@@ -3,7 +3,7 @@
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-feature android:name="android.software.leanback" android:required="false"/>
   <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
-  <application android:label="NEMTV" android:usesCleartextTraffic="true" android:hardwareAccelerated="true"
+  <application android:icon="@mipmap/ic_launcher" android:banner="@drawable/banner" android:label="NEMTV" android:usesCleartextTraffic="true" android:hardwareAccelerated="true"
       android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
     <activity android:name=".Main" android:exported="true" android:configChanges="orientation|screenSize|keyboardHidden">
       <intent-filter>

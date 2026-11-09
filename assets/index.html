@@ -4,6 +4,7 @@
 <title>NEMTV</title>
 <style>
 /* NEMOS dark tokens, copied from the live local NEMOS (whisper-hub/nemos-src) */
+@font-face{font-family:"NemFB";src:local("Inter Bold"),local("Inter-Bold"),local("Roboto Bold"),local("Roboto-Bold"),local("Arial Bold"),local("Arial-BoldMT");font-weight:400}
 @font-face{font-family:"Jersey M54";src:url(jersey.ttf) format("truetype");unicode-range:U+002E,U+0030-0039,U+0041-005A,U+0061-007A}
 :root{
   --bg:#0F0E11;--surface:#19171C;--surface-2:#242128;--line:#2D2A31;--line-strong:#3B3741;
@@ -17,10 +18,10 @@
 html,body{height:100%;background:var(--bg);color:var(--ink);font:11px/1.35 Inter,system-ui,sans-serif;overflow:hidden}
 button,input{font:inherit;color:inherit}
 button{border:0;background:none;cursor:pointer;text-align:inherit}
-.disp{font-family:"Jersey M54",Inter,sans-serif;text-transform:uppercase;font-synthesis:none;letter-spacing:.02em}
+.disp{font-family:"Jersey M54","NemFB",Inter,sans-serif;text-transform:uppercase;font-synthesis:none;letter-spacing:.02em}
 
 header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:10px 28px 6px}
-.brand{font-size:20px;justify-self:start}
+.brand{justify-self:start;display:flex}.brand img{height:18px}
 nav{display:flex;gap:4px;padding:3px;border-radius:999px;background:var(--gl-fill);box-shadow:var(--gl-shadow);border:1px solid var(--line)}
 nav button{padding:5px 14px;border-radius:999px;color:var(--ink-2);font-weight:600;text-align:center}
 nav button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
@@ -170,13 +171,13 @@ h2{font-size:15px;margin:10px 0 8px}
 .gsc{display:flex;align-items:center;justify-content:center;gap:18px;padding:10px 0}.gsc .disp{font-size:34px}.gsc img{width:40px;height:40px}.gsc span{font-size:10px;color:var(--muted)}
 .ev{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:10.5px}.ev b{min-width:36px}.ev em{font-style:normal;color:var(--muted);min-width:56px}.ev.g{color:#fff;font-weight:700}.ev:not(.g){color:var(--ink-2)}
 .gsc2{display:flex;justify-content:center}.gsh{display:flex;align-items:center;gap:22px;padding:2px 0 4px}.gsh .disp{font-size:34px}.gsh img{width:38px;height:38px}.gsh span{font-size:11px;color:var(--muted);min-width:70px;text-align:center}
-.g3{display:grid;grid-template-columns:.9fr 1.25fr 1fr;gap:12px;height:calc(100vh - 118px);overflow:hidden;align-items:start}.g3 h3{margin:8px 0 4px;font-size:10px;color:var(--muted);letter-spacing:.08em}
+.g3{display:grid;grid-template-columns:.9fr 1.25fr 1fr;gap:12px;align-items:start;padding-bottom:40px}.g3 h3{margin:8px 0 4px;font-size:10px;color:var(--muted);letter-spacing:.08em}
 .g3 .ls td img{width:16px;height:16px;vertical-align:middle}.ls th:nth-child(2),.ls td:nth-child(2){width:auto}.ls td:nth-child(n+3),.ls th:nth-child(n+3){text-align:center}
 .star{display:flex;gap:8px;align-items:center;background:#15131a;border-radius:12px;padding:5px 8px;margin-bottom:5px}.star img{width:34px;height:34px;border-radius:50%;background:#2a2630;object-fit:cover}.star div{display:flex;flex-direction:column;font-size:10px}.star b{font-size:11px}.star span{color:var(--muted)}.star .hn{color:#fff}
 .gc{display:grid;grid-template-columns:34px 1fr auto auto;gap:8px;align-items:center;background:#15131a;border-radius:12px;padding:6px 8px;margin-bottom:5px;box-shadow:inset 3px 0 0 var(--o-a)}.gc .mug{width:34px;height:34px;border-radius:50%;background:#2a2630;object-fit:cover}
 .gm{display:flex;flex-direction:column;font-size:10px;min-width:0}.gm b{font-size:11px}.gm span{color:var(--muted)}.ppg{font-style:normal;background:#d21f3c;color:#fff;border-radius:4px;padding:0 4px;margin-left:5px;font-size:9px}
 .gsx{display:flex;align-items:center;gap:4px}.gsx img{width:16px;height:16px}.gsx b{font-size:18px}.gtm{display:flex;flex-direction:column;font-size:9.5px;color:var(--muted);min-width:42px;text-align:right}.gtm span:first-child{color:#fff}
-.br{margin-bottom:5px}.bv{display:flex;justify-content:space-between;align-items:baseline;font-size:10px;color:var(--muted)}.bv b{color:#fff;font-size:13px}.bb{display:flex;gap:6px;margin-top:1px}.bb i{display:block;height:5px;border-radius:3px;transform:skewX(-20deg)}
+.br{margin-bottom:5px}.bv{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;font-size:10px;line-height:1;color:var(--muted)}.bv span{text-align:center}.bv b{color:#fff;font-size:13px;line-height:1}.bv b:last-child{text-align:right}.bb{display:flex;gap:6px;margin-top:1px}.bb i{display:block;height:5px;border-radius:3px;transform:skewX(-20deg)}
 .srl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .sr{position:relative;isolation:isolate;border-radius:18px;padding:10px 12px;color:#fff;text-align:left;display:flex;flex-direction:column;gap:8px;background:linear-gradient(100deg,color-mix(in srgb,var(--o-a) 32%,#141217),#141217 50%,color-mix(in srgb,var(--o-b) 32%,#141217))}
 .sr.lv{box-shadow:inset 0 0 0 1.5px var(--coral)}.sr.done{filter:grayscale(.8);opacity:.7}
@@ -252,10 +253,10 @@ h2{font-size:15px;margin:10px 0 8px}
 #gbar .sp{flex:1}
 #gbar button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 </style></head><body>
-<header><span class="brand disp">NEMTV</span>
+<header><span class="brand"><img src="nemtv-logo.png" alt="NEMTV"></span>
 <nav id="nav"><button data-t="home">Home</button><button data-t="scores">Scores</button><button data-t="live">Live</button><button data-t="guide">Guide</button><button data-t="sports">Sports</button><button data-t="setup">Setup</button></nav></header>
 <main id="m"></main>
-<div id="boot"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="rows" id="brows"></div><div class="ttl disp">NEMTV</div><div class="tag disp">NHL &middot; LIVE TV</div><div class="bar"><i></i></div><div class="st" id="bst">Loading channels...</div></div>
+<div id="boot"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="rows" id="brows"></div><div class="ttl"><img src="nemtv-logo.png" alt="NEMTV" style="height:64px"></div><div class="tag disp">NHL &middot; LIVE TV</div><div class="bar"><i></i></div><div class="st" id="bst">Loading channels...</div></div>
 <div id="pl"><video id="v" autoplay playsinline></video>
 <div id="pbuf"><div class="mesh2"></div><div id="pbc"></div><div class="bar"><i></i></div><div class="stt" id="pst"></div></div>
 <div class="ptop" id="ptop"></div>
@@ -355,7 +356,7 @@ function games(){ // from the bundled NHL schedule + the TV box clock
   const t=Date.now(), live=[], later=[], sod=new Date(new Date().setHours(0,0,0,0)).getTime(); // 7 day window from midnight today
   if(off.includes("NHL"))return {live,later};
   (window.SCHED||[]).forEach(([st,aw,hm,nets])=>{
-    if(st+DUR<=t||st>=sod+7*864e5)return;
+    if(st>=sod+7*864e5||(st+DUR<=t&&(st<sod||!scoreOf(aw,hm,st))))return; // finished games from today stay (greyed, FINAL)
     const A=ABBR[aw],H=ABBR[hm]; if(!A||!H)return;
     const g={s:"NHL",tm:[H.name,A.name],t:[H,A],st,aw,hm,nets,title:A.name+" at "+H.name}; // home team on the left
     g.sc=scInfo(scoreOf(aw,hm,st)); g.c=feedsFor(g)[0]||{n:"No matching channel",u:"",g:""};
@@ -469,7 +470,7 @@ function gdLoad(){const id=gdId,u="https://api-web.nhle.com/v1/gamecenter/"+id+"
   get("landing","gotGL");get("right-rail","gotGR");get("boxscore","gotGB");get("play-by-play","gotGP")}
 function gdRender(){const sc=SC.find(x=>x.id===gdId),b=gdBox,L0=gdLand,aw=(sc&&sc.awayTeam)||(b&&b.awayTeam)||(L0&&L0.awayTeam)||{},hm=(sc&&sc.homeTeam)||(b&&b.homeTeam)||(L0&&L0.homeTeam)||{};
   const h=$("#gdh"),cur=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.gt,curS=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.gs;
-  h.innerHTML=`<button data-gx="1">X</button><button data-gt="sum" aria-pressed="${gdTab==="sum"}">Live Stats</button><button data-gt="box" aria-pressed="${gdTab==="box"}">${/OFF|FINAL/.test((sc&&sc.gameState)||(L0&&L0.gameState)||"")?"Stats":"Box Score"}</button><button data-gt="pbp" aria-pressed="${gdTab==="pbp"}">Play-by-Play</button><span class="t disp">${esc(hm.abbrev||"")} vs ${esc(aw.abbrev||"")}</span>`;
+  h.innerHTML=`<button data-gx="1">X</button><button data-gt="sum" aria-pressed="${gdTab==="sum"}">Summary</button><button data-gt="box" aria-pressed="${gdTab==="box"}">${/OFF|FINAL/.test((sc&&sc.gameState)||(L0&&L0.gameState)||"")?"Stats":"Box Score"}</button><button data-gt="pbp" aria-pressed="${gdTab==="pbp"}">Play-by-Play</button><span class="t disp">${esc(hm.abbrev||"")} vs ${esc(aw.abbrev||"")}</span>`;
   if(cur){const f=h.querySelector("[data-gt="+cur+"]");if(f)f.focus()}
   const rb=$("#gdr");rb.innerHTML=gdTab==="box"?`<button data-gs="h" aria-pressed="${gdSide==="h"}">${esc(hm.abbrev||"Home")}</button><button data-gs="a" aria-pressed="${gdSide==="a"}">${esc(aw.abbrev||"Away")}</button>`:"";
   if(curS){const f=rb.querySelector("[data-gs="+curS+"]");if(f)f.focus()}
@@ -486,7 +487,7 @@ function gdSum(aw,hm){const L=gdLand,S=L.summary||{},R=gdRail||{},ab=x=>x&&(x.de
   const stars=(S.threeStars||[]).map(x=>`<div class="star"><img src="${x.headshot}" alt=""><div><b>${x.star}&#9733; ${esc(x.name.default)}</b><span>${esc(x.teamAbbrev)} #${x.sweaterNo} ${esc(x.position)}</span><span class="hn">${x.position==="G"?"GAA "+(x.goalsAgainstAverage||0).toFixed(2)+" SV% "+(x.savePctg||0).toFixed(3).slice(1):x.goals+"G "+x.assists+"A "+x.points+"P"}</span></div></div>`).join("");
   const pens=(S.penalties||[]).map(p=>(p.penalties||[]).map(q=>`<div class="ev"><em>${pn(p.periodDescriptor.number)} ${esc(q.timeInPeriod)}</em><b>${esc(ab(q.teamAbbrev))}</b><span>${esc((q.committedByPlayer&&q.committedByPlayer.lastName&&q.committedByPlayer.lastName.default)||"Bench")} ${q.duration}m ${esc((q.descKey||"").replace(/-/g," "))}</span></div>`).join("")).join("");
   const goals=(S.scoring||[]).map(p=>`<h3>${pl(p.periodDescriptor.number).toUpperCase()}</h3>${(p.goals||[]).map(g=>{const t=ab(g.teamAbbrev),ho=t===H;
-    return `<div class="gc" style="--o-a:${col(t)}"><img class="mug" src="${g.mugshot}" alt=""><div class="gm"><b>${esc(g.name.default)} (${g.goalsToDate})${g.strength&&g.strength!=="ev"?`<i class="ppg">${esc(g.strength.toUpperCase())}</i>`:""}${g.goalModifier&&g.goalModifier!=="none"?`<i class="ppg">${esc(g.goalModifier.replace(/-/g," ").toUpperCase())}</i>`:""}</b><span>${(g.assists||[]).map(x=>esc(x.name.default)+" ("+x.assistsToDate+")").join(", ")||"Unassisted"}</span></div><div class="gsx">${lg(H)}<b class="disp">${g.homeScore}</b><b class="disp">${g.awayScore}</b>${lg(A)}</div><div class="gtm"><span>${esc(g.timeInPeriod)}</span><span>${esc(g.shotType||"")}</span></div></div>`}).join("")||'<div class="empty" style="padding:2px 0">No goals scored.</div>'}`).join("");
+    return `<div class="gc" style="--o-a:${col(t)}"><img class="mug" src="${g.headshot||g.mugshot}" alt=""><div class="gm"><b>${esc(g.name.default)} (${g.goalsToDate})${g.strength&&g.strength!=="ev"?`<i class="ppg">${esc(g.strength.toUpperCase())}</i>`:""}${g.goalModifier&&g.goalModifier!=="none"?`<i class="ppg">${esc(g.goalModifier.replace(/-/g," ").toUpperCase())}</i>`:""}</b><span>${(g.assists||[]).map(x=>esc(x.name.default)+" ("+x.assistsToDate+")").join(", ")||"Unassisted"}</span></div><div class="gsx">${lg(H)}<b class="disp">${g.homeScore}</b><b class="disp">${g.awayScore}</b>${lg(A)}</div><div class="gtm"><span>${esc(g.timeInPeriod)}</span><span>${esc(g.shotType||"")}</span></div></div>`}).join("")||'<div class="empty" style="padding:2px 0">No goals scored.</div>'}`).join("");
   const T={};(R.teamGameStats||[]).forEach(x=>T[x.category]=x);
   const bar=(lab,hv,av,hs,as,pc)=>{const h=parseFloat(String(hv)),a=parseFloat(String(av)),t=(h+a)||1;return `<div class="br"><div class="bv"><b>${hs}</b><span>${lab}</span><b>${as}</b></div><div class="bb"><i style="width:${Math.max(3,h/t*100)}%;background:${col(H)}"></i><i style="width:${Math.max(3,a/t*100)}%;background:${col(A)}"></i></div></div>`};
   const sg=(c,lab,pct)=>{const x=T[c];if(!x)return"";const f=pct?v=>(v*100).toFixed(1)+"%":v=>v;return bar(lab,x.homeValue,x.awayValue,f(x.homeValue),f(x.awayValue))};
@@ -672,7 +673,7 @@ function alignRow(el){const gw=el.closest(".gw");
     smoothTo($("#m"),0); const y=el.getBoundingClientRect().top-gw.getBoundingClientRect().top+gw.scrollTop-9; smoothTo(gw,y); setTimeout(updateDots,200); return}
   const m=$("#m"), g=el.closest(".grid,.cards"), top=g&&g.previousElementSibling&&/^H2$/.test(g.previousElementSibling.tagName)&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?g.previousElementSibling:el;
   smoothTo(m,top.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-6)}
-$("#m").addEventListener("focusin",e=>{const t=e.target; if(t.closest&&t.closest(".grid,.cards"))alignRow(t); else if(t.closest&&t.closest(".hcar"))smoothTo($("#m"),0);
+$("#m").addEventListener("focusin",e=>{const t=e.target; if(t.closest&&t.closest(".grid,.cards")){alignRow(t); if(t.classList.contains("pill")&&t.dataset.g!==undefined&&+t.dataset.g!==hi)slideTo(+t.dataset.g)} else if(t.closest&&t.closest(".hcar"))smoothTo($("#m"),0);
 });
 // D-pad inside the home/live/sports pages: we pick the next item ourselves, so one press = one item and we control the viewport
 const ARR={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};

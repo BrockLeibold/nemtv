@@ -720,7 +720,7 @@ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
     </button></div>
     <button type="button" class="pill gbtn" id="gamesBtn" data-mode="games" aria-pressed="false"><svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Games</button></div>
     <nav class="jump" aria-label="Sections">
-      <a href="#news">News</a><a href="#schedule">Schedule</a><a href="#roster">Roster</a><a href="#team">Team view</a>
+      <a href="#news">News</a><a href="#roster">Roster</a><a href="#team">Team view</a>
     </nav>
   </div>
   <nav class="rail" id="rail" aria-label="Teams by conference, sorted by points"></nav>
@@ -764,17 +764,7 @@ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
     </div>
   </section>
 
-  <section id="schedule" class="block">
-    <div class="block-h"><h2 class="d section">Schedule</h2><span class="caption" id="schedSub"></span></div>
-    <div class="calnav">
-      <button type="button" class="pill s icon" data-cal="-1" aria-label="Previous month"><svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
-      <h3 class="d calmonth" id="calMonth" aria-live="polite"></h3>
-      <button type="button" class="pill s icon" data-cal="1" aria-label="Next month"><svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
-      <button type="button" class="pill s" data-cal="0">This month</button>
-    </div>
-    <div class="calkey caption"><span><i class="k home"></i>Home</span><span><i class="k away"></i>Away</span><span><span class="res W">W</span><span class="res L">L</span><span class="res OT">OT</span>Results</span><span>Times in Eastern</span></div>
-    <div class="cal" id="sched"></div>
-  </section>
+
 
   <section id="roster" class="block">
     <div class="block-h"><h2 class="d section">Roster</h2><span class="caption" id="rosterSub"></span></div>
@@ -1209,7 +1199,7 @@ function fitAll() {
     while (el.scrollWidth > el.clientWidth + 1 && s > min) { s -= 1; el.style.fontSize = s + "px"; }
   });
 }
-function renderAll() { renderTeam(); renderGameday(); renderNews(); renderSchedule(); renderRoster(); fitAll(); }
+function renderAll() { renderTeam(); renderGameday(); renderNews(); renderRoster(); fitAll(); }
 let fitTimer; window.addEventListener("resize", () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitAll, 120); });
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (DATA) fitAll(); });
 const LT = ab => LEAGUE.teams.find(x => x.abbrev === ab);

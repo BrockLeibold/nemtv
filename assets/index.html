@@ -265,7 +265,7 @@ h2{font-size:15px;margin:10px 0 8px}
 #gbar button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 </style></head><body>
 <header><span class="brand"><img src="nemtv-logo.png" alt="NEMTV"></span>
-<nav id="nav"><button data-t="home">Home</button><button data-t="scores">Scores</button><button data-t="live">Live</button><button data-t="guide">Guide</button><button data-t="sports">Sports</button><button data-t="setup">Setup</button></nav></header>
+<nav id="nav"><button data-t="home">Home</button><button data-t="scores">Scores</button><button data-t="schedule">Schedule</button><button data-t="live">Live</button><button data-t="guide">Guide</button><button data-t="sports">Sports</button><button data-t="setup">Setup</button></nav></header>
 <main id="m"></main>
 <div id="boot"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="rows" id="brows"></div><div class="ttl"><img src="nemtv-logo.png" alt="NEMTV" style="height:64px"></div><div class="tag disp">NHL &middot; LIVE TV</div><div class="bar"><i></i></div><div class="st" id="bst">Loading channels...</div></div>
 <div id="pl"><video id="v" autoplay playsinline></video>
@@ -378,9 +378,29 @@ function games(){ // from the bundled NHL schedule + the TV box clock
   return {live,later};
 }
 const CA=/^(Sportsnet (One|360|East|West|Pacific|Ontario|World)|TSN\d|TVA Sports|CBC|RDS)/i; // Canadian broadcasters always come first
-function feedsFor(g){ // strict: only channels for a network the NHL lists for this exact game (Canada first)
+/* ---------- guide (epg.xml from the M3U header): confirms which channel airs which game ---------- */
+let EPG=null, EPGMAX=0, EPGURL=ls("epgurl","");
+window.gotEpg=(o,e)=>{if(e||!o)return log("epg failed",e);EPG=o;EPGMAX=0;for(const k in o)o[k].forEach(r=>{if(r[1]>EPGMAX)EPGMAX=r[1]});log("epg",Object.keys(o).length+" channels");if(typeof rerender==="function"&&ch.length)try{rerender()}catch(x){}};
+function loadEpg(){if(EPGURL&&window.Android&&Android.epg)Android.epg(EPGURL)}
+const lastW=n=>n.split(" ").pop().toLowerCase(), says=(t,n)=>t.toLowerCase().includes(lastW(n));
+function epgVerdict(c,g){ // 1 = guide names this game, 0 = unknown / generic NHL block, -1 = guide shows something else (or nothing) then
+  if(!EPG||!c.id||!EPG[c.id])return 0;
+  const rows=(EPG[c.id]||[]).filter(r=>r[0]<g.st+10800000&&r[1]>g.st+1800000);
+  if(!rows.length)return -1;
+  let gen=0;
+  for(const r of rows){const a=says(r[2],g.tm[1]),h=says(r[2],g.tm[0]);
+    if(a&&h)return 1;
+    if(a||h){const o=NHL.filter(t=>t[1]!==g.tm[0]&&t[1]!==g.tm[1]&&says(r[2],t[1])).length;if(!o)return 1}
+    else if(!NHL.some(t=>says(r[2],t[1])))gen=1}
+  return gen?0:-1}
+function feedsFor(g){ // strict: NHL network list for this game, checked against the guide (Canada first)
   const seen=new Set(), out=[], add=re=>ch.forEach(c=>{if(re.test(baseName(c.n))&&!seen.has(c.u)){seen.add(c.u);out.push(c)}});
   (g.nets||[]).forEach(n=>NET[n.trim()]&&add(NET[n.trim()]));
+  if(EPG&&g.st<EPGMAX){
+    const conf=[];ch.forEach(c=>{if(!seen.has(c.u)&&c.id&&EPG[c.id]&&epgVerdict(c,g)===1){seen.add(c.u);conf.push(c)}}); // e.g. regional channels naming this game
+    const keep=out.filter(c=>epgVerdict(c,g)>=0), sure=keep.filter(c=>epgVerdict(c,g)===1);
+    out.length=0;out.push(...conf,...sure,...keep.filter(c=>!sure.includes(c)));
+  }
   const ca=out.filter(c=>CA.test(baseName(c.n))), rest=out.filter(c=>!CA.test(baseName(c.n)));
   return ca.concat(rest);
 }
@@ -419,12 +439,18 @@ function heroSet(){const c=$("#hcar"); if(!c)return;
 function heroRefresh(){if(tab==="home"&&$("#hcar"))heroSet()}
 function pillHTML(c,k,kind){
   const col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";
-  const fs=kind==="live"&&starOn(c.aw,c.hm)?`<span class="fstar">&#9733;</span>`:"";
+  const fs=starOn(c.aw,c.hm,c.sc&&c.sc.over)?`<span class="fstar">&#9733;</span>`:"";
   return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${fs}<span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(c.nets.join(" / "))}</span>`:""}<span class="live">${kind==="later"?"STARTS "+esc(fmtT(c.st)).toUpperCase():c.sc?(c.sc.over?esc(c.sc.note):''+esc(c.sc.note)):'LIVE'}</span></button>`;
 }
 const chanCard=c=>`<button class="cc focusable" data-i="${ch.indexOf(c)}"><b>${esc(baseName(c.n))}</b>${fav.includes(c.n)?'<span class="star">&#9733;</span>':""}<span class="nw none">${esc(c.g)}</span></button>`;
 const chip=(label,pressed,attr)=>`<button class="chip focusable" ${attr} aria-pressed="${pressed}">${esc(label)}</button>`;
 
+function daysHTML(L,keep){ // one block per day: Today, then weekday names; keep(offset) picks which days
+  let h="";const sd=new Date(new Date().setHours(0,0,0,0)).getTime(), days={};
+  L.forEach((c,k)=>{const o=Math.round((new Date(new Date(c.st).setHours(0,0,0,0))-sd)/864e5);if(keep(o))(days[o]=days[o]||[]).push([c,k])});
+  Object.keys(days).sort((x,y)=>x-y).forEach(o=>{const nm=+o===0?"Today":new Date(sd+o*864e5+36e5).toLocaleDateString([],{weekday:"long"});
+    h+=`<h2 class="disp">${nm}<small style="color:var(--muted);font-size:.6em;margin-left:8px">${new Date(sd+o*864e5+36e5).toLocaleDateString([],{month:"short",day:"numeric"})}</small></h2><div class="grid">${days[o].slice().sort((x,y)=>(isFavG(x[0].aw,x[0].hm)?0:1)-(isFavG(y[0].aw,y[0].hm)?0:1)).map(([c,k])=>pillHTML(c,k,"later")).join("")}</div>`});
+  return h}
 function render(){
   guideTab(tab==="guide");
   document.querySelectorAll("#nav button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===tab));
@@ -434,13 +460,12 @@ function render(){
     const favs=fav.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c)), rec=recent.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c));
     let h=(G.length?"":`<h2 class="disp">NHL on now</h2>`)+(G.length?(hi=Math.min(hi,G.length-1),`<div class="lz"><div class="lzh"><h2 class="disp">NHL on now</h2><span class="dots" id="dots"></span></div><div class="hcar" id="hcar"></div><div class="gw" id="gw"><div class="grid lg">${G.map((c,k)=>pillHTML(c,k,"live")).join("")}</div></div></div>`)
       :`<div class="empty">${ch.length?"No NHL games on right now."+(L.length?" Next up: "+esc(L[0].title)+", "+esc(fmtT(L[0].st))+".":""):"No playlist yet. Open Setup and add your M3U link."}</div>`);
-    if(L.length){const sd=new Date(new Date().setHours(0,0,0,0)).getTime(), days={}; // one row per day: Today, then weekday names
-      L.forEach((c,k)=>{const o=Math.round((new Date(new Date(c.st).setHours(0,0,0,0))-sd)/864e5);(days[o]=days[o]||[]).push([c,k])});
-      Object.keys(days).sort((x,y)=>x-y).forEach(o=>{const nm=+o===0?"Today":new Date(sd+o*864e5+36e5).toLocaleDateString([],{weekday:"long"});
-        h+=`<h2 class="disp">${nm}<small style="color:var(--muted);font-size:.6em;margin-left:8px">${new Date(sd+o*864e5+36e5).toLocaleDateString([],{month:"short",day:"numeric"})}</small></h2><div class="grid">${days[o].slice().sort((x,y)=>(isFavG(x[0].aw,x[0].hm)?0:1)-(isFavG(y[0].aw,y[0].hm)?0:1)).map(([c,k])=>pillHTML(c,k,"later")).join("")}</div>`})}
+    h+=daysHTML(L,o=>o===0);
     if(favs.length)h+=`<h2 class="disp">Favorites</h2><div class="cards">${favs.map(c=>chanCard(c)).join("")}</div>`;
     if(rec.length)h+=`<h2 class="disp">Recently watched</h2><div class="cards">${rec.slice(0,8).map(c=>chanCard(c)).join("")}</div>`;
     m.innerHTML=h; if(tab==="home")heroSet();
+  }else if(tab==="schedule"){
+    L=games().later; m.innerHTML=L.length?daysHTML(L,()=>true):`<div class="empty">No upcoming NHL games.</div>`;
   }else if(tab==="guide"){ m.innerHTML="";
   }else if(tab==="scores"){
     const ord=x=>/LIVE|CRIT/.test(x.gameState)?0:/FUT|PRE/.test(x.gameState)?1:2, fv=x=>isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?0:1, gl=[...SC].sort((a,b)=>ord(a)-ord(b)||fv(a)-fv(b)||Date.parse(a.startTimeUTC)-Date.parse(b.startTimeUTC));
@@ -682,8 +707,9 @@ function rerender(){ // redraw but keep the remote focus on the same item
 }
 window.gotList=(t,e)=>{
   const c=t?parse(t):[];
+  const eu=t&&(t.match(/(?:x-tvg-url|url-tvg)="([^",]+)/)||[])[1]; if(eu&&eu!==EPGURL){EPGURL=eu;sv("epgurl",eu)}
   if(c.length){ch=c;sv("ch",c);msg=c.length+" channels loaded";log("playlist",c.length)}else msg=e?"Failed: "+e:"No channels found in that playlist";
-  render(); $("#bst")&&($("#bst").textContent=c.length?"Loading games...":"Could not load the playlist"); bootOff();
+  loadEpg(); render(); $("#bst")&&($("#bst").textContent=c.length?"Loading games...":"Could not load the playlist"); bootOff();
 };
 function go(t){tab=t;render();(document.querySelector("#nav button[aria-pressed=true]")).focus()}
 
@@ -749,7 +775,7 @@ if(ch.length)bootOff();
 log("NEMTV start",new Date().toString(),"games",(window.SCHED||[]).length);
 if(window.Android&&(window.CFG||{}).repo)Android.guideSync(CFG.repo,CFG.branch||"main");
 if(url&&!ch.length)Android.load(url);else if(url)Android.load(url); // refresh playlist in the background
-pollScores(); setInterval(pollScores,20000); pollStandings(); setInterval(pollStandings,300000); loadHeroData(); setInterval(loadHeroData,600000);
+if(EPGURL)setTimeout(loadEpg,3000); setInterval(loadEpg,10800000); pollScores(); setInterval(pollScores,20000); pollStandings(); setInterval(pollStandings,300000); loadHeroData(); setInterval(loadHeroData,600000);
 setTimeout(()=>{if($("#gp").hidden&&!gLoaded){$("#gp").className="tab";gLayout();gLoad()}},6000); // warm the guide so the tab opens instantly
 let gSig=""; const gSigOf=()=>{const g=games();return g.live.length+":"+g.later.length+":"+(g.live[0]||{}).st+":"+(g.later[0]||{}).st};
 setTimeout(()=>{gSig=gSigOf()},3000);

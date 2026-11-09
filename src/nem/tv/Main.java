@@ -122,6 +122,43 @@ public class Main extends Activity {
         }}).start();
       }
 
+      // guide: download epg.xml, keep only hockey programmes, hand JS {channelId:[[startMs,stopMs,text]]}
+      @JavascriptInterface public void epg(final String u) {
+        new Thread(new Runnable() { public void run() {
+          String out = "{}", e = "";
+          try {
+            java.io.InputStream in = new java.io.ByteArrayInputStream(fetch(u, 60000));
+            org.xmlpull.v1.XmlPullParser x = android.util.Xml.newPullParser();
+            x.setInput(in, "UTF-8");
+            java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyyMMddHHmmss Z", java.util.Locale.US);
+            org.json.JSONObject all = new org.json.JSONObject();
+            String ch = "", st = "", en = "", tag = ""; StringBuilder tx = new StringBuilder();
+            for (int ev = x.getEventType(); ev != org.xmlpull.v1.XmlPullParser.END_DOCUMENT; ev = x.next()) {
+              if (ev == org.xmlpull.v1.XmlPullParser.START_TAG) {
+                tag = x.getName();
+                if (tag.equals("programme")) { ch = x.getAttributeValue(null, "channel"); st = x.getAttributeValue(null, "start"); en = x.getAttributeValue(null, "stop"); tx.setLength(0); }
+              } else if (ev == org.xmlpull.v1.XmlPullParser.TEXT) {
+                if (tag.equals("title") || tag.equals("sub-title") || tag.equals("desc")) tx.append(x.getText()).append(" | ");
+              } else if (ev == org.xmlpull.v1.XmlPullParser.END_TAG) {
+                if (x.getName().equals("programme")) {
+                  String t = tx.toString();
+                  if (t.matches("(?is).*(nhl|hockey).*")) {
+                    if (st.length() == 14) st += " +0000"; if (en.length() == 14) en += " +0000";
+                    org.json.JSONArray a = all.optJSONArray(ch); if (a == null) { a = new org.json.JSONArray(); all.put(ch, a); }
+                    org.json.JSONArray r = new org.json.JSONArray();
+                    r.put(f.parse(st).getTime()); r.put(f.parse(en).getTime()); r.put(t.length() > 300 ? t.substring(0, 300) : t);
+                    a.put(r);
+                  }
+                }
+                tag = "";
+              }
+            }
+            out = all.toString();
+          } catch (Exception x) { e = String.valueOf(x.getMessage()); }
+          js("gotEpg(" + out + "," + org.json.JSONObject.quote(e) + ")");
+        }}).start();
+      }
+
       // generic native GET (NHL scores): result goes to window[cb](text, err)
       @JavascriptInterface public void get(final String u, final String cb) {
         new Thread(new Runnable() { public void run() {

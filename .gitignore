@@ -5,3 +5,4 @@ debug.keystore
 src-logos/
 assets/config.js
 assets/guide/
+dist/

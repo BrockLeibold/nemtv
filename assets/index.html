@@ -846,6 +846,11 @@ $("#m").onclick=e=>{
   const s=e.target.closest("[data-s]"); if(s){const k=s.dataset.s;off=off.includes(k)?off.filter(x=>x!==k):[...off,k];sv("off",off);render();$("#m").querySelector(`[data-s="${CSS.escape(k)}"]`).focus();return}
   if(e.target.closest("#go")){url=$("#u").value.trim();sv("url",url);msg="Loading...";$("#st").textContent=msg;Android.load(url)}
 };
+document.addEventListener("keydown",e=>{ // Backspace in Live: clear search + filter, back to the default view
+  if(e.key!=="Backspace"||tab!=="live"||$("#pl").classList.contains("on"))return;
+  const a=document.activeElement; if(a&&a.id==="gs"&&a.value)return; // typing: let it delete characters
+  e.preventDefault(); gQ=""; grp="All"; sv("grp",grp); gStart=0; render(); $("#m").scrollTop=0; const n=$("#m").querySelector(".gc"); if(n)n.focus({preventScroll:true});
+});
 document.addEventListener("keydown",e=>{ // Menu key on a channel card = favorite
   if(e.keyCode===82||e.key==="ContextMenu"){const c=document.activeElement.closest&&document.activeElement.closest("[data-i]");
     if(c&&!$("#pl").classList.contains("on")){toggleFav(ch[+c.dataset.i].n);const i=c.dataset.i;render();const n=$("#m").querySelector(`[data-i="${i}"]`);if(n)n.focus();e.preventDefault()}}

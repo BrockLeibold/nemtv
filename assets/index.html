@@ -325,10 +325,10 @@ const team=n=>{const k=nk(n),t=NHL.find(t=>nk(t[1])===k);return t?{logo:(window.
 const on=c=>!c.s||!off.includes(c.s);
 const ABBR={}; NHL.forEach(t=>{ABBR[t[0]]={name:t[1],c:t[2],logo:(window.LOGO||{})[t[0]]}});
 // NHL broadcast code -> channel names in the playlist (feeds like "TSN4 . feed 2" share the base name)
-const NET={ESPN:/^ESPN2?$/,"ESPN+":/^ESPN2?$/,ABC:/^ABC$/,TNT:/^(TNT|TNT Sports \d|truTV)$/,truTV:/^(TNT|truTV)$/,NHLN:/^NHL Network$/,"NHLN-US":/^NHL Network$/,
- SN:/^Sportsnet/,"SN+":/^Sportsnet/,SN1:/^Sportsnet One$/,SN360:/^Sportsnet 360$/,SNE:/^Sportsnet East$/,SNW:/^Sportsnet West$/,SNP:/^Sportsnet Pacific$/,SNO:/^Sportsnet Ontario$/,"SN-PIT":/^SportsNet Pittsburgh$/,
- TSN2:/^TSN2$/,TSN3:/^TSN3$/,TSN4:/^TSN4$/,TSN5:/^TSN5$/,TVAS:/^TVA Sports$/,TVAS2:/^TVA Sports 2$/,NESN:/^NESN$/,MSG:/^MSG$/,"MSG 2":/^MSG 2$/,"MSG-B":/^MSG$/,MSGSN:/^MSGSN$/,MSGSN2:/^MSGSN 2$/,
- NBCSP:/^NBC Sports Philadelphia$/,"NBCSP+":/^NBC Sports Philadelphia$/,NBCSCA:/^NBC Sports (California|Bay Area)$/,ALT:/^Altitude Sports$/,ALT2:/^Altitude Sports 2$/,CHSN:/^Chicago Sports Network$/};
+const NET={ESPN:/^ESPN$/,ABC:/^ABC$/,TNT:/^TNT$/,truTV:/^truTV$/,NHLN:/^NHL Network$/,"NHLN-US":/^NHL Network$/,
+ SN1:/^Sportsnet One$/,SN360:/^Sportsnet 360$/,SNE:/^Sportsnet East$/,SNW:/^Sportsnet West$/,SNP:/^Sportsnet Pacific$/,SNO:/^Sportsnet Ontario$/,"SN-PIT":/^SportsNet Pittsburgh$/,
+ TSN2:/^TSN2$/,TSN3:/^TSN3$/,TSN4:/^TSN4$/,TSN5:/^TSN5$/,TVAS:/^TVA Sports$/,TVAS2:/^TVA Sports 2$/,NESN:/^NESN$/,MSG:/^MSG$/,"MSG 2":/^MSG 2$/,MSGSN:/^MSGSN$/,MSGSN2:/^MSGSN 2$/,
+ NBCSP:/^NBC Sports Philadelphia$/,"NBCSP+":/^NBC Sports Philadelphia$/,NBCSCA:/^NBC Sports California$/,ALT:/^Altitude Sports$/,ALT2:/^Altitude Sports 2$/,CHSN:/^Chicago Sports Network$/};
 const HOME_RSN={DET:/^Detroit SportsNet$/,LAK:/^Spectrum SportsNet LA$/,BOS:/^(NESN|NBC Sports Boston)$/,SJS:/^NBC Sports (Bay Area|California)$/,
  NYR:/^MSG$/,NYI:/^MSG/,NJD:/^MSG/,PHI:/^NBC Sports Philadelphia$/,PIT:/^SportsNet Pittsburgh$/,COL:/^Altitude Sports$/,CHI:/^Chicago Sports Network$/};
 const baseName=n=>n.replace(/\s+\S\s+feed\s+\d+$/,"");
@@ -378,12 +378,9 @@ function games(){ // from the bundled NHL schedule + the TV box clock
   return {live,later};
 }
 const CA=/^(Sportsnet (One|360|East|West|Pacific|Ontario|World)|TSN\d|TVA Sports|CBC|RDS)/i; // Canadian broadcasters always come first
-function feedsFor(g){ // channels carrying this game: Canada first, then its other networks, then each team's regional network
+function feedsFor(g){ // strict: only channels for a network the NHL lists for this exact game (Canada first)
   const seen=new Set(), out=[], add=re=>ch.forEach(c=>{if(re.test(baseName(c.n))&&!seen.has(c.u)){seen.add(c.u);out.push(c)}});
   (g.nets||[]).forEach(n=>NET[n.trim()]&&add(NET[n.trim()]));
-  [HOME_RSN[g.hm],HOME_RSN[g.aw]].forEach(re=>re&&add(re));
-  // only when nothing carries the game: national sports channels as a last resort (they often show other sports)
-  if(!out.length){add(/^(Sportsnet (One|360)|TSN[1-5])$/);add(/^(NHL Network)$/)}
   const ca=out.filter(c=>CA.test(baseName(c.n))), rest=out.filter(c=>!CA.test(baseName(c.n)));
   return ca.concat(rest);
 }
@@ -477,13 +474,14 @@ let LL=[];
 /* ---------- game popup: pick Watch / Live stats ---------- */
 let popG=null,popBack=null;
 function openPop(g){if(!g)return;popG=g;popBack=document.activeElement;const sc=g.sc,over=sc&&sc.over,x=scoreOf(g.aw,g.hm,g.st),logo=t=>t.logo?`<img src="${t.logo}" alt="">`:"";
-  const btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>`:sc?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="play">WATCH</button>`;
+  const hasF=!!(g.c&&g.c.u), btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>`:sc?(hasF?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="sum">LIVE STATS</button>`):(hasF?`<button class="pbtn" data-pa="play">WATCH</button>`:`<button class="pbtn" data-pa="close">CLOSE</button>`);
   const p=$("#gpop");p.innerHTML=`<div class="pc${over?" done":""}" style="${slideStyle(g)}"><span class="skin"><span class="mesh"></span></span><div class="pi"><div class="ft-top"><b>${sc?(over?"GAME OVER":esc(sc.note)):esc(fmtT(g.st))}</b><span>${esc((g.nets||[]).join(" / "))}</span></div>
     <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span></div><div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div><div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span></div></div>
-    <div class="tv">${over?"This game has ended":g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No feed found"}</div><div class="pb">${btns}</div></div></div>`;
+    <div class="tv">${over?"This game has ended":g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No channel carries this game"}</div><div class="pb">${btns}</div></div></div>`;
   p.hidden=false;p.querySelector(".pbtn").focus()}
 function closePop(){$("#gpop").hidden=true;if(popBack&&popBack.isConnected)popBack.focus({preventScroll:true})}
 $("#gpop").addEventListener("click",e=>{const b=e.target.closest("button");if(!b){closePop();return}const a=b.dataset.pa,g=popG;if(!a)return;
+  if(a==="close"){closePop();return}
   if(a==="play"){$("#gpop").hidden=true;play(g);return}
   const x=scoreOf(g.aw,g.hm,g.st);closePop();openGame(x&&x.id,a)});
 $("#gpop").addEventListener("keydown",e=>{const k=e.key;if(!/^Arrow/.test(k))return;e.preventDefault();e.stopPropagation();
@@ -647,6 +645,7 @@ window.nemBack=()=>{const pl=$("#pl");
     if(!pl.classList.contains("hide")){clearTimeout(hideT);pl.classList.add("hide");return true}
     stop();return true}if(tab!=="home"){go("home");return true}return false};
 $("#pl").addEventListener("keydown",e=>{
+  if(menuOn&&/^Arrow/.test(e.key)){e.preventDefault();e.stopPropagation();show();const bs=[...$("#pmenu").querySelectorAll("button")],i=bs.indexOf(document.activeElement);if(e.key==="ArrowDown"&&i<bs.length-1)bs[i+1].focus();else if(e.key==="ArrowUp"&&i>0)bs[i-1].focus();return}
   const hidden=$("#pl").classList.contains("hide");
   if(hidden&&!menuOn){
     // D-pad just opens the controls (never touches the stream); only dedicated channel keys zap

@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEMTV</title>
+<style>
+/* NEMOS dark tokens, copied from the live local NEMOS (whisper-hub/nemos-src) */
+@font-face{font-family:"Jersey M54";src:url(jersey.ttf) format("truetype");unicode-range:U+002E,U+0030-0039,U+0041-005A,U+0061-007A}
+:root{
+  --bg:#0F0E11;--surface:#19171C;--surface-2:#242128;--line:#2D2A31;--line-strong:#3B3741;
+  --ink:#F2F0F4;--ink-2:#C9C4CF;--muted:#8F8996;--accent:#F0435F;
+  --red:#D21F3C;--red-3:#B8182F;--coral:#FF8A5B;--plum:#2B2731;--wine:#5C2330;--island:#211E25;
+  --gl-fill:rgba(33,30,37,.62);
+  --gl-sheen:linear-gradient(135deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.03) 45%,rgba(255,255,255,.07) 100%);
+  --gl-shadow:0 12px 34px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(255,255,255,.05);
+}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--ink);font:11px/1.35 Inter,system-ui,sans-serif;overflow:hidden}
+button,input{font:inherit;color:inherit}
+button{border:0;background:none;cursor:pointer;text-align:inherit}
+.disp{font-family:"Jersey M54",Inter,sans-serif;text-transform:uppercase;font-synthesis:none;letter-spacing:.02em}
+
+header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:10px 28px 6px}
+.brand{font-size:20px;justify-self:start}
+nav{display:flex;gap:4px;padding:3px;border-radius:999px;background:var(--gl-fill);box-shadow:var(--gl-shadow);border:1px solid var(--line)}
+nav button{padding:5px 14px;border-radius:999px;color:var(--ink-2);font-weight:600;text-align:center}
+nav button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
+:focus{outline:none}
+button:focus-visible,input:focus-visible,.focusable:focus{box-shadow:0 0 0 2px var(--ink);transform:scale(1.04)}
+button,.pill{transition:transform .12s}
+
+main{height:calc(100% - 44px);overflow-y:auto;padding:4px 28px 24px;scrollbar-width:none}
+main::-webkit-scrollbar{display:none}
+h2{font-size:15px;margin:10px 0 8px}
+.sub{color:var(--muted);margin-bottom:8px}
+.empty{color:var(--muted);padding:16px 0}
+
+/* game pills: 16:9 NEMOS orb panels. Away colour fills the left edge, home colour the right */
+.grid{display:flex;flex-wrap:wrap;gap:10px}
+.pill{--o-base:var(--island);--o-a:var(--red-3);--o-b:var(--wine);--o-c:var(--plum);--o-f1:var(--coral);--o-f2:var(--wine);
+  position:relative;isolation:isolate;width:236px;aspect-ratio:16/9;border-radius:22px;text-align:center;color:#fff;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:14px 10px 10px;text-shadow:0 1px 4px rgba(0,0,0,.55)}
+.skin{position:absolute;inset:0;border-radius:inherit;overflow:hidden;z-index:-1;pointer-events:none}
+.mesh{position:absolute;inset:-20%;filter:blur(10px) saturate(1.35);
+  background:radial-gradient(55% 70% at 14% 42%,var(--o-a) 0%,transparent 72%),radial-gradient(55% 70% at 86% 58%,var(--o-b) 0%,transparent 72%),radial-gradient(30% 60% at 50% 50%,var(--o-c) 0%,transparent 80%),var(--o-base)}
+.pill:focus .mesh{animation:drift 9s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(4%,-3%) scale(1.08)}}
+.skin::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 7px 0 12px -3px var(--o-f1),inset -7px 0 12px -3px var(--o-f2),inset 0 0 22px 2px rgba(255,255,255,.18)}
+.pill .side{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.pill .side img{width:54px;height:54px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+.pill .tm{font-size:11px;line-height:1.05;word-break:break-word}
+.pill .mid{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 4px}
+.pill .vs{color:rgba(255,255,255,.8);font-size:10px}
+.pill .sp{position:absolute;top:7px;left:0;right:0;font-size:8px;color:rgba(255,255,255,.85);letter-spacing:.12em}
+.pill .live{position:absolute;bottom:6px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:4px;font-size:8px;color:rgba(255,255,255,.9);font-weight:700;letter-spacing:.1em}
+.pill.later{opacity:.82}
+.dot{width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(240,67,95,.9);animation:ping 1.6s infinite;display:inline-block}
+@keyframes ping{50%{opacity:.35}}
+@media(prefers-reduced-motion:reduce){.dot,.pill:focus .mesh{animation:none}}
+
+/* chips (Live filters, Home shortcuts) */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip{padding:5px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2);font-weight:600;white-space:nowrap}
+.chip[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217;border-color:transparent}
+
+/* channel cards: what is on right now */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.cc{position:relative;display:flex;flex-direction:column;gap:3px;padding:9px 12px 10px;border-radius:16px;background:var(--surface);border:1px solid var(--line);min-height:64px;overflow:hidden}
+.cc b{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:14px}
+.cc .nw{color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cc .nw.none{color:var(--muted)}
+.cc .star{position:absolute;top:8px;right:10px;color:var(--coral)}
+.cc .bar{position:absolute;left:0;bottom:0;height:3px;background:var(--accent);opacity:.9}
+
+/* settings */
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 12px;margin-bottom:5px;border-radius:999px;background:var(--surface);border:1px solid var(--line);width:300px}
+.sw{width:26px;height:15px;border-radius:999px;background:var(--line-strong);position:relative;flex:none}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:var(--ink-2);transition:transform .12s}
+.row[aria-checked=true] .sw{background:var(--ink)}
+.row[aria-checked=true] .sw::after{transform:translateX(11px);background:#141217}
+.field{display:flex;gap:6px;align-items:center;margin-bottom:10px}
+.field input{width:360px;padding:6px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong)}
+.btn{padding:6px 16px;border-radius:999px;background:rgba(244,242,246,.86);color:#141217;font-weight:700;text-align:center}
+
+/* splash */
+#boot{position:fixed;inset:0;z-index:50;background:var(--bg);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:opacity .6s}
+#boot.out{opacity:0;pointer-events:none}
+#boot .orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:.55}
+#boot .o1{width:420px;height:420px;left:-80px;top:-120px;background:var(--red-3);animation:fl 14s ease-in-out infinite alternate}
+#boot .o2{width:380px;height:380px;right:-60px;bottom:-140px;background:var(--wine);animation:fl 17s ease-in-out infinite alternate-reverse}
+#boot .o3{width:260px;height:260px;left:38%;top:30%;background:var(--plum);animation:fl 11s ease-in-out infinite alternate}
+@keyframes fl{to{transform:translate(40px,-30px) scale(1.12)}}
+#boot .rows{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:30px;opacity:.55}
+#boot .r{display:flex;gap:34px;width:max-content;animation:mq 46s linear infinite}
+#boot .r:nth-child(2){animation-direction:reverse;animation-duration:58s}
+#boot .r img{width:44px;height:44px;object-fit:contain}
+@keyframes mq{to{transform:translateX(-50%)}}
+#boot .ttl{position:relative;font-size:64px;line-height:1;text-shadow:0 6px 30px rgba(0,0,0,.6)}
+#boot .tag{position:relative;color:var(--ink-2);letter-spacing:.28em;font-size:10px}
+#boot .bar{position:relative;width:150px;height:4px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:6px}
+#boot .bar i{position:absolute;left:0;top:0;bottom:0;width:40%;border-radius:inherit;background:linear-gradient(90deg,var(--red-3),var(--coral));animation:ld 1.3s ease-in-out infinite}
+@keyframes ld{from{transform:translateX(-100%)}to{transform:translateX(260%)}}
+#boot .st{position:relative;color:var(--muted);font-size:10px;min-height:14px}
+@media(prefers-reduced-motion:reduce){#boot *{animation:none!important}}
+
+/* player */
+#pl{position:fixed;inset:0;background:#000;display:none;overflow:hidden}
+#pl.on{display:block}
+#pl video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform-origin:center}
+.ptop,.ctl{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;transition:opacity .2s}
+.ptop{top:0;padding:12px 28px;gap:10px;background:linear-gradient(#000b,#0000)}
+.ptop img{width:26px;height:26px;object-fit:contain}
+.ptop .t{font-size:15px}
+.ptop .tag{padding:2px 10px;border-radius:999px;background:var(--gl-fill);border:1px solid var(--line-strong);color:var(--ink-2);font-size:9px;letter-spacing:.1em}
+.ctl{bottom:16px;gap:6px;flex-wrap:wrap}
+.ctl .grp{display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;background:var(--gl-fill);box-shadow:var(--gl-shadow);border:1px solid var(--line-strong)}
+.ctl button{padding:6px 14px;border-radius:999px;color:var(--ink);font-weight:600;white-space:nowrap;text-align:center}
+.ctl button.sm{padding:6px 10px}
+.ctl .lbl{color:var(--muted);padding:0 4px 0 10px;font-size:9px;letter-spacing:.1em}
+#pl.hide .ptop,#pl.hide .ctl{opacity:0;pointer-events:none}
+.pmenu{position:absolute;left:50%;bottom:62px;transform:translateX(-50%);max-height:62%;overflow-y:auto;scrollbar-width:none;min-width:260px;max-width:420px;
+  padding:6px;border-radius:22px;background:rgba(25,23,28,.94);box-shadow:var(--gl-shadow);border:1px solid var(--line-strong)}
+.pmenu::-webkit-scrollbar{display:none}
+.pmenu button{display:flex;justify-content:space-between;gap:12px;width:100%;padding:7px 14px;border-radius:999px;text-align:left}
+.pmenu button[aria-checked=true]{background:rgba(242,240,244,.86);color:#141217;font-weight:700}
+.pmenu small{color:var(--muted)}
+.pmenu button[aria-checked=true] small{color:#4B4652}
+.pmenu h3{font-size:9px;color:var(--muted);letter-spacing:.1em;padding:4px 14px 6px}
+#pbuf{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;background:#09080b;pointer-events:none;
+  --o-a:var(--red-3);--o-b:var(--wine)}
+#pbuf.on{display:flex}
+#pbuf .mesh2{position:absolute;inset:-20%;filter:blur(36px) saturate(1.3);opacity:.85;
+  background:radial-gradient(45% 70% at 12% 50%,var(--o-a) 0%,transparent 72%),radial-gradient(45% 70% at 88% 50%,var(--o-b) 0%,transparent 72%),radial-gradient(30% 50% at 50% 50%,var(--plum) 0%,transparent 80%);animation:fl 12s ease-in-out infinite alternate}
+#pbuf .tm2{position:relative;display:flex;align-items:center;justify-content:center;gap:34px}
+#pbuf .tm2 .tt{display:flex;flex-direction:column;align-items:center;gap:8px;width:190px;text-align:center}
+#pbuf .tm2 img{width:92px;height:92px;object-fit:contain;filter:drop-shadow(0 6px 18px rgba(0,0,0,.6));animation:bob 2.4s ease-in-out infinite alternate}
+#pbuf .tm2 .tt+.vs2+.tt img{animation-delay:-1.2s}
+@keyframes bob{to{transform:translateY(-6px) scale(1.04)}}
+#pbuf .nm{font-size:17px;line-height:1.05;text-shadow:0 3px 14px rgba(0,0,0,.6)}
+#pbuf .vs2{font-size:13px;color:rgba(255,255,255,.75)}
+#pbuf .chn{position:relative;font-size:34px;text-shadow:0 4px 20px rgba(0,0,0,.6)}
+#pbuf .bar{position:relative;width:170px;height:4px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden;margin-top:6px}
+#pbuf .bar i{position:absolute;left:0;top:0;bottom:0;width:40%;border-radius:inherit;background:linear-gradient(90deg,var(--red-3),var(--coral));animation:ld 1.3s ease-in-out infinite}
+#pbuf .stt{position:relative;color:var(--ink-2);font-size:11px;min-height:14px;text-align:center}
+#pbuf.fail .bar{display:none}
+#pbuf.mini{inset:auto;left:50%;top:54px;transform:translateX(-50%);background:var(--gl-fill);border:1px solid var(--line-strong);border-radius:999px;padding:6px 14px;flex-direction:row;gap:10px;box-shadow:var(--gl-shadow);backdrop-filter:blur(8px)}
+#pbuf.mini .mesh2,#pbuf.mini .tm2,#pbuf.mini .chn{display:none}
+#pbuf.mini .bar{margin:0;width:46px}
+@media(prefers-reduced-motion:reduce){#pbuf *{animation:none!important}}
+#gp{position:fixed;z-index:80;background:rgba(15,14,17,.85)}
+#gp.tab{left:0;right:0;top:46px;bottom:0;z-index:20}
+#gp.side{top:0;bottom:0;right:0;width:25vw;border-left:1px solid var(--line-strong);backdrop-filter:blur(10px);overflow:hidden}
+#gf{border:0;background:transparent;display:block;transform-origin:0 0}
+#gbar{display:none;gap:3px;padding:4px;height:34px;align-items:center}
+#gp.side #gbar{display:flex}
+#gbar button{display:flex;align-items:center;justify-content:center;gap:4px;padding:3px 8px;min-width:30px;height:26px;border-radius:999px;background:var(--gl-fill);border:1px solid var(--line-strong);color:var(--ink);font-weight:700;font-size:10px}
+#gbar button img{width:18px;height:18px;object-fit:contain}
+#gbar button:focus{outline:2px solid var(--coral);outline-offset:1px}
+#gbar .sp{flex:1}
+</style></head><body>
+<header><span class="brand disp">NEMTV</span>
+<nav id="nav"><button data-t="home">Home</button><button data-t="live">Live</button><button data-t="guide">Guide</button><button data-t="sports">Sports</button><button data-t="setup">Setup</button></nav></header>
+<main id="m"></main>
+<div id="boot"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="rows" id="brows"></div><div class="ttl disp">NEMTV</div><div class="tag disp">NHL &middot; LIVE TV</div><div class="bar"><i></i></div><div class="st" id="bst">Loading channels...</div></div>
+<div id="pl"><video id="v" autoplay playsinline></video>
+<div id="pbuf"><div class="mesh2"></div><div id="pbc"></div><div class="bar"><i></i></div><div class="stt" id="pst"></div></div>
+<div class="ptop" id="ptop"></div>
+<div class="ctl" id="pctl">
+ <div class="grp"><span class="lbl">FEED</span><button id="bfeed"></button></div>
+ <div class="grp"><span class="lbl">ZOOM</span><button class="sm" id="zm">-</button><button id="zv"></button><button class="sm" id="zp">+</button></div>
+ <div class="grp"><button id="bgd">Guide</button><button id="bfav">Favorite</button><button id="bpp">Pause</button><button id="bmu">Mute</button><button id="bcl">Close</button></div>
+</div><div class="pmenu" id="pmenu" hidden></div></div>
+<div id="gp" hidden><div id="gbar"></div><iframe id="gf" title="NHL guide"></iframe></div>
+<script src="config.js"></script>
+<script src="hls.min.js"></script>
+<script src="nhl_schedule.js"></script>
+<script src="nhl_logos.js"></script>
+<script>
+const $=s=>document.querySelector(s), ls=(k,d)=>{try{return JSON.parse(localStorage[k])}catch(e){return d}}, sv=(k,v)=>{try{localStorage[k]=JSON.stringify(v)}catch(e){}};
+const log=(...a)=>console.log(a.join(" "));
+const SPORTS=[["NFL",/\bnfl\b/i],["NBA",/\bnba\b|\bwnba\b/i],["MLB",/\bmlb\b/i],["NHL",/\bnhl\b/i],["UFC",/\bufc\b|\bmma\b|\bboxing\b|\bpfl\b/i],
+ ["Soccer",/soccer|\bepl\b|premier league|la ?liga|uefa|champions league|\bmls\b|bundesliga|serie a|ligue 1|\bfifa\b|europa|futbol/i],
+ ["College",/ncaa|college|\bcfb\b|\bcbb\b/i],["Tennis",/tennis|\batp\b|\bwta\b/i],["Golf",/\bgolf\b|\bpga\b/i],["Racing",/\bf1\b|formula|nascar|motogp|indycar/i],
+ ["Wrestling",/\bwwe\b|\baew\b|wrestling/i],["Cricket",/cricket|\bipl\b/i],["Rugby",/rugby/i],["Sports",/sport|espn|\bfox sports\b|\bdazn\b|bein|\bsky sports\b/i]];
+const VS=/\s(?:vs\.?|v|@|at)\s/i;
+let G=[], L=[], cur=null, menuOn=false, hideT=0, hls=null, tried=new Set();
+let zoom=ls("zoom",100), fav=ls("fav",[]), recent=ls("recent",[]), grp=ls("grp","All");
+let ch=ls("ch",[]), off=ls("off",[]), tab="home", url=ls("url",(window.CFG||{}).playlist||""), msg="";
+
+const plain=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"");
+const esc=s=>plain(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const nk=x=>plain(x).replace(/\./g,"").toLowerCase().trim(), nt=x=>nk(x).replace(/\s+/g," ");
+
+function parse(t){
+  const out=[], Ls=t.split(/\r?\n/);
+    for(let i=0;i<Ls.length;i++){
+    if(!Ls[i].startsWith("#EXTINF"))continue;
+    const name=(Ls[i].split(/,(.*)$/)[1]||"").trim(), g=(Ls[i].match(/group-title="([^"]*)"/)||[])[1]||"";
+    let u=""; for(let j=i+1;j<Ls.length;j++){const x=Ls[j].trim(); if(x&&x[0]!=="#"){u=x;break}}
+    if(!u)continue;
+    const s=SPORTS.find(p=>p[1].test(g+" "+name));
+    out.push({id:(Ls[i].match(/tvg-id="([^"]*)"/)||[])[1]||"",n:name,u,g,s:s?s[0]:""});
+  }
+  return out;
+}
+
+const NHL=[["ANA","Anaheim Ducks","#F47A38"],["BOS","Boston Bruins","#FFB81C"],["BUF","Buffalo Sabres","#3D6CC9"],["CGY","Calgary Flames","#D2001C"],["CAR","Carolina Hurricanes","#CC0000"],
+["CHI","Chicago Blackhawks","#CF0A2C"],["COL","Colorado Avalanche","#A03A5C"],["CBJ","Columbus Blue Jackets","#CE1126"],["DAL","Dallas Stars","#00A66B"],["DET","Detroit Red Wings","#CE1126"],
+["EDM","Edmonton Oilers","#FF4C00"],["FLA","Florida Panthers","#C8102E"],["LAK","Los Angeles Kings","#A2AAAD"],["MIN","Minnesota Wild","#2A8C5A"],["MTL","Montreal Canadiens","#AF1E2D"],
+["NSH","Nashville Predators","#FFB81C"],["NJD","New Jersey Devils","#CE1126"],["NYI","New York Islanders","#2F7FD0"],["NYR","New York Rangers","#2F63D6"],["OTT","Ottawa Senators","#C52032"],
+["PHI","Philadelphia Flyers","#F74902"],["PIT","Pittsburgh Penguins","#FCB514"],["SEA","Seattle Kraken","#68A2B9"],["SJS","San Jose Sharks","#00A0AA"],["STL","St Louis Blues","#1C57C4"],
+["TBL","Tampa Bay Lightning","#1E8AD8"],["TOR","Toronto Maple Leafs","#2F6FD6"],["UTA","Utah Mammoth","#6CACE4"],["UTA","Utah Hockey Club","#6CACE4"],["VAN","Vancouver Canucks","#2A7DC0"],
+["VGK","Vegas Golden Knights","#B4975A"],["WSH","Washington Capitals","#C8102E"],["WPG","Winnipeg Jets","#3D6DB5"]];
+const team=n=>{const k=nk(n),t=NHL.find(t=>nk(t[1])===k);return t?{logo:(window.LOGO||{})[t[0]],c:t[2]}:{}};
+
+const on=c=>!c.s||!off.includes(c.s);
+const ABBR={}; NHL.forEach(t=>{ABBR[t[0]]={name:t[1],c:t[2],logo:(window.LOGO||{})[t[0]]}});
+// NHL broadcast code -> channel names in the playlist (feeds like "TSN4 . feed 2" share the base name)
+const NET={ESPN:/^ESPN2?$/,"ESPN+":/^ESPN2?$/,ABC:/^ABC$/,TNT:/^(TNT|TNT Sports \d|truTV)$/,truTV:/^(TNT|truTV)$/,NHLN:/^NHL Network$/,"NHLN-US":/^NHL Network$/,
+ SN:/^Sportsnet/,"SN+":/^Sportsnet/,SN1:/^Sportsnet One$/,SN360:/^Sportsnet 360$/,SNE:/^Sportsnet East$/,SNW:/^Sportsnet West$/,SNP:/^Sportsnet Pacific$/,SNO:/^Sportsnet Ontario$/,"SN-PIT":/^SportsNet Pittsburgh$/,
+ TSN2:/^TSN2$/,TSN3:/^TSN3$/,TSN4:/^TSN4$/,TSN5:/^TSN5$/,TVAS:/^TVA Sports$/,TVAS2:/^TVA Sports 2$/,NESN:/^NESN$/,MSG:/^MSG$/,"MSG 2":/^MSG 2$/,"MSG-B":/^MSG$/,MSGSN:/^MSGSN$/,MSGSN2:/^MSGSN 2$/,
+ NBCSP:/^NBC Sports Philadelphia$/,"NBCSP+":/^NBC Sports Philadelphia$/,NBCSCA:/^NBC Sports (California|Bay Area)$/,ALT:/^Altitude Sports$/,ALT2:/^Altitude Sports 2$/,CHSN:/^Chicago Sports Network$/};
+const HOME_RSN={DET:/^Detroit SportsNet$/,LAK:/^Spectrum SportsNet LA$/,BOS:/^(NESN|NBC Sports Boston)$/,SJS:/^NBC Sports (Bay Area|California)$/,
+ NYR:/^MSG$/,NYI:/^MSG/,NJD:/^MSG/,PHI:/^NBC Sports Philadelphia$/,PIT:/^SportsNet Pittsburgh$/,COL:/^Altitude Sports$/,CHI:/^Chicago Sports Network$/};
+const baseName=n=>n.replace(/\s+\S\s+feed\s+\d+$/,"");
+const DUR=3.25*3600e3; // NHL game window on the TV clock
+function games(){ // from the bundled NHL schedule + the TV box clock
+  const t=Date.now(), live=[], later=[];
+  if(off.includes("NHL"))return {live,later};
+  (window.SCHED||[]).forEach(([st,aw,hm,nets])=>{
+    if(st+DUR<=t||st>t+36*3600e3)return;
+    const A=ABBR[aw],H=ABBR[hm]; if(!A||!H)return;
+    const g={s:"NHL",tm:[H.name,A.name],t:[H,A],st,aw,hm,nets,title:A.name+" at "+H.name}; // home team on the left
+    g.c=feedsFor(g)[0]||{n:"No matching channel",u:"",g:""};
+    (st<=t?live:later).push(g);
+  });
+  return {live,later};
+}
+const CA=/^(Sportsnet (One|360|East|West|Pacific|Ontario|World)|TSN\d|TVA Sports|CBC|RDS)/i; // Canadian broadcasters always come first
+function feedsFor(g){ // channels carrying this game: Canada first, then its other networks, then each team's regional network
+  const seen=new Set(), out=[], add=re=>ch.forEach(c=>{if(re.test(baseName(c.n))&&!seen.has(c.u)){seen.add(c.u);out.push(c)}});
+  (g.nets||[]).forEach(n=>NET[n.trim()]&&add(NET[n.trim()]));
+  [HOME_RSN[g.hm],HOME_RSN[g.aw]].forEach(re=>re&&add(re));
+  // only when nothing carries the game: national sports channels as a last resort (they often show other sports)
+  if(!out.length){add(/^(Sportsnet (One|360)|TSN[1-5])$/);add(/^(NHL Network)$/)}
+  const ca=out.filter(c=>CA.test(baseName(c.n))), rest=out.filter(c=>!CA.test(baseName(c.n)));
+  return ca.concat(rest);
+}
+const fmtT=ms=>{const d=new Date(ms),td=new Date().toDateString()===d.toDateString();return (td?"":d.toLocaleDateString([],{weekday:"short"})+" ")+d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})};
+
+function pillHTML(c,k,kind){
+  const col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";
+  return `<button class="pill focusable${kind==="later"?" later":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span><span class="sp disp">${esc(c.s)}</span><span class="side">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span></span><span class="mid"><span class="vs disp">VS</span></span><span class="side">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span></span><span class="live">${kind==="later"?"STARTS "+esc(fmtT(c.st)).toUpperCase():'<i class="dot"></i>LIVE'}</span></button>`;
+}
+const chanCard=c=>`<button class="cc focusable" data-i="${ch.indexOf(c)}"><b>${esc(baseName(c.n))}</b>${fav.includes(c.n)?'<span class="star">&#9733;</span>':""}<span class="nw none">${esc(c.g)}</span></button>`;
+const chip=(label,pressed,attr)=>`<button class="chip focusable" ${attr} aria-pressed="${pressed}">${esc(label)}</button>`;
+
+function render(){
+  guideTab(tab==="guide");
+  document.querySelectorAll("#nav button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===tab));
+  const m=$("#m"), vis=ch.filter(on);
+  if(tab==="home"){
+    const gm=games(); G=gm.live; L=gm.later;
+    const favs=fav.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c)), rec=recent.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c));
+    let h=`<h2 class="disp">NHL on now</h2>`+(G.length?`<div class="grid">${G.map((c,k)=>pillHTML(c,k,"live")).join("")}</div>`
+      :`<div class="empty">${ch.length?"No NHL games on right now."+(L.length?" Next up: "+esc(L[0].title)+", "+esc(fmtT(L[0].st))+".":""):"No playlist yet. Open Setup and add your M3U link."}</div>`);
+    if(L.length)h+=`<h2 class="disp">Coming up</h2><div class="grid">${L.slice(0,12).map((c,k)=>pillHTML(c,k,"later")).join("")}</div>`;
+    if(favs.length)h+=`<h2 class="disp">Favorites</h2><div class="cards">${favs.map(c=>chanCard(c)).join("")}</div>`;
+    if(rec.length)h+=`<h2 class="disp">Recently watched</h2><div class="cards">${rec.slice(0,8).map(c=>chanCard(c)).join("")}</div>`;
+    m.innerHTML=h;
+  }else if(tab==="guide"){ m.innerHTML="";
+  }else if(tab==="live"){
+    const groups=["All","Favorites","Recent",...new Set(vis.map(c=>c.g).filter(Boolean))];
+    if(!groups.includes(grp))grp="All";
+    let list=grp==="All"?vis:grp==="Favorites"?vis.filter(c=>fav.includes(c.n)):grp==="Recent"?recent.map(n=>vis.find(c=>c.n===n)).filter(Boolean):vis.filter(c=>c.g===grp);
+    LL=list;
+    m.innerHTML=`<div class="chips">${groups.map(g=>chip(g,g===grp,`data-grp="${esc(g)}"`)).join("")}</div>`+
+      (list.length?`<div class="cards">${list.map(c=>chanCard(c)).join("")}</div><div class="sub" style="margin-top:10px">Press Menu on a channel to add or remove it from Favorites.</div>`
+      :`<div class="empty">${grp==="Favorites"?"No favorites yet. Press Menu on a channel to add one.":grp==="Recent"?"Nothing watched yet.":"Nothing here."}</div>`);
+  }else if(tab==="sports"){
+    const gm=games(), ss=[...new Set([...ch.map(c=>c.s),...gm.live.map(g=>g.s),...gm.later.map(g=>g.s),...off].filter(Boolean))];
+    m.innerHTML=`<h2 class="disp">Sports</h2><div class="sub">Turn a sport off to hide its games and channels.</div>`+
+      (ss.map(s=>`<button class="row focusable" role="switch" aria-checked="${!off.includes(s)}" data-s="${esc(s)}"><span>${esc(s)}</span><span class="sw"></span></button>`).join("")||'<div class="empty">No sports found in the playlist.</div>');
+  }else{
+    m.innerHTML=`<h2 class="disp">Setup</h2><div class="sub">M3U playlist link</div>
+      <div class="field"><input id="u" type="url" value="${esc(url)}" placeholder="http://..."><button class="btn" id="go">Load</button></div>
+      <div class="sub" id="st">${esc(msg||ch.length+" channels loaded")}</div>`;
+  }
+  const f=m.querySelector("button,input"); if(f&&!document.activeElement.closest("main")) f.focus();
+}
+let LL=[];
+
+/* ---------- player ---------- */
+function show(){const pl=$("#pl");pl.classList.remove("hide");clearTimeout(hideT);hideT=setTimeout(()=>{if(!menuOn)pl.classList.add("hide")},4000)}
+function setZoom(z){zoom=Math.max(50,Math.min(200,z));$("#v").style.transform="scale("+zoom/100+")";$("#zv").textContent=zoom+"%";sv("zoom",zoom)}
+function favBtn(){$("#bfav").textContent=fav.includes(cur.c.n)?"Unfavorite":"Favorite"}
+let waitT=0;
+function bufBuild(){ // big loading card: both teams on their colours, or the channel name
+  const pb=$("#pbuf"), t=cur&&cur.t||[{},{}], two=cur&&cur.tm&&cur.tm.length>1&&t[0].logo&&t[1].logo;
+  pb.style.setProperty("--o-a",t[0].c||"var(--red-3)"); pb.style.setProperty("--o-b",t[1].c||"var(--wine)");
+  $("#pbc").innerHTML=two?`<div class="tm2"><div class="tt"><img src="${t[0].logo}" alt=""><span class="nm disp">${esc(cur.tm[0])}</span></div><span class="vs2 disp">VS</span><div class="tt"><img src="${t[1].logo}" alt=""><span class="nm disp">${esc(cur.tm[1])}</span></div></div>`
+    :`<div class="chn disp">${esc(baseName(cur.c.n))}</div>`;
+}
+function msgP(t,mode){ // mode: "full" first load, "fail" dead end, "mini" mid-stream stall; empty text hides it
+  const pb=$("#pbuf"); clearTimeout(waitT);
+  if(!t){pb.classList.remove("on","mini","fail");return}
+  pb.classList.toggle("mini",mode==="mini"); pb.classList.toggle("fail",mode==="fail");
+  if(mode!=="mini")bufBuild();
+  $("#pst").textContent=t; pb.classList.add("on");
+}
+function killHls(){if(hls){hls.destroy();hls=null}}
+function setFeed(c){
+  cur.c=c; cur.feed=c; tried.add(c.u); msgP("Connecting to "+baseName(c.n)+"...","full");
+  const v=$("#v"); killHls();
+  $("#bfeed").textContent=c.n+(cur.feeds.length>1?"  ("+(cur.feeds.indexOf(c)+1)+"/"+cur.feeds.length+")":"");
+  favBtn();
+  if(window.Hls&&Hls.isSupported()){
+    hls=new Hls({maxBufferLength:20,enableWorker:true});
+    hls.on(Hls.Events.ERROR,(e,d)=>{log("hls",d.type,d.details,d.fatal);
+      if(d.fatal){const nx=cur.feeds.find(f=>!tried.has(f.u)); if(nx){msgP("That feed failed. Trying "+baseName(nx.n)+"...","full");setFeed(nx)}else msgP("This feed would not play. Open FEED and pick another.","fail")}});
+    hls.loadSource(c.u); hls.attachMedia(v);
+    hls.on(Hls.Events.MANIFEST_PARSED,()=>{if($("#pbuf").classList.contains("on"))$("#pst").textContent="Starting the stream...";v.play().catch(e=>log("play",e))});
+  }else{v.src=c.u;v.play().catch(e=>log("play",e))}
+}
+function addRecent(c){recent=[c.n,...recent.filter(n=>n!==c.n)].slice(0,12);sv("recent",recent)}
+function play(g,list){
+  const feeds=g.title?feedsFor(g):[g.c];
+  cur={...g,feeds,list:list||feeds}; tried=new Set(); addRecent(g.c);
+  const t=cur.t||[{},{}], logo=x=>x&&x.logo?`<img src="${x.logo}" alt="">`:"";
+  $("#ptop").innerHTML=(cur.tm&&cur.tm.length>1?logo(t[0])+`<span class="t disp">${esc(cur.tm[0])}</span><span class="vs disp" style="color:var(--muted)">VS</span><span class="t disp">${esc(cur.tm[1])}</span>${logo(t[1])}`
+    :`<span class="t disp">${esc(g.c.n)}</span>`)+(cur.s?`<span class="tag">${esc(cur.s)}</span>`:"")+`<span class="tag"><i class="dot"></i> LIVE</span>`;
+  $("#pl").classList.add("on"); setZoom(zoom); setFeed(feeds[0]); show(); $("#bpp").textContent="Pause"; $("#bmu").textContent=$("#v").muted?"Unmute":"Mute"; $("#bfeed").focus();
+}
+function zap(d){ // Up/Down with controls hidden: next/previous channel (or feed for a game)
+  const l=cur.list, i=l.indexOf(cur.c); if(l.length<2)return;
+  const n=l[(i+d+l.length)%l.length];
+  if(cur.title){tried=new Set();setFeed(n)}else{cur.c=n;addRecent(n);tried=new Set();cur.feeds=[n];$("#ptop .t").textContent=plain(n.n).toUpperCase();setFeed(n)}
+}
+function stop(){closeMenu();killHls();const v=$("#v");v.pause();v.removeAttribute("src");v.load();msgP("");$("#pl").classList.remove("on")}
+function openMenu(kind){
+  const m=$("#pmenu"); menuOn=true; show();
+  if(kind==="feed")m.innerHTML=`<h3>CHOOSE A FEED FOR THIS GAME</h3>`+cur.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===cur.feed}" data-f="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("");
+  else m.innerHTML=`<h3>ZOOM</h3>`+[50,75,85,90,95,100,105,110,115,120,125,130,140,150,175,200].map(z=>`<button role="menuitemradio" aria-checked="${z===zoom}" data-z="${z}"><span>${z}%</span><small>${z===100?"fit to screen":""}</small></button>`).join("");
+  m.hidden=false; const a=m.querySelector('[aria-checked=true]')||m.querySelector("button"); a.focus(); a.scrollIntoView({block:"center"});
+}
+function closeMenu(){const m=$("#pmenu"); if(!m.hidden){m.hidden=true;menuOn=false;show();return true} return false}
+/* ---------- NHL guide (git-synced site in an iframe) ---------- */
+const GURL=window.Android?"https://guide.nemtv.local/index.html":"guide/index.html";
+let gDepth=0, gStale=false, gLoaded=false;
+const gPost=m=>{const w=$("#gf").contentWindow; if(w)w.postMessage(Object.assign({nem:1},m),"*")};
+const gSide=()=>$("#gp").classList.contains("side");
+function gLoad(){const f=$("#gf"); if(!gLoaded||gStale){gLoaded=true;gStale=false;f.src=GURL+(gStale?"":"")+"?v="+Date.now()}}
+const GS=.85; // guide content drawn 15% smaller
+function gLayout(){const f=$("#gf"); let w,h,sc;
+  if(gSide()){w=390/GS;sc=innerWidth/4/w;h=(innerHeight-34)/sc}else{sc=GS;w=innerWidth/sc;h=(innerHeight-46)/sc}
+  f.style.width=w+"px";f.style.height=h+"px";f.style.transform="scale("+sc+")"}
+function gFocus(){$("#gf").focus(); gPost({cmd:"focus"})}
+function guideTab(on){const gp=$("#gp"); if(on){gp.className="tab";gp.hidden=false;gLayout();gLoad();gDepth=0;setTimeout(gFocus,400)}else if(!gSide())gp.hidden=true}
+function guideSide(){ // quarter-width phone view inside the player
+  const gp=$("#gp"), t=(cur&&cur.t)||[], logo=x=>x&&x.logo?`<img src="${x.logo}" alt="">`:"";
+  let b="";
+  if(cur&&cur.hm)b=`<button data-gq="game">GAME</button><button data-gq="team" data-ab="${cur.hm}">${logo(t[0])}${cur.hm}</button><button data-gq="team" data-ab="${cur.aw}">${logo(t[1])}${cur.aw}</button>`;
+  else b=`<button data-gq="games">GAMES</button>`;
+  $("#gbar").innerHTML=b+`<span class="sp"></span><button data-gq="close">X</button>`;
+  gp.className="side"; gp.hidden=false; gLayout(); gDepth=0; gLoad();
+  clearTimeout(hideT); $("#pl").classList.add("hide");
+  const first=$("#gbar button"); if(first)first.focus();
+  if(cur&&cur.hm){const go=()=>gPost({cmd:"matchup",away:cur.aw,home:cur.hm,start:cur.st});go();setTimeout(go,1500)}
+}
+function guideClose(){const gp=$("#gp"), side=gSide(); gp.hidden=true; if(side){show();$("#bgd").focus()}}
+window.guideSynced=(n,e)=>{log("guide sync",n,e||"ok"); if(n>0){gStale=true; if($("#gp").hidden)gLoaded=false; else if(gDepth===0){gLoad()}}};
+window.addEventListener("message",e=>{const m=e.data||{}; if(m.nem!=="guide")return;
+  if(m.depth!==undefined)gDepth=m.depth;
+  if(m.ready&&gLoaded&&!$("#gp").hidden&&!gSide())gFocus();
+  if(m.exit==="up"){const t=gSide()?$("#gbar button"):document.querySelector("#nav button[aria-pressed=true]"); if(t)t.focus()}});
+$("#gbar").onclick=e=>{const b=e.target.closest("button"); if(!b)return; const q=b.dataset.gq;
+  if(q==="close")guideClose(); else if(q==="game")gPost({cmd:"matchup",away:cur.aw,home:cur.hm,start:cur.st});
+  else if(q==="team")gPost({cmd:"team",ab:b.dataset.ab}); else if(q==="games")gPost({cmd:"games"})};
+$("#gbar").addEventListener("keydown",e=>{if(e.key==="ArrowDown"){e.preventDefault();gFocus()}});
+$("#nav").addEventListener("keydown",e=>{if(e.key==="ArrowDown"&&tab==="guide"){e.preventDefault();gFocus()}});
+window.addEventListener("resize",gLayout);
+window.nemBack=()=>{const pl=$("#pl");
+  if(!$("#gp").hidden){ // guide: close its drawer first, then the panel (or go home from the tab)
+    if(gDepth>0){gPost({cmd:"back"});return true}
+    if(gSide()){guideClose();return true}
+    go("home");return true}
+  if(pl.classList.contains("on")){ // Back: close open menu, then hide the controls, then leave the player
+    if(closeMenu()){return true}
+    if(!pl.classList.contains("hide")){clearTimeout(hideT);pl.classList.add("hide");return true}
+    stop();return true}if(tab!=="home"){go("home");return true}return false};
+$("#pl").addEventListener("keydown",e=>{
+  const hidden=$("#pl").classList.contains("hide");
+  if(hidden&&!menuOn){
+    // D-pad just opens the controls (never touches the stream); only dedicated channel keys zap
+    if(e.key==="PageUp"||e.key==="PageDown"||e.keyCode===166||e.keyCode===167){e.preventDefault();e.stopPropagation();zap(e.key==="PageDown"||e.keyCode===167?1:-1);show();return}
+    e.preventDefault();e.stopPropagation();show();$("#bfeed").focus();return;
+  }
+  show();
+},true);
+$("#pl").addEventListener("pointermove",show);
+$("#v").addEventListener("playing",()=>msgP(""));
+$("#v").addEventListener("waiting",()=>{clearTimeout(waitT);if(!$("#pbuf").classList.contains("on"))waitT=setTimeout(()=>msgP("Buffering...","mini"),700)});
+$("#v").addEventListener("error",()=>{if(!hls)msgP("This feed would not play. Open FEED and pick another.","fail")});
+$("#pl").onclick=e=>{
+  show(); const b=e.target.closest("button"); if(!b)return; const v=$("#v");
+  if(b.id==="bfeed")openMenu("feed");
+  else if(b.id==="zv")openMenu("zoom");
+  else if(b.id==="zm")setZoom(zoom-5);
+  else if(b.id==="zp")setZoom(zoom+5);
+  else if(b.id==="bfav")toggleFav(cur.c.n);
+  else if(b.id==="bpp"){if(v.paused){v.play();b.textContent="Pause"}else{v.pause();b.textContent="Play"}}
+  else if(b.id==="bmu"){v.muted=!v.muted;b.textContent=v.muted?"Unmute":"Mute"}
+  else if(b.id==="bgd")guideSide();
+  else if(b.id==="bcl")stop();
+  else if(b.dataset.f!==undefined){closeMenu();tried=new Set();setFeed(cur.feeds[+b.dataset.f]);$("#bfeed").focus()}
+  else if(b.dataset.z!==undefined){closeMenu();setZoom(+b.dataset.z);$("#zv").focus()}
+};
+function toggleFav(n){fav=fav.includes(n)?fav.filter(x=>x!==n):[...fav,n];sv("fav",fav);if(cur&&$("#pl").classList.contains("on"))favBtn()}
+
+/* ---------- data from the TV side ---------- */
+function rerender(){ // redraw but keep the remote focus on the same item
+  const a=document.activeElement, y=$("#m").scrollTop; let sel=null;
+  if(a&&a.closest&&a.closest("main"))for(const k of ["data-g","data-l","data-i","data-grp","data-s"])if(a.hasAttribute(k)){sel=`[${k}="${CSS.escape(a.getAttribute(k))}"]`;break}
+  render(); $("#m").scrollTop=y; const n=sel&&$("#m").querySelector(sel); if(n)n.focus();
+}
+window.gotList=(t,e)=>{
+  const c=t?parse(t):[];
+  if(c.length){ch=c;sv("ch",c);msg=c.length+" channels loaded";log("playlist",c.length)}else msg=e?"Failed: "+e:"No channels found in that playlist";
+  render(); $("#bst")&&($("#bst").textContent=c.length?"Loading games...":"Could not load the playlist"); bootOff();
+};
+function go(t){tab=t;render();(document.querySelector("#nav button[aria-pressed=true]")).focus()}
+
+$("#nav").onclick=e=>{const b=e.target.closest("button");if(b)go(b.dataset.t)};
+$("#m").onclick=e=>{
+  const q=e.target.closest("[data-g]"); if(q)return play(G[+q.dataset.g]);
+  const l=e.target.closest("[data-l]"); if(l)return play(L[+l.dataset.l]);
+  const p=e.target.closest("[data-i]"); if(p){const c=ch[+p.dataset.i];return play({c,tm:[c.n],t:[{}],s:c.s},tab==="live"?LL:null)}
+  const gp=e.target.closest("[data-grp]"); if(gp){grp=gp.dataset.grp;sv("grp",grp);render();$("#m").querySelector(`[data-grp="${CSS.escape(grp)}"]`).focus();return}
+  const s=e.target.closest("[data-s]"); if(s){const k=s.dataset.s;off=off.includes(k)?off.filter(x=>x!==k):[...off,k];sv("off",off);render();$("#m").querySelector(`[data-s="${CSS.escape(k)}"]`).focus();return}
+  if(e.target.closest("#go")){url=$("#u").value.trim();sv("url",url);msg="Loading...";$("#st").textContent=msg;Android.load(url)}
+};
+document.addEventListener("keydown",e=>{ // Menu key on a channel card = favorite
+  if(e.keyCode===82||e.key==="ContextMenu"){const c=document.activeElement.closest&&document.activeElement.closest("[data-i]");
+    if(c&&!$("#pl").classList.contains("on")){toggleFav(ch[+c.dataset.i].n);const i=c.dataset.i;render();const n=$("#m").querySelector(`[data-i="${i}"]`);if(n)n.focus();e.preventDefault()}}
+});
+render();
+const bootAt=Date.now(); let bootDone=false;
+(function(){const k=Object.keys(window.LOGO||{}).sort(()=>Math.random()-.5);
+  $("#brows").innerHTML=[0,1,2].map(r=>{const l=k.filter((_,i)=>i%3===r),h=l.concat(l).map(a=>`<img src="${window.LOGO[a]}" alt="">`).join("");return `<div class="r">${h}</div>`}).join("")})();
+function bootOff(){if(bootDone)return;bootDone=true;const wait=Math.max(0,2200-(Date.now()-bootAt));setTimeout(()=>{$("#boot").classList.add("out");setTimeout(()=>$("#boot").remove(),700);const f=$("#m").querySelector("button,input");if(f)f.focus()},wait)}
+setTimeout(bootOff,9000); // never hang on the splash
+if(ch.length)bootOff();
+log("NEMTV start",new Date().toString(),"games",(window.SCHED||[]).length);
+if(window.Android&&(window.CFG||{}).repo)Android.guideSync(CFG.repo,CFG.branch||"main");
+if(url&&!ch.length)Android.load(url);else if(url)Android.load(url); // refresh playlist in the background
+setInterval(()=>{if((tab==="home"||tab==="live")&&!$("#pl").classList.contains("on"))rerender()},60000);
+</script></body></html>

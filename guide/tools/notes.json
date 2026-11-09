@@ -1,0 +1,3269 @@
+{
+ "updated": "2026-11-08T17:10:00-05:00",
+ "teams": {
+  "BOS": {
+   "name": "Boston Bruins",
+   "short": "Bruins",
+   "coach": "Marco Sturm",
+   "gm": "Don Sweeney",
+   "captain": 8477956,
+   "linesAsOf": "Nov 8 vs FLA game lineup, per NHL.com 'Need to Know: Bruins vs. Panthers' (Sturm's game-day lineup); no projection yet for Nov 12 vs MTL",
+   "lines": [
+    [
+     8482175,
+     8478401,
+     8477956
+    ],
+    [
+     8479591,
+     8483489,
+     8479987
+    ],
+    [
+     8479999,
+     8477496,
+     8482177
+    ],
+    [
+     8479661,
+     8483505,
+     8480355
+    ]
+   ],
+   "pairs": [
+    [
+     8476854,
+     8479325
+    ],
+    [
+     8477507,
+     8478840
+    ],
+    [
+     8483017,
+     8482511
+    ]
+   ],
+   "goalies": [
+    8480280,
+    8480022
+   ],
+   "out": [
+    8485395,
+    8476374,
+    8481219,
+    8477365
+   ],
+   "extras": [],
+   "players": {
+    "8479987": {
+     "acq": "fa",
+     "when": "Jul 2023",
+     "how": "Signed as a free agent from Seattle in 2023; re-signed long term in 2025.",
+     "role": "Second-line RW · PP1",
+     "story": "A depth forward in Carolina and Seattle who became a goal scorer in Boston, with a team-high 39 goals last season. Scored on a 5-on-3 power play against Florida on Nov. 8.",
+     "status": "Active",
+     "contract": {
+      "aav": 5500000,
+      "ends": "2030-31",
+      "fa": "UFA"
+     }
+    },
+    "8485395": {
+     "acq": "draft",
+     "when": "2025",
+     "how": "Drafted 7th overall in 2025 out of Boston College.",
+     "role": "Third-line RW (injured)",
+     "story": "Placed on IR on Nov. 7 with a lower-body injury after a cross-check from Samuel Girard on Nov. 5. Sturm said it will be a few weeks.",
+     "status": "IR",
+     "contract": {
+      "aav": 986250,
+      "ends": "2027-28",
+      "fa": "RFA",
+      "note": "Entry-level contract."
+     }
+    },
+    "8479661": {
+     "acq": "fa",
+     "when": "Jul 2025",
+     "how": "Signed as a free agent in 2025 after a season in Los Angeles.",
+     "role": "Fourth-line LW",
+     "story": "Undrafted power forward from Saskatchewan. Brings hits and fights more than points (22 last season).",
+     "status": "Active",
+     "contract": {
+      "aav": 3400000,
+      "ends": "2029-30",
+      "fa": "UFA"
+     }
+    },
+    "8480355": {
+     "acq": "trade",
+     "when": "Jun 2024",
+     "how": "Came from Ottawa with Joonas Korpisalo in the 2024 Linus Ullmark trade.",
+     "role": "Fourth-line RW",
+     "story": "A 6'4\" energy player who hits and fights. Took down Garnet Hathaway in a fight against Florida on Nov. 8.",
+     "status": "Active",
+     "contract": {
+      "aav": 1566667,
+      "ends": "2027-28",
+      "fa": "UFA"
+     }
+    },
+    "8482177": {
+     "acq": "trade",
+     "when": "Mar 2025",
+     "how": "Traded from Minnesota for Justin Brazeau in March 2025.",
+     "role": "Third-line RW · PK",
+     "story": "Fast Russian forward who signed a three-year, $3.95M-a-year extension on Oct. 21. Moved to the right side of the Mittelstadt-Lindholm line at Saturday's practice in place of Hagens.",
+     "status": "Active",
+     "contract": {
+      "aav": 925000,
+      "ends": "2029-30",
+      "fa": "UFA",
+      "note": "Three-year extension at $3.95M AAV starts in 2027-28."
+     }
+    },
+    "8476374": {
+     "acq": "fa",
+     "when": "Jul 2025",
+     "how": "Returned as a free agent in 2025 after four seasons in Columbus.",
+     "role": "Fourth-line centre (extra)",
+     "story": "Sat out the Nov. 8 win over Florida as Poitras returned to centre the fourth line.",
+     "status": "Scratched",
+     "contract": {
+      "aav": 1850000,
+      "ends": "2026-27",
+      "fa": "UFA"
+     }
+    },
+    "8477496": {
+     "acq": "fa",
+     "when": "Jul 2024",
+     "how": "Signed a seven-year deal as a free agent in 2024.",
+     "role": "Third-line centre",
+     "story": "A two-way Swedish centre who starred in Calgary. Opened the scoring against Florida on Nov. 8 with a point shot that stood after video review.",
+     "status": "Active",
+     "contract": {
+      "aav": 7750000,
+      "ends": "2030-31",
+      "fa": "UFA"
+     }
+    },
+    "8483489": {
+     "acq": "trade",
+     "when": "Mar 2025",
+     "how": "Came from Toronto in the March 2025 Brandon Carlo trade.",
+     "role": "Second-line centre",
+     "story": "Played all 82 games last season with 17 goals. Scored the power-play winner and had an assist against San Jose on Oct. 24, earning first star.",
+     "status": "Active",
+     "contract": {
+      "aav": 879166,
+      "ends": "2033-34",
+      "fa": "UFA",
+      "note": "Entry-level deal this season; his extension starts in 2027-28."
+     }
+    },
+    "8479999": {
+     "acq": "trade",
+     "when": "Mar 2025",
+     "how": "Traded from Colorado for Charlie Coyle at the 2025 deadline.",
+     "role": "Third-line LW",
+     "story": "Former 8th overall pick from Minnesota. Scored his fifth goal and fought Alex Vlasic in the win over Chicago.",
+     "status": "Active",
+     "contract": {
+      "aav": 5750000,
+      "ends": "2026-27",
+      "fa": "UFA"
+     }
+    },
+    "8477956": {
+     "acq": "draft",
+     "when": "2014",
+     "how": "Drafted 25th overall in 2014.",
+     "role": "Captain · top-line RW",
+     "story": "The franchise scorer and, since September, the 28th captain in team history. Had two assists in the 4-1 win over Florida on Nov. 8.",
+     "status": "Active",
+     "contract": {
+      "aav": 11250000,
+      "ends": "2030-31",
+      "fa": "UFA"
+     }
+    },
+    "8482175": {
+     "acq": "trade",
+     "when": "Jun 2026",
+     "how": "Traded from Utah on June 26, 2026, for Boston’s 2026 first-round pick and a conditional 2028 first.",
+     "role": "First-line LW",
+     "story": "The headline summer move, traded from Utah in June. Scored early in the third period against Florida on Nov. 8 on a set-up from Pastrnak.",
+     "status": "Active",
+     "contract": {
+      "aav": 7700000,
+      "ends": "2029-30",
+      "fa": "UFA"
+     }
+    },
+    "8483505": {
+     "acq": "draft",
+     "when": "2022",
+     "how": "Drafted 54th overall in 2022.",
+     "role": "Fourth-line centre",
+     "story": "Returned from a broken nose on Nov. 8 and centred Jeannot and Kastelic in the win over Florida.",
+     "status": "Active",
+     "contract": {
+      "aav": 850000,
+      "ends": "2026-27",
+      "fa": "RFA",
+      "note": "Entry-level contract."
+     }
+    },
+    "8478401": {
+     "acq": "trade",
+     "when": "Jul 2022",
+     "how": "Traded from New Jersey for Erik Haula in 2022.",
+     "role": "First-line centre",
+     "story": "Former 6th overall pick who had career highs of 30 goals and 65 points last season. Had two assists against Florida on Nov. 8 to extend his point streak.",
+     "status": "Active",
+     "contract": {
+      "aav": 4750000,
+      "ends": "2026-27",
+      "fa": "UFA"
+     }
+    },
+    "8481219": {
+     "acq": "undrafted",
+     "when": "2025",
+     "how": "Signed as an undrafted free agent after AHL seasons with Belleville and Calgary.",
+     "role": "Third-pair LD (extra)",
+     "story": "Healthy scratch again on Nov. 8 against Florida.",
+     "status": "Scratched",
+     "contract": {
+      "aav": 887500,
+      "ends": "2027-28",
+      "fa": "UFA"
+     }
+    },
+    "8478840": {
+     "acq": "trade",
+     "when": "Jul 2026",
+     "how": "Traded from the Rangers on July 1, 2026, for a 2027 second and a conditional 2028 third.",
+     "role": "Second-pair RD",
+     "story": "A defensive defenceman added to steady the back end. Played in Buffalo, Seattle and New York.",
+     "status": "Active",
+     "contract": {
+      "aav": 4100000,
+      "ends": "2029-30",
+      "fa": "UFA"
+     }
+    },
+    "8483017": {
+     "acq": "draft",
+     "when": "2022",
+     "how": "Drafted 132nd overall in 2022.",
+     "role": "Third-pair LD",
+     "story": "Returned after three straight healthy scratches for the Nov. 5 game at Pittsburgh and assisted on Mark Kastelic's goal.",
+     "status": "Active",
+     "contract": {
+      "aav": 875000,
+      "ends": "2027-28",
+      "fa": "RFA"
+     }
+    },
+    "8477365": {
+     "acq": "fa",
+     "when": "Jul 2026",
+     "how": "Signed a two-year deal on July 1, 2026, returning to Boston.",
+     "role": "Third-pair RD (extra)",
+     "story": "Healthy scratch again on Nov. 8 against Florida.",
+     "status": "Scratched",
+     "contract": {
+      "aav": 2250000,
+      "ends": "2027-28",
+      "fa": "UFA"
+     }
+    },
+    "8476854": {
+     "acq": "trade",
+     "when": "Mar 2022",
+     "how": "Traded from Anaheim at the 2022 deadline, then signed an eight-year extension.",
+     "role": "Top-pair LD",
+     "story": "Steady Swedish defenceman who plays heavy minutes against top lines. 26 points last season.",
+     "status": "Active",
+     "contract": {
+      "aav": 6500000,
+      "ends": "2029-30",
+      "fa": "UFA"
+     }
+    },
+    "8482511": {
+     "acq": "draft",
+     "when": "2020",
+     "how": "Drafted 58th overall in 2020 out of the USHL.",
+     "role": "Third-pair D · PP2",
+     "story": "Big, mobile offensive defenceman from Ohio State. Scored his third goal to start the third-period comeback against Chicago.",
+     "status": "Active",
+     "contract": {
+      "aav": 3200000,
+      "ends": "2026-27",
+      "fa": "RFA"
+     }
+    },
+    "8479325": {
+     "acq": "draft",
+     "when": "2016",
+     "how": "Drafted 14th overall in 2016.",
+     "role": "Top-pair RD",
+     "story": "The No. 1 defenceman. Career-best 61 points last season. Missed the first six games through suspension; four assists vs. Nashville gives him six points in five games back.",
+     "status": "Active",
+     "contract": {
+      "aav": 9500000,
+      "ends": "2029-30",
+      "fa": "UFA"
+     }
+    },
+    "8477507": {
+     "acq": "fa",
+     "when": "Jul 2024",
+     "how": "Signed a six-year deal as a free agent in 2024.",
+     "role": "Second-pair LD",
+     "story": "The biggest player on the team at 6'7\". Fought Brady Tkachuk right after the opening faceoff against Florida on Nov. 8.",
+     "status": "Active",
+     "contract": {
+      "aav": 5000000,
+      "ends": "2029-30",
+      "fa": "UFA"
+     }
+    },
+    "8480022": {
+     "acq": "trade",
+     "when": "Oct 2022",
+     "how": "Traded from Vancouver for Jack Studnicka in 2022.",
+     "role": "Backup goalie",
+     "story": "Former Windsor Spitfires star who spent years in the AHL. Made 16 saves in the 6-2 win at Pittsburgh on Nov. 5 for his fourth straight win; he is 4-1-0.",
+     "status": "Active",
+     "contract": {
+      "aav": 812500,
+      "ends": "2026-27",
+      "fa": "UFA"
+     }
+    },
+    "8480280": {
+     "acq": "draft",
+     "when": "2017",
+     "how": "Drafted 111th overall in 2017 out of the University of Maine.",
+     "role": "Starting goalie",
+     "story": "Made 40 saves in the 4-1 win over Florida on Nov. 8, the Bruins' fourth straight win.",
+     "status": "Active",
+     "contract": {
+      "aav": 8250000,
+      "ends": "2031-32",
+      "fa": "UFA"
+     }
+    },
+    "8479591": {
+     "acq": "fa",
+     "when": "Jul 2025",
+     "how": "Signed as a free agent in 2025.",
+     "role": "Second-line LW",
+     "story": "Recalled from Providence, where he led the AHL with 13 goals in eight games. Scored in the first period of his season debut against Florida on Nov. 8, on the line with Minten and Geekie.",
+     "status": "Active",
+     "contract": {
+      "aav": 1450000,
+      "ends": "2026-27",
+      "fa": "UFA"
+     }
+    }
+   },
+   "detail": "full"
+  },
+  "TOR": {
+   "name": "Toronto Maple Leafs",
+   "short": "Leafs",
+   "coach": "Jim Hiller",
+   "gm": "John Chayka",
+   "captain": 8479318,
+   "linesAsOf": "Nov 8 vs NJD, forwards per Daily Faceoff (updated Nov 8) and New Jersey Hockey Now projection; defence projected with Mermis and McWard in for Rielly and Tanev (Toronto Hockey Daily, citing Mark Masters), pairs not confirmed",
+   "lines": [
+    [
+     8484158,
+     8479318,
+     8478458
+    ],
+    [
+     8475166,
+     8477426,
+     8477939
+    ],
+    [
+     8478057,
+     8476925,
+     8486067
+    ],
+    [
+     8479520,
+     8476927,
+     8479772
+    ]
+   ],
+   "pairs": [
+    [
+     8476931,
+     8478178
+    ],
+    [
+     8475171,
+     8479442
+    ],
+    [
+     8477541,
+     8484287
+    ]
+   ],
+   "goalies": [
+    8476932,
+    8475683
+   ],
+   "out": [
+    8476853,
+    8475690,
+    8480893,
+    8477425,
+    8483565,
+    8483546,
+    8480870,
+    8482515
+   ],
+   "extras": [
+    8480870,
+    8482515,
+    8484287,
+    8479968
+   ],
+   "players": {
+    "8479318": {
+     "acq": "draft",
+     "when": "2016",
+     "how": "Drafted 1st overall by Toronto in 2016.",
+     "role": "Top-line centre",
+     "story": "Set up both Roslovic goals, the first after forcing a turnover behind the Utah net. He has a five-game point streak (three goals, five assists).",
+     "status": "Active",
+     "contract": {
+      "aav": 13250000,
+      "ends": "2027-28",
+      "fa": "UFA"
+     }
+    },
+    "8477939": {
+     "acq": "draft",
+     "when": "2014",
+     "how": "Drafted 8th overall by Toronto in 2014.",
+     "role": "Second-line right wing",
+     "story": "Scored a power-play goal and hit two posts in the 4-2 loss to Montreal. It was his 85th power-play goal as a Leaf, tying Tavares for fifth in team history.",
+     "status": "Active",
+     "contract": {
+      "aav": 11500000,
+      "ends": "2031-32",
+      "fa": "UFA"
+     }
+    },
+    "8475166": {
+     "acq": "fa",
+     "when": "Jul 2018",
+     "how": "Signed as a free agent in 2018 and has re-signed since.",
+     "role": "Second-line left wing and PP1",
+     "story": "Returned Nov. 7 after missing nine games with a lower-body injury and played left wing for the first time since April 2023, with Paul and Nylander. Had three shots in the loss to Montreal.",
+     "status": "Active",
+     "contract": {
+      "aav": 4389280,
+      "ends": "2028-29",
+      "fa": "UFA"
+     }
+    },
+    "8480893": {
+     "acq": "trade",
+     "when": "Sep 2026",
+     "how": "Traded from Columbus on Sept. 28, 2026, with Miles Wood and Elvis Merzlikins for Matthew Knies, Steven Lorentz, Emil Andrae and a 2027 second-round pick. Then signed a six-year, $75M extension.",
+     "role": "Top-six right wing",
+     "story": "Marchenko left an Oct. 26 game against Calgary with a lower-body injury after a hit from Yegor Sharangovich. He had 14 points in 13 games and is projected back around Nov. 17.",
+     "status": "IR",
+     "contract": {
+      "aav": 3850000,
+      "ends": "2032-33",
+      "fa": "UFA",
+      "note": "Six-year, $75M extension ($12.5M AAV) starts in 2027-28."
+     }
+    },
+    "8486067": {
+     "acq": "draft",
+     "when": "2026",
+     "how": "Drafted 1st overall by Toronto in 2026 out of Penn State.",
+     "role": "Third-line right wing and PP2",
+     "story": "Benched for the rest of the second period on Nov. 7 after a turnover led to Montreal's first goal. Scored in the third period 55 seconds after Nylander.",
+     "status": "Active",
+     "contract": {
+      "aav": 1075000,
+      "ends": "2028-29",
+      "fa": "RFA",
+      "note": "Entry-level contract."
+     }
+    },
+    "8484158": {
+     "acq": "draft",
+     "when": "2023",
+     "how": "Drafted 28th overall by Toronto in 2023.",
+     "role": "First-line LW · PK",
+     "story": "Back on the top line with Matthews and Roslovic at Monday's practice. Had some early turnovers at Vancouver.",
+     "status": "Active",
+     "contract": {
+      "aav": 900000,
+      "ends": "2027-28",
+      "fa": "RFA",
+      "note": "Entry-level contract."
+     }
+    },
+    "8478458": {
+     "acq": "fa",
+     "when": "Jul 2026",
+     "how": "Signed as a free agent on July 1, 2026.",
+     "role": "Top-line right wing",
+     "story": "Took a maintenance day Wednesday and was back on the top line with Cowan and Matthews at Friday's practice. He scored both goals in the 3-2 loss to Utah.",
+     "status": "Active",
+     "contract": {
+      "aav": 4000000,
+      "ends": "2027-28",
+      "fa": "UFA"
+     }
+    },
+    "8477426": {
+     "acq": "trade",
+     "when": "Jul 2026",
+     "how": "Traded from Tampa Bay on July 1, 2026, for goalie Dennis Hildeby, a 2027 fourth and a 2028 third.",
+     "role": "Second-line centre",
+     "story": "Centred Tavares and Nylander at Friday's practice and is on the second power-play unit.",
+     "status": "Active",
+     "contract": {
+      "aav": 3150000,
+      "ends": "2028-29",
+      "fa": "UFA"
+     }
+    },
+    "8476925": {
+     "acq": "fa",
+     "when": "Jul 2026",
+     "how": "Signed a two-year, $8.5M deal as a free agent in 2026.",
+     "role": "Third-line centre",
+     "story": "Longtime Nashville checking centre who spent last season in Vegas. Faceoffs and penalty killing.",
+     "status": "Active",
+     "contract": {
+      "aav": 4250000,
+      "ends": "2027-28",
+      "fa": "UFA"
+     }
+    },
+    "8476927": {
+     "acq": "fa",
+     "when": "Jul 2026",
+     "how": "Signed a two-year deal as a free agent on July 1, 2026.",
+     "role": "Fourth-line centre · PK",
+     "story": "Scored an empty-net goal and added an assist in the 4-2 win at Vancouver.",
+     "status": "Active",
+     "contract": {
+      "aav": 2500000,
+      "ends": "2027-28",
+      "fa": "UFA"
+     }
+    },
+    "8479520": {
+     "acq": "fa",
+     "when": "Jul 2026",
+     "how": "Signed a three-year deal as a free agent on July 1, 2026.",
+     "role": "Fourth-line LW",
+     "story": "Energy forward from Florida who played all 82 games for Washington last season.",
+     "status": "Active",
+     "contract": {
+      "aav": 2600000,
+      "ends": "2028-29",
+      "fa": "UFA"
+     }
+    },
+    "8480870": {
+     "acq": "fa",
+     "when": "2025",
+     "how": "Signed by Toronto in 2025.",
+     "role": "Depth center",
+     "story": "Groulx cleared waivers on Nov. 3 after Joshua returned. He was scoreless in seven games and had not played since Oct. 28.",
+     "status": "Scratched",
+     "contract": {
+      "aav": 812500,
+      "ends": "2026-27",
+      "fa": "UFA"
+     }
+    },
+    "8479772": {
+     "acq": "fa",
+     "when": "2026",
+     "how": "Signed by Toronto in 2026.",
+     "role": "Fourth-line RW",
+     "story": "Scored at Vancouver on a point shot that deflected off Luke Schenn. It was his second goal as a Leaf.",
+     "status": "Active",
+     "contract": {
+      "aav": 875000,
+      "ends": "2027-28",
+      "fa": "UFA"
+     }
+    },
+    "8477425": {
+     "acq": "trade",
+     "when": "Sep 2026",
+     "how": "Came from Columbus in the Sept. 28, 2026, Marchenko trade.",
+     "role": "Depth winger",
+     "story": "Wood was moved to long-term injured reserve on Oct. 28 to open cap room for Dakota Joshua's return. He is not in the projected lineup for Saturday.",
+     "status": "LTIR",
+     "contract": {
+      "aav": 2500000,
+      "ends": "2028-29",
+      "fa": "UFA"
+     }
+    },
+    "8479968": {
+     "acq": "fa",
+     "when": "2026",
+     "how": "Signed by Toronto as a free agent.",
+     "role": "Depth forward",
+     "story": "Sent to the AHL Marlies on Nov. 8 when Cole McWard was recalled.",
+     "status": "AHL",
+     "contract": {
+      "aav": 850000,
+      "ends": "2026-27",
+      "fa": "UFA"
+     }
+    },
+    "8476853": {
+     "acq": "draft",
+     "when": "2012",
+     "how": "Drafted 5th overall by Toronto in 2012.",
+     "role": "Second-pair left defenceman",
+     "story": "Left the Nov. 7 loss to Montreal after 5:45 with a lower-body injury and did not return. Reported out Nov. 8 against New Jersey; Hiller called it a big blow.",
+     "status": "Day-to-day",
+     "contract": {
+      "aav": 7500000,
+      "ends": "2029-30",
+      "fa": "UFA"
+     }
+    },
+    "8476931": {
+     "acq": "trade",
+     "when": "Feb 2023",
+     "how": "Traded from Chicago at the 2023 deadline.",
+     "role": "Top-pair LD",
+     "story": "Steady, physical defenceman paired with Raddysh. Was on the ice for three of Montreal's four goals on Nov. 7.",
+     "status": "Active",
+     "contract": {
+      "aav": 4513102,
+      "ends": "2029-30",
+      "fa": "UFA"
+     }
+    },
+    "8478178": {
+     "acq": "trade",
+     "when": "Jun 2026",
+     "how": "Acquired from Tampa Bay in a sign-and-trade on June 19, 2026, with an eight-year contract.",
+     "role": "Top-pair right defenceman and PP1 quarterback",
+     "story": "Played 29:43 in the 4-2 loss to Montreal on Nov. 7 and is expected to take heavy minutes with Rielly out.",
+     "status": "Active",
+     "contract": {
+      "aav": 8500000,
+      "ends": "2033-34",
+      "fa": "UFA"
+     }
+    },
+    "8475171": {
+     "acq": "fa",
+     "when": "Jul 2024",
+     "how": "Signed as a free agent in 2024.",
+     "role": "Third-pair RD",
+     "story": "Former Coyotes captain and 2009 sixth-overall pick, now 35. Won a Cup with Florida in 2024.",
+     "status": "Active",
+     "contract": {
+      "aav": 3500000,
+      "ends": "2027-28",
+      "fa": "UFA"
+     }
+    },
+    "8479442": {
+     "acq": "fa",
+     "when": "Jun 2026",
+     "how": "Re-signed for two years on June 29, 2026.",
+     "role": "Third-pair right defenceman",
+     "story": "Was beaten on the rush on a Utah goal and broke his stick on a good scoring chance.",
+     "status": "Active",
+     "contract": {
+      "aav": 1350000,
+      "ends": "2027-28",
+      "fa": "UFA"
+     }
+    },
+    "8483565": {
+     "acq": "fa",
+     "when": "Oct 2026",
+     "how": "Signed after a training-camp tryout in 2026.",
+     "role": "Depth defenseman",
+     "story": "Blankenburg went on injured reserve in late October with an upper-body injury. InsideTheRink projects a return around Nov. 12.",
+     "status": "IR",
+     "contract": {
+      "aav": 1400000,
+      "ends": "2026-27",
+      "fa": "UFA"
+     }
+    },
+    "8475690": {
+     "acq": "trade",
+     "when": "Jun 2024",
+     "how": "Acquired from Dallas in 2024 for his rights, then signed a six-year deal.",
+     "role": "Second-pair right defenceman and penalty killer",
+     "story": "Reported out Nov. 8 against New Jersey for planned maintenance, not an injury. He has played nine of Toronto's 18 games.",
+     "status": "Scratched",
+     "contract": {
+      "aav": 4500000,
+      "ends": "2029-30",
+      "fa": "UFA"
+     }
+    },
+    "8483546": {
+     "acq": "undrafted",
+     "when": "2023",
+     "how": "Signed as an undrafted free agent in 2023.",
+     "role": "Depth defenseman",
+     "story": "Rifai went on injured reserve in late October with a lower-body injury. Daily Faceoff lists him as out.",
+     "status": "IR",
+     "contract": {
+      "aav": 850000,
+      "ends": "2026-27",
+      "fa": "UFA"
+     }
+    },
+    "8475683": {
+     "acq": "fa",
+     "when": "Jul 2026",
+     "how": "Signed a three-year, $21M deal as a free agent on July 1, 2026.",
+     "role": "Backup goalie (Nov. 8)",
+     "story": "Made 24 saves in the 4-2 loss to Montreal on Nov. 7. Stolarz is expected to start the second game of the back-to-back.",
+     "status": "Active",
+     "contract": {
+      "aav": 7000000,
+      "ends": "2028-29",
+      "fa": "UFA"
+     }
+    },
+    "8476932": {
+     "acq": "fa",
+     "when": "Jul 2024",
+     "how": "Signed as a free agent in 2024.",
+     "role": "Goalie (expected starter Nov. 8)",
+     "story": "Expected to start Sunday against New Jersey on the back end of the back-to-back, per New Jersey Hockey Now.",
+     "status": "Active",
+     "contract": {
+      "aav": 3750000,
+      "ends": "2029-30",
+      "fa": "UFA"
+     }
+    },
+    "8482515": {
+     "acq": "draft",
+     "when": "2020",
+     "how": "Drafted 106th overall by Toronto in 2020.",
+     "role": "Third goaltender",
+     "story": "Third goalie. New Jersey Hockey Now projected him as Sunday's backup, but Daily Faceoff lists Bobrovsky.",
+     "status": "Scratched",
+     "contract": {
+      "aav": 900000,
+      "ends": "2028-29",
+      "fa": "UFA"
+     }
+    },
+    "8484287": {
+     "acq": "fa",
+     "when": "2026",
+     "how": "Signed by Toronto in 2026 after a season in the Islanders organization.",
+     "role": "Third-pair RD",
+     "story": "Recalled from the Marlies on Nov. 8 after Rielly's injury and projected to play his first game of the season against New Jersey.",
+     "status": "Active",
+     "contract": {
+      "aav": 875000,
+      "ends": "2027-28",
+      "fa": "UFA"
+     }
+    },
+    "8477541": {
+     "acq": "other",
+     "when": "Jan 2025",
+     "how": "Claimed off waivers from Utah in January 2025.",
+     "role": "Third-pair LD",
+     "story": "Projected to draw in Nov. 8 against New Jersey with Rielly and Tanev out.",
+     "status": "Active",
+     "contract": {
+      "aav": 812500,
+      "ends": "2026-27",
+      "fa": "UFA"
+     }
+    },
+    "8478057": {
+     "acq": "trade",
+     "when": "Jul 2025",
+     "how": "Acquired from Vancouver in July 2025 for a 2028 fourth-round pick.",
+     "role": "Third-line left wing",
+     "story": "Moved to the third line with Sissons and McKenna at Friday's practice as Tavares rejoined the second line.",
+     "status": "Active",
+     "contract": {
+      "aav": 3250000,
+      "ends": "2027-28",
+      "fa": "UFA",
+      "note": "Four-year, $13M deal signed with Vancouver."
+     }
+    }
+   },
+   "detail": "full"
+  },
+  "ANA": {
+   "name": "Anaheim Ducks",
+   "short": "Ducks",
+   "coach": "Joel Quenneville",
+   "captain": null,
+   "detail": "news",
+   "linesAsOf": "Projected for Nov 8 vs PIT (NHL.com projected lineups; Daily Faceoff from Nov 6 game)",
+   "lines": [
+    [
+     8473986,
+     8484153,
+     8481538
+    ],
+    [
+     8483445,
+     8475798,
+     8484762
+    ],
+    [
+     8484201,
+     8485512,
+     8482118
+    ],
+    [
+     8482408,
+     8485400,
+     8481754
+    ]
+   ],
+   "pairs": [
+    [
+     8481605,
+     8481563
+    ],
+    [
+     8484262,
+     8483482
+    ],
+    [
+     8483490,
+     8483521
+    ]
+   ],
+   "goalies": [
+    8478024,
+    8476316
+   ],
+   "out": [
+    8480843,
+    8478366,
+    8482731,
+    8478873,
+    8482178,
+    8480068,
+    8478421
+   ],
+   "players": {
+    "8480843": {
+     "status": "Scratched",
+     "role": "Goalie",
+     "story": "Dostal was pulled after allowing three goals on 11 shots Friday and is projected to sit."
+    },
+    "8478366": {
+     "status": "Scratched",
+     "role": "Forward",
+     "story": "Vatrano is a projected scratch against Pittsburgh."
+    },
+    "8482731": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "Hinds is a projected scratch against Pittsburgh."
+    },
+    "8478873": {
+     "status": "IR",
+     "role": "Forward",
+     "story": "Terry is out with a hip injury."
+    },
+    "8482178": {
+     "status": "IR",
+     "role": "Defenseman",
+     "story": "Moore is out with a lower-body injury."
+    },
+    "8480068": {
+     "status": "IR",
+     "role": "Forward",
+     "story": "Poehling is out with an MCL injury."
+    },
+    "8478421": {
+     "status": "IR",
+     "role": "Forward",
+     "story": "Greer is out with an upper-body injury."
+    }
+   },
+   "extras": []
+  },
+  "BUF": {
+   "name": "Buffalo Sabres",
+   "short": "Sabres",
+   "coach": "Lindy Ruff",
+   "captain": 8480064,
+   "detail": "news",
+   "linesAsOf": "Nov 8 vs VGK, Die by the Blade projected lineup (matches Daily Faceoff from Nov 6 vs CBJ)",
+   "lines": [
+    [
+     8484145,
+     8481522,
+     8479420
+    ],
+    [
+     8482659,
+     8483500,
+     8482097
+    ],
+    [
+     8483468,
+     8480064,
+     8475722
+    ],
+    [
+     8479359,
+     8482896,
+     8475842
+    ]
+   ],
+   "pairs": [
+    [
+     8480839,
+     8480807
+    ],
+    [
+     8482803,
+     8482671
+    ],
+    [
+     8484305,
+     8479982
+    ]
+   ],
+   "goalies": [
+    8481551,
+    8480045
+   ],
+   "out": [
+    8484797,
+    8479941,
+    8476891,
+    8479312,
+    8480802,
+    8481806
+   ],
+   "players": {
+    "8484797": {
+     "status": "Injured",
+     "role": "Depth C",
+     "story": "Out; ESPN lists an estimated return of Nov. 17."
+    },
+    "8479941": {
+     "status": "IR",
+     "role": "Depth RW",
+     "story": "On injured reserve; ESPN lists an estimated return of Nov. 8."
+    },
+    "8476891": {
+     "status": "IR",
+     "role": "Depth D",
+     "story": "On injured reserve; ESPN lists an estimated return of Nov. 8."
+    },
+    "8479312": {
+     "status": "IR",
+     "role": "Goalie",
+     "story": "On injured reserve; ESPN lists an estimated return of Nov. 22."
+    },
+    "8480802": {
+     "status": "Scratched",
+     "role": "C",
+     "story": "Expected healthy scratch on Nov. 8, per Die by the Blade."
+    },
+    "8481806": {
+     "status": "Scratched",
+     "role": "Depth D",
+     "story": "Expected healthy scratch on Nov. 8, per Die by the Blade."
+    }
+   },
+   "extras": []
+  },
+  "CAR": {
+   "name": "Carolina Hurricanes",
+   "short": "Hurricanes",
+   "coach": "Rod Brind'Amour",
+   "captain": 8473533,
+   "detail": "news",
+   "linesAsOf": "Nov 7 vs CHI (9-2 W); Daily Faceoff lines (Walt Ruff), Nikishin debut confirmed by NHL.com recap",
+   "lines": [
+    [
+     8477478,
+     8478427,
+     8480830
+    ],
+    [
+     8477940,
+     8482702,
+     8482809
+    ],
+    [
+     8475791,
+     8476873,
+     8482093
+    ],
+    [
+     8480762,
+     8480829,
+     8476921
+    ]
+   ],
+   "pairs": [
+    [
+     8476958,
+     8478970
+    ],
+    [
+     8480817,
+     8480336
+    ],
+    [
+     8476906,
+     8482100
+    ]
+   ],
+   "goalies": [
+    8481611,
+    8483548
+   ],
+   "out": [
+    8473533
+   ],
+   "players": {
+    "8473533": {
+     "status": "IR",
+     "role": "C, captain",
+     "story": "Tore his calf in warmups in mid-October and was ruled out one to two months."
+    },
+    "8475235": {
+     "status": "Scratched",
+     "role": "LW",
+     "story": "Left the lineup when Taylor Hall returned on Nov. 5."
+    },
+    "8479976": {
+     "status": "Scratched",
+     "role": "D",
+     "story": "Did not dress against Chicago as Nikishin entered the lineup."
+    },
+    "8476422": {
+     "status": "Scratched",
+     "role": "D",
+     "story": "Extra defenseman who did not dress against Chicago."
+    }
+   },
+   "extras": []
+  },
+  "CBJ": {
+   "name": "Columbus Blue Jackets",
+   "short": "Blue Jackets",
+   "coach": "Rick Bowness",
+   "captain": null,
+   "detail": "news",
+   "linesAsOf": "Nov 6 at BUF as played (Columbus Dispatch line notes, CBS box score; 4th-line order inferred)",
+   "lines": [
+    [
+     8482720,
+     8477497,
+     8482660
+    ],
+    [
+     8477501,
+     8484166,
+     8478856
+    ],
+    [
+     8482705,
+     8475745,
+     8479671
+    ],
+    [
+     8481716,
+     8485469,
+     8478904
+    ]
+   ],
+   "pairs": [
+    [
+     8478460,
+     8476923
+    ],
+    [
+     8478500,
+     8483485
+    ],
+    [
+     8481161,
+     8479371
+    ]
+   ],
+   "goalies": [
+    8482982,
+    8475660
+   ],
+   "out": [],
+   "players": {
+    "8477497": {
+     "status": "Day-to-day",
+     "role": "Center",
+     "story": "Sean Monahan left the Nov. 6 game with a lower-body injury after blocking a shot."
+    },
+    "8481716": {
+     "status": "Day-to-day",
+     "role": "Left wing",
+     "story": "Dmitri Voronkov left the Nov. 6 game with an upper-body injury and is being evaluated."
+    },
+    "8483432": {
+     "status": "Scratched",
+     "role": "Center",
+     "story": "Luca Del Bel Belluz was scratched on Nov. 6."
+    },
+    "8479066": {
+     "status": "Scratched",
+     "role": "Left wing",
+     "story": "Ryan Lomberg was scratched on Nov. 6."
+    },
+    "8475790": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "Erik Gudbranson was a scratch on Nov. 6."
+    }
+   },
+   "extras": []
+  },
+  "CGY": {
+   "name": "Calgary Flames",
+   "short": "Flames",
+   "coach": "Ryan Huska",
+   "captain": 8474150,
+   "detail": "news",
+   "linesAsOf": "Projected for Nov 8 vs PHI (Daily Faceoff via Pat Steinberg, Nov 8; NHL.com)",
+   "lines": [
+    [
+     8480797,
+     8474150,
+     8482679
+    ],
+    [
+     8484860,
+     8481028,
+     8476458
+    ],
+    [
+     8481068,
+     8480028,
+     8484234
+    ],
+    [
+     8482766,
+     8484154,
+     8483609
+    ]
+   ],
+   "pairs": [
+    [
+     8477810,
+     8483495
+    ],
+    [
+     8478136,
+     8480727
+    ],
+    [
+     8482165,
+     8484768
+    ]
+   ],
+   "goalies": [
+    8482445,
+    8481692
+   ],
+   "out": [
+    8480860,
+    8476456,
+    8484180,
+    8482747,
+    8484958,
+    8481167
+   ],
+   "players": {
+    "8480860": {
+     "status": "IR",
+     "role": "Defenseman",
+     "story": "Bahl ruptured his Achilles tendon in an off-ice warmup on Nov. 6 and will have season-ending surgery."
+    },
+    "8476456": {
+     "status": "IR",
+     "role": "Forward",
+     "story": "Huberdeau is out with a hip injury."
+    },
+    "8484180": {
+     "status": "Injured",
+     "role": "Forward",
+     "story": "Honzek is out with a lower-body injury."
+    },
+    "8482747": {
+     "status": "Day-to-day",
+     "role": "Forward",
+     "story": "Othmann has an upper-body injury but took part in Sunday's morning skate."
+    },
+    "8484958": {
+     "status": "Scratched",
+     "role": "Forward",
+     "story": "Tsyplakov is a projected scratch against Philadelphia."
+    },
+    "8481167": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "Pachal was recalled from AHL Calgary on Sunday but is not expected to play."
+    }
+   },
+   "extras": []
+  },
+  "CHI": {
+   "name": "Chicago Blackhawks",
+   "short": "Blackhawks",
+   "coach": "Jeff Blashill",
+   "captain": 8484144,
+   "detail": "news",
+   "linesAsOf": "Nov 7 at CAR (projected) - Daily Faceoff via Ben Pope, NHL.com and Chicago Hockey Now",
+   "lines": [
+    [
+     8477479,
+     8484144,
+     8484390
+    ],
+    [
+     8484197,
+     8485391,
+     8483493
+    ],
+    [
+     8476882,
+     8483450,
+     8477987
+    ],
+    [
+     8482062,
+     8478413,
+     8485554
+    ]
+   ],
+   "pairs": [
+    [
+     8482176,
+     8484783
+    ],
+    [
+     8481568,
+     8474013
+    ],
+    [
+     8483466,
+     8483506
+    ]
+   ],
+   "goalies": [
+    8481519,
+    8482821
+   ],
+   "out": [
+    8474141,
+    8481524,
+    8478233,
+    8482807
+   ],
+   "players": {
+    "8474141": {
+     "status": "Injured",
+     "role": "Top-six right wing",
+     "story": "He left the Nov 2 game against Colorado with an upper-body injury and missed his third straight game Nov 7."
+    },
+    "8481524": {
+     "status": "IR",
+     "role": "Top-four defenseman",
+     "story": "He was placed on IR Nov 3 with an upper-body injury that has kept him out since mid-October."
+    },
+    "8478233": {
+     "status": "Scratched",
+     "role": "Left wing",
+     "story": "He was a healthy scratch Nov 7 at Carolina."
+    },
+    "8482807": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "He was scratched Nov 7 as Kevin Korchinski returned to the lineup."
+    }
+   },
+   "extras": []
+  },
+  "COL": {
+   "name": "Colorado Avalanche",
+   "short": "Avalanche",
+   "coach": "Jared Bednar",
+   "captain": 8476455,
+   "detail": "news",
+   "linesAsOf": "Projected and expected unchanged for Nov 7 vs DET (4-0 win); NHL.com preview Nov 7 and Daily Faceoff",
+   "lines": [
+    [
+     8477476,
+     8477492,
+     8480039
+    ],
+    [
+     8476455,
+     8475172,
+     8478462
+    ],
+    [
+     8475768,
+     8475754,
+     8486171
+    ],
+    [
+     8480448,
+     8482768,
+     8481186
+    ]
+   ],
+   "pairs": [
+    [
+     8476967,
+     8480069
+    ],
+    [
+     8478038,
+     8484258
+    ],
+    [
+     8478454,
+     8470613
+    ]
+   ],
+   "goalies": [
+    8478406,
+    8475809
+   ],
+   "out": [
+    8476312,
+    8482742
+   ],
+   "players": {
+    "8476312": {
+     "status": "IR",
+     "role": "Top-four right defenseman",
+     "story": "Manson injured his ankle on Oct. 28 against New Jersey and is expected to miss about eight weeks."
+    },
+    "8482742": {
+     "status": "Injured",
+     "role": "Depth forward",
+     "story": "L'Heureux is out with an upper-body injury."
+    }
+   },
+   "extras": []
+  },
+  "DAL": {
+   "name": "Dallas Stars",
+   "short": "Stars",
+   "coach": "Glen Gulutzan",
+   "captain": 8473994,
+   "detail": "news",
+   "linesAsOf": "Nov 7 vs SJS (4-3 W); Daily Faceoff (Robert Tiffin) and NHL.com preview. Third pair was Trey Taylor-Myers; Taylor is not on the roster file, so Heiskanen fills the slot as a placeholder.",
+   "lines": [
+    [
+     8473994,
+     8482740,
+     8478420
+    ],
+    [
+     8480027,
+     8478449,
+     8484938
+    ],
+    [
+     8479351,
+     8484829,
+     8475794
+    ],
+    [
+     8481641,
+     8476889,
+     8474102
+    ]
+   ],
+   "pairs": [
+    [
+     8481581,
+     8480878
+    ],
+    [
+     8483425,
+     8476902
+    ],
+    [
+     8474574
+    ]
+   ],
+   "goalies": [
+    8479979,
+    8479193
+   ],
+   "out": [
+    8475168,
+    8480840,
+    8478476,
+    8480036
+   ],
+   "players": {
+    "8480036": {
+     "status": "Day-to-day",
+     "role": "D",
+     "story": "Upper-body injury on Nov. 3 in Washington; missed the last two games."
+    },
+    "8475168": {
+     "status": "IR",
+     "role": "C",
+     "story": "Expected to miss about three months after core surgery."
+    },
+    "8480840": {
+     "status": "LTIR",
+     "role": "C",
+     "story": "On long-term injured reserve with a finger injury."
+    },
+    "8478476": {
+     "status": "IR",
+     "role": "D",
+     "story": "Lower-body injury on Oct. 27; Gulutzan said about four weeks."
+    },
+    "8476278": {
+     "status": "Scratched",
+     "role": "C",
+     "story": "Healthy scratch against San Jose."
+    }
+   },
+   "extras": []
+  },
+  "DET": {
+   "name": "Detroit Red Wings",
+   "short": "Red Wings",
+   "coach": "Todd McLellan",
+   "captain": null,
+   "detail": "news",
+   "linesAsOf": "Nov 7 at COL (0-4 L); Daily Faceoff (Ansar Khan) and Inside The Rink projected lines",
+   "lines": [
+    [
+     8479337,
+     8484471,
+     8478042
+    ],
+    [
+     8484794,
+     8477429,
+     8482078
+    ],
+    [
+     8479992,
+     8477456,
+     8484160
+    ],
+    [
+     8482802,
+     8480326,
+     8478434
+    ]
+   ],
+   "pairs": [
+    [
+     8475279,
+     8481542
+    ],
+    [
+     8482171,
+     8475753
+    ],
+    [
+     8477971,
+     8483679
+    ]
+   ],
+   "goalies": [
+    8480193,
+    8485545
+   ],
+   "out": [
+    8476434,
+    8483464,
+    8478891,
+    8481607
+   ],
+   "players": {
+    "8476434": {
+     "status": "Day-to-day",
+     "role": "G",
+     "story": "Lower-body injury; did not dress in Colorado."
+    },
+    "8483464": {
+     "status": "IR",
+     "role": "C",
+     "story": "Upper-body injury since the opener; expected back during the road trip."
+    },
+    "8478891": {
+     "status": "IR",
+     "role": "C",
+     "story": "On IR since the second game; expected back during the road trip."
+    },
+    "8481607": {
+     "status": "IR",
+     "role": "D",
+     "story": "Undisclosed injury; Inside The Rink lists a Nov. 12 return."
+    },
+    "8480879": {
+     "status": "Scratched",
+     "role": "D",
+     "story": "Did not dress in Colorado."
+    },
+    "8481077": {
+     "status": "Scratched",
+     "role": "LW",
+     "story": "Did not dress in Colorado."
+    }
+   },
+   "extras": []
+  },
+  "EDM": {
+   "name": "Edmonton Oilers",
+   "short": "Oilers",
+   "coach": "Mike Babcock",
+   "captain": 8478402,
+   "detail": "news",
+   "linesAsOf": "Nov 7 vs VAN (4-2 win); NHL.com projected lineup, confirmed against ESPN box score",
+   "lines": [
+    [
+     8481617,
+     8478402,
+     8477934
+    ],
+    [
+     8477953,
+     8476454,
+     8475786
+    ],
+    [
+     8479368,
+     8477450,
+     8478472
+    ],
+    [
+     8480029,
+     8486161,
+     8479365
+    ]
+   ],
+   "pairs": [
+    [
+     8475218,
+     8480803
+    ],
+    [
+     8478854,
+     8476473
+    ],
+    [
+     8482166,
+     8480834
+    ]
+   ],
+   "goalies": [
+    8482221,
+    8477465
+   ],
+   "out": [
+    8475883,
+    8483455,
+    8477406,
+    8480831,
+    8483512,
+    8482703,
+    8480842,
+    8478013
+   ],
+   "players": {
+    "8476454": {
+     "status": "Day-to-day",
+     "role": "Second-line center",
+     "story": "Nugent-Hopkins left 45 seconds into the second period on Nov. 7 after a puck hit him in the head, and Babcock said he did not expect much missed time."
+    },
+    "8475883": {
+     "status": "IR",
+     "role": "Goalie",
+     "story": "Andersen is on injured reserve with an undisclosed injury."
+    },
+    "8483455": {
+     "status": "IR",
+     "role": "Left wing",
+     "story": "Howard is out with a lower-body injury."
+    },
+    "8477406": {
+     "status": "IR",
+     "role": "Depth forward",
+     "story": "Janmark is on injured reserve with an undisclosed injury."
+    },
+    "8480831": {
+     "status": "IR",
+     "role": "Depth defenseman",
+     "story": "Regula is on injured reserve with an undisclosed injury."
+    },
+    "8483512": {
+     "status": "IR",
+     "role": "Forward",
+     "story": "Savoie is on injured reserve with an undisclosed injury."
+    },
+    "8482703": {
+     "status": "Scratched",
+     "role": "Depth forward",
+     "story": "Dach sat on Nov. 7 after not taking part in the morning skate as Hyman returned."
+    },
+    "8480842": {
+     "status": "Scratched",
+     "role": "Depth forward",
+     "story": "Hallander was scratched on Nov. 7 with Trent Frederic coming in."
+    },
+    "8478013": {
+     "status": "Scratched",
+     "role": "Left defenseman",
+     "story": "Walman was scratched on Nov. 7 with Ty Emberson coming in."
+    }
+   },
+   "extras": []
+  },
+  "FLA": {
+   "name": "Florida Panthers",
+   "short": "Panthers",
+   "coach": "Paul Maurice",
+   "captain": 8477493,
+   "detail": "news",
+   "linesAsOf": "Nov 8 at BOS, NHL.com projected lineup (Vilmanis out); 4th-line center not named, Devine is a placeholder",
+   "lines": [
+    [
+     8480801,
+     8477935,
+     8479314
+    ],
+    [
+     8477409,
+     8477933,
+     8474189
+    ],
+    [
+     8480185,
+     8481655,
+     8481133
+    ],
+    [
+     8478147,
+     8483433,
+     8477903
+    ]
+   ],
+   "pairs": [
+    [
+     8478055,
+     8477932
+    ],
+    [
+     8478859,
+     8477495
+    ],
+    [
+     8475179,
+     8484304
+    ]
+   ],
+   "goalies": [
+    8474593,
+    8481033
+   ],
+   "out": [
+    8477493,
+    8473419,
+    8479981,
+    8482113,
+    8483771,
+    8475462
+   ],
+   "players": {
+    "8477493": {
+     "status": "IR",
+     "role": "Captain, 1C",
+     "story": "Left knee injury on Oct. 1 with a 6-8 week timeline; skating on his own."
+    },
+    "8473419": {
+     "status": "IR",
+     "role": "Top-six LW",
+     "story": "Left knee injury on Oct. 6; Maurice said a 6-8 week window, about Dec. 6 at eight weeks."
+    },
+    "8479981": {
+     "status": "IR",
+     "role": "Depth LW",
+     "story": "Neck injury; skating on his own with Barkov and Marchand."
+    },
+    "8482113": {
+     "status": "Day-to-day",
+     "role": "2C",
+     "story": "Undisclosed injury; missed the Nov. 7 loss at Washington and was listed day to day."
+    },
+    "8483771": {
+     "status": "Injured",
+     "role": "Top-six RW",
+     "story": "Upper-body injury in the first period at Washington on Nov. 7; severity to be known after evaluation in Florida."
+    },
+    "8475462": {
+     "status": "Scratched",
+     "role": "Depth D",
+     "story": "Seventh defenseman in the NHL.com projected lineup for Nov. 8."
+    }
+   },
+   "extras": []
+  },
+  "LAK": {
+   "name": "Los Angeles Kings",
+   "short": "Kings",
+   "coach": "Peter Laviolette",
+   "captain": 8474563,
+   "detail": "news",
+   "linesAsOf": "Projected for Nov 7 vs PIT (5-2 loss); LA Kings Insider preview Nov 7",
+   "lines": [
+    [
+     8478550,
+     8482155,
+     8477960
+    ],
+    [
+     8479675,
+     8482124,
+     8470621
+    ],
+    [
+     8481732,
+     8476872,
+     8481532
+    ],
+    [
+     8475287,
+     8483675,
+     8476469
+    ]
+   ],
+   "pairs": [
+    [
+     8476979,
+     8482730
+    ],
+    [
+     8476441,
+     8474563
+    ],
+    [
+     8479998,
+     8475208
+    ]
+   ],
+   "goalies": [
+    8475311,
+    8476341
+   ],
+   "out": [
+    8477942,
+    8475692,
+    8482160,
+    8482726,
+    8476879
+   ],
+   "players": {
+    "8477942": {
+     "status": "IR",
+     "role": "Top-six left wing",
+     "story": "Fiala remains out but skated on Nov. 7 and was described as trending closer to a return."
+    },
+    "8475692": {
+     "status": "IR",
+     "role": "Veteran winger",
+     "story": "Zuccarello has been on injured reserve since Oct. 10 and remains out, though he has skated with the group."
+    },
+    "8482160": {
+     "status": "Scratched",
+     "role": "Depth winger",
+     "story": "Chromiak was expected to come out of the lineup when Turcotte returned on Nov. 7."
+    },
+    "8482726": {
+     "status": "Scratched",
+     "role": "Depth center",
+     "story": "Helenius was listed as a healthy scratch for Nov. 7."
+    },
+    "8476879": {
+     "status": "Scratched",
+     "role": "Depth defenseman",
+     "story": "Ceci was listed as a healthy scratch for Nov. 7."
+    }
+   },
+   "extras": []
+  },
+  "MIN": {
+   "name": "Minnesota Wild",
+   "short": "Wild",
+   "coach": "John Hynes",
+   "captain": 8474716,
+   "detail": "news",
+   "linesAsOf": "Nov 7 vs TBL (3-4 OT L); Daily Faceoff (Nov 5) adjusted per The Hockey News lineup changes",
+   "lines": [
+    [
+     8478864,
+     8478493,
+     8481557
+    ],
+    [
+     8476399,
+     8477451,
+     8481553
+    ],
+    [
+     8485702,
+     8483525,
+     8478508
+    ],
+    [
+     8475220,
+     8481477,
+     8473422
+    ]
+   ],
+   "pairs": [
+    [
+     8480800,
+     8476463
+    ],
+    [
+     8476874,
+     8474567
+    ],
+    [
+     8482641,
+     8483766
+    ]
+   ],
+   "goalies": [
+    8482661,
+    8475717
+   ],
+   "out": [
+    8477446,
+    8474716,
+    8482122,
+    8479406
+   ],
+   "players": {
+    "8477446": {
+     "status": "IR",
+     "role": "C",
+     "story": "Upper-body injury on Nov. 6 against San Jose; placed on the injured list."
+    },
+    "8474716": {
+     "status": "Injured",
+     "role": "D, captain",
+     "story": "Lower-body injury since Oct. 27 and ruled out for the weekend."
+    },
+    "8482122": {
+     "status": "IR",
+     "role": "D",
+     "story": "Medically cleared after a skull fracture and expected to join the road trip."
+    },
+    "8479406": {
+     "status": "IR",
+     "role": "G",
+     "story": "Recovering from offseason hip surgery."
+    },
+    "8475752": {
+     "status": "Scratched",
+     "role": "RW",
+     "story": "Out of the lineup when the Foligno brothers returned."
+    },
+    "8480075": {
+     "status": "Scratched",
+     "role": "D",
+     "story": "Extra defenseman who did not dress against Tampa Bay."
+    }
+   },
+   "extras": []
+  },
+  "MTL": {
+   "name": "Montréal Canadiens",
+   "short": "Canadiens",
+   "coach": "Martin St. Louis",
+   "captain": 8480018,
+   "detail": "news",
+   "linesAsOf": "Nov 7 at TOR (projected) - Daily Faceoff line combinations, updated 2026-11-07; NHL.com projected lineups",
+   "lines": [
+    [
+     8481540,
+     8480018,
+     8483515
+    ],
+    [
+     8475184,
+     8478133,
+     8483424
+    ],
+    [
+     8482737,
+     8476479,
+     8480074
+    ],
+    [
+     8481618,
+     8482775,
+     8481523
+    ]
+   ],
+   "pairs": [
+    [
+     8483457,
+     8480865
+    ],
+    [
+     8482087,
+     8478851
+    ],
+    [
+     8482964,
+     8483686
+    ]
+   ],
+   "goalies": [
+    8484170,
+    8482487
+   ],
+   "out": [
+    8484984,
+    8478470,
+    8476875,
+    8476981,
+    8484403
+   ],
+   "players": {
+    "8484984": {
+     "status": "IR",
+     "role": "Rookie right wing",
+     "story": "GM Kent Hughes said on Nov 6 that his lower-body injury has had no setbacks and he is still within the two-to-four-week estimate."
+    },
+    "8478470": {
+     "status": "IR",
+     "role": "Goalie",
+     "story": "He has been out about a month with a lower-body injury and may return soon."
+    },
+    "8476875": {
+     "status": "Injured",
+     "role": "Top-four defenseman",
+     "story": "The team said on Oct 31 that he would miss two weeks with a lower-body injury."
+    },
+    "8476981": {
+     "status": "Scratched",
+     "role": "Right wing",
+     "story": "He did not play Nov 7 at Toronto for personal reasons, and Owen Beck replaced him."
+    },
+    "8484403": {
+     "status": "Scratched",
+     "role": "Depth left wing",
+     "story": "He was a healthy scratch Nov 7 at Toronto."
+    }
+   },
+   "extras": []
+  },
+  "NJD": {
+   "name": "New Jersey Devils",
+   "short": "Devils",
+   "coach": "Sheldon Keefe",
+   "captain": 8480002,
+   "detail": "news",
+   "linesAsOf": "Projected for Nov 8 at TOR, from Nov 7 game lines (Daily Faceoff / New Jersey Hockey Now)",
+   "lines": [
+    [
+     8478414,
+     8480002,
+     8482146
+    ],
+    [
+     8481721,
+     8481559,
+     8479407
+    ],
+    [
+     8477511,
+     8478542,
+     8480003
+    ],
+    [
+     8483695,
+     8479996,
+     8477015
+    ]
+   ],
+   "pairs": [
+    [
+     8482684,
+     8477488
+    ],
+    [
+     8478399,
+     8476462
+    ],
+    [
+     8480990,
+     8480192
+    ]
+   ],
+   "goalies": [
+    8476945,
+    8474596
+   ],
+   "out": [
+    8475455
+   ],
+   "players": {
+    "8475455": {
+     "status": "Scratched",
+     "role": "Extra defenseman",
+     "story": "Dillon is listed as the scratch on defense for the game at Toronto."
+    }
+   },
+   "extras": []
+  },
+  "NSH": {
+   "name": "Nashville Predators",
+   "short": "Predators",
+   "coach": "Andrew Brunette",
+   "captain": 8474600,
+   "detail": "news",
+   "linesAsOf": "Nov 7 vs STL, NHL.com projected lineups and Daily Faceoff (updated Nov 6)",
+   "lines": [
+    [
+     8474564,
+     8475158,
+     8482145
+    ],
+    [
+     8476887,
+     8483524,
+     8481535
+    ],
+    [
+     8483513,
+     8477021,
+     8486189
+    ],
+    [
+     8479525,
+     8480835,
+     8481726
+    ]
+   ],
+   "pairs": [
+    [
+     8474600,
+     8482482
+    ],
+    [
+     8476869,
+     8480246
+    ],
+    [
+     8482094,
+     8481593
+    ]
+   ],
+   "goalies": [
+    8477424,
+    8481020
+   ],
+   "out": [
+    8476539,
+    8482806
+   ],
+   "players": {
+    "8476539": {
+     "status": "Day-to-day",
+     "role": "Forward",
+     "story": "Marchessault has a lower-body injury and missed his third straight game on Nov 7."
+    },
+    "8482806": {
+     "status": "IR",
+     "role": "Defenseman",
+     "story": "Trudeau has been on injured reserve since Oct. 9 with an upper-body injury and was listed week-to-week."
+    },
+    "8479980": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "Hague was a healthy scratch on Nov 5 and was projected out again on Nov 7."
+    },
+    "8480950": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "Lyubushkin was a healthy scratch on Nov 5 and was projected out again on Nov 7."
+    }
+   },
+   "extras": []
+  },
+  "NYI": {
+   "name": "New York Islanders",
+   "short": "Islanders",
+   "coach": "Pete DeBoer",
+   "captain": 8477500,
+   "detail": "news",
+   "linesAsOf": "Nov 7 vs NJD (projected) - Daily Faceoff via Stefen Rosner and NHL.com projected lineups",
+   "lines": [
+    [
+     8482476,
+     8477500,
+     8475151
+    ],
+    [
+     8476292,
+     8475170,
+     8485388
+    ],
+    [
+     8481601,
+     8476419,
+     8477407
+    ],
+    [
+     8481237,
+     8475231,
+     8482070
+    ]
+   ],
+   "pairs": [
+    [
+     8479378,
+     8485366
+    ],
+    [
+     8476917,
+     8477950
+    ],
+    [
+     8477018,
+     8482516
+    ]
+   ],
+   "goalies": [
+    8478009,
+    8473575
+   ],
+   "out": [
+    8477506,
+    8481711,
+    8484221,
+    8481014,
+    8476429
+   ],
+   "players": {
+    "8477506": {
+     "status": "Injured",
+     "role": "Top-four defenseman",
+     "story": "He was hurt Oct 29 and the team said Nov 1 he would miss two to four weeks; he is practicing in a non-contact jersey."
+    },
+    "8481711": {
+     "status": "IR",
+     "role": "Left wing",
+     "story": "He was hurt Oct 17 and practiced in a regular jersey Nov 7, with medical staff to decide if he joins the West Coast trip."
+    },
+    "8484221": {
+     "status": "IR",
+     "role": "Center",
+     "story": "He was hurt Oct 17 with a four-to-six-week timeline and has not resumed skating with the team."
+    },
+    "8481014": {
+     "status": "IR",
+     "role": "Defenseman",
+     "story": "He is out with a torn ACL."
+    },
+    "8476429": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "He was a healthy scratch Nov 7 as Ben Hutton made his Islanders debut."
+    }
+   },
+   "extras": []
+  },
+  "NYR": {
+   "name": "New York Rangers",
+   "short": "Rangers",
+   "coach": "Mike Sullivan",
+   "captain": 8476468,
+   "detail": "news",
+   "linesAsOf": "Nov 7 at SEA, NHL.com projected lineups; matches Daily Faceoff (updated Nov 6)",
+   "lines": [
+    [
+     8481604,
+     8476459,
+     8482109
+    ],
+    [
+     8481789,
+     8476468,
+     8484210
+    ],
+    [
+     8480009,
+     8482157,
+     8477416
+    ],
+    [
+     8482877,
+     8483690,
+     8482460
+    ]
+   ],
+   "pairs": [
+    [
+     8478882,
+     8479323
+    ],
+    [
+     8477969,
+     8482073
+    ],
+    [
+     8485957,
+     8482666
+    ]
+   ],
+   "goalies": [
+    8482193,
+    8476914
+   ],
+   "out": [
+    8478048,
+    8480813,
+    8480434,
+    8483669
+   ],
+   "players": {
+    "8478048": {
+     "status": "IR",
+     "role": "Goalie",
+     "story": "Shesterkin injured his right knee in a game at Washington on Oct. 9 and is out for the season."
+    },
+    "8480813": {
+     "status": "IR",
+     "role": "Forward",
+     "story": "Veleno is out with a lower-body injury."
+    },
+    "8480434": {
+     "status": "IR",
+     "role": "Defenseman",
+     "story": "Durzi was placed on injured reserve retroactive to Oct. 26 with an undisclosed injury."
+    },
+    "8483669": {
+     "status": "IR",
+     "role": "Forward",
+     "story": "Sykora is listed on injured reserve by Daily Faceoff."
+    },
+    "8476822": {
+     "status": "Scratched",
+     "role": "Forward",
+     "story": "Glendening was projected as a scratch at Seattle on Nov 7."
+    },
+    "8481525": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "Robertson was projected as a scratch at Seattle on Nov 7."
+    }
+   },
+   "extras": []
+  },
+  "OTT": {
+   "name": "Ottawa Senators",
+   "short": "Senators",
+   "coach": "Travis Green",
+   "captain": 8478469,
+   "detail": "news",
+   "linesAsOf": "Nov 7 vs UTA (game lineup) - Daily Faceoff via Andrew Wilimek; Philip Tomasino (L2 LW) and Sammy Blais (L4 LW) are not on roster file, slots left null",
+   "lines": [
+    [
+     8476393,
+     8482116,
+     8480188
+    ],
+    [
+     8481596,
+     8480208
+    ],
+    [
+     8478020,
+     8481528,
+     8473512
+    ],
+    [
+     8483676,
+     8478173
+    ]
+   ],
+   "pairs": [
+    [
+     8482105,
+     8482245
+    ],
+    [
+     8478469,
+     8481606
+    ],
+    [
+     8484321,
+     8484759
+    ]
+   ],
+   "goalies": [
+    8481035,
+    8477992
+   ],
+   "out": [
+    8476999,
+    8482667,
+    8477998,
+    8477444,
+    8482092,
+    8482095
+   ],
+   "players": {
+    "8476999": {
+     "status": "IR",
+     "role": "Starting goalie",
+     "story": "He has missed seven games with a lower-body strain from Oct 21 but practiced fully Friday and is close to returning."
+    },
+    "8482667": {
+     "status": "IR",
+     "role": "Top-six left wing",
+     "story": "He is out with an ankle injury."
+    },
+    "8477998": {
+     "status": "IR",
+     "role": "Left wing",
+     "story": "He is out with a lower-body injury."
+    },
+    "8477444": {
+     "status": "Injured",
+     "role": "Left wing",
+     "story": "He is out with a lower-body injury."
+    },
+    "8482092": {
+     "status": "Day-to-day",
+     "role": "Center",
+     "story": "He missed a second straight game Nov 7 with an undisclosed injury."
+    },
+    "8482095": {
+     "status": "Day-to-day",
+     "role": "Defenseman",
+     "story": "He returned to practice Friday after an illness, but Nikolas Matinpalo was in the Nov 7 lineup."
+    }
+   },
+   "extras": []
+  },
+  "PHI": {
+   "name": "Philadelphia Flyers",
+   "short": "Flyers",
+   "coach": "Rick Tocchet",
+   "captain": 8476461,
+   "detail": "news",
+   "linesAsOf": "Projected for Nov 8 at CGY (NHL.com projected lineups / Daily Faceoff, Saturday practice)",
+   "lines": [
+    [
+     8482159,
+     8477989,
+     8478439
+    ],
+    [
+     8485406,
+     8480220,
+     8484387
+    ],
+    [
+     8481533,
+     8483787,
+     8480015
+    ],
+    [
+     8484142,
+     8476461,
+     8478569
+    ]
+   ],
+   "pairs": [
+    [
+     8477948,
+     8482142
+    ],
+    [
+     8481546,
+     8484148
+    ],
+    [
+     8476372,
+     8481122
+    ]
+   ],
+   "goalies": [
+    8478435,
+    8479361
+   ],
+   "out": [
+    8477499,
+    8483733,
+    8483460,
+    8478047
+   ],
+   "players": {
+    "8477499": {
+     "status": "Injured",
+     "role": "Defenseman",
+     "story": "Ristolainen has an upper-body injury and is expected to miss his sixth straight game despite practicing."
+    },
+    "8483733": {
+     "status": "Injured",
+     "role": "Forward",
+     "story": "Grebenkin is out with a back injury."
+    },
+    "8483460": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "Jiricek is a projected healthy scratch at Calgary."
+    },
+    "8478047": {
+     "status": "Scratched",
+     "role": "Forward",
+     "story": "Bunting is a projected healthy scratch at Calgary."
+    }
+   },
+   "extras": []
+  },
+  "PIT": {
+   "name": "Pittsburgh Penguins",
+   "short": "Penguins",
+   "coach": "Dan Muse",
+   "captain": 8471675,
+   "detail": "news",
+   "linesAsOf": "Projected for Nov 8 at ANA (NHL.com projected lineups / Pittsburgh Hockey Now)",
+   "lines": [
+    [
+     8476483,
+     8471675,
+     8471215
+    ],
+    [
+     8478438,
+     8485414,
+     8482475
+    ],
+    [
+     8482758,
+     8482148,
+     8479638
+    ],
+    [
+     8480980,
+     8481481,
+     8481582
+    ]
+   ],
+   "pairs": [
+    [
+     8481056,
+     8474578
+    ],
+    [
+     8479398,
+     8481527
+    ],
+    [
+     8483398,
+     8471724
+    ]
+   ],
+   "goalies": [
+    8481668,
+    8483703
+   ],
+   "out": [
+    8475810,
+    8477845,
+    8481725,
+    8483808,
+    8482470
+   ],
+   "players": {
+    "8475810": {
+     "status": "IR",
+     "role": "Forward",
+     "story": "Rust has a lower-body injury and was to be reevaluated six weeks after Oct. 22."
+    },
+    "8477845": {
+     "status": "IR",
+     "role": "Defenseman",
+     "story": "Van Riemsdyk is out with a lower-body injury."
+    },
+    "8481725": {
+     "status": "Injured",
+     "role": "Forward",
+     "story": "Soderblom is out with an upper-body injury."
+    },
+    "8483808": {
+     "status": "Scratched",
+     "role": "Forward",
+     "story": "Kuzmenko is a projected scratch at Anaheim."
+    },
+    "8482470": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "Solovyov is a projected scratch at Anaheim."
+    }
+   },
+   "extras": []
+  },
+  "SEA": {
+   "name": "Seattle Kraken",
+   "short": "Kraken",
+   "coach": "Lane Lambert",
+   "captain": 8474586,
+   "detail": "news",
+   "linesAsOf": "Nov 7 vs NYR, NHL.com projected lineups and Daily Faceoff (updated Nov 6)",
+   "lines": [
+    [
+     8482259,
+     8482665,
+     8474586
+    ],
+    [
+     8476905,
+     8477919,
+     8484241
+    ],
+    [
+     8481554,
+     8484800,
+     8482713
+    ],
+    [
+     8483497,
+     8483570,
+     8482751
+    ]
+   ],
+   "pairs": [
+    [
+     8478407,
+     8476457
+    ],
+    [
+     8482858,
+     8477986
+    ],
+    [
+     8479372,
+     8482866
+    ]
+   ],
+   "goalies": [
+    8478916,
+    8475831
+   ],
+   "out": [
+    8477955,
+    8479324,
+    8482874,
+    8480876
+   ],
+   "players": {
+    "8477955": {
+     "status": "IR",
+     "role": "Forward",
+     "story": "McCann is on injured reserve with a lower-body injury."
+    },
+    "8479324": {
+     "status": "Injured",
+     "role": "Defenseman",
+     "story": "Lindgren is out with an upper-body injury."
+    },
+    "8482874": {
+     "status": "IR",
+     "role": "Forward",
+     "story": "Melanson is on injured reserve with an upper-body injury."
+    },
+    "8480876": {
+     "status": "Injured",
+     "role": "Forward",
+     "story": "Douglas is out with an upper-body injury."
+    },
+    "8479985": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "Fleury was projected as a scratch against the Rangers on Nov 7."
+    },
+    "8483442": {
+     "status": "Scratched",
+     "role": "Forward",
+     "story": "Firkus was recalled from AHL Coachella Valley on Nov 5 but was not expected to play on Nov 7."
+    }
+   },
+   "extras": []
+  },
+  "SJS": {
+   "name": "San Jose Sharks",
+   "short": "Sharks",
+   "coach": "Ryan Warsofsky",
+   "captain": null,
+   "detail": "news",
+   "linesAsOf": "Nov 7 at DAL (3-4 L); NHL.com projected lineup and Daily Faceoff (Sheng Peng)",
+   "lines": [
+    [
+     8485402,
+     8484801,
+     8484227
+    ],
+    [
+     8478975,
+     8484911,
+     8480748
+    ],
+    [
+     8486103,
+     8480848,
+     8475726
+    ],
+    [
+     8476624,
+     8482859,
+     8478874
+    ]
+   ],
+   "pairs": [
+    [
+     8484806,
+     8476885
+    ],
+    [
+     8477498,
+     8480891
+    ],
+    [
+     8475200,
+     8484421
+    ]
+   ],
+   "goalies": [
+    8477968,
+    8482137
+   ],
+   "out": [
+    8477505,
+    8484994
+   ],
+   "players": {
+    "8477505": {
+     "status": "IR",
+     "role": "C",
+     "story": "Placed on IR Oct. 28 with an upper-body injury and is week to week."
+    },
+    "8484994": {
+     "status": "IR",
+     "role": "LW",
+     "story": "Placed on IR Oct. 28 with an upper-body injury and is week to week."
+    },
+    "8482700": {
+     "status": "Scratched",
+     "role": "D",
+     "story": "Healthy scratch in Dallas."
+    },
+    "8483428": {
+     "status": "Scratched",
+     "role": "C",
+     "story": "Recalled Oct. 28 and scratched in Dallas."
+    }
+   },
+   "extras": []
+  },
+  "STL": {
+   "name": "St. Louis Blues",
+   "short": "Blues",
+   "coach": "Jim Montgomery",
+   "captain": 8480023,
+   "detail": "news",
+   "linesAsOf": "Nov 7 at NSH, NHL.com projected lineups; matches Daily Faceoff (updated Nov 7)",
+   "lines": [
+    [
+     8482077,
+     8480023,
+     8483516
+    ],
+    [
+     8481580,
+     8482745,
+     8483463
+    ],
+    [
+     8482089,
+     8484164,
+     8477402
+    ],
+    [
+     8480281,
+     8480459,
+     8477527
+    ]
+   ],
+   "pairs": [
+    [
+     8481598,
+     8478443
+    ],
+    [
+     8482111,
+     8476892
+    ],
+    [
+     8475764,
+     8484790
+    ]
+   ],
+   "goalies": [
+    8480981,
+    8476412
+   ],
+   "out": [
+    8481006,
+    8479346,
+    8482733
+   ],
+   "players": {
+    "8481006": {
+     "status": "IR",
+     "role": "Defenseman",
+     "story": "Tucker is on injured reserve with a knee injury."
+    },
+    "8479346": {
+     "status": "IR",
+     "role": "Forward",
+     "story": "Dube is on injured reserve with a neck injury."
+    },
+    "8482733": {
+     "status": "IR",
+     "role": "Defenseman",
+     "story": "Mailloux was recalled from an AHL conditioning stint on Nov 6 but remains on injured reserve after right hand surgery on Sept. 28."
+    },
+    "8481013": {
+     "status": "Scratched",
+     "role": "Forward",
+     "story": "Berggren was projected as a scratch at Nashville on Nov 7."
+    },
+    "8484188": {
+     "status": "Scratched",
+     "role": "Defenseman",
+     "story": "Lindstein was projected as a scratch at Nashville on Nov 7."
+    }
+   },
+   "extras": []
+  },
+  "TBL": {
+   "name": "Tampa Bay Lightning",
+   "short": "Lightning",
+   "coach": "Jon Cooper",
+   "captain": 8475167,
+   "detail": "news",
+   "linesAsOf": "Nov 8 at WPG, Paul Edmonds (Jets broadcaster) projected lines",
+   "lines": [
+    [
+     8477404,
+     8478010,
+     8476453
+    ],
+    [
+     8479542,
+     8478519,
+     8482201
+    ],
+    [
+     8481624,
+     8483447,
+     8480995
+    ],
+    [
+     8479705,
+     8476878,
+     8477149
+    ]
+   ],
+   "pairs": [
+    [
+     8475167,
+     8482655
+    ],
+    [
+     8474151,
+     8478416
+    ],
+    [
+     8480426,
+     8474590
+    ]
+   ],
+   "goalies": [
+    8476883,
+    8483710
+   ],
+   "out": [
+    8476826,
+    8483752,
+    8481719,
+    8482929
+   ],
+   "players": {
+    "8476826": {
+     "status": "Injured",
+     "role": "C",
+     "story": "Recovering from offseason hip surgery; GM Julien BriseBois said in September he would be out until December."
+    },
+    "8483752": {
+     "status": "Scratched",
+     "role": "C",
+     "story": "Broke his hand in training in September; not in the projected lineup for Nov. 8."
+    },
+    "8481719": {
+     "status": "Scratched",
+     "role": "Depth D",
+     "story": "Not in the projected lineup for Nov. 8."
+    },
+    "8482929": {
+     "status": "Scratched",
+     "role": "Depth D",
+     "story": "Not in the projected lineup for Nov. 8."
+    }
+   },
+   "extras": []
+  },
+  "UTA": {
+   "name": "Utah Mammoth",
+   "short": "Mammoth",
+   "coach": "Andre Tourigny",
+   "captain": 8479343,
+   "detail": "news",
+   "linesAsOf": "Nov 7 at OTT (game lineup) - Daily Faceoff from Utah Mammoth post; Artyom Duda (not on roster file) played LD on pair 3, slot left null",
+   "lines": [
+    [
+     8475314,
+     8480849,
+     8479343
+    ],
+    [
+     8480855,
+     8477951,
+     8482699
+    ],
+    [
+     8483431,
+     8476389,
+     8478474
+    ],
+    [
+     8479619,
+     8478831,
+     8477070
+    ]
+   ],
+   "pairs": [
+    [
+     8479410,
+     8477346
+    ],
+    [
+     8484386,
+     8479369
+    ],
+    [
+     8480084
+    ]
+   ],
+   "goalies": [
+    8478872,
+    8482657
+   ],
+   "out": [
+    8478507,
+    8479977,
+    8477220,
+    8483472,
+    8485010
+   ],
+   "players": {
+    "8478507": {
+     "status": "IR",
+     "role": "Top-four right defenseman",
+     "story": "He has been out since Oct 17 with an upper-body injury and was placed on IR retroactive to that date."
+    },
+    "8479977": {
+     "status": "IR",
+     "role": "Right wing",
+     "story": "He was placed on IR with an upper-body injury retroactive to Oct 29."
+    },
+    "8477220": {
+     "status": "Day-to-day",
+     "role": "Veteran defenseman",
+     "story": "He has an upper-body injury after taking a hit from Nick Suzuki on Nov 5 and missed the Nov 7 game."
+    },
+    "8483472": {
+     "status": "Injured",
+     "role": "Defenseman",
+     "story": "He is out with a shoulder injury."
+    },
+    "8485010": {
+     "status": "Scratched",
+     "role": "Call-up defenseman",
+     "story": "He was recalled from Tucson after the Schmidt injury and was scratched Nov 7 while still awaiting his NHL debut."
+    }
+   },
+   "extras": []
+  },
+  "VAN": {
+   "name": "Vancouver Canucks",
+   "short": "Canucks",
+   "coach": "Manny Malhotra",
+   "captain": null,
+   "detail": "news",
+   "linesAsOf": "Nov 7 at EDM (2-4 loss); forwards from NHL.com preview and Sportsnaut, D group per ESPN box score (Brisebois played, Willander did not), pair order partly inferred",
+   "lines": [
+    [
+     8483395,
+     8480012,
+     8478444
+    ],
+    [
+     8483499,
+     8482079,
+     8481024
+    ],
+    [
+     8482055,
+     8484136,
+     8475848
+    ],
+    [
+     8478498,
+     8481032,
+     8483476
+    ]
+   ],
+   "pairs": [
+    [
+     8484798,
+     8479425
+    ],
+    [
+     8476467,
+     8483678
+    ],
+    [
+     8478465,
+     8474568
+    ]
+   ],
+   "goalies": [
+    8482447,
+    8480947
+   ],
+   "out": [
+    8477967,
+    8480078,
+    8484240,
+    8483768,
+    8484901
+   ],
+   "players": {
+    "8477967": {
+     "status": "IR",
+     "role": "Starting goalie",
+     "story": "Demko is on injured reserve with a hip injury."
+    },
+    "8480078": {
+     "status": "IR",
+     "role": "Center",
+     "story": "Chytil is on injured reserve with an upper-body injury."
+    },
+    "8484240": {
+     "status": "Injured",
+     "role": "Right defenseman",
+     "story": "Willander missed a third straight game on Nov. 7 with a lower-body injury and no timeline has been given."
+    },
+    "8483768": {
+     "status": "Scratched",
+     "role": "Depth defenseman",
+     "story": "Mancini sat on Nov. 7 as Luke Schenn went into the lineup."
+    },
+    "8484901": {
+     "status": "Scratched",
+     "role": "Depth center",
+     "story": "Quillan was a healthy scratch on Nov. 7 as Arshdeep Bains returned."
+    }
+   },
+   "extras": []
+  },
+  "VGK": {
+   "name": "Vegas Golden Knights",
+   "short": "Golden Knights",
+   "coach": "Ryan Craig",
+   "captain": 8475913,
+   "detail": "news",
+   "linesAsOf": "Nov 8 at BUF, The Hockey News projected lines (match Daily Faceoff from Nov 5 at DET)",
+   "lines": [
+    [
+     8479353,
+     8478403,
+     8475913
+    ],
+    [
+     8477964,
+     8476448,
+     8478483
+    ],
+    [
+     8484803,
+     8476881,
+     8478109
+    ],
+    [
+     8483553,
+     8475343,
+     8483890
+    ]
+   ],
+   "pairs": [
+    [
+     8475188,
+     8477447
+    ],
+    [
+     8478468,
+     8478397
+    ],
+    [
+     8478396,
+     8479639
+    ]
+   ],
+   "goalies": [
+    8479394,
+    8478499
+   ],
+   "out": [
+    8478450,
+    8481534
+   ],
+   "players": {
+    "8478450": {
+     "status": "IR",
+     "role": "Depth D",
+     "story": "On injured reserve; ESPN lists an estimated return of Nov. 8."
+    },
+    "8481534": {
+     "status": "Scratched",
+     "role": "Depth F",
+     "story": "Not in the projected lineup for Nov. 8."
+    }
+   },
+   "extras": []
+  },
+  "WPG": {
+   "name": "Winnipeg Jets",
+   "short": "Jets",
+   "coach": "Scott Arniel",
+   "captain": 8476392,
+   "detail": "news",
+   "linesAsOf": "Nov 8 vs TBL, Paul Edmonds projected lines (match Daily Faceoff from Nov 5 vs VAN)",
+   "lines": [
+    [
+     8478398,
+     8476460,
+     8480014
+    ],
+    [
+     8482149,
+     8484242,
+     8482110
+    ],
+    [
+     8480113,
+     8476392,
+     8486025
+    ],
+    [
+     8481043,
+     8480289,
+     8482765
+    ]
+   ],
+   "pairs": [
+    [
+     8480049,
+     8480145
+    ],
+    [
+     8479983,
+     8476331
+    ],
+    [
+     8477938,
+     8482459
+    ]
+   ],
+   "goalies": [
+    8479973,
+    8483532
+   ],
+   "out": [
+    8477504,
+    8476480,
+    8481567,
+    8482076,
+    8475799
+   ],
+   "players": {
+    "8477504": {
+     "status": "IR",
+     "role": "Top-pair D",
+     "story": "Wrist injury on Oct. 7; practiced in a regular sweater on Nov. 7 and is nearing a return."
+    },
+    "8476480": {
+     "status": "IR",
+     "role": "C",
+     "story": "Injured in practice on Oct. 15 and still wearing a brace as of Oct. 30."
+    },
+    "8475799": {
+     "status": "Scratched",
+     "role": "RW",
+     "story": "Not in the projected lineup for Nov. 8."
+    },
+    "8481567": {
+     "status": "Scratched",
+     "role": "Depth D",
+     "story": "Not in the projected lineup for Nov. 8."
+    },
+    "8482076": {
+     "status": "Scratched",
+     "role": "Goalie",
+     "story": "Not listed as starter or backup for Nov. 8."
+    }
+   },
+   "extras": []
+  },
+  "WSH": {
+   "name": "Washington Capitals",
+   "short": "Capitals",
+   "coach": "Spencer Carbery",
+   "captain": 8471214,
+   "detail": "news",
+   "linesAsOf": "Nov 7 vs FLA lineup, Daily Faceoff (updated Nov 7) and NHL.com projected lineups",
+   "lines": [
+    [
+     8477949,
+     8478440,
+     8479385
+    ],
+    [
+     8481656,
+     8479400,
+     8476880
+    ],
+    [
+     8471214,
+     8482088,
+     8478463
+    ],
+    [
+     8476432,
+     8484999,
+     8484186
+    ]
+   ],
+   "pairs": [
+    [
+     8479345,
+     8478911
+    ],
+    [
+     8480796,
+     8480043
+    ],
+    [
+     8484873,
+     8481030
+    ]
+   ],
+   "goalies": [
+    8480313,
+    8479292
+   ],
+   "out": [
+    8480873,
+    8479576
+   ],
+   "players": {
+    "8480873": {
+     "status": "LTIR",
+     "role": "Defenseman",
+     "story": "Sandin is on long-term injured reserve with a knee injury and is not expected back before late December."
+    },
+    "8479576": {
+     "status": "IR",
+     "role": "Defenseman",
+     "story": "Desharnais had an appendectomy and was projected to miss about four to six weeks."
+    },
+    "8483573": {
+     "status": "Scratched",
+     "role": "Forward",
+     "story": "Frank was a healthy scratch against Florida on Nov 7."
+    },
+    "8483491": {
+     "status": "Scratched",
+     "role": "Forward",
+     "story": "Miroshnichenko was a healthy scratch against Florida on Nov 7."
+    }
+   },
+   "extras": []
+  }
+ },
+ "contractsSource": "PuckPedia team cap pages, Oct. 26, 2026"
+}

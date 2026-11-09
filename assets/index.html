@@ -52,6 +52,7 @@ h2{font-size:15px;margin:10px 0 8px}
 .pill .vs{color:rgba(255,255,255,.8);font-size:10px}
 .pill .sp{position:absolute;top:7px;left:0;right:0;font-size:8px;color:rgba(255,255,255,.85);letter-spacing:.12em}
 .pill .live{position:absolute;bottom:6px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:4px;font-size:8px;color:rgba(255,255,255,.9);font-weight:700;letter-spacing:.1em}
+.pill .scr{font-size:19px;line-height:1;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6);letter-spacing:.02em}
 .pill.later{opacity:.82}
 .dot{width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(240,67,95,.9);animation:ping 1.6s infinite;display:inline-block}
 @keyframes ping{50%{opacity:.35}}
@@ -156,6 +157,7 @@ h2{font-size:15px;margin:10px 0 8px}
 #gbar button img{width:18px;height:18px;object-fit:contain}
 #gbar button:focus{outline:2px solid var(--coral);outline-offset:1px}
 #gbar .sp{flex:1}
+#gbar button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 </style></head><body>
 <header><span class="brand disp">NEMTV</span>
 <nav id="nav"><button data-t="home">Home</button><button data-t="live">Live</button><button data-t="guide">Guide</button><button data-t="sports">Sports</button><button data-t="setup">Setup</button></nav></header>
@@ -223,6 +225,23 @@ const HOME_RSN={DET:/^Detroit SportsNet$/,LAK:/^Spectrum SportsNet LA$/,BOS:/^(N
  NYR:/^MSG$/,NYI:/^MSG/,NJD:/^MSG/,PHI:/^NBC Sports Philadelphia$/,PIT:/^SportsNet Pittsburgh$/,COL:/^Altitude Sports$/,CHI:/^Chicago Sports Network$/};
 const baseName=n=>n.replace(/\s+\S\s+feed\s+\d+$/,"");
 const DUR=3.25*3600e3; // NHL game window on the TV clock
+/* ---------- live scores straight from the NHL API (no routine needed) ---------- */
+let SC=[], scSig="";
+const scoreOf=(aw,hm,st)=>SC.find(x=>x.awayTeam&&x.homeTeam&&x.awayTeam.abbrev===aw&&x.homeTeam.abbrev===hm&&Math.abs(Date.parse(x.startTimeUTC)-st)<14*3600e3);
+function scInfo(x){ // {score:"2 - 1", note:"P2 12:34"} or null before the puck drops
+  if(!x||x.gameState==="FUT"||x.gameState==="PRE")return null;
+  const pd=x.periodDescriptor||{}, n=pd.number||1, over=x.gameState==="OFF"||x.gameState==="FINAL", ck=x.clock||{};
+  const per=pd.periodType==="SO"?"SO":pd.periodType==="OT"?(n>4?(n-3)+"OT":"OT"):"P"+n;
+  const note=over?"FINAL"+(pd.periodType==="OT"?" / OT":pd.periodType==="SO"?" / SO":""):ck.inIntermission?"INT "+n+" "+(ck.timeRemaining||""):per+" "+(ck.timeRemaining||"");
+  return {score:(x.awayTeam.score||0)+" - "+(x.homeTeam.score||0),note,over};
+}
+window.gotScores=(t,e)=>{
+  try{const d=JSON.parse(t); SC=d.games||[];}catch(x){log("scores failed",e||x);return}
+  const sig=SC.map(x=>x.id+x.gameState+(x.clock&&x.clock.timeRemaining)+(x.awayTeam.score||0)+(x.homeTeam.score||0)).join();
+  if(sig!==scSig){scSig=sig;if(tab==="home"&&!$("#pl").classList.contains("on"))rerender()}
+};
+function pollScores(){const u="https://api-web.nhle.com/v1/score/now";
+  if(window.Android&&Android.get)Android.get(u,"gotScores");else fetch(u).then(r=>r.text()).then(t=>gotScores(t,"")).catch(e=>gotScores("",String(e)))}
 function games(){ // from the bundled NHL schedule + the TV box clock
   const t=Date.now(), live=[], later=[], sod=new Date(new Date().setHours(0,0,0,0)).getTime(); // 7 day window from midnight today
   if(off.includes("NHL"))return {live,later};
@@ -230,7 +249,7 @@ function games(){ // from the bundled NHL schedule + the TV box clock
     if(st+DUR<=t||st>=sod+7*864e5)return;
     const A=ABBR[aw],H=ABBR[hm]; if(!A||!H)return;
     const g={s:"NHL",tm:[H.name,A.name],t:[H,A],st,aw,hm,nets,title:A.name+" at "+H.name}; // home team on the left
-    g.c=feedsFor(g)[0]||{n:"No matching channel",u:"",g:""};
+    g.sc=scInfo(scoreOf(aw,hm,st)); g.c=feedsFor(g)[0]||{n:"No matching channel",u:"",g:""};
     (st<=t?live:later).push(g);
   });
   return {live,later};
@@ -249,7 +268,7 @@ const fmtT=ms=>{const d=new Date(ms);return d.toLocaleDateString([],{weekday:"sh
 
 function pillHTML(c,k,kind){
   const col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";
-  return `<button class="pill focusable${kind==="later"?" later":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span><span class="sp disp">${esc(c.s)}</span><span class="side">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span></span><span class="mid"><span class="vs disp">VS</span></span><span class="side">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span></span><span class="live">${kind==="later"?"STARTS "+esc(fmtT(c.st)).toUpperCase():'<i class="dot"></i>LIVE'}</span></button>`;
+  return `<button class="pill focusable${kind==="later"?" later":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span><span class="sp disp">${esc(c.s)}</span><span class="side">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span></span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span></span><span class="live">${kind==="later"?"STARTS "+esc(fmtT(c.st)).toUpperCase():c.sc?(c.sc.over?esc(c.sc.note):'<i class="dot"></i>'+esc(c.sc.note)):'<i class="dot"></i>LIVE'}</span></button>`;
 }
 const chanCard=c=>`<button class="cc focusable" data-i="${ch.indexOf(c)}"><b>${esc(baseName(c.n))}</b>${fav.includes(c.n)?'<span class="star">&#9733;</span>':""}<span class="nw none">${esc(c.g)}</span></button>`;
 const chip=(label,pressed,attr)=>`<button class="chip focusable" ${attr} aria-pressed="${pressed}">${esc(label)}</button>`;
@@ -338,7 +357,7 @@ function zap(d){ // Up/Down with controls hidden: next/previous channel (or feed
   const n=l[(i+d+l.length)%l.length];
   if(cur.title){tried=new Set();setFeed(n)}else{cur.c=n;addRecent(n);tried=new Set();cur.feeds=[n];$("#ptop .t").textContent=plain(n.n).toUpperCase();setFeed(n)}
 }
-function stop(){closeMenu();killHls();const v=$("#v");v.pause();v.removeAttribute("src");v.load();msgP("");$("#pl").classList.remove("on")}
+function stop(){if($("#v").volume===.5&&vol0!==.5)$("#v").volume=vol0;closeMenu();killHls();const v=$("#v");v.pause();v.removeAttribute("src");v.load();msgP("");$("#pl").classList.remove("on")}
 function openMenu(kind){
   const m=$("#pmenu"); menuOn=true; show();
   if(kind==="feed")m.innerHTML=`<h3>CHOOSE A FEED FOR THIS GAME</h3>`+cur.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===cur.feed}" data-f="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("");
@@ -358,25 +377,28 @@ function gLayout(){const f=$("#gf"); let w,h,sc;
   f.style.width=w+"px";f.style.height=h+"px";f.style.transform="scale("+sc+")"}
 function gFocus(){$("#gf").focus(); gPost({cmd:"focus"})}
 function guideTab(on){const gp=$("#gp"); if(on){gp.className="tab";gp.hidden=false;gLayout();gLoad();gDepth=0;setTimeout(gFocus,400)}else if(!gSide())gp.hidden=true}
+let duck=ls("duck",true), vol0=1; // toggle: guide open = game volume at 50%
+const duckApply=()=>{const v=$("#v"),open=!$("#gp").hidden&&gSide(); if(open&&duck){if(v.volume!==.5){vol0=v.volume;v.volume=.5}}else if(v.volume===.5&&vol0!==.5)v.volume=vol0};
 function guideSide(){ // quarter-width phone view inside the player
   const gp=$("#gp"), t=(cur&&cur.t)||[], logo=x=>x&&x.logo?`<img src="${x.logo}" alt="">`:"";
   let b="";
   if(cur&&cur.hm)b=`<button data-gq="game">GAME</button><button data-gq="team" data-ab="${cur.hm}">${logo(t[0])}${cur.hm}</button><button data-gq="team" data-ab="${cur.aw}">${logo(t[1])}${cur.aw}</button>`;
   else b=`<button data-gq="games">GAMES</button>`;
-  $("#gbar").innerHTML=b+`<span class="sp"></span><button data-gq="close">X</button>`;
-  gp.className="side"; gp.hidden=false; gLayout(); gDepth=0; gLoad();
+  $("#gbar").innerHTML=b+`<span class="sp"></span><button data-gq="duck" aria-pressed="${duck}">VOL 50%: ${duck?"ON":"OFF"}</button><button data-gq="close">X</button>`;
+  gp.className="side"; gp.hidden=false; gLayout(); duckApply(); gDepth=0; gLoad();
   clearTimeout(hideT); $("#pl").classList.add("hide");
   const first=$("#gbar button"); if(first)first.focus();
   if(cur&&cur.hm){const go=()=>gPost({cmd:"matchup",away:cur.aw,home:cur.hm,start:cur.st});go();setTimeout(go,1500)}
 }
-function guideClose(){const gp=$("#gp"), side=gSide(); gp.hidden=true; if(side){show();$("#bgd").focus()}}
+function guideClose(){const gp=$("#gp"), side=gSide(); gp.hidden=true; duckApply(); if(side){show();$("#bgd").focus()}}
 window.guideSynced=(n,e)=>{log("guide sync",n,e||"ok"); if(n>0){gStale=true; if($("#gp").hidden)gLoaded=false; else if(gDepth===0){gLoad()}}};
 window.addEventListener("message",e=>{const m=e.data||{}; if(m.nem!=="guide")return;
   if(m.depth!==undefined)gDepth=m.depth;
   if(m.ready&&gLoaded&&!$("#gp").hidden&&!gSide())gFocus();
   if(m.exit==="up"){const t=gSide()?$("#gbar button"):document.querySelector("#nav button[aria-pressed=true]"); if(t)t.focus()}});
 $("#gbar").onclick=e=>{const b=e.target.closest("button"); if(!b)return; const q=b.dataset.gq;
-  if(q==="close")guideClose(); else if(q==="game")gPost({cmd:"matchup",away:cur.aw,home:cur.hm,start:cur.st});
+  if(q==="duck"){duck=!duck;sv("duck",duck);b.setAttribute("aria-pressed",duck);b.textContent="VOL 50%: "+(duck?"ON":"OFF");duckApply()}
+  else if(q==="close")guideClose(); else if(q==="game")gPost({cmd:"matchup",away:cur.aw,home:cur.hm,start:cur.st});
   else if(q==="team")gPost({cmd:"team",ab:b.dataset.ab}); else if(q==="games")gPost({cmd:"games"})};
 $("#gbar").addEventListener("keydown",e=>{if(e.key==="ArrowDown"){e.preventDefault();gFocus()}});
 $("#nav").addEventListener("keydown",e=>{if(e.key==="ArrowDown"&&tab==="guide"){e.preventDefault();gFocus()}});
@@ -455,5 +477,6 @@ if(ch.length)bootOff();
 log("NEMTV start",new Date().toString(),"games",(window.SCHED||[]).length);
 if(window.Android&&(window.CFG||{}).repo)Android.guideSync(CFG.repo,CFG.branch||"main");
 if(url&&!ch.length)Android.load(url);else if(url)Android.load(url); // refresh playlist in the background
+pollScores(); setInterval(pollScores,20000);
 setInterval(()=>{if((tab==="home"||tab==="live")&&!$("#pl").classList.contains("on"))rerender()},60000);
 </script></body></html>

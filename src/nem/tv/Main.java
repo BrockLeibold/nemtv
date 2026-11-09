@@ -119,6 +119,15 @@ public class Main extends Activity {
         }}).start();
       }
 
+      // generic native GET (NHL scores): result goes to window[cb](text, err)
+      @JavascriptInterface public void get(final String u, final String cb) {
+        new Thread(new Runnable() { public void run() {
+          String r, e = "";
+          try { r = new String(fetch(u, 15000), "UTF-8"); } catch (Exception x) { r = ""; e = String.valueOf(x.getMessage()); }
+          js(cb + "(" + org.json.JSONObject.quote(r) + "," + org.json.JSONObject.quote(e) + ")");
+        }}).start();
+      }
+
       // pull guide/ from the GitHub repo into filesDir/guide (changed files only, by blob sha)
       @JavascriptInterface public void guideSync(final String repo, final String branch) {
         new Thread(new Runnable() { public void run() {

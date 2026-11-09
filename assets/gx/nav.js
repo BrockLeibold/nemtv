@@ -39,9 +39,25 @@
     else if(m.cmd==='matchup'){var g=typeof SCHED!=='undefined'&&SCHED&&SCHED.games.filter(function(x){return x.away===m.away&&x.home===m.home}).sort(function(a,b){return Math.abs(Date.parse(a.start)-m.start)-Math.abs(Date.parse(b.start)-m.start)})[0];
       if(g&&Math.abs(Date.parse(g.start)-m.start)<24*36e5)openGame(g.id);else if(window.setTeam)setTeam(m.home)}
     else if(m.cmd==='zoom'){document.documentElement.style.zoom=m.z}
+    else if(m.cmd==='api'){try{liveApply(m)}catch(x){console.log('liveApply '+x)}}
     else if(m.cmd==='games'){location.hash='#games';if(window.setMode)setMode('games')}
     else if(m.cmd==='back'){document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));setTimeout(report,300)}
     else if(m.cmd==='focus'){var l=items();(l[0]||document.body).focus()}
   });
   window.addEventListener('load',function(){scan();report();setTimeout(function(){scan();report();parent.postMessage({nem:'guide',ready:1},'*')},1200)});
 })();
+
+// live NHL API data pushed from the app: standings -> LEAGUE, scores -> SCHED, then redraw. No routine needed for these.
+var lastSig='';
+function liveApply(m){
+  if(typeof LEAGUE==='undefined'||typeof SCHED==='undefined'||!LEAGUE||!SCHED)return;
+  var sig=JSON.stringify([(m.standings||[]).map(function(x){return x.teamAbbrev.default+x.points+x.gamesPlayed}),(m.scores||[]).map(function(x){return x.id+x.gameState+x.awayTeam.score+x.homeTeam.score})]);
+  if(sig===lastSig)return; lastSig=sig;
+  (m.standings||[]).forEach(function(x){var t=LEAGUE.teams.filter(function(q){return q.abbrev===x.teamAbbrev.default})[0]; if(!t)return;
+    t.points=x.points;t.gp=x.gamesPlayed;t.record=x.wins+'-'+x.losses+'-'+x.otLosses;t.streak=(x.streakCode||'')+(x.streakCount||'');
+    t.l10=x.l10Wins+'-'+x.l10Losses+'-'+x.l10OtLosses;t.home=x.homeWins+'-'+x.homeLosses+'-'+x.homeOtLosses;t.road=x.roadWins+'-'+x.roadLosses+'-'+x.roadOtLosses;
+    t.gf=x.goalFor;t.ga=x.goalAgainst;t.diff=x.goalDifferential;t.ppct=x.pointPctg;t.leagueRank=x.leagueSequence;t.confRank=x.conferenceSequence;t.divRank=x.divisionSequence});
+  (m.scores||[]).forEach(function(x){var g=SCHED.games.filter(function(q){return q.id===x.id})[0]; if(!g)return;
+    g.state=x.gameState; g.as=x.awayTeam.score; g.hs=x.homeTeam.score; var pt=(x.periodDescriptor||{}).periodType; g.ot=(pt==='OT'||pt==='SO')?pt:(g.ot&&x.gameState==='OFF'?g.ot:'')});
+  if(typeof renderAll==='function'){renderAll(); if(typeof state!=='undefined'&&state.mode==='games'&&typeof setMode==='function')setMode('games',state.day); else if(typeof showMode==='function')showMode()}
+}

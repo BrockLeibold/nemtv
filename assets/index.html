@@ -149,6 +149,69 @@ h2{font-size:15px;margin:10px 0 8px}
 #pbuf.mini .mesh2,#pbuf.mini .tm2,#pbuf.mini .chn{display:none}
 #pbuf.mini .bar{margin:0;width:46px}
 @media(prefers-reduced-motion:reduce){#pbuf *{animation:none!important}}
+/* hero: featured live game + live cards + team news */
+.lz{height:calc(100vh - 62px);display:flex;flex-direction:column;gap:8px}
+.lzh{display:flex;align-items:center;justify-content:space-between;flex:none}
+.lzh h2{margin:0}
+.dots{display:flex;align-items:center;gap:4px;font-size:9px;letter-spacing:.1em;color:var(--ink-2)}
+.dots i{width:7px;height:7px;border-radius:50%;background:transparent;box-shadow:inset 0 0 0 1.5px var(--muted)}
+.dots i.v{background:#fff;box-shadow:none}
+.dots i.c{box-shadow:0 0 0 2px var(--coral);background:#fff}
+.dots b{margin-left:6px;color:#fff}
+.gw{flex:1;min-height:0;overflow:hidden}
+.hero{display:flex;flex-direction:column;gap:12px}
+/* finished games: greyed orb, dimmed loser, big FINAL */
+.pill.done,.feat.done{--o-a:#4a474f!important;--o-b:#3b393f!important;--o-c:#28262c!important;--o-f1:#605d66!important;--o-f2:#605d66!important}
+.pill.done .scr,.feat.done .ft-sc{color:#fff}
+.lose{opacity:.45}
+.pill.done .live{bottom:0;padding:5px 0;background:rgba(0,0,0,.6);border-radius:0 0 22px 22px;font-size:11px;letter-spacing:.24em;color:#fff}
+.pill.done .tvl{display:none}
+.ft-over{display:inline-block;margin-top:6px;padding:3px 16px;border:2px solid rgba(255,255,255,.85);border-radius:999px;font-size:22px;letter-spacing:.16em;color:#fff}
+.feat.done .watch{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.8)}
+.pill.cur{box-shadow:0 0 0 3px var(--coral),0 0 0 6px rgba(255,138,91,.25)}
+.hcar{display:flex;gap:12px;overflow:hidden;border-radius:26px;flex:none}
+.feat{box-sizing:border-box;width:100%;--o-a:var(--red-3);--o-b:var(--wine);--o-c:var(--plum);flex:0 0 100%;position:relative;isolation:isolate;border-radius:26px;padding:14px 16px 16px 20px;color:#fff;overflow:hidden;min-height:236px;display:grid;grid-template-columns:1.6fr 1fr;gap:16px}
+.fl{display:flex;flex-direction:column;gap:8px;min-width:0}
+.fn{background:rgba(10,9,12,.5);border-radius:20px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden}
+.fn h3{font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.7)}
+.fn .tn{display:flex;flex-direction:column;gap:3px}
+.fn .tn+.tn{border-top:1px solid rgba(255,255,255,.14);padding-top:7px}
+.fn .th{display:flex;align-items:center;gap:6px}.fn .th img{width:20px;height:20px;object-fit:contain}
+.fn .hd{font-size:10px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.fn .it{font-size:9px;line-height:1.3;color:rgba(255,255,255,.8);display:flex;gap:5px}
+.fn .it i{flex:none;width:4px;height:4px;border-radius:50%;background:var(--coral);margin-top:4px}
+.fn .inj{font-size:9px;color:var(--coral)}
+.feat .skin::after{opacity:.6}
+.ft-top{display:flex;justify-content:space-between;align-items:center;font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.88)}
+.ft-top b{display:inline-flex;align-items:center;gap:5px}
+.ft-mid{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;text-align:center;gap:8px;flex:1}
+.ft-team{display:flex;flex-direction:column;align-items:center;gap:3px}
+.ft-team img{width:82px;height:82px;object-fit:contain}
+.ft-team .nm{font-size:16px;line-height:1.05;max-width:100%;overflow-wrap:anywhere}
+.ft-team small{font-size:10px;color:rgba(255,255,255,.8)}
+.ft-sc{font-size:60px;line-height:.9}
+.ft-note{font-size:12px;color:rgba(255,255,255,.9);margin-top:4px;letter-spacing:.06em}
+.ft-st{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px}
+.ft-st div{background:rgba(0,0,0,.28);border-radius:14px;padding:6px 8px;text-align:center}
+.ft-st small{display:block;font-size:8px;letter-spacing:.1em;color:rgba(255,255,255,.7)}
+.ft-st b{font-size:12px}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ft-bot .tv{font-size:10px;color:rgba(255,255,255,.85)}
+.watch{padding:7px 18px;border-radius:999px;background:rgba(244,242,246,.92);color:#141217;font-weight:800;font-size:11px}
+.grid.lg .pill{width:calc(33.333% - 7px);aspect-ratio:auto;height:150px;padding:16px 10px 28px}
+.grid.lg .pill .side img{width:62px;height:62px}
+.pill .rec{font-size:8px;color:rgba(255,255,255,.8);letter-spacing:.04em}
+.pill .tvl{position:absolute;bottom:20px;left:0;right:0;font-size:8px;color:rgba(255,255,255,.7);letter-spacing:.06em}
+.nws{background:rgba(25,23,28,.92);border:1px solid var(--line);border-radius:26px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.nws h3{font-size:10px;letter-spacing:.14em;color:var(--muted)}
+.nws .tn{display:flex;flex-direction:column;gap:4px;padding-top:8px;border-top:1px solid var(--line)}
+.nws .tn:first-of-type{border-top:0;padding-top:0}
+.nws .th{display:flex;align-items:center;gap:6px}
+.nws .th img{width:22px;height:22px;object-fit:contain}
+.nws .hd{font-size:10.5px;line-height:1.3;color:var(--ink)}
+.nws .it{font-size:9px;line-height:1.3;color:var(--ink-2);display:flex;gap:5px}
+.nws .it i{flex:none;width:4px;height:4px;border-radius:50%;background:var(--coral);margin-top:4px}
+.nws .inj{font-size:9px;color:var(--coral)}
 #gp{position:fixed;z-index:80;background:rgba(15,14,17,.85)}
 #gp.tab{left:0;right:0;top:46px;bottom:0;z-index:20}
 #gp.side{top:0;bottom:0;right:0;width:25vw;border-left:1px solid var(--line-strong);backdrop-filter:blur(10px);overflow:hidden}
@@ -236,18 +299,26 @@ function scInfo(x){ // {score:"2 - 1", note:"P2 12:34"} or null before the puck 
   const pd=x.periodDescriptor||{}, n=pd.number||1, over=x.gameState==="OFF"||x.gameState==="FINAL", ck=x.clock||{};
   const per=pd.periodType==="SO"?"SO":pd.periodType==="OT"?(n>4?(n-3)+"OT":"OT"):"P"+n;
   const note=over?"FINAL"+(pd.periodType==="OT"?" / OT":pd.periodType==="SO"?" / SO":""):ck.inIntermission?"INT "+n+" "+(ck.timeRemaining||""):per+" "+(ck.timeRemaining||"");
-  return {score:(x.awayTeam.score||0)+" - "+(x.homeTeam.score||0),note,over};
+  return {score:(x.awayTeam.score||0)+" - "+(x.homeTeam.score||0),note,over,win:over?((x.awayTeam.score||0)>(x.homeTeam.score||0)?"a":(x.awayTeam.score||0)<(x.homeTeam.score||0)?"h":""):""};
 }
+let ST=[];
+function applyStandings(){ST.forEach(x=>{const t=TMI[x.teamAbbrev&&x.teamAbbrev.default]; if(!t)return;
+  Object.assign(t,{points:x.points,gp:x.gamesPlayed,record:x.wins+"-"+x.losses+"-"+x.otLosses,streak:(x.streakCode||"")+(x.streakCount||""),l10:x.l10Wins+"-"+x.l10Losses+"-"+x.l10OtLosses,gf:x.goalFor,ga:x.goalAgainst})})}
+window.gotStandings=(t,e)=>{try{ST=JSON.parse(t).standings||[]}catch(x){log("standings failed",e||x);return} applyStandings(); heroRefresh(); pushGuideLive()};
+function pollStandings(){const u="https://api-web.nhle.com/v1/standings/now";
+  if(window.Android&&Android.get)Android.get(u,"gotStandings");else fetch(u).then(r=>r.text()).then(t=>gotStandings(t,"")).catch(e=>gotStandings("",String(e)))}
+function pushGuideLive(){if(ST.length||SC.length)gPost({cmd:"api",standings:ST,scores:SC})}
 window.gotScores=(t,e)=>{
   try{const d=JSON.parse(t); SC=d.games||[];}catch(x){log("scores failed",e||x);return}
   const sig=SC.map(x=>x.id+x.gameState+(x.clock&&x.clock.timeRemaining)+(x.awayTeam.score||0)+(x.homeTeam.score||0)).join();
+  if(sig!==scSig)pushGuideLive();
   if(sig===scSig)return; scSig=sig;
   if(tab!=="home"||$("#pl").classList.contains("on"))return;
   let redo=false;
   document.querySelectorAll("#m [data-g]").forEach(b=>{const g=G[+b.dataset.g]; if(!g)return; g.sc=scInfo(scoreOf(g.aw,g.hm,g.st));
     const sc=b.querySelector(".scr"), lv=b.querySelector(".live");
-    if(g.sc&&sc){sc.textContent=g.sc.score; lv.innerHTML=(g.sc.over?"":'<i class="dot"></i>')+esc(g.sc.note)} else if(g.sc!==null&&!sc)redo=true});
-  if(redo)rerender()
+    if(g.sc&&sc){sc.textContent=g.sc.score; lv.innerHTML=(g.sc.over?"":'')+esc(g.sc.note)} else if(g.sc!==null&&!sc)redo=true});
+  if(redo)rerender(); else heroRefresh()
 };
 function pollScores(){const u="https://api-web.nhle.com/v1/score/now";
   if(window.Android&&Android.get)Android.get(u,"gotScores");else fetch(u).then(r=>r.text()).then(t=>gotScores(t,"")).catch(e=>gotScores("",String(e)))}
@@ -275,9 +346,40 @@ function feedsFor(g){ // channels carrying this game: Canada first, then its oth
 }
 const fmtT=ms=>{const d=new Date(ms);return d.toLocaleDateString([],{weekday:"short",month:"short",day:"numeric"})+", "+d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})};
 
+/* ---------- hero data: standings + team news from the guide (git-synced) ---------- */
+let TMI={}, NWS={}, hi=0;
+function loadHeroData(){const B=GURL.replace(/index\.html$/,"");
+  fetch(B+"data/league.json").then(r=>r.json()).then(d=>{TMI={};(d.teams||[]).forEach(t=>TMI[t.abbrev]=t);applyStandings();heroRefresh()}).catch(()=>{});
+  fetch(B+"news.json").then(r=>r.json()).then(d=>{NWS=d.teams||{};heroRefresh()}).catch(()=>{})}
+const recOf=ab=>{const t=TMI[ab];return t?t.record+" · "+t.streak:""};
+function newsHTML(g){
+  const one=(ab,t)=>{const n=NWS[ab]; const lg=t.logo?`<img src="${t.logo}" alt="">`:"";
+    if(!n)return `<div class="tn"><div class="th">${lg}<b class="disp">${esc(ab)}</b></div><div class="hd">News loads with the guide.</div></div>`;
+    const inj=(n.injuries||[]).length;
+    return `<div class="tn"><div class="th">${lg}<b class="disp">${esc(ab)}</b></div><div class="hd">${esc(n.headline||"")}</div>${(n.items||[]).slice(0,1).map(i=>`<div class="it"><i></i><span>${esc(i.title)}</span></div>`).join("")}${inj?`<div class="inj">${inj} injury note${inj>1?"s":""}</div>`:""}</div>`};
+  return `<h3 class="disp">TEAM NEWS</h3>`+one(g.hm,g.t[0])+one(g.aw,g.t[1])}
+function featHTML(g,k){ if(!g)return "";
+  const H=TMI[g.hm]||{}, A=TMI[g.aw]||{}, sc=g.sc, x=scoreOf(g.aw,g.hm,g.st), logo=t=>t.logo?`<img src="${t.logo}" alt="">`:"";
+  const sog=x&&x.homeTeam&&x.homeTeam.sog!==undefined?[x.homeTeam.sog,x.awayTeam.sog]:["-","-"];
+  const cell=(l,a,b)=>`<div><small>${l}</small><b>${esc(a)} &nbsp;|&nbsp; ${esc(b)}</b></div>`;
+  return `<span class="skin"><span class="mesh"></span></span><div class="fl">
+   <div class="ft-top"><b>${sc?(sc.over?"GAME OVER":esc(sc.note)):"LIVE"}</b><span>${k+1} / ${G.length} &middot; ${esc((g.nets||[]).join(" / "))}</span></div>
+   <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span><small>${esc(recOf(g.hm)||"HOME")}</small></div>
+    <div><div class="ft-sc disp">${sc?sc.score.split(" - ").reverse().join(" - "):"VS"}</div>${sc&&sc.over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div>
+    <div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span><small>${esc(recOf(g.aw)||"AWAY")}</small></div></div>
+   <div class="ft-st">${cell("POINTS",H.points!==undefined?H.points:"-",A.points!==undefined?A.points:"-")}${cell("LAST 10",H.l10||"-",A.l10||"-")}${cell("GOALS F-A",H.gf!==undefined?H.gf+"-"+H.ga:"-",A.gf!==undefined?A.gf+"-"+A.ga:"-")}${cell("SHOTS",sog[0],sog[1])}</div>
+   <div class="ft-bot"><span class="tv">${sc&&sc.over?"This game has ended":g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No feed found"}</span><button class="watch focusable" data-g="${k}">${sc&&sc.over?"BOX SCORE":"WATCH LIVE"}</button></div></div>
+   <div class="fn">${newsHTML(g)}</div>`}
+const slideStyle=g=>{const c=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";return c(g.t[0].c,"a")+c(g.t[1].c,"b")};
+function heroSet(){const c=$("#hcar"); if(!c)return;
+  const ae=document.activeElement, fk=ae&&ae.classList&&ae.classList.contains("watch")?ae.dataset.g:null;
+  c.innerHTML=G.map((g,k)=>`<div class="feat${g.sc&&g.sc.over?" done":""}" data-k="${k}" style="${slideStyle(g)}">${featHTML(g,k)}</div>`).join("");
+  c.scrollLeft=(c.children[hi]||{}).offsetLeft||0; markCur(); setTimeout(updateDots,50);
+  if(fk!==null){const w=c.querySelector('.watch[data-g="'+fk+'"]'); if(w)w.focus({preventScroll:true})}}
+function heroRefresh(){if(tab==="home"&&$("#hcar"))heroSet()}
 function pillHTML(c,k,kind){
   const col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";
-  return `<button class="pill focusable${kind==="later"?" later":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span><span class="sp disp">${esc(c.s)}</span><span class="side">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span></span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span></span><span class="live">${kind==="later"?"STARTS "+esc(fmtT(c.st)).toUpperCase():c.sc?(c.sc.over?esc(c.sc.note):'<i class="dot"></i>'+esc(c.sc.note)):'<i class="dot"></i>LIVE'}</span></button>`;
+  return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span><span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(c.nets.join(" / "))}</span>`:""}<span class="live">${kind==="later"?"STARTS "+esc(fmtT(c.st)).toUpperCase():c.sc?(c.sc.over?esc(c.sc.note):''+esc(c.sc.note)):'LIVE'}</span></button>`;
 }
 const chanCard=c=>`<button class="cc focusable" data-i="${ch.indexOf(c)}"><b>${esc(baseName(c.n))}</b>${fav.includes(c.n)?'<span class="star">&#9733;</span>':""}<span class="nw none">${esc(c.g)}</span></button>`;
 const chip=(label,pressed,attr)=>`<button class="chip focusable" ${attr} aria-pressed="${pressed}">${esc(label)}</button>`;
@@ -287,9 +389,9 @@ function render(){
   document.querySelectorAll("#nav button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===tab));
   const m=$("#m"), vis=ch.filter(on);
   if(tab==="home"){
-    const gm=games(); G=gm.live; L=gm.later;
+    const gm=games(); G=gm.live.sort((a,b)=>!!(a.sc&&a.sc.over)-!!(b.sc&&b.sc.over)); L=gm.later;
     const favs=fav.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c)), rec=recent.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c));
-    let h=`<h2 class="disp">NHL on now</h2>`+(G.length?`<div class="grid">${G.map((c,k)=>pillHTML(c,k,"live")).join("")}</div>`
+    let h=(G.length?"":`<h2 class="disp">NHL on now</h2>`)+(G.length?(hi=Math.min(hi,G.length-1),`<div class="lz"><div class="lzh"><h2 class="disp">NHL on now</h2><span class="dots" id="dots"></span></div><div class="hcar" id="hcar"></div><div class="gw" id="gw"><div class="grid lg">${G.map((c,k)=>pillHTML(c,k,"live")).join("")}</div></div></div>`)
       :`<div class="empty">${ch.length?"No NHL games on right now."+(L.length?" Next up: "+esc(L[0].title)+", "+esc(fmtT(L[0].st))+".":""):"No playlist yet. Open Setup and add your M3U link."}</div>`);
     if(L.length){const sd=new Date(new Date().setHours(0,0,0,0)).getTime(), days={}; // one row per day: Today, then weekday names
       L.forEach((c,k)=>{const o=Math.round((new Date(new Date(c.st).setHours(0,0,0,0))-sd)/864e5);(days[o]=days[o]||[]).push([c,k])});
@@ -297,7 +399,7 @@ function render(){
         h+=`<h2 class="disp">${nm}<small style="color:var(--muted);font-size:.6em;margin-left:8px">${new Date(sd+o*864e5+36e5).toLocaleDateString([],{month:"short",day:"numeric"})}</small></h2><div class="grid">${days[o].map(([c,k])=>pillHTML(c,k,"later")).join("")}</div>`})}
     if(favs.length)h+=`<h2 class="disp">Favorites</h2><div class="cards">${favs.map(c=>chanCard(c)).join("")}</div>`;
     if(rec.length)h+=`<h2 class="disp">Recently watched</h2><div class="cards">${rec.slice(0,8).map(c=>chanCard(c)).join("")}</div>`;
-    m.innerHTML=h;
+    m.innerHTML=h; if(tab==="home")heroSet();
   }else if(tab==="guide"){ m.innerHTML="";
   }else if(tab==="live"){
     const groups=["All","Favorites","Recent",...new Set(vis.map(c=>c.g).filter(Boolean))];
@@ -358,7 +460,7 @@ function play(g,list){
   cur={...g,feeds,list:list||feeds}; tried=new Set(); addRecent(g.c);
   const t=cur.t||[{},{}], logo=x=>x&&x.logo?`<img src="${x.logo}" alt="">`:"";
   $("#ptop").innerHTML=(cur.tm&&cur.tm.length>1?logo(t[0])+`<span class="t disp">${esc(cur.tm[0])}</span><span class="vs disp" style="color:var(--muted)">VS</span><span class="t disp">${esc(cur.tm[1])}</span>${logo(t[1])}`
-    :`<span class="t disp">${esc(g.c.n)}</span>`)+(cur.s?`<span class="tag">${esc(cur.s)}</span>`:"")+`<span class="tag"><i class="dot"></i> LIVE</span>`;
+    :`<span class="t disp">${esc(g.c.n)}</span>`)+(cur.s?`<span class="tag">${esc(cur.s)}</span>`:"")+`<span class="tag"> LIVE</span>`;
   $("#pl").classList.add("on"); setZoom(zoom); setFeed(feeds[0]); show(); $("#bpp").textContent="Pause"; $("#bmu").textContent=$("#v").muted?"Unmute":"Mute"; $("#bfeed").focus();
 }
 function zap(d){ // Up/Down with controls hidden: next/previous channel (or feed for a game)
@@ -404,7 +506,7 @@ function guideClose(){const gp=$("#gp"), side=gSide(); gp.hidden=true; duckApply
 window.guideSynced=(n,e)=>{log("guide sync",n,e||"ok"); if(n>0){gStale=true; if($("#gp").hidden)gLoaded=false; else if(gDepth===0){gLoad()}}};
 window.addEventListener("message",e=>{const m=e.data||{}; if(m.nem!=="guide")return;
   if(m.depth!==undefined)gDepth=m.depth;
-  if(m.ready&&gLoaded&&!$("#gp").hidden&&!gSide())gFocus();
+  if(m.ready){pushGuideLive();if(gLoaded&&!$("#gp").hidden&&!gSide())gFocus()}
   if(m.exit==="up"){const t=gSide()?$("#gbar button"):document.querySelector("#nav button[aria-pressed=true]"); if(t)t.focus()}});
 $("#gbar").onclick=e=>{const b=e.target.closest("button"); if(!b)return; const q=b.dataset.gq;
   if(q==="duck"){duck=!duck;sv("duck",duck);b.setAttribute("aria-pressed",duck);b.textContent="VOL 50%: "+(duck?"ON":"OFF");duckApply()}
@@ -464,23 +566,43 @@ window.gotList=(t,e)=>{
 };
 function go(t){tab=t;render();(document.querySelector("#nav button[aria-pressed=true]")).focus()}
 
+function updateDots(){const d=$("#dots"),gw=$("#gw"); if(!d||!gw)return; const R=gw.getBoundingClientRect(); let v=0, h="";
+  document.querySelectorAll(".gw .pill").forEach((p,k)=>{const r=p.getBoundingClientRect(), vis=r.top>=R.top-4&&r.bottom<=R.bottom+4; if(vis)v++; h+=`<i class="${vis?"v":""}${k===hi?" c":""}"></i>`});
+  d.innerHTML=h+`<b>${v} of ${G.length} showing</b>`}
+const markCur=()=>updateDots()||document.querySelectorAll(".grid.lg .pill").forEach(p=>p.classList.toggle("cur",+p.dataset.g===hi));
+let slT=0; function slideTo(k){const c=$("#hcar"); if(!c||!c.children[k])return; hi=k; markCur(); cancelAnimationFrame(slT); const x0=c.scrollLeft,d=c.children[k].offsetLeft-x0,t0=performance.now();
+  (function f(t){const q=Math.min(1,(t-t0)/160);c.scrollLeft=x0+d*(1-(1-q)*(1-q));if(q<1)slT=requestAnimationFrame(f)})(t0);
+  const w=c.children[k].querySelector(".watch"); if(w)w.focus({preventScroll:true})}
 let scT=0; // light 140ms ease-out scroll: a few scrollTop writes, no layers
 function smoothTo(m,y){cancelAnimationFrame(scT);const y0=m.scrollTop,d=y-y0;if(Math.abs(d)<2)return;const t0=performance.now();
   (function f(t){const k=Math.min(1,(t-t0)/140);m.scrollTop=y0+d*(1-(1-k)*(1-k));if(k<1)scT=requestAnimationFrame(f)})(t0)}
-function alignRow(el){const m=$("#m"), g=el.closest(".grid,.cards"), top=g&&g.previousElementSibling&&/^H2$/.test(g.previousElementSibling.tagName)&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?g.previousElementSibling:el;
+function alignRow(el){const gw=el.closest(".gw");
+  if(gw){ // live games: the hero stays put, only the games strip scrolls (one row per press)
+    smoothTo($("#m"),0); const y=el.getBoundingClientRect().top-gw.getBoundingClientRect().top+gw.scrollTop-2; smoothTo(gw,y); setTimeout(updateDots,200); return}
+  const m=$("#m"), g=el.closest(".grid,.cards"), top=g&&g.previousElementSibling&&/^H2$/.test(g.previousElementSibling.tagName)&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?g.previousElementSibling:el;
   smoothTo(m,top.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-6)}
-$("#m").addEventListener("focusin",e=>{if(e.target.closest&&e.target.closest(".grid,.cards"))alignRow(e.target)});
-// Up/Down: one press = one row. Pick the next row ourselves (the browser would spend a press scrolling first)
+$("#m").addEventListener("focusin",e=>{const t=e.target; if(t.closest&&t.closest(".grid,.cards"))alignRow(t); else if(t.closest&&t.closest(".hcar"))smoothTo($("#m"),0);
+});
+// D-pad inside the home/live/sports pages: we pick the next item ourselves, so one press = one item and we control the viewport
+const ARR={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};
 $("#m").addEventListener("keydown",e=>{
-  if(e.key!=="ArrowUp"&&e.key!=="ArrowDown")return; const a=document.activeElement; if(!a||!a.closest(".grid,.cards"))return;
-  const dy=e.key==="ArrowDown"?1:-1, ra=a.getBoundingClientRect(), cx=ra.left+ra.width/2, cy=ra.top+ra.height/2; let best=null,bs=1e9;
-  $("#m").querySelectorAll(".grid .focusable,.cards .focusable").forEach(x=>{if(x===a)return;const r=x.getBoundingClientRect(),oy=(r.top+r.height/2-cy)*dy;if(oy<8)return;
-    const sc=oy+Math.abs(r.left+r.width/2-cx)*2;if(sc<bs){bs=sc;best=x}});
-  if(best){e.preventDefault();e.stopPropagation();best.focus({preventScroll:true});alignRow(best)}
+  const d=ARR[e.key]; if(!d)return; const a=document.activeElement; if(!a||!$("#m").contains(a)||a.tagName==="INPUT")return;
+  if(a.classList.contains("watch")&&d[0]){e.preventDefault();e.stopPropagation();const k=+a.dataset.g+d[0];if(k>=0&&k<G.length)slideTo(k);return} // carousel: left/right = previous/next live game
+  const ra=a.getBoundingClientRect(), cx=ra.left+ra.width/2, cy=ra.top+ra.height/2; let best=null,bs=1e9, c=[];
+  $("#m").querySelectorAll(".focusable").forEach(x=>{if(x===a||!x.offsetParent)return; if(x.classList.contains("watch")&&+x.dataset.g!==hi)return;const r=x.getBoundingClientRect(),ox=r.left+r.width/2-cx,oy=r.top+r.height/2-cy;
+    const along=d[0]?ox*d[0]:oy*d[1]; if(along<6)return;
+    if(d[0]&&(Math.abs(r.top-ra.top)>20||x.closest('.grid,.hcar')!==a.closest('.grid,.hcar')))return; // sideways stays in the same row of the same grid
+    c.push({x,r,ox,oy})});
+  if(d[1]&&c.length){const rowTop=d[1]>0?Math.min(...c.map(i=>i.r.top)):Math.max(...c.map(i=>i.r.top)); c=c.filter(i=>Math.abs(i.r.top-rowTop)<30)} // nearest row only
+  c.forEach(i=>{const sc=Math.abs(i.ox)+(d[0]?0:0); if(sc<bs){bs=sc;best=i.x}});
+  e.preventDefault(); e.stopPropagation();
+  if(best){best.focus({preventScroll:true});focusScroll(best)}
+  else if(d[1]<0){const n=document.querySelector("#nav button[aria-pressed=true]");if(n){n.focus();smoothTo($("#m"),0)}}
 },true);
+function focusScroll(el){if(el.closest(".hcar"))smoothTo($("#m"),0);else if(el.closest(".grid,.cards"))alignRow(el)}
 $("#nav").onclick=e=>{const b=e.target.closest("button");if(b)go(b.dataset.t)};
 $("#m").onclick=e=>{
-  const q=e.target.closest("[data-g]"); if(q)return play(G[+q.dataset.g]);
+  const q=e.target.closest("[data-g]"); if(q){const g=G[+q.dataset.g]; if(g.sc&&g.sc.over){go("guide");const f=()=>gPost({cmd:"matchup",away:g.aw,home:g.hm,start:g.st});setTimeout(f,700);setTimeout(f,2200);return}return play(g)}
   const l=e.target.closest("[data-l]"); if(l)return play(L[+l.dataset.l]);
   const p=e.target.closest("[data-i]"); if(p){const c=ch[+p.dataset.i];return play({c,tm:[c.n],t:[{}],s:c.s},tab==="live"?LL:null)}
   const gp=e.target.closest("[data-grp]"); if(gp){grp=gp.dataset.grp;sv("grp",grp);render();$("#m").querySelector(`[data-grp="${CSS.escape(grp)}"]`).focus();return}
@@ -501,7 +623,7 @@ if(ch.length)bootOff();
 log("NEMTV start",new Date().toString(),"games",(window.SCHED||[]).length);
 if(window.Android&&(window.CFG||{}).repo)Android.guideSync(CFG.repo,CFG.branch||"main");
 if(url&&!ch.length)Android.load(url);else if(url)Android.load(url); // refresh playlist in the background
-pollScores(); setInterval(pollScores,20000);
+pollScores(); setInterval(pollScores,20000); pollStandings(); setInterval(pollStandings,300000); loadHeroData(); setInterval(loadHeroData,600000);
 setTimeout(()=>{if($("#gp").hidden&&!gLoaded){$("#gp").className="tab";gLayout();gLoad()}},6000); // warm the guide so the tab opens instantly
 let gSig=""; const gSigOf=()=>{const g=games();return g.live.length+":"+g.later.length+":"+(g.live[0]||{}).st+":"+(g.later[0]||{}).st};
 setTimeout(()=>{gSig=gSigOf()},3000);

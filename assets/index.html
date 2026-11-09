@@ -407,7 +407,7 @@ function feedsFor(g){ // strict: NHL network list for this game, checked against
   (g.nets||[]).forEach(n=>NET[n.trim()]&&add(NET[n.trim()]));
   if(EPG&&g.st<EPGMAX&&!(g.sc&&g.sc.over)){
     const conf=[];ch.forEach(c=>{if(!seen.has(c.u)&&c.id&&EPG[c.id]&&epgVerdict(c,g)===1){seen.add(c.u);conf.push(c)}}); // e.g. regional channels naming this game
-    const keep=out.filter(c=>epgVerdict(c,g)>=0), sure=keep.filter(c=>epgVerdict(c,g)===1);
+    const keep=out.filter(c=>CA.test(baseName(c.n))||epgVerdict(c,g)>=0) /* Canadian channels the NHL lists always stay */, sure=keep.filter(c=>epgVerdict(c,g)===1);
     out.length=0;out.push(...conf,...sure,...keep.filter(c=>!sure.includes(c)));
   }
   const ca=out.filter(c=>CA.test(baseName(c.n))), rest=out.filter(c=>!CA.test(baseName(c.n)));
@@ -507,14 +507,15 @@ let LL=[];
 /* ---------- game popup: pick Watch / Live stats ---------- */
 let popG=null,popBack=null;
 function openPop(g){if(!g)return;popG=g;popBack=document.activeElement;const sc=g.sc,over=sc&&sc.over,x=scoreOf(g.aw,g.hm,g.st),logo=t=>t.logo?`<img src="${t.logo}" alt="">`:"";
-  const hasF=!!(g.c&&g.c.u), btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>${g.c&&g.c.u&&x&&Date.now()<(ls("endAt",{})[x.id]||0)+36e5?`<button class="pbtn alt" data-pa="play">WATCH POST GAME</button>`:""}`:sc?(hasF?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="sum">LIVE STATS</button>`):(hasF?`<button class="pbtn" data-pa="play">WATCH</button>`:`<button class="pbtn" data-pa="close">CLOSE</button>`);
+  const hasF=!!(g.c&&g.c.u), btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>${g.c&&g.c.u&&x&&Date.now()<(ls("endAt",{})[x.id]||0)+36e5?`<button class="pbtn alt" data-pa="play">WATCH POST GAME</button>`:""}`:sc?(hasF?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="sum">LIVE STATS</button>`):`<button class="pbtn" data-pa="t0">${esc(g.tm[1].split(" ").pop().toUpperCase())} IN GUIDE</button><button class="pbtn alt" data-pa="t1">${esc(g.tm[0].split(" ").pop().toUpperCase())} IN GUIDE</button>`;
   const p=$("#gpop");p.innerHTML=`<div class="pc${over?" done":""}" style="${slideStyle(g)}"><span class="skin"><span class="mesh"></span></span><div class="pi"><div class="ft-top"><b>${sc?(over?"GAME OVER":esc(sc.note)):esc(fmtT(g.st))}</b><span>${esc((g.nets||[]).join(" / "))}</span></div>
     <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span></div><div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div><div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span></div></div>
-    <div class="tv">${over?"This game has ended":g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No channel carries this game"}</div><div class="pb">${btns}</div></div></div>`;
+    <div class="tv">${over?"This game has ended":sc?(g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No channel carries this game"):"Game has not started yet"}</div><div class="pb">${btns}</div></div></div>`;
   p.hidden=false;p.querySelector(".pbtn").focus()}
 function closePop(){$("#gpop").hidden=true;if(popBack&&popBack.isConnected)popBack.focus({preventScroll:true})}
 $("#gpop").addEventListener("click",e=>{const b=e.target.closest("button");if(!b){closePop();return}const a=b.dataset.pa,g=popG;if(!a)return;
   if(a==="close"){closePop();return}
+  if(a==="t0"||a==="t1"){const ab=a==="t0"?g.aw:g.hm;$("#gpop").hidden=true;tab="guide";render();[500,1500].forEach(d=>setTimeout(()=>gPost({cmd:"team",ab}),d));return}
   if(a==="play"){$("#gpop").hidden=true;play(g);return}
   const x=scoreOf(g.aw,g.hm,g.st);closePop();openGame(x&&x.id,a)});
 $("#gpop").addEventListener("keydown",e=>{const k=e.key;if(!/^Arrow/.test(k))return;e.preventDefault();e.stopPropagation();
@@ -664,7 +665,7 @@ $("#gbar").onclick=e=>{const b=e.target.closest("button"); if(!b)return; const q
   else if(q==="close")guideClose(); else if(q==="game")gPost({cmd:"matchup",away:cur.aw,home:cur.hm,start:cur.st});
   else if(q==="team")gPost({cmd:"team",ab:b.dataset.ab}); else if(q==="games")gPost({cmd:"games"})};
 $("#gbar").addEventListener("keydown",e=>{if(e.key==="ArrowDown"){e.preventDefault();gFocus()}});
-$("#nav").addEventListener("keydown",e=>{if(e.key==="ArrowDown"&&tab==="guide"){e.preventDefault();gFocus()}});
+$("#nav").addEventListener("keydown",e=>{if(e.key==="ArrowDown"&&tab==="guide"){e.preventDefault();gFocus()}else if(e.key==="ArrowDown"&&tab==="schedule"){e.preventDefault();const f=$("#m").querySelector(".focusable");if(f){f.focus({preventScroll:true});$("#m").scrollTop=0}}});
 window.addEventListener("resize",gLayout);
 window.nemBack=()=>{const pl=$("#pl");
   if(!$("#gd").hidden){closeGame();return true}
@@ -734,7 +735,7 @@ function smoothTo(m,y){cancelAnimationFrame(scT);const y0=m.scrollTop,d=y-y0;if(
 function alignRow(el){const gw=el.closest(".gw");
   if(gw){ // live games: the hero stays put, only the games strip scrolls (one row per press)
     smoothTo($("#m"),0); const y=el.getBoundingClientRect().top-gw.getBoundingClientRect().top+gw.scrollTop-9; smoothTo(gw,y); setTimeout(updateDots,200); return}
-  const m=$("#m"), g=el.closest(".grid,.cards"), top=g&&g.previousElementSibling&&/^H2$/.test(g.previousElementSibling.tagName)&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?g.previousElementSibling:el;
+  const m=$("#m"), g=el.closest(".grid,.cards"), top=g&&g.previousElementSibling&&(/^H2$/.test(g.previousElementSibling.tagName)||g.previousElementSibling.classList.contains("dh"))&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?g.previousElementSibling:el;
   smoothTo(m,top.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-6)}
 $("#m").addEventListener("focusin",e=>{const t=e.target; if(t.closest&&t.closest(".grid,.cards")){alignRow(t); if(t.classList.contains("pill")&&t.dataset.g!==undefined&&+t.dataset.g!==hi)slideTo(+t.dataset.g,1)} else if(t.closest&&t.closest(".hcar"))smoothTo($("#m"),0);
 });

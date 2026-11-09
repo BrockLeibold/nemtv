@@ -1,0 +1,1 @@
+{"name":"nemtv","productName":"NEMTV","version":"1.0.0","main":"main.js","description":"NEMTV desktop","devDependencies":{"@electron/packager":"^20.3.0","electron":"^45.2.3"}}

@@ -6,3 +6,6 @@ src-logos/
 assets/config.js
 assets/guide/
 dist/
+desktop/node_modules/
+desktop/app/
+desktop/dist/

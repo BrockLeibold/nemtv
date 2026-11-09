@@ -222,8 +222,8 @@ h2{font-size:15px;margin:10px 0 8px}
 .ft-st div{background:rgba(0,0,0,.28);border-radius:14px;padding:6px 8px;text-align:center}
 .ft-st small{display:block;font-size:8px;letter-spacing:.1em;color:rgba(255,255,255,.7)}
 .ft-st b{font-size:12px}
-.chip.ft{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 6px}.chip.ft img{width:22px;height:22px;object-fit:contain}.chip.ft[aria-pressed=true]::after{content:"°5";color:#E8A400;font-size:13px}
-.fstar{position:absolute;top:4px;left:5px;width:20px;height:20px;border-radius:50%;background:#FFB81C;color:#141217;font-size:13px;line-height:20px;text-align:center;box-shadow:0 0 0 2px rgba(0,0,0,.45),0 0 10px rgba(255,184,28,.7);z-index:3}.sr .fstar{top:6px;left:8px}.feat.fv::after{content:"\2605  FAVORITE";position:absolute;top:9px;left:92px;font-size:11px;font-weight:800;letter-spacing:.1em;color:#141217;background:#FFB81C;border-radius:999px;padding:3px 10px;box-shadow:0 0 12px rgba(255,184,28,.6)}
+.chip.ft{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 6px}.chip.ft img{width:22px;height:22px;object-fit:contain}.chip.ft[aria-pressed=true]::after{content:"°5";color:#141217;font-size:13px}
+.fstar{position:absolute;top:4px;left:5px;width:20px;height:20px;border-radius:50%;background:#fff;color:#141217;font-size:13px;line-height:20px;text-align:center;box-shadow:0 0 0 2px rgba(0,0,0,.45),0 0 10px rgba(255,255,255,.55);z-index:3}.sr .fstar{top:50%;left:9px;margin-top:-10px}.sr.fv{padding-left:36px}.feat.fv::after{content:"\2605  FAVORITE";position:absolute;top:9px;left:92px;font-size:11px;font-weight:800;letter-spacing:.1em;color:#141217;background:#FFB81C;border-radius:999px;padding:3px 10px;box-shadow:0 0 12px rgba(255,184,28,.6)}
 .fbt{display:flex;gap:8px}.sumb{background:transparent!important;color:#fff!important;border:2px solid rgba(255,255,255,.8)}
 .ft-bot{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .ft-bot .tv{font-size:10px;color:rgba(255,255,255,.85)}
@@ -333,7 +333,7 @@ function scInfo(x){ // {score:"2 - 1", note:"P2 12:34"} or null before the puck 
   const pd=x.periodDescriptor||{}, n=pd.number||1, over=x.gameState==="OFF"||x.gameState==="FINAL", ck=x.clock||{};
   const per=pd.periodType==="SO"?"SO":pd.periodType==="OT"?(n>4?(n-3)+"OT":"OT"):"P"+n;
   const note=over?"FINAL"+(pd.periodType==="OT"?" / OT":pd.periodType==="SO"?" / SO":""):ck.inIntermission?"INT "+n+" "+(ck.timeRemaining||""):per+" "+(ck.timeRemaining||"");
-  return {score:(x.awayTeam.score||0)+" - "+(x.homeTeam.score||0),note,over,win:over?((x.awayTeam.score||0)>(x.homeTeam.score||0)?"a":(x.awayTeam.score||0)<(x.homeTeam.score||0)?"h":""):""};
+  return {score:(x.homeTeam.score||0)+" - "+(x.awayTeam.score||0),note,over,win:over?((x.awayTeam.score||0)>(x.homeTeam.score||0)?"a":(x.awayTeam.score||0)<(x.homeTeam.score||0)?"h":""):""};
 }
 let ST=[];
 function applyStandings(){ST.forEach(x=>{const t=TMI[x.teamAbbrev&&x.teamAbbrev.default]; if(!t)return;
@@ -400,7 +400,7 @@ function featHTML(g,k){ if(!g)return "";
   return `<span class="skin"><span class="mesh"></span></span><div class="fl">
    <div class="ft-top"><b>${sc?(sc.over?"GAME OVER":esc(sc.note)):"LIVE"}</b><span>${k+1} / ${G.length} &middot; ${esc((g.nets||[]).join(" / "))}</span></div>
    <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span><small>${esc(recOf(g.hm)||"HOME")}</small></div>
-    <div><div class="ft-sc disp">${sc?sc.score.split(" - ").reverse().join(" - "):"VS"}</div>${sc&&sc.over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div>
+    <div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${sc&&sc.over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div>
     <div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span><small>${esc(recOf(g.aw)||"AWAY")}</small></div></div>
    <div class="ft-st">${cell("POINTS",H.points!==undefined?H.points:"-",A.points!==undefined?A.points:"-")}${cell("LAST 10",H.l10||"-",A.l10||"-")}${cell("GOALS F-A",H.gf!==undefined?H.gf+"-"+H.ga:"-",A.gf!==undefined?A.gf+"-"+A.ga:"-")}${cell("SHOTS",sog[0],sog[1])}</div>
    <div class="ft-bot"><span class="tv">${sc&&sc.over?"This game has ended":g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No feed found"}</span><span class="fbt"><button class="watch focusable" data-g="${k}">${sc&&sc.over?"STATS":"WATCH LIVE"}</button><button class="watch sumb focusable" data-g="${k}">${sc&&sc.over?"SUMMARY":"LIVE STATS"}</button></span></div></div>
@@ -443,7 +443,7 @@ function render(){
     const per=g=>{const d=g.periodDescriptor||{};return d.periodType==="OT"?"OT":d.periodType==="SO"?"SO":"P"+(g.period||d.number||1)};
     const row=x=>{const a=tm(x.awayTeam),h=tm(x.homeTeam),i=scInfo(x),gs=(x.goals||[]).slice(-3).reverse(),lv=ord(x)===0;
       const gh=gs.map((g,k)=>`<span class="gl${k?"":" new"}"><b>${esc(g.teamAbbrev)}</b> ${esc((g.name&&g.name.default)||"")} <em>${esc(per({period:g.period,periodDescriptor:g.periodDescriptor}))} ${esc(g.timeInPeriod||"")}</em> ${g.awayScore}-${g.homeScore}${g.strength&&g.strength!=="ev"?" "+esc(g.strength.toUpperCase()):""}</span>`).join("");
-      return `<button data-id="${x.id}" class="sr focusable${i&&i.over?" done":""}${lv?" lv":""}" style="--o-a:${h.c};--o-b:${a.c}">${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?`<span class="fstar">&#9733;</span>`:""}<span class="srt"><span class="srs">${h.logo?`<img src="${h.logo}" alt="">`:""}<b class="disp">${esc(x.homeTeam.abbrev)}</b></span><span class="srm disp">${i?esc(i.score.split(" - ").reverse().join(" - ")):"VS"}</span><span class="srs">${a.logo?`<img src="${a.logo}" alt="">`:""}<b class="disp">${esc(x.awayTeam.abbrev)}</b></span><span class="srn">${i?esc(i.note):esc(fmtT(Date.parse(x.startTimeUTC)))}</span></span>${gh?`<span class="srg"><i>LAST GOAL</i>${gh}</span>`:`<span class="srg none">${i?"No goals yet":"Not started"}</span>`}</button>`};
+      return `<button data-id="${x.id}" class="sr focusable${i&&i.over?" done":""}${lv?" lv":""}${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?" fv":""}" style="--o-a:${h.c};--o-b:${a.c}">${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?`<span class="fstar">&#9733;</span>`:""}<span class="srt"><span class="srs">${h.logo?`<img src="${h.logo}" alt="">`:""}<b class="disp">${esc(x.homeTeam.abbrev)}</b></span><span class="srm disp">${i?esc(i.score):"VS"}</span><span class="srs">${a.logo?`<img src="${a.logo}" alt="">`:""}<b class="disp">${esc(x.awayTeam.abbrev)}</b></span><span class="srn">${i?esc(i.note):esc(fmtT(Date.parse(x.startTimeUTC)))}</span></span>${gh?`<span class="srg"><i>LAST GOAL</i>${gh}</span>`:`<span class="srg none">${i?"No goals yet":"Not started"}</span>`}</button>`};
     m.innerHTML=`<div class="lzh"><h2 class="disp">Scores today</h2><span class="sub" style="margin:0">${nLive} live &middot; ${gl.length} games</span></div>`+(gl.length?`<div class="srl">${gl.map(row).join("")}</div>`:`<div class="empty">No NHL games on the board yet.</div>`);
   }else if(tab==="live"){
     const groups=["All","Favorites","Recent",...new Set(vis.map(c=>c.g).filter(Boolean))];

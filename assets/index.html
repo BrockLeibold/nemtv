@@ -461,8 +461,6 @@ function render(){
     let h=(G.length?"":`<h2 class="disp">NHL on now</h2>`)+(G.length?(hi=Math.min(hi,G.length-1),`<div class="lz"><div class="lzh"><h2 class="disp">NHL on now</h2><span class="dots" id="dots"></span></div><div class="hcar" id="hcar"></div><div class="gw" id="gw"><div class="grid lg">${G.map((c,k)=>pillHTML(c,k,"live")).join("")}</div></div></div>`)
       :`<div class="empty">${ch.length?"No NHL games on right now."+(L.length?" Next up: "+esc(L[0].title)+", "+esc(fmtT(L[0].st))+".":""):"No playlist yet. Open Setup and add your M3U link."}</div>`);
     h+=daysHTML(L,o=>o===0);
-    if(favs.length)h+=`<h2 class="disp">Favorites</h2><div class="cards">${favs.map(c=>chanCard(c)).join("")}</div>`;
-    if(rec.length)h+=`<h2 class="disp">Recently watched</h2><div class="cards">${rec.slice(0,8).map(c=>chanCard(c)).join("")}</div>`;
     m.innerHTML=h; if(tab==="home")heroSet();
   }else if(tab==="schedule"){
     L=games().later; m.innerHTML=L.length?daysHTML(L,()=>true):`<div class="empty">No upcoming NHL games.</div>`;

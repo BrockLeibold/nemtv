@@ -132,21 +132,23 @@ public class Main extends Activity {
             x.setInput(in, "UTF-8");
             java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyyMMddHHmmss Z", java.util.Locale.US);
             org.json.JSONObject all = new org.json.JSONObject();
-            String ch = "", st = "", en = "", tag = ""; StringBuilder tx = new StringBuilder();
+            String ch = "", st = "", en = "", tag = "", ti = ""; StringBuilder tx = new StringBuilder(); long now = System.currentTimeMillis();
             for (int ev = x.getEventType(); ev != org.xmlpull.v1.XmlPullParser.END_DOCUMENT; ev = x.next()) {
               if (ev == org.xmlpull.v1.XmlPullParser.START_TAG) {
                 tag = x.getName();
-                if (tag.equals("programme")) { ch = x.getAttributeValue(null, "channel"); st = x.getAttributeValue(null, "start"); en = x.getAttributeValue(null, "stop"); tx.setLength(0); }
+                if (tag.equals("programme")) { ch = x.getAttributeValue(null, "channel"); st = x.getAttributeValue(null, "start"); en = x.getAttributeValue(null, "stop"); tx.setLength(0); ti = ""; }
               } else if (ev == org.xmlpull.v1.XmlPullParser.TEXT) {
+                if (tag.equals("title") && ti.length() == 0) ti = x.getText();
                 if (tag.equals("title") || tag.equals("sub-title") || tag.equals("desc")) tx.append(x.getText()).append(" | ");
               } else if (ev == org.xmlpull.v1.XmlPullParser.END_TAG) {
                 if (x.getName().equals("programme")) {
-                  String t = tx.toString();
-                  if (t.matches("(?is).*(nhl|hockey).*")) {
-                    if (st.length() == 14) st += " +0000"; if (en.length() == 14) en += " +0000";
+                  String t = tx.toString(); boolean hk = t.matches("(?is).*(nhl|hockey).*");
+                  if (st.length() == 14) st += " +0000"; if (en.length() == 14) en += " +0000";
+                  long s0 = f.parse(st).getTime(), e0 = f.parse(en).getTime();
+                  if (hk || (e0 > now - 4 * 3600000L && s0 < now + 36 * 3600000L)) {
                     org.json.JSONArray a = all.optJSONArray(ch); if (a == null) { a = new org.json.JSONArray(); all.put(ch, a); }
                     org.json.JSONArray r = new org.json.JSONArray();
-                    r.put(f.parse(st).getTime()); r.put(f.parse(en).getTime()); r.put(t.length() > 300 ? t.substring(0, 300) : t);
+                    String tt = hk ? t : ti; r.put(s0); r.put(e0); r.put(tt.length() > 300 ? tt.substring(0, 300) : tt); r.put(hk ? 1 : 0);
                     a.put(r);
                   }
                 }

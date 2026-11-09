@@ -397,7 +397,7 @@ function epgVerdict(c,g){ // 1 = guide names this game, 0 = unknown / generic NH
 function feedsFor(g){ // strict: NHL network list for this game, checked against the guide (Canada first)
   const seen=new Set(), out=[], add=re=>ch.forEach(c=>{if(re.test(baseName(c.n))&&!seen.has(c.u)){seen.add(c.u);out.push(c)}});
   (g.nets||[]).forEach(n=>NET[n.trim()]&&add(NET[n.trim()]));
-  if(EPG&&g.st<EPGMAX){
+  if(EPG&&g.st<EPGMAX&&!(g.sc&&g.sc.over)){
     const conf=[];ch.forEach(c=>{if(!seen.has(c.u)&&c.id&&EPG[c.id]&&epgVerdict(c,g)===1){seen.add(c.u);conf.push(c)}}); // e.g. regional channels naming this game
     const keep=out.filter(c=>epgVerdict(c,g)>=0), sure=keep.filter(c=>epgVerdict(c,g)===1);
     out.length=0;out.push(...conf,...sure,...keep.filter(c=>!sure.includes(c)));
@@ -498,7 +498,7 @@ let LL=[];
 /* ---------- game popup: pick Watch / Live stats ---------- */
 let popG=null,popBack=null;
 function openPop(g){if(!g)return;popG=g;popBack=document.activeElement;const sc=g.sc,over=sc&&sc.over,x=scoreOf(g.aw,g.hm,g.st),logo=t=>t.logo?`<img src="${t.logo}" alt="">`:"";
-  const hasF=!!(g.c&&g.c.u), btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>`:sc?(hasF?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="sum">LIVE STATS</button>`):(hasF?`<button class="pbtn" data-pa="play">WATCH</button>`:`<button class="pbtn" data-pa="close">CLOSE</button>`);
+  const hasF=!!(g.c&&g.c.u), btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>${g.c&&g.c.u?`<button class="pbtn alt" data-pa="play">WATCH POST GAME</button>`:""}`:sc?(hasF?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="sum">LIVE STATS</button>`):(hasF?`<button class="pbtn" data-pa="play">WATCH</button>`:`<button class="pbtn" data-pa="close">CLOSE</button>`);
   const p=$("#gpop");p.innerHTML=`<div class="pc${over?" done":""}" style="${slideStyle(g)}"><span class="skin"><span class="mesh"></span></span><div class="pi"><div class="ft-top"><b>${sc?(over?"GAME OVER":esc(sc.note)):esc(fmtT(g.st))}</b><span>${esc((g.nets||[]).join(" / "))}</span></div>
     <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span></div><div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div><div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span></div></div>
     <div class="tv">${over?"This game has ended":g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No channel carries this game"}</div><div class="pb">${btns}</div></div></div>`;

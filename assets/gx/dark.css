@@ -11,3 +11,8 @@ img[src*="logo"]{background:none}
 .pill[aria-pressed="true"] *,.chip.cap *,.tm.cur *,.gm.home *,.cb-seg.cur *,.cv-seg.cur *,.cv-seg.here *,.gbtn[aria-pressed="true"] *,.dchip[aria-pressed="true"] *{color:#141217!important}
 .card:hover,.mc:hover{background:#221F26!important}
 .res.W{background:#12301F!important;color:#5FD08A!important}.res.L{background:#3A1720!important;color:#FF6B7F!important}.res.OT{background:#3A2A0C!important;color:#F0B35A!important}
+/* weak-hardware mode: no blur, no filters, no animation, no smooth scroll */
+*,*::before,*::after{animation:none!important;transition:none!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;scroll-behavior:auto!important;text-shadow:none!important}
+/* skip layout/paint of everything off screen (roster is ~2400 elements) */
+#news,#schedule,#team,#sec-D,#sec-G{content-visibility:auto;contain-intrinsic-size:auto 700px}
+.grid>.card{content-visibility:auto;contain-intrinsic-size:auto 320px}

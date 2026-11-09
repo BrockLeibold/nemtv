@@ -9,7 +9,7 @@ class H(http.server.SimpleHTTPRequestHandler):
             if p=='/guide/' or p=='/guide': f='../guide/index.html'
             if f and os.path.isfile(f):
                 d=open(f,'rb').read()
-                if f.endswith('index.html'): d=d.replace(b'</body>',b'<link rel=stylesheet href=/_dark.css><script src=/_nav.js></script></body>')
+                if f.endswith('index.html'): d=d.replace(b'</body>',b'<link rel=stylesheet href=/_dark.css><script src=/_nav.js></script></body>').replace(b'</head>',b'<style>html{zoom:.85}</style></head>')
                 s.send_response(200);s.send_header('Content-Type','image/svg+xml' if f.endswith('svg') else 'text/html' if f.endswith('html') else 'text/css' if f.endswith('css') else 'application/javascript');s.end_headers();s.wfile.write(d);return
         if p.startswith('/guide/data') or p.startswith('/guide/news'):
             s.path='/../guide/'+p[7:]

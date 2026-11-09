@@ -33,7 +33,7 @@ public class Main extends Activity {
   }
 
   // https://guide.nemtv.local/<path>: cached git copy first, bundled snapshot second
-  android.webkit.WebResourceResponse guide(String path) {
+  android.webkit.WebResourceResponse guide(String path, String zoomQ) {
     android.util.Log.d("NEMTV", "guide req " + path);
     try {
       if (path.equals("/") || path.length() == 0) path = "/index.html";
@@ -48,7 +48,10 @@ public class Main extends Activity {
       if (path.equals("/index.html")) {
         String h = new String(d, "UTF-8"), add = "<link rel=stylesheet href=/_dark.css><script src=/_nav.js></script>";
         int i = h.lastIndexOf("</body>");
-        d = (i < 0 ? h + add : h.substring(0, i) + add + h.substring(i)).getBytes("UTF-8");
+        h = i < 0 ? h + add : h.substring(0, i) + add + h.substring(i);
+        int j = h.indexOf("</head>");
+        if (j >= 0) h = h.substring(0, j) + "<style>html{zoom:" + zoomQ + "}</style>" + h.substring(j);
+        d = h.getBytes("UTF-8");
       }
       java.util.HashMap<String, String> hd = new java.util.HashMap<String, String>();
       hd.put("Access-Control-Allow-Origin", "*"); hd.put("Cache-Control", "no-cache");
@@ -90,7 +93,7 @@ public class Main extends Activity {
     w.setWebViewClient(new android.webkit.WebViewClient() {
       @Override public android.webkit.WebResourceResponse shouldInterceptRequest(WebView v, android.webkit.WebResourceRequest r) {
         android.net.Uri u = r.getUrl();
-        if ("guide.nemtv.local".equals(u.getHost())) return guide(u.getPath() == null ? "/" : u.getPath());
+        if ("guide.nemtv.local".equals(u.getHost())) { String z = u.getQueryParameter("z"); float zf = 1f; try { zf = Float.parseFloat(z); } catch (Exception x) {} if (zf < .3f || zf > 2f) zf = 1f; return guide(u.getPath() == null ? "/" : u.getPath(), String.valueOf(zf)); }
         return null;
       }
     });

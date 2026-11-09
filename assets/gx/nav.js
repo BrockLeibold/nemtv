@@ -38,6 +38,7 @@
     else if(m.cmd==='game'&&window.openGame)openGame(m.id);
     else if(m.cmd==='matchup'){var g=typeof SCHED!=='undefined'&&SCHED&&SCHED.games.filter(function(x){return x.away===m.away&&x.home===m.home}).sort(function(a,b){return Math.abs(Date.parse(a.start)-m.start)-Math.abs(Date.parse(b.start)-m.start)})[0];
       if(g&&Math.abs(Date.parse(g.start)-m.start)<24*36e5)openGame(g.id);else if(window.setTeam)setTeam(m.home)}
+    else if(m.cmd==='zoom'){document.documentElement.style.zoom=m.z}
     else if(m.cmd==='games'){location.hash='#games';if(window.setMode)setMode('games')}
     else if(m.cmd==='back'){document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));setTimeout(report,300)}
     else if(m.cmd==='focus'){var l=items();(l[0]||document.body).focus()}

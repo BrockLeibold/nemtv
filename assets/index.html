@@ -256,6 +256,9 @@ h2{font-size:15px;margin:10px 0 8px}
 .gv .pw{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;color:var(--muted);font-size:11px}.gv.on .pw{display:none}
 .gh{top:142px}#m{scroll-padding-top:178px}
 .chips.one{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.chips.one::-webkit-scrollbar{display:none}
+@media (max-aspect-ratio:1/1){ /* tall / portrait windows: hero stacks, bigger type */
+ .feat{grid-template-columns:1fr;gap:12px;padding:20px 22px}.ft-team img{width:120px;height:120px}.ft-team .nm{font-size:24px}.ft-sc{font-size:90px}.ft-st b{font-size:15px}.ft-st small{font-size:10px}.ft-top{font-size:11px}.fn{padding:14px 16px}
+ .grid.lg .pill{width:calc(25% - 8px);height:96px}.grid.lg .pill .side img{width:38px;height:38px}.grid.lg .pill .tm{font-size:10px}}
 .fbt{display:flex;gap:8px}.sumb{background:transparent!important;color:#fff!important;border:2px solid rgba(255,255,255,.8)}
 .ft-bot{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .ft-bot .tv{font-size:10px;color:rgba(255,255,255,.85)}

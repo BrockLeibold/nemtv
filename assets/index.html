@@ -224,10 +224,10 @@ const HOME_RSN={DET:/^Detroit SportsNet$/,LAK:/^Spectrum SportsNet LA$/,BOS:/^(N
 const baseName=n=>n.replace(/\s+\S\s+feed\s+\d+$/,"");
 const DUR=3.25*3600e3; // NHL game window on the TV clock
 function games(){ // from the bundled NHL schedule + the TV box clock
-  const t=Date.now(), live=[], later=[];
+  const t=Date.now(), live=[], later=[], sod=new Date(new Date().setHours(0,0,0,0)).getTime(); // 7 day window from midnight today
   if(off.includes("NHL"))return {live,later};
   (window.SCHED||[]).forEach(([st,aw,hm,nets])=>{
-    if(st+DUR<=t||st>t+36*3600e3)return;
+    if(st+DUR<=t||st>=sod+7*864e5)return;
     const A=ABBR[aw],H=ABBR[hm]; if(!A||!H)return;
     const g={s:"NHL",tm:[H.name,A.name],t:[H,A],st,aw,hm,nets,title:A.name+" at "+H.name}; // home team on the left
     g.c=feedsFor(g)[0]||{n:"No matching channel",u:"",g:""};
@@ -245,7 +245,7 @@ function feedsFor(g){ // channels carrying this game: Canada first, then its oth
   const ca=out.filter(c=>CA.test(baseName(c.n))), rest=out.filter(c=>!CA.test(baseName(c.n)));
   return ca.concat(rest);
 }
-const fmtT=ms=>{const d=new Date(ms),td=new Date().toDateString()===d.toDateString();return (td?"":d.toLocaleDateString([],{weekday:"short"})+" ")+d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})};
+const fmtT=ms=>{const d=new Date(ms);return d.toLocaleDateString([],{weekday:"short",month:"short",day:"numeric"})+", "+d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})};
 
 function pillHTML(c,k,kind){
   const col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";
@@ -263,7 +263,10 @@ function render(){
     const favs=fav.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c)), rec=recent.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c));
     let h=`<h2 class="disp">NHL on now</h2>`+(G.length?`<div class="grid">${G.map((c,k)=>pillHTML(c,k,"live")).join("")}</div>`
       :`<div class="empty">${ch.length?"No NHL games on right now."+(L.length?" Next up: "+esc(L[0].title)+", "+esc(fmtT(L[0].st))+".":""):"No playlist yet. Open Setup and add your M3U link."}</div>`);
-    if(L.length)h+=`<h2 class="disp">Coming up</h2><div class="grid">${L.slice(0,12).map((c,k)=>pillHTML(c,k,"later")).join("")}</div>`;
+    if(L.length){const sd=new Date(new Date().setHours(0,0,0,0)).getTime(), days={}; // one row per day: Today, then weekday names
+      L.forEach((c,k)=>{const o=Math.round((new Date(new Date(c.st).setHours(0,0,0,0))-sd)/864e5);(days[o]=days[o]||[]).push([c,k])});
+      Object.keys(days).sort((x,y)=>x-y).forEach(o=>{const nm=+o===0?"Today":new Date(sd+o*864e5+36e5).toLocaleDateString([],{weekday:"long"});
+        h+=`<h2 class="disp">${nm}<small style="color:var(--muted);font-size:.6em;margin-left:8px">${new Date(sd+o*864e5+36e5).toLocaleDateString([],{month:"short",day:"numeric"})}</small></h2><div class="grid">${days[o].map(([c,k])=>pillHTML(c,k,"later")).join("")}</div>`})}
     if(favs.length)h+=`<h2 class="disp">Favorites</h2><div class="cards">${favs.map(c=>chanCard(c)).join("")}</div>`;
     if(rec.length)h+=`<h2 class="disp">Recently watched</h2><div class="cards">${rec.slice(0,8).map(c=>chanCard(c)).join("")}</div>`;
     m.innerHTML=h;

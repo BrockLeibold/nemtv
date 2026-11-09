@@ -406,7 +406,7 @@ function games(){ // from the bundled NHL schedule + the TV box clock
     const A=ABBR[aw],H=ABBR[hm]; if(!A||!H)return;
     const g={s:"NHL",tm:[H.name,A.name],t:[H,A],st,aw,hm,nets,title:A.name+" at "+H.name}; // home team on the left
     g.sc=scInfo(scoreOf(aw,hm,st)); g.c=feedsFor(g)[0]||{n:"No matching channel",u:"",g:""};
-    (st<=t?live:later).push(g);
+    (st<=t||st<sod+864e5?live:later).push(g); // today's games (not started, live, finished) all go in the hero
   });
   return {live,later};
 }
@@ -459,12 +459,12 @@ function featHTML(g,k){ if(!g)return "";
   const sog=x&&x.homeTeam&&x.homeTeam.sog!==undefined?[x.homeTeam.sog,x.awayTeam.sog]:["-","-"];
   const cell=(l,a,b)=>`<div><small>${l}</small><b>${esc(a)} &nbsp;|&nbsp; ${esc(b)}</b></div>`;
   return `<span class="skin"><span class="mesh"></span></span><div class="fl">
-   <div class="ft-top"><b>${sc?(sc.over?"GAME OVER":esc(sc.note)):"LIVE"}</b><span>${k+1} / ${G.length} &middot; ${esc((g.nets||[]).join(" / "))}</span></div>
+   <div class="ft-top"><b>${sc?(sc.over?"GAME OVER":esc(sc.note)):"STARTS "+esc(clk(g.st)).toUpperCase()}</b><span>${k+1} / ${G.length} &middot; ${esc((g.nets||[]).join(" / "))}</span></div>
    <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span><small>${esc(recOf(g.hm)||"HOME")}</small></div>
     <div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${sc&&sc.over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div>
     <div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span><small>${esc(recOf(g.aw)||"AWAY")}</small></div></div>
    <div class="ft-st">${cell("POINTS",H.points!==undefined?H.points:"-",A.points!==undefined?A.points:"-")}${cell("RECORD",H.record||"-",A.record||"-")}${cell("LAST 10",H.l10||"-",A.l10||"-")}${cell("STREAK",H.streak||"-",A.streak||"-")}${cell("GOALS F-A",H.gf!==undefined?H.gf+"-"+H.ga:"-",A.gf!==undefined?A.gf+"-"+A.ga:"-")}${cell("SHOTS",sog[0],sog[1])}</div>
-   <div class="ft-bot"><span class="tv">${sc&&sc.over?"This game has ended":g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No feed found"}</span></div></div>
+   <div class="ft-bot"><span class="tv">${sc&&sc.over?"This game has ended":!sc?"Game has not started yet":g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No feed found"}</span></div></div>
    <div class="fn">${newsHTML(g)}</div>`}
 const slideStyle=g=>{const c=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";return c(g.t[0].c,"a")+c(g.t[1].c,"b")};
 function heroSet(){const c=$("#hcar"); if(!c)return;
@@ -476,7 +476,7 @@ function heroRefresh(){if(tab==="home"&&$("#hcar"))heroSet()}
 function pillHTML(c,k,kind,cal){
   const col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";
   const fs=starOn(c.aw,c.hm,c.sc&&c.sc.over)?`<span class="fstar">&#9733;</span>`:"";
-  return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${fs}<span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(c.nets.join(" / "))}</span>`:""}<span class="live">${kind==="later"?(cal?esc(new Date(c.st).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})):"STARTS "+esc(fmtT(c.st)).toUpperCase()):c.sc?(c.sc.over?esc(c.sc.note):''+esc(c.sc.note)):'LIVE'}</span></button>`;
+  return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${fs}<span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(c.nets.join(" / "))}</span>`:""}<span class="live">${kind==="later"?(cal?esc(new Date(c.st).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})):"STARTS "+esc(fmtT(c.st)).toUpperCase()):c.sc?(c.sc.over?esc(c.sc.note):''+esc(c.sc.note)):esc(clk(c.st)).toUpperCase()}</span></button>`;
 }
 const chanCard=c=>`<button class="cc focusable" data-i="${ch.indexOf(c)}"><b>${esc(baseName(c.n))}</b>${fav.includes(c.n)?'<span class="star">&#9733;</span>':""}<span class="nw none">${esc(c.g)}</span></button>`;
 const chip=(label,pressed,attr)=>`<button class="chip focusable" ${attr} aria-pressed="${pressed}">${esc(label)}</button>`;
@@ -533,9 +533,9 @@ function render(){
   document.querySelectorAll("header [data-t]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===tab));
   const m=$("#m"), vis=ch.filter(on);
   if(tab==="home"){
-    const gm=games(); G=gm.live.sort((a,b)=>!!(a.sc&&a.sc.over)-!!(b.sc&&b.sc.over)||(isFavG(a.aw,a.hm)?0:1)-(isFavG(b.aw,b.hm)?0:1)); L=gm.later;
+    const gm=games(); const rk=x=>x.sc&&x.sc.over?2:x.sc?0:1; G=gm.live.sort((a,b)=>rk(a)-rk(b)||(isFavG(a.aw,a.hm)?0:1)-(isFavG(b.aw,b.hm)?0:1)||a.st-b.st); L=gm.later;
     const favs=fav.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c)), rec=recent.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c));
-    let h=(G.length?"":`<h2 class="disp">NHL on now</h2>`)+(G.length?(hi=Math.min(hi,G.length-1),`<div class="lz"><div class="lzh"><h2 class="disp">NHL on now</h2><span class="dots" id="dots"></span></div><div class="hcar" id="hcar"></div><div class="gw" id="gw"><div class="grid lg">${G.map((c,k)=>pillHTML(c,k,"live")).join("")}</div></div></div>`)
+    let h=(G.length?"":`<h2 class="disp">NHL today</h2>`)+(G.length?(hi=Math.min(hi,G.length-1),`<div class="lz"><div class="lzh"><h2 class="disp">NHL today</h2><span class="dots" id="dots"></span></div><div class="hcar" id="hcar"></div><div class="gw" id="gw"><div class="grid lg">${G.map((c,k)=>pillHTML(c,k,"live")).join("")}</div></div></div>`)
       :`<div class="empty">${ch.length?"No NHL games on right now."+(L.length?" Next up: "+esc(L[0].title)+", "+esc(fmtT(L[0].st))+".":""):"No playlist yet. Open Setup and add your M3U link."}</div>`);
     h+=daysHTML(L,o=>o===0);
     m.innerHTML=h; if(tab==="home")heroSet();

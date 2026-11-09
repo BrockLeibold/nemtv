@@ -237,9 +237,16 @@ h2{font-size:15px;margin:10px 0 8px}
 .ft-bot .tv{font-size:10px;color:rgba(255,255,255,.85)}
 .watch{padding:7px 18px;border-radius:999px;background:rgba(244,242,246,.92);color:#141217;font-weight:800;font-size:11px}
 .grid.lg{justify-content:center}
+.grid.cal{justify-content:flex-start;gap:8px}
+.dh{display:flex;align-items:center;gap:12px;margin:16px 0 8px}.dh::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.12)}
+.dn{font-size:34px;line-height:1;min-width:60px;text-align:center;padding:6px 10px;border-radius:14px;background:rgba(255,255,255,.08)}.dh.today .dn{box-shadow:inset 0 0 0 2px var(--coral)}
+.dw b{display:block;font-size:15px}.dw small{color:var(--muted);font-size:11px}
 .grid.lg .pill{width:calc(25% - 8px);aspect-ratio:auto;height:75px;padding:6px 6px 15px;border-radius:16px}
+.grid.cal .pill{width:calc(25% - 8px);aspect-ratio:auto;height:75px;padding:6px 6px 15px;border-radius:16px}
 .grid.lg .pill .side{gap:1px}.grid.lg .pill .side img{width:30px;height:30px}.grid.lg .pill .tm{font-size:8px}.grid.lg .pill .scr{font-size:15px}
+.grid.cal .pill .side{gap:1px}.grid.cal .pill .side img{width:30px;height:30px}.grid.cal .pill .tm{font-size:8px}.grid.cal .pill .scr{font-size:15px}
 .grid.lg .pill .sp,.grid.lg .pill .rec,.grid.lg .pill .tvl{display:none}.grid.lg .pill .live{bottom:3px;font-size:7px}.grid.lg .pill.done .live{bottom:0;padding:3px 0;font-size:8px;border-radius:0 0 16px 16px}
+.grid.cal .pill .sp,.grid.cal .pill .rec,.grid.cal .pill .tvl{display:none}.grid.cal .pill .live{bottom:3px;font-size:7px}.grid.cal .pill.done .live{bottom:0;padding:3px 0;font-size:8px;border-radius:0 0 16px 16px}
 .pill .rec{font-size:8px;color:rgba(255,255,255,.8);letter-spacing:.04em}
 .pill .tvl{position:absolute;bottom:20px;left:0;right:0;font-size:8px;color:rgba(255,255,255,.7);letter-spacing:.06em}
 .nws{background:rgba(25,23,28,.92);border:1px solid var(--line);border-radius:26px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
@@ -353,6 +360,7 @@ function pollStandings(){const u="https://api-web.nhle.com/v1/standings/now";
 function pushGuideLive(){if(ST.length||SC.length)gPost({cmd:"api",standings:ST,scores:SC})}
 window.gotScores=(t,e)=>{
   try{const d=JSON.parse(t); SC=d.games||[];}catch(x){log("scores failed",e||x);return}
+  {const E=ls("endAt",{});let ch2=0;SC.forEach(x=>{if(/FINAL|OFF/.test(x.gameState)&&!E[x.id]){E[x.id]=Math.min(Date.now(),Date.parse(x.startTimeUTC)+DUR);ch2=1}});if(ch2)sv("endAt",E)} // when a game was first seen over: post-game button lasts 1 hour from here
   const sig=SC.map(x=>x.id+x.gameState+(x.clock&&x.clock.timeRemaining)+(x.awayTeam.score||0)+(x.homeTeam.score||0)+(x.goals||[]).length).join();
   if(sig!==scSig)pushGuideLive();
   if(sig===scSig)return; scSig=sig; if(gdId&&!$("#gd").hidden)gdLoad();
@@ -438,20 +446,21 @@ function heroSet(){const c=$("#hcar"); if(!c)return;
   c.scrollLeft=(c.children[hi]||{}).offsetLeft||0; markCur(); setTimeout(updateDots,50);
   if(fk!==null){const w=c.querySelector('.watch[data-g="'+fk+'"]'); if(w)w.focus({preventScroll:true})}}
 function heroRefresh(){if(tab==="home"&&$("#hcar"))heroSet()}
-function pillHTML(c,k,kind){
+function pillHTML(c,k,kind,cal){
   const col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";
   const fs=starOn(c.aw,c.hm,c.sc&&c.sc.over)?`<span class="fstar">&#9733;</span>`:"";
-  return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${fs}<span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(c.nets.join(" / "))}</span>`:""}<span class="live">${kind==="later"?"STARTS "+esc(fmtT(c.st)).toUpperCase():c.sc?(c.sc.over?esc(c.sc.note):''+esc(c.sc.note)):'LIVE'}</span></button>`;
+  return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${fs}<span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(c.nets.join(" / "))}</span>`:""}<span class="live">${kind==="later"?(cal?esc(new Date(c.st).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})):"STARTS "+esc(fmtT(c.st)).toUpperCase()):c.sc?(c.sc.over?esc(c.sc.note):''+esc(c.sc.note)):'LIVE'}</span></button>`;
 }
 const chanCard=c=>`<button class="cc focusable" data-i="${ch.indexOf(c)}"><b>${esc(baseName(c.n))}</b>${fav.includes(c.n)?'<span class="star">&#9733;</span>':""}<span class="nw none">${esc(c.g)}</span></button>`;
 const chip=(label,pressed,attr)=>`<button class="chip focusable" ${attr} aria-pressed="${pressed}">${esc(label)}</button>`;
 
-function daysHTML(L,keep){ // one block per day: Today, then weekday names; keep(offset) picks which days
+function daysHTML(L,keep,cal){ // one block per day: Today, then weekday names; keep(offset) picks which days
   let h="";const sd=new Date(new Date().setHours(0,0,0,0)).getTime(), days={};
   L.forEach((c,k)=>{const o=Math.round((new Date(new Date(c.st).setHours(0,0,0,0))-sd)/864e5);if(keep(o))(days[o]=days[o]||[]).push([c,k])});
   Object.keys(days).sort((x,y)=>x-y).forEach(o=>{const nm=+o===0?"Today":new Date(sd+o*864e5+36e5).toLocaleDateString([],{weekday:"long"});
-    h+=`<h2 class="disp">${nm}<small style="color:var(--muted);font-size:.6em;margin-left:8px">${new Date(sd+o*864e5+36e5).toLocaleDateString([],{month:"short",day:"numeric"})}</small></h2><div class="grid">${days[o].slice().sort((x,y)=>(isFavG(x[0].aw,x[0].hm)?0:1)-(isFavG(y[0].aw,y[0].hm)?0:1)).map(([c,k])=>pillHTML(c,k,"later")).join("")}</div>`});
-  return h}
+    const d=new Date(sd+o*864e5+36e5), rows=days[o].slice().sort((x,y)=>(isFavG(x[0].aw,x[0].hm)?0:1)-(isFavG(y[0].aw,y[0].hm)?0:1)).map(([c,k])=>pillHTML(c,k,"later",cal)).join("");
+    h+=cal?`<div class="dh${+o===0?" today":""}"><span class="dn disp">${d.getDate()}</span><span class="dw"><b>${nm==="Today"?"Today, "+d.toLocaleDateString([],{weekday:"long"}):nm}</b><small>${d.toLocaleDateString([],{month:"long"})} &middot; ${days[o].length} games</small></span></div><div class="grid cal">${rows}</div>`
+      :`<h2 class="disp">${nm}<small style="color:var(--muted);font-size:.6em;margin-left:8px">${d.toLocaleDateString([],{month:"short",day:"numeric"})}</small></h2><div class="grid">${rows}</div>`});  return h}
 function render(){
   guideTab(tab==="guide");
   document.querySelectorAll("#nav button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===tab));
@@ -464,7 +473,7 @@ function render(){
     h+=daysHTML(L,o=>o===0);
     m.innerHTML=h; if(tab==="home")heroSet();
   }else if(tab==="schedule"){
-    L=games().later; m.innerHTML=L.length?daysHTML(L,()=>true):`<div class="empty">No upcoming NHL games.</div>`;
+    L=games().later; m.innerHTML=L.length?daysHTML(L,()=>true,true):`<div class="empty">No upcoming NHL games.</div>`;
   }else if(tab==="guide"){ m.innerHTML="";
   }else if(tab==="scores"){
     const ord=x=>/LIVE|CRIT/.test(x.gameState)?0:/FUT|PRE/.test(x.gameState)?1:2, fv=x=>isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?0:1, gl=[...SC].sort((a,b)=>ord(a)-ord(b)||fv(a)-fv(b)||Date.parse(a.startTimeUTC)-Date.parse(b.startTimeUTC));
@@ -498,7 +507,7 @@ let LL=[];
 /* ---------- game popup: pick Watch / Live stats ---------- */
 let popG=null,popBack=null;
 function openPop(g){if(!g)return;popG=g;popBack=document.activeElement;const sc=g.sc,over=sc&&sc.over,x=scoreOf(g.aw,g.hm,g.st),logo=t=>t.logo?`<img src="${t.logo}" alt="">`:"";
-  const hasF=!!(g.c&&g.c.u), btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>${g.c&&g.c.u?`<button class="pbtn alt" data-pa="play">WATCH POST GAME</button>`:""}`:sc?(hasF?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="sum">LIVE STATS</button>`):(hasF?`<button class="pbtn" data-pa="play">WATCH</button>`:`<button class="pbtn" data-pa="close">CLOSE</button>`);
+  const hasF=!!(g.c&&g.c.u), btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>${g.c&&g.c.u&&x&&Date.now()<(ls("endAt",{})[x.id]||0)+36e5?`<button class="pbtn alt" data-pa="play">WATCH POST GAME</button>`:""}`:sc?(hasF?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="sum">LIVE STATS</button>`):(hasF?`<button class="pbtn" data-pa="play">WATCH</button>`:`<button class="pbtn" data-pa="close">CLOSE</button>`);
   const p=$("#gpop");p.innerHTML=`<div class="pc${over?" done":""}" style="${slideStyle(g)}"><span class="skin"><span class="mesh"></span></span><div class="pi"><div class="ft-top"><b>${sc?(over?"GAME OVER":esc(sc.note)):esc(fmtT(g.st))}</b><span>${esc((g.nets||[]).join(" / "))}</span></div>
     <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span></div><div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div><div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span></div></div>
     <div class="tv">${over?"This game has ended":g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No channel carries this game"}</div><div class="pb">${btns}</div></div></div>`;

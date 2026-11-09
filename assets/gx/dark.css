@@ -16,3 +16,6 @@ img[src*="logo"]{background:none}
 /* skip layout/paint of everything off screen (roster is ~2400 elements) */
 #news,#schedule,#team,#sec-D,#sec-G{content-visibility:auto;contain-intrinsic-size:auto 700px}
 .grid>.card{content-visibility:auto;contain-intrinsic-size:auto 320px}
+/* the sticky filter bar covered the top of every card on a TV: let it scroll away */
+.toolbar{position:static!important}
+.card,.grid>*{scroll-margin-top:12px}

@@ -30,6 +30,7 @@ button:focus-visible,input:focus-visible,.focusable:focus{box-shadow:0 0 0 3px v
 
 main{height:calc(100% - 44px);overflow-y:auto;overscroll-behavior:contain;padding:4px 28px 24px;scrollbar-width:none}
 main::-webkit-scrollbar{display:none}
+main::after{content:"";display:block;height:62%}
 h2{font-size:15px;margin:10px 0 8px}
 .sub{color:var(--muted);margin-bottom:8px}
 .empty{color:var(--muted);padding:16px 0}
@@ -463,6 +464,20 @@ window.gotList=(t,e)=>{
 };
 function go(t){tab=t;render();(document.querySelector("#nav button[aria-pressed=true]")).focus()}
 
+let scT=0; // light 140ms ease-out scroll: a few scrollTop writes, no layers
+function smoothTo(m,y){cancelAnimationFrame(scT);const y0=m.scrollTop,d=y-y0;if(Math.abs(d)<2)return;const t0=performance.now();
+  (function f(t){const k=Math.min(1,(t-t0)/140);m.scrollTop=y0+d*(1-(1-k)*(1-k));if(k<1)scT=requestAnimationFrame(f)})(t0)}
+function alignRow(el){const m=$("#m"), g=el.closest(".grid,.cards"), top=g&&g.previousElementSibling&&/^H2$/.test(g.previousElementSibling.tagName)&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?g.previousElementSibling:el;
+  smoothTo(m,top.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-6)}
+$("#m").addEventListener("focusin",e=>{if(e.target.closest&&e.target.closest(".grid,.cards"))alignRow(e.target)});
+// Up/Down: one press = one row. Pick the next row ourselves (the browser would spend a press scrolling first)
+$("#m").addEventListener("keydown",e=>{
+  if(e.key!=="ArrowUp"&&e.key!=="ArrowDown")return; const a=document.activeElement; if(!a||!a.closest(".grid,.cards"))return;
+  const dy=e.key==="ArrowDown"?1:-1, ra=a.getBoundingClientRect(), cx=ra.left+ra.width/2, cy=ra.top+ra.height/2; let best=null,bs=1e9;
+  $("#m").querySelectorAll(".grid .focusable,.cards .focusable").forEach(x=>{if(x===a)return;const r=x.getBoundingClientRect(),oy=(r.top+r.height/2-cy)*dy;if(oy<8)return;
+    const sc=oy+Math.abs(r.left+r.width/2-cx)*2;if(sc<bs){bs=sc;best=x}});
+  if(best){e.preventDefault();e.stopPropagation();best.focus({preventScroll:true});alignRow(best)}
+},true);
 $("#nav").onclick=e=>{const b=e.target.closest("button");if(b)go(b.dataset.t)};
 $("#m").onclick=e=>{
   const q=e.target.closest("[data-g]"); if(q)return play(G[+q.dataset.g]);

@@ -158,7 +158,14 @@ h2{font-size:15px;margin:10px 0 8px}
 .dots i.v{background:#fff;box-shadow:none}
 .dots i.c{box-shadow:0 0 0 2px var(--coral);background:#fff}
 .dots b{margin-left:6px;color:#fff}
-.gw{flex:1;min-height:0;overflow:hidden}
+.srl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.sr{position:relative;isolation:isolate;border-radius:18px;padding:10px 12px;color:#fff;text-align:left;display:flex;flex-direction:column;gap:8px;background:linear-gradient(100deg,color-mix(in srgb,var(--o-a) 32%,#141217),#141217 50%,color-mix(in srgb,var(--o-b) 32%,#141217))}
+.sr.lv{box-shadow:inset 0 0 0 1.5px var(--coral)}.sr.done{filter:grayscale(.8);opacity:.7}
+.srt{display:flex;align-items:center;gap:8px}.srs{display:flex;align-items:center;gap:6px;flex:1}.srs:last-of-type{justify-content:flex-end}
+.srs img{width:28px;height:28px}.srs b{font-size:20px}.srm{font-size:26px;min-width:76px;text-align:center}.srn{font-size:10px;color:var(--muted);min-width:64px;text-align:right}
+.srg{display:flex;flex-direction:column;gap:2px;font-size:10.5px;background:rgba(10,9,12,.5);border-radius:12px;padding:6px 9px}.srg.none{color:var(--muted)}
+.srg i{font-style:normal;font-size:9px;letter-spacing:.08em;color:var(--muted)}.gl em{font-style:normal;color:var(--muted)}.gl.new{color:#fff}.gl:not(.new){opacity:.65}
+.gw{flex:1;min-height:0;overflow:hidden;padding:9px 8px 0;margin:0 -8px}
 .hero{display:flex;flex-direction:column;gap:12px}
 /* finished games: greyed orb, dimmed loser, big FINAL */
 .pill.done,.feat.done{--o-a:#4a474f!important;--o-b:#3b393f!important;--o-c:#28262c!important;--o-f1:#605d66!important;--o-f2:#605d66!important}
@@ -169,7 +176,7 @@ h2{font-size:15px;margin:10px 0 8px}
 .ft-over{display:inline-block;margin-top:6px;padding:3px 16px;border:2px solid rgba(255,255,255,.85);border-radius:999px;font-size:22px;letter-spacing:.16em;color:#fff}
 .feat.done .watch{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.8)}
 .pill.cur{box-shadow:0 0 0 3px var(--coral),0 0 0 6px rgba(255,138,91,.25)}
-.hcar{display:flex;gap:12px;overflow:hidden;border-radius:26px;flex:none}
+.hcar{position:relative;display:flex;gap:12px;overflow:hidden;border-radius:26px;flex:none}
 .feat{box-sizing:border-box;width:100%;--o-a:var(--red-3);--o-b:var(--wine);--o-c:var(--plum);flex:0 0 100%;position:relative;isolation:isolate;border-radius:26px;padding:14px 16px 16px 20px;color:#fff;overflow:hidden;min-height:236px;display:grid;grid-template-columns:1.6fr 1fr;gap:16px}
 .fl{display:flex;flex-direction:column;gap:8px;min-width:0}
 .fn{background:rgba(10,9,12,.5);border-radius:20px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden}
@@ -226,7 +233,7 @@ h2{font-size:15px;margin:10px 0 8px}
 #gbar button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 </style></head><body>
 <header><span class="brand disp">NEMTV</span>
-<nav id="nav"><button data-t="home">Home</button><button data-t="live">Live</button><button data-t="guide">Guide</button><button data-t="sports">Sports</button><button data-t="setup">Setup</button></nav></header>
+<nav id="nav"><button data-t="home">Home</button><button data-t="scores">Scores</button><button data-t="live">Live</button><button data-t="guide">Guide</button><button data-t="sports">Sports</button><button data-t="setup">Setup</button></nav></header>
 <main id="m"></main>
 <div id="boot"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="rows" id="brows"></div><div class="ttl disp">NEMTV</div><div class="tag disp">NHL &middot; LIVE TV</div><div class="bar"><i></i></div><div class="st" id="bst">Loading channels...</div></div>
 <div id="pl"><video id="v" autoplay playsinline></video>
@@ -310,9 +317,10 @@ function pollStandings(){const u="https://api-web.nhle.com/v1/standings/now";
 function pushGuideLive(){if(ST.length||SC.length)gPost({cmd:"api",standings:ST,scores:SC})}
 window.gotScores=(t,e)=>{
   try{const d=JSON.parse(t); SC=d.games||[];}catch(x){log("scores failed",e||x);return}
-  const sig=SC.map(x=>x.id+x.gameState+(x.clock&&x.clock.timeRemaining)+(x.awayTeam.score||0)+(x.homeTeam.score||0)).join();
+  const sig=SC.map(x=>x.id+x.gameState+(x.clock&&x.clock.timeRemaining)+(x.awayTeam.score||0)+(x.homeTeam.score||0)+(x.goals||[]).length).join();
   if(sig!==scSig)pushGuideLive();
   if(sig===scSig)return; scSig=sig;
+  if(tab==="scores"&&!$("#pl").classList.contains("on")){const y=$("#m").scrollTop;render();$("#m").scrollTop=y;return}
   if(tab!=="home"||$("#pl").classList.contains("on"))return;
   let redo=false;
   document.querySelectorAll("#m [data-g]").forEach(b=>{const g=G[+b.dataset.g]; if(!g)return; g.sc=scInfo(scoreOf(g.aw,g.hm,g.st));
@@ -401,6 +409,14 @@ function render(){
     if(rec.length)h+=`<h2 class="disp">Recently watched</h2><div class="cards">${rec.slice(0,8).map(c=>chanCard(c)).join("")}</div>`;
     m.innerHTML=h; if(tab==="home")heroSet();
   }else if(tab==="guide"){ m.innerHTML="";
+  }else if(tab==="scores"){
+    const ord=x=>/LIVE|CRIT/.test(x.gameState)?0:/FUT|PRE/.test(x.gameState)?1:2, gl=[...SC].sort((a,b)=>ord(a)-ord(b)||Date.parse(a.startTimeUTC)-Date.parse(b.startTimeUTC));
+    const nLive=gl.filter(x=>ord(x)===0).length, tm=x=>ABBR[x.abbrev]||{name:x.abbrev||"",c:"#888"};
+    const per=g=>{const d=g.periodDescriptor||{};return d.periodType==="OT"?"OT":d.periodType==="SO"?"SO":"P"+(g.period||d.number||1)};
+    const row=x=>{const a=tm(x.awayTeam),h=tm(x.homeTeam),i=scInfo(x),gs=(x.goals||[]).slice(-3).reverse(),lv=ord(x)===0;
+      const gh=gs.map((g,k)=>`<span class="gl${k?"":" new"}"><b>${esc(g.teamAbbrev)}</b> ${esc((g.name&&g.name.default)||"")} <em>${esc(per({period:g.period,periodDescriptor:g.periodDescriptor}))} ${esc(g.timeInPeriod||"")}</em> ${g.awayScore}-${g.homeScore}${g.strength&&g.strength!=="ev"?" "+esc(g.strength.toUpperCase()):""}</span>`).join("");
+      return `<button class="sr focusable${i&&i.over?" done":""}${lv?" lv":""}" style="--o-a:${h.c};--o-b:${a.c}"><span class="srt"><span class="srs">${h.logo?`<img src="${h.logo}" alt="">`:""}<b class="disp">${esc(x.homeTeam.abbrev)}</b></span><span class="srm disp">${i?esc(i.score.split(" - ").reverse().join(" - ")):"VS"}</span><span class="srs">${a.logo?`<img src="${a.logo}" alt="">`:""}<b class="disp">${esc(x.awayTeam.abbrev)}</b></span><span class="srn">${i?esc(i.note):esc(fmtT(Date.parse(x.startTimeUTC)))}</span></span>${gh?`<span class="srg"><i>LAST GOAL</i>${gh}</span>`:`<span class="srg none">${i?"No goals yet":"Not started"}</span>`}</button>`};
+    m.innerHTML=`<div class="lzh"><h2 class="disp">Scores today</h2><span class="sub" style="margin:0">${nLive} live &middot; ${gl.length} games</span></div>`+(gl.length?`<div class="srl">${gl.map(row).join("")}</div>`:`<div class="empty">No NHL games on the board yet.</div>`);
   }else if(tab==="live"){
     const groups=["All","Favorites","Recent",...new Set(vis.map(c=>c.g).filter(Boolean))];
     if(!groups.includes(grp))grp="All";
@@ -578,7 +594,7 @@ function smoothTo(m,y){cancelAnimationFrame(scT);const y0=m.scrollTop,d=y-y0;if(
   (function f(t){const k=Math.min(1,(t-t0)/140);m.scrollTop=y0+d*(1-(1-k)*(1-k));if(k<1)scT=requestAnimationFrame(f)})(t0)}
 function alignRow(el){const gw=el.closest(".gw");
   if(gw){ // live games: the hero stays put, only the games strip scrolls (one row per press)
-    smoothTo($("#m"),0); const y=el.getBoundingClientRect().top-gw.getBoundingClientRect().top+gw.scrollTop-2; smoothTo(gw,y); setTimeout(updateDots,200); return}
+    smoothTo($("#m"),0); const y=el.getBoundingClientRect().top-gw.getBoundingClientRect().top+gw.scrollTop-9; smoothTo(gw,y); setTimeout(updateDots,200); return}
   const m=$("#m"), g=el.closest(".grid,.cards"), top=g&&g.previousElementSibling&&/^H2$/.test(g.previousElementSibling.tagName)&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?g.previousElementSibling:el;
   smoothTo(m,top.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-6)}
 $("#m").addEventListener("focusin",e=>{const t=e.target; if(t.closest&&t.closest(".grid,.cards"))alignRow(t); else if(t.closest&&t.closest(".hcar"))smoothTo($("#m"),0);

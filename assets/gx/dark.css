@@ -6,3 +6,8 @@ body::before{background:transparent!important}
 .drawer{background-color:#0F0E11!important;opacity:1!important}
 img[src*="logo"]{background:none}
 :focus,:focus-visible{outline:3px solid #FF8A5B!important;outline-offset:2px;box-shadow:none!important}
+/* ink-filled chips/buttons: ink is light in dark mode, so their text must be dark */
+.pill[aria-pressed="true"],.chip.cap,.tm.cur,.gm.home,.cb-seg.cur,.cv-seg.cur,.cv-seg.here,.gbtn[aria-pressed="true"],.dchip[aria-pressed="true"],
+.pill[aria-pressed="true"] *,.chip.cap *,.tm.cur *,.gm.home *,.cb-seg.cur *,.cv-seg.cur *,.cv-seg.here *,.gbtn[aria-pressed="true"] *,.dchip[aria-pressed="true"] *{color:#141217!important}
+.card:hover,.mc:hover{background:#221F26!important}
+.res.W{background:#12301F!important;color:#5FD08A!important}.res.L{background:#3A1720!important;color:#FF6B7F!important}.res.OT{background:#3A2A0C!important;color:#F0B35A!important}

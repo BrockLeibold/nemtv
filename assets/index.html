@@ -565,7 +565,7 @@ function render(){
   }
   const f=m.querySelector("button,input"); if(f&&!document.activeElement.closest("main")) f.focus();
 }
-let LL=[];
+let LL=[], deskSel=null;
 /* ---------- game popup: pick Watch / Live stats ---------- */
 let popG=null,popBack=null;
 function openPop(g){if(!g)return;popG=g;popBack=document.activeElement;const sc=g.sc,over=sc&&sc.over,x=scoreOf(g.aw,g.hm,g.st),logo=t=>t.logo?`<img src="${t.logo}" alt="">`:"";
@@ -839,7 +839,7 @@ $("header").onclick=e=>{const b=e.target.closest("button");if(b)go(b.dataset.t)}
 $("#m").onclick=e=>{
   const ft=e.target.closest("[data-ft]"); if(ft){const k=ft.dataset.ft;favT=favT.includes(k)?favT.filter(x=>x!==k):[...favT,k];sv("favT",favT);ft.setAttribute("aria-pressed",favT.includes(k));return}
   const sr=e.target.closest(".sr"); if(sr)return openGame(+sr.dataset.id);
-  const q=e.target.closest("[data-g]"); if(q)return openPop(G[+q.dataset.g]);
+  const q=e.target.closest("[data-g]"); if(q){if(window.NEMDESK&&e.detail>0&&q.classList.contains("pill")&&deskSel!==q.dataset.g){deskSel=q.dataset.g;slideTo(+q.dataset.g);return} deskSel=null;return openPop(G[+q.dataset.g])} // desktop: 1st click shows that game in the hero, 2nd opens the watch options
   const l=e.target.closest("[data-l]"); if(l)return openPop(L[+l.dataset.l]);
   const p=e.target.closest("[data-i]"); if(p){const c=ch[+p.dataset.i];return play({c,tm:[c.n],t:[{}],s:c.s},tab==="live"?LL:null)}
   const gp=e.target.closest("[data-grp]"); if(gp){grp=gp.dataset.grp;sv("grp",grp);render();$("#m").querySelector(`[data-grp="${CSS.escape(grp)}"]`).focus();return}

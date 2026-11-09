@@ -222,12 +222,15 @@ h2{font-size:15px;margin:10px 0 8px}
 .ft-st div{background:rgba(0,0,0,.28);border-radius:14px;padding:6px 8px;text-align:center}
 .ft-st small{display:block;font-size:8px;letter-spacing:.1em;color:rgba(255,255,255,.7)}
 .ft-st b{font-size:12px}
+.fstar{position:absolute;top:3px;left:6px;font-size:11px;color:#FFB81C;text-shadow:0 1px 4px rgba(0,0,0,.8);z-index:3}.feat.fv::after{content:"\2605  FAVORITE";position:absolute;top:13px;left:92px;font-size:10px;font-weight:800;letter-spacing:.1em;color:#FFB81C}
 .fbt{display:flex;gap:8px}.sumb{background:transparent!important;color:#fff!important;border:2px solid rgba(255,255,255,.8)}
 .ft-bot{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .ft-bot .tv{font-size:10px;color:rgba(255,255,255,.85)}
 .watch{padding:7px 18px;border-radius:999px;background:rgba(244,242,246,.92);color:#141217;font-weight:800;font-size:11px}
-.grid.lg .pill{width:calc(33.333% - 7px);aspect-ratio:auto;height:150px;padding:16px 10px 28px}
-.grid.lg .pill .side img{width:62px;height:62px}
+.grid.lg{justify-content:center}
+.grid.lg .pill{width:calc(25% - 8px);aspect-ratio:auto;height:75px;padding:6px 6px 15px;border-radius:16px}
+.grid.lg .pill .side{gap:1px}.grid.lg .pill .side img{width:30px;height:30px}.grid.lg .pill .tm{font-size:8px}.grid.lg .pill .scr{font-size:15px}
+.grid.lg .pill .sp,.grid.lg .pill .rec,.grid.lg .pill .tvl{display:none}.grid.lg .pill .live{bottom:3px;font-size:7px}.grid.lg .pill.done .live{bottom:0;padding:3px 0;font-size:8px;border-radius:0 0 16px 16px}
 .pill .rec{font-size:8px;color:rgba(255,255,255,.8);letter-spacing:.04em}
 .pill .tvl{position:absolute;bottom:20px;left:0;right:0;font-size:8px;color:rgba(255,255,255,.7);letter-spacing:.06em}
 .nws{background:rgba(25,23,28,.92);border:1px solid var(--line);border-radius:26px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
@@ -281,6 +284,7 @@ const SPORTS=[["NFL",/\bnfl\b/i],["NBA",/\bnba\b|\bwnba\b/i],["MLB",/\bmlb\b/i],
 const VS=/\s(?:vs\.?|v|@|at)\s/i;
 let G=[], L=[], cur=null, menuOn=false, hideT=0, hls=null, tried=new Set();
 let zoom=ls("zoom",100), fav=ls("fav",[]), recent=ls("recent",[]), grp=ls("grp","All");
+let favT=ls("favT",[]); const isFavG=(a,b)=>favT.includes(a)||favT.includes(b), starOn=(a,b,over)=>!over&&isFavG(a,b);
 let ch=ls("ch",[]), off=ls("off",[]), tab="home", url=ls("url",(window.CFG||{}).playlist||""), msg="";
 
 const plain=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"");
@@ -398,18 +402,19 @@ function featHTML(g,k){ if(!g)return "";
     <div><div class="ft-sc disp">${sc?sc.score.split(" - ").reverse().join(" - "):"VS"}</div>${sc&&sc.over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div>
     <div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span><small>${esc(recOf(g.aw)||"AWAY")}</small></div></div>
    <div class="ft-st">${cell("POINTS",H.points!==undefined?H.points:"-",A.points!==undefined?A.points:"-")}${cell("LAST 10",H.l10||"-",A.l10||"-")}${cell("GOALS F-A",H.gf!==undefined?H.gf+"-"+H.ga:"-",A.gf!==undefined?A.gf+"-"+A.ga:"-")}${cell("SHOTS",sog[0],sog[1])}</div>
-   <div class="ft-bot"><span class="tv">${sc&&sc.over?"This game has ended":g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No feed found"}</span><span class="fbt"><button class="watch focusable" data-g="${k}">${sc&&sc.over?"STATS":"WATCH LIVE"}</button><button class="watch sumb focusable" data-g="${k}">LIVE STATS</button></span></div></div>
+   <div class="ft-bot"><span class="tv">${sc&&sc.over?"This game has ended":g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No feed found"}</span><span class="fbt"><button class="watch focusable" data-g="${k}">${sc&&sc.over?"STATS":"WATCH LIVE"}</button><button class="watch sumb focusable" data-g="${k}">${sc&&sc.over?"SUMMARY":"LIVE STATS"}</button></span></div></div>
    <div class="fn">${newsHTML(g)}</div>`}
 const slideStyle=g=>{const c=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";return c(g.t[0].c,"a")+c(g.t[1].c,"b")};
 function heroSet(){const c=$("#hcar"); if(!c)return;
   const ae=document.activeElement, fk=ae&&ae.classList&&ae.classList.contains("watch")?ae.dataset.g:null;
-  c.innerHTML=G.map((g,k)=>`<div class="feat${g.sc&&g.sc.over?" done":""}" data-k="${k}" style="${slideStyle(g)}">${featHTML(g,k)}</div>`).join("");
+  c.innerHTML=G.map((g,k)=>`<div class="feat${g.sc&&g.sc.over?" done":""}${starOn(g.aw,g.hm,g.sc&&g.sc.over)?" fv":""}" data-k="${k}" style="${slideStyle(g)}">${featHTML(g,k)}</div>`).join("");
   c.scrollLeft=(c.children[hi]||{}).offsetLeft||0; markCur(); setTimeout(updateDots,50);
   if(fk!==null){const w=c.querySelector('.watch[data-g="'+fk+'"]'); if(w)w.focus({preventScroll:true})}}
 function heroRefresh(){if(tab==="home"&&$("#hcar"))heroSet()}
 function pillHTML(c,k,kind){
   const col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";
-  return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span><span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(c.nets.join(" / "))}</span>`:""}<span class="live">${kind==="later"?"STARTS "+esc(fmtT(c.st)).toUpperCase():c.sc?(c.sc.over?esc(c.sc.note):''+esc(c.sc.note)):'LIVE'}</span></button>`;
+  const fs=kind==="live"&&c.sc!==undefined&&starOn(c.aw,c.hm,c.sc&&c.sc.over)?`<span class="fstar">&#9733;</span>`:"";
+  return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${fs}<span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(c.nets.join(" / "))}</span>`:""}<span class="live">${kind==="later"?"STARTS "+esc(fmtT(c.st)).toUpperCase():c.sc?(c.sc.over?esc(c.sc.note):''+esc(c.sc.note)):'LIVE'}</span></button>`;
 }
 const chanCard=c=>`<button class="cc focusable" data-i="${ch.indexOf(c)}"><b>${esc(baseName(c.n))}</b>${fav.includes(c.n)?'<span class="star">&#9733;</span>':""}<span class="nw none">${esc(c.g)}</span></button>`;
 const chip=(label,pressed,attr)=>`<button class="chip focusable" ${attr} aria-pressed="${pressed}">${esc(label)}</button>`;
@@ -419,25 +424,25 @@ function render(){
   document.querySelectorAll("#nav button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===tab));
   const m=$("#m"), vis=ch.filter(on);
   if(tab==="home"){
-    const gm=games(); G=gm.live.sort((a,b)=>!!(a.sc&&a.sc.over)-!!(b.sc&&b.sc.over)); L=gm.later;
+    const gm=games(); G=gm.live.sort((a,b)=>(isFavG(a.aw,a.hm)?0:1)-(isFavG(b.aw,b.hm)?0:1)||!!(a.sc&&a.sc.over)-!!(b.sc&&b.sc.over)); L=gm.later;
     const favs=fav.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c)), rec=recent.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c));
     let h=(G.length?"":`<h2 class="disp">NHL on now</h2>`)+(G.length?(hi=Math.min(hi,G.length-1),`<div class="lz"><div class="lzh"><h2 class="disp">NHL on now</h2><span class="dots" id="dots"></span></div><div class="hcar" id="hcar"></div><div class="gw" id="gw"><div class="grid lg">${G.map((c,k)=>pillHTML(c,k,"live")).join("")}</div></div></div>`)
       :`<div class="empty">${ch.length?"No NHL games on right now."+(L.length?" Next up: "+esc(L[0].title)+", "+esc(fmtT(L[0].st))+".":""):"No playlist yet. Open Setup and add your M3U link."}</div>`);
     if(L.length){const sd=new Date(new Date().setHours(0,0,0,0)).getTime(), days={}; // one row per day: Today, then weekday names
       L.forEach((c,k)=>{const o=Math.round((new Date(new Date(c.st).setHours(0,0,0,0))-sd)/864e5);(days[o]=days[o]||[]).push([c,k])});
       Object.keys(days).sort((x,y)=>x-y).forEach(o=>{const nm=+o===0?"Today":new Date(sd+o*864e5+36e5).toLocaleDateString([],{weekday:"long"});
-        h+=`<h2 class="disp">${nm}<small style="color:var(--muted);font-size:.6em;margin-left:8px">${new Date(sd+o*864e5+36e5).toLocaleDateString([],{month:"short",day:"numeric"})}</small></h2><div class="grid">${days[o].map(([c,k])=>pillHTML(c,k,"later")).join("")}</div>`})}
+        h+=`<h2 class="disp">${nm}<small style="color:var(--muted);font-size:.6em;margin-left:8px">${new Date(sd+o*864e5+36e5).toLocaleDateString([],{month:"short",day:"numeric"})}</small></h2><div class="grid">${days[o].slice().sort((x,y)=>(isFavG(x[0].aw,x[0].hm)?0:1)-(isFavG(y[0].aw,y[0].hm)?0:1)).map(([c,k])=>pillHTML(c,k,"later")).join("")}</div>`})}
     if(favs.length)h+=`<h2 class="disp">Favorites</h2><div class="cards">${favs.map(c=>chanCard(c)).join("")}</div>`;
     if(rec.length)h+=`<h2 class="disp">Recently watched</h2><div class="cards">${rec.slice(0,8).map(c=>chanCard(c)).join("")}</div>`;
     m.innerHTML=h; if(tab==="home")heroSet();
   }else if(tab==="guide"){ m.innerHTML="";
   }else if(tab==="scores"){
-    const ord=x=>/LIVE|CRIT/.test(x.gameState)?0:/FUT|PRE/.test(x.gameState)?1:2, gl=[...SC].sort((a,b)=>ord(a)-ord(b)||Date.parse(a.startTimeUTC)-Date.parse(b.startTimeUTC));
+    const ord=x=>/LIVE|CRIT/.test(x.gameState)?0:/FUT|PRE/.test(x.gameState)?1:2, fv=x=>isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?0:1, gl=[...SC].sort((a,b)=>fv(a)-fv(b)||ord(a)-ord(b)||Date.parse(a.startTimeUTC)-Date.parse(b.startTimeUTC));
     const nLive=gl.filter(x=>ord(x)===0).length, tm=x=>ABBR[x.abbrev]||{name:x.abbrev||"",c:"#888"};
     const per=g=>{const d=g.periodDescriptor||{};return d.periodType==="OT"?"OT":d.periodType==="SO"?"SO":"P"+(g.period||d.number||1)};
     const row=x=>{const a=tm(x.awayTeam),h=tm(x.homeTeam),i=scInfo(x),gs=(x.goals||[]).slice(-3).reverse(),lv=ord(x)===0;
       const gh=gs.map((g,k)=>`<span class="gl${k?"":" new"}"><b>${esc(g.teamAbbrev)}</b> ${esc((g.name&&g.name.default)||"")} <em>${esc(per({period:g.period,periodDescriptor:g.periodDescriptor}))} ${esc(g.timeInPeriod||"")}</em> ${g.awayScore}-${g.homeScore}${g.strength&&g.strength!=="ev"?" "+esc(g.strength.toUpperCase()):""}</span>`).join("");
-      return `<button data-id="${x.id}" class="sr focusable${i&&i.over?" done":""}${lv?" lv":""}" style="--o-a:${h.c};--o-b:${a.c}"><span class="srt"><span class="srs">${h.logo?`<img src="${h.logo}" alt="">`:""}<b class="disp">${esc(x.homeTeam.abbrev)}</b></span><span class="srm disp">${i?esc(i.score.split(" - ").reverse().join(" - ")):"VS"}</span><span class="srs">${a.logo?`<img src="${a.logo}" alt="">`:""}<b class="disp">${esc(x.awayTeam.abbrev)}</b></span><span class="srn">${i?esc(i.note):esc(fmtT(Date.parse(x.startTimeUTC)))}</span></span>${gh?`<span class="srg"><i>LAST GOAL</i>${gh}</span>`:`<span class="srg none">${i?"No goals yet":"Not started"}</span>`}</button>`};
+      return `<button data-id="${x.id}" class="sr focusable${i&&i.over?" done":""}${lv?" lv":""}" style="--o-a:${h.c};--o-b:${a.c}">${i&&!i.over&&isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?`<span class="fstar">&#9733;</span>`:""}<span class="srt"><span class="srs">${h.logo?`<img src="${h.logo}" alt="">`:""}<b class="disp">${esc(x.homeTeam.abbrev)}</b></span><span class="srm disp">${i?esc(i.score.split(" - ").reverse().join(" - ")):"VS"}</span><span class="srs">${a.logo?`<img src="${a.logo}" alt="">`:""}<b class="disp">${esc(x.awayTeam.abbrev)}</b></span><span class="srn">${i?esc(i.note):esc(fmtT(Date.parse(x.startTimeUTC)))}</span></span>${gh?`<span class="srg"><i>LAST GOAL</i>${gh}</span>`:`<span class="srg none">${i?"No goals yet":"Not started"}</span>`}</button>`};
     m.innerHTML=`<div class="lzh"><h2 class="disp">Scores today</h2><span class="sub" style="margin:0">${nLive} live &middot; ${gl.length} games</span></div>`+(gl.length?`<div class="srl">${gl.map(row).join("")}</div>`:`<div class="empty">No NHL games on the board yet.</div>`);
   }else if(tab==="live"){
     const groups=["All","Favorites","Recent",...new Set(vis.map(c=>c.g).filter(Boolean))];
@@ -454,7 +459,8 @@ function render(){
   }else{
     m.innerHTML=`<h2 class="disp">Setup</h2><div class="sub">M3U playlist link</div>
       <div class="field"><input id="u" type="url" value="${esc(url)}" placeholder="http://..."><button class="btn" id="go">Load</button></div>
-      <div class="sub" id="st">${esc(msg||ch.length+" channels loaded")}</div>`;
+      <div class="sub" id="st">${esc(msg||ch.length+" channels loaded")}</div>
+      <h2 class="disp" style="margin-top:14px">Favorite teams</h2><div class="sub">Their games show first, with a star while live.</div><div class="chips">${NHL.map(t=>chip(t[0]+" "+t[1].split(" ").slice(-1)[0],favT.includes(t[0]),`data-ft="${t[0]}"`)).join("")}</div>`;
   }
   const f=m.querySelector("button,input"); if(f&&!document.activeElement.closest("main")) f.focus();
 }
@@ -662,9 +668,9 @@ function updateDots(){const d=$("#dots"),gw=$("#gw"); if(!d||!gw)return; const R
   document.querySelectorAll(".gw .pill").forEach((p,k)=>{const r=p.getBoundingClientRect(), vis=r.top>=R.top-4&&r.bottom<=R.bottom+4; if(vis)v++; h+=`<i class="${vis?"v":""}${k===hi?" c":""}"></i>`});
   d.innerHTML=h+`<b>${v} of ${G.length} showing</b>`}
 const markCur=()=>updateDots()||document.querySelectorAll(".grid.lg .pill").forEach(p=>p.classList.toggle("cur",+p.dataset.g===hi));
-let slT=0; function slideTo(k){const c=$("#hcar"); if(!c||!c.children[k])return; hi=k; markCur(); cancelAnimationFrame(slT); const x0=c.scrollLeft,d=c.children[k].offsetLeft-x0,t0=performance.now();
+let slT=0; function slideTo(k,keep){const c=$("#hcar"); if(!c||!c.children[k])return; hi=k; markCur(); cancelAnimationFrame(slT); const x0=c.scrollLeft,d=c.children[k].offsetLeft-x0,t0=performance.now();
   (function f(t){const q=Math.min(1,(t-t0)/160);c.scrollLeft=x0+d*(1-(1-q)*(1-q));if(q<1)slT=requestAnimationFrame(f)})(t0);
-  const w=c.children[k].querySelector(".watch"); if(w)w.focus({preventScroll:true})}
+  const w=c.children[k].querySelector(".watch"); if(w&&!keep)w.focus({preventScroll:true})}
 let scT=0; // light 140ms ease-out scroll: a few scrollTop writes, no layers
 function smoothTo(m,y){cancelAnimationFrame(scT);const y0=m.scrollTop,d=y-y0;if(Math.abs(d)<2)return;const t0=performance.now();
   (function f(t){const k=Math.min(1,(t-t0)/140);m.scrollTop=y0+d*(1-(1-k)*(1-k));if(k<1)scT=requestAnimationFrame(f)})(t0)}
@@ -673,13 +679,16 @@ function alignRow(el){const gw=el.closest(".gw");
     smoothTo($("#m"),0); const y=el.getBoundingClientRect().top-gw.getBoundingClientRect().top+gw.scrollTop-9; smoothTo(gw,y); setTimeout(updateDots,200); return}
   const m=$("#m"), g=el.closest(".grid,.cards"), top=g&&g.previousElementSibling&&/^H2$/.test(g.previousElementSibling.tagName)&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?g.previousElementSibling:el;
   smoothTo(m,top.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-6)}
-$("#m").addEventListener("focusin",e=>{const t=e.target; if(t.closest&&t.closest(".grid,.cards")){alignRow(t); if(t.classList.contains("pill")&&t.dataset.g!==undefined&&+t.dataset.g!==hi)slideTo(+t.dataset.g)} else if(t.closest&&t.closest(".hcar"))smoothTo($("#m"),0);
+$("#m").addEventListener("focusin",e=>{const t=e.target; if(t.closest&&t.closest(".grid,.cards")){alignRow(t); if(t.classList.contains("pill")&&t.dataset.g!==undefined&&+t.dataset.g!==hi)slideTo(+t.dataset.g,1)} else if(t.closest&&t.closest(".hcar"))smoothTo($("#m"),0);
 });
 // D-pad inside the home/live/sports pages: we pick the next item ourselves, so one press = one item and we control the viewport
 const ARR={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};
 $("#m").addEventListener("keydown",e=>{
   const d=ARR[e.key]; if(!d)return; const a=document.activeElement; if(!a||!$("#m").contains(a)||a.tagName==="INPUT")return;
   if(a.classList.contains("watch")&&d[0]){e.preventDefault();e.stopPropagation();const sib=a.classList.contains("sumb")?(d[0]<0?a.previousElementSibling:null):(d[0]>0?a.nextElementSibling:null);if(sib){sib.focus({preventScroll:true});return}const k=+a.dataset.g+d[0];if(k>=0&&k<G.length)slideTo(k);return} // carousel: left/right = previous/next live game
+  if(d[1]<0){const g=a.closest(".grid:not(.lg)"); // first row of the first later day: Up goes straight back to the hero
+    if(g&&g===$("#m").querySelector(".grid:not(.lg)")&&Math.abs(a.offsetTop-g.firstElementChild.offsetTop)<4){const w=document.querySelector('#hcar .watch[data-g="'+hi+'"]');
+      if(w){e.preventDefault();e.stopPropagation();w.focus({preventScroll:true});smoothTo($("#m"),0);return}}}
   const ra=a.getBoundingClientRect(), cx=ra.left+ra.width/2, cy=ra.top+ra.height/2; let best=null,bs=1e9, c=[];
   $("#m").querySelectorAll(".focusable").forEach(x=>{if(x===a||!x.offsetParent)return; if(x.classList.contains("watch")&&+x.dataset.g!==hi)return;const r=x.getBoundingClientRect(),ox=r.left+r.width/2-cx,oy=r.top+r.height/2-cy;
     const along=d[0]?ox*d[0]:oy*d[1]; if(along<6)return;
@@ -694,6 +703,7 @@ $("#m").addEventListener("keydown",e=>{
 function focusScroll(el){if(el.closest(".hcar"))smoothTo($("#m"),0);else if(el.closest(".grid,.cards"))alignRow(el)}
 $("#nav").onclick=e=>{const b=e.target.closest("button");if(b)go(b.dataset.t)};
 $("#m").onclick=e=>{
+  const ft=e.target.closest("[data-ft]"); if(ft){const k=ft.dataset.ft;favT=favT.includes(k)?favT.filter(x=>x!==k):[...favT,k];sv("favT",favT);ft.setAttribute("aria-pressed",favT.includes(k));return}
   const sr=e.target.closest(".sr"); if(sr)return openGame(+sr.dataset.id);
   const sm=e.target.closest(".sumb"); if(sm){const g=G[+sm.dataset.g],x=scoreOf(g.aw,g.hm,g.st);return openGame(x&&x.id,"sum")}
   const q=e.target.closest("[data-g]"); if(q){const g=G[+q.dataset.g]; if(g.sc&&g.sc.over){const x=scoreOf(g.aw,g.hm,g.st);return openGame(x&&x.id,"box")}return play(g)}

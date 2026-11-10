@@ -1,11 +1,18 @@
 {
- "updated": "2026-11-08T17:10:00-05:00",
+ "updated": "2026-11-10T00:53:25-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
    "headline": "The Bruins beat Florida 4-1 at home on Nov. 8 for their fourth straight win behind 40 saves from Jeremy Swayman.",
    "game": "Next: Thu Nov 12, 7:00 PM ET vs MTL, TD Garden (NESN, RDS, TSN2). Starter not announced.",
    "items": [
+    {
+     "title": "Carey Price, Patrice Bergeron among 6 inducted into Hockey Hall of Fame",
+     "summary": "Longtime Canadiens goaltender Carey Price was inducted into the Hockey Hall of Fame as part of the 2026 class alongside Patrice Bergeron, Pekka Rinne, Keith Tkachuk and Cindy Curley in the player category Monday. Brian Burke was enshrined as a builder.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50438897/carey-price-patrice-bergeron-pekka-rinne-keith-tkachuk-cindy-curley-brian-burke-inducted-hockey-hall-fame",
+     "date": "2026-11-10"
+    },
     {
      "title": "Swayman makes 40 saves as Bruins beat Panthers",
      "summary": "Elias Lindholm, Mikey Eyssimont, Morgan Geekie and JJ Peterka scored in a 4-1 win. Boston is 13-4-1 and 8-1-0 at home.",
@@ -28,6 +35,20 @@
      "date": "2026-11-08"
     },
     {
+     "title": "Elias Lindholm scores 1st of Boston's 3 goals in 1st period, carrying Bruins past Panthers, 4-1",
+     "summary": "— Elias Lindholm, Mikey Eyssimont and Morgan Geekie each scored a goal in an opening period that started out testy, carrying the Boston Bruins past the Florida Panthers 4-1 on Sunday.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892674",
+     "date": "2026-11-08"
+    },
+    {
+     "title": "Bruins try to keep win streak alive, host the Panthers",
+     "summary": "Florida Panthers (9-6-2, in the Atlantic Division) vs. Boston Bruins (12-4-1, in the Atlantic Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892674",
+     "date": "2026-11-08"
+    },
+    {
      "title": "Hagens on IR, Eyssimont recalled",
      "summary": "James Hagens went on injured reserve after a cross-check from Samuel Girard on Nov. 5. Sturm said he will miss a few weeks.",
      "source": "Heavy",
@@ -36,13 +57,27 @@
     }
    ],
    "injuries": [
-    "James Hagens (lower body, IR; Sturm says a few weeks)"
+    "James Hagens (back, IR)"
    ]
   },
   "TOR": {
    "headline": "The Leafs lost 4-2 to Montreal on Nov. 7 and lost Morgan Rielly to a lower-body injury before hosting New Jersey tonight.",
    "game": "Next: Sun Nov 8, 7:00 PM ET vs NJD, Scotiabank Arena (MSGSN, NHLN, TSN4). Anthony Stolarz expected to start.",
    "items": [
+    {
+     "title": "Maple Leafs bring losing streak into home matchup with the Avalanche",
+     "summary": "Colorado Avalanche (10-6-2, in the Central Division) vs. Toronto Maple Leafs (8-9-2, in the Atlantic Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892683",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Hellebuyck makes 23 saves for his first shutout with Devils in 4-0 victory over Maple Leafs",
+     "summary": "— Connor Hellebuyck made 23 saves for his first shutout with New Jersey and the Devils beat the Toronto Maple Leafs 4-0 on Sunday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892676",
+     "date": "2026-11-09"
+    },
     {
      "title": "Rielly and Tanev out against Devils",
      "summary": "Mark Masters reported Rielly (lower body) and Tanev (maintenance) are out Sunday, with Mermis and McWard drawing in. Stolarz is expected to start.",
@@ -65,6 +100,13 @@
      "date": "2026-11-08"
     },
     {
+     "title": "Devils take on the Maple Leafs after overtime victory",
+     "summary": "New Jersey Devils (12-5, in the Metropolitan Division) vs. Toronto Maple Leafs (8-8-2, in the Atlantic Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892676",
+     "date": "2026-11-08"
+    },
+    {
      "title": "McKenna benched, then scores in 4-2 loss",
      "summary": "Gavin McKenna was benched for the rest of the second period after a turnover led to Montreal's first goal, then scored in the third. Toronto is 8-8-2 and has lost four of five.",
      "source": "TSN",
@@ -73,17 +115,27 @@
     }
    ],
    "injuries": [
-    "Morgan Rielly (lower body, day-to-day; out Nov 8, update expected after the game)",
-    "Kirill Marchenko (lower body, IR)",
-    "Nick Blankenburg (upper body, IR)",
-    "Marshall Rifai (lower body, IR)",
-    "Miles Wood (undisclosed, LTIR)"
+    "Morgan Rielly (day-to-day)",
+    "Colton Sissons (day-to-day)",
+    "Jack Roslovic (day-to-day)",
+    "Kirill Marchenko (IR)",
+    "Miles Wood (undisclosed, IR)",
+    "Nick Blankenburg (undisclosed, IR)",
+    "Marshall Rifai (IR)",
+    "Max Domi (back, IR)"
    ]
   },
   "ANA": {
    "headline": "The Ducks (9-7-1) host Pittsburgh on a four-game win streak after rallying past Calgary 5-3.",
    "game": "Next: Sun Nov 08, 8:00 PM ET vs Pittsburgh, Honda Center (Prime Video, SN, SN-PIT). Expected starter: Ville Husso (could start).",
    "items": [
+    {
+     "title": "Cutter Gauthier gets his 3rd hat trick in November, propelling the prolific Ducks past Penguins 5-2",
+     "summary": "— Cutter Gauthier continued his scoring rampage with his third hat trick in eight days, and captain Mikael Granlund had a goal and three assists in the Anaheim Ducks' fifth consecutive victory, 5-2 over the Pittsburgh Penguins on Sunday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892679",
+     "date": "2026-11-09"
+    },
     {
      "title": "Penguins at Ducks projected lineups",
      "summary": "Ville Husso could start after stopping all 10 shots in relief Friday. Lukas Dostal, Frank Vatrano and Tyson Hinds are projected scratches.",
@@ -96,6 +148,13 @@
      "summary": "Gauthier has 10 goals in a five-game span. Leo Carlsson has 15 points in a seven-game point streak.",
      "source": "AP (640 WXSM)",
      "url": "https://www.640wxsm.com/2026/11/08/cutter-gauthier-ducks-out-to-put-freeze-on-penguins-western-swing/",
+     "date": "2026-11-08"
+    },
+    {
+     "title": "Penguins play the Ducks after Novak's 2-goal game",
+     "summary": "Pittsburgh Penguins (6-9-2, in the Metropolitan Division) vs. Anaheim Ducks (9-7-1, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892679",
      "date": "2026-11-08"
     },
     {
@@ -114,10 +173,10 @@
     }
    ],
    "injuries": [
-    "Troy Terry (hip, no timeline)",
-    "Ryan Poehling (MCL, no timeline)",
-    "Ian Moore (lower body, no timeline)",
-    "A.J. Greer (upper body, no timeline)"
+    "A.J. Greer (upper body, IR)",
+    "Troy Terry (hip, IR)",
+    "Ian Moore (lower body, IR)",
+    "Ryan Poehling (knee, IR)"
    ]
   },
   "BUF": {
@@ -144,13 +203,20 @@
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/game/_/gameId/401892675/golden-knights-sabres",
      "date": "2026-11-08"
+    },
+    {
+     "title": "Tomas Hertl scores twice as Golden Knights beat Sabres 4-1 for third straight win",
+     "summary": "— Tomas Hertl scored two goals and the Vegas Golden Knights won their third straight game, 4-1 over the Buffalo Sabres on Sunday.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892675",
+     "date": "2026-11-08"
     }
    ],
    "injuries": [
-    "Konsta Helenius (undisclosed, est. return Nov. 17)",
-    "Alex Lyon (undisclosed, IR, est. return Nov. 22)",
-    "Justin Danforth (undisclosed, IR, est. return Nov. 8)",
-    "Matt Grzelcyk (undisclosed, IR, est. return Nov. 8)"
+    "Konsta Helenius (upper body, out)",
+    "Justin Danforth (upper body, IR)",
+    "Alex Lyon (upper body, IR)",
+    "Matt Grzelcyk (lower body, IR)"
    ]
   },
   "CAR": {
@@ -187,13 +253,21 @@
     }
    ],
    "injuries": [
-    "Jordan Staal (torn calf, IR, out 1-2 months from Oct. 13)"
+    "William Carrier (day-to-day)",
+    "Jordan Staal (IR)"
    ]
   },
   "CBJ": {
    "headline": "The Blue Jackets lost 5-2 in Buffalo and lost Sean Monahan and Dmitri Voronkov to injuries.",
    "game": "Next: Tue Nov 10, 7:30 PM ET vs FLA, Nationwide Arena (Disney+, ESPN+, HULU, SN). Starter not announced.",
    "items": [
+    {
+     "title": "Blue Jackets bring home winning streak into matchup with the Panthers",
+     "summary": "Florida Panthers (9-7-2, in the Atlantic Division) vs. Columbus Blue Jackets (7-8, in the Metropolitan Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892686",
+     "date": "2026-11-09"
+    },
     {
      "title": "Monahan and Voronkov hurt in loss",
      "summary": "Coach Rick Bowness had no update on either player. Columbus has lost three straight, all on the road.",
@@ -231,14 +305,21 @@
     }
    ],
    "injuries": [
-    "Sean Monahan (lower body, day-to-day, no timeline)",
-    "Dmitri Voronkov (upper body, day-to-day, being evaluated)"
+    "Isac Lundestrom (IR)",
+    "Denton Mateychuk (dtd)"
    ]
   },
   "CGY": {
    "headline": "The Flames (7-9-1) host Philadelphia after losing defenceman Kevin Bahl for the season with a ruptured Achilles tendon.",
    "game": "Next: Sun Nov 08, 7:00 PM ET vs Philadelphia, Scotiabank Saddledome (NBCSP, SNW). Expected starter: Devin Cooley.",
    "items": [
+    {
+     "title": "Matt Coronato scores at 4:08 of overtime in Flames' 4-3 victory over Flyers",
+     "summary": "— Matt Coronato scored at 4:08 of overtime to give the Calgary Flames a 4-3 victory over the Philadelphia Flyers on Sunday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892678",
+     "date": "2026-11-09"
+    },
     {
      "title": "Flyers at Flames projected lineups",
      "summary": "Devin Cooley starts after missing five games and being activated from injured reserve Thursday. Brayden Pachal was recalled from AHL Calgary.",
@@ -269,23 +350,17 @@
     }
    ],
    "injuries": [
-    "Kevin Bahl (ruptured Achilles tendon, out for season)",
-    "Jonathan Huberdeau (hip, no timeline)",
-    "Samuel Honzek (lower body, no timeline)",
-    "Brennan Othmann (upper body, day-to-day)"
+    "Brennan Othmann (day-to-day)",
+    "Kevin Bahl (IR)",
+    "Jonathan Huberdeau (hip, IR)",
+    "Connor Zary (out)",
+    "Samuel Honzek (IR)"
    ]
   },
   "CHI": {
    "headline": "The Blackhawks lost 9-2 at Carolina on Saturday for their sixth straight loss.",
    "game": "Next: Thu Nov 12, 8:00 PM ET vs Buffalo Sabres, United Center (CHSN, MSG-B). Starter not announced.",
    "items": [
-    {
-     "title": "Hurricanes score nine against Chicago",
-     "summary": "Spencer Knight was pulled after allowing six goals on 17 shots. Roman Kantserov and Connor Bedard scored, and Chicago fell to 4-13-1.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-recap-november-7-2026",
-     "date": "2026-11-07"
-    },
     {
      "title": "Losing streak hits six",
      "summary": "Chicago is 0-8-1 on the road and was outscored 18-6 on a three-game trip. Kantserov extended his point streak to eight games.",
@@ -299,6 +374,13 @@
      "source": "CBS Sports (RotoWire)",
      "url": "https://www.cbssports.com/fantasy/hockey/news/blackhawks-arvid-soderblom-shaky-in-relief-appearance/",
      "date": "2026-11-08"
+    },
+    {
+     "title": "Hurricanes score nine against Chicago",
+     "summary": "Spencer Knight was pulled after allowing six goals on 17 shots. Roman Kantserov and Connor Bedard scored, and Chicago fell to 4-13-1.",
+     "source": "NHL.com",
+     "url": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-recap-november-7-2026",
+     "date": "2026-11-07"
     },
     {
      "title": "Byram to IR, Boucher recalled",
@@ -316,8 +398,8 @@
     }
    ],
    "injuries": [
-    "Patrick Kane (upper body, has missed three games, no firm timeline)",
-    "Bowen Byram (upper body, IR, out since mid-October)"
+    "Patrick Kane (upper body, IR)",
+    "Bowen Byram (upper body, IR)"
    ]
   },
   "COL": {
@@ -325,10 +407,31 @@
    "game": "Next: Tue Nov 10, 7:00 PM ET at Toronto, Scotiabank Arena (ALT, TSN4, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Maple Leafs bring losing streak into home matchup with the Avalanche",
+     "summary": "Colorado Avalanche (10-6-2, in the Central Division) vs. Toronto Maple Leafs (8-9-2, in the Atlantic Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892683",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Most consecutive games played in MLB, NFL, NBA, NHL",
+     "summary": "Brent Burns has 1,000+ consecutive games played. Find out who else has played the most games in a row across other major leagues.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/mlb/story/_/id/47539505/most-consecutive-games-played-mlb-nfl-nba-nhl",
+     "date": "2026-11-09"
+    },
+    {
      "title": "Necas has four points, Blackwood blanks Red Wings",
      "summary": "Necas had two goals and two assists and MacKinnon and Makar each had a goal and two assists in a 4-0 win. Blackwood made 27 saves for his first shutout of the season and Colorado moved to 10-6-2.",
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-recap-november-7-2026",
+     "date": "2026-11-08"
+    },
+    {
+     "title": "Blackwood makes 27 saves, Necas has 4 points, Avs beat Wings 4-0",
+     "summary": "— Mackenzie Blackwood made 27 saves, Martin Necas had two goals and two assists and the Colorado Avalanche beat the Detroit Red Wings 4-0 on Saturday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892671",
      "date": "2026-11-08"
     },
     {
@@ -347,8 +450,8 @@
     }
    ],
    "injuries": [
-    "Josh Manson (ankle, expected out about eight weeks from Oct. 30)",
-    "Zachary L'Heureux (upper body, no timeline given)"
+    "Josh Manson (IR)",
+    "Zachary L'Heureux (IR)"
    ]
   },
   "DAL": {
@@ -385,16 +488,31 @@
     }
    ],
    "injuries": [
-    "Miro Heiskanen (upper body, day-to-day)",
-    "Matt Duchene (core surgery, about three months)",
-    "Oskar Back (finger, LTIR, no timeline)",
-    "Kyle Capobianco (lower body, about four weeks from Oct. 30)"
+    "Miro Heiskanen (day-to-day)",
+    "Kyle Capobianco (IR)",
+    "Oskar Back (IR)",
+    "Matt Duchene (IR)",
+    "Luke Krys (IR)"
    ]
   },
   "DET": {
    "headline": "The Red Wings were shut out 4-0 in Colorado for their third straight loss.",
    "game": "Next: Tue Nov 10, 8:00 PM ET at STL, Enterprise Center (TNT, HBO Max, SN+). Starter not announced.",
    "items": [
+    {
+     "title": "Blues bring 3-game losing streak into matchup against the Red Wings",
+     "summary": "Detroit Red Wings (7-8-3, in the Atlantic Division) vs. St. Louis Blues (7-8-2, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892687",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Blackwood makes 27 saves, Necas has 4 points, Avs beat Wings 4-0",
+     "summary": "— Mackenzie Blackwood made 27 saves, Martin Necas had two goals and two assists and the Colorado Avalanche beat the Detroit Red Wings 4-0 on Saturday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892671",
+     "date": "2026-11-08"
+    },
     {
      "title": "Avalanche blank Red Wings",
      "summary": "Martin Necas had four points and Mackenzie Blackwood made 27 saves. Daniil Tarasov stopped 25 shots.",
@@ -425,18 +543,25 @@
     }
    ],
    "injuries": [
-    "John Gibson (lower body, day-to-day)",
-    "Marco Kasper (upper body, IR, expected back on road trip)",
-    "Mason Appleton (undisclosed, IR, expected back on road trip)",
-    "Albert Johansson (undisclosed, IR, listed back Nov. 12)",
-    "Dylan Larkin (suspended by team pending trade)",
-    "Simon Edvinsson (contract dispute, non-roster)"
+    "John Gibson (day-to-day)",
+    "Albert Johansson (undisclosed, IR)",
+    "Marco Kasper (upper body, IR)",
+    "Mason Appleton (undisclosed, IR)",
+    "Dylan Larkin (IR)",
+    "Simon Edvinsson (contract dispute, IR)"
    ]
   },
   "EDM": {
    "headline": "The Oilers beat the Canucks 4-2 on Saturday as Draisaitl scored twice and McDavid ran his season-opening point streak to 18 games.",
    "game": "Next: Mon Nov 9, 8:00 PM ET vs NY Rangers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
+    {
+     "title": "Draisaitl scores twice and McDavid nets goal to extend point streak as Oilers top Rangers 3-1",
+     "summary": "— Leon Draisaitl scored twice, Connor McDavid also had a goal and the Edmonton Oilers held off the New York Rangers 3-1 on Monday night to sweep their season series.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892680",
+     "date": "2026-11-10"
+    },
     {
      "title": "Nugent-Hopkins leaves game after being struck in head by puck",
      "summary": "Nugent-Hopkins was hit by a shoot-in attempt from teammate Ryan Shea 45 seconds into the second period and did not return.",
@@ -459,6 +584,20 @@
      "date": "2026-11-08"
     },
     {
+     "title": "New York brings 3-game win streak into matchup against Edmonton",
+     "summary": "New York Rangers (10-7-1, in the Metropolitan Division) vs. Edmonton Oilers (12-3-3, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892680",
+     "date": "2026-11-08"
+    },
+    {
+     "title": "Draisaitl scores twice, McDavid has 3 assists to extend streak and Oilers beat skidding Canucks 4-2",
+     "summary": "— Leon Draisaitl had two goals and an assist, Connor McDavid added three more assists and the Edmonton Oilers beat the struggling Vancouver Canucks 4-2 on Saturday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892673",
+     "date": "2026-11-08"
+    },
+    {
      "title": "Canucks at Oilers projected lineups",
      "summary": "Edmonton assigned goalie Matt Tomkins to AHL Bakersfield and placed defenseman Atro Leppanen on waivers. Jarry dressed as backup after missing the previous game with illness.",
      "source": "NHL.com",
@@ -467,12 +606,13 @@
     }
    ],
    "injuries": [
-    "Ryan Nugent-Hopkins (struck in head by puck Nov. 7, not expected to miss much time)",
-    "Frederik Andersen (undisclosed, IR)",
-    "Isaac Howard (lower body)",
-    "Mattias Janmark (undisclosed, IR)",
+    "Colton Dach (illness, out)",
+    "Isaac Howard (IR)",
     "Alec Regula (undisclosed, IR)",
-    "Matthew Savoie (undisclosed, IR)"
+    "Matt Savoie (lower body, IR)",
+    "Frederik Andersen (knee, IR)",
+    "Mattias Janmark (undisclosed, IR)",
+    "Matthew Savoie (IR)"
    ]
   },
   "FLA": {
@@ -480,10 +620,31 @@
    "game": "Next: Tue Nov 10, 7:30 PM ET at CBJ, Nationwide Arena (Disney+, ESPN+, HULU, SN). Starter not announced.",
    "items": [
     {
+     "title": "Blue Jackets bring home winning streak into matchup with the Panthers",
+     "summary": "Florida Panthers (9-7-2, in the Atlantic Division) vs. Columbus Blue Jackets (7-8, in the Metropolitan Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892686",
+     "date": "2026-11-09"
+    },
+    {
      "title": "Bruins beat Panthers 4-1",
      "summary": "Boston scored three first-period goals and Jeremy Swayman made 40 saves. Carter Verhaeghe scored on the power play and Jacob Markstrom made 32 saves.",
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/florida-panthers-boston-bruins-game-recap-november-8-2026",
+     "date": "2026-11-08"
+    },
+    {
+     "title": "Elias Lindholm scores 1st of Boston's 3 goals in 1st period, carrying Bruins past Panthers, 4-1",
+     "summary": "— Elias Lindholm, Mikey Eyssimont and Morgan Geekie each scored a goal in an opening period that started out testy, carrying the Boston Bruins past the Florida Panthers 4-1 on Sunday.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892674",
+     "date": "2026-11-08"
+    },
+    {
+     "title": "Bruins try to keep win streak alive, host the Panthers",
+     "summary": "Florida Panthers (9-6-2, in the Atlantic Division) vs. Boston Bruins (12-4-1, in the Atlantic Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892674",
      "date": "2026-11-08"
     },
     {
@@ -509,17 +670,30 @@
     }
    ],
    "injuries": [
-    "Aleksander Barkov (left knee, 6-8 weeks from Oct. 1)",
-    "Brad Marchand (left knee, about Dec. 6)",
-    "Jonah Gadjovich (neck, no timeline)",
-    "Sandis Vilmanis (upper body, being evaluated)",
-    "Anton Lundell (undisclosed, day to day)"
+    "Sandis Vilmanis (undisclosed, out)",
+    "Brad Marchand (knee, IR)",
+    "Aleksander Barkov (knee, IR)",
+    "Jonah Gadjovich (upper body, IR)"
    ]
   },
   "LAK": {
    "headline": "The Kings lost 5-2 to the Penguins on Saturday and fell to 5-8-2.",
    "game": "Next: Tue Nov 10, 10:00 PM ET vs Nashville, Crypto.com Arena (ESPN+, Disney+, Hulu, SNE). Starter not announced.",
    "items": [
+    {
+     "title": "Predators take win streak into matchup with the Kings",
+     "summary": "Nashville Predators (8-4-5, in the Central Division) vs. Los Angeles Kings (5-8-2, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892689",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Sidney Crosby takes sole possession of 6th on NHL scoring list in Penguins' 5-2 win over Kings",
+     "summary": "— Sidney Crosby scored two goals while moving into sole possession of sixth place on the NHL’s career scoring list, and the Pittsburgh Penguins snapped their four-game skid with a 5-2 victory over the Los Angeles Kings on Saturday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892672",
+     "date": "2026-11-08"
+    },
     {
      "title": "Penguins 5, Kings 2",
      "summary": "Tommy Novak scored twice for Pittsburgh. Corey Perry and Alex Laferriere scored for Los Angeles, and Darcy Kuemper was in goal.",
@@ -550,14 +724,31 @@
     }
    ],
    "injuries": [
-    "Kevin Fiala (undisclosed, IR, week-to-week, trending toward return)",
-    "Mats Zuccarello (undisclosed, IR since Oct. 10, week-to-week)"
+    "Erik Gustafsson (day-to-day)",
+    "Mats Zuccarello (upper body, IR)",
+    "Kevin Fiala (lower leg, IR)",
+    "Jakub Dvorak (IR)",
+    "Jan Jenik (undisclosed, IR)"
    ]
   },
   "MIN": {
    "headline": "The Wild blew a two-goal lead and lost 4-3 in overtime to Tampa Bay before a three-game road trip.",
    "game": "Next: Tue Nov 10, 7:00 PM ET at MTL, Centre Bell (TSN2, RDS). Starter not announced.",
    "items": [
+    {
+     "title": "Canadiens take on the Wild after Newhook's 2-goal performance",
+     "summary": "Minnesota Wild (12-3-4, in the Central Division) vs. Montreal Canadiens (11-3-3, in the Atlantic Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892684",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Nikita Kucherov scores power-play goal in overtime and Lightning rally for 4-3 win over Wild",
+     "summary": "— Nikita Kucherov scored a power-play goal 3:23 into overtime and the Tampa Bay Lightning rallied past the Minnesota Wild 4-3 on Saturday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892670",
+     "date": "2026-11-08"
+    },
     {
      "title": "Lightning beat Wild in overtime",
      "summary": "Nikita Kucherov scored on the power play in overtime. Maxim Shabanov scored twice and Calvin Pickard made 30 saves.",
@@ -588,16 +779,23 @@
     }
    ],
    "injuries": [
-    "Michael McCarron (upper body, no timeline)",
-    "Jared Spurgeon (lower body, out since Oct. 27)",
-    "Brock Faber (skull fracture, cleared, could return on road trip)",
-    "Filip Gustavsson (hip surgery, IR)"
+    "Michael McCarron (upper body, day-to-day)",
+    "Filip Gustavsson (hip, IR)",
+    "Jared Spurgeon (lower body, IR)",
+    "Brock Faber (skull, IR)"
    ]
   },
   "MTL": {
    "headline": "The Canadiens won 4-2 in Toronto on Saturday to push their point streak to 10 games.",
    "game": "Next: Tue Nov 10, 7:00 PM ET vs Minnesota Wild, Centre Bell (MINNHL, RDS, TSN2, Wild+). Starter not announced.",
    "items": [
+    {
+     "title": "Canadiens take on the Wild after Newhook's 2-goal performance",
+     "summary": "Minnesota Wild (12-3-4, in the Central Division) vs. Montreal Canadiens (11-3-3, in the Atlantic Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892684",
+     "date": "2026-11-09"
+    },
     {
      "title": "Fowler stops 26, Canadiens beat Maple Leafs",
      "summary": "Alex Newhook scored twice and Chris Kreider and Zachary Bolduc also scored in a 4-2 win. Montreal is 11-3-3 and 8-0-2 in its past 10 games.",
@@ -635,15 +833,47 @@
     }
    ],
    "injuries": [
-    "Ivan Demidov (lower body, IR, two to four weeks, no setbacks as of Nov 6)",
-    "Mike Matheson (lower body, out two weeks as of Oct 31)",
-    "Samuel Montembeault (lower body, IR, could return soon)"
+    "Jake Evans (day-to-day)",
+    "Josh Anderson (day-to-day)",
+    "Ivan Demidov (foot, IR)",
+    "Mike Matheson (lower body, out)",
+    "Sam Montembeault (lower body, IR)",
+    "Bryce Pickford (IR)",
+    "Lucas Condotta (IR)"
    ]
   },
   "NJD": {
    "headline": "The Devils (12-5-0) take a four-game win streak to Toronto after beating the Islanders 5-4 in overtime.",
    "game": "Next: Sun Nov 08, 7:00 PM ET at Toronto, Scotiabank Arena (MSGSN, NHLN, TSN4). Expected starter: Connor Hellebuyck (not confirmed).",
    "items": [
+    {
+     "title": "Jets disappointed ex-goalie Connor Hellebuyck sitting out",
+     "summary": "The Jets are disappointed they won't get closure for the departure of ex-goalie Connor Hellebuyck as he won't be starting for the Devils when they play in Winnipeg on Tuesday.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50435073/jets-disappointed-ex-goalie-connor-hellebuyck-sitting-out",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Devils visit the Jets after Meier's 2-goal game",
+     "summary": "New Jersey Devils (13-5, in the Metropolitan Division) vs. Winnipeg Jets (7-8-3, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892688",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Connor Hellebuyck won't play in return to Winnipeg with Devils",
+     "summary": "The Devils announced Connor Hellebuyck will not face the Jets on Tuesday night in his first trip to Winnipeg since his contentious trade demand was granted.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50429372/connor-hellebuyck-play-winnipeg-return-devils",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Hellebuyck makes 23 saves for his first shutout with Devils in 4-0 victory over Maple Leafs",
+     "summary": "— Connor Hellebuyck made 23 saves for his first shutout with New Jersey and the Devils beat the Toronto Maple Leafs 4-0 on Sunday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892676",
+     "date": "2026-11-09"
+    },
     {
      "title": "Devils vs. Maple Leafs: projected lines",
      "summary": "Connor Hellebuyck is expected to start in Toronto after Jake Allen played Saturday. The lines are unchanged from the win over the Islanders.",
@@ -674,13 +904,28 @@
     }
    ],
    "injuries": [
-    "Seamus Casey (knee, injured non-roster; ESPN lists estimated return Nov 21)"
+    "Anthony Mantha (out)",
+    "Seamus Casey (IR)"
    ]
   },
   "NSH": {
    "headline": "The Predators beat St. Louis 3-1 at home on Saturday for their fourth straight win.",
    "game": "Next: Tue Nov 10, 10:00 PM ET at Los Angeles Kings, Crypto.com Arena (Disney+, ESPN+, HULU, SNE). Starter not announced.",
    "items": [
+    {
+     "title": "Carey Price, Patrice Bergeron among 6 inducted into Hockey Hall of Fame",
+     "summary": "Longtime Canadiens goaltender Carey Price was inducted into the Hockey Hall of Fame as part of the 2026 class alongside Patrice Bergeron, Pekka Rinne, Keith Tkachuk and Cindy Curley in the player category Monday. Brian Burke was enshrined as a builder.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50438897/carey-price-patrice-bergeron-pekka-rinne-keith-tkachuk-cindy-curley-brian-burke-inducted-hockey-hall-fame",
+     "date": "2026-11-10"
+    },
+    {
+     "title": "Predators take win streak into matchup with the Kings",
+     "summary": "Nashville Predators (8-4-5, in the Central Division) vs. Los Angeles Kings (5-8-2, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892689",
+     "date": "2026-11-09"
+    },
     {
      "title": "Stamkos, Josi lift Predators past Blues for fourth straight win",
      "summary": "Steven Stamkos, Ross Colton and Nick Perbix scored and Juuse Saros made 25 saves. Stamkos' 248th power-play goal moved him past Luc Robitaille for fifth in NHL history.",
@@ -711,8 +956,8 @@
     }
    ],
    "injuries": [
-    "Jonathan Marchessault (lower body, day-to-day)",
-    "William Trudeau (upper body, IR, week-to-week since Oct. 9)"
+    "Jonathan Marchessault (day-to-day)",
+    "William Trudeau (IR)"
    ]
   },
   "NYI": {
@@ -720,18 +965,25 @@
    "game": "Next: Mon Nov 9, 10:00 PM ET at San Jose Sharks, SAP Center at San Jose (MSGSN, NBCSCA, TVAS). Starter not announced.",
    "items": [
     {
-     "title": "Hughes wins it in OT for Devils",
-     "summary": "Jack Hughes scored 1:18 into overtime after New Jersey erased a two-goal deficit. Ilya Sorokin made 45 saves and the Islanders are 7-6-3 with three straight losses.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-recap-november-7-2026",
-     "date": "2026-11-07"
-    },
-    {
      "title": "Isles outshot 50-23",
      "summary": "The Islanders allowed 50 shots for the first time since March 2018 and had no power plays to New Jersey's four. Matthew Schaefer has 14 points in his last 12 games.",
      "source": "Eyes on Isles",
      "url": "https://eyesonisles.com/ny-islanders-squander-two-goal-lead-as-nj-devils-steal-overtime-win-on-hughes-goal-01m6xk76yems",
      "date": "2026-11-08"
+    },
+    {
+     "title": "New York brings losing streak into matchup with San Jose",
+     "summary": "New York Islanders (7-6-3, in the Metropolitan Division) vs. San Jose Sharks (7-11-1, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892682",
+     "date": "2026-11-08"
+    },
+    {
+     "title": "Hughes wins it in OT for Devils",
+     "summary": "Jack Hughes scored 1:18 into overtime after New Jersey erased a two-goal deficit. Ilya Sorokin made 45 saves and the Islanders are 7-6-3 with three straight losses.",
+     "source": "NHL.com",
+     "url": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-recap-november-7-2026",
+     "date": "2026-11-07"
     },
     {
      "title": "Barzal, Maccelli skate in full",
@@ -756,11 +1008,11 @@
     }
    ],
    "injuries": [
-    "Ryan Pulock (upper body, two to four weeks from Nov 1)",
-    "Matias Maccelli (lower body, IR, practicing in full)",
-    "Cal Ritchie (lower body, IR, four to six weeks from Oct 17)",
-    "Alexander Romanov (torn ACL, IR)",
-    "Mathew Barzal (left knee inflammation, has not played this season, practicing in full)"
+    "Matias Maccelli (lower body, IR)",
+    "Mathew Barzal (knee, IR)",
+    "Ryan Pulock (out)",
+    "Calum Ritchie (IR)",
+    "Alexander Romanov (IR)"
    ]
   },
   "NYR": {
@@ -768,10 +1020,24 @@
    "game": "Next: Mon Nov 09, 8:00 PM ET at Edmonton Oilers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Draisaitl scores twice and McDavid nets goal to extend point streak as Oilers top Rangers 3-1",
+     "summary": "— Leon Draisaitl scored twice, Connor McDavid also had a goal and the Edmonton Oilers held off the New York Rangers 3-1 on Monday night to sweep their season series.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892680",
+     "date": "2026-11-10"
+    },
+    {
      "title": "Korpisalo makes 25 saves in debut for Rangers, who hold off Kraken",
      "summary": "The Rangers led 4-0 on goals by Gabe Perreault, Tye Kartye, Jaroslav Chmelar and Pavel Dorofeyev and held on 4-3. Joonas Korpisalo made 25 saves in his first game of the season.",
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-recap-november-7-2026",
+     "date": "2026-11-08"
+    },
+    {
+     "title": "New York brings 3-game win streak into matchup against Edmonton",
+     "summary": "New York Rangers (10-7-1, in the Metropolitan Division) vs. Edmonton Oilers (12-3-3, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892680",
      "date": "2026-11-08"
     },
     {
@@ -790,16 +1056,25 @@
     }
    ],
    "injuries": [
-    "Igor Shesterkin (right knee, out for season)",
-    "Joseph Veleno (lower body, IR, no timeline)",
-    "Sean Durzi (undisclosed, IR retroactive to Oct. 26, no timeline)",
-    "Adam Sykora (IR per Daily Faceoff, no details)"
+    "Alberts Smits (upper body, out)",
+    "Sean Durzi (undisclosed, IR)",
+    "Igor Shesterkin (IR)",
+    "Joe Veleno (lower body, IR)",
+    "Aidan Thompson (IR)",
+    "Adam Sykora (IR)"
    ]
   },
   "OTT": {
    "headline": "The Senators beat Utah 4-2 on Saturday on a late Nick Cousins goal.",
    "game": "Next: Tue Nov 10, 7:00 PM ET vs Washington Capitals, Canadian Tire Centre (MNMT, RDS2, TSN5). Starter not announced.",
    "items": [
+    {
+     "title": "Senators and Capitals face off in Eastern Conference action",
+     "summary": "Washington Capitals (9-6, in the Metropolitan Division) vs. Ottawa Senators (11-6-1, in the Atlantic Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892685",
+     "date": "2026-11-09"
+    },
     {
      "title": "Cousins scores late to lift Senators",
      "summary": "Nick Cousins tipped a Thomas Chabot shot with 2:18 left and Shane Pinto added an empty-net goal. Samuel Ersson made 30 saves and Ottawa is 11-6-1.",
@@ -830,18 +1105,29 @@
     }
    ],
    "injuries": [
-    "Linus Ullmark (lower body, IR, close to returning)",
-    "William Eklund (ankle, IR)",
-    "Warren Foegele (lower body, IR)",
-    "Andre Burakovsky (lower body, out)",
-    "Ridly Greig (undisclosed, day to day)",
-    "Tyler Kleven (illness, day to day)"
+    "Andre Burakovsky (IR)",
+    "Warren Foegele (knee, IR)",
+    "William Eklund (IR)"
    ]
   },
   "PHI": {
    "headline": "The Flyers (4-10-4) open a back-to-back in Calgary after a 3-2 loss to the Rangers, their fifth loss in six games.",
    "game": "Next: Sun Nov 08, 7:00 PM ET at Calgary, Scotiabank Saddledome (NBCSP, SNW). Expected starter: Dan Vladar (projected).",
    "items": [
+    {
+     "title": "Canucks bring 5-game losing streak into matchup against the Flyers",
+     "summary": "Philadelphia Flyers (4-10-5, in the Metropolitan Division) vs. Vancouver Canucks (3-15-1, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892681",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Matt Coronato scores at 4:08 of overtime in Flames' 4-3 victory over Flyers",
+     "summary": "— Matt Coronato scored at 4:08 of overtime to give the Calgary Flames a 4-3 victory over the Philadelphia Flyers on Sunday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892678",
+     "date": "2026-11-09"
+    },
     {
      "title": "Flyers at Flames projected lineups",
      "summary": "Michael Bunting and David Jiricek are projected scratches. Rasmus Ristolainen will miss a sixth straight game and the Flyers did not hold a morning skate.",
@@ -872,14 +1158,21 @@
     }
    ],
    "injuries": [
-    "Rasmus Ristolainen (upper body, expected to miss sixth straight game)",
-    "Nikita Grebenkin (back, no timeline)"
+    "Rasmus Ristolainen (hand, IR)",
+    "Nikita Grebenkin (back, IR)"
    ]
   },
   "PIT": {
    "headline": "The Penguins (6-9-2) play at Anaheim on the second night of a back-to-back after a 5-2 win in Los Angeles ended a four-game skid.",
    "game": "Next: Sun Nov 08, 8:00 PM ET at Anaheim, Honda Center (Prime Video, SN, SN-PIT). Expected starter: Arturs Silovs.",
    "items": [
+    {
+     "title": "Cutter Gauthier gets his 3rd hat trick in November, propelling the prolific Ducks past Penguins 5-2",
+     "summary": "— Cutter Gauthier continued his scoring rampage with his third hat trick in eight days, and captain Mikael Granlund had a goal and three assists in the Anaheim Ducks' fifth consecutive victory, 5-2 over the Pittsburgh Penguins on Sunday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892679",
+     "date": "2026-11-09"
+    },
     {
      "title": "Penguins at Ducks projected lineups",
      "summary": "Arturs Silovs is expected to start. Andrei Kuzmenko and Ilya Solovyov are projected scratches, and neither team held a morning skate.",
@@ -907,13 +1200,28 @@
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/pittsburgh-penguins-los-angeles-kings-game-recap-november-7-2026",
      "date": "2026-11-08"
+    },
+    {
+     "title": "Penguins play the Ducks after Novak's 2-goal game",
+     "summary": "Pittsburgh Penguins (6-9-2, in the Metropolitan Division) vs. Anaheim Ducks (9-7-1, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892679",
+     "date": "2026-11-08"
+    },
+    {
+     "title": "Sidney Crosby takes sole possession of 6th on NHL scoring list in Penguins' 5-2 win over Kings",
+     "summary": "— Sidney Crosby scored two goals while moving into sole possession of sixth place on the NHL’s career scoring list, and the Pittsburgh Penguins snapped their four-game skid with a 5-2 victory over the Los Angeles Kings on Saturday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892672",
+     "date": "2026-11-08"
     }
    ],
    "injuries": [
-    "Bryan Rust (lower body, reevaluation about six weeks from Oct 22)",
-    "Trevor van Riemsdyk (lower body, no timeline)",
-    "Elmer Soderblom (upper body, no timeline)",
-    "Ryan Graves (knee, no timeline)"
+    "Ville Koivunen (day-to-day)",
+    "Elmer Soderblom (upper body, IR)",
+    "Bryan Rust (lower body, IR)",
+    "Trevor van Riemsdyk (IR)",
+    "Ryan Graves (lower body, IR)"
    ]
   },
   "SEA": {
@@ -950,16 +1258,25 @@
     }
    ],
    "injuries": [
-    "Jared McCann (lower body, IR, no timeline)",
-    "Ryan Lindgren (upper body, out, no timeline)",
-    "Jacob Melanson (upper body, IR, no timeline)",
-    "Curtis Douglas (upper body, no timeline)"
+    "Nikke Kokko (IR)",
+    "Curtis Douglas (IR)",
+    "Jared McCann (lower body, IR)",
+    "Jacob Melanson (IR)",
+    "Ryan Lindgren (upper body, IR)",
+    "Jake O'Brien (lower body, IR)"
    ]
   },
   "SJS": {
    "headline": "The Sharks lost 4-3 in Dallas for their fifth straight loss and return home to face the Islanders.",
    "game": "Next: Mon Nov 09, 10:00 PM ET vs NYI, SAP Center at San Jose (NBCSCA, MSGSN). Starter not announced.",
    "items": [
+    {
+     "title": "New York brings losing streak into matchup with San Jose",
+     "summary": "New York Islanders (7-6-3, in the Metropolitan Division) vs. San Jose Sharks (7-11-1, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892682",
+     "date": "2026-11-08"
+    },
     {
      "title": "Stars hand Sharks fifth straight loss",
      "summary": "Michael Misa, Ivar Stenberg and Will Smith scored and Macklin Celebrini had three assists. Dallas scored three power-play goals.",
@@ -990,14 +1307,22 @@
     }
    ],
    "injuries": [
-    "Alexander Wennberg (upper body, IR, week to week)",
-    "Igor Chernyshov (upper body, IR, week to week)"
+    "Igor Chernyshov (IR)",
+    "Quentin Musty (upper body, IR)",
+    "Kyle Keyser (upper body, IR)"
    ]
   },
   "STL": {
    "headline": "The Blues lost 3-1 at Nashville on Saturday for their third straight loss.",
    "game": "Next: Tue Nov 10, 8:00 PM ET vs Detroit Red Wings, Enterprise Center (HBO MAX, SN+, TNT). Starter not announced.",
    "items": [
+    {
+     "title": "Blues bring 3-game losing streak into matchup against the Red Wings",
+     "summary": "Detroit Red Wings (7-8-3, in the Atlantic Division) vs. St. Louis Blues (7-8-2, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892687",
+     "date": "2026-11-09"
+    },
     {
      "title": "Stamkos, Josi lift Predators past Blues for fourth straight win",
      "summary": "Jimmy Snuggerud scored on the power play and Joel Hofer made 26 saves in a 3-1 loss. Coach Jim Montgomery said, \"We need to be better.\"",
@@ -1021,15 +1346,22 @@
     }
    ],
    "injuries": [
-    "Tyler Tucker (knee, IR, no timeline)",
-    "Dillon Dube (neck, IR, no timeline)",
-    "Logan Mailloux (right hand surgery Sept. 28, IR, expected out about eight weeks)"
+    "Torey Krug (ankle, IR)",
+    "Dillon Dube (IR)",
+    "Tyler Tucker (IR)"
    ]
   },
   "TBL": {
    "headline": "The Lightning beat Minnesota 4-3 in overtime on Saturday and play at Winnipeg on Sunday on the back end of a back-to-back.",
    "game": "Next: Sun Nov 08, 6:00 PM ET at WPG, Canada Life Centre (TSN3, The Spot). Andrei Vasilevskiy projected to start.",
    "items": [
+    {
+     "title": "Scheifele scores on power play with 1.6 seconds left to lift Jets past Lightning, 4-3",
+     "summary": "— Mark Scheifele scored on a 5-on-3 power play with 1.6 seconds left and the Winnipeg Jets beat the Tampa Bay Lightning 4-3 on Sunday after blowing a late three-goal lead.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892677",
+     "date": "2026-11-09"
+    },
     {
      "title": "Vasilevskiy projected at Winnipeg",
      "summary": "Paul Edmonds projected Andrei Vasilevskiy to start with Dennis Hildeby as backup. Jake Guentzel leads the team with 10 goals.",
@@ -1052,6 +1384,20 @@
      "date": "2026-11-08"
     },
     {
+     "title": "Tampa Bay visits Winnipeg after shootout victory",
+     "summary": "Tampa Bay Lightning (11-3-2, in the Atlantic Division) vs. Winnipeg Jets (6-8-3, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892677",
+     "date": "2026-11-08"
+    },
+    {
+     "title": "Nikita Kucherov scores power-play goal in overtime and Lightning rally for 4-3 win over Wild",
+     "summary": "— Nikita Kucherov scored a power-play goal 3:23 into overtime and the Tampa Bay Lightning rallied past the Minnesota Wild 4-3 on Saturday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892670",
+     "date": "2026-11-08"
+    },
+    {
      "title": "Gourde out until December",
      "summary": "Yanni Gourde is recovering from offseason hip surgery. Dominic James broke his hand in training.",
      "source": "Daily Faceoff",
@@ -1060,7 +1406,7 @@
     }
    ],
    "injuries": [
-    "Yanni Gourde (hip surgery, out until December)"
+    "Brayden Point (day-to-day)"
    ]
   },
   "UTA": {
@@ -1104,16 +1450,24 @@
     }
    ],
    "injuries": [
-    "John Marino (upper body, IR since Oct 17)",
-    "Kailer Yamamoto (upper body, IR retroactive to Oct 29)",
-    "Nate Schmidt (upper body, day to day)",
-    "Maveric Lamoureux (shoulder, no timeline)"
+    "Nate Schmidt (upper body, out)",
+    "Kailer Yamamoto (upper body, IR)",
+    "John Marino (IR)",
+    "Maveric Lamoureux (IR)",
+    "Dylan Guenther (dtd)"
    ]
   },
   "VAN": {
    "headline": "The Canucks lost 4-2 in Edmonton on Saturday for their fifth straight loss and are 3-15-1.",
    "game": "Next: Mon Nov 9, 9:30 PM ET vs Philadelphia, Rogers Arena (NBCSP, SN+). Starter not announced.",
    "items": [
+    {
+     "title": "Canucks bring 5-game losing streak into matchup against the Flyers",
+     "summary": "Philadelphia Flyers (4-10-5, in the Metropolitan Division) vs. Vancouver Canucks (3-15-1, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892681",
+     "date": "2026-11-09"
+    },
     {
      "title": "Canucks losses keep piling up",
      "summary": "Malhotra scratched Quillan, put Bains on the top line with Pettersson and Boeser, and played Schenn for Mancini. Willander missed a third straight game.",
@@ -1126,6 +1480,13 @@
      "summary": "Max Sasson and Brock Boeser scored and Leevi Merilainen made 26 saves. Boeser briefly left in the second period after blocking a shot off his foot but returned.",
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-recap-november-7-2026",
+     "date": "2026-11-08"
+    },
+    {
+     "title": "Draisaitl scores twice, McDavid has 3 assists to extend streak and Oilers beat skidding Canucks 4-2",
+     "summary": "— Leon Draisaitl had two goals and an assist, Connor McDavid added three more assists and the Edmonton Oilers beat the struggling Vancouver Canucks 4-2 on Saturday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892673",
      "date": "2026-11-08"
     },
     {
@@ -1144,9 +1505,11 @@
     }
    ],
    "injuries": [
-    "Thatcher Demko (hip, IR, no timeline)",
-    "Filip Chytil (upper body, IR, no timeline)",
-    "Tom Willander (lower body, missed three straight games, no timeline)"
+    "Filip Chytil (shoulder, IR)",
+    "Tom Willander (lower body, out)",
+    "Akil Thomas (IR)",
+    "Mackenzie MacEachern (IR)",
+    "Thatcher Demko (hip, IR)"
    ]
   },
   "VGK": {
@@ -1173,16 +1536,51 @@
      "source": "Golden Knights",
      "url": "https://www.nhl.com/goldenknights/news/morning-skate-report-nov-8-2026",
      "date": "2026-11-08"
+    },
+    {
+     "title": "Tomas Hertl scores twice as Golden Knights beat Sabres 4-1 for third straight win",
+     "summary": "— Tomas Hertl scored two goals and the Vegas Golden Knights won their third straight game, 4-1 over the Buffalo Sabres on Sunday.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892675",
+     "date": "2026-11-08"
     }
    ],
    "injuries": [
-    "Parker Wotherspoon (undisclosed, IR, estimated return Nov. 8)"
+    "Parker Wotherspoon (IR)"
    ]
   },
   "WPG": {
    "headline": "The Jets host Tampa Bay on Sunday after a 6-2 win over Vancouver on Thursday.",
    "game": "Next: Sun Nov 08, 6:00 PM ET vs TBL, Canada Life Centre (TSN3, The Spot). Stuart Skinner projected to start.",
    "items": [
+    {
+     "title": "Jets disappointed ex-goalie Connor Hellebuyck sitting out",
+     "summary": "The Jets are disappointed they won't get closure for the departure of ex-goalie Connor Hellebuyck as he won't be starting for the Devils when they play in Winnipeg on Tuesday.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50435073/jets-disappointed-ex-goalie-connor-hellebuyck-sitting-out",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Devils visit the Jets after Meier's 2-goal game",
+     "summary": "New Jersey Devils (13-5, in the Metropolitan Division) vs. Winnipeg Jets (7-8-3, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892688",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Connor Hellebuyck won't play in return to Winnipeg with Devils",
+     "summary": "The Devils announced Connor Hellebuyck will not face the Jets on Tuesday night in his first trip to Winnipeg since his contentious trade demand was granted.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50429372/connor-hellebuyck-play-winnipeg-return-devils",
+     "date": "2026-11-09"
+    },
+    {
+     "title": "Scheifele scores on power play with 1.6 seconds left to lift Jets past Lightning, 4-3",
+     "summary": "— Mark Scheifele scored on a 5-on-3 power play with 1.6 seconds left and the Winnipeg Jets beat the Tampa Bay Lightning 4-3 on Sunday after blowing a late three-goal lead.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892677",
+     "date": "2026-11-09"
+    },
     {
      "title": "Skinner projected against Lightning",
      "summary": "Paul Edmonds projected Stuart Skinner to start with lines unchanged. Kyle Connor leads the Jets with 13 goals and 19 points.",
@@ -1198,29 +1596,38 @@
      "date": "2026-11-08"
     },
     {
+     "title": "Tampa Bay visits Winnipeg after shootout victory",
+     "summary": "Tampa Bay Lightning (11-3-2, in the Atlantic Division) vs. Winnipeg Jets (6-8-3, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892677",
+     "date": "2026-11-08"
+    },
+    {
      "title": "Morrissey sheds non-contact sweater",
      "summary": "Josh Morrissey practiced in a regular sweater on Nov. 7. He has been out since a wrist injury on Oct. 7.",
      "source": "TSN",
      "url": "https://www.tsn.ca/nhl/article/jets-d-morrissey-wrist-sheds-non-contact-sweater-as-he-nears-return/",
      "date": "2026-11-07"
-    },
-    {
-     "title": "Namestnikov still out",
-     "summary": "Vladislav Namestnikov was hurt in practice on Oct. 15. Scott Arniel said he was still wearing a brace.",
-     "source": "SSBCrack News",
-     "url": "https://news.ssbcrack.com/jets-josh-morrissey-to-join-road-trip-vlad-namestnikov-still-out/",
-     "date": "2026-10-30"
     }
    ],
    "injuries": [
-    "Josh Morrissey (wrist, nearing return)",
-    "Vladislav Namestnikov (undisclosed, wearing a brace, no timeline)"
+    "Josh Morrissey (wrist, IR)",
+    "Elias Salomonsson (IR)",
+    "Vladislav Namestnikov (IR)",
+    "Nick Bjugstad (pectoral, IR)"
    ]
   },
   "WSH": {
    "headline": "The Capitals beat Florida 4-3 at home on Saturday to end a two-game losing streak.",
    "game": "Next: Tue Nov 10, 7:00 PM ET at Ottawa Senators, Canadian Tire Centre (MNMT, RDS2, TSN5). Starter not announced.",
    "items": [
+    {
+     "title": "Senators and Capitals face off in Eastern Conference action",
+     "summary": "Washington Capitals (9-6, in the Metropolitan Division) vs. Ottawa Senators (11-6-1, in the Atlantic Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892685",
+     "date": "2026-11-09"
+    },
     {
      "title": "Capitals rally with three straight, hold off Panthers",
      "summary": "Jack St. Ivany scored his first NHL goal and Alex Tuch, Aliaksei Protas and Pierre-Luc Dubois also scored in a 4-3 win. Logan Thompson made 27 saves and Tom Wilson got a boarding major and game misconduct for a hit on Sandis Vilmanis.",
@@ -1251,8 +1658,9 @@
     }
    ],
    "injuries": [
-    "Rasmus Sandin (knee, LTIR, not before late December)",
-    "Vincent Desharnais (appendectomy, IR, expected to miss about 4-6 weeks as of Nov 1)"
+    "Rasmus Sandin (knee, IR)",
+    "Vincent Desharnais (IR)",
+    "Patrick Thomas (IR)"
    ]
   }
  }

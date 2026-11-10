@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T17:10:00-05:00",
+ "updated": "2026-11-10T00:53:25-05:00",
  "teams": {
   "BOS": {
    "name": "Boston Bruins",
@@ -7,7 +7,7 @@
    "coach": "Marco Sturm",
    "gm": "Don Sweeney",
    "captain": 8477956,
-   "linesAsOf": "Nov 8 vs FLA game lineup, per NHL.com 'Need to Know: Bruins vs. Panthers' (Sturm's game-day lineup); no projection yet for Nov 12 vs MTL",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8482175,
@@ -49,10 +49,7 @@
     8480022
    ],
    "out": [
-    8485395,
-    8476374,
-    8481219,
-    8477365
+    8485395
    ],
    "extras": [],
    "players": {
@@ -381,22 +378,22 @@
    "coach": "Jim Hiller",
    "gm": "John Chayka",
    "captain": 8479318,
-   "linesAsOf": "Nov 8 vs NJD, forwards per Daily Faceoff (updated Nov 8) and New Jersey Hockey Now projection; defence projected with Mermis and McWard in for Rielly and Tanev (Toronto Hockey Daily, citing Mark Masters), pairs not confirmed",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8484158,
      8479318,
-     8478458
+     8476925
     ],
     [
+     8486067,
      8475166,
-     8477426,
      8477939
     ],
     [
      8478057,
-     8476925,
-     8486067
+     8477426,
+     8479968
     ],
     [
      8479520,
@@ -419,24 +416,31 @@
     ]
    ],
    "goalies": [
-    8476932,
-    8475683
+    8475683,
+    8476932
    ],
    "out": [
     8476853,
-    8475690,
+    8478458,
     8480893,
     8477425,
     8483565,
     8483546,
-    8480870,
-    8482515
+    8477503,
+    8481570,
+    8478007,
+    8482174,
+    8475690
    ],
    "extras": [
     8480870,
     8482515,
     8484287,
-    8479968
+    8479968,
+    8477503,
+    8481570,
+    8478007,
+    8482174
    ],
    "players": {
     "8479318": {
@@ -829,7 +833,7 @@
    "coach": "Joel Quenneville",
    "captain": null,
    "detail": "news",
-   "linesAsOf": "Projected for Nov 8 vs PIT (NHL.com projected lineups; Daily Faceoff from Nov 6 game)",
+   "linesAsOf": "DailyFaceoff Nov 8",
    "lines": [
     [
      8473986,
@@ -844,7 +848,7 @@
     [
      8484201,
      8485512,
-     8482118
+     8478366
     ],
     [
      8482408,
@@ -858,26 +862,23 @@
      8481563
     ],
     [
-     8484262,
-     8483482
-    ],
-    [
      8483490,
      8483521
+    ],
+    [
+     8484262,
+     8483482
     ]
    ],
    "goalies": [
-    8478024,
-    8476316
+    8476316,
+    8478024
    ],
    "out": [
-    8480843,
-    8478366,
-    8482731,
+    8478421,
     8478873,
     8482178,
-    8480068,
-    8478421
+    8480068
    ],
    "players": {
     "8480843": {
@@ -924,7 +925,7 @@
    "coach": "Lindy Ruff",
    "captain": 8480064,
    "detail": "news",
-   "linesAsOf": "Nov 8 vs VGK, Die by the Blade projected lineup (matches Daily Faceoff from Nov 6 vs CBJ)",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8484145,
@@ -949,29 +950,27 @@
    ],
    "pairs": [
     [
-     8480839,
-     8480807
+     8480807,
+     8480839
     ],
     [
-     8482803,
+     8479982,
      8482671
     ],
     [
-     8484305,
-     8479982
+     8482803,
+     8484305
     ]
    ],
    "goalies": [
-    8481551,
-    8480045
+    8480045,
+    8481551
    ],
    "out": [
     8484797,
     8479941,
-    8476891,
     8479312,
-    8480802,
-    8481806
+    8476891
    ],
    "players": {
     "8484797": {
@@ -1013,7 +1012,7 @@
    "coach": "Rod Brind'Amour",
    "captain": 8473533,
    "detail": "news",
-   "linesAsOf": "Nov 7 vs CHI (9-2 W); Daily Faceoff lines (Walt Ruff), Nikishin debut confirmed by NHL.com recap",
+   "linesAsOf": "DailyFaceoff Nov 8",
    "lines": [
     [
      8477478,
@@ -1087,7 +1086,7 @@
    "coach": "Rick Bowness",
    "captain": null,
    "detail": "news",
-   "linesAsOf": "Nov 6 at BUF as played (Columbus Dispatch line notes, CBS box score; 4th-line order inferred)",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8482720,
@@ -1097,7 +1096,7 @@
     [
      8477501,
      8484166,
-     8478856
+     8481716
     ],
     [
      8482705,
@@ -1105,9 +1104,9 @@
      8479671
     ],
     [
-     8481716,
      8485469,
-     8478904
+     8478904,
+     8479066
     ]
    ],
    "pairs": [
@@ -1120,15 +1119,17 @@
      8483485
     ],
     [
-     8481161,
-     8479371
+     8479371,
+     8475790
     ]
    ],
    "goalies": [
-    8482982,
-    8475660
+    8475660,
+    8482982
    ],
-   "out": [],
+   "out": [
+    8480806
+   ],
    "players": {
     "8477497": {
      "status": "Day-to-day",
@@ -1156,7 +1157,9 @@
      "story": "Erik Gudbranson was a scratch on Nov. 6."
     }
    },
-   "extras": []
+   "extras": [
+    8480806
+   ]
   },
   "CGY": {
    "name": "Calgary Flames",
@@ -1164,7 +1167,7 @@
    "coach": "Ryan Huska",
    "captain": 8474150,
    "detail": "news",
-   "linesAsOf": "Projected for Nov 8 vs PHI (Daily Faceoff via Pat Steinberg, Nov 8; NHL.com)",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8480797,
@@ -1206,12 +1209,11 @@
     8481692
    ],
    "out": [
+    8482747,
     8480860,
     8476456,
-    8484180,
-    8482747,
-    8484958,
-    8481167
+    8482074,
+    8484180
    ],
    "players": {
     "8480860": {
@@ -1245,7 +1247,9 @@
      "story": "Pachal was recalled from AHL Calgary on Sunday but is not expected to play."
     }
    },
-   "extras": []
+   "extras": [
+    8482074
+   ]
   },
   "CHI": {
    "name": "Chicago Blackhawks",
@@ -1253,52 +1257,50 @@
    "coach": "Jeff Blashill",
    "captain": 8484144,
    "detail": "news",
-   "linesAsOf": "Nov 7 at CAR (projected) - Daily Faceoff via Ben Pope, NHL.com and Chicago Hockey Now",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
-     8477479,
+     8484390,
      8484144,
-     8484390
+     8477479
+    ],
+    [
+     8478233,
+     8485391,
+     8476882
     ],
     [
      8484197,
-     8485391,
-     8483493
-    ],
-    [
-     8476882,
-     8483450,
+     8483493,
      8477987
     ],
     [
      8482062,
-     8478413,
-     8485554
+     8483450,
+     8478413
     ]
    ],
    "pairs": [
-    [
-     8482176,
-     8484783
-    ],
     [
      8481568,
      8474013
     ],
     [
-     8483466,
+     8482807,
+     8484783
+    ],
+    [
+     8482176,
      8483506
     ]
    ],
    "goalies": [
     8481519,
-    8482821
+    8482123
    ],
    "out": [
     8474141,
-    8481524,
-    8478233,
-    8482807
+    8481524
    ],
    "players": {
     "8474141": {
@@ -1330,7 +1332,7 @@
    "coach": "Jared Bednar",
    "captain": 8476455,
    "detail": "news",
-   "linesAsOf": "Projected and expected unchanged for Nov 7 vs DET (4-0 win); NHL.com preview Nov 7 and Daily Faceoff",
+   "linesAsOf": "DailyFaceoff Nov 8",
    "lines": [
     [
      8477476,
@@ -1395,7 +1397,7 @@
    "coach": "Glen Gulutzan",
    "captain": 8473994,
    "detail": "news",
-   "linesAsOf": "Nov 7 vs SJS (4-3 W); Daily Faceoff (Robert Tiffin) and NHL.com preview. Third pair was Trey Taylor-Myers; Taylor is not on the roster file, so Heiskanen fills the slot as a placeholder.",
+   "linesAsOf": "DailyFaceoff Nov 8",
    "lines": [
     [
      8473994,
@@ -1436,10 +1438,11 @@
     8479193
    ],
    "out": [
-    8475168,
-    8480840,
+    8480036,
     8478476,
-    8480036
+    8480840,
+    8475168,
+    8484822
    ],
    "players": {
     "8480036": {
@@ -1468,7 +1471,9 @@
      "story": "Healthy scratch against San Jose."
     }
    },
-   "extras": []
+   "extras": [
+    8484822
+   ]
   },
   "DET": {
    "name": "Detroit Red Wings",
@@ -1476,7 +1481,7 @@
    "coach": "Todd McLellan",
    "captain": null,
    "detail": "news",
-   "linesAsOf": "Nov 7 at COL (0-4 L); Daily Faceoff (Ansar Khan) and Inside The Rink projected lines",
+   "linesAsOf": "DailyFaceoff Nov 8",
    "lines": [
     [
      8479337,
@@ -1514,14 +1519,15 @@
     ]
    ],
    "goalies": [
-    8480193,
-    8485545
+    8476434,
+    8480193
    ],
    "out": [
-    8476434,
+    8481607,
     8483464,
     8478891,
-    8481607
+    8477946,
+    8482762
    ],
    "players": {
     "8476434": {
@@ -1555,7 +1561,10 @@
      "story": "Did not dress in Colorado."
     }
    },
-   "extras": []
+   "extras": [
+    8477946,
+    8482762
+   ]
   },
   "EDM": {
    "name": "Edmonton Oilers",
@@ -1563,7 +1572,7 @@
    "coach": "Mike Babcock",
    "captain": 8478402,
    "detail": "news",
-   "linesAsOf": "Nov 7 vs VAN (4-2 win); NHL.com projected lineup, confirmed against ESPN box score",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8481617,
@@ -1576,12 +1585,12 @@
      8475786
     ],
     [
-     8479368,
+     8480029,
      8477450,
      8478472
     ],
     [
-     8480029,
+     8479368,
      8486161,
      8479365
     ]
@@ -1605,14 +1614,12 @@
     8477465
    ],
    "out": [
-    8475883,
+    8482703,
     8483455,
-    8477406,
     8480831,
     8483512,
-    8482703,
-    8480842,
-    8478013
+    8475883,
+    8477406
    ],
    "players": {
     "8476454": {
@@ -1669,7 +1676,7 @@
    "coach": "Paul Maurice",
    "captain": 8477493,
    "detail": "news",
-   "linesAsOf": "Nov 8 at BOS, NHL.com projected lineup (Vilmanis out); 4th-line center not named, Devine is a placeholder",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8480801,
@@ -1683,12 +1690,12 @@
     ],
     [
      8480185,
-     8481655,
+     8482113,
      8481133
     ],
     [
      8478147,
-     8483433,
+     8481655,
      8477903
     ]
    ],
@@ -1702,8 +1709,8 @@
      8477495
     ],
     [
-     8475179,
-     8484304
+     8484304,
+     8475462
     ]
    ],
    "goalies": [
@@ -1711,12 +1718,10 @@
     8481033
    ],
    "out": [
-    8477493,
-    8473419,
-    8479981,
-    8482113,
     8483771,
-    8475462
+    8473419,
+    8477493,
+    8479981
    ],
    "players": {
     "8477493": {
@@ -1758,7 +1763,7 @@
    "coach": "Peter Laviolette",
    "captain": 8474563,
    "detail": "news",
-   "linesAsOf": "Projected for Nov 7 vs PIT (5-2 loss); LA Kings Insider preview Nov 7",
+   "linesAsOf": "DailyFaceoff Nov 8",
    "lines": [
     [
      8478550,
@@ -1771,14 +1776,14 @@
      8470621
     ],
     [
-     8481732,
-     8476872,
-     8481532
-    ],
-    [
      8475287,
      8483675,
      8476469
+    ],
+    [
+     8481732,
+     8476872,
+     8481532
     ]
    ],
    "pairs": [
@@ -1800,11 +1805,10 @@
     8476341
    ],
    "out": [
-    8477942,
     8475692,
-    8482160,
-    8482726,
-    8476879
+    8477942,
+    8484163,
+    8480890
    ],
    "players": {
     "8477942": {
@@ -1833,7 +1837,10 @@
      "story": "Ceci was listed as a healthy scratch for Nov. 7."
     }
    },
-   "extras": []
+   "extras": [
+    8484163,
+    8480890
+   ]
   },
   "MIN": {
    "name": "Minnesota Wild",
@@ -1841,7 +1848,7 @@
    "coach": "John Hynes",
    "captain": 8474716,
    "detail": "news",
-   "linesAsOf": "Nov 7 vs TBL (3-4 OT L); Daily Faceoff (Nov 5) adjusted per The Hockey News lineup changes",
+   "linesAsOf": "DailyFaceoff Nov 8",
    "lines": [
     [
      8478864,
@@ -1884,9 +1891,9 @@
    ],
    "out": [
     8477446,
+    8479406,
     8474716,
-    8482122,
-    8479406
+    8482122
    ],
    "players": {
     "8477446": {
@@ -1928,7 +1935,7 @@
    "coach": "Martin St. Louis",
    "captain": 8480018,
    "detail": "news",
-   "linesAsOf": "Nov 7 at TOR (projected) - Daily Faceoff line combinations, updated 2026-11-07; NHL.com projected lineups",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8481540,
@@ -1936,19 +1943,19 @@
      8483515
     ],
     [
-     8475184,
-     8478133,
-     8483424
-    ],
-    [
      8482737,
      8476479,
      8480074
     ],
     [
-     8481618,
+     8481523,
      8482775,
-     8481523
+     8481618
+    ],
+    [
+     8475184,
+     8478133,
+     8476981
     ]
    ],
    "pairs": [
@@ -1971,10 +1978,10 @@
    ],
    "out": [
     8484984,
-    8478470,
     8476875,
-    8476981,
-    8484403
+    8478470,
+    8485218,
+    8483549
    ],
    "players": {
     "8484984": {
@@ -2003,7 +2010,10 @@
      "story": "He was a healthy scratch Nov 7 at Toronto."
     }
    },
-   "extras": []
+   "extras": [
+    8485218,
+    8483549
+   ]
   },
   "NJD": {
    "name": "New Jersey Devils",
@@ -2011,7 +2021,7 @@
    "coach": "Sheldon Keefe",
    "captain": 8480002,
    "detail": "news",
-   "linesAsOf": "Projected for Nov 8 at TOR, from Nov 7 game lines (Daily Faceoff / New Jersey Hockey Now)",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8478414,
@@ -2049,11 +2059,11 @@
     ]
    ],
    "goalies": [
-    8476945,
-    8474596
+    8474596,
+    8476945
    ],
    "out": [
-    8475455
+    8483429
    ],
    "players": {
     "8475455": {
@@ -2062,7 +2072,9 @@
      "story": "Dillon is listed as the scratch on defense for the game at Toronto."
     }
    },
-   "extras": []
+   "extras": [
+    8483429
+   ]
   },
   "NSH": {
    "name": "Nashville Predators",
@@ -2070,7 +2082,7 @@
    "coach": "Andrew Brunette",
    "captain": 8474600,
    "detail": "news",
-   "linesAsOf": "Nov 7 vs STL, NHL.com projected lineups and Daily Faceoff (updated Nov 6)",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8474564,
@@ -2083,14 +2095,14 @@
      8481535
     ],
     [
-     8483513,
-     8477021,
-     8486189
-    ],
-    [
      8479525,
      8480835,
      8481726
+    ],
+    [
+     8483513,
+     8477021,
+     8486189
     ]
    ],
    "pairs": [
@@ -2145,20 +2157,20 @@
    "coach": "Pete DeBoer",
    "captain": 8477500,
    "detail": "news",
-   "linesAsOf": "Nov 7 vs NJD (projected) - Daily Faceoff via Stefen Rosner and NHL.com projected lineups",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
-     8482476,
+     8481601,
      8477500,
      8475151
     ],
     [
-     8476292,
+     8482476,
      8475170,
      8485388
     ],
     [
-     8481601,
+     8476292,
      8476419,
      8477407
     ],
@@ -2187,11 +2199,11 @@
     8473575
    ],
    "out": [
-    8477506,
     8481711,
+    8478445,
+    8477506,
     8484221,
-    8481014,
-    8476429
+    8481014
    ],
    "players": {
     "8477506": {
@@ -2220,7 +2232,9 @@
      "story": "He was a healthy scratch Nov 7 as Ben Hutton made his Islanders debut."
     }
    },
-   "extras": []
+   "extras": [
+    8478445
+   ]
   },
   "NYR": {
    "name": "New York Rangers",
@@ -2228,27 +2242,27 @@
    "coach": "Mike Sullivan",
    "captain": 8476468,
    "detail": "news",
-   "linesAsOf": "Nov 7 at SEA, NHL.com projected lineups; matches Daily Faceoff (updated Nov 6)",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
-     8481604,
+     8484210,
      8476459,
      8482109
     ],
     [
      8481789,
      8476468,
-     8484210
+     8481604
     ],
     [
-     8480009,
      8482157,
+     8483690,
      8477416
     ],
     [
-     8482877,
-     8483690,
-     8482460
+     8480009,
+     8476822,
+     8482877
     ]
    ],
    "pairs": [
@@ -2261,7 +2275,7 @@
      8482073
     ],
     [
-     8485957,
+     8481525,
      8482666
     ]
    ],
@@ -2270,9 +2284,11 @@
     8476914
    ],
    "out": [
+    8485957,
+    8480434,
     8478048,
     8480813,
-    8480434,
+    8483685,
     8483669
    ],
    "players": {
@@ -2307,7 +2323,9 @@
      "story": "Robertson was projected as a scratch at Seattle on Nov 7."
     }
    },
-   "extras": []
+   "extras": [
+    8483685
+   ]
   },
   "OTT": {
    "name": "Ottawa Senators",
@@ -2315,7 +2333,7 @@
    "coach": "Travis Green",
    "captain": 8478469,
    "detail": "news",
-   "linesAsOf": "Nov 7 vs UTA (game lineup) - Daily Faceoff via Andrew Wilimek; Philip Tomasino (L2 LW) and Sammy Blais (L4 LW) are not on roster file, slots left null",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8476393,
@@ -2346,21 +2364,18 @@
      8481606
     ],
     [
-     8484321,
-     8484759
+     8482095,
+     8484321
     ]
    ],
    "goalies": [
-    8481035,
-    8477992
+    8476999,
+    8481035
    ],
    "out": [
-    8476999,
-    8482667,
-    8477998,
     8477444,
-    8482092,
-    8482095
+    8477998,
+    8482667
    ],
    "players": {
     "8476999": {
@@ -2402,22 +2417,22 @@
    "coach": "Rick Tocchet",
    "captain": 8476461,
    "detail": "news",
-   "linesAsOf": "Projected for Nov 8 at CGY (NHL.com projected lineups / Daily Faceoff, Saturday practice)",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
-     8482159,
+     8478047,
      8477989,
+     8480015
+    ],
+    [
+     8482159,
+     8481533,
      8478439
     ],
     [
      8485406,
      8480220,
      8484387
-    ],
-    [
-     8481533,
-     8483787,
-     8480015
     ],
     [
      8484142,
@@ -2440,14 +2455,12 @@
     ]
    ],
    "goalies": [
-    8478435,
-    8479361
+    8479361,
+    8478435
    ],
    "out": [
     8477499,
-    8483733,
-    8483460,
-    8478047
+    8483733
    ],
    "players": {
     "8477499": {
@@ -2479,12 +2492,12 @@
    "coach": "Dan Muse",
    "captain": 8471675,
    "detail": "news",
-   "linesAsOf": "Projected for Nov 8 at ANA (NHL.com projected lineups / Pittsburgh Hockey Now)",
+   "linesAsOf": "DailyFaceoff Nov 8",
    "lines": [
     [
-     8476483,
+     8471215,
      8471675,
-     8471215
+     8476483
     ],
     [
      8478438,
@@ -2492,7 +2505,7 @@
      8482475
     ],
     [
-     8482758,
+     8483808,
      8482148,
      8479638
     ],
@@ -2504,12 +2517,12 @@
    ],
    "pairs": [
     [
-     8481056,
-     8474578
-    ],
-    [
      8479398,
      8481527
+    ],
+    [
+     8481056,
+     8474578
     ],
     [
      8483398,
@@ -2521,11 +2534,10 @@
     8483703
    ],
    "out": [
-    8475810,
-    8477845,
+    8482758,
     8481725,
-    8483808,
-    8482470
+    8475810,
+    8477845
    ],
    "players": {
     "8475810": {
@@ -2562,7 +2574,7 @@
    "coach": "Lane Lambert",
    "captain": 8474586,
    "detail": "news",
-   "linesAsOf": "Nov 7 vs NYR, NHL.com projected lineups and Daily Faceoff (updated Nov 6)",
+   "linesAsOf": "DailyFaceoff Nov 8",
    "lines": [
     [
      8482259,
@@ -2604,10 +2616,11 @@
     8475831
    ],
    "out": [
+    8480876,
     8477955,
-    8479324,
     8482874,
-    8480876
+    8479324,
+    8485383
    ],
    "players": {
     "8477955": {
@@ -2649,7 +2662,7 @@
    "coach": "Ryan Warsofsky",
    "captain": null,
    "detail": "news",
-   "linesAsOf": "Nov 7 at DAL (3-4 L); NHL.com projected lineup and Daily Faceoff (Sheng Peng)",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8485402,
@@ -2658,7 +2671,7 @@
     ],
     [
      8478975,
-     8484911,
+     8477505,
      8480748
     ],
     [
@@ -2669,17 +2682,17 @@
     [
      8476624,
      8482859,
-     8478874
+     8484911
     ]
    ],
    "pairs": [
     [
-     8484806,
-     8476885
-    ],
-    [
      8477498,
      8480891
+    ],
+    [
+     8484806,
+     8476885
     ],
     [
      8475200,
@@ -2687,12 +2700,13 @@
     ]
    ],
    "goalies": [
-    8477968,
-    8482137
+    8482137,
+    8477968
    ],
    "out": [
-    8477505,
-    8484994
+    8484994,
+    8484200,
+    8480356
    ],
    "players": {
     "8477505": {
@@ -2716,7 +2730,10 @@
      "story": "Recalled Oct. 28 and scratched in Dallas."
     }
    },
-   "extras": []
+   "extras": [
+    8484200,
+    8480356
+   ]
   },
   "STL": {
    "name": "St. Louis Blues",
@@ -2724,7 +2741,7 @@
    "coach": "Jim Montgomery",
    "captain": 8480023,
    "detail": "news",
-   "linesAsOf": "Nov 7 at NSH, NHL.com projected lineups; matches Daily Faceoff (updated Nov 7)",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8482077,
@@ -2732,13 +2749,13 @@
      8483516
     ],
     [
-     8481580,
+     8482089,
      8482745,
-     8483463
+     8481013
     ],
     [
-     8482089,
      8484164,
+     8481580,
      8477402
     ],
     [
@@ -2750,7 +2767,7 @@
    "pairs": [
     [
      8481598,
-     8478443
+     8482733
     ],
     [
      8482111,
@@ -2758,7 +2775,7 @@
     ],
     [
      8475764,
-     8484790
+     8478443
     ]
    ],
    "goalies": [
@@ -2766,9 +2783,9 @@
     8476412
    ],
    "out": [
-    8481006,
+    8476792,
     8479346,
-    8482733
+    8481006
    ],
    "players": {
     "8481006": {
@@ -2797,7 +2814,9 @@
      "story": "Lindstein was projected as a scratch at Nashville on Nov 7."
     }
    },
-   "extras": []
+   "extras": [
+    8476792
+   ]
   },
   "TBL": {
    "name": "Tampa Bay Lightning",
@@ -2805,7 +2824,7 @@
    "coach": "Jon Cooper",
    "captain": 8475167,
    "detail": "news",
-   "linesAsOf": "Nov 8 at WPG, Paul Edmonds (Jets broadcaster) projected lines",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8477404,
@@ -2830,28 +2849,23 @@
    ],
    "pairs": [
     [
-     8475167,
-     8482655
-    ],
-    [
      8474151,
      8478416
     ],
     [
-     8480426,
-     8474590
+     8474590,
+     8480426
+    ],
+    [
+     8475167,
+     8482655
     ]
    ],
    "goalies": [
     8476883,
     8483710
    ],
-   "out": [
-    8476826,
-    8483752,
-    8481719,
-    8482929
-   ],
+   "out": [],
    "players": {
     "8476826": {
      "status": "Injured",
@@ -2882,7 +2896,7 @@
    "coach": "Andre Tourigny",
    "captain": 8479343,
    "detail": "news",
-   "linesAsOf": "Nov 7 at OTT (game lineup) - Daily Faceoff from Utah Mammoth post; Artyom Duda (not on roster file) played LD on pair 3, slot left null",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8475314,
@@ -2890,14 +2904,14 @@
      8479343
     ],
     [
-     8480855,
-     8477951,
-     8482699
-    ],
-    [
      8483431,
      8476389,
      8478474
+    ],
+    [
+     8480855,
+     8477951,
+     8482699
     ],
     [
      8479619,
@@ -2919,15 +2933,14 @@
     ]
    ],
    "goalies": [
-    8478872,
-    8482657
+    8482657,
+    8478872
    ],
    "out": [
-    8478507,
-    8479977,
     8477220,
-    8483472,
-    8485010
+    8479977,
+    8478507,
+    8483472
    ],
    "players": {
     "8478507": {
@@ -2964,27 +2977,27 @@
    "coach": "Manny Malhotra",
    "captain": null,
    "detail": "news",
-   "linesAsOf": "Nov 7 at EDM (2-4 loss); forwards from NHL.com preview and Sportsnaut, D group per ESPN box score (Brisebois played, Willander did not), pair order partly inferred",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
-     8483395,
+     8483476,
      8480012,
      8478444
     ],
     [
+     8478498,
+     8481032,
+     8483395
+    ],
+    [
      8483499,
      8482079,
-     8481024
+     8475848
     ],
     [
      8482055,
      8484136,
-     8475848
-    ],
-    [
-     8478498,
-     8481032,
-     8483476
+     8481024
     ]
    ],
    "pairs": [
@@ -2994,10 +3007,10 @@
     ],
     [
      8476467,
-     8483678
+     8478465
     ],
     [
-     8478465,
+     8483678,
      8474568
     ]
    ],
@@ -3006,11 +3019,11 @@
     8480947
    ],
    "out": [
-    8477967,
     8480078,
     8484240,
-    8483768,
-    8484901
+    8480851,
+    8476907,
+    8477967
    ],
    "players": {
     "8477967": {
@@ -3039,7 +3052,10 @@
      "story": "Quillan was a healthy scratch on Nov. 7 as Arshdeep Bains returned."
     }
    },
-   "extras": []
+   "extras": [
+    8480851,
+    8476907
+   ]
   },
   "VGK": {
    "name": "Vegas Golden Knights",
@@ -3047,27 +3063,27 @@
    "coach": "Ryan Craig",
    "captain": 8475913,
    "detail": "news",
-   "linesAsOf": "Nov 8 at BUF, The Hockey News projected lines (match Daily Faceoff from Nov 5 at DET)",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
-     8479353,
+     8484803,
      8478403,
      8475913
     ],
     [
-     8477964,
+     8479353,
      8476448,
      8478483
     ],
     [
-     8484803,
+     8477964,
      8476881,
      8478109
     ],
     [
-     8483553,
+     8483890,
      8475343,
-     8483890
+     8483553
     ]
    ],
    "pairs": [
@@ -3089,8 +3105,7 @@
     8478499
    ],
    "out": [
-    8478450,
-    8481534
+    8478450
    ],
    "players": {
     "8478450": {
@@ -3112,7 +3127,7 @@
    "coach": "Scott Arniel",
    "captain": 8476392,
    "detail": "news",
-   "linesAsOf": "Nov 8 vs TBL, Paul Edmonds projected lines (match Daily Faceoff from Nov 5 vs VAN)",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8478398,
@@ -3137,15 +3152,15 @@
    ],
    "pairs": [
     [
+     8477504,
+     8476331
+    ],
+    [
      8480049,
      8480145
     ],
     [
      8479983,
-     8476331
-    ],
-    [
-     8477938,
      8482459
     ]
    ],
@@ -3154,11 +3169,9 @@
     8483532
    ],
    "out": [
-    8477504,
+    8483510,
     8476480,
-    8481567,
-    8482076,
-    8475799
+    8475760
    ],
    "players": {
     "8477504": {
@@ -3187,7 +3200,10 @@
      "story": "Not listed as starter or backup for Nov. 8."
     }
    },
-   "extras": []
+   "extras": [
+    8483510,
+    8475760
+   ]
   },
   "WSH": {
    "name": "Washington Capitals",
@@ -3195,7 +3211,7 @@
    "coach": "Spencer Carbery",
    "captain": 8471214,
    "detail": "news",
-   "linesAsOf": "Nov 7 vs FLA lineup, Daily Faceoff (updated Nov 7) and NHL.com projected lineups",
+   "linesAsOf": "DailyFaceoff Nov 9",
    "lines": [
     [
      8477949,

@@ -32,8 +32,8 @@
     if(d){if(/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName)&&d[0])return;if(move(d[0],d[1])){e.preventDefault();e.stopPropagation()}}
     else if(k==='Enter'||k==='OK'){var a=document.activeElement;if(a&&a!==document.body&&!/^(BUTTON|A|INPUT|SELECT|TEXTAREA)$/.test(a.tagName)){a.click();e.preventDefault()}}
   },true);
-  function depth(){return [].some.call(document.querySelectorAll('.drawer'),function(d){return !d.hidden})?1:0}
-  var last=-1;function report(){var d=depth();if(d!==last){last=d;parent.postMessage({nem:'guide',depth:d},'*')}}
+  function depth(){return ([].some.call(document.querySelectorAll('.drawer'),function(d){return !d.hidden})||(window.deckHasBack&&deckHasBack()))?1:0}
+  var last=-1;function report(){var d=depth();if(d!==last){last=d;parent.postMessage({nem:'guide',depth:d},'*')}}window.guideReport=report;
   new MutationObserver(function(){clearTimeout(window.__t);window.__t=setTimeout(function(){scan();report()},250)}).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden']});
   window.addEventListener('message',function(e){var m=e.data||{};if(!m.nem)return;
     if(m.cmd==='team'&&window.setTeam)setTeam(m.ab);

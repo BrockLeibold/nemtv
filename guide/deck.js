@@ -34,7 +34,7 @@
   function go(k, instant) {
     k = Math.max(0, Math.min(DEFS.length - 1, k)); cur = k;
     deck.style.scrollBehavior = "auto"; deck.scrollLeft = k * width();
-    mark(); sync();
+    mark(); sync(); if (k === 4) renderCal(); if (window.guideReport) guideReport();
   }
   deck.addEventListener("scroll", function () { var o = cur; mark(); if (o !== cur) sync(); });
   tabs.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) go(+b.dataset.slide); });
@@ -106,7 +106,7 @@
     var rs = document.documentElement.style; rs.setProperty("--tc", tc); rs.setProperty("--tc2", tc2); rs.setProperty("--tx", txt(tc)); rs.setProperty("--tx2", txt(tc2)); rs.setProperty("--lg", t.logo ? "url(" + t.logo + ")" : "none");
     var pl = function (id, pos) { var p = byId(id); if (!p) return '<span class="lp empty"></span>';
       var n = p.now, sx = !n || !n.gp ? "" : p.group === "G" ? n.w + "-" + n.l + "-" + n.otl + " " + sv(n.sv) : n.g + "G " + n.a + "A " + n.pts + "P";
-      var hs = 'https://assets.nhle.com/mugs/nhl/20252026/' + t.abbrev + '/' + p.id + '.png';
+      var hs = 'https://assets.nhle.com/mugs/nhl/20252026/' + state.team + '/' + p.id + '.png';
       return '<button type="button" class="lp' + (p.status && p.status !== "Active" ? " inj" : "") + '" data-id="' + p.id + '" aria-label="' + esc(p.first + " " + p.last) + '"><img class="ph" src="' + hs + '" data-f="' + phSrc(p) + '" onerror="this.onerror=null;this.src=this.dataset.f" alt=""><span class="tx"><i class="pp">' + pos + '</i><b class="no">' + (p.num == null ? "" : p.num) + '</b><span class="ln">' + dn(p.last) + (p.captain ? " ★" : "") + '</span><span class="sx">' + sx + "</span></span></button>"; };
     var row = function (h, ids, poss) { return '<div class="lrow"><h4>' + h + "</h4>" + ids.map(function (id, k) { return pl(id, poss[k]); }).join("") + "</div>"; };
     var F = t.lines.map(function (l, i) { return row("L" + (i + 1), l, ["LW", "C", "RW"]); }).join("");
@@ -127,38 +127,112 @@
     var sc = P.filter(function (p) { return p.group !== "G" && p.now && p.now.gp; }).sort(function (a, b) { return b.now.pts - a.now.pts || b.now.g - a.now.g; }).slice(0, 7);
     pn.innerHTML = '<div class="h3">Top cap hits<i>AAV · through</i></div><div class="mini">' + cap.map(function (p) { return row(p, money(p.contract.aav) + " · " + String(p.contract.ends).slice(0, 4) + "-" + String(p.contract.ends).slice(-2)); }).join("") + '</div><div class="h3">Scoring leaders<i>G · A · P</i></div><div class="mini">' + sc.map(function (p) { return row(p, p.now.g + " · " + p.now.a + " · " + p.now.pts); }).join("") + "</div>";
   }
+  /* ---- live NHL schedule for the current team. api-web.nhle.com sends no CORS header: on the TV the host fetches it (Android.get);
+     on the PC Electron runs with webSecurity off, so a plain fetch works. Falls back to the bundled schedule. ---- */
+  var nhlN = 0, LIVE = {}; // LIVE[abbr] = that team's games, in the bundled schedule's shape
+  function nhlGet(path, cb) {
+    var url = "https://api-web.nhle.com/" + path, A = null;
+    try { A = window.Android || (window.parent && window.parent.Android) || null; } catch (e) {}
+    if (A && A.get) { var name = "__nhl" + (++nhlN); window[name] = function (t, e) { try { delete window[name]; } catch (x) {} cb(t, e || ""); }; A.get(url, name); return; }
+    fetch(url).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }).then(function (t) { cb(t, ""); }).catch(function (e) { cb("", String(e)); });
+  }
+  function liveRows(j, ab) {
+    return (j.games || []).map(function (g) {
+      var home = g.homeTeam.abbrev === ab, us = home ? g.homeTeam : g.awayTeam, them = home ? g.awayTeam : g.homeTeam, o = g.gameOutcome && g.gameOutcome.lastPeriodType;
+      return { id: g.id, start: g.startTimeUTC, home: home, opp: them.abbrev, oppShort: (them.commonName && them.commonName.default) || them.abbrev, venue: (g.venue && g.venue.default) || "", state: g.gameState, us: us.score, them: them.score, ot: o === "OT" || o === "SO" ? o : "REG" };
+    });
+  }
+  function loadLive(ab) { // refresh every 10 minutes and on team change; a failed load keeps the last good data (or the bundled schedule)
+    if (!ab) return;
+    nhlGet("v1/club-schedule-season/" + ab + "/now", function (t, e) {
+      try { var j = JSON.parse(t); if (j && j.games && j.games.length) LIVE[ab] = liveRows(j, ab); } catch (x) { console.log("deck live " + ab + " " + (e || x)); }
+      if (typeof state !== "undefined" && state.team === ab) { renderOv(); renderCal(); }
+    });
+  }
+  var fin = function (g) { return g.state === "OFF" || g.state === "FINAL"; };
+  function teamGames(ab) {
+    if (LIVE[ab]) return LIVE[ab];
+    return (typeof DATA !== "undefined" && DATA && DATA.teams[ab] && DATA.teams[ab].schedule) || [];
+  }
+  function nextFor(ab) { return teamGames(ab).find(function (g) { return !fin(g); }) || null; }
+
+  /* ---- Games: one team, a month calendar (Mon-Sun), no scroll ---- */
+  var calM = null; // month shown: {y, m}
+  function renderCal() {
+    var s = $(".s-gm .si"); if (!s || typeof DATA === "undefined" || !DATA || typeof state === "undefined") return;
+    var c = $("#cal");
+    if (!c) { c = document.createElement("div"); c.id = "cal"; s.appendChild(c); c.addEventListener("click", calClick); }
+    var today = todayET();
+    if (!calM) calM = { y: +today.slice(0, 4), m: +today.slice(5, 7) - 1 };
+    var first = new Date(Date.UTC(calM.y, calM.m, 1)), lead = (first.getUTCDay() + 6) % 7, days = new Date(Date.UTC(calM.y, calM.m + 1, 0)).getUTCDate(), rows = Math.ceil((lead + days) / 7);
+    var byDay = {}; teamGames(state.team).forEach(function (g) { var d = etDay(g.start); (byDay[d] = byDay[d] || []).push(g); });
+    var title = first.toLocaleDateString("en-US", { timeZone: "UTC", month: "long", year: "numeric" }), cells = "";
+    for (var i = 0; i < rows * 7; i++) {
+      var n = i - lead + 1;
+      if (n < 1 || n > days) { cells += '<div class="cd out"></div>'; continue; }
+      var iso = calM.y + "-" + String(calM.m + 1).padStart(2, "0") + "-" + String(n).padStart(2, "0"), g = (byDay[iso] || [])[0], cls = "cd" + (iso === today ? " today" : ""), body = '<div class="cdr"><b class="dn">' + n + "</b></div>", attr = "";
+      if (g) {
+        var played = fin(g), lab = played ? (g.us > g.them ? "W " : "L ") + g.us + "-" + g.them + (g.ot !== "REG" ? " " + g.ot : "") : (g.home ? "vs " : "@ ") + esc(g.opp);
+        cls += " game" + (played ? " done" : ""); attr = ' data-gid="' + g.id + '"';
+        body = '<div class="cdr"><b class="dn">' + n + '</b><img src="logos/' + esc(g.opp) + '.svg" alt=""></div><span class="cl">' + lab + '</span><span class="ct">' + (played ? "Final" : new Date(g.start).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })) + "</span>";
+      }
+      cells += '<div class="' + cls + '"' + attr + ">" + body + "</div>";
+    }
+    var head = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(function (d) { return '<div class="cdh">' + d + "</div>"; }).join("");
+    c.innerHTML = '<div class="calbar"><button type="button" class="calnav" data-m="-1" aria-label="Previous month">&larr;</button><h3>' + esc(title) + '</h3><button type="button" class="calnav" data-m="1" aria-label="Next month">&rarr;</button></div>' +
+      '<div class="calg" style="grid-template-rows:auto repeat(' + rows + ',minmax(0,1fr))">' + head + cells + "</div>";
+  }
+  function calClick(e) {
+    var b = e.target.closest && e.target.closest(".calnav"), g = e.target.closest && e.target.closest("[data-gid]");
+    if (b) { var d = new Date(Date.UTC(calM.y, calM.m + (+b.dataset.m), 1)); calM = { y: d.getUTCFullYear(), m: d.getUTCMonth() }; renderCal(); return; }
+    // a played game opens the guide's game drawer (box score) when it has one in the bundled schedule; otherwise nothing
+    if (g && typeof SCHED !== "undefined" && SCHED && SCHED.games.some(function (x) { return x.id === +g.dataset.gid; })) openGame(+g.dataset.gid);
+  }
+
+  /* ---- Back: the player page first, then an open drawer (the guide's own Escape handler), then the previous slide; slide 1 goes to the host ---- */
+  function deckHasBack() { var pq = document.getElementById("pq"); return !!(pq && !pq.hidden) || cur > 0; }
+  window.deckHasBack = deckHasBack;
+  function deckBack() {
+    var pq = document.getElementById("pq");
+    if (pq && !pq.hidden) { closePlayer(); return true; }
+    if ($("#gdrawer:not([hidden]),#drawer:not([hidden]),#picker:not([hidden])")) return false;
+    if (cur > 0) { go(cur - 1); return true; }
+    return false;
+  }
+  document.addEventListener("keydown", function (e) { // capture: runs before the guide's own Escape handler, so one press closes one thing
+    if (e.defaultPrevented) return;
+    var back = e.key === "Escape" || e.key === "GoBack" || e.key === "BrowserBack" || e.keyCode === 4 || e.keyCode === 27;
+    if (back && deckBack()) { e.preventDefault(); e.stopImmediatePropagation(); if (window.guideReport) guideReport(); }
+  }, true);
+
   /* ---- Overview dashboard: team photo hero (or team-colour gradient) over frosted stat cards; "Next game" is the old #gameday ---- */
   var HM = null; // team hero photos, data/heroes.json
-  fetch("data/heroes.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (j) { HM = j; renderOv(); }).catch(function () { HM = {}; });
+  var HF = {}; // focus point per team, data/heroes_focus.json ("x% y%" background-position: the player's eyes)
+  fetch("data/heroes.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (j) { HM = j; renderOv(); }).catch(function () {});
+  fetch("data/heroes_focus.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (j) { HF = j; renderOv(); }).catch(function () {});
   function renderOv() {
     var s = $(".s-ov .si"); if (!s || typeof T !== "function" || typeof DATA === "undefined" || !DATA) return;
-    var t = T(), P = PL(), gd = $("#gameday"), h = $("#ov");
+    var t = T(), gd = $("#gameday"), h = $("#ov");
+    if (!t) return; // no team loaded yet: the next renderAll/renderOv call draws it
     if (gd) s.appendChild(gd); // park the next-game card so the rebuild below cannot destroy it
     if (!h) { h = document.createElement("div"); h.id = "ov"; s.insertBefore(h, s.firstChild); }
-    var sk = P.filter(function (p) { return p.group !== "G" && p.now && p.now.gp; });
-    var top = sk.slice().sort(function (a, b) { return b.now.pts - a.now.pts || b.now.g - a.now.g; })[0];
-    var gl = sk.slice().sort(function (a, b) { return b.now.g - a.now.g || b.now.pts - a.now.pts; })[0];
-    var face = function (p, c) { return p ? '<img class="' + c + '" src="https://assets.nhle.com/mugs/nhl/20252026/' + t.abbrev + "/" + p.id + '.png" data-f="' + phSrc(p) + '" onerror="this.onerror=null;this.src=this.dataset.f" alt="">' : ""; };
-    var photo = HM && HM[t.abbrev];
-    var bg = photo ? "background-image:linear-gradient(0deg,rgba(8,8,12,.92),rgba(8,8,12,.25) 60%,rgba(8,8,12,.1)),linear-gradient(90deg,rgba(8,8,12,.65),transparent 70%),url('" + photo + "')"
+    var photo = HM && HM[state.team]; // team hero photo, keyed by the current team code
+    var bg = photo ? "background-image:linear-gradient(0deg,rgba(8,8,12,.85),rgba(8,8,12,.15) 60%,rgba(8,8,12,.05)),url('" + photo + "');background-position:" + (HF[state.team] || "50% 30%")
       : "background-image:linear-gradient(160deg,var(--tc,#1B3A8A) 0%,#0a0a0d 92%)";
     var rank = (t.divRank ? ordinal(t.divRank) + " in " : "") + esc(t.division || "");
-    var hero = '<section class="ov-hero" style="' + bg + '">' + (!photo && t.logo ? '<img class="ov-bg" src="' + t.logo + '" alt="">' : "") + (!photo ? face(top, "ov-face") : "") +
-      '<div class="ov-id"><span class="ov-eye">' + rank + '</span><div class="ov-name">' + (t.logo ? '<img class="ov-logo" src="' + t.logo + '" alt="">' : "") + "<h2>" + esc(t.name) + "</h2></div></div></section>";
+    var hero = '<section class="ov-hero" style="' + bg + '"><div class="ov-id"><span class="ov-eye">' + rank + '</span><div class="ov-name"><h2>' + esc(t.name) + "</h2></div></div></section>";
     var card = function (lab, body, cls) { return '<div class="ovc' + (cls ? " " + cls : "") + '"><span class="ovl">' + lab + "</span>" + body + "</div>"; };
     var cards = [
       card("Record", '<b class="ovv">' + esc(t.record || "—") + '</b><span class="ovs">' + (t.gp != null ? t.gp + " games played" : "") + "</span>"),
       card("Points", '<b class="ovv">' + (t.points == null ? "—" : t.points) + '</b><span class="ovs">' + (t.divRank ? ordinal(t.divRank) + " in " + esc(t.division || "") : "") + "</span>"),
       card("Streak", '<b class="ovv">' + esc(t.streak || "—") + '</b><span class="ovs">L10 ' + esc(t.l10 || "—") + "</span>"),
-      card("Top scorer", '<div class="ovrow">' + face(top, "ovph") + '<div class="ovtxt"><b class="ovv">' + (top ? top.now.pts : "—") + '</b><span class="ovs">pts · ' + (top ? esc(top.first[0] + ". " + dn(top.last)) : "") + "</span></div></div>"),
-      card("Goals leader", '<b class="ovv">' + (gl ? gl.now.g : "—") + '</b><span class="ovs">goals · ' + (gl ? esc(gl.first[0] + ". " + dn(gl.last)) : "") + "</span>"),
       nextCard(t)
     ];
     h.innerHTML = hero + '<div class="ovcards">' + cards.join("") + "</div>";
   }
   // Next game card: plain text from nextGame() (the old orb is hidden on this slide, #gameday stays parked)
   function nextCard(t) {
-    var g = nextGame(t.abbrev), today = g && etDay(g.start) === todayET();
+    var g = nextFor(state.team), today = g && etDay(g.start) === todayET();
     return '<div class="ovc ovnext"><span class="ovl">' + (today ? "Game day" : "Next game") + "</span>" + (g ?
       '<div class="ovrow"><img class="ovlg" src="logos/' + esc(g.opp) + '.svg" alt=""><b class="ovv">' + (g.home ? "vs" : "at") + " " + esc(g.oppShort) + "</b></div>" +
       '<span class="ovs">' + (today ? "Tonight" : gDate(g)) + " · " + gTime(g) + " ET</span><span class=\"ovs\">" + esc(g.venue) + "</span>"
@@ -172,7 +246,7 @@
   wrapFn("renderAll", function () { extras(); fitSoon(); });
   wrapFn("renderGames", function () { var g = $("#mgrid"); if (g) g.dataset.n = g.querySelectorAll(".mc").length; fitSoon(); });
   var _setTeam = window.setTeam;
-  if (_setTeam) window.setTeam = function (ab) { return _setTeam(ab).then(function () { if (cur === 4) go(0); else fitSoon(); }); };
+  if (_setTeam) window.setTeam = function (ab) { return _setTeam(ab).then(function () { loadLive(ab); if (cur === 4) go(0); else fitSoon(); }); };
   var _setMode = window.setMode;
   if (_setMode) window.setMode = function (m, d) { var r = _setMode(m, d); if (m === "games" && booted && cur !== 4) go(4); fitSoon(); return r; };
   window.showMode = function () { // never hide a slide: only update the pressed states
@@ -190,6 +264,7 @@
   var tries = 0, iv = setInterval(function () {
     tries++; if (typeof DATA !== "undefined" && DATA && typeof renderAll === "function" && $("#h1") && $("#h1").textContent !== "NHL Teams" || tries > 150) {
       clearInterval(iv);
+      if (typeof state !== "undefined") { loadLive(state.team); setInterval(function () { loadLive(state.team); }, 600000); }
       if (typeof state !== "undefined") {
         if (state.mode === "games") { var wantGames = /^#games/i.test(H0); state.mode = "team"; try { renderAll(); } catch (e) { console.log("deck boot " + e); } if (wantGames) { booted = true; setMode("games", state.day); go(4); return; } }
         else { denseRoster(); extras(); }
@@ -240,7 +315,7 @@
       ["Role", p.role],
       ["Status", p.status]
     ].filter(function (r) { return r[1]; });
-    var photo = '<img class="pq-photo" alt="' + esc(p.first + " " + p.last) + '" src="https://assets.nhle.com/mugs/nhl/20252026/' + t.abbrev + "/" + p.id +
+    var photo = '<img class="pq-photo" alt="' + esc(p.first + " " + p.last) + '" src="https://assets.nhle.com/mugs/nhl/20252026/' + state.team + "/" + p.id +
       '.png" data-f="' + phSrc(p) + '" onerror="this.onerror=null;this.src=this.dataset.f">';
     el.innerHTML =
       '<div class="pq-bar"><button type="button" class="pq-btn pq-back">&larr; <span class="pq-lbl">Back</span></button>' +
@@ -265,11 +340,13 @@
         statRow("This season", p.now) + statRow("Last season", p.prev) + "</tbody></table></div>";
     el.style.setProperty("--tc", t.colors ? t.colors[0] : "#1B3A8A");
     el.hidden = false; el.scrollTop = 0; el.querySelector("#dClose").focus();
+    if (window.guideReport) guideReport();
   }
   openPlayer = pqOpen;
   closePlayer = function () {
     if (!box || box.hidden) return;
     state.open = null; box.hidden = true;
     if (lastFocus && document.body.contains(lastFocus)) lastFocus.focus();
+    if (window.guideReport) guideReport();
   };
 })();

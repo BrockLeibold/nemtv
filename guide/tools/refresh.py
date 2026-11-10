@@ -221,6 +221,8 @@ for i, ab in enumerate(teams):
         espn_names = {x[4] for x in entries}
         for p in dfo_ir:
             if norm(p['name']) in espn_names: continue
+            dpid = roster.find(p['name'], None)
+            if dpid and any(x[0] == dpid for x in entries): continue
             stt = (p.get('injuryStatus') or '').lower()
             entries.append((roster.find(p['name'], None), p['name'], {'ir': 'Injured Reserve'}.get(stt, stt), '', norm(p['name'])))
         out_ids = []

@@ -302,23 +302,48 @@ footer,.jump,#gamesBtn,#teamView{display:none!important}
   .pq-band{padding:12px 14px 22px;margin-top:14px}
   .pq-stats{min-width:380px}
 }
-/* Games slide: one team's month calendar (#cal), the guide's day grid is hidden */
+/* Games slide: one team's month calendar (#cal) + the selected day's games; the guide's day grid is hidden */
 .s-gm #gamesView{display:none!important}
-#cal{grid-column:1/-1;display:grid;grid-template-rows:auto minmax(0,1fr);gap:var(--g8);height:100%;min-height:0;min-width:0}
-.calbar{display:flex;align-items:center;justify-content:center;gap:var(--g12)}
-.calbar h3{margin:0;font:800 clamp(16px,3.8vh,26px)/1 var(--font-display);text-transform:uppercase;min-width:9em;text-align:center}
-.calnav{font:800 18px/1 var(--font-display);min-width:44px;min-height:36px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:inherit;cursor:pointer}
+#cal{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) clamp(190px,25%,270px);grid-template-rows:auto minmax(0,1fr);column-gap:var(--g12);row-gap:var(--g8);height:100%;min-height:0;min-width:0}
+.calbar{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:var(--g12);min-height:44px}
+.calbar h3{margin:0;font:800 clamp(16px,3.8vh,26px)/1 var(--font-display);text-transform:uppercase;min-width:9em;text-align:center;display:flex;align-items:center;justify-content:center}
+.calnav{flex:none;display:inline-grid;place-items:center;width:44px;height:44px;min-width:44px;margin:0;padding:0;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:inherit;cursor:pointer;line-height:0}
+.calnav svg{display:block;width:20px;height:20px}
 .calg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;min-height:0;height:100%}
 .cdh{font:700 12px/1 var(--font-sans);letter-spacing:.12em;text-transform:uppercase;opacity:.7;text-align:center;padding:2px 0}
-.cd{min-width:0;min-height:0;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.06);padding:4px 6px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;font:600 11px/1.15 var(--font-sans)}
+.cd{min-width:0;min-height:0;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:stretch;font:600 11px/1.15 var(--font-sans)}
 .cd.out{background:none}
 .cd.today{box-shadow:inset 0 0 0 2px var(--tc,#fff)}
-.cd.done{cursor:pointer}
-.cdr{display:flex;align-items:center;justify-content:space-between;gap:4px;min-width:0;width:100%}
-.cd .dn{font:800 12px/1 var(--font-sans);opacity:.75}
+.cd.sel{background:color-mix(in srgb,var(--ink,#fff) 16%,transparent);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--ink,#fff) 55%,transparent)}
+.cd.sel.today{box-shadow:inset 0 0 0 2px var(--tc,#fff)}
+.cdb,.cg{display:flex;margin:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;min-width:0;border-radius:10px}
+.cdb{flex:1 1 auto;align-items:flex-start;justify-content:space-between;gap:4px;padding:4px 6px 0;min-height:18px}
+.cd.game .cdb{flex:none}
+.cg{flex:1 1 auto;flex-direction:column;align-items:flex-start;gap:2px;padding:0 6px 4px}
+.cdb:focus-visible,.cg:focus-visible,.cr:focus-visible,.cs:focus-visible,.calnav:focus-visible{outline:3px solid #FF8A5B;outline-offset:-3px}
+.cd .dn{font:800 12px/1 var(--font-sans);opacity:.85}
 .cd img{height:clamp(14px,3.6vh,26px);width:auto}
 .cd .cl{font-weight:700}
 .cd .ct{opacity:.8}
+.calstrip{display:none}
+.calday{grid-column:2;grid-row:2;min-height:0;min-width:0;display:flex;flex-direction:column;gap:var(--g8);overflow-y:auto;scrollbar-width:none;padding:2px}
+.calday::-webkit-scrollbar{display:none}
+.calh{margin:0;font:700 12px/1.25 var(--font-sans);letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.calday .none{font-size:13px;opacity:.7}
+/* game row button (selected-day list, compact month list) */
+.cr{display:grid;grid-template-columns:3.4em 32px minmax(0,1fr) auto;gap:var(--g12);align-items:center;width:100%;min-height:52px;margin:0;padding:var(--g8) var(--g12);border:0;border-radius:14px;background:rgba(255,255,255,.07);color:inherit;text-align:left;cursor:pointer;font:600 13px/1.2 var(--font-sans)}
+.cr .cd-d{display:grid;line-height:1.1}
+.cr .cd-d b{font:800 20px/1 var(--font-display)}
+.cr .cd-d i{font-style:normal;font-size:11px;opacity:.75;text-transform:uppercase;letter-spacing:.08em}
+.cr img{width:32px;height:32px;object-fit:contain}
+.cr .cd-t{display:grid;gap:2px;min-width:0}
+.cr .cd-t b{font-size:14px}
+.cr .cd-t span{font-size:11px;opacity:.75}
+.cr .cd-s{font:800 15px/1 var(--font-sans);text-align:right;white-space:nowrap}
+.cr.today{box-shadow:inset 0 0 0 2px var(--tc,#fff)}
+.calday .cr{grid-template-columns:32px minmax(0,1fr) auto}
+.calday .cr .cd-d{display:none}
+.callist .none{padding:var(--g12);opacity:.75;font-size:13px}
 
 /* ======================================================================================================
    COMPACT (phone, tablet-narrow, guide side panel inside the player, landscape phone): slides scroll DOWN instead of
@@ -393,24 +418,25 @@ footer,.jump,#gamesBtn,#teamView{display:none!important}
  html.cz .mrow .ph{width:28px;height:28px}
  html.cz .acqrow{min-height:40px}
  html.cz .tenure{gap:var(--g8)}
- /* Games: list of the month's games (list is built by deck.js renderCal), the 7-column grid is hidden */
+ /* Games: day strip + the selected day's games + the month's game list; the 7-column grid is hidden */
  html.cz .calg{display:none!important}
- html.cz #cal{height:auto;grid-template-rows:auto auto}
- html.cz .calnav{min-width:44px;min-height:44px}
+ html.cz #cal{height:auto;grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-auto-rows:auto}
+ html.cz .calbar,html.cz .calstrip,html.cz .calday,html.cz .callist{grid-column:1}
+ html.cz .calday{grid-row:auto;overflow:visible}
  html.cz .calbar h3{font-size:22px;min-width:0;flex:1}
+ html.cz .calstrip{display:flex;gap:var(--g4);overflow-x:auto;scrollbar-width:none;padding:2px 0;margin:0 calc(var(--g4)*-1)}
+ html.cz .calstrip::-webkit-scrollbar{display:none}
+ html.cz .cs{flex:none;display:grid;grid-template-rows:auto auto 6px;justify-items:center;align-content:center;gap:2px;width:48px;min-height:64px;margin:0;padding:var(--g4);border:0;border-radius:12px;background:rgba(255,255,255,.07);color:inherit;cursor:pointer;font:600 11px/1 var(--font-sans)}
+ html.cz .cs i{font-style:normal;font-size:11px;opacity:.75;text-transform:uppercase;letter-spacing:.06em}
+ html.cz .cs b{font:800 20px/1 var(--font-display)}
+ html.cz .cs u{width:6px;height:6px;border-radius:50%;background:transparent}
+ html.cz .cs.game u{background:var(--tc,#fff)}
+ html.cz .cs.today{box-shadow:inset 0 0 0 2px var(--tc,#fff)}
+ html.cz .cs[aria-pressed=true]{background:color-mix(in srgb,var(--ink,#fff) 18%,transparent);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--ink,#fff) 55%,transparent)}
+ html.cz .calday .cr{grid-template-columns:3.4em 32px minmax(0,1fr) auto}
+ html.cz .calday .cr .cd-d{display:grid}
  html.cz .callist{display:grid;gap:var(--g8)}
- html.cz .callist .cr{display:grid;grid-template-columns:3.4em 32px minmax(0,1fr) auto;gap:var(--g12);align-items:center;min-height:52px;padding:var(--g8) var(--g12);border-radius:14px;background:rgba(255,255,255,.07);font:600 13px/1.2 var(--font-sans)}
- html.cz .callist .cr .cd-d{display:grid;line-height:1.1}
- html.cz .callist .cr .cd-d b{font:800 20px/1 var(--font-display)}
- html.cz .callist .cr .cd-d i{font-style:normal;font-size:11px;opacity:.75;text-transform:uppercase;letter-spacing:.08em}
- html.cz .callist .cr img{width:32px;height:32px;object-fit:contain}
- html.cz .callist .cr .cd-t{display:grid;gap:2px;min-width:0}
- html.cz .callist .cr .cd-t b{font-size:14px}
- html.cz .callist .cr .cd-t span{font-size:11px;opacity:.75}
- html.cz .callist .cr .cd-s{font:800 15px/1 var(--font-sans);text-align:right;white-space:nowrap}
- html.cz .callist .cr.today{box-shadow:inset 0 0 0 2px var(--tc,#fff)}
- html.cz .callist .cr.done{cursor:pointer}
- html.cz .callist .none{padding:var(--g12);opacity:.75;font-size:13px}
+ html.cz .calh{font-size:11px}
  /* Player page */
  html.cz .pq-btn{height:40px;min-width:40px}
  html.cz .pq-x{width:40px}

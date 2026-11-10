@@ -193,52 +193,69 @@
   }
   function nextFor(ab) { return teamGames(ab).find(function (g) { return !fin(g); }) || null; }
 
-  /* ---- Games: one team, a month calendar (Mon-Sun), no scroll ---- */
-  var calM = null; // month shown: {y, m}
+  /* ---- Games: one team, a month calendar (Mon-Sun) + the selected day's games. Every day is a button (data-cday), every game is a button (data-gid). ---- */
+  var calM = null, calSel = null, calBy = {}; // month shown {y, m}, selected day (ISO), games by ISO day
+  var pad2 = function (n) { return String(n).padStart(2, "0"); };
+  var isoOf = function (y, m, n) { return y + "-" + pad2(m + 1) + "-" + pad2(n); };
+  var isLiveG = function (g) { return g.state === "LIVE" || g.state === "CRIT"; };
+  var timeOf = function (g) { return new Date(g.start).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); };
+  var arw = function (d) { return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="' + (d < 0 ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7") + '" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'; };
+  function gShort(g) { // label for a calendar cell
+    if (fin(g)) return (g.us > g.them ? "W " : "L ") + g.us + "-" + g.them + (g.ot !== "REG" ? " " + g.ot : "");
+    if (isLiveG(g)) return "LIVE " + g.us + "-" + g.them;
+    return (g.home ? "vs " : "@ ") + esc(g.opp);
+  }
+  function gRow(g, n, wd, today) { // one game as a full-width button (day list + compact month list)
+    var pl = fin(g), lv = isLiveG(g);
+    return '<button type="button" class="cr game' + (pl ? " done" : "") + (lv ? " live" : "") + (today ? " today" : "") + '" data-gid="' + g.id + '"><span class="cd-d"><b>' + n + "</b><i>" + wd + '</i></span><img src="logos/' + esc(g.opp) + '.svg" alt=""><span class="cd-t"><b>' + (g.home ? "vs " : "at ") + esc(g.oppShort || g.opp) + "</b><span>" + (pl ? "Final" + (g.ot !== "REG" ? " " + g.ot : "") : lv ? "Live" : timeOf(g)) + (g.venue ? " &middot; " + esc(g.venue) : "") + '</span></span><span class="cd-s">' + (pl ? (g.us > g.them ? "W " : "L ") + g.us + "-" + g.them : lv ? g.us + "-" + g.them : "") + "</span></button>";
+  }
+  function dayRows(iso) {
+    var d = new Date(iso + "T12:00:00Z"), n = d.getUTCDate(), wd = d.toLocaleDateString("en-US", { timeZone: "UTC", weekday: "short" }), l = calBy[iso] || [];
+    return '<h4 class="calh">' + esc(d.toLocaleDateString("en-US", { timeZone: "UTC", weekday: "long", month: "long", day: "numeric" })) + " &middot; " + (l.length ? l.length + " game" + (l.length > 1 ? "s" : "") : "no games") + "</h4>" +
+      (l.length ? l.map(function (g) { return gRow(g, n, wd, iso === todayET()); }).join("") : '<div class="none">No games on this day</div>');
+  }
+  function selectDay(iso) { // update in place (no rebuild), so the D-pad focus stays on the day button
+    calSel = iso; var c = $("#cal"); if (!c) return;
+    c.querySelectorAll("[data-cday]").forEach(function (b) { var on = b.dataset.cday === iso; b.setAttribute("aria-pressed", String(on)); var p = b.closest(".cd"); if (p) p.classList.toggle("sel", on); });
+    var dp = c.querySelector(".calday"); if (dp) dp.innerHTML = dayRows(iso);
+    var st = c.querySelector(".cs[aria-pressed=true]"); if (st && st.offsetParent) try { st.scrollIntoView({ block: "nearest", inline: "center" }); } catch (e) {}
+    fitSoon();
+  }
   function renderCal() {
     var s = $(".s-gm .si"); if (!s || typeof DATA === "undefined" || !DATA || typeof state === "undefined") return;
     var csk = $("#calsk"); if (csk) csk.remove();
     var c = $("#cal");
     if (!c) { c = document.createElement("div"); c.id = "cal"; s.appendChild(c); c.addEventListener("click", calClick); }
+    var a = document.activeElement, keep = a && c.contains(a) ? (a.dataset.cday ? '[data-cday="' + a.dataset.cday + '"]' : a.dataset.gid ? '[data-gid="' + a.dataset.gid + '"]' : a.dataset.m ? '.calnav[data-m="' + a.dataset.m + '"]' : "") : "";
     var today = todayET();
     if (!calM) calM = { y: +today.slice(0, 4), m: +today.slice(5, 7) - 1 };
-    var first = new Date(Date.UTC(calM.y, calM.m, 1)), lead = (first.getUTCDay() + 6) % 7, days = new Date(Date.UTC(calM.y, calM.m + 1, 0)).getUTCDate(), rows = Math.ceil((lead + days) / 7);
-    var byDay = {}; teamGames(state.team).forEach(function (g) { var d = etDay(g.start); (byDay[d] = byDay[d] || []).push(g); });
-    var title = first.toLocaleDateString("en-US", { timeZone: "UTC", month: "long", year: "numeric" }), cells = "";
+    var first = new Date(Date.UTC(calM.y, calM.m, 1)), lead = (first.getUTCDay() + 6) % 7, days = new Date(Date.UTC(calM.y, calM.m + 1, 0)).getUTCDate(), rows = Math.ceil((lead + days) / 7), pre = calM.y + "-" + pad2(calM.m + 1);
+    calBy = {}; teamGames(state.team).forEach(function (g) { var d = etDay(g.start); (calBy[d] = calBy[d] || []).push(g); });
+    if (!calSel || calSel.slice(0, 7) !== pre) { calSel = today.slice(0, 7) === pre ? today : null; if (!calSel) for (var q = 1; q <= days; q++) if (calBy[isoOf(calM.y, calM.m, q)]) { calSel = isoOf(calM.y, calM.m, q); break; } if (!calSel) calSel = pre + "-01"; }
+    var title = first.toLocaleDateString("en-US", { timeZone: "UTC", month: "long", year: "numeric" }), cells = "", strip = "", list = "";
     for (var i = 0; i < rows * 7; i++) {
       var n = i - lead + 1;
       if (n < 1 || n > days) { cells += '<div class="cd out"></div>'; continue; }
-      var iso = calM.y + "-" + String(calM.m + 1).padStart(2, "0") + "-" + String(n).padStart(2, "0"), g = (byDay[iso] || [])[0], cls = "cd" + (iso === today ? " today" : ""), body = '<div class="cdr"><b class="dn">' + n + "</b></div>", attr = "";
-      if (g) {
-        var played = fin(g), lab = played ? (g.us > g.them ? "W " : "L ") + g.us + "-" + g.them + (g.ot !== "REG" ? " " + g.ot : "") : (g.home ? "vs " : "@ ") + esc(g.opp);
-        cls += " game" + (played ? " done" : ""); attr = ' data-gid="' + g.id + '"';
-        body = '<div class="cdr"><b class="dn">' + n + '</b><img src="logos/' + esc(g.opp) + '.svg" alt=""></div><span class="cl">' + lab + '</span><span class="ct">' + (played ? "Final" : new Date(g.start).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })) + "</span>";
-      }
-      cells += '<div class="' + cls + '"' + attr + ">" + body + "</div>";
+      var iso = isoOf(calM.y, calM.m, n), g = (calBy[iso] || [])[0], wd = new Date(Date.UTC(calM.y, calM.m, n)).toLocaleDateString("en-US", { timeZone: "UTC", weekday: "short" }), sel = iso === calSel;
+      var cls = "cd" + (iso === today ? " today" : "") + (sel ? " sel" : "") + (g ? " game" + (fin(g) ? " done" : "") + (isLiveG(g) ? " live" : "") : "");
+      var lab = new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { timeZone: "UTC", weekday: "long", month: "long", day: "numeric" }) + (g ? ", game vs " + g.opp : ", no games");
+      cells += '<div class="' + cls + '"><button type="button" class="cdb" data-cday="' + iso + '" aria-pressed="' + sel + '" aria-label="' + esc(lab) + '"><b class="dn">' + n + "</b>" + (g ? '<img src="logos/' + esc(g.opp) + '.svg" alt="">' : "") + "</button>" +
+        (g ? '<button type="button" class="cg" data-gid="' + g.id + '" aria-label="' + esc((g.home ? "vs " : "at ") + g.opp + ", " + (fin(g) ? "final" : isLiveG(g) ? "live" : timeOf(g)) + ", open game") + '"><span class="cl">' + gShort(g) + '</span><span class="ct">' + (fin(g) ? "Final" : isLiveG(g) ? "Live" : timeOf(g)) + "</span></button>" : "") + "</div>";
+      strip += '<button type="button" class="cs' + (g ? " game" : "") + (iso === today ? " today" : "") + '" data-cday="' + iso + '" aria-pressed="' + sel + '" aria-label="' + esc(lab) + '"><i>' + wd + "</i><b>" + n + "</b><u></u></button>";
+      if (g) list += gRow(g, n, wd, iso === today);
     }
     var head = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(function (d) { return '<div class="cdh">' + d + "</div>"; }).join("");
-    var list = ""; // compact view: one row per game in the month
-    for (var n2 = 1; n2 <= days; n2++) {
-      var iso2 = calM.y + "-" + String(calM.m + 1).padStart(2, "0") + "-" + String(n2).padStart(2, "0"), g2 = (byDay[iso2] || [])[0]; if (!g2) continue;
-      var pl2 = fin(g2), wd = new Date(Date.UTC(calM.y, calM.m, n2)).toLocaleDateString("en-US", { timeZone: "UTC", weekday: "short" });
-      list += '<div class="cr game' + (pl2 ? " done" : "") + (iso2 === today ? " today" : "") + '" data-gid="' + g2.id + '"><span class="cd-d"><b>' + n2 + "</b><i>" + wd + '</i></span><img src="logos/' + esc(g2.opp) + '.svg" alt=""><span class="cd-t"><b>' + (g2.home ? "vs " : "at ") + esc(g2.oppShort || g2.opp) + "</b><span>" + (pl2 ? "Final" + (g2.ot !== "REG" ? " " + g2.ot : "") : new Date(g2.start).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })) + (g2.venue ? " · " + esc(g2.venue) : "") + '</span></span><span class="cd-s">' + (pl2 ? (g2.us > g2.them ? "W " : "L ") + g2.us + "-" + g2.them : "") + "</span></div>";
-    }
-    if (!list) list = '<div class="none">No games this month</div>';
-    var list = ""; // compact view: one row per game in the month
-    for (var n2 = 1; n2 <= days; n2++) {
-      var iso2 = calM.y + "-" + String(calM.m + 1).padStart(2, "0") + "-" + String(n2).padStart(2, "0"), g2 = (byDay[iso2] || [])[0]; if (!g2) continue;
-      var pl2 = fin(g2), wd = new Date(Date.UTC(calM.y, calM.m, n2)).toLocaleDateString("en-US", { timeZone: "UTC", weekday: "short" });
-      list += '<div class="cr game' + (pl2 ? " done" : "") + (iso2 === today ? " today" : "") + '" data-gid="' + g2.id + '"><span class="cd-d"><b>' + n2 + "</b><i>" + wd + '</i></span><img src="logos/' + esc(g2.opp) + '.svg" alt=""><span class="cd-t"><b>' + (g2.home ? "vs " : "at ") + esc(g2.oppShort || g2.opp) + "</b><span>" + (pl2 ? "Final" + (g2.ot !== "REG" ? " " + g2.ot : "") : new Date(g2.start).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })) + (g2.venue ? " · " + esc(g2.venue) : "") + '</span></span><span class="cd-s">' + (pl2 ? (g2.us > g2.them ? "W " : "L ") + g2.us + "-" + g2.them : "") + "</span></div>";
-    }
-    if (!list) list = '<div class="none">No games this month</div>';
-    c.innerHTML = '<div class="calbar"><button type="button" class="calnav" data-m="-1" aria-label="Previous month">&larr;</button><h3>' + esc(title) + '</h3><button type="button" class="calnav" data-m="1" aria-label="Next month">&rarr;</button></div>' +
-      '<div class="calg" style="grid-template-rows:auto repeat(' + rows + ',minmax(0,1fr))">' + head + cells + '</div><div class="callist">' + list + "</div>";
+    c.innerHTML = '<div class="calbar"><button type="button" class="calnav" data-m="-1" aria-label="Previous month">' + arw(-1) + "</button><h3>" + esc(title) + '</h3><button type="button" class="calnav" data-m="1" aria-label="Next month">' + arw(1) + "</button></div>" +
+      '<div class="calstrip">' + strip + '</div><div class="calg" style="grid-template-rows:auto repeat(' + rows + ',minmax(0,1fr))">' + head + cells + '</div><div class="calday">' + dayRows(calSel) + '</div><div class="callist"><h4 class="calh">Games this month</h4>' + (list || '<div class="none">No games this month</div>') + "</div>";
+    if (keep) { var k = c.querySelector(keep); if (k) k.focus({ preventScroll: true }); }
+    var st = c.querySelector(".cs[aria-pressed=true]"); if (st && st.offsetParent) try { st.scrollIntoView({ block: "nearest", inline: "center" }); } catch (e) {}
   }
   function calClick(e) {
-    var b = e.target.closest && e.target.closest(".calnav"), g = e.target.closest && e.target.closest("[data-gid]");
+    var t = e.target, b = t.closest && t.closest(".calnav"), dy = t.closest && t.closest("[data-cday]"), g = t.closest && t.closest("[data-gid]");
     if (b) { var d = new Date(Date.UTC(calM.y, calM.m + (+b.dataset.m), 1)); calM = { y: d.getUTCFullYear(), m: d.getUTCMonth() }; renderCal(); return; }
-    // a played game opens the guide's game drawer (box score) when it has one in the bundled schedule; otherwise nothing
-    if (g && typeof SCHED !== "undefined" && SCHED && SCHED.games.some(function (x) { return x.id === +g.dataset.gid; })) openGame(+g.dataset.gid);
+    if (dy) { selectDay(dy.dataset.cday); return; }
+    // any game (played, live, upcoming) opens the guide's game drawer: box score for finals, matchup for the rest
+    if (g && typeof openGame === "function") openGame(+g.dataset.gid);
   }
 
   /* ---- Back: the player page first, then an open drawer (the guide's own Escape handler), then Overview; Overview goes to the host ---- */

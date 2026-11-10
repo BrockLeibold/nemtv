@@ -95,7 +95,7 @@
   }
   /* compact = phone / narrow window drawn at real size (class html.cz switches deck.css's compact layout on). The TV's quarter-width side panel is
      drawn zoomed out by the host (root zoom < 1): that one keeps the zoom-fit deck. */
-  var cmq = window.matchMedia("(max-width:900px),(max-height:440px)"), root = document.documentElement;
+  var cmq = window.matchMedia("(max-width:900px),(max-width:1100px) and (min-height:640px),(max-height:440px)"), root = document.documentElement;
   function setCz() { var c = cmq.matches && !(parseFloat(root.style.zoom) < .99); root.classList.toggle("cz", c); return c; }
   setCz(); window.addEventListener("resize", setCz);
   new MutationObserver(function () { var o = root.classList.contains("cz"); setCz(); if (o !== root.classList.contains("cz")) { fitSoon(); deck.scrollLeft = cur * width(); } }).observe(root, { attributes: true, attributeFilter: ["style"] });

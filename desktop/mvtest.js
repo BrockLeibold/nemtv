@@ -8,8 +8,8 @@ let masters=0; const serve=(root,cnt)=>http.createServer((q,r)=>{let p=decodeURI
   if(cnt&&/index\.m3u8$/.test(p))masters++;
   r.writeHead(200,{"Content-Type":MT[path.extname(f)]||"application/octet-stream","Access-Control-Allow-Origin":"*"});fs.createReadStream(f).pipe(r)});
 const sleep=t=>new Promise(r=>setTimeout(r,t)); let fails=0; const log=(ok,m)=>{if(!ok)fails++;console.log((ok?"PASS ":"FAIL ")+m)};
-process.on("uncaughtException",e=>{console.log("CRASH",e&&e.stack||e);app.exit(1)});
-app.on("window-all-closed",()=>{}); app.commandLine.appendSwitch("autoplay-policy","no-user-gesture-required"); app.setPath("userData",path.join(require("os").tmpdir(),"mvtest-ud"));
+process.on("uncaughtException",e=>{try{fs.writeSync(1,"CRASH "+(e&&e.stack||e)+String.fromCharCode(10))}catch(x){}console.log("CRASH",e&&e.stack||e);app.exit(1)});
+app.on("window-all-closed",()=>{}); for(const n of ["render-process-gone","child-process-gone"])app.on(n,(e,x,y)=>{try{fs.writeSync(1,"GONE "+n+" "+JSON.stringify(y||x)+String.fromCharCode(10))}catch(z){}}); process.on("exit",c=>{try{fs.writeSync(1,"EXIT "+c+String.fromCharCode(10))}catch(z){}}); app.commandLine.appendSwitch("autoplay-policy","no-user-gesture-required"); app.setPath("userData",path.join(require("os").tmpdir(),"mvtest-ud"));
 app.whenReady().then(async()=>{
   await new Promise(r=>serve(A).listen(47190,"127.0.0.1",r)); await new Promise(r=>serve(HL,true).listen(47191,"127.0.0.1",r)); fs.mkdirSync(OUT,{recursive:true});
   const sizes=process.argv.slice(2).filter(a=>/^\d+x\d+$/.test(a)); if(!sizes.length)sizes.push("960x540");
@@ -120,6 +120,38 @@ app.whenReady().then(async()=>{
     if(process.env.MV_DEBUG)console.log("ENTRY",await ev(`(()=>{const t=__mv.t[0];return JSON.stringify([mvOn(),__mv.t.length,t.v===__e0.v,t.hls===__e0.h,__mvLoads-__e0.l,t.c.u===cur.feed.u,!t.v.muted,t.v.currentTime>__e0.ct,!t.v.paused,t.v.readyState,t.v.videoHeight,document.querySelectorAll("#v").length,$("#v")!==t.v,t.v.id])})()`));
     log(await ev(`(()=>{const t=__mv.t[0];return mvOn()&&__mv.t.length===1&&t.v===__e0.v&&t.hls===__e0.h&&__mvLoads===__e0.l&&t.c.u===cur.feed.u&&t.c.n==="Alt feed 0"&&!t.v.muted&&__mv.a===t&&t.v.currentTime>__e0.ct&&!t.v.paused&&t.v.readyState>2&&t.v.videoHeight>0&&t.el.contains(t.v)&&document.querySelectorAll("#v").length===1&&$("#v")!==t.v&&!$("#v").getAttribute("src")&&t.v.id===""})()`),sz+" entry hands the running video + hls to tile 1: same feed, no restart, no new load, audio on");
     await ev(`nemBack();nemBack();0`); await sleep(300);
+    // ---- Live channels in multiview: menu add, picker (Channels section + search), mix with games, channel Feed menu, swap, handover from the single player ----
+    await ev(`(()=>{const n=Date.now(),u=i=>"http://127.0.0.1:47191/g"+i+"/index.m3u8",e=(t)=>[[n-6e5,n+6e5,t+" | d"]];window.__ch0=ch;window.__ep0=EPG;
+      ch=[0,1,2,3].map(i=>({n:"Chan"+i,u:u(i),g:"News",id:"c"+i,s:""}));ch.push({n:"Chan0 - feed 2",u:u(1),g:"News",id:"c9",s:""});
+      EPG={c0:e("Show Zero"),c1:e("Show Zero"),c2:e("Show Two"),c3:e("Show Three"),c9:e("Other")};__mvBase=__mvLoads;openChMenu(ch[0]);0})()`); await sleep(300);
+    log(await ev(`!$("#gpop").hidden&&document.querySelectorAll("#gpop [data-pa]").length===3&&/Show Zero/.test($("#gpop").textContent)&&!!$("#gpop [data-pa=cmv]")`),sz+" channel menu (Menu key / right-click) offers Watch, Multiview +, Favorite");
+    await ev(`$("#gpop [data-pa=cmv]").click()`); await sleep(5000);
+    log(await ev(`mvOn()&&__mv.t.length===1&&__mv.t[0].g.ch&&__mv.t[0].v.readyState>2&&__mvLoads-__mvBase===2&&/Chan0 - Show Zero/.test(__mv.t[0].lb.textContent)&&$("#gpop").hidden`),sz+" '+ Multiview' on a channel adds it, tile labelled channel + now-playing title");
+    log(await ev(`document.querySelectorAll("#mvp button[data-pc]").length===3&&!!$("#mvq")&&/CHANNEL/.test($("#mvp").textContent)&&1`),sz+" picker has a Channels section (feed variants hidden, already-added channel hidden): "+await ev(`[...document.querySelectorAll("#mvp button[data-pc]")].map(x=>x.textContent).join()+"|"+$("#mvp").hidden`));
+    await ev(`window.__v0=__mv.t[0].v;document.querySelector("#mvp button[data-pc]").click()`); await sleep(5000);
+    log(await ev(`__mv.t.length===2&&__mv.t[1].g.ch&&__mv.t[1].g.c.n==="Chan1"&&__mv.t[0].v===__v0&&__mvLoads-__mvBase===4&&__mv.t[1].v.readyState>2&&__mv.t.filter(t=>!t.v.muted).length===1`),sz+" picked channel becomes tile 2, tile 1 untouched, one audio tile");
+    await ev(`mvPick();const q=$("#mvq");q.value="three";q.dispatchEvent(new Event("input",{bubbles:true}));0`); await sleep(200);
+    log(await ev(`document.querySelectorAll("#mvpl button[data-pc]").length===1&&/Chan3/.test($("#mvpl").textContent)&&/Show Three/.test($("#mvpl").textContent)&&!$("#mvp").hidden`),sz+" channel search filters by name / now-playing title");
+    await ev(`document.querySelector("#mvpl button[data-pc]").click()`); await sleep(300); await ev(`mvAdd(__t(2),{feeds:[__t(2).c],c:__t(2).c});0`); await sleep(5000);
+    log(await ev(`__mv.t.length===4&&__mv.t.filter(t=>t.g.ch).length===3&&!!__mv.t[3].g.title&&__mvLoads-__mvBase===8&&__mv.t.every(t=>t.v.readyState>2)`),sz+" channels and a game mix up to 4 tiles, one load each");
+    await ev(`mvAdd(chG(ch[2]));0`); await sleep(300);
+    log(await ev(`__mv.t.length===4&&/full/.test($("#mvt").textContent)&&__mvLoads-__mvBase===8`),sz+" 5th tile refused");
+    await ev(`__vid=__mv.t.map(t=>t.v);window.__h0=__mv.t.map(t=>t.hls);__mv.f=__mv.t[0];mvAct("fd");0`); await sleep(300);
+    log(await ev(`document.querySelectorAll("#mvp button[data-fi]").length===3&&/Chan0 - Show Zero/.test($("#mvp h3").textContent)&&[...document.querySelectorAll("#mvp button[data-fi] span")].map(x=>x.textContent).join()==="Chan0,Chan1,Chan0 - feed 2"`),sz+" channel Feed menu lists the channel and alt channels with the same title: "+await ev(`[...document.querySelectorAll("#mvp button[data-fi] span")].map(x=>x.textContent).join()`));
+    await ev(`document.querySelectorAll("#mvp button[data-fi]")[2].click()`); await sleep(4500);
+    log(await ev(`(()=>{const T=__mv.t;return T[0].c.n==="Chan0 - feed 2"&&T[0].hls!==__h0[0]&&T.slice(1).every((t,i)=>t.hls===__h0[i+1])&&__mvLoads-__mvBase===10&&T[0].v.readyState>2&&T.every((t,i)=>t.v===__vid[i])&&/Chan0 - Show Zero/.test(T[0].lb.textContent)})()`),sz+" channel Feed change reloads only that tile");
+    await ev(`__mv.f=__mv.t[1];mvAct("sw");0`); await sleep(300);
+    log(await ev(`/SWAP/.test($("#mvp h3").textContent)&&document.querySelectorAll("#mvp button[data-pc]").length===1`),sz+" Swap picker lists channels");
+    await ev(`document.querySelector("#mvp button[data-pc]").click()`); await sleep(5000);
+    log(await ev(`__mv.t.length===4&&__mv.t[1].g.c.n==="Chan2"&&/Chan2 - Show Two/.test(__mv.t[1].lb.textContent)&&__mv.t[1].v.readyState>2&&__mvLoads-__mvBase===12&&__mv.t.filter(t=>!t.v.muted).length===1`),sz+" swap tile 2 to another channel in place, others untouched");
+    await ev(`mvClose();0`); await sleep(300);
+    // single player watching a channel -> Multiview button hands the playing video over (no reload), channel tile labelled
+    await ev(`(()=>{const c=ch[0];cur={c,tm:[c.n],t:[{}],s:"",feeds:[c],feed:c,list:ch};tried=new Set();$("#pl").classList.add("on");$("#bmv").hidden=false;setFeed(c);0})()`); await sleep(6000);
+    await ev(`window.__e1={v:$("#v"),h:hls,l:__mvLoads};0`);
+    log(await ev(`!$("#bmv").hidden&&!!__e1.h&&__e1.v.readyState>2`),sz+" single player is playing a channel with the Multiview button shown");
+    await ev(`$("#bmv").click()`); await sleep(3000);
+    log(await ev(`(()=>{const t=__mv.t[0];return mvOn()&&__mv.t.length===1&&t.g.ch&&t.v===__e1.v&&t.hls===__e1.h&&__mvLoads===__e1.l&&/Chan0 - Show Zero/.test(t.lb.textContent)&&t.feeds.length===3&&!t.v.muted&&t.v.readyState>2})()`),sz+" channel handed over from the single player: same video+hls, no new load, alt feeds available");
+    await ev(`nemBack();nemBack();ch=__ch0;EPG=__ep0;0`); await sleep(300);
     w.destroy();
   }
   console.log(fails?"FAILS "+fails:"FAILS 0"); app.exit(fails?1:0);

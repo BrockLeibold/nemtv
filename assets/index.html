@@ -170,6 +170,7 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 .pmenu button[aria-checked=true]{background:rgba(242,240,244,.86);color:#141217;font-weight:700}
 .pmenu small{color:var(--muted)}
 .pmenu button[aria-checked=true] small{color:#4B4652}
+.pmenu input{width:100%;margin:2px 0 6px;padding:7px 14px;border-radius:999px;border:0;background:rgba(0,0,0,.35);color:#fff;font:inherit;font-size:12px}.pmenu input:focus{outline:3px solid var(--coral);outline-offset:1px}
 .pmenu h3{font-size:9px;color:var(--muted);letter-spacing:.1em;padding:4px 14px 6px}
 #pbuf{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;background:#09080b;pointer-events:none;
   --o-a:var(--red-3);--o-b:var(--wine)}
@@ -808,10 +809,19 @@ function openPop(g){if(!g)return;popG=g;popBack=document.activeElement;const sc=
     <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span></div><div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div><div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span></div></div>
     <div class="tv">${over?"This game has ended":sc?(g.c&&g.c.u?"Best feed: "+esc(bfName(g)):"No channel carries this game"):hasF&&Date.now()>=g.st-40*6e4?"Pre-game on "+esc(bfName(g)):"Game has not started yet"}</div><div class="pb">${btns}${mvb}</div></div></div>`;
   p.hidden=false;p.querySelector(".pbtn").focus()}
+let popC=null;
+function openChMenu(c){if(!c||!$("#gpop").hidden)return;popC=c;popG=null;popBack=document.activeElement;const o=onNow(c);
+  $("#gpop").innerHTML=`<div class="pc"><span class="skin"><span class="mesh"></span></span><div class="pi"><div class="ft-top"><b>${esc(baseName(c.n))}</b><span>${esc(c.g||"")}</span></div><div class="ft-mid"><div class="ft-team"><span class="nm disp">${esc(o?o.t:"Live TV")}</span></div></div><div class="pb"><button class="pbtn" data-pa="cplay">WATCH</button><button class="pbtn alt" data-pa="cmv">MULTIVIEW +</button><button class="pbtn alt" data-pa="cfav">${fav.includes(c.n)?"UNFAVORITE":"FAVORITE"}</button></div></div></div>`;
+  $("#gpop").hidden=false;$("#gpop").querySelector(".pbtn").focus()}
 function closePop(){$("#gpop").hidden=true;if(popBack&&popBack.isConnected)popBack.focus({preventScroll:true})}
 $("#gpop").addEventListener("click",e=>{const b=e.target.closest("button");if(!b){closePop();return}const a=b.dataset.pa,g=popG;if(!a)return;
   if(a==="close"){closePop();return}
   if(a==="t0"||a==="t1"){const ab=a==="t0"?g.hm:g.aw;$("#gpop").hidden=true;tab="guide";render();[500,1500].forEach(d=>setTimeout(()=>gPost({cmd:"team",ab}),d));return}
+  if(a==="cplay"||a==="cmv"||a==="cfav"){const c=popC; if(!c)return; // channel menu (Live tab): watch / add to multiview / favorite
+    if(a==="cfav"){closePop();toggleFav(c.n);rerender();return}
+    $("#gpop").hidden=true;
+    if(a==="cplay"){play({c,tm:[c.n],t:[{}],s:c.s},tab==="live"?LL:null);return}
+    pvStop(); if(popBack&&popBack.isConnected)popBack.focus({preventScroll:true}); mvAdd(chG(c)); mvPick(); return}
   if(a==="play"){$("#gpop").hidden=true;play(g);return}
   if(a==="mv"){$("#gpop").hidden=true;mvAdd(g);mvPick();return}
   const x=scoreOf(g.aw,g.hm,g.st);closePop();openGame(x&&x.id,a)});
@@ -919,7 +929,7 @@ function play(g,list){
   const t=cur.t||[{},{}], logo=x=>x&&x.logo?`<img src="${x.logo}" alt="">`:"";
   $("#ptt").innerHTML=(cur.tm&&cur.tm.length>1?logo(t[0])+`<span class="t disp">${esc(cur.tm[0])}</span><span class="vs disp" style="color:var(--muted)">VS</span><span class="t disp">${esc(cur.tm[1])}</span>${logo(t[1])}`
     :`<span class="t disp">${esc(g.c.n)}</span>`)+(cur.s?`<span class="tag">${esc(cur.s)}</span>`:"")+`<span class="tag"> LIVE</span>`;
-  $("#pl").classList.add("on"); setZoom(100); $("#bmv").hidden=!g.title;
+  $("#pl").classList.add("on"); setZoom(100); $("#bmv").hidden=false;
   cur.t0=Date.now();
   const FR=/TVA|RDS|FR:|French/i, me0=cur;
   if(g.sid&&g.title){ // Stremio addon feeds lead: do not start a playlist feed first, wait up to 6s for the addon, then fall back
@@ -969,6 +979,11 @@ const MVS={ // style -> [label, rects for [main,...others] as screen fractions; 
  strip:["Main + 3",P=>P?[[0,0,1,.55],[0,.55,R3,.45],[R3,.55,R3,.45],[2*R3,.55,R3,.45]]:[[0,0,.75,1],[.75,0,.25,R3],[.75,R3,.25,R3],[.75,2*R3,.25,R3]]],
  free:["Free zoom (overlap)",null]}; // free: every tile has its own size (ZOOM -/+), ALL scales the whole pile, main on top
 const MVL=[0,["full"],["side","pip","over","free"],["main3","row3","free"],["grid","strip","free"]], MVF=[[.3,.3],[.7,.7],[.7,.3],[.3,.7]];
+const chG=c=>({ch:1,c,title:"",tm:[c.n],t:[{}],s:c.s}); // a Live-tab channel as a multiview "game"
+const mvKey=g=>g.ch?"ch:"+g.c.u:g.title;
+const mvName=g=>{if(g.aw&&g.hm)return g.aw+" @ "+g.hm; if(!g.ch)return g.title||""; const o=onNow(g.c);return baseName(g.c.n)+(o?" - "+o.t:"")}; // channel tile: name + now-playing EPG title
+function chFeeds(c){ // this channel, plus other channels airing the same EPG title now (or its own "feed N" variants)
+  const o=onNow(c),b=baseName(c.n),alt=ch.filter(x=>x!==c&&x.u&&on(x)&&(baseName(x.n)===b||(o&&(onNow(x)||{}).t===o.t))).slice(0,8); return [c,...alt]}
 function mvLayout(){
   const T=MV.t,n=T.length; if(!n)return;
   const W=mvEl.clientWidth,H=mvEl.clientHeight,S=MVL[n],cs=S.includes(MV.sty[n])?MV.sty[n]:S[0],free=cs==="free",gz=MV.gz/100,
@@ -980,7 +995,7 @@ function mvLayout(){
     t.v.style.transform="scale("+(free?1:Math.min(4,t.z/100*gz))+")"}); // crop zoom inside the tile
   mvMark()}
 function mvMark(){MV.t.forEach((t,i)=>{t.el.classList.toggle("au",t===MV.a);t.el.classList.toggle("fo",t===MV.f);
-    t.lb.textContent=(i+1)+"  "+(t.g.aw&&t.g.hm?t.g.aw+" @ "+t.g.hm:t.g.title||"")+(t===MV.a?"  · AUDIO":"")+(t.c?"  · "+baseName(t.c.n):"")});
+    t.lb.textContent=(i+1)+"  "+mvName(t.g)+(t===MV.a?"  · AUDIO":"")+(t.c&&!(t.g.ch&&t.c===t.g.c)?"  · "+baseName(t.c.n):"")});
   const f=MV.f; $("#mvl").textContent="Layout: "+MVS[MV.cs][0]; $("#mvz").textContent=f?Math.round(MV.cs==="free"?f.bs*100:f.z)+"%":""}
 function mvCap(t){ // size each tile's quality to its box; more streams = lower ceilings (main tile may go higher). autoLevelCapping never reloads.
   const h=t.hls,L=h&&h.levels; if(!L||!L.length)return;
@@ -1007,14 +1022,14 @@ function mvLoad(t,c){ // the ONLY place a tile (re)loads: first start, FEED chan
   }else{t.v.src=c.u;window.__mvLoads+=2;mvPlay(t)}
 }
 function mvFeeds(t){ // same feed order as single player: Stremio addon first (wait up to 6s), then playlist feeds
-  const g=t.g,k=t.k=(t.k||0)+1,base=g.title?feedsFor(g):[g.c],go=()=>{if(!MV.t.includes(t)||t.k!==k)return;if(t.feeds[0])mvLoad(t,t.feeds[0]);else mvMsg(t,"No feed found for this game.","fail")};
+  const g=t.g,k=t.k=(t.k||0)+1,base=g.ch?chFeeds(g.c):g.title?feedsFor(g):[g.c],go=()=>{if(!MV.t.includes(t)||t.k!==k)return;if(t.feeds[0])mvLoad(t,t.feeds[0]);else mvMsg(t,"No feed found for this game.","fail")};
   t.feeds=base.slice(); if(!(g.sid&&g.title))return go();
   mvMsg(t,"Finding feeds..."); let done=0; const fin=f=>{if(done||t.k!==k)return;done=1;clearTimeout(tm);t.feeds=svOrder(base,f);go()},tm=setTimeout(()=>fin([]),6e3);
   svFeeds(g.sid,fin)}
 function mvKill(t){if(t.hls){t.hls.destroy();t.hls=null}try{t.v.pause();t.v.removeAttribute("src");t.v.load()}catch(x){}t.el.remove()}
 function mvAdd(g,pre){ // pre = {feeds,c} when the game was already playing in the single player (skips feed lookup)
   if(!mvOn()){MV.back=document.activeElement;mvEl.classList.add("on");$("#pl").classList.add("on","mvh");mvEl.focus()}
-  const o=MV.t.find(x=>x.g.title===g.title); if(o){mvSetAudio(o);return}
+  const o=MV.t.find(x=>mvKey(x.g)===mvKey(g)); if(o){mvSetAudio(o);return}
   if(MV.t.length>=MVMAX){mvToast("Multiview is full (4 games)");return}
   const el=document.createElement("div"); el.className="mt"; el.innerHTML='<video muted playsinline autoplay disablepictureinpicture></video><div class="ml"></div><div class="mx"></div>';
   const t={g,el,v:el.firstChild,lb:el.children[1],mx:el.children[2],feeds:[],tried:new Set(),hls:null,c:null,z:100,bs:1,pen:0};
@@ -1035,20 +1050,27 @@ function mvClose(){MV.t.forEach(mvKill);MV.t=[];MV.a=MV.f=null;$("#mvp").hidden=
 function mvFeedMenu(t){ // FEED button: this tile's feeds, same labels/order as the single player menu; picking one reloads only this tile
   const m=$("#mvp"); if(!t)return; MV.mf=t; MV.sw=null;
   if(!t.feeds.length)return mvToast("Still finding feeds...");
-  m.innerHTML=`<h3>CHOOSE A FEED (${esc(t.g.aw&&t.g.hm?t.g.aw+" @ "+t.g.hm:t.g.title||"")})</h3>`+t.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===t.c}" data-fi="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("");
+  m.innerHTML=`<h3>CHOOSE A FEED (${esc(mvName(t.g))})</h3>`+t.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===t.c}" data-fi="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("");
   m.hidden=false; mvShow(); const a=m.querySelector("[aria-checked=true]")||m.querySelector("button"); a.focus(); a.scrollIntoView({block:"center"})}
 function mvFeed(t,i){const c=t&&t.feeds[i]; if(!c||!MV.t.includes(t))return; t.tried=new Set(); mvLoad(t,c); mvToast(baseName(c.n))}
 function mvSwap(t,g){ // same slot, zoom and audio state; only this tile's stream is replaced
   if(!MV.t.includes(t))return; if(t.hls){t.hls.destroy();t.hls=null} try{t.v.pause();t.v.removeAttribute("src");t.v.load()}catch(x){}
   t.g=g; t.c=null; t.feeds=[]; t.tried=new Set(); mvMark(); mvFeeds(t); mvShow()}
-function mvPick(on,sw){ // list of other live games to add (sw = tile to swap instead)
-  const m=$("#mvp"); if(on===0){m.hidden=true;mvEl.focus();return}
+function mvPick(off0,sw){ // list of other live games to add (sw = tile to swap instead); off0===0 closes
+  const m=$("#mvp"); if(off0===0){m.hidden=true;mvEl.focus();return}
   MV.sw=sw||null; if(!sw&&MV.t.length>=MVMAX)return mvToast("Multiview is full (4 games)");
-  const now=Date.now(),have=new Set(MV.t.map(t=>t.g.title));
+  const now=Date.now(),have=new Set(MV.t.map(t=>mvKey(t.g)));
   MV.pl=games().live.filter(g=>g.c&&g.c.u&&!(g.sc&&g.sc.over)&&g.st<=now+40*6e4&&!have.has(g.title));
-  if(!MV.pl.length)return mvToast(sw?"No other live games to swap in":"No other live games to add");
-  m.innerHTML=`<h3>${sw?"SWAP GAME":"ADD A GAME ("+MV.t.length+"/"+MVMAX+")"}</h3>`+MV.pl.map((g,k)=>`<button data-pg="${k}"><span>${esc(g.aw)} @ ${esc(g.hm)}</span><small>${g.sc?esc(g.sc.score):"pre-game"}</small></button>`).join("");
-  m.hidden=false; mvShow(); m.querySelector("button").focus()}
+  MV.q=""; const hasCh=ch.some(c=>c.u&&on(c));
+  if(!MV.pl.length&&!hasCh)return mvToast(sw?"No other live games to swap in":"No other live games to add");
+  m.innerHTML=`<h3>${sw?"SWAP GAME OR CHANNEL":"ADD A GAME OR CHANNEL ("+MV.t.length+"/"+MVMAX+")"}</h3>`+MV.pl.map((g,k)=>`<button data-pg="${k}"><span>${esc(g.aw)} @ ${esc(g.hm)}</span><small>${g.sc?esc(g.sc.score):"pre-game"}</small></button>`).join("")
+    +(hasCh?`<h3>CHANNELS</h3><input id="mvq" type="search" placeholder="Search channels" autocomplete="off"><div id="mvpl">${mvChList()}</div>`:"");
+  m.hidden=false; mvShow(); (m.querySelector("button")||m.querySelector("input")).focus()}
+function mvChList(){ // channel rows for the picker: favorites + recent first; a search matches name, group and now/next title (max 40)
+  const q=(MV.q||"").trim().toLowerCase(),have=new Set(MV.t.map(t=>mvKey(t.g))),ok=c=>c.u&&on(c)&&!/\sfeed\s\d+$/.test(c.n)&&!have.has("ch:"+c.u);
+  let l=q?ch.filter(c=>ok(c)&&(c.n+" "+c.g+" "+nowNext(c)).toLowerCase().includes(q)):[...fav.map(n=>ch.find(c=>c.n===n)),...recent.map(n=>ch.find(c=>c.n===n)),...ch].filter(c=>c&&ok(c));
+  MV.pc=[...new Set(l)].slice(0,40);
+  return MV.pc.map((c,k)=>{const o=onNow(c);return `<button data-pc="${k}"><span>${fav.includes(c.n)?"&#9733; ":""}${esc(baseName(c.n))}</span><small>${esc(o?o.t:c.g||"")}</small></button>`}).join("")||'<div class="empty">No channels match.</div>'}
 function mvToast(s){const e=$("#mvt");e.textContent=s;e.classList.add("on");clearTimeout(MV.tt);MV.tt=setTimeout(()=>e.classList.remove("on"),2e3);mvShow()}
 function mvShow(){mvEl.classList.remove("hide");clearTimeout(MV.ht);MV.ht=setTimeout(mvHide,3e3)} // every control, label, ring and the cursor go after 3s idle; the white audio outline stays
 function mvHide(){clearTimeout(MV.ht);$("#mvp").hidden=true;mvEl.classList.add("hide");mvEl.focus()}
@@ -1069,7 +1091,9 @@ function mvAct(a){const f=MV.f||MV.a,n=MV.t.length;
   else if(a==="rm")mvRemove(f);
   else if(a==="ex")mvClose()}
 mvEl.addEventListener("click",e=>{const b=e.target.closest("button"),tl=e.target.closest(".mt");
+  if(e.target.id==="mvq")return;
   if(!$("#mvp").hidden&&!e.target.closest("#mvp")){mvPick(0);if(!b)return} // click outside the menu closes it
+  if(b&&b.dataset.pc!==undefined){const c=MV.pc[+b.dataset.pc],s=MV.sw;if(!c)return;mvPick(0);if(s)mvSwap(s,chG(c));else mvAdd(chG(c));return}
   if(b&&b.dataset.fi!==undefined){const t=MV.mf;mvPick(0);mvFeed(t,+b.dataset.fi)}
   else if(b&&b.dataset.pg!==undefined){const g=MV.pl[+b.dataset.pg],s=MV.sw;mvPick(0);if(s)mvSwap(s,g);else mvAdd(g)}
   else if(b&&b.dataset.a)mvAct(b.dataset.a);
@@ -1078,12 +1102,15 @@ mvEl.addEventListener("click",e=>{const b=e.target.closest("button"),tl=e.target
 ["pointerdown","wheel","touchstart"].forEach(v=>mvEl.addEventListener(v,()=>{if(mvOn())mvShow()},{passive:true}));
 mvEl.addEventListener("pointermove",e=>{if(e.clientX===MV.lx&&e.clientY===MV.ly)return;MV.lx=e.clientX;MV.ly=e.clientY;mvShow()});
 // remote: hidden -> any key only wakes the UI; tiles: arrows move the focus ring, OK = audio (becomes main); Down leaves to the bar, Up comes back; 1-4 pick a tile's audio
+mvEl.addEventListener("input",e=>{if(e.target.id==="mvq"){MV.q=e.target.value;$("#mvpl").innerHTML=mvChList();mvShow()}});
 mvEl.addEventListener("keydown",e=>{const k=e.key,a=document.activeElement,inB=a.closest&&a.closest("#mvb"),inP=a.closest&&a.closest("#mvp");
+  if(a.id==="mvq"){if(!/^(ArrowUp|ArrowDown|Enter)$/.test(k)){e.stopPropagation();mvShow();return}} // typing in the channel search: letters, digits, space, Left/Right stay in the field
   if(!/^(Arrow|Enter$|\s$|[1-4]$)/.test(k))return; e.preventDefault();e.stopPropagation();
   if(mvEl.classList.contains("hide")){mvShow();return} mvShow();
   if(/^[1-4]$/.test(k)){mvSetAudio(MV.t[k-1]);return}
-  if(inP||inB){const row=[...(inP?$("#mvp"):$("#mvb")).querySelectorAll("button")],i=row.indexOf(a),nx=i+(k==="ArrowRight"||k==="ArrowDown"?1:-1);
-    if(k==="Enter"||k===" ")a.click();
+  if(inP||inB){const row=[...(inP?$("#mvp"):$("#mvb")).querySelectorAll("button,input")],i=row.indexOf(a),nx=i+(k==="ArrowRight"||k==="ArrowDown"||(k==="Enter"&&a.id==="mvq")?1:-1);
+    if(a.id==="mvq"){if(row[nx])row[nx].focus()}
+    else if(k==="Enter"||k===" ")a.click();
     else if(inP){if((k==="ArrowDown"||k==="ArrowUp")&&row[nx])row[nx].focus()}
     else if((k==="ArrowRight"||k==="ArrowLeft")&&row[nx])row[nx].focus();
     else if(k==="ArrowUp")mvEl.focus();
@@ -1092,8 +1119,8 @@ mvEl.addEventListener("keydown",e=>{const k=e.key,a=document.activeElement,inB=a
   mvMove(k.slice(5))},true);
 window.addEventListener("resize",()=>{if(mvOn()){mvLayout();mvCapAll()}});
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&mvOn())MV.t.forEach(t=>t.v.paused&&t.v.play().catch(()=>{}))});
-setInterval(()=>{if(mvOn())MV.t.forEach(t=>{const q=t.v.getVideoPlaybackQuality&&t.v.getVideoPlaybackQuality(); if(!q)return; // dropping frames (>10% over 4s): step this tile one level down, up to 3 steps
-  const d=q.droppedVideoFrames-(t.qd||0),n=q.totalVideoFrames-(t.qn||0);t.qd=q.droppedVideoFrames;t.qn=q.totalVideoFrames;if(n>60&&d/n>.1&&t.pen<3){t.pen++;mvCap(t)}})},4e3);
+setInterval(()=>{if(mvOn()){mvMark();MV.t.forEach(t=>{const q=t.v.getVideoPlaybackQuality&&t.v.getVideoPlaybackQuality(); if(!q)return; // dropping frames (>10% over 4s): step this tile one level down, up to 3 steps
+  const d=q.droppedVideoFrames-(t.qd||0),n=q.totalVideoFrames-(t.qn||0);t.qd=q.droppedVideoFrames;t.qn=q.totalVideoFrames;if(n>60&&d/n>.1&&t.pen<3){t.pen++;mvCap(t)}})}},4e3);
 /* ---------- NHL guide (git-synced site in an iframe) ---------- */
 const GURL=window.Android?"https://guide.nemtv.local/index.html":"guide/index.html";
 let gDepth=0, gStale=false, gLoaded=false;
@@ -1186,7 +1213,7 @@ $("#pl").onclick=e=>{
   else if(b.id==="pback"){closeMenu();stop()}
   else if(b.id==="pfs"){const d=document;if(d.fullscreenElement)d.exitFullscreen&&d.exitFullscreen().catch(()=>{});else if(d.documentElement.requestFullscreen)d.documentElement.requestFullscreen().catch(()=>{})}
   else if(b.id==="bgd")guideSide();
-  else if(b.id==="bmv"){const g=cur,pre={feeds:cur.feeds.slice(),c:cur.feed||cur.c},v=$("#v"),h=hls;closeMenu();clearTimeout(zapT);
+  else if(b.id==="bmv"){const chn=!cur.title,g=chn?chG(cur.feed||cur.c):cur,pre={feeds:chn?chFeeds(g.c):cur.feeds.slice(),c:cur.feed||cur.c},v=$("#v"),h=hls;closeMenu();clearTimeout(zapT);
     if(h&&v.readyState>0){ // hand the playing <video> + hls to multiview tile 1 (no restart); the player gets a fresh empty video
       const n=document.createElement("video");n.autoplay=true;n.setAttribute("playsinline","");v.before(n);v.removeAttribute("id");n.id="v";vBind(n);hls=null;pre.ad={v,h}}
     stop();mvAdd(g,pre);mvPick()}
@@ -1295,8 +1322,9 @@ document.addEventListener("keydown",e=>{ // Backspace in Live: clear search + fi
 });
 document.addEventListener("keydown",e=>{ // Menu key on a channel card = favorite
   if(e.keyCode===82||e.key==="ContextMenu"){const c=document.activeElement.closest&&document.activeElement.closest("[data-i]");
-    if(c&&!$("#pl").classList.contains("on")){toggleFav(ch[+c.dataset.i].n);const i=c.dataset.i;render();const n=$("#m").querySelector(`[data-i="${i}"]`);if(n)n.focus();e.preventDefault()}}
+    if(c&&!$("#pl").classList.contains("on")&&!mvOn()){openChMenu(ch[+c.dataset.i]);e.preventDefault()}}
 });
+$("#m").addEventListener("contextmenu",e=>{const c=e.target.closest("[data-i]");if(c&&ch[+c.dataset.i]&&!$("#pl").classList.contains("on")){e.preventDefault();openChMenu(ch[+c.dataset.i])}}); // right-click / touch long-press: same channel menu
 render();
 const bootAt=Date.now(); let bootDone=false;
 (function(){const k=Object.keys(window.LOGO||{}).sort(()=>Math.random()-.5);

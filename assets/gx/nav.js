@@ -7,7 +7,8 @@
   function items(){
     var dr=[].filter.call(document.querySelectorAll('.drawer'),function(d){return !d.hidden});
     var root=dr.length?dr[dr.length-1]:document;
-    return [].filter.call(root.querySelectorAll(SEL),function(e){return e.tabIndex>=0&&!e.disabled&&vis(e)})}
+    var cs=window.deckSlideEl&&window.deckSlideEl(); // deck guide: only the slide you are on (plus the bars above it)
+    return [].filter.call(root.querySelectorAll(SEL),function(e){if(cs&&!dr.length){var sl=e.closest('.slide');if(sl&&sl!==cs)return false}return e.tabIndex>=0&&!e.disabled&&vis(e)})}
   function mid(r){return{x:r.left+r.width/2,y:r.top+r.height/2}}
   function move(dx,dy){
     var a=document.activeElement,list=items();if(!list.length)return false;
@@ -18,6 +19,7 @@
       var across=dx?Math.abs(oy):Math.abs(ox);
       var sc=along+across*2.2;if(sc<bs){bs=sc;best=e}});
     if(best){best.focus();return true}
+    if(dx&&window.deckStep&&!a.closest('.drawer')){if(window.deckStep(dx)){var n=items().filter(function(e){return e.closest('.slide')});if(n.length)n[0].focus();return true}return false}
     // nothing further: scroll the page/drawer so more content can appear
     var sc=a.closest('.drawer')||document.scrollingElement;
     if(dy>0){sc.scrollBy(0,160);return true}

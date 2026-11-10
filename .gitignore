@@ -10,3 +10,6 @@ desktop/node_modules/
 desktop/app/
 desktop/dist/
 desktop/shots/
+guide/heroes/
+hero-check/
+shots_*.log*

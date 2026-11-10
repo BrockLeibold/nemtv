@@ -20,3 +20,24 @@
     if (window.Hls && Hls.prototype.loadSource) { var o = Hls.prototype.loadSource; Hls.prototype.loadSource = function (u) { return o.call(this, prox(u)) } }
   });
 })();
+
+// web only: volume slider in the player top bar (TV uses its remote volume). Applies to every <video> (player + multiview tiles).
+(function () {
+  var K = "nemtv-vol", v = 1;
+  try { var s = parseFloat(localStorage.getItem(K)); if (s >= 0 && s <= 1) v = s } catch (e) {}
+  var all = function () { document.querySelectorAll("video").forEach(function (x) { x.volume = v }) };
+  document.addEventListener("play", function (e) { if (e.target.tagName === "VIDEO") e.target.volume = v }, true);
+  var add = function () {
+    var fs = document.getElementById("pfs"); if (!fs || document.getElementById("pvol")) return;
+    var w = document.createElement("label"); w.id = "pvol"; w.title = "Volume";
+    w.innerHTML = '<span>&#128266;</span><input type="range" min="0" max="100" step="1">';
+    var r = w.querySelector("input"); r.value = Math.round(v * 100);
+    r.addEventListener("input", function () { v = r.value / 100; all(); try { localStorage.setItem(K, v) } catch (e) {} });
+    r.addEventListener("keydown", function (e) { e.stopPropagation() });
+    fs.parentNode.insertBefore(w, fs);
+    var st = document.createElement("style");
+    st.textContent = "#pvol{display:flex;align-items:center;gap:6px;margin-right:8px;color:#fff;font-size:14px}#pvol input{width:110px;accent-color:#fff;cursor:pointer}";
+    document.head.appendChild(st);
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", add); else add();
+})();

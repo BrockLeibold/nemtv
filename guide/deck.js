@@ -133,9 +133,10 @@
   function nhlGet(path, cb) {
     var url = "https://api-web.nhle.com/" + path, A = null;
     try { A = window.Android || (window.parent && window.parent.Android) || null; } catch (e) {}
-    if (A && A.get) { var name = "__nhl" + (++nhlN); window[name] = function (t, e) { try { delete window[name]; } catch (x) {} cb(t, e || ""); }; A.get(url, name); return; }
+    if (A && A.get) { var name = "__nhl" + (++nhlN); window[name] = function (t, e) { try { delete window[name]; } catch (x) {} cb(t, e || ""); }; A.get(url, "nhlRelay.bind(null,\"" + name + "\")"); return; }
     fetch(url).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }).then(function (t) { cb(t, ""); }).catch(function (e) { cb("", String(e)); });
   }
+  window.addEventListener("message", function (e) { var m = e.data; if (m && m.nem && m.cmd === "nhl" && typeof window[m.n] === "function") window[m.n](m.t, m.e); }); // the top window relays Android.get results here
   function liveRows(j, ab) {
     return (j.games || []).map(function (g) {
       var home = g.homeTeam.abbrev === ab, us = home ? g.homeTeam : g.awayTeam, them = home ? g.awayTeam : g.homeTeam, o = g.gameOutcome && g.gameOutcome.lastPeriodType;

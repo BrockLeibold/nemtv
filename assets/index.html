@@ -425,6 +425,7 @@ function applyStandings(){ST.forEach(x=>{const t=TMI[x.teamAbbrev&&x.teamAbbrev.
 window.gotStandings=(t,e)=>{try{ST=JSON.parse(t).standings||[]}catch(x){log("standings failed",e||x);return} applyStandings(); heroRefresh(); pushGuideLive()};
 function pollStandings(){const u="https://api-web.nhle.com/v1/standings/now";
   if(window.Android&&Android.get)Android.get(u,"gotStandings");else fetch(u).then(r=>r.text()).then(t=>gotStandings(t,"")).catch(e=>gotStandings("",String(e)))}
+window.nhlRelay=(n,t,e)=>gPost({cmd:"nhl",n,t,e}); // Android.get runs its callback in this window; the guide iframe is another origin
 function pushGuideLive(){if(ST.length||SC.length)gPost({cmd:"api",standings:ST,scores:SC})}
 window.gotScores=(t,e)=>{
   try{const d=JSON.parse(t); SC=d.games||[];}catch(x){log("scores failed",e||x);return}
@@ -457,10 +458,11 @@ function games(){ // from the bundled NHL schedule + the TV box clock
 const CA=/^(Sportsnet (One|360|East|West|Pacific|Ontario|World)|TSN\d|TVA Sports|CBC|RDS)/i; // Canadian broadcasters always come first
 /* ---------- guide (epg.xml from the M3U header): confirms which channel airs which game ---------- */
 let EPG=null, EPGMAX=0, EPGURL=ls("epgurl","");
-window.gotEpg=(o,e)=>{if(e||!o)return log("epg failed",e);EPG=o;EPGMAX=0;for(const k in o)o[k].forEach(r=>{if(r[3]&&r[1]>EPGMAX)EPGMAX=r[1]});log("epg",Object.keys(o).length+" channels");if(typeof rerender==="function"&&ch.length)try{rerender()}catch(x){}};
+window.gotEpg=(o,e)=>{if(e||!o){epgAt=0;return log("epg failed",e)}EPG=o;EPGMAX=0;for(const k in o)o[k].forEach(r=>{if(r[3]&&r[1]>EPGMAX)EPGMAX=r[1]});log("epg",Object.keys(o).length+" channels");if(typeof rerender==="function"&&ch.length&&!$("#pl").classList.contains("on"))try{rerender()}catch(x){}};
 const clk=ms=>new Date(ms).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"}), ttl=r=>r[2].split(" | ")[0];
 function onNow(c){const t=Date.now(),r=EPG&&c&&c.id&&EPG[c.id]&&EPG[c.id].find(x=>x[0]<=t&&x[1]>t);return r?{t:ttl(r),s:r[0],e:r[1]}:null}
-function loadEpg(){if(EPGURL&&window.Android&&Android.epg)Android.epg(EPGURL)}
+let epgAt=0;
+function loadEpg(){if(EPGURL&&window.Android&&Android.epg&&Date.now()-epgAt>12e4){epgAt=Date.now();Android.epg(EPGURL)}}
 const lastW=n=>n.split(" ").pop().toLowerCase(), says=(t,n)=>t.toLowerCase().includes(lastW(n));
 function epgVerdict(c,g){ // 1 = guide names this game, 0 = unknown / generic NHL block, -1 = guide shows something else (or nothing) then
   if(!EPG||!c.id||!EPG[c.id])return 0;
@@ -700,6 +702,9 @@ function msgP(t,mode){ // mode: "full" first load, "fail" dead end, "mini" mid-s
   if(mode!=="mini")bufBuild();
   $("#pst").textContent=t; pb.classList.add("on");
 }
+const playErr=e=>{if(!e||e.name!=="AbortError")log("play",e)};
+let userPaused=false;
+document.addEventListener("visibilitychange",()=>{const v=$("#v"); if(!document.hidden&&!userPaused&&$("#pl").classList.contains("on")&&v.paused&&(hls||v.getAttribute("src")))v.play().catch(playErr)});
 function killHls(){if(hls){hls.destroy();hls=null}}
 function setFeed(c){
   cur.c=c; cur.feed=c; tried.add(c.u); msgP("Connecting to "+baseName(c.n)+"...","full");
@@ -708,15 +713,16 @@ function setFeed(c){
   favBtn();
   if(window.Hls&&Hls.isSupported()){
     hls=new Hls({maxBufferLength:20,enableWorker:true});
-    hls.on(Hls.Events.ERROR,(e,d)=>{log("hls",d.type,d.details,d.fatal);
+    let rec=0; hls.on(Hls.Events.ERROR,(e,d)=>{log("hls",d.type,d.details,d.fatal);
+      if(d.fatal&&rec++<2&&hls){if(d.type===Hls.ErrorTypes.MEDIA_ERROR){hls.recoverMediaError();return}if(d.type===Hls.ErrorTypes.NETWORK_ERROR){hls.startLoad();return}}
       if(d.fatal){const nx=cur.feeds.find(f=>!tried.has(f.u)); if(nx){msgP("That feed failed. Trying "+baseName(nx.n)+"...","full");setFeed(nx)}else msgP("This feed would not play. Open FEED and pick another.","fail")}});
     hls.loadSource(c.u); hls.attachMedia(v);
-    hls.on(Hls.Events.MANIFEST_PARSED,()=>{if($("#pbuf").classList.contains("on"))$("#pst").textContent="Starting the stream...";v.play().catch(e=>log("play",e))});
-  }else{v.src=c.u;v.play().catch(e=>log("play",e))}
+    hls.on(Hls.Events.MANIFEST_PARSED,()=>{if($("#pbuf").classList.contains("on"))$("#pst").textContent="Starting the stream...";v.play().catch(playErr)});
+  }else{v.src=c.u;v.play().catch(playErr)}
 }
 function addRecent(c){recent=[c.n,...recent.filter(n=>n!==c.n)].slice(0,12);sv("recent",recent)}
 function play(g,list){
-  pvStop();
+  pvStop(); userPaused=false;
   const feeds=g.title?feedsFor(g):[g.c];
   cur={...g,feeds,list:list||feeds}; tried=new Set(); addRecent(g.c);
   const t=cur.t||[{},{}], logo=x=>x&&x.logo?`<img src="${x.logo}" alt="">`:"";
@@ -736,7 +742,8 @@ function zap(d){ // Up/Down with controls hidden: next/previous channel (or feed
   const n=l[(i+d+l.length)%l.length];
   if(cur.title){tried=new Set();lazyFeed(n)}else{cur.c=n;addRecent(n);tried=new Set();cur.feeds=[n];$("#ptop .t").textContent=plain(n.n).toUpperCase();lazyFeed(n)}
   zb()}
-function stop(){clearTimeout(zapT);$("#zb").classList.remove("on");if($("#v").volume===.5&&vol0!==.5)$("#v").volume=vol0;closeMenu();killHls();const v=$("#v");v.pause();v.removeAttribute("src");v.load();msgP("");$("#pl").classList.remove("on")}
+function stop(){clearTimeout(zapT);$("#zb").classList.remove("on");if($("#v").volume===.5&&vol0!==.5)$("#v").volume=vol0;closeMenu();killHls();const v=$("#v");v.pause();v.removeAttribute("src");v.load();msgP("");$("#pl").classList.remove("on");refocus()}
+function refocus(){const a=document.activeElement; if(a&&a!==document.body&&a.offsetParent)return; const f=document.querySelector("#hcar .watch[data-g=\""+hi+"\"]")||$("#m").querySelector(".focusable,button,input")||document.querySelector("header [data-t][aria-pressed=true]"); if(f)f.focus({preventScroll:true})}
 function openMenu(kind){
   const m=$("#pmenu"); menuOn=true; show();
   if(kind==="feed")m.innerHTML=`<h3>CHOOSE A FEED FOR THIS GAME</h3>`+cur.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===cur.feed}" data-f="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("");
@@ -818,7 +825,7 @@ $("#pl").onclick=e=>{
   else if(b.id==="zm")setZoom(zoom-5);
   else if(b.id==="zp")setZoom(zoom+5);
   else if(b.id==="bfav")toggleFav(cur.c.n);
-  else if(b.id==="bpp"){if(v.paused){v.play();b.textContent="Pause"}else{v.pause();b.textContent="Play"}}
+  else if(b.id==="bpp"){if(v.paused){userPaused=false;v.play().catch(playErr);b.textContent="Pause"}else{userPaused=true;v.pause();b.textContent="Play"}}
   else if(b.id==="bmu"){v.muted=!v.muted;b.textContent=v.muted?"Unmute":"Mute"}
   else if(b.id==="bgd")guideSide();
   else if(b.id==="bcl")stop();
@@ -940,7 +947,7 @@ log("NEMTV start",new Date().toString(),"games",(window.SCHED||[]).length);
 if(window.Android&&(window.CFG||{}).repo)Android.guideSync(CFG.repo,CFG.branch||"main");
 if(url&&!ch.length)Android.load(url);else if(url)Android.load(url); // refresh playlist in the background
 if(EPGURL)setTimeout(loadEpg,3000); setInterval(loadEpg,10800000); pollScores(); setInterval(pollScores,20000); pollStandings(); setInterval(pollStandings,300000); loadHeroData(); setInterval(loadHeroData,600000);
-setTimeout(()=>{if($("#gp").hidden&&!gLoaded){$("#gp").className="tab";gLayout();gLoad()}},6000); // warm the guide so the tab opens instantly
+setTimeout(()=>{if($("#gp").hidden&&!gLoaded&&!$("#pl").classList.contains("on")){$("#gp").className="tab";gLayout();gLoad()}},20000); // warm the guide so the tab opens instantly
 let gSig=""; const gSigOf=()=>{const g=games();return g.live.length+":"+g.later.length+":"+(g.live[0]||{}).st+":"+(g.later[0]||{}).st};
 setTimeout(()=>{gSig=gSigOf()},3000);
 setInterval(()=>{if((tab==="home"||tab==="live")&&!$("#pl").classList.contains("on")){const n=gSigOf();if(n!==gSig){gSig=n;rerender()}}},60000);

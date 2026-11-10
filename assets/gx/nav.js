@@ -53,6 +53,7 @@
 var lastSig='';
 function liveApply(m){
   if(typeof LEAGUE==='undefined'||typeof SCHED==='undefined'||!LEAGUE||!SCHED)return;
+  if(typeof DATA==='undefined'||!DATA||typeof state==='undefined'||!DATA.teams[state.team]||!DATA.teams[state.team].players)return; // team data still loading: renderAll would throw; next push retries
   var sig=JSON.stringify([(m.standings||[]).map(function(x){return x.teamAbbrev.default+x.points+x.gamesPlayed}),(m.scores||[]).map(function(x){return x.id+x.gameState+x.awayTeam.score+x.homeTeam.score})]);
   if(sig===lastSig)return; lastSig=sig;
   (m.standings||[]).forEach(function(x){var t=LEAGUE.teams.filter(function(q){return q.abbrev===x.teamAbbrev.default})[0]; if(!t)return;

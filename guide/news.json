@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T09:00:00-05:00",
+ "updated": "2026-11-10T17:00:00-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -115,14 +115,14 @@
     }
    ],
    "injuries": [
-    "Morgan Rielly (day-to-day)",
-    "Colton Sissons (day-to-day)",
-    "Jack Roslovic (day-to-day)",
+    "Morgan Rielly (lower body, out)",
+    "Colton Sissons (out)",
     "Kirill Marchenko (IR)",
     "Miles Wood (undisclosed, IR)",
     "Nick Blankenburg (undisclosed, IR)",
     "Marshall Rifai (IR)",
-    "Max Domi (back, IR)"
+    "Max Domi (back, IR)",
+    "Cade Webber (IR)"
    ]
   },
   "ANA": {
@@ -173,8 +173,8 @@
     }
    ],
    "injuries": [
-    "A.J. Greer (upper body, IR)",
     "Troy Terry (hip, IR)",
+    "A.J. Greer (upper body, IR)",
     "Ian Moore (lower body, IR)",
     "Ryan Poehling (knee, IR)"
    ]
@@ -220,9 +220,9 @@
     }
    ],
    "injuries": [
+    "Alex Lyon (shoulder, IR)",
     "Konsta Helenius (upper body, out)",
     "Justin Danforth (upper body, IR)",
-    "Alex Lyon (upper body, IR)",
     "Matt Grzelcyk (lower body, IR)"
    ]
   },
@@ -364,7 +364,6 @@
     }
    ],
    "injuries": [
-    "Brennan Othmann (day-to-day)",
     "Kevin Bahl (IR)",
     "Jonathan Huberdeau (hip, IR)",
     "Connor Zary (out)",
@@ -557,12 +556,11 @@
     }
    ],
    "injuries": [
-    "John Gibson (day-to-day)",
     "Albert Johansson (undisclosed, IR)",
-    "Marco Kasper (upper body, IR)",
-    "Mason Appleton (undisclosed, IR)",
     "Dylan Larkin (IR)",
-    "Simon Edvinsson (contract dispute, IR)"
+    "Simon Edvinsson (contract dispute, IR)",
+    "Marco Kasper (dtd)",
+    "Mason Appleton (dtd)"
    ]
   },
   "EDM": {
@@ -627,7 +625,6 @@
     }
    ],
    "injuries": [
-    "Colton Dach (illness, out)",
     "Isaac Howard (IR)",
     "Alec Regula (undisclosed, IR)",
     "Matt Savoie (lower body, IR)",
@@ -701,6 +698,13 @@
    "game": "Next: Tue Nov 10, 10:00 PM ET vs Nashville, Crypto.com Arena (ESPN+, Disney+, Hulu, SNE). Starter not announced.",
    "items": [
     {
+     "title": "Kings expect to get Kevin Fiala back this week, sources say",
+     "summary": "Kevin Fiala is expected to make his season debut this week, sources told ESPN's Emily Kaplan, with the Kings also slated to get Mats Zuccarello back Tuesday night.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50444957/kings-expect-get-kevin-fiala-back-week-sources-say",
+     "date": "2026-11-10"
+    },
+    {
      "title": "Predators take win streak into matchup with the Kings",
      "summary": "Nashville Predators (8-4-5, in the Central Division) vs. Los Angeles Kings (5-8-2, in the Pacific Division)",
      "source": "ESPN",
@@ -744,11 +748,9 @@
     }
    ],
    "injuries": [
-    "Erik Gustafsson (day-to-day)",
-    "Mats Zuccarello (upper body, IR)",
+    "Erik Gustafsson (out)",
     "Kevin Fiala (lower leg, IR)",
-    "Jakub Dvorak (IR)",
-    "Jan Jenik (undisclosed, IR)"
+    "Jakub Dvorak (IR)"
    ]
   },
   "MIN": {
@@ -801,7 +803,6 @@
    "injuries": [
     "Michael McCarron (upper body, day-to-day)",
     "Filip Gustavsson (hip, IR)",
-    "Jared Spurgeon (lower body, IR)",
     "Brock Faber (skull, IR)"
    ]
   },
@@ -853,8 +854,7 @@
     }
    ],
    "injuries": [
-    "Jake Evans (day-to-day)",
-    "Josh Anderson (day-to-day)",
+    "Jake Evans (hand, day-to-day)",
     "Ivan Demidov (foot, IR)",
     "Mike Matheson (lower body, out)",
     "Sam Montembeault (lower body, IR)",
@@ -866,6 +866,13 @@
    "headline": "The Devils (12-5-0) take a four-game win streak to Toronto after beating the Islanders 5-4 in overtime.",
    "game": "Next: Sun Nov 08, 7:00 PM ET at Toronto, Scotiabank Arena (MSGSN, NHLN, TSN4). Expected starter: Connor Hellebuyck (not confirmed).",
    "items": [
+    {
+     "title": "Connor Hellebuyck discusses why he wanted out of Winnipeg",
+     "summary": "Connor Hellebuyck talks a little bit about why he wanted out of Winnipeg.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50444775/connor-hellebuyck-discusses-why-wanted-winnipeg",
+     "date": "2026-11-10"
+    },
     {
      "title": "Jets disappointed ex-goalie Connor Hellebuyck sitting out",
      "summary": "The Jets are disappointed they won't get closure for the departure of ex-goalie Connor Hellebuyck as he won't be starting for the Devils when they play in Winnipeg on Tuesday.",
@@ -913,13 +920,6 @@
      "summary": "Jack Hughes scored 1:18 into overtime for a 5-4 win at UBS Arena. Jake Allen made 19 saves and the Devils have won four straight.",
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/new-jersey-devils-new-york-islanders-game-recap-november-7-2026",
-     "date": "2026-11-08"
-    },
-    {
-     "title": "Devils line combinations",
-     "summary": "Daily Faceoff lists the same lines and pairs from the Nov. 7 game. Seamus Casey remains on injured reserve.",
-     "source": "Daily Faceoff",
-     "url": "https://www.dailyfaceoff.com/teams/new-jersey-devils/line-combinations",
      "date": "2026-11-08"
     }
    ],
@@ -1139,6 +1139,7 @@
     }
    ],
    "injuries": [
+    "Linus Ullmark (out)",
     "Andre Burakovsky (IR)",
     "Warren Foegele (knee, IR)",
     "William Eklund (IR)"
@@ -1482,7 +1483,7 @@
     }
    ],
    "injuries": [
-    "Brayden Point (day-to-day)"
+    "Brayden Point (IR)"
    ]
   },
   "UTA": {
@@ -1533,11 +1534,11 @@
     }
    ],
    "injuries": [
+    "Dylan Guenther (day-to-day)",
     "Nate Schmidt (upper body, out)",
     "Kailer Yamamoto (upper body, IR)",
     "John Marino (IR)",
-    "Maveric Lamoureux (IR)",
-    "Dylan Guenther (dtd)"
+    "Maveric Lamoureux (IR)"
    ]
   },
   "VAN": {
@@ -1595,9 +1596,8 @@
     }
    ],
    "injuries": [
+    "Tom Willander (day-to-day)",
     "Filip Chytil (shoulder, IR)",
-    "Tom Willander (lower body, out)",
-    "Akil Thomas (IR)",
     "Mackenzie MacEachern (IR)",
     "Thatcher Demko (hip, IR)"
    ]
@@ -1643,6 +1643,7 @@
     }
    ],
    "injuries": [
+    "Noah Hanifin (out)",
     "Parker Wotherspoon (IR)"
    ]
   },
@@ -1650,6 +1651,13 @@
    "headline": "The Jets host Tampa Bay on Sunday after a 6-2 win over Vancouver on Thursday.",
    "game": "Next: Sun Nov 08, 6:00 PM ET vs TBL, Canada Life Centre (TSN3, The Spot). Stuart Skinner projected to start.",
    "items": [
+    {
+     "title": "Connor Hellebuyck discusses why he wanted out of Winnipeg",
+     "summary": "Connor Hellebuyck talks a little bit about why he wanted out of Winnipeg.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50444775/connor-hellebuyck-discusses-why-wanted-winnipeg",
+     "date": "2026-11-10"
+    },
     {
      "title": "Jets disappointed ex-goalie Connor Hellebuyck sitting out",
      "summary": "The Jets are disappointed they won't get closure for the departure of ex-goalie Connor Hellebuyck as he won't be starting for the Devils when they play in Winnipeg on Tuesday.",
@@ -1698,17 +1706,9 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892677",
      "date": "2026-11-08"
-    },
-    {
-     "title": "Morrissey sheds non-contact sweater",
-     "summary": "Josh Morrissey practiced in a regular sweater on Nov. 7. He has been out since a wrist injury on Oct. 7.",
-     "source": "TSN",
-     "url": "https://www.tsn.ca/nhl/article/jets-d-morrissey-wrist-sheds-non-contact-sweater-as-he-nears-return/",
-     "date": "2026-11-07"
     }
    ],
    "injuries": [
-    "Josh Morrissey (wrist, IR)",
     "Elias Salomonsson (IR)",
     "Vladislav Namestnikov (IR)",
     "Nick Bjugstad (pectoral, IR)"
@@ -1718,6 +1718,13 @@
    "headline": "The Capitals beat Florida 4-3 at home on Saturday to end a two-game losing streak.",
    "game": "Next: Tue Nov 10, 7:00 PM ET at Ottawa Senators, Canadian Tire Centre (MNMT, RDS2, TSN5). Starter not announced.",
    "items": [
+    {
+     "title": "Ovechkin says Russians want to play for country, doesn't weigh in on worlds",
+     "summary": "Alex Ovechkin didn't weigh in on CAS' decision to allow Russian players back in hockey worlds, but said they just want to represent their country.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50444702/ovechkin-weigh-allowing-russians-worlds",
+     "date": "2026-11-10"
+    },
     {
      "title": "Senators and Capitals face off in Eastern Conference action",
      "summary": "Washington Capitals (9-6, in the Metropolitan Division) vs. Ottawa Senators (11-6-1, in the Atlantic Division)",

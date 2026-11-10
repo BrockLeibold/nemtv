@@ -65,8 +65,15 @@
     }
     return i.scrollHeight > i.clientHeight + 1 || i.scrollWidth > i.clientWidth + 1;
   }
+  /* compact = phone / narrow window drawn at real size (class html.cz switches deck.css's compact layout on). The TV's quarter-width side panel is
+     drawn zoomed out by the host (root zoom < 1): that one keeps the zoom-fit deck. */
+  var cmq = window.matchMedia("(max-width:900px),(max-height:440px)"), root = document.documentElement;
+  function setCz() { var c = cmq.matches && !(parseFloat(root.style.zoom) < .99); root.classList.toggle("cz", c); return c; }
+  setCz(); window.addEventListener("resize", setCz);
+  new MutationObserver(function () { var o = root.classList.contains("cz"); setCz(); if (o !== root.classList.contains("cz")) { fitSoon(); deck.scrollLeft = cur * width(); } }).observe(root, { attributes: true, attributeFilter: ["style"] });
   function fitOne(s) {
     var i = s.firstChild; i.style.zoom = ""; var z = 1;
+    if (root.classList.contains("cz")) { s.dataset.z = 1; return; }
     while (z > .5 && over(i)) { z = Math.round((z - .03) * 100) / 100; i.style.zoom = z; }
     s.dataset.z = z;
   }
@@ -105,9 +112,10 @@
     var txt = function (c) { var l = lum(c); return (l + .05) / .05 > 1.05 / (l + .05) ? "#141217" : "#FFFFFF"; };
     var rs = document.documentElement.style; rs.setProperty("--tc", tc); rs.setProperty("--tc2", tc2); rs.setProperty("--tx", txt(tc)); rs.setProperty("--tx2", txt(tc2)); rs.setProperty("--lg", t.logo ? "url(" + t.logo + ")" : "none");
     var pl = function (id, pos) { var p = byId(id); if (!p) return '<span class="lp empty"></span>';
-      var n = p.now, sx = !n || !n.gp ? "" : p.group === "G" ? n.w + "-" + n.l + "-" + n.otl + " " + sv(n.sv) : n.g + "G " + n.a + "A " + n.pts + "P";
+      var n = p.now, isG = p.group === "G", gaa = n && n.gp && n.ga != null ? (n.ga / n.gp).toFixed(2) : null,
+        sx = !n || !n.gp ? "" : isG ? '<span class="s1">' + n.gp + " GP · " + n.w + "-" + n.l + "-" + n.otl + '</span><span class="s1">' + sv(n.sv) + " SV%" + (gaa ? " · " + gaa + " GAA" : "") + "</span>" : n.g + "G " + n.a + "A " + n.pts + "P";
       var hs = 'https://assets.nhle.com/mugs/nhl/20252026/' + state.team + '/' + p.id + '.png';
-      return '<button type="button" class="lp' + (p.status && p.status !== "Active" ? " inj" : "") + '" data-id="' + p.id + '" aria-label="' + esc(p.first + " " + p.last) + '"><img class="ph" src="' + hs + '" data-f="' + phSrc(p) + '" onerror="this.onerror=null;this.src=this.dataset.f" alt=""><span class="tx"><i class="pp">' + pos + '</i><b class="no">' + (p.num == null ? "" : p.num) + '</b><span class="ln">' + dn(p.last) + (p.captain ? " ★" : "") + '</span><span class="sx">' + sx + "</span></span></button>"; };
+      return '<button type="button" class="lp' + (isG ? " g" : "") + (p.status && p.status !== "Active" ? " inj" : "") + '" data-id="' + p.id + '" aria-label="' + esc(p.first + " " + p.last) + '"><img class="ph" src="' + hs + '" data-f="' + phSrc(p) + '" onerror="this.onerror=null;this.src=this.dataset.f" alt=""><span class="tx"><i class="pp">' + pos + '</i><b class="no">' + (p.num == null ? "" : p.num) + '</b><span class="ln">' + dn(p.last) + (p.captain ? " ★" : "") + '</span><span class="sx">' + sx + "</span></span></button>"; };
     var row = function (h, ids, poss) { return '<div class="lrow"><h4>' + h + "</h4>" + ids.map(function (id, k) { return pl(id, poss[k]); }).join("") + "</div>"; };
     var F = t.lines.map(function (l, i) { return row("L" + (i + 1), l, ["LW", "C", "RW"]); }).join("");
     var D = t.pairs.map(function (l, i) { return row("D" + (i + 1), l, ["LD", "RD"]); }).join("");
@@ -116,7 +124,7 @@
     var rest = PL().filter(function (p) { return !used[p.id]; }).sort(function (a, b) { return (a.group === b.group ? 0 : a.group < b.group ? 1 : -1) || (a.num || 99) - (b.num || 99); });
     var out = (t.out || []).map(byId).filter(Boolean);
     var ex = rest.length ? '<div id="rest"><h4>Reserves and out</h4>' + rest.map(function (p) { return pl(p.id, p.pos); }).join("") + "</div>" : "";
-    el.innerHTML = '<div class="lblk f" style="--r:' + t.lines.length + '">' + F + '</div><div class="lblk d" style="--r:' + (t.pairs.length + 1) + '">' + D + G + "</div>" + ex;
+    el.innerHTML = '<div class="lblk f" style="--r:' + t.lines.length + '">' + F + '</div><div class="lblk d" style="--r:' + (t.pairs.length + 1) + ';--pr:' + t.pairs.length + '">' + D + G + "</div>" + ex;
   }
   /* ---- Team: cap hits + scoring leaders ---- */
   function renderCap() {
@@ -125,7 +133,7 @@
     var P = PL(), row = function (p, r) { return '<button type="button" class="mrow" data-id="' + p.id + '">' + ph(p, "s") + "<b>" + esc(p.first[0]) + ". " + dn(p.last) + "</b><em>" + r + "</em></button>"; };
     var cap = P.filter(function (p) { return p.contract; }).sort(function (a, b) { return b.contract.aav - a.contract.aav; }).slice(0, 7);
     var sc = P.filter(function (p) { return p.group !== "G" && p.now && p.now.gp; }).sort(function (a, b) { return b.now.pts - a.now.pts || b.now.g - a.now.g; }).slice(0, 7);
-    pn.innerHTML = '<div class="h3">Top cap hits<i>AAV · through</i></div><div class="mini">' + cap.map(function (p) { return row(p, money(p.contract.aav) + " · " + String(p.contract.ends).slice(0, 4) + "-" + String(p.contract.ends).slice(-2)); }).join("") + '</div><div class="h3">Scoring leaders<i>G · A · P</i></div><div class="mini">' + sc.map(function (p) { return row(p, p.now.g + " · " + p.now.a + " · " + p.now.pts); }).join("") + "</div>";
+    pn.innerHTML = '<div class="h3">Top cap hits<i>AAV · through</i></div><div class="mini">' + (cap.length ? "" : '<div class="muted">Contract data not available yet</div>') + cap.map(function (p) { return row(p, money(p.contract.aav) + " · " + String(p.contract.ends).slice(0, 4) + "-" + String(p.contract.ends).slice(-2)); }).join("") + '</div><div class="h3">Scoring leaders<i>G · A · P</i></div><div class="mini">' + sc.map(function (p) { return row(p, p.now.g + " · " + p.now.a + " · " + p.now.pts); }).join("") + "</div>";
   }
   /* ---- live NHL schedule for the current team. api-web.nhle.com sends no CORS header: on the TV the host fetches it (Android.get);
      on the PC Electron runs with webSecurity off, so a plain fetch works. Falls back to the bundled schedule. ---- */
@@ -180,8 +188,22 @@
       cells += '<div class="' + cls + '"' + attr + ">" + body + "</div>";
     }
     var head = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(function (d) { return '<div class="cdh">' + d + "</div>"; }).join("");
+    var list = ""; // compact view: one row per game in the month
+    for (var n2 = 1; n2 <= days; n2++) {
+      var iso2 = calM.y + "-" + String(calM.m + 1).padStart(2, "0") + "-" + String(n2).padStart(2, "0"), g2 = (byDay[iso2] || [])[0]; if (!g2) continue;
+      var pl2 = fin(g2), wd = new Date(Date.UTC(calM.y, calM.m, n2)).toLocaleDateString("en-US", { timeZone: "UTC", weekday: "short" });
+      list += '<div class="cr game' + (pl2 ? " done" : "") + (iso2 === today ? " today" : "") + '" data-gid="' + g2.id + '"><span class="cd-d"><b>' + n2 + "</b><i>" + wd + '</i></span><img src="logos/' + esc(g2.opp) + '.svg" alt=""><span class="cd-t"><b>' + (g2.home ? "vs " : "at ") + esc(g2.oppShort || g2.opp) + "</b><span>" + (pl2 ? "Final" + (g2.ot !== "REG" ? " " + g2.ot : "") : new Date(g2.start).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })) + (g2.venue ? " · " + esc(g2.venue) : "") + '</span></span><span class="cd-s">' + (pl2 ? (g2.us > g2.them ? "W " : "L ") + g2.us + "-" + g2.them : "") + "</span></div>";
+    }
+    if (!list) list = '<div class="none">No games this month</div>';
+    var list = ""; // compact view: one row per game in the month
+    for (var n2 = 1; n2 <= days; n2++) {
+      var iso2 = calM.y + "-" + String(calM.m + 1).padStart(2, "0") + "-" + String(n2).padStart(2, "0"), g2 = (byDay[iso2] || [])[0]; if (!g2) continue;
+      var pl2 = fin(g2), wd = new Date(Date.UTC(calM.y, calM.m, n2)).toLocaleDateString("en-US", { timeZone: "UTC", weekday: "short" });
+      list += '<div class="cr game' + (pl2 ? " done" : "") + (iso2 === today ? " today" : "") + '" data-gid="' + g2.id + '"><span class="cd-d"><b>' + n2 + "</b><i>" + wd + '</i></span><img src="logos/' + esc(g2.opp) + '.svg" alt=""><span class="cd-t"><b>' + (g2.home ? "vs " : "at ") + esc(g2.oppShort || g2.opp) + "</b><span>" + (pl2 ? "Final" + (g2.ot !== "REG" ? " " + g2.ot : "") : new Date(g2.start).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })) + (g2.venue ? " · " + esc(g2.venue) : "") + '</span></span><span class="cd-s">' + (pl2 ? (g2.us > g2.them ? "W " : "L ") + g2.us + "-" + g2.them : "") + "</span></div>";
+    }
+    if (!list) list = '<div class="none">No games this month</div>';
     c.innerHTML = '<div class="calbar"><button type="button" class="calnav" data-m="-1" aria-label="Previous month">&larr;</button><h3>' + esc(title) + '</h3><button type="button" class="calnav" data-m="1" aria-label="Next month">&rarr;</button></div>' +
-      '<div class="calg" style="grid-template-rows:auto repeat(' + rows + ',minmax(0,1fr))">' + head + cells + "</div>";
+      '<div class="calg" style="grid-template-rows:auto repeat(' + rows + ',minmax(0,1fr))">' + head + cells + '</div><div class="callist">' + list + "</div>";
   }
   function calClick(e) {
     var b = e.target.closest && e.target.closest(".calnav"), g = e.target.closest && e.target.closest("[data-gid]");
@@ -190,14 +212,14 @@
     if (g && typeof SCHED !== "undefined" && SCHED && SCHED.games.some(function (x) { return x.id === +g.dataset.gid; })) openGame(+g.dataset.gid);
   }
 
-  /* ---- Back: the player page first, then an open drawer (the guide's own Escape handler), then the previous slide; slide 1 goes to the host ---- */
+  /* ---- Back: the player page first, then an open drawer (the guide's own Escape handler), then Overview; Overview goes to the host ---- */
   function deckHasBack() { var pq = document.getElementById("pq"); return !!(pq && !pq.hidden) || cur > 0; }
   window.deckHasBack = deckHasBack;
   function deckBack() {
     var pq = document.getElementById("pq");
     if (pq && !pq.hidden) { closePlayer(); return true; }
     if ($("#gdrawer:not([hidden]),#drawer:not([hidden]),#picker:not([hidden])")) return false;
-    if (cur > 0) { go(cur - 1); return true; }
+    if (cur > 0) { go(0); var t0 = tabs.querySelector("button"); if (t0) t0.focus(); return true; } // Back: Overview first, then out of the guide
     return false;
   }
   document.addEventListener("keydown", function (e) { // capture: runs before the guide's own Escape handler, so one press closes one thing
@@ -224,7 +246,7 @@
     var hero = '<section class="ov-hero" style="' + bg + '"><div class="ov-id"><span class="ov-eye">' + rank + '</span><div class="ov-name"><h2>' + esc(t.name) + "</h2></div></div></section>";
     var card = function (lab, body, cls) { return '<div class="ovc' + (cls ? " " + cls : "") + '"><span class="ovl">' + lab + "</span>" + body + "</div>"; };
     var cards = [
-      card("Record", '<b class="ovv">' + esc(t.record || "—") + '</b><span class="ovs">' + (t.gp != null ? t.gp + " games played" : "") + "</span>"),
+      card("Record", '<b class="ovv">' + esc(t.record || "—").replace(/-/g, '<i class="rs">–</i>') + '</b><span class="ovs">' + (t.gp != null ? t.gp + " games played" : "") + "</span>"),
       card("Points", '<b class="ovv">' + (t.points == null ? "—" : t.points) + '</b><span class="ovs">' + (t.divRank ? ordinal(t.divRank) + " in " + esc(t.division || "") : "") + "</span>"),
       card("Streak", '<b class="ovv">' + esc(t.streak || "—") + '</b><span class="ovs">L10 ' + esc(t.l10 || "—") + "</span>"),
       nextCard(t)
@@ -236,7 +258,7 @@
     var g = nextFor(state.team), today = g && etDay(g.start) === todayET();
     return '<div class="ovc ovnext"><span class="ovl">' + (today ? "Game day" : "Next game") + "</span>" + (g ?
       '<div class="ovrow"><img class="ovlg" src="logos/' + esc(g.opp) + '.svg" alt=""><b class="ovv">' + (g.home ? "vs" : "at") + " " + esc(g.oppShort) + "</b></div>" +
-      '<span class="ovs">' + (today ? "Tonight" : gDate(g)) + " · " + gTime(g) + " ET</span><span class=\"ovs\">" + esc(g.venue) + "</span>"
+      '<span class="ovs">' + (today ? "Tonight" : gDate(g)) + " · " + gTime(g) + " ET · " + esc(g.venue) + "</span>"
       : '<b class="ovv">Season over</b>') + "</div>";
   }
   function extras() { renderLines(); renderOv(); renderCap(); }
@@ -247,7 +269,15 @@
   wrapFn("renderAll", function () { extras(); fitSoon(); });
   wrapFn("renderGames", function () { var g = $("#mgrid"); if (g) g.dataset.n = g.querySelectorAll(".mc").length; fitSoon(); });
   var _setTeam = window.setTeam;
-  if (_setTeam) window.setTeam = function (ab) { return _setTeam(ab).then(function () { loadLive(ab); if (cur === 4) go(0); else fitSoon(); }); };
+  // any team switch (picker, rail logo, host message) lands on that team's Overview
+  if (_setTeam) window.setTeam = function (ab) {
+    return _setTeam(ab).then(function () {
+      loadLive(ab);
+      var a = document.activeElement; // the picker closed under the focus: put it back on the team button so the D-pad has somewhere to start
+      if (booted && (!a || a === document.body || !a.offsetParent)) { var sb = $("#switchBtn"); if (sb) sb.focus(); }
+      go(0); fitSoon();
+    });
+  };
   var _setMode = window.setMode;
   if (_setMode) window.setMode = function (m, d) { var r = _setMode(m, d); if (m === "games" && booted && cur !== 4) go(4); fitSoon(); return r; };
   window.showMode = function () { // never hide a slide: only update the pressed states

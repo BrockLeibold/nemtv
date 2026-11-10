@@ -1,0 +1,3 @@
+# staged copy of assets/ (holds the private stremio.json + config.js playlist token): never commit
+app/
+data/

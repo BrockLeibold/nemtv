@@ -5,7 +5,7 @@
 html,body{height:100%;overflow:hidden}
 #scroller{position:fixed;inset:0;overflow:hidden!important;padding:0!important}
 #scroller>.wrap{height:100%;max-width:none;margin:0;padding:var(--g4) var(--g12) var(--g8)!important;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:var(--g4)}
-footer,.jump,#gamesBtn{display:none!important}
+footer,.jump,#gamesBtn,#teamView{display:none!important}
 #news .block-h,#roster .block-h,#team .block-h{display:none!important}
 
 /* row 1: team switcher left, section tabs right (equal-width tabs) */
@@ -29,8 +29,8 @@ footer,.jump,#gamesBtn{display:none!important}
 .rlogos .lg .pt{display:none}
 .rlogos .lg[aria-pressed=true]{background:var(--surface);box-shadow:inset 0 0 0 2px var(--tc,#FF8A5B)}
 
-/* row 3: the deck */
-#deck{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;min-height:0;min-width:0}
+/* row 3: the deck (pinned to row 3 so a hidden team rail never lets it fall into an auto row) */
+#deck{grid-row:3;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;min-height:0;min-width:0}
 #deck::-webkit-scrollbar{display:none}
 .slide{flex:0 0 100%;min-width:0;min-height:0;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;padding:var(--g4)}
 .si{height:100%;min-height:0;min-width:0;display:grid;gap:var(--g8)}
@@ -62,9 +62,14 @@ footer,.jump,#gamesBtn{display:none!important}
 .orb .when,.orb .head{font-size:12px!important;line-height:1.3!important}
 .orb .go{height:var(--ch)!important;padding:0 var(--cp)!important;font-size:12px!important}
 #lines{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);grid-template-rows:minmax(0,1fr) auto;gap:var(--g8);min-height:0}
-#rest{grid-column:1/-1;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);grid-template-columns:5.5em;gap:var(--g4);height:clamp(44px,8vh,56px);min-width:0}
-#rest h4{font:700 11px/1.1 var(--font-sans);color:var(--muted);margin:0;align-self:center}
+/* reserves / injured: a square photo so the face is never cropped, as many per row as fit, extra rows instead of squeezing */
+#rest{grid-column:1/-1;display:grid;grid-template-columns:5.5em repeat(auto-fill,minmax(112px,1fr));grid-auto-rows:clamp(44px,8vh,56px);gap:var(--g4);min-width:0}
+#rest h4{font:700 11px/1.1 var(--font-sans);color:var(--muted);margin:0;align-self:center;grid-row:1}
+#rest .lp{grid-template-columns:auto minmax(0,1fr)}
+#rest .lp .ph{width:auto;height:100%;aspect-ratio:1;object-fit:cover;object-position:50% 10%;-webkit-mask-image:none;mask-image:none}
+#rest .lp .ln{-webkit-line-clamp:1}
 .lblk{display:grid;grid-template-rows:repeat(var(--r),minmax(0,1fr));gap:var(--g4);min-height:0;min-width:0}
+.lblk.d{grid-template-rows:repeat(var(--pr,3),minmax(0,1fr)) minmax(0,1.7fr)}
 .lrow{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);grid-template-columns:1.6em;gap:var(--g4);align-items:stretch;min-height:0}
 .lblk.f .lrow{grid-template-columns:1.6em repeat(3,minmax(0,1fr))}
 .lblk.d .lrow{grid-template-columns:1.6em repeat(2,minmax(0,1fr))}
@@ -83,6 +88,9 @@ footer,.jump,#gamesBtn{display:none!important}
 .lp .sx{font:700 clamp(9px,10cqh,10px)/1 var(--font-sans);white-space:nowrap;color:var(--tx,#fff);opacity:.9;margin-top:2px}
 .lp.inj::after{content:"";position:absolute;left:5px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--crit);box-shadow:0 0 0 2px #fff;z-index:2}
 #rest .lp .sx{display:none}
+.lp.g .sx{display:block;white-space:normal;text-align:center;font-size:10px;line-height:1.2;margin-top:3px}
+.lp.g .sx .s1{display:block;white-space:nowrap}
+#rest .lp.g .sx{display:none}
 #lineout{grid-column:1/-1;font-size:10px;color:var(--ink-2);white-space:nowrap;overflow:hidden}
 #lineout b{color:var(--crit);margin-right:var(--g4)}
 /* 2 News */
@@ -231,11 +239,14 @@ footer,.jump,#gamesBtn{display:none!important}
 .ovtxt{display:grid;gap:2px;min-width:0}
 .ovph{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none;background:rgba(255,255,255,.12);box-shadow:0 0 0 2px var(--tc,#fff)}
 @media (max-aspect-ratio:1/1){
-  #ov{grid-template-rows:minmax(0,75fr) minmax(0,25fr)}
-  .ovcards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #ov{grid-template-rows:minmax(0,1fr) auto}
+  .ovcards{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .ovc.ovnext{grid-column:1/-1}
+  .ovc{min-height:84px}
 }
+@media (pointer:coarse) and (min-width:1000px){.rail{height:44px}.rlogos .lg{height:44px}.rlogos .lg img{max-height:32px}}
 
-.ovlg{height:34px;width:auto;flex:none}
+.ovlg{height:28px;width:auto;flex:none}
 .s-ov #gameday{display:none!important}
 /* ---- full-screen player page (deck.js pqOpen) ---- */
 .pq{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;background:#0b0d12;color:#fff;overflow:hidden;font-family:var(--font-sans,system-ui,sans-serif);-webkit-font-smoothing:antialiased}
@@ -308,3 +319,128 @@ footer,.jump,#gamesBtn{display:none!important}
 .cd img{height:clamp(14px,3.6vh,26px);width:auto}
 .cd .cl{font-weight:700}
 .cd .ct{opacity:.8}
+
+/* ======================================================================================================
+   COMPACT (phone, tablet-narrow, guide side panel inside the player, landscape phone): slides scroll DOWN instead of
+   zooming out, one column, text >= 11px, controls >= 40px. deck.js skips its zoom-fit in this mode (same media query).
+   ====================================================================================================== */
+ html.cz{--ch:40px}
+ html.cz .rail{display:none!important}
+ html.cz .top{flex-direction:row!important;flex-wrap:wrap!important;gap:var(--g8)!important;align-items:center}
+ html.cz .topl{flex:1 1 100%}
+ html.cz .switch{width:100%;height:40px!important;padding:0 var(--cp) 0 var(--g12)!important}
+ html.cz .switch img{height:26px!important}
+ html.cz .sw-t b{font-size:15px!important}
+ html.cz #tabs{width:auto;flex:1 1 100%;padding:0;gap:0;min-width:0}
+ html.cz #tabs button{height:40px;font-size:12px;padding:0 var(--g4)}
+ html.cz .eyebrow,html.cz .caption,html.cz .count,html.cz .ovl,html.cz .ovs,html.cz .ov-eye,html.cz .lrow h4,html.cz #rest h4,html.cz .h3 i,html.cz .mt small,html.cz .mc-tv,html.cz .cd .ct,html.cz .cd .cl,html.cz .cd .dn,html.cz .cdh,html.cz .acqrow small,html.cz .panel .sub,html.cz #regions,html.cz .pr2 .sub2,html.cz .pr2 .av,html.cz .mrow em,html.cz .bar,html.cz .ten,html.cz .dchip,html.cz .dchip .n,html.cz #lineout,html.cz .ni p,html.cz .pq-facts span,html.cz .pq-det dt,html.cz .pq-stats thead th,html.cz .pq-stats tbody th small{font-size:11px!important}
+ html.cz .mrow b,html.cz .mrow em,html.cz .acqrow,html.cz .chip.l,html.cz .side p,html.cz .pr2 .nm{font-size:12px!important}
+ html.cz .slide{overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;padding:var(--g4) 0 var(--g12);scrollbar-width:none}
+ html.cz .slide::-webkit-scrollbar{display:none}
+ html.cz .si{height:auto;min-height:100%;grid-template-rows:auto;align-content:start}
+ /* Overview: photo fills everything above the cards */
+ html.cz .s-ov .si{grid-template-rows:minmax(min-content,1fr);align-content:stretch}
+ html.cz #ov{height:auto;min-height:0;grid-template-rows:minmax(clamp(220px,46vh,640px),1fr) auto}
+ html.cz .ov-hero{padding:var(--g12) var(--g12) 16px}
+ html.cz .ov-name h2{font-size:clamp(34px,11vw,64px)}
+ html.cz .ovcards{grid-template-columns:repeat(3,minmax(0,1fr))}
+ html.cz .ovc.ovnext{grid-column:1/-1}
+ html.cz .ovc{padding:var(--g12);min-height:76px}
+ html.cz .ovv{font-size:clamp(22px,6.4vw,34px)}
+ html.cz .ovnext .ovv{white-space:normal}
+ /* News */
+ html.cz .news{grid-template-columns:minmax(0,1fr)!important}
+ html.cz .list{grid-template-columns:minmax(0,1fr)}
+ html.cz .newslead{font-size:17px!important}
+ html.cz .ni a{display:block;font-size:14px!important;padding:var(--g12) 0;min-height:40px}
+ html.cz .ni p{-webkit-line-clamp:4}
+ /* Roster (starting lineup): vertical cards, 3 across */
+ html.cz .s-ro .si{grid-template-rows:auto}
+ html.cz #lines{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;gap:var(--g12)}
+ html.cz .lblk{grid-template-rows:none;grid-auto-rows:auto}
+ html.cz .lblk .lrow,html.cz .lblk.f .lrow,html.cz .lblk.d .lrow{grid-template-columns:2em repeat(3,minmax(0,1fr))}
+ html.cz .lblk.d .lrow{grid-template-columns:2em repeat(2,minmax(0,1fr))}
+ html.cz .lrow h4{font-weight:800}
+ html.cz .lp{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;justify-items:center;align-content:start;container-type:normal;min-height:112px;padding:var(--g8) var(--g4) var(--g8);border-radius:14px;gap:2px}
+ html.cz .lp::before{background-position:50% 50%;background-size:auto 90%}
+ html.cz .lp .ph{width:52px;height:52px;border-radius:50%;object-position:50% 14%;-webkit-mask-image:none;mask-image:none;box-shadow:0 0 0 2px var(--tx,#fff)}
+ html.cz .lp .tx{padding:0;gap:0}
+ html.cz .lp .pp{font-size:11px!important;margin:0}
+ html.cz .lp .no{font-size:28px!important;line-height:1}
+ html.cz .lp .ln{font-size:11px!important;max-width:100%;-webkit-line-clamp:2;overflow-wrap:break-word;text-align:center}
+ html.cz .lp .sx{font-size:11px!important;white-space:normal;text-align:center}
+ html.cz .lp.inj::after{left:6px;top:6px}
+ html.cz #rest{grid-template-columns:none;grid-auto-flow:row;grid-auto-columns:none;grid-template-columns:repeat(3,minmax(0,1fr));height:auto;gap:var(--g4)}
+ html.cz #rest h4{grid-column:1/-1}
+ html.cz #rest{grid-auto-rows:auto}
+ html.cz #rest .lp{min-height:96px;grid-template-columns:minmax(0,1fr)}
+ html.cz #rest .lp .ph{width:52px;height:52px;aspect-ratio:auto;border-radius:50%;object-position:50% 14%}
+ html.cz #rest .lp .ln{-webkit-line-clamp:2}
+ html.cz #rest .lp .sx{display:none}
+.lp.g .sx{display:block;white-space:normal;text-align:center;font-size:10px;line-height:1.2;margin-top:3px}
+.lp.g .sx .s1{display:block;white-space:nowrap}
+#rest .lp.g .sx{display:none}
+ /* Team: panels stacked, rows are tap targets */
+ html.cz .panels{grid-template-columns:minmax(0,1fr)!important}
+ html.cz .panel{overflow:visible}
+ html.cz .bars{grid-auto-rows:auto;overflow:visible}
+ html.cz .bars .bar:nth-child(n+8){display:none}
+ html.cz .bar,html.cz .ten{grid-template-columns:minmax(6em,9em) minmax(0,1fr) 2.4em}
+ html.cz button.bar{min-height:40px}
+ html.cz .bar>span:first-child,html.cz .ten>span:first-child{white-space:normal}
+ html.cz .mini{grid-auto-rows:minmax(40px,auto)}
+ html.cz .mrow{min-height:40px;grid-template-columns:28px minmax(0,1fr) auto}
+ html.cz .mrow .ph{width:28px;height:28px}
+ html.cz .acqrow{min-height:40px}
+ html.cz .tenure{gap:var(--g8)}
+ /* Games: list of the month's games (list is built by deck.js renderCal), the 7-column grid is hidden */
+ html.cz .calg{display:none!important}
+ html.cz #cal{height:auto;grid-template-rows:auto auto}
+ html.cz .calnav{min-width:44px;min-height:44px}
+ html.cz .calbar h3{font-size:22px;min-width:0;flex:1}
+ html.cz .callist{display:grid;gap:var(--g8)}
+ html.cz .callist .cr{display:grid;grid-template-columns:3.4em 32px minmax(0,1fr) auto;gap:var(--g12);align-items:center;min-height:52px;padding:var(--g8) var(--g12);border-radius:14px;background:rgba(255,255,255,.07);font:600 13px/1.2 var(--font-sans)}
+ html.cz .callist .cr .cd-d{display:grid;line-height:1.1}
+ html.cz .callist .cr .cd-d b{font:800 20px/1 var(--font-display)}
+ html.cz .callist .cr .cd-d i{font-style:normal;font-size:11px;opacity:.75;text-transform:uppercase;letter-spacing:.08em}
+ html.cz .callist .cr img{width:32px;height:32px;object-fit:contain}
+ html.cz .callist .cr .cd-t{display:grid;gap:2px;min-width:0}
+ html.cz .callist .cr .cd-t b{font-size:14px}
+ html.cz .callist .cr .cd-t span{font-size:11px;opacity:.75}
+ html.cz .callist .cr .cd-s{font:800 15px/1 var(--font-sans);text-align:right;white-space:nowrap}
+ html.cz .callist .cr.today{box-shadow:inset 0 0 0 2px var(--tc,#fff)}
+ html.cz .callist .cr.done{cursor:pointer}
+ html.cz .callist .none{padding:var(--g12);opacity:.75;font-size:13px}
+ /* Player page */
+ html.cz .pq-btn{height:40px;min-width:40px}
+ html.cz .pq-x{width:40px}
+.callist{display:none}
+/* wide enough for two columns (tablet portrait, landscape phone) */
+@media (max-width:900px) and (min-width:600px),(max-height:520px) and (min-width:600px){
+ html.cz .top{flex-wrap:nowrap!important}
+ html.cz .topl{flex:0 1 240px}.switch{width:auto}
+ html.cz #tabs{flex:1 1 auto;max-width:560px}
+ html.cz #lines{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
+ html.cz .news{grid-template-columns:minmax(0,2.2fr) minmax(0,1fr)!important}
+ html.cz .panels{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ html.cz .ovv{font-size:clamp(24px,4vw,40px)}
+}
+@media (max-height:520px) and (min-width:600px){
+ html.cz #ov{grid-template-rows:none;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);min-height:100%}
+ html.cz .ov-hero{min-height:260px}
+}
+/* landscape phone: player page scrolls instead of cutting off */
+@media (max-height:520px) and (min-width:720px){
+ html.cz .pq{overflow-y:auto;overflow-x:hidden}
+ html.cz .pq-bar{position:fixed}
+ html.cz .pq-top{flex:none;min-height:100%}
+ html.cz .pq-info{height:auto;min-height:100%;padding-top:64px;padding-bottom:16px;justify-content:flex-start}
+ html.cz .pq-last{font-size:clamp(36px,10vh,60px)}
+ html.cz .pq-det{grid-template-columns:minmax(0,1fr)}
+ html.cz .pq-band{flex:none}
+}
+/* compact: drawer controls are tap targets too */
+html.cz .drawer .tn,html.cz button.tn{min-height:40px;padding-left:12px;padding-right:12px;display:inline-flex;align-items:center}
+html.cz .drawer .x,html.cz #gClose,html.cz #dClose{min-width:40px;min-height:40px}
+.mini .muted{font:600 11px/1.3 var(--font-sans);opacity:.7;padding:var(--g8) 0}
+.ovv .rs{font:700 .6em/1 var(--font-sans);font-style:normal;opacity:.7;margin:0 .12em;vertical-align:.18em}

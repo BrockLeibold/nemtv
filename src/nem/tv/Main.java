@@ -161,6 +161,11 @@ public class Main extends Activity {
         }}).start();
       }
 
+      // bundled asset as text ("" if missing); used for the optional, git-ignored stremio.json
+      @JavascriptInterface public String asset(String n) {
+        try { return new String(readAsset(n), "UTF-8"); } catch (Exception x) { return ""; }
+      }
+
       // generic native GET (NHL scores): result goes to window[cb](text, err)
       @JavascriptInterface public void get(final String u, final String cb) {
         new Thread(new Runnable() { public void run() {

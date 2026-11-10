@@ -1,7 +1,8 @@
 // Controller test: press the real arrow keys and check, per screen, that every focus target can be reached and none is a dead end.
 // returns lines like "FAIL guide slide2 unreachable: button.pr2#73" / "ok guide slide2 (41 targets)"
 module.exports = async function navtest(w, ev, sleep, page, out) {
-  const guide = page === "guide";
+  if (page === "guide") return require("./guidenav.js")(w, ev, sleep, out); // the guide has its own zone-based test (guidenav.js)
+  const guide = false;
   const DOC = guide ? "document.getElementById('gf').contentDocument" : "document";
   const key = async (k) => { for (const t of ["keyDown", "keyUp"]) w.webContents.sendInputEvent({ type: t, keyCode: k }); await sleep(70); };
   const nodesJs = (scopeSlide) => `(function(){var D=${DOC},SEL='button,a[href],input,select,textarea,[tabindex]',cs=${guide ? "D.defaultView.deckSlideEl&&D.defaultView.deckSlideEl()" : "null"};

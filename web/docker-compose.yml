@@ -1,0 +1,25 @@
+# NEMTV private web build. Use: docker compose -f web/docker-compose.yml ...
+# 'nemtv' is created but never started here (profile + restart no): the waker starts it on the first request and stops it after 30 min idle.
+name: nemtv-web
+services:
+  nemtv:
+    build: .
+    image: nemtv-web:latest
+    container_name: nemtv
+    restart: "no"
+    profiles: ["manual"]
+    networks: [nemtv-net]
+    volumes: ["./data:/data"]
+  nemtv-waker:
+    build: ./waker
+    image: nemtv-waker:latest
+    container_name: nemtv-waker
+    restart: unless-stopped
+    ports: ["127.0.0.1:4480:8080"]
+    volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
+    environment:
+      TARGET: nemtv
+      IDLE_MIN: "30"
+    networks: [nemtv-net]
+networks:
+  nemtv-net: {}

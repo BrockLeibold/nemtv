@@ -13,3 +13,6 @@ desktop/shots/
 guide/heroes/
 hero-check/
 shots_*.log*
+assets/stremio.json
+web/data/
+web/app/

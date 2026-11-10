@@ -115,6 +115,9 @@ h2{font-size:15px;margin:10px 0 8px}
 #pl video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform-origin:center}
 .ptop,.ctl{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;transition:opacity .2s}
 .ptop{top:0;padding:12px 28px;gap:10px;background:linear-gradient(#000b,#0000)}
+.ptop .ptt{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;min-width:0}
+.pbtn{padding:12px 26px;border-radius:999px;background:var(--gl-fill);border:2px solid var(--line-strong);box-shadow:var(--gl-shadow);color:var(--ink);font-weight:700;font-size:20px;white-space:nowrap}
+.pbtn:focus-visible{border-color:var(--ink)}
 .ptop img{width:26px;height:26px;object-fit:contain}
 .ptop .t{font-size:15px}
 .ptop .tag{padding:2px 10px;border-radius:999px;background:var(--gl-fill);border:1px solid var(--line-strong);color:var(--ink-2);font-size:9px;letter-spacing:.1em}
@@ -123,6 +126,7 @@ h2{font-size:15px;margin:10px 0 8px}
 .ctl button{padding:6px 14px;border-radius:999px;color:var(--ink);font-weight:600;white-space:nowrap;text-align:center}
 .ctl button.sm{padding:6px 10px}
 .ctl .lbl{color:var(--muted);padding:0 4px 0 10px;font-size:9px;letter-spacing:.1em}
+#pl.hide,#pl.hide *{cursor:none}
 #pl.hide .ptop,#pl.hide .ctl{opacity:0;pointer-events:none}
 .pmenu{position:absolute;left:50%;bottom:62px;transform:translateX(-50%);max-height:62%;overflow-y:auto;scrollbar-width:none;min-width:260px;max-width:420px;
   padding:6px;border-radius:22px;background:rgba(25,23,28,.94);box-shadow:var(--gl-shadow);border:1px solid var(--line-strong)}
@@ -186,9 +190,10 @@ h2{font-size:15px;margin:10px 0 8px}
 .pc{--o-a:var(--red-3);--o-b:var(--wine);--o-c:var(--plum);--o-base:var(--island);position:relative;isolation:isolate;width:40vw;aspect-ratio:16/9;border-radius:26px;overflow:hidden;color:#fff;background:#141217}
 .pc.done{--o-a:#4a474f!important;--o-b:#3b393f!important;--o-c:#28262c!important;--o-f1:#605d66!important;--o-f2:#605d66!important}
 .pi{position:absolute;inset:0;padding:12px 16px 12px;display:flex;flex-direction:column;gap:5px}.pc .ft-mid{flex:1}.pc .ft-team img{width:48px;height:48px}.pc .ft-team .nm{font-size:11px}.pc .ft-sc{font-size:40px}.pc .ft-over{font-size:11px;padding:1px 10px;margin-top:3px}
-.pc .tv{font-size:9px;color:rgba(255,255,255,.85);text-align:center}.pb{display:flex;gap:8px;justify-content:center;margin-top:9px}
-.pbtn{padding:6px 18px;border-radius:999px;background:rgba(244,242,246,.92);color:#141217;font-weight:800;font-size:11px}.pbtn.alt{background:rgba(0,0,0,.35);color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+.pc .tv{font-size:9px;color:rgba(255,255,255,.85);text-align:center}.pb{display:flex;flex-wrap:wrap;gap:6px 8px;justify-content:center;margin-top:9px}
+.pbtn{padding:6px 14px;border-radius:999px;background:rgba(244,242,246,.92);color:#141217;font-weight:800;font-size:11px}.pbtn.alt{background:rgba(0,0,0,.35);color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
 .pbtn:focus{outline:3px solid var(--coral);outline-offset:2px}
+#gpop .pc{width:max(40vw,min(560px,92vw))}
 .srl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .sr{position:relative;isolation:isolate;border-radius:18px;padding:10px 12px;color:#fff;text-align:left;display:flex;flex-direction:column;gap:8px;background:linear-gradient(100deg,color-mix(in srgb,var(--o-a) 32%,#141217),#141217 50%,color-mix(in srgb,var(--o-b) 32%,#141217))}
 .sr.lv{box-shadow:inset 0 0 0 1.5px var(--coral)}.sr.done{filter:grayscale(.8);opacity:.7}
@@ -290,8 +295,8 @@ h2{font-size:15px;margin:10px 0 8px}
 .nws .it i{flex:none;width:4px;height:4px;border-radius:50%;background:var(--coral);margin-top:4px}
 .nws .inj{font-size:9px;color:var(--coral)}
 #gp{position:fixed;z-index:80;background:rgba(15,14,17,.85)}
-#gp.tab{left:0;right:0;top:46px;bottom:0;z-index:20}
-#gp.side{top:0;bottom:0;right:0;width:25vw;border-left:1px solid var(--line-strong);backdrop-filter:blur(10px);overflow:hidden}
+#gp.tab{left:0;right:0;top:var(--hh,46px);bottom:0;z-index:20}
+#gp.side{top:0;bottom:0;right:0;width:var(--gpw,25vw);border-left:1px solid var(--line-strong);backdrop-filter:blur(10px);overflow:hidden}
 #gp[hidden]{display:block!important;visibility:hidden;pointer-events:none;left:-4000px!important;right:auto!important;width:100vw!important}
 #gf{border:0;background:transparent;display:block}
 #gbar{display:none;gap:3px;padding:4px;height:34px;align-items:center}
@@ -327,6 +332,98 @@ main.live .chlogo i{font-style:normal;font-weight:800;font-size:9px;letter-spaci
 main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;object-fit:contain}
 .ccl{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
 .ccl .row{width:100%;max-width:460px;margin:0}.ccl .row small{margin-left:auto;color:var(--muted)}
+
+/* ===== PHONE / SMALL WINDOWS (docs/UI-RULES.md still rules the TV; this block only runs below 700px wide or 520px tall, never on the 960x540 TV layout) =====
+   text >= 11px, controls >= 40px, one column, no sideways page scroll */
+@media (max-width:700px),(max-height:520px),(min-width:701px) and (max-aspect-ratio:3/2){ /* readability + touch sizes: phone, landscape phone, tablets (4:3 and portrait) */
+ .pill .vs,.pill .sp,.pill .live,#boot .tag,#boot .st,.ptop .tag,.ctl .lbl,.pmenu h3,.dots,.gt,.gsc span,.ev,.g3 h3,.star div,.gm,.ppg,.gtm,.bv,.pc .tv,.srn,.srg,.srg i,.fn h3,.fn .hd,.fn .it,.fn .inj,.ft-top,.ft-team small,.ft-st small,.gcs,.gc small,.pg small,#zb small,.grid.lg .pill .tm,.ft-bot .tv,.grid.cal .pill .tm,.grid.lg .pill .live,.grid.lg .pill.done .live,.grid.cal .pill .live,.grid.cal .pill.done .live,.pill .rec,.pill .tvl,.nws h3,.nws .hd,.nws .it,.nws .inj,#gbar button,main.live .chip,main.live .chlogo i{font-size:11px}
+ header [data-t]{min-height:40px}
+ #setb{width:44px;height:44px;min-height:44px}
+ .chip,main.live .chip{min-height:40px;display:inline-flex;align-items:center;padding:0 14px;font-size:12px}
+ .chip.ft{padding:0 14px 0 8px}
+ .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+ .gs input{min-height:44px}
+ .pbtn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+ .watch{min-height:44px}
+ .ctl button{min-height:40px;padding:0 14px;min-width:44px}.ctl button.sm{padding:0 14px}
+ small{font-size:11px}
+ .pmenu button{min-height:44px}
+ #gbar{height:44px}#gbar button{height:40px;min-width:40px;padding:0 12px;font-size:12px}
+ #gdh{flex-wrap:wrap}#gdh button,#gdr button{min-height:40px}
+}
+@media (max-width:700px),(max-height:520px){  /* phone layout */
+ header{padding:6px 12px}
+ main{padding:4px 12px 24px}
+ main::after{height:72px}
+ h2{font-size:17px}
+ .row{width:100%;min-height:44px}
+ .field{flex-wrap:wrap}.field input{width:auto;flex:1 1 200px;min-width:0;min-height:44px}
+ .ptop{padding:8px 12px;gap:8px}
+ .ptop .t{font-size:14px}
+ .ptop .ptt{overflow:hidden}
+ .ctl{bottom:12px;padding:0 8px}
+ .pmenu{left:12px;right:12px;bottom:12px;transform:none;max-width:none;min-width:0;max-height:70%}
+ #pbuf .tm2{gap:12px}#pbuf .tm2 .tt{width:38vw}
+ #gpop .pc{width:min(92vw,440px);aspect-ratio:auto;height:min(300px,86vh)}
+ .pc .ft-team .nm{font-size:13px}.pc .ft-sc{font-size:36px}.pc .pb{flex-wrap:wrap}
+ #gdb{overflow-y:auto}
+ .g3{grid-template-columns:minmax(0,1fr)}
+ #gdb .gs{flex-direction:column;align-items:stretch}
+ .gt td,.gt th{padding:6px 3px}
+ .grid{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+ .pill,.grid.lg .pill,.grid.cal .pill{width:100%;height:80px;aspect-ratio:auto;border-radius:18px;padding:8px 12px 22px}
+ .pill .side,.grid.lg .pill .side,.grid.cal .pill .side{flex-direction:row;gap:8px;justify-content:flex-start;text-align:left}
+ .pill .mid~.side{flex-direction:row-reverse;justify-content:flex-start;text-align:right}
+ .pill .side img,.grid.lg .pill .side img,.grid.cal .pill .side img{width:36px;height:36px;flex:none}
+ .pill .tm,.grid.lg .pill .tm,.grid.cal .pill .tm{font-size:13px;line-height:1.1}
+ .pill .sp,.pill .tvl,.pill .rec{display:none}
+ .grid.lg .pill .live,.grid.cal .pill .live,.pill .live{bottom:4px;font-size:11px}
+ .grid.lg .pill.done .live,.grid.cal .pill.done .live,.pill.done .live{font-size:11px;padding:3px 0}
+ .pill .scr{font-size:20px}
+ .grid.lg .pill .scr,.grid.cal .pill .scr{font-size:20px}
+ .lz{height:auto;min-height:0;grid-template-rows:auto auto auto;gap:12px}
+ .hcar{container-type:normal;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:8px;border-radius:22px}
+ .hcar::-webkit-scrollbar{display:none}
+ .feat{scroll-snap-align:start;border-radius:22px;padding:14px;gap:12px}
+ .ft-team img{width:56px;height:56px}.ft-team .nm{font-size:16px}.ft-sc{font-size:44px}.ft-st b{font-size:13px}
+ .ft-over{font-size:16px}
+ .fn{padding:10px 12px}.fn .tn{gap:4px}
+ .srl{grid-template-columns:minmax(0,1fr)}
+ .sr{padding:12px}
+ .srm{font-size:24px;min-width:64px}
+ main.live{padding:4px 12px 0}
+ main.live .gv,main.live .gh{display:none}
+ main.live .gtop{height:auto;padding:0 0 8px}
+ main.live .gi .cn{font-size:20px}
+ main.live .gr{height:auto;min-height:56px;display:flex;align-items:stretch;gap:6px;margin-bottom:6px}
+ main.live .gc{width:42%;height:auto;min-height:48px;align-self:stretch;margin:0}
+ main.live .gr .gt{flex:1;min-width:0;height:auto;display:flex;position:relative}
+ main.live .pg{position:static;width:auto!important;flex:1;display:none;min-height:48px}
+ main.live .pg.now{display:flex}
+ main.live .gt:not(:has(.pg.now)) .pg:first-child{display:flex}
+ #zb{right:12px;width:220px}
+ .dh{margin:12px 0 8px}
+ .dn{font-size:28px;min-width:52px}
+}
+@media (max-width:700px){
+ header{grid-template-columns:auto 1fr auto;grid-template-areas:"b . s" "n n n";gap:6px 8px;padding:8px 12px 6px}
+ .brand{grid-area:b}.brand img{height:22px}
+ #setb{grid-area:s;grid-column:auto}
+ nav{grid-area:n;width:100%}
+ header nav [data-t]{flex:1 1 0;flex-direction:column;gap:2px;padding:4px 2px;min-width:0;min-height:48px;font-size:11px;border-radius:22px}
+ .feat{grid-template-columns:minmax(0,1fr)}
+ .ft-st{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .ptop .ptt .tag{display:none}
+ .pbtn{padding:0 14px}
+ #boot .ttl img{height:44px!important}
+}
+@media (max-height:520px) and (min-width:701px){
+ header{padding:4px 12px}
+ .lz{grid-template-rows:auto auto auto}
+ .feat{grid-template-columns:1.6fr 1fr}
+ .grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+ .srl{grid-template-columns:1fr 1fr}
+}
 </style></head><body>
 <header><span class="brand"><img src="nemtv-logo.png" alt="NEMTV"></span>
 <nav id="nav"><button data-t="home"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Home</span></button><button data-t="scores"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Scores</span></button><button data-t="schedule"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Schedule</span></button><button data-t="live"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Live</span></button><button data-t="guide"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Guide</span></button></nav><button id="setb" data-t="setup" aria-label="Setup"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2.2-1.3L14 3h-4l-.4 2.5a7 7 0 0 0-2.2 1.3l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .9.1 1.3l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2.2 1.3L10 21h4l.4-2.5a7 7 0 0 0 2.2-1.3l2.3 1 2-3.4-2-1.5c.1-.4.1-.9.1-1.3z"/></svg></button></header>
@@ -334,11 +431,11 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 <div id="boot"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="rows" id="brows"></div><div class="ttl"><img src="nemtv-logo.png" alt="NEMTV" style="height:64px"></div><div class="tag disp">NHL &middot; LIVE TV</div><div class="bar"><i></i></div><div class="st" id="bst">Loading channels...</div></div>
 <div id="pl"><video id="v" autoplay playsinline></video>
 <div id="pbuf"><div class="mesh2"></div><div id="pbc"></div><div class="bar"><i></i></div><div class="stt" id="pst"></div></div>
-<div class="ptop" id="ptop"></div><div id="zb"></div>
+<div class="ptop" id="ptop"><button class="pbtn" id="pback">&#8592; Back</button><div class="ptt" id="ptt"></div><button class="pbtn" id="pfs">Full screen</button></div><div id="zb"></div>
 <div class="ctl" id="pctl">
  <div class="grp"><span class="lbl">FEED</span><button id="bfeed"></button></div>
  <div class="grp"><span class="lbl">ZOOM</span><button class="sm" id="zm">-</button><button id="zv"></button><button class="sm" id="zp">+</button></div>
- <div class="grp"><button id="bgd">Guide</button><button id="bfav">Favorite</button><button id="bpp">Pause</button><button id="bmu">Mute</button><button id="bcl">Close</button></div>
+ <div class="grp"><button id="bgd">Guide</button><button id="bfav">Favorite</button></div>
 </div><div class="pmenu" id="pmenu" hidden></div></div>
 <div id="gpop" hidden></div>
 <div id="gd" hidden><div id="gdh"></div><div id="gdr"></div><div id="gdb"></div></div>
@@ -357,7 +454,7 @@ const SPORTS=[["NFL",/\bnfl\b/i],["NBA",/\bnba\b|\bwnba\b/i],["MLB",/\bmlb\b/i],
  ["Wrestling",/\bwwe\b|\baew\b|wrestling/i],["Cricket",/cricket|\bipl\b/i],["Rugby",/rugby/i],["Sports",/sport|espn|\bfox sports\b|\bdazn\b|bein|\bsky sports\b/i]];
 const VS=/\s(?:vs\.?|v|@|at)\s/i;
 let G=[], L=[], cur=null, menuOn=false, hideT=0, hls=null, tried=new Set();
-let zoom=ls("zoom",100), fav=ls("fav",[]), recent=ls("recent",[]), grp=ls("grp","All");
+let zoom=100, fav=ls("fav",[]), recent=ls("recent",[]), grp=ls("grp","All");
 let favT=ls("favT",[]); const isFavG=(a,b)=>favT.includes(a)||favT.includes(b), starOn=(a,b)=>isFavG(a,b);
 let ch=ls("ch",[]), off=ls("off",[]), tab="home", url=ls("url",(window.CFG||{}).playlist||""), msg="";
 
@@ -443,14 +540,17 @@ window.gotScores=(t,e)=>{
 };
 function pollScores(){const u="https://api-web.nhle.com/v1/score/now";
   if(window.Android&&Android.get)Android.get(u,"gotScores");else fetch(u).then(r=>r.text()).then(t=>gotScores(t,"")).catch(e=>gotScores("",String(e)))}
+const endAtMap=()=>ls("endAt",{});
 function games(){ // from the bundled NHL schedule + the TV box clock
   const t=Date.now(), live=[], later=[], sod=new Date(new Date().setHours(0,0,0,0)).getTime(); // 7 day window from midnight today
   if(off.includes("NHL"))return {live,later};
   (window.SCHED||[]).forEach(([st,aw,hm,nets])=>{
-    if(st>=sod+7*864e5||(st+DUR<=t&&(st<sod||!scoreOf(aw,hm,st))))return; // finished games from today stay (greyed, FINAL)
+    const sx=scoreOf(aw,hm,st), end=(sx&&endAtMap()[sx.id])||st+3.5*3600e3; // final time if seen, else start+3.5h
+    if(st>=sod+7*864e5||(st<sod?t>=end+90*60e3:st+DUR<=t&&!sx))return; // yesterday's (past-midnight) games stay until 90 min after they end; finished games from today stay (greyed, FINAL)
     const A=ABBR[aw],H=ABBR[hm]; if(!A||!H)return;
     const g={s:"NHL",tm:[H.name,A.name],t:[H,A],st,aw,hm,nets,title:A.name+" at "+H.name}; // home team on the left
     g.sc=scInfo(scoreOf(aw,hm,st)); g.c=feedsFor(g)[0]||{n:"No matching channel",u:"",g:""};
+    g.sid=svId(g); if(g.sid&&!g.c.u)g.c={n:"Stream addon",u:"stremio",g:"Stremio"}; // addon feeds count as a feed (real list loads on Watch)
     (st<=t||st<sod+864e5?live:later).push(g); // today's games (not started, live, finished) all go in the hero
   });
   return {live,later};
@@ -486,6 +586,32 @@ function feedsFor(g){ // strict: NHL network list for this game, checked against
   const ca=out.filter(c=>CA.test(baseName(c.n))), rest=out.filter(c=>!CA.test(baseName(c.n)));
   return ca.concat(rest);
 }
+/* ---------- optional Stremio addon (private base URL lives only in assets/stremio.json; file missing = feature off) ---------- */
+let svBase="", svMap={}, svCache={}, svVer=0, svN=0; // pair "A,B" -> [{id,t,live}]; meta id -> {t,f}
+const svNrm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]/g,"");
+const svAb=s=>{const k=svNrm(s),t=NHL.find(t=>k.endsWith(svNrm(t[1].match(/(Maple Leafs|Blue Jackets|Red Wings|Golden Knights|\S+)$/)[1])));return t&&t[0]}; // "LA Kings", "Montreal Canadiens", "St. Louis Blues" -> abbrev
+function svGet(p,cb){const done=t=>{let o=null;try{o=JSON.parse(t)}catch(x){}cb(o)};
+  if(window.Android&&Android.get){const f="gotSv"+(++svN);window[f]=(t,e)=>{delete window[f];done(e?"":t)};Android.get(svBase+p,f)}else fetch(svBase+p).then(r=>r.text()).then(done).catch(()=>done(""))}
+function svLoad(){if(!svBase)return;
+  svGet("/catalog/sport/sports_hockey.json",o=>{if(!o||!o.metas)return log("stremio catalog failed");
+    const m={};let n=0;
+    o.metas.forEach(x=>{const p=String(x.name||"").split(/\s+vs\.?\s+/i);if(p.length!==2)return;const a=svAb(p[0]),b=svAb(p[1]);if(!a||!b||a===b)return;
+      const live=/live/i.test(x.releaseInfo||""),t=live?0:Date.parse(String(x.releaseInfo||"").replace("·","")); if(!live&&isNaN(t))return;
+      (m[[a,b].sort()]=m[[a,b].sort()]||[]).push({id:x.id,t,live});n++});
+    log("stremio games",n); if(JSON.stringify(m)===JSON.stringify(svMap))return;
+    svMap=m;svVer++; if(!$("#pl").classList.contains("on"))try{rerender()}catch(x){}})} // while the player is open the 60s check redraws later
+function svId(g){const l=svMap[[g.aw,g.hm].sort()];if(!l||(g.sc&&g.sc.over))return "";
+  const now=Date.now();let b="",d=12*36e5; // nearest start time within 12h; a LIVE tag only counts for a game that started within 5h
+  l.forEach(x=>{const v=x.live?(Math.abs(now-g.st)<5*36e5?Math.abs(now-g.st):1e18):Math.abs(x.t-g.st);if(v<d){d=v;b=x.id}});return b}
+function svFeeds(id,cb){const c=svCache[id];if(c&&Date.now()-c.t<12e4)return cb(c.f);
+  svGet("/stream/sport/"+encodeURIComponent(id)+".json",o=>{if(!o||!o.streams)return cb([]);
+    const f=o.streams.filter(s=>s.url&&!/^\s*tip\b|external player/i.test((s.name||"")+" "+(s.title||""))).map(s=>({n:String(s.name||"Stream").replace(/^Leaf \([^)]*\)\s*[·-]\s*/,""),u:s.url,g:"Stremio"})),
+      r=c=>/TVA|RDS|FR:|French/i.test(c.n)?3:/CA:/i.test(c.n)?0:/Sportsnet|ESPN\+/i.test(c.n)?1:2; // Canadian English first, then Sportsnet/ESPN+, French last
+    f.sort((a,b)=>r(a)-r(b)); svCache[id]={t:Date.now(),f}; log("stremio streams",f.length); cb(f)})}
+function bfName(g){ // name the Stremio addon feed when the game has one (warm cache), else "Stream addon"; otherwise the channel
+  if(!g.sid)return baseName(g.c.n); const c=svCache[g.sid],f=c&&c.f&&c.f.find(x=>!/TVA|RDS|FR:|French/i.test(x.n)); return f?baseName(f.n):"Stream addon"}
+(function(){const go=t=>{try{svBase=JSON.parse(t).base||""}catch(x){}if(svBase){svLoad();setInterval(svLoad,3e5)}};
+  if(window.Android&&Android.asset)go(Android.asset("stremio.json"));else fetch("stremio.json").then(r=>r.ok?r.text():"").then(go).catch(()=>{})})();
 const fmtT=ms=>{const d=new Date(ms);return d.toLocaleDateString([],{weekday:"short",month:"short",day:"numeric"})+", "+d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})};
 
 /* ---------- hero data: standings + team news from the guide (git-synced) ---------- */
@@ -510,7 +636,7 @@ function featHTML(g,k){ if(!g)return "";
     <div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${sc&&sc.over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div>
     <div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span><small>${esc(recOf(g.aw)||"AWAY")}</small></div></div>
    <div class="ft-st">${cell("POINTS",H.points!==undefined?H.points:"-",A.points!==undefined?A.points:"-")}${cell("RECORD",H.record||"-",A.record||"-")}${cell("LAST 10",H.l10||"-",A.l10||"-")}${cell("STREAK",H.streak||"-",A.streak||"-")}${cell("GOALS F-A",H.gf!==undefined?H.gf+"-"+H.ga:"-",A.gf!==undefined?A.gf+"-"+A.ga:"-")}${cell("SHOTS",sog[0],sog[1])}</div>
-   <div class="ft-bot"><span class="tv">${sc&&sc.over?"This game has ended":!sc?(g.c&&g.c.u&&Date.now()>=g.st-40*6e4?"Pre-game on "+esc(baseName(g.c.n)):"Game has not started yet"):g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No feed found"}</span></div></div>
+   <div class="ft-bot"><span class="tv">${sc&&sc.over?"This game has ended":!sc?(g.c&&g.c.u&&Date.now()>=g.st-40*6e4?"Pre-game on "+esc(bfName(g)):"Game has not started yet"):g.c&&g.c.u?"Best feed: "+esc(bfName(g)):"No feed found"}</span></div></div>
    <div class="fn">${newsHTML(g)}</div>`}
 const slideStyle=g=>{const c=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";return c(g.t[0].c,"a")+c(g.t[1].c,"b")};
 function heroSet(){const c=$("#hcar"); if(!c)return;
@@ -618,9 +744,10 @@ let LL=[], deskSel=null;
 let popG=null,popBack=null;
 function openPop(g){if(!g)return;popG=g;popBack=document.activeElement;const sc=g.sc,over=sc&&sc.over,x=scoreOf(g.aw,g.hm,g.st),logo=t=>t.logo?`<img src="${t.logo}" alt="">`:"";
   const hasF=!!(g.c&&g.c.u), btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>${g.c&&g.c.u&&x&&Date.now()<(ls("endAt",{})[x.id]||0)+36e5?`<button class="pbtn alt" data-pa="play">WATCH POST GAME</button>`:""}`:sc?(hasF?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="sum">LIVE STATS</button>`):(hasF&&Date.now()>=g.st-40*6e4?`<button class="pbtn" data-pa="play">WATCH PRE-GAME</button>`:"")+`<button class="pbtn alt" data-pa="t0">${esc(g.tm[0].split(" ").pop().toUpperCase())} IN GUIDE</button><button class="pbtn alt" data-pa="t1">${esc(g.tm[1].split(" ").pop().toUpperCase())} IN GUIDE</button>`;
+  if(g.sid)svFeeds(g.sid,()=>{}); // warm the 2 min stream cache so Watch starts fast
   const p=$("#gpop");p.innerHTML=`<div class="pc${over?" done":""}" style="${slideStyle(g)}"><span class="skin"><span class="mesh"></span></span><div class="pi"><div class="ft-top"><b>${sc?(over?"GAME OVER":esc(sc.note)):esc(fmtT(g.st))}</b><span>${esc((g.nets||[]).join(" / "))}</span></div>
     <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span></div><div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div><div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span></div></div>
-    <div class="tv">${over?"This game has ended":sc?(g.c&&g.c.u?"Best feed: "+esc(baseName(g.c.n)):"No channel carries this game"):hasF&&Date.now()>=g.st-40*6e4?"Pre-game on "+esc(baseName(g.c.n)):"Game has not started yet"}</div><div class="pb">${btns}</div></div></div>`;
+    <div class="tv">${over?"This game has ended":sc?(g.c&&g.c.u?"Best feed: "+esc(bfName(g)):"No channel carries this game"):hasF&&Date.now()>=g.st-40*6e4?"Pre-game on "+esc(bfName(g)):"Game has not started yet"}</div><div class="pb">${btns}</div></div></div>`;
   p.hidden=false;p.querySelector(".pbtn").focus()}
 function closePop(){$("#gpop").hidden=true;if(popBack&&popBack.isConnected)popBack.focus({preventScroll:true})}
 $("#gpop").addEventListener("click",e=>{const b=e.target.closest("button");if(!b){closePop();return}const a=b.dataset.pa,g=popG;if(!a)return;
@@ -686,7 +813,7 @@ $("#gd").addEventListener("keydown",e=>{const k=e.key;if(!/^Arrow/.test(k))retur
 
 /* ---------- player ---------- */
 function show(){const pl=$("#pl");pl.classList.remove("hide");clearTimeout(hideT);hideT=setTimeout(()=>{if(!menuOn)pl.classList.add("hide")},4000)}
-function setZoom(z){zoom=Math.max(50,Math.min(200,z));$("#v").style.transform="scale("+zoom/100+")";$("#zv").textContent=zoom+"%";sv("zoom",zoom)}
+function setZoom(z){zoom=Math.max(50,Math.min(200,z));$("#v").style.transform="scale("+zoom/100+")";$("#zv").textContent=zoom+"%"}
 function favBtn(){$("#bfav").textContent=fav.includes(cur.c.n)?"Unfavorite":"Favorite"}
 let waitT=0;
 function bufBuild(){ // big loading card: both teams on their colours, or the channel name
@@ -724,12 +851,26 @@ function addRecent(c){recent=[c.n,...recent.filter(n=>n!==c.n)].slice(0,12);sv("
 function play(g,list){
   pvStop(); userPaused=false;
   const feeds=g.title?feedsFor(g):[g.c];
-  cur={...g,feeds,list:list||feeds}; tried=new Set(); addRecent(g.c);
+  cur={...g,feeds,list:list||feeds}; tried=new Set(); if(g.c.u!=="stremio")addRecent(g.c);
   const t=cur.t||[{},{}], logo=x=>x&&x.logo?`<img src="${x.logo}" alt="">`:"";
-  $("#ptop").innerHTML=(cur.tm&&cur.tm.length>1?logo(t[0])+`<span class="t disp">${esc(cur.tm[0])}</span><span class="vs disp" style="color:var(--muted)">VS</span><span class="t disp">${esc(cur.tm[1])}</span>${logo(t[1])}`
+  $("#ptt").innerHTML=(cur.tm&&cur.tm.length>1?logo(t[0])+`<span class="t disp">${esc(cur.tm[0])}</span><span class="vs disp" style="color:var(--muted)">VS</span><span class="t disp">${esc(cur.tm[1])}</span>${logo(t[1])}`
     :`<span class="t disp">${esc(g.c.n)}</span>`)+(cur.s?`<span class="tag">${esc(cur.s)}</span>`:"")+`<span class="tag"> LIVE</span>`;
-  $("#pl").classList.add("on"); setZoom(zoom); setFeed(feeds[0]);
-  show(); zb(); $("#bpp").textContent="Pause"; $("#bmu").textContent=$("#v").muted?"Unmute":"Mute"; $("#bfeed").focus();
+  $("#pl").classList.add("on"); setZoom(100);
+  cur.t0=Date.now();
+  const FR=/TVA|RDS|FR:|French/i, me0=cur;
+  if(g.sid&&g.title){ // Stremio addon feeds lead: do not start a playlist feed first, wait up to 6s for the addon, then fall back
+    msgP("Finding feeds...","full"); let done=false;
+    const fin=f=>{if(done||cur!==me0||!$("#pl").classList.contains("on"))return; done=true;clearTimeout(tm);
+      const have=new Set(me0.feeds.map(x=>x.u)),add=(f||[]).filter(x=>!have.has(x.u)),en=x=>!FR.test(x.n),isCA=x=>/CA:/i.test(x.n);
+      const all=[...add.filter(x=>en(x)&&isCA(x)),...add.filter(x=>en(x)&&!isCA(x)),...me0.feeds.filter(en),...add.filter(x=>!en(x)),...me0.feeds.filter(x=>!en(x))];
+      me0.feeds.length=0; me0.feeds.push(...all); // same array as me0.list for games
+      if(me0.feeds[0])setFeed(me0.feeds[0]); else msgP("No feed found for this game.","fail")},
+      tm=setTimeout(()=>fin([]),6e3);
+    svFeeds(g.sid,f=>{if(done&&f&&f.length&&cur===me0&&$("#pl").classList.contains("on")){ // late addon answer after the fallback started: add feeds, keep what is playing
+        const have=new Set(me0.feeds.map(x=>x.u)),add=f.filter(x=>!have.has(x.u)&&!FR.test(x.n)); if(add.length){me0.feeds.unshift(...add);$("#bfeed").textContent=me0.feed.n+"  ("+(me0.feeds.indexOf(me0.feed)+1)+"/"+me0.feeds.length+")"}
+      } else fin(f)});
+  } else if(feeds[0])setFeed(feeds[0]); else msgP("Finding feeds...","full");
+  show(); zb(); fsLbl(); $("#bfeed").focus();
 }
 let zbT=0, zapT=0;
 function lazyFeed(n){ // stop the old stream now, start the new one only after Up/Down settles (no overlapping streams)
@@ -756,11 +897,15 @@ const GURL=window.Android?"https://guide.nemtv.local/index.html":"guide/index.ht
 let gDepth=0, gStale=false, gLoaded=false;
 const gPost=m=>{const w=$("#gf").contentWindow; if(w)w.postMessage(Object.assign({nem:1},m),"*")};
 const gSide=()=>$("#gp").classList.contains("side");
-function gLoad(){const f=$("#gf"); if(!gLoaded||gStale){gLoaded=true;gStale=false;f.src=GURL+"?z="+(gSide()?GS*innerWidth/4/390:GS)+"&v="+Date.now()}}
+function gLoad(){const f=$("#gf"); if(!gLoaded||gStale){gLoaded=true;gStale=false;f.src=GURL+"?z="+gZoom()+"&v="+Date.now()}}
 const GS=.85; // guide content drawn 15% smaller (CSS zoom inside the page: no scaled-layer compositing)
+const mobile=()=>matchMedia("(max-width:900px),(max-height:520px),(min-width:701px) and (max-aspect-ratio:3/2)").matches; // phone / tablet window (never the 16:9 TV): real-size layout, guide at zoom 1 (its compact mode)
+const gsw=()=>!mobile()?innerWidth/4:innerWidth<=700?innerWidth:Math.min(460,innerWidth/2); // side panel width: TV quarter; phone portrait full width; tablet / landscape up to 460
+const gZoom=()=>mobile()?1:gSide()?GS*innerWidth/4/390:GS;
 let gZ=0;
-function gLayout(){const f=$("#gf"), side=gSide(), z=side?GS*innerWidth/4/390:GS; // side panel: phone layout (~390px) in a quarter of the screen
-  f.style.width=(side?innerWidth/4:innerWidth)+"px"; f.style.height=(innerHeight-(side?34:46))+"px";
+function gLayout(){const f=$("#gf"), side=gSide(), z=gZoom(), hh=document.querySelector("header").offsetHeight||46; // side panel: phone layout (~390px) in a quarter of the screen
+  document.documentElement.style.setProperty("--hh",hh+"px"); document.documentElement.style.setProperty("--gpw",gsw()+"px");
+  f.style.width=(side?gsw():innerWidth)+"px"; f.style.height=(innerHeight-(side?($("#gbar").offsetHeight||34):hh))+"px";
   if(z!==gZ){gZ=z;gPost({cmd:"zoom",z})}}
 function gFocus(){$("#gf").focus(); gPost({cmd:"focus"})}
 function guideTab(on){const gp=$("#gp"); if(on){gp.className="tab";gp.hidden=false;gLayout();gLoad();gDepth=0;setTimeout(gFocus,400)}else if(!gSide())gp.hidden=true}
@@ -790,6 +935,8 @@ $("#gbar").onclick=e=>{const b=e.target.closest("button"); if(!b)return; const q
 $("#gbar").addEventListener("keydown",e=>{if(e.key==="ArrowDown"){e.preventDefault();gFocus()}});
 $("header").addEventListener("keydown",e=>{if(e.key==="ArrowDown"&&tab==="guide"){e.preventDefault();gFocus()}else if(e.key==="ArrowDown"&&tab==="schedule"){e.preventDefault();const f=$("#m").querySelector(".focusable");if(f){f.focus({preventScroll:true});$("#m").scrollTop=0}}});
 window.addEventListener("resize",gLayout);
+function fsLbl(){const b=$("#pfs");if(b)b.textContent=document.fullscreenElement?"Exit full screen":"Full screen"}
+document.addEventListener("fullscreenchange",fsLbl);
 window.nemBack=()=>{const pl=$("#pl");
   if(!$("#gd").hidden){closeGame();return true}
   if(!$("#gpop").hidden){closePop();return true}
@@ -812,23 +959,29 @@ $("#pl").addEventListener("keydown",e=>{
     if(cur&&!cur.title&&(e.key==="ArrowUp"||e.key==="ArrowDown")){e.preventDefault();e.stopPropagation();zap(e.key==="ArrowDown"?1:-1);return} // live TV: Up/Down changes channel
     e.preventDefault();e.stopPropagation();show();$("#bfeed").focus();return;
   }
+  if(!menuOn&&/^Arrow/.test(e.key)){ // D-pad: top bar (Back, Full screen) <-> bottom bar
+    const top=[...document.querySelectorAll("#ptop button")],bot=[...document.querySelectorAll("#pctl button")],a=document.activeElement,
+      row=top.includes(a)?top:bot.includes(a)?bot:null;
+    if(row){e.preventDefault();e.stopPropagation();const i=row.indexOf(a);
+      if(e.key==="ArrowLeft"&&i>0)row[i-1].focus();else if(e.key==="ArrowRight"&&i<row.length-1)row[i+1].focus();
+      else if(e.key==="ArrowUp"&&row===bot)top[Math.min(i<bot.length/2?0:1,top.length-1)].focus();
+      else if(e.key==="ArrowDown"&&row===top)bot[0].focus()}}
   show();
 },true);
-$("#pl").addEventListener("pointermove",show);
+$("#pl").addEventListener("pointermove",show);$("#pl").addEventListener("mousemove",show);
 $("#v").addEventListener("playing",()=>msgP(""));
 $("#v").addEventListener("waiting",()=>{clearTimeout(waitT);if(!$("#pbuf").classList.contains("on"))waitT=setTimeout(()=>msgP("Buffering...","mini"),700)});
 $("#v").addEventListener("error",()=>{if(!hls)msgP("This feed would not play. Open FEED and pick another.","fail")});
 $("#pl").onclick=e=>{
-  show(); const b=e.target.closest("button"); if(!b)return; const v=$("#v");
+  show(); if(menuOn&&!e.target.closest("#pmenu")){closeMenu();return} const b=e.target.closest("button"); if(!b)return; const v=$("#v");
   if(b.id==="bfeed")openMenu("feed");
   else if(b.id==="zv")openMenu("zoom");
   else if(b.id==="zm")setZoom(zoom-5);
   else if(b.id==="zp")setZoom(zoom+5);
   else if(b.id==="bfav")toggleFav(cur.c.n);
-  else if(b.id==="bpp"){if(v.paused){userPaused=false;v.play().catch(playErr);b.textContent="Pause"}else{userPaused=true;v.pause();b.textContent="Play"}}
-  else if(b.id==="bmu"){v.muted=!v.muted;b.textContent=v.muted?"Unmute":"Mute"}
+  else if(b.id==="pback"){closeMenu();stop()}
+  else if(b.id==="pfs"){const d=document;if(d.fullscreenElement)d.exitFullscreen&&d.exitFullscreen().catch(()=>{});else if(d.documentElement.requestFullscreen)d.documentElement.requestFullscreen().catch(()=>{})}
   else if(b.id==="bgd")guideSide();
-  else if(b.id==="bcl")stop();
   else if(b.dataset.f!==undefined){closeMenu();tried=new Set();setFeed(cur.feeds[+b.dataset.f]);$("#bfeed").focus()}
   else if(b.dataset.z!==undefined){closeMenu();setZoom(+b.dataset.z);$("#zv").focus()}
 };
@@ -948,7 +1101,7 @@ if(window.Android&&(window.CFG||{}).repo)Android.guideSync(CFG.repo,CFG.branch||
 if(url&&!ch.length)Android.load(url);else if(url)Android.load(url); // refresh playlist in the background
 if(EPGURL)setTimeout(loadEpg,3000); setInterval(loadEpg,10800000); pollScores(); setInterval(pollScores,20000); pollStandings(); setInterval(pollStandings,300000); loadHeroData(); setInterval(loadHeroData,600000);
 setTimeout(()=>{if($("#gp").hidden&&!gLoaded&&!$("#pl").classList.contains("on")){$("#gp").className="tab";gLayout();gLoad()}},20000); // warm the guide so the tab opens instantly
-let gSig=""; const gSigOf=()=>{const g=games();return g.live.length+":"+g.later.length+":"+(g.live[0]||{}).st+":"+(g.later[0]||{}).st};
+let gSig=""; const gSigOf=()=>{const g=games();return g.live.length+":"+g.later.length+":"+(g.live[0]||{}).st+":"+(g.later[0]||{}).st+":"+svVer};
 setTimeout(()=>{gSig=gSigOf()},3000);
 setInterval(()=>{if((tab==="home"||tab==="live")&&!$("#pl").classList.contains("on")){const n=gSigOf();if(n!==gSig){gSig=n;rerender()}}},60000);
 

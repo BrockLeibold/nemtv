@@ -39,3 +39,12 @@ at 15 window shapes (`NEMTV_TEST=<dir> NEMTV_PAGES=home,guide,...`). A change is
 ## Data
 19. **Show what you know, say what you do not.** "No games yet", "Not started", never an empty hole.
 20. **Never block on the network.** Draw from cache first, update when data arrives, never show a spinner over known content.
+
+## Phone, tablet and the guide side panel (round 2)
+The TV rules above stay. Below 700px wide, 520px tall, or on 4:3 / portrait tablets the app and guide switch to a touch layout:
+21. **Real size, no zoom-out.** The guide adds `html.cz` (compact) when its window is <=900px wide or <=520px tall and the host has not zoomed it
+    out (the TV's quarter-width side panel is zoomed, so it keeps the zoom-fit deck). In compact mode sections scroll down inside their slide.
+22. **One column, 3 across for lineup cards, games as a list.** The month calendar becomes one row per game (`.callist`).
+23. **Text >= 11px, controls >= 40px** (44px for primary buttons) at those sizes. `desktop/webshot.js` audits this at real window sizes
+    (`desktop/mkjob.py` builds the job, `desktop/cycle.sh job.json` stages, runs and writes `<out>/aud.txt` plus viewable JPEGs).
+24. **Overview photo fills the space above the cards** at every window shape (`#ov` rows: photo `1fr`, cards `auto`).

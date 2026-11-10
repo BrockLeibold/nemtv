@@ -1,0 +1,1 @@
+[{"name": "x", "size": "960x540", "pre": "document.getElementById('gf').contentWindow.deckGo(0)", "wait": 1500, "expr": "JSON.stringify([...document.getElementById('gf').contentDocument.querySelectorAll('.ovc')].map(c=>[c.innerText,c.scrollHeight,c.clientHeight]))+getComputedStyle(document.getElementById('gf').contentDocument.querySelector('.ovv')).fontFamily"}]

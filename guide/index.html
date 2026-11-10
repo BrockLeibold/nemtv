@@ -751,7 +751,7 @@ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
     <div class="ans" id="answer"></div>
   </header>
 
-  <div class="gameday" id="gameday"><p class="caption">Loading the latest data…</p></div>
+  <div class="gameday" id="gameday"><p class="caption"></p></div>
 
   <section id="news" class="block">
     <div class="block-h"><h2 class="d section">News</h2><span class="caption" id="newsUpd"></span></div>
@@ -1290,7 +1290,7 @@ function matchCard(g) {
     <div class="mc-foot">${esc(g.venue)}</div></button>`;
 }
 function renderGames() {
-  if (!SCHED) { $("#mgrid").innerHTML = `<p class="gempty">Loading the schedule…</p>`; return; }
+  if (!SCHED) { $("#mgrid").innerHTML = `<p class="gempty">The schedule could not be loaded. Reload to try again.</p>`; return; }
   const t = todayET(), d = state.day || t, list = gamesOn(d);
   $("#dayName").textContent = dayName(d);
   $("#daySub").textContent = `${longDay(d, {weekday:"short", month:"short", day:"numeric"})} · ${list.length} game${list.length === 1 ? "" : "s"}`;
@@ -1370,7 +1370,7 @@ async function openGame(id, tab) {
       <div class="gd-t"><img src="${H.logo}" alt=""><button type="button" class="tn" data-team="${H.abbrev}">${esc(H.name)}</button><small class="tab">${esc(H.record)} · ${H.points} pts</small></div>
     </div>`;
   const dr = $("#gdrawer");
-  dr.innerHTML = head + `<div class="gd-b"><p class="caption">Loading…</p></div>`;
+  dr.innerHTML = head + `<div class="gd-b" aria-hidden="true"><i class="sk" style="height:72px;margin-bottom:8px"></i><i class="sk" style="height:140px;margin-bottom:8px"></i><i class="sk" style="height:96px"></i></div>`;
   if (dr.hidden) { dr.hidden = false; $("#scrim").hidden = false; dr.scrollTop = 0; $("#gClose").focus(); }
   const seriesHtml = `<div class="gd-sec"><div class="eyebrow">${esc(s.text)}</div>${s.prev.map(x => `<button type="button" class="mini-g" data-game="${x.id}"><span>${longDay(etDay(x.start), {month:"short", day:"numeric"})} · ${esc(x.away)} at ${esc(x.home)}</span><span class="tab"><b>${esc(winOf(x))}</b> ${Math.max(x.as, x.hs)}-${Math.min(x.as, x.hs)}${endTag(x) ? " " + endTag(x) : ""}</span></button>`).join("")}</div>`;
   let body = "";
@@ -1451,7 +1451,7 @@ document.addEventListener("keydown", e => {
     if (h.startsWith("GAMES")) { state.mode = "games"; state.day = (h.split("/")[1] || "").toLowerCase() || null; }
     if (h.startsWith("GAME/")) state.mode = "games";
     await loadTeam(state.team);
-  } catch (e) { $("#gameday").innerHTML = `<p class="caption">Couldn't load the roster data. Reload the page to try again.</p>`; return; }
+  } catch (e) { $("#gameday").innerHTML = `<p class="caption">Couldn't load the roster data. Reload the page to try again.</p>`; if (window.skFail) skFail(); return; }
   renderAll();
   if (state.mode === "games") setMode("games", state.day); else showMode();
   const gm = location.hash.match(/^#game\/(\d+)/i); if (gm) openGame(gm[1]);

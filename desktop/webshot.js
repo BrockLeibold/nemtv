@@ -7,7 +7,8 @@ const A=path.join(__dirname,"..","web","app"),T={".html":"text/html",".js":"appl
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(q.url.split("?")[0]);if(p==="/")p="/index.html";if(p==="/guide/"||p==="/guide")p="/guide/index.html";
   const f=path.normalize(path.join(A,p));if(!f.startsWith(A)||!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.writeHead(404);return r.end()}
   let d=fs.readFileSync(f);if(p==="/guide/index.html")d=Buffer.from(d.toString("utf8").replace("</body>",'<link rel=stylesheet href=/_dark.css><script src=/_nav.js></script></body>'));
-  r.writeHead(200,{"Content-Type":T[path.extname(f)]||"application/octet-stream"});r.end(d)});
+  const send=()=>{r.writeHead(200,{"Content-Type":T[path.extname(f)]||"application/octet-stream"});r.end(d)};
+  const DL=+process.env.SK_DELAY||0; if(DL&&/\.(json|png|jpg|jpeg|svg|webp)$/.test(p)&&new RegExp(process.env.SK_MATCH||".").test(p))setTimeout(send,DL); else send()}); // SK_DELAY=ms [SK_MATCH=regex]: hold data + images so loading skeletons can be screenshotted
 const AUDIT=`(function(w){var d=w.document,out=[],iw=w.innerWidth,ih=w.innerHeight,phone=iw<700||ih<500;
  var de=d.documentElement; if(de.scrollWidth>iw+1)out.push("HSCROLL "+de.scrollWidth+">"+iw);
  var vis=function(e){var r=e.getBoundingClientRect();if(r.width<1||r.height<1)return null;var c=w.getComputedStyle(e);if(c.visibility==="hidden"||c.display==="none"||+c.opacity===0)return null;return r};

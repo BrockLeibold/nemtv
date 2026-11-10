@@ -13,6 +13,34 @@
     return s;
   });
   wrap.appendChild(deck);
+  /* ---- skeletons (docs/UI-RULES.md 25): shaped like the real content, shown until the data lands, replaced in place by the renderers ---- */
+  var skl = function (w, h, m) { return '<i class="sk" style="width:' + w + ";height:" + h + (m ? ";margin-bottom:" + m : "") + '"></i>'; };
+  var skRep = function (n, f) { var o = ""; for (var i = 0; i < n; i++) o += f(i); return o; };
+  var skOv = function () {
+    var c = function (cls, l, v, s) { return '<div class="ovc skm' + cls + '"><span class="ovl">' + l + '</span><b class="ovv">' + v + '</b><span class="ovs">' + s + "</span></div>"; };
+    return '<section class="ov-hero skm"></section><div class="ovcards" inert aria-hidden="true">' + c("", "Record", "00-00-00", "00 games played") + c("", "Points", "00", "1st in Division") + c("", "Streak", "W0", "L10 0-0-0") + c(" ovnext", "Next game", "vs Team", "Today &middot; 7:00 PM ET &middot; Arena") + "</div>";
+  };
+  var skMc = function () { return '<div class="mc skm"><div class="mc-top"><span class="mc-time">7:00 PM</span></div><div>Team</div><div>Team</div></div>'; };
+  var skFill = function (q, html) { var e = $(q); if (e && !e.firstElementChild && !e.textContent.trim()) e.innerHTML = html; };
+  var o0 = $(".s-ov .si"); if (o0 && !$("#ov")) { var oh = document.createElement("div"); oh.id = "ov"; oh.innerHTML = skOv(); o0.insertBefore(oh, o0.firstChild); }
+  skFill("#rail", skRep(2, function (r) { return '<div class="rrow" inert aria-hidden="true"><span class="eyebrow">' + (r ? "West" : "East") + '</span><div class="rlogos">' + skRep(16, function () { return '<i class="lg sk"></i>'; }) + "</div></div>"; }));
+  skFill("#newsLead", skl("85%", "1.3em"));
+  skFill("#newsList", skRep(4, function () { return '<div class="ni" inert aria-hidden="true">' + skl("70%", "1.1em", "6px") + skl("95%", ".9em", "4px") + skl("40%", ".8em") + "</div>"; }));
+  skFill("#rosterBody", '<div class="skw" inert aria-hidden="true" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--g4)">' + skRep(18, function () { return skl("100%", "34px").replace('style="', 'style="border-radius:8px;'); }) + "</div>");
+  skFill("#lines", '<div class="lblk f" style="--r:4" inert aria-hidden="true">' + skRep(4, function (r) { return '<div class="lrow"><h4>L' + (r + 1) + "</h4>" + skRep(3, function () { return '<span class="lp skm"></span>'; }) + "</div>"; }) + '</div><div class="lblk d" style="--r:4;--pr:3" inert aria-hidden="true">' + skRep(4, function (r) { return '<div class="lrow"><h4>' + (r < 3 ? "D" + (r + 1) : "G") + "</h4>" + skRep(2, function () { return '<span class="lp skm"></span>'; }) + "</div>"; }) + "</div>");
+  var gs = $(".s-gm .si"); if (gs && !$("#calsk")) { var cs = document.createElement("div"); cs.id = "calsk"; cs.setAttribute("inert", ""); cs.setAttribute("aria-hidden", "true"); cs.style.cssText = "grid-column:1/-1;display:grid;grid-template-rows:auto repeat(5,minmax(0,1fr));grid-template-columns:repeat(7,minmax(0,1fr));gap:var(--g4);height:100%;min-height:min(420px,60vh)"; cs.innerHTML = skl("30%", "18px").replace('style="', 'style="grid-column:1/-1;') + skRep(35, function () { return skl("100%", "100%").replace('style="', 'style="border-radius:10px;'); }); gs.appendChild(cs); } // month calendar; renderCal removes it
+  skFill("#geo", skRep(6, function (i) { return skl(100 - i * 12 + "%", "18px", "6px"); }));
+  skFill("#acqWho", skRep(4, function () { return skl("100%", "36px", "4px"); }));
+  skFill("#depth", skRep(4, function () { return skl("100%", "28px", "4px"); }));
+  skFill("#dstrip", skRep(15, function () { return '<i class="dchip sk" style="flex:1;height:40px"></i>'; }));
+  skFill("#mgrid", '<div class="skw" inert aria-hidden="true">' + skRep(8, skMc) + "</div>");
+  setTimeout(function () { document.documentElement.classList.add("skon"); }, 150); // skeletons stay invisible for the first 150ms (cache hits never flash)
+  window.skFail = function () { // data never came: real message, no skeletons left behind
+    document.querySelectorAll(".sk,.skm,.skw,.ni[inert]").forEach(function (e) { if (e.parentNode) e.remove(); });
+    var o = $("#ov") || document.createElement("div"); o.id = "ov"; o.innerHTML = '<p class="caption">Couldn\'t load the roster data. Reload the page to try again.</p>'; if (!o.parentNode && o0) o0.insertBefore(o, o0.firstChild);
+  };
+  document.addEventListener("load", function (e) { if (e.target.tagName === "IMG") e.target.classList.add("ld"); }, true);
+  document.addEventListener("error", function (e) { if (e.target.tagName === "IMG") e.target.classList.add("ld"); }, true);
   var tabs = document.createElement("nav"); tabs.id = "tabs"; tabs.setAttribute("aria-label", "Sections");
   tabs.innerHTML = DEFS.map(function (d, k) { return '<button type="button" data-slide="' + k + '">' + d[0] + "</button>"; }).join("");
   top.appendChild(tabs);
@@ -169,6 +197,7 @@
   var calM = null; // month shown: {y, m}
   function renderCal() {
     var s = $(".s-gm .si"); if (!s || typeof DATA === "undefined" || !DATA || typeof state === "undefined") return;
+    var csk = $("#calsk"); if (csk) csk.remove();
     var c = $("#cal");
     if (!c) { c = document.createElement("div"); c.id = "cal"; s.appendChild(c); c.addEventListener("click", calClick); }
     var today = todayET();
@@ -271,12 +300,13 @@
   var _setTeam = window.setTeam;
   // any team switch (picker, rail logo, host message) lands on that team's Overview
   if (_setTeam) window.setTeam = function (ab) {
+    if (typeof DATA !== "undefined" && DATA && DATA.teams && !DATA.teams[ab]) { var oo = $("#ov"); if (oo) oo.innerHTML = skOv(); } // not cached: skeleton Overview until it loads
     return _setTeam(ab).then(function () {
       loadLive(ab);
       var a = document.activeElement; // the picker closed under the focus: put it back on the team button so the D-pad has somewhere to start
       if (booted && (!a || a === document.body || !a.offsetParent)) { var sb = $("#switchBtn"); if (sb) sb.focus(); }
       go(0); fitSoon();
-    });
+    }, function (e) { try { renderOv(); } catch (x) {} throw e; });
   };
   var _setMode = window.setMode;
   if (_setMode) window.setMode = function (m, d) { var r = _setMode(m, d); if (m === "games" && booted && cur !== 4) go(4); fitSoon(); return r; };

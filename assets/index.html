@@ -38,6 +38,21 @@ main::after{content:"";display:block;height:62%}
 h2{font-size:15px;margin:10px 0 8px}
 .sub{color:var(--muted);margin-bottom:8px}
 .empty{color:var(--muted);padding:16px 0}
+/* skeletons (UI-RULES 25): .sk = a plain block, .skm = a real card drawn by its own renderer with its content hidden, so sizes match. Both fade in after 150ms (a cache hit replaces them before that) and shimmer with one transform-only layer. */
+.sk,.skm{position:relative;overflow:hidden;background:var(--surface-2)!important;box-shadow:none!important;filter:none!important;border-color:transparent!important;pointer-events:none;opacity:0;animation:skv 1ms linear .15s forwards}
+.sk{display:block;border-radius:6px}
+.pg.skm{position:absolute}
+.skm *{visibility:hidden}
+.sk::after,.skm::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);animation:skm 1.4s linear infinite}
+@keyframes skv{to{opacity:1}}@keyframes skm{from{transform:translateX(-100%)}to{transform:translateX(100%)}}@keyframes skbg{to{background-color:var(--surface-2)}}
+img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
+@media(prefers-reduced-motion:reduce){.sk::after,.skm::after{animation:none}}
+.gv .pw .sk,.mx .sk{position:absolute;inset:0;border-radius:0}.mx .sk{background:#141218!important}
+#pbuf .skf{position:absolute;inset:0;border-radius:0;background:rgba(20,18,24,.72)!important}
+#pbuf .bar{height:10px!important;border-radius:5px!important}
+#pbuf.mini .bar{width:90px!important;height:8px!important}
+#pbuf.fail .skf,#pbuf.mini .skf{display:none}
+#pbuf:not(.fail) .stt{display:none}
 
 /* game pills: 16:9 NEMOS orb panels. Away colour fills the left edge, home colour the right */
 .grid{display:flex;flex-wrap:wrap;gap:10px}
@@ -107,7 +122,7 @@ h2{font-size:15px;margin:10px 0 8px}
 #boot .bar i{position:absolute;left:0;top:0;bottom:0;width:40%;border-radius:inherit;background:linear-gradient(90deg,var(--red-3),var(--coral));animation:ld 1.3s ease-in-out infinite}
 @keyframes ld{from{transform:translateX(-100%)}to{transform:translateX(260%)}}
 #boot .st{position:relative;color:var(--muted);font-size:10px;min-height:14px}
-@media(prefers-reduced-motion:reduce){#boot *{animation:none!important}}
+@media(prefers-reduced-motion:reduce){#boot *:not(.sk){animation:none!important}}
 
 /* player */
 #pl{position:fixed;inset:0;z-index:50;background:#000;display:none;overflow:hidden}
@@ -176,7 +191,7 @@ h2{font-size:15px;margin:10px 0 8px}
 #pbuf.mini{inset:auto;left:50%;top:54px;transform:translateX(-50%);background:var(--gl-fill);border:1px solid var(--line-strong);border-radius:999px;padding:6px 14px;flex-direction:row;gap:10px;box-shadow:var(--gl-shadow);backdrop-filter:blur(8px)}
 #pbuf.mini .mesh2,#pbuf.mini .tm2,#pbuf.mini .chn{display:none}
 #pbuf.mini .bar{margin:0;width:46px}
-@media(prefers-reduced-motion:reduce){#pbuf *{animation:none!important}}
+@media(prefers-reduced-motion:reduce){#pbuf *:not(.sk){animation:none!important}}
 /* hero: featured live game + live cards + team news */
 /* home = ONE grid that owns every cell: title row, hero cell, game-strip cell. Cells size the content; too small = main scrolls */
 .lz{height:100%;min-height:340px;display:grid;grid-template-rows:auto minmax(0,3fr) minmax(0,2fr);gap:8px}
@@ -451,9 +466,9 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 <header><span class="brand"><img src="nemtv-logo.png" alt="NEMTV"></span>
 <nav id="nav"><button data-t="home"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Home</span></button><button data-t="scores"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Scores</span></button><button data-t="schedule"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Schedule</span></button><button data-t="live"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Live</span></button><button data-t="guide"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Guide</span></button></nav><button id="setb" data-t="setup" aria-label="Setup"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2.2-1.3L14 3h-4l-.4 2.5a7 7 0 0 0-2.2 1.3l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .9.1 1.3l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2.2 1.3L10 21h4l.4-2.5a7 7 0 0 0 2.2-1.3l2.3 1 2-3.4-2-1.5c.1-.4.1-.9.1-1.3z"/></svg></button></header>
 <main id="m"></main>
-<div id="boot"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="rows" id="brows"></div><div class="ttl"><img src="nemtv-logo.png" alt="NEMTV" style="height:64px"></div><div class="tag disp">NHL &middot; LIVE TV</div><div class="bar"><i></i></div><div class="st" id="bst">Loading channels...</div></div>
+<div id="boot"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="rows" id="brows"></div><div class="ttl"><img src="nemtv-logo.png" alt="NEMTV" style="height:64px"></div><div class="tag disp">NHL &middot; LIVE TV</div><div class="bar sk"></div><div class="st" id="bst"></div></div>
 <div id="pl"><video id="v" autoplay playsinline></video>
-<div id="pbuf"><div class="mesh2"></div><div id="pbc"></div><div class="bar"><i></i></div><div class="stt" id="pst"></div></div>
+<div id="pbuf"><div class="mesh2"></div><div class="sk skf"></div><div id="pbc"></div><div class="bar sk"></div><div class="stt" id="pst"></div></div>
 <div class="ptop" id="ptop"><button class="pbtn" id="pback">&#8592; Back</button><div class="ptt" id="ptt"></div><button class="pbtn" id="pfs">Full screen</button></div><div id="zb"></div>
 <div class="ctl" id="pctl">
  <div class="grp"><span class="lbl">FEED</span><button id="bfeed"></button></div>
@@ -537,6 +552,12 @@ function catRename(old,x){x=x.trim();if(!x||catList.includes(x)||old==="Other")r
 function catDelete(x){if(x==="Other")return;allKeys().forEach(k=>{if(effCat(k)===x)catOv[k]="Other"});catList=catList.filter(y=>y!==x);saveCats()}
 const DUR=3.25*3600e3; // NHL game window on the TV clock
 /* ---------- live scores straight from the NHL API (no routine needed) ---------- */
+document.addEventListener("load",e=>{if(e.target.tagName==="IMG")e.target.classList.add("ld")},true);document.addEventListener("error",e=>{if(e.target.tagName==="IMG")e.target.classList.add("ld")},true); // image skeleton (CSS img:not(.ld)) ends on load or error
+const skify=h=>h.replace(/<button/g,"<div").replace(/<\/button>/g,"</div>").replace(/ focusable/g,"").replace(/ data-(?:g|l|i|id|s)=/g," data-x=").replace(/class="(pill|sr|gc|pg)\b/g,'class="skm $1'); // a real renderer's HTML -> inert skeleton card
+const skN=(n,f)=>'<div inert aria-hidden="true" style="display:contents">'+skify(Array.from({length:n},(_,i)=>f(i)).join(""))+'</div>';
+const SKL='<i class="sk" style="display:inline-block;width:120px;height:11px;vertical-align:middle"></i>', SKI='<i class="sk" style="display:inline-block;width:60px;height:9px;vertical-align:middle"></i>';
+let scLoaded=0, scFail=0, plDone=0, epgF=0, gdFail=0, tmiL=0, nwsL=0;
+const plLoad=()=>!!url&&!ch.length&&!plDone;
 let SC=[], scSig="";
 const scoreOf=(aw,hm,st)=>SC.find(x=>x.awayTeam&&x.homeTeam&&x.awayTeam.abbrev===aw&&x.homeTeam.abbrev===hm&&Math.abs(Date.parse(x.startTimeUTC)-st)<14*3600e3);
 function scInfo(x){ // {score:"2 - 1", note:"P2 12:34"} or null before the puck drops
@@ -555,11 +576,11 @@ function pollStandings(){const u="https://api-web.nhle.com/v1/standings/now";
 window.nhlRelay=(n,t,e)=>gPost({cmd:"nhl",n,t,e}); // Android.get runs its callback in this window; the guide iframe is another origin
 function pushGuideLive(){if(ST.length||SC.length)gPost({cmd:"api",standings:ST,scores:SC})}
 window.gotScores=(t,e)=>{
-  try{const d=JSON.parse(t); SC=d.games||[];}catch(x){log("scores failed",e||x);return}
+  var first=!scLoaded; try{const d=JSON.parse(t); SC=d.games||[]; scLoaded=1; scFail=0}catch(x){log("scores failed",e||x);if(!scLoaded){scFail=1;if(tab==="scores"&&!$("#pl").classList.contains("on"))render()}return}
   {const E=ls("endAt",{});let ch2=0;SC.forEach(x=>{if(/FINAL|OFF/.test(x.gameState)&&!E[x.id]){E[x.id]=Math.min(Date.now(),Date.parse(x.startTimeUTC)+DUR);ch2=1}});if(ch2)sv("endAt",E)} // when a game was first seen over: post-game button lasts 1 hour from here
   const sig=SC.map(x=>x.id+x.gameState+(x.clock&&x.clock.timeRemaining)+(x.awayTeam.score||0)+(x.homeTeam.score||0)+(x.goals||[]).length).join();
   if(sig!==scSig)pushGuideLive();
-  if(sig===scSig)return; scSig=sig; if(gdId&&!$("#gd").hidden)gdLoad();
+  if(sig===scSig&&!first)return; scSig=sig; if(gdId&&!$("#gd").hidden)gdLoad();
   if(tab==="scores"&&!$("#pl").classList.contains("on")){const y=$("#m").scrollTop;render();$("#m").scrollTop=y;return}
   if(tab!=="home"||$("#pl").classList.contains("on"))return;
   let redo=false;
@@ -587,8 +608,9 @@ function games(){ // from the bundled NHL schedule + the TV box clock
 }
 const CA=/^(Sportsnet (One|360|East|West|Pacific|Ontario|World)|TSN\d|TVA Sports|CBC|RDS)/i; // Canadian broadcasters always come first
 /* ---------- guide (epg.xml from the M3U header): confirms which channel airs which game ---------- */
+const epgL=()=>!!(EPGURL&&!EPG&&!epgF&&window.Android&&Android.epg);
 let EPG=null, EPGMAX=0, EPGURL=ls("epgurl","");
-window.gotEpg=(o,e)=>{if(e||!o){epgAt=0;return log("epg failed",e)}EPG=o;EPGMAX=0;for(const k in o)o[k].forEach(r=>{if(r[3]&&r[1]>EPGMAX)EPGMAX=r[1]});log("epg",Object.keys(o).length+" channels");if(typeof rerender==="function"&&ch.length&&!$("#pl").classList.contains("on"))try{rerender()}catch(x){}};
+window.gotEpg=(o,e)=>{if(e||!o){epgAt=0;epgF=1;return log("epg failed",e)}EPG=o;EPGMAX=0;for(const k in o)o[k].forEach(r=>{if(r[3]&&r[1]>EPGMAX)EPGMAX=r[1]});log("epg",Object.keys(o).length+" channels");if(typeof rerender==="function"&&ch.length&&!$("#pl").classList.contains("on"))try{rerender()}catch(x){}};
 const clk=ms=>new Date(ms).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"}), ttl=r=>r[2].split(" | ")[0];
 function onNow(c){const t=Date.now(),r=EPG&&c&&c.id&&EPG[c.id]&&EPG[c.id].find(x=>x[0]<=t&&x[1]>t);return r?{t:ttl(r),s:r[0],e:r[1]}:null}
 let epgAt=0;
@@ -647,11 +669,12 @@ const fmtT=ms=>{const d=new Date(ms);return d.toLocaleDateString([],{weekday:"sh
 /* ---------- hero data: standings + team news from the guide (git-synced) ---------- */
 let TMI={}, NWS={}, hi=0;
 function loadHeroData(){const B=GURL.replace(/index\.html$/,"");
-  fetch(B+"data/league.json").then(r=>r.json()).then(d=>{TMI={};(d.teams||[]).forEach(t=>TMI[t.abbrev]=t);applyStandings();heroRefresh()}).catch(()=>{});
-  fetch(B+"news.json").then(r=>r.json()).then(d=>{NWS=d.teams||{};heroRefresh()}).catch(()=>{})}
+  fetch(B+"data/league.json").then(r=>r.json()).then(d=>{TMI={};(d.teams||[]).forEach(t=>TMI[t.abbrev]=t);applyStandings();heroRefresh()}).catch(()=>{}).then(()=>{tmiL=1;heroRefresh()});
+  fetch(B+"news.json").then(r=>r.json()).then(d=>{NWS=d.teams||{};heroRefresh()}).catch(()=>{}).then(()=>{nwsL=1;heroRefresh()})}
 const recOf=ab=>{const t=TMI[ab];return t?t.record+" · "+t.streak:""};
 function newsHTML(g){
   const one=(ab,t)=>{const n=NWS[ab]; const lg=t.logo?`<img src="${t.logo}" alt="">`:"";
+    if(!n&&!nwsL)return `<div class="tn"><div class="th">${lg}<b class="disp">${esc(ab)}</b></div><div class="hd"><i class="sk" style="height:1.1em;width:90%"></i></div><div class="it"><i class="sk" style="height:1em;width:70%"></i></div></div>`;
     if(!n)return `<div class="tn"><div class="th">${lg}<b class="disp">${esc(ab)}</b></div><div class="hd">News loads with the guide.</div></div>`;
     const inj=(n.injuries||[]).length;
     return `<div class="tn"><div class="th">${lg}<b class="disp">${esc(ab)}</b></div><div class="hd">${esc(n.headline||"")}</div>${(n.items||[]).slice(0,1).map(i=>`<div class="it"><i></i><span>${esc(i.title)}</span></div>`).join("")}${inj?`<div class="inj">${inj} injury note${inj>1?"s":""}</div>`:""}</div>`};
@@ -659,7 +682,7 @@ function newsHTML(g){
 function featHTML(g,k){ if(!g)return "";
   const H=TMI[g.hm]||{}, A=TMI[g.aw]||{}, sc=g.sc, x=scoreOf(g.aw,g.hm,g.st), logo=t=>t.logo?`<img src="${t.logo}" alt="">`:"";
   const sog=x&&x.homeTeam&&x.homeTeam.sog!==undefined?[x.homeTeam.sog,x.awayTeam.sog]:["-","-"];
-  const cell=(l,a,b)=>`<div><small>${l}</small><b>${esc(a)} &nbsp;|&nbsp; ${esc(b)}</b></div>`;
+  const cell=(l,a,b)=>`<div><small>${l}</small><b>${tmiL?`${esc(a)} &nbsp;|&nbsp; ${esc(b)}`:'<i class="sk" style="display:inline-block;width:5em;height:1em;vertical-align:middle"></i>'}</b></div>`;
   return `<span class="skin"><span class="mesh"></span></span><div class="fl">
    <div class="ft-top"><b>${sc?(sc.over?"GAME OVER":esc(sc.note)):"STARTS "+esc(clk(g.st)).toUpperCase()}</b><span>${k+1} / ${G.length} &middot; ${esc((g.nets||[]).join(" / "))}</span></div>
    <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span><small>${esc(recOf(g.hm)||"HOME")}</small></div>
@@ -696,7 +719,7 @@ let phls=null, pvT=0, pvI=0, pvKey="";
 function pvStop(){clearTimeout(pvT);clearInterval(pvI);pvKey="";if(phls){phls.destroy();phls=null}try{PV.pause();PV.removeAttribute("src");PV.load()}catch(x){}const g=$("#gv");if(g)g.classList.remove("on")}
 function pvSoon(c){ // starts 300ms after the focus settles, so fast scrolling loads nothing; no countdown
   if(pvKey===c.u)return; pvStop(); pvKey=c.u; const pw=$("#pw");
-  pvT=setTimeout(()=>{if(pw)pw.textContent="Loading preview...";
+  pvT=setTimeout(()=>{if(pw)pw.innerHTML='<i class="sk"></i>';
     if(window.Hls&&Hls.isSupported()){phls=new Hls({maxBufferLength:8,capLevelToPlayerSize:true,startLevel:0});
       phls.on(Hls.Events.ERROR,(e,d)=>{if(d.fatal){if(pw)pw.textContent="Preview unavailable";$("#gv")&&$("#gv").classList.remove("on")}});
       phls.on(Hls.Events.MANIFEST_PARSED,()=>PV.play().catch(()=>{}));phls.loadSource(c.u);phls.attachMedia(PV)}else{PV.src=c.u;PV.play().catch(()=>{})}
@@ -705,7 +728,7 @@ PV.addEventListener("playing",()=>{const g=$("#gv");if(g&&tab==="live"&&pvKey)g.
 function gInfo(el){const box=$("#gi"); if(!box)return; if(!el){box.innerHTML=`<div class="cn disp">Live TV</div><div class="sm">Move over a channel to see what is on.</div>`;return}
   const c=ch[+el.dataset.i]; if(!c)return; const rows=(EPG&&c.id&&EPG[c.id]||[]).slice().sort((a,b)=>a[0]-b[0]), t=Date.now();
   const pick=el.dataset.s?rows.find(x=>x[0]===+el.dataset.s):rows.find(x=>x[0]<=t&&x[1]>t), nx=pick&&rows.find(x=>x[0]>=pick[1]);
-  box.innerHTML=`<div class="cn disp">${esc(baseName(c.n))}</div><div class="sm">${esc(c.g)}</div>`+(pick?`<div class="st">${esc(ttl(pick))}</div><div class="sm">${clk(pick[0])} - ${clk(pick[1])}${pick[0]<=t&&pick[1]>t?" &middot; on now":""}</div>`:`<div class="st">Live TV</div><div class="sm">No guide data for this channel</div>`)+(nx?`<div class="nx">Next: ${esc(ttl(nx))} at ${clk(nx[0])}</div>`:"");
+  box.innerHTML=`<div class="cn disp">${esc(baseName(c.n))}</div><div class="sm">${esc(c.g)}</div>`+(pick?`<div class="st">${esc(ttl(pick))}</div><div class="sm">${clk(pick[0])} - ${clk(pick[1])}${pick[0]<=t&&pick[1]>t?" &middot; on now":""}</div>`:`<div class="st">Live TV</div><div class="sm">${epgL()?SKI:"No guide data for this channel"}</div>`)+(nx?`<div class="nx">Next: ${esc(ttl(nx))} at ${clk(nx[0])}</div>`:"");
   pvSoon(c)}
 $("#m").addEventListener("focusin",e=>{if(tab!=="live")return;const t=e.target;if(t.closest&&t.closest(".gr"))gInfo(t);else if(!t.closest(".gtop")){pvStop();gInfo(null);const pw=$("#pw");if(pw)pw.textContent="Preview starts when a channel is focused"}});
 const nowNext=c=>{const t=Date.now();return ((EPG&&c.id&&EPG[c.id])||[]).filter(x=>x[1]>t).sort((a,b)=>a[0]-b[0]).slice(0,2).map(x=>ttl(x)).join(" ")}; // on now + next title
@@ -724,11 +747,11 @@ function guideHTML(vis){
   const list=guideList(vis), end=gStart+36e5*3; LL=list;
   const day=new Date(gStart).toLocaleDateString([],{weekday:"short"});
   let h=`<div class="gh"><div class="gcs">${day} &middot; Left / Right for time</div><div class="gt">${[0,1,2,3,4,5].map(i=>`<span style="left:${i/6*100}%">${clk(gStart+i*18e5)}</span>`).join("")}</div></div>`;
-  if(!list.length)return h+`<div class="empty">${grp==="Favorites"?"No favorites yet. Press Menu on a channel to add one.":grp==="Recent"?"Nothing watched yet.":"No channels match."}</div>`;
+  if(!list.length)return h+(plLoad()?skN(8,()=>'<div class="gr"><button class="gc focusable"><span class="chlogo"></span><b>Channel name</b></button><div class="gt"><button class="pg now focusable" style="left:2px;right:2px"><b>Live TV</b><small>x</small></button></div></div>'):`<div class="empty">${grp==="Favorites"?"No favorites yet. Press Menu on a channel to add one.":grp==="Recent"?"Nothing watched yet.":"No channels match."}</div>`);
   list.forEach(c=>{const i=ch.indexOf(c), rows=(EPG&&c.id&&EPG[c.id]?EPG[c.id].filter(x=>x[1]>gStart&&x[0]<end).sort((x,y)=>x[0]-y[0]):[]), t=Date.now();
     const blocks=rows.length?rows.map(x=>{const l=(Math.max(x[0],gStart)-gStart)/(end-gStart)*100,w=(Math.min(x[1],end)-Math.max(x[0],gStart))/(end-gStart)*100;
       return `<button class="pg focusable${x[0]<=t&&x[1]>t?" now":""}" data-i="${i}" data-s="${x[0]}" style="left:calc(${l}% + 2px);width:calc(${w}% - 4px)"><b>${esc(ttl(x))}</b><small>${clk(x[0])} - ${clk(x[1])}</small></button>`}).join("")
-      :`<button class="pg now focusable" data-i="${i}" style="left:2px;right:2px"><b>Live TV</b><small>No guide data</small></button>`;
+      :`<button class="pg now focusable" data-i="${i}" style="left:2px;right:2px"><b>Live TV</b><small>${epgL()?SKI:"No guide data"}</small></button>`;
     h+=`<div class="gr"><button class="gc focusable" data-i="${i}"><span class="chlogo">${logoTile(c)}</span><b>${fav.includes(c.n)?"&#9733; ":""}${esc(baseName(c.n))}</b></button><div class="gt">${blocks}</div></div>`});
   return h}
 function gRefresh(){const x=$("#gx");if(x)x.innerHTML=guideHTML(ch.filter(on))}
@@ -758,7 +781,8 @@ function render(){
     const row=x=>{const a=tm(x.awayTeam),h=tm(x.homeTeam),i=scInfo(x),gs=(x.goals||[]).slice(-3).reverse(),lv=ord(x)===0;
       const gh=gs.map((g,k)=>`<span class="gl${k?"":" new"}"><b>${esc(g.teamAbbrev)}</b> ${esc((g.name&&g.name.default)||"")} <em>${esc(per({period:g.period,periodDescriptor:g.periodDescriptor}))} ${esc(g.timeInPeriod||"")}</em> ${g.awayScore}-${g.homeScore}${g.strength&&g.strength!=="ev"?" "+esc(g.strength.toUpperCase()):""}</span>`).join("");
       return `<button data-id="${x.id}" class="sr focusable${i&&i.over?" done":""}${lv?" lv":""}${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?" fv":""}" style="--o-a:${h.c};--o-b:${a.c}">${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?`<span class="fstar">&#9733;</span>`:""}<span class="srt"><span class="srs">${h.logo?`<img src="${h.logo}" alt="">`:""}<b class="disp">${esc(x.homeTeam.abbrev)}</b></span><span class="srm disp">${i?esc(i.score):"VS"}</span><span class="srs">${a.logo?`<img src="${a.logo}" alt="">`:""}<b class="disp">${esc(x.awayTeam.abbrev)}</b></span><span class="srn">${i?esc(i.note):esc(fmtT(Date.parse(x.startTimeUTC)))}</span></span>${gh?`<span class="srg"><i>LAST GOAL</i>${gh}</span>`:`<span class="srg none">${i?"No goals yet":"Not started"}</span>`}</button>`};
-    m.innerHTML=`<div class="lzh"><h2 class="disp">Scores today</h2><span class="sub" style="margin:0">${nLive} live &middot; ${gl.length} games</span></div>`+(gl.length?`<div class="srl">${gl.map(row).join("")}</div>`:`<div class="empty">No NHL games on the board yet.</div>`);
+    const FK={id:0,gameState:"FUT",startTimeUTC:new Date().toISOString(),awayTeam:{abbrev:"AAA"},homeTeam:{abbrev:"BBB"},goals:[]};
+    m.innerHTML=`<div class="lzh"><h2 class="disp">Scores today</h2><span class="sub" style="margin:0">${scLoaded?`${nLive} live &middot; ${gl.length} games`:SKL}</span></div>`+(gl.length?`<div class="srl">${gl.map(row).join("")}</div>`:!scLoaded&&!scFail?`<div class="srl">${skN(8,()=>row(FK))}</div>`:scFail?`<div class="empty">Could not load the scores. Trying again.</div>`:`<div class="empty">No NHL games on the board yet.</div>`);
   }else if(tab==="live"){
     const have=new Set(vis.map(catOf)), groups=["All","Favorites","Recent",...catList.filter(x=>have.has(x))];
     if(!groups.includes(grp))grp="All";
@@ -768,7 +792,7 @@ function render(){
   }else{
     m.innerHTML=`<h2 class="disp">Setup</h2><div class="sub">M3U playlist link</div>
       <div class="field"><input id="u" type="url" value="${esc(url)}" placeholder="http://..."><button class="btn" id="go">Load</button></div>
-      <div class="sub" id="st">${esc(msg||ch.length+" channels loaded")}</div>
+      <div class="sub" id="st">${msg==="Loading..."?SKL:esc(msg||ch.length+" channels loaded")}</div>
       <h2 class="disp" style="margin-top:14px">Favorite teams</h2><div class="sub">Their games show first, with a star while live.</div><div class="chips">${NHL.map(t=>`<button class="chip ft focusable" data-ft="${t[0]}" aria-pressed="${favT.includes(t[0])}">${(window.LOGO||{})[t[0]]?`<img src="${window.LOGO[t[0]]}" alt="">`:""}<span>${esc(t[1])}</span></button>`).join("")}</div>
       <h2 class="disp" style="margin-top:14px">Sports</h2><div class="sub">Turn a sport off to hide its games and channels.</div>${sportRows()}${catSettingsHTML()}`;
   }
@@ -796,11 +820,12 @@ $("#gpop").addEventListener("keydown",e=>{const k=e.key;if(!/^Arrow/.test(k))ret
 /* ---------- game detail overlay: summary / box score / play-by-play ---------- */
 let gdId=0,gdTab="sum",gdSide="h",gdBox=null,gdPbp=null,gdBack=null,gdLand=null,gdRail=null;
 const nm=id=>{const r=((gdPbp&&gdPbp.rosterSpots)||[]).find(x=>x.playerId===id);return r?(r.firstName.default[0]+". "+r.lastName.default):""};
-function openGame(id,tb){if(!id)return;gdId=id;gdBox=gdPbp=gdLand=gdRail=null;gdTab=tb||"sum";gdBack=document.activeElement;$("#gd").hidden=false;gdRender();gdLoad();$("#gdh [data-gt="+gdTab+"]").focus()}
+const gdSk=()=>'<div inert aria-hidden="true">'+'<i class="sk" style="height:46px;margin-bottom:6px;border-radius:12px"></i>'.repeat(6)+'</div>';
+function openGame(id,tb){if(!id)return;gdFail=0;gdId=id;gdBox=gdPbp=gdLand=gdRail=null;gdTab=tb||"sum";gdBack=document.activeElement;$("#gd").hidden=false;gdRender();gdLoad();$("#gdh [data-gt="+gdTab+"]").focus()}
 function closeGame(){$("#gd").hidden=true;gdId=0;if(gdBack&&gdBack.isConnected)gdBack.focus({preventScroll:true})}
 function gdLoad(){const id=gdId,u="https://api-web.nhle.com/v1/gamecenter/"+id+"/";
-  const get=(p,cb)=>{window[cb]=(t,e)=>{try{const d=JSON.parse(t);if(id!==gdId)return;if(cb==="gotGB")gdBox=d;else if(cb==="gotGL")gdLand=d;else if(cb==="gotGR")gdRail=d;else gdPbp=d;gdRender()}catch(x){}};
-    if(window.Android&&Android.get)Android.get(u+p,cb);else fetch(u+p).then(r=>r.text()).then(t=>window[cb](t,""))};
+  const get=(p,cb)=>{window[cb]=(t,e)=>{try{const d=JSON.parse(t);if(id!==gdId)return;if(cb==="gotGB")gdBox=d;else if(cb==="gotGL")gdLand=d;else if(cb==="gotGR")gdRail=d;else gdPbp=d;gdRender()}catch(x){gdFail=1;if(id===gdId)gdRender()}};
+    if(window.Android&&Android.get)Android.get(u+p,cb);else fetch(u+p).then(r=>r.text()).then(t=>window[cb](t,"")).catch(()=>window[cb]("",""))};
   get("landing","gotGL");get("right-rail","gotGR");get("boxscore","gotGB");get("play-by-play","gotGP")}
 function gdRender(){const sc=SC.find(x=>x.id===gdId),b=gdBox,L0=gdLand,aw=(sc&&sc.awayTeam)||(b&&b.awayTeam)||(L0&&L0.awayTeam)||{},hm=(sc&&sc.homeTeam)||(b&&b.homeTeam)||(L0&&L0.homeTeam)||{};
   const h=$("#gdh"),cur=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.gt,curS=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.gs;
@@ -809,7 +834,7 @@ function gdRender(){const sc=SC.find(x=>x.id===gdId),b=gdBox,L0=gdLand,aw=(sc&&s
   const rb=$("#gdr");rb.innerHTML=gdTab==="box"?`<button data-gs="h" aria-pressed="${gdSide==="h"}">${esc(hm.abbrev||"Home")}</button><button data-gs="a" aria-pressed="${gdSide==="a"}">${esc(aw.abbrev||"Away")}</button>`:"";
   if(curS){const f=rb.querySelector("[data-gs="+curS+"]");if(f)f.focus()}
   const bd=$("#gdb"),y=bd.scrollTop;
-  if((gdTab==="box"&&!b)||(gdTab==="sum"&&!gdLand)){bd.innerHTML='<div class="empty">Loading...</div>';return}
+  if((gdTab==="box"&&!b)||(gdTab==="sum"&&!gdLand)){bd.innerHTML=gdFail?'<div class="empty">Could not load this game. Try again in a moment.</div>':gdSk();return}
   bd.innerHTML=gdTab==="sum"?gdSum(aw,hm):gdTab==="box"?gdBoxHTML():gdPbpHTML();bd.scrollTop=y}
 function gdTeamTot(t){const a=[].concat(t.forwards||[],t.defense||[]),sum=k=>a.reduce((n,p)=>n+(p[k]||0),0);return {sog:sum("sog"),hits:sum("hits"),blk:sum("blockedShots"),tk:sum("takeaways"),gv:sum("giveaways"),pim:sum("pim"),ppg:sum("powerPlayGoals")}}
 function gdSum(aw,hm){const L=gdLand,S=L.summary||{},R=gdRail||{},ab=x=>x&&(x.default||x),col=x=>(ABBR[x]&&ABBR[x].c)||"#999",lg=x=>(ABBR[x]&&ABBR[x].logo)?`<img src="${ABBR[x].logo}" alt="">`:"";
@@ -833,7 +858,7 @@ function gdBoxHTML(){const t=gdBox.playerByGameStats[gdSide==="h"?"homeTeam":"aw
   const sk=(l,a)=>`<table class="gt"><thead><tr><th>#</th><th>${l}</th><th>POS</th><th>G</th><th>A</th><th>P</th><th>+/-</th><th>SOG</th><th>HIT</th><th>BLK</th><th>TK</th><th>GV</th><th>FO%</th><th>PIM</th><th>PPG</th><th>SHF</th><th>TOI</th></tr></thead><tbody>${(a||[]).map(p=>`<tr><td>${p.sweaterNumber}</td><td>${esc(p.name.default)}</td><td>${p.position}</td>${z(p.goals)}${z(p.assists)}${z(p.points)}<td>${p.plusMinus||0}</td>${z(p.sog)}${z(p.hits)}${z(p.blockedShots)}${z(p.takeaways)}${z(p.giveaways)}<td>${p.faceoffWinningPctg?Math.round(p.faceoffWinningPctg*100):"-"}</td>${z(p.pim)}${z(p.powerPlayGoals)}<td>${p.shifts||0}</td><td>${p.toi||""}</td></tr>`).join("")}</tbody></table>`;
   const gl=`<table class="gt"><thead><tr><th>#</th><th>GOALIES</th><th>POS</th><th>SA</th><th>SV</th><th>GA</th><th>SV%</th><th>EV</th><th>PP</th><th>SH</th><th>PIM</th><th></th><th></th><th></th><th></th><th></th><th>TOI</th></tr></thead><tbody>${(t.goalies||[]).map(g=>`<tr><td>${g.sweaterNumber}</td><td>${esc(g.name.default)}</td><td>${g.decision||(g.starter?"S":"")}</td><td>${g.shotsAgainst}</td><td class="h">${g.saves}</td><td>${g.goalsAgainst}</td><td>${g.savePctg?g.savePctg.toFixed(3).slice(1):"-"}</td><td>${g.evenStrengthShotsAgainst||""}</td><td>${g.powerPlayShotsAgainst||""}</td><td>${g.shorthandedShotsAgainst||""}</td><td>${g.pim||0}</td><td></td><td></td><td></td><td></td><td></td><td>${g.toi||""}</td></tr>`).join("")}</tbody></table>`;
   return sk("FORWARDS",t.forwards)+sk("DEFENSE",t.defense)+gl}
-function gdPbpHTML(){if(!gdPbp)return '<div class="empty">Loading...</div>';const hm=gdPbp.homeTeam,aw=gdPbp.awayTeam,K={goal:"GOAL","shot-on-goal":"Shot",penalty:"Penalty"};
+function gdPbpHTML(){if(!gdPbp)return gdFail?'<div class="empty">Could not load the play-by-play.</div>':gdSk();const hm=gdPbp.homeTeam,aw=gdPbp.awayTeam,K={goal:"GOAL","shot-on-goal":"Shot",penalty:"Penalty"};
   return [...gdPbp.plays].reverse().filter(p=>/goal|penalty|shot-on-goal|period-end|period-start|game-end/.test(p.typeDescKey)).slice(0,160).map(p=>{const d=p.details||{},k=p.typeDescKey,team=d.eventOwnerTeamId===hm.id?hm.abbrev:d.eventOwnerTeamId===aw.id?aw.abbrev:"";
     const who=k==="goal"?nm(d.scoringPlayerId)+" ("+d.homeScore+"-"+d.awayScore+")":k==="shot-on-goal"?nm(d.shootingPlayerId):k==="penalty"?nm(d.committedByPlayerId)+" "+(d.descKey||"")+" "+(d.duration||"")+"m":"";
     return `<div class="ev${k==="goal"?" g":""}"><em>P${p.periodDescriptor.number} ${esc(p.timeInPeriod)}</em><b>${esc(team)}</b><span>${esc(K[k]||k.replace(/-/g," "))} ${esc(who)}</span></div>`}).join("")||'<div class="empty">No events yet</div>'}
@@ -863,7 +888,7 @@ function msgP(t,mode){ // mode: "full" first load, "fail" dead end, "mini" mid-s
   if(!t){pb.classList.remove("on","mini","fail");return}
   pb.classList.toggle("mini",mode==="mini"); pb.classList.toggle("fail",mode==="fail");
   if(mode!=="mini")bufBuild();
-  $("#pst").textContent=t; pb.classList.add("on");
+  $("#pst").textContent=t; pb.setAttribute("aria-label",t); pb.classList.add("on");
 }
 const playErr=e=>{if(!e||e.name!=="AbortError")log("play",e)};
 let userPaused=false;
@@ -967,7 +992,7 @@ function mvCap(t){ // size each tile's quality to its box; more streams = lower 
   t.cp=i;
   h.config.maxBufferLength=m?14:6; h.config.maxMaxBufferLength=m?20:8} // muted tiles keep a tiny buffer
 const mvCapAll=()=>MV.t.forEach(mvCap);
-const mvMsg=(t,s,m)=>{t.mx.textContent=s;t.mx.style.color=m==="fail"?"#f88":""};
+const mvMsg=(t,s,m)=>{t.mx.style.color=m==="fail"?"#f88":"";if(s&&m!=="fail")t.mx.innerHTML='<i class="sk"></i>';else t.mx.textContent=s};
 function mvPlay(t){t.v.play().catch(()=>{if(!t.v.muted&&t===MV.a){t.v.muted=true;t.v.play().catch(()=>{});mvToast("Press OK on the game for sound")}})}
 function mvHook(t,h){let rec=0; h.on(Hls.Events.ERROR,(e,d)=>{if(!d.fatal||t.hls!==h)return; log("mv hls",d.type,d.details);
   if(rec++<2){if(d.type===Hls.ErrorTypes.MEDIA_ERROR){h.recoverMediaError();return}if(d.type===Hls.ErrorTypes.NETWORK_ERROR){h.startLoad();return}}
@@ -1180,7 +1205,7 @@ window.gotList=(t,e)=>{
   const c=t?parse(t):[];
   const eu=t&&(t.match(/(?:x-tvg-url|url-tvg)="([^",]+)/)||[])[1]; if(eu&&eu!==EPGURL){EPGURL=eu;sv("epgurl",eu)}
   if(c.length){ch=c;sv("ch",c);msg=c.length+" channels loaded";log("playlist",c.length)}else msg=e?"Failed: "+e:"No channels found in that playlist";
-  loadEpg(); render(); $("#bst")&&($("#bst").textContent=c.length?"Loading games...":"Could not load the playlist"); bootOff();
+  loadEpg(); render(); {const b=$("#bst");if(b){b.textContent=c.length?"":"Could not load the playlist";if(!c.length){const r=$("#boot .bar");r&&r.remove()}}} plDone=1; bootOff();
 };
 function go(t){tab=t;gStart=0;render();(document.querySelector("header [data-t][aria-pressed=true]")).focus()}
 
@@ -1261,7 +1286,7 @@ $("#m").onclick=e=>{
   const p=e.target.closest("[data-i]"); if(p){const c=ch[+p.dataset.i];return play({c,tm:[c.n],t:[{}],s:c.s},tab==="live"?LL:null)}
   const gp=e.target.closest("[data-grp]"); if(gp){grp=gp.dataset.grp;sv("grp",grp);render();$("#m").querySelector(`[data-grp="${CSS.escape(grp)}"]`).focus();return}
   const s=e.target.closest("[data-s]"); if(s){const k=s.dataset.s;off=off.includes(k)?off.filter(x=>x!==k):[...off,k];sv("off",off);render();$("#m").querySelector(`[data-s="${CSS.escape(k)}"]`).focus();return}
-  if(e.target.closest("#go")){url=$("#u").value.trim();sv("url",url);msg="Loading...";$("#st").textContent=msg;Android.load(url)}
+  if(e.target.closest("#go")){url=$("#u").value.trim();sv("url",url);msg="Loading...";$("#st").innerHTML=SKL;Android.load(url)}
 };
 document.addEventListener("keydown",e=>{ // Backspace in Live: clear search + filter, back to the default view
   if(e.key!=="Backspace"||tab!=="live"||$("#pl").classList.contains("on"))return;
@@ -1279,6 +1304,7 @@ const bootAt=Date.now(); let bootDone=false;
 function bootOff(){if(bootDone)return;bootDone=true;const wait=Math.max(0,2200-(Date.now()-bootAt));setTimeout(()=>{$("#boot").classList.add("out");setTimeout(()=>$("#boot").remove(),700);const f=$("#m").querySelector("button,input");if(f)f.focus()},wait)}
 setTimeout(bootOff,9000); // never hang on the splash
 if(ch.length)bootOff();
+document.querySelectorAll("img").forEach(i=>{if(i.complete)i.classList.add("ld")});
 log("NEMTV start",new Date().toString(),"games",(window.SCHED||[]).length);
 if(window.Android&&(window.CFG||{}).repo)Android.guideSync(CFG.repo,CFG.branch||"main");
 if(url&&!ch.length)Android.load(url);else if(url)Android.load(url); // refresh playlist in the background

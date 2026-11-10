@@ -349,6 +349,9 @@ main.live .pg{top:4px;bottom:4px;padding:3px 10px;border:1px solid var(--line);b
 main.live .pg.now{background:#2a2530;border-color:var(--line-strong)}
 main.live .chlogo{position:relative;width:30px;height:30px;border-radius:8px;background:#e9e7ee;display:flex;align-items:center;justify-content:center;overflow:hidden}
 main.live .chlogo i{font-style:normal;font-weight:800;font-size:9px;letter-spacing:.04em;color:#141217}
+main.live .chlogo.hasimg i{display:none}
+main.live .chlogo.lgdark{background:#26232b}
+main.live .chlogo.lglight{background:#f3f2f5}
 main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;object-fit:contain}
 .ccl{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
 .ccl .row{width:100%;max-width:460px;margin:0}.ccl .row small{margin-left:auto;color:var(--muted)}
@@ -706,7 +709,12 @@ function gInfo(el){const box=$("#gi"); if(!box)return; if(!el){box.innerHTML=`<d
   pvSoon(c)}
 $("#m").addEventListener("focusin",e=>{if(tab!=="live")return;const t=e.target;if(t.closest&&t.closest(".gr"))gInfo(t);else if(!t.closest(".gtop")){pvStop();gInfo(null);const pw=$("#pw");if(pw)pw.textContent="Preview starts when a channel is focused"}});
 const nowNext=c=>{const t=Date.now();return ((EPG&&c.id&&EPG[c.id])||[]).filter(x=>x[1]>t).sort((a,b)=>a[0]-b[0]).slice(0,2).map(x=>ttl(x)).join(" ")}; // on now + next title
-const logoTile=c=>`<i>${esc(baseName(c.n).replace(/[^A-Za-z0-9]/g,"").slice(0,3).toUpperCase())}</i>${c.logo?`<img src="${esc(c.logo)}" alt="" loading="lazy" onerror="this.remove()">`:""}`; // logo, or initials badge under it
+const logoTile=c=>`<i>${esc(baseName(c.n).replace(/[^A-Za-z0-9]/g,"").slice(0,3).toUpperCase())}</i>${c.logo?`<img src="${esc(c.logo)}" alt="" loading="lazy" crossorigin="anonymous" onload="lgOk(this)" onerror="lgErr(this)">`:""}`;
+function lgErr(im){if(im.crossOrigin){const u=im.src;im.removeAttribute("crossorigin");im.src=u}else im.remove()} // no CORS on that host: load it plain (no contrast check)
+function lgOk(im){const t=im.parentNode;if(!t)return;t.classList.add("hasimg"); // logo loaded: hide initials (no double logo), then pick tile bg by the logo's own brightness
+  try{const c=document.createElement("canvas"),w=c.width=24,h=c.height=24,x=c.getContext("2d");x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let L=0,n=0;
+    for(let i=0;i<d.length;i+=4)if(d[i+3]>40){L+=.2126*d[i]+.7152*d[i+1]+.0722*d[i+2];n++}
+    if(n)t.classList.add(L/n>165?"lgdark":"lglight")}catch(e){} } // ponytail: cross-origin logos without CORS taint the canvas -> keep default light tile // logo, or initials badge under it
 $("#m").addEventListener("pointerover",e=>{if(tab!=="live")return;const t=e.target.closest&&e.target.closest(".gr .focusable");if(t&&t.dataset.i!==undefined)gInfo(t)}); // mouse hover previews too
 function guideList(vis){const q=gQ.trim().toLowerCase();
   let list=grp==="All"?vis.filter(c=>!/\sfeed\s\d+$/.test(c.n)):grp==="Favorites"?vis.filter(c=>fav.includes(c.n)):grp==="Recent"?recent.map(n=>vis.find(c=>c.n===n)).filter(Boolean):vis.filter(c=>catOf(c)===grp);

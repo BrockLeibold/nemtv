@@ -48,3 +48,10 @@ The TV rules above stay. Below 700px wide, 520px tall, or on 4:3 / portrait tabl
 23. **Text >= 11px, controls >= 40px** (44px for primary buttons) at those sizes. `desktop/webshot.js` audits this at real window sizes
     (`desktop/mkjob.py` builds the job, `desktop/cycle.sh job.json` stages, runs and writes `<out>/aud.txt` plus viewable JPEGs).
 24. **Overview photo fills the space above the cards** at every window shape (`#ov` rows: photo `1fr`, cards `auto`).
+
+## Multiview (#mv)
+- Tiles are absolutely positioned boxes in #mv and never reparented; layout/audio/zoom/remove only change CSS (left/top/width/height/z-index, video transform) or the muted flag. Only `mvLoad()` (first start, FEED button, fatal error) touches hls; `window.__mvLoads` counts loadSource+attachMedia so tests can prove it.
+- Exactly one tile has audio; it is the main tile and the only thing that keeps a UI-less look (2px white outline). Everything else (bar, labels, focus ring, picker, cursor) hides after 3 s idle.
+- FEED opens this tile's feed list in #mvp (same labels/order as the single player menu, `svOrder`); choosing one runs `mvLoad` for that tile only (position, size, zoom, audio kept). SWAP opens the game picker for the focused tile and `mvSwap` replaces its game in place, same slot/zoom/audio, only that tile reloads. Menus close on D-pad pick, click outside, Back, or 3 s idle.
+- Entering from the single player hands its playing `<video>` and hls instance to tile 1 (no restart, no new load, `__mvLoads` unchanged); the player gets a fresh empty `#v` (`vBind`). Falls back to a reload of the same feed if nothing is playing yet.
+- Test: `cd desktop; node ../web/stage.js; MV_HLS=<dir with g0..g3/index.m3u8> MV_OUT=<dir> npx electron mvtest.js 960x540 390x844` -> FAILS 0.

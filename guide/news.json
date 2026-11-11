@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T09:00:01-05:00",
+ "updated": "2026-11-11T17:00:01-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -129,14 +129,14 @@
     }
    ],
    "injuries": [
-    "Morgan Rielly (lower body, out)",
+    "Zack MacEwen (day-to-day)",
+    "Morgan Rielly (day-to-day)",
     "Colton Sissons (out)",
     "Kirill Marchenko (IR)",
     "Miles Wood (undisclosed, IR)",
     "Nick Blankenburg (undisclosed, IR)",
     "Marshall Rifai (IR)",
-    "Max Domi (back, IR)",
-    "Cade Webber (IR)"
+    "Max Domi (back, IR)"
    ]
   },
   "ANA": {
@@ -194,10 +194,10 @@
     }
    ],
    "injuries": [
-    "Troy Terry (hip, IR)",
-    "A.J. Greer (upper body, IR)",
     "Ian Moore (lower body, IR)",
-    "Ryan Poehling (knee, IR)"
+    "A.J. Greer (upper body, IR)",
+    "Ryan Poehling (knee, IR)",
+    "Troy Terry (IR)"
    ]
   },
   "BUF": {
@@ -297,6 +297,13 @@
    "game": "Next: Tue Nov 10, 7:30 PM ET vs FLA, Nationwide Arena (Disney+, ESPN+, HULU, SN). Starter not announced.",
    "items": [
     {
+     "title": "Bennett scores twice as Panthers stop 2-game skid with a 4-1 win over Blue Jackets",
+     "summary": "— Sam Bennett scored twice, and the Florida Panthers snapped a two-game skid with a 4-1 win over the Columbus Blue Jackets on Tuesday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892686",
+     "date": "2026-11-11"
+    },
+    {
      "title": "Blue Jackets bring home winning streak into matchup with the Panthers",
      "summary": "Florida Panthers (9-7-2, in the Atlantic Division) vs. Columbus Blue Jackets (7-8, in the Metropolitan Division)",
      "source": "ESPN",
@@ -394,7 +401,7 @@
     "Kevin Bahl (IR)",
     "Jonathan Huberdeau (hip, IR)",
     "Connor Zary (out)",
-    "Samuel Honzek (IR)"
+    "Samuel Honzek (out)"
    ]
   },
   "CHI": {
@@ -549,7 +556,7 @@
     }
    ],
    "injuries": [
-    "Miro Heiskanen (day-to-day)",
+    "Miro Heiskanen (upper body, out)",
     "Kyle Capobianco (IR)",
     "Oskar Back (IR)",
     "Matt Duchene (IR)",
@@ -704,6 +711,13 @@
      "date": "2026-11-11"
     },
     {
+     "title": "Bennett scores twice as Panthers stop 2-game skid with a 4-1 win over Blue Jackets",
+     "summary": "— Sam Bennett scored twice, and the Florida Panthers snapped a two-game skid with a 4-1 win over the Columbus Blue Jackets on Tuesday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892686",
+     "date": "2026-11-11"
+    },
+    {
      "title": "Blue Jackets bring home winning streak into matchup with the Panthers",
      "summary": "Florida Panthers (9-7-2, in the Atlantic Division) vs. Columbus Blue Jackets (7-8, in the Metropolitan Division)",
      "source": "ESPN",
@@ -741,13 +755,6 @@
     {
      "title": "Marchand targets return next month",
      "summary": "Brad Marchand has been skating for more than a week. Paul Maurice said eight weeks would put him at Dec. 6.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/florida-panthers-brad-marchand-injury-status-update-november-5-2026",
-     "date": "2026-11-05"
-    },
-    {
-     "title": "Barkov on track for late November or December",
-     "summary": "Aleksander Barkov has a 6-8 week timeline from his Oct. 1 knee injury. He is skating on his own with Marchand and Jonah Gadjovich.",
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/florida-panthers-brad-marchand-injury-status-update-november-5-2026",
      "date": "2026-11-05"
@@ -822,7 +829,8 @@
     }
    ],
    "injuries": [
-    "Erik Gustafsson (out)",
+    "Drew Doughty (day-to-day)",
+    "Erik Gustafsson (day-to-day)",
     "Kevin Fiala (lower leg, IR)",
     "Jakub Dvorak (IR)"
    ]
@@ -889,8 +897,8 @@
     }
    ],
    "injuries": [
-    "Filip Gustavsson (hip, IR)",
-    "Brock Faber (skull, IR)"
+    "Brock Faber (skull, IR)",
+    "Filip Gustavsson (hip, IR)"
    ]
   },
   "MTL": {
@@ -955,8 +963,8 @@
     }
    ],
    "injuries": [
+    "Mike Matheson (day-to-day)",
     "Ivan Demidov (foot, IR)",
-    "Mike Matheson (lower body, out)",
     "Sam Montembeault (lower body, IR)",
     "Bryce Pickford (IR)",
     "Lucas Condotta (IR)"
@@ -1091,7 +1099,7 @@
     }
    ],
    "injuries": [
-    "Jonathan Marchessault (out)",
+    "Jonathan Marchessault (day-to-day)",
     "William Trudeau (IR)"
    ]
   },
@@ -1239,6 +1247,13 @@
      "date": "2026-11-11"
     },
     {
+     "title": "Senators' Cousins out 7-10 days after legal hit from Caps' Chychrun",
+     "summary": "Senators forward Nick Cousins will be out for a week to 10 days following a thunderous hit by Capitals defenseman Jakob Chychrun  that was ruled as legal during Tuesday night's game.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50452880/hit-capitals-chychrun-senators-cousins-deemed-clean",
+     "date": "2026-11-11"
+    },
+    {
      "title": "Senators and Capitals face off in Eastern Conference action",
      "summary": "Washington Capitals (9-6, in the Metropolitan Division) vs. Ottawa Senators (11-6-1, in the Atlantic Division)",
      "source": "ESPN",
@@ -1275,8 +1290,8 @@
     }
    ],
    "injuries": [
-    "Nick Cousins (day-to-day)",
-    "Linus Ullmark (out)",
+    "Nick Cousins (out)",
+    "Linus Ullmark (day-to-day)",
     "Andre Burakovsky (IR)",
     "Warren Foegele (knee, IR)",
     "William Eklund (IR)"
@@ -1291,6 +1306,13 @@
      "summary": "The Flyers have not received a formal trade request from Matvei Michkov and were surprised to hear he wanted to play elsewhere, sources told ESPN on Tuesday.",
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50448279/flyers-not-received-formal-trade-request-matvei-michkov",
+     "date": "2026-11-11"
+    },
+    {
+     "title": "Matvei Michkov didn't ask Flyers for trade, Rick Tocchet says",
+     "summary": "Flyers coach Rick Tocchet said Wednesday that winger Matvei Michkov has not asked the organization for a trade.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50454698/matvei-michkov-ask-flyers-trade-rick-tocchet-says",
      "date": "2026-11-11"
     },
     {
@@ -1334,18 +1356,11 @@
      "source": "FlamesNation",
      "url": "https://flamesnation.ca/news/calgary-flames-philadelphia-flyers-preview-cooley-vladar-2026",
      "date": "2026-11-08"
-    },
-    {
-     "title": "RAV4 Things: Flyers @ Flames",
-     "summary": "Saturday practice reunited Matvei Michkov and Porter Martone with Noah Cates. Michkov leads the team with 10 goals.",
-     "source": "Philadelphia Flyers",
-     "url": "https://www.nhl.com/flyers/news/rav4-things-flyers-flames-x5519",
-     "date": "2026-11-08"
     }
    ],
    "injuries": [
-    "Rasmus Ristolainen (hand, IR)",
-    "Nikita Grebenkin (back, IR)"
+    "Nikita Grebenkin (back, IR)",
+    "Rasmus Ristolainen (IR)"
    ]
   },
   "PIT": {
@@ -1884,6 +1899,13 @@
      "date": "2026-11-11"
     },
     {
+     "title": "Senators' Cousins out 7-10 days after legal hit from Caps' Chychrun",
+     "summary": "Senators forward Nick Cousins will be out for a week to 10 days following a thunderous hit by Capitals defenseman Jakob Chychrun  that was ruled as legal during Tuesday night's game.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50452880/hit-capitals-chychrun-senators-cousins-deemed-clean",
+     "date": "2026-11-11"
+    },
+    {
      "title": "Ovechkin says Russians want to play for country, doesn't weigh in on worlds",
      "summary": "Alex Ovechkin didn't weigh in on CAS' decision to allow Russian players back in hockey worlds, but said they just want to represent their country.",
      "source": "ESPN",
@@ -1917,13 +1939,6 @@
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/florida-panthers-washington-capitals-game-preview-november-7-2026",
      "date": "2026-11-07"
-    },
-    {
-     "title": "Capitals Week Ahead: defensive absences, Thompson returns",
-     "summary": "Desharnais is out about four to six weeks after abdominal surgery and Sandin is on LTIR with a knee injury. Thompson returned from a lower-body injury against Philadelphia.",
-     "source": "The Hockey Writers",
-     "url": "https://thehockeywriters.com/capitals-week-ahead-schedule-storylines-defensive-absences-thompson-returns-and-more/",
-     "date": "2026-11-01"
     }
    ],
    "injuries": [

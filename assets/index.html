@@ -143,13 +143,32 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 .ctl .lbl{color:var(--muted);padding:0 4px 0 10px;font-size:9px;letter-spacing:.1em}
 #pl.hide,#pl.hide *{cursor:none}
 #pl.hide .ptop,#pl.hide .ctl{opacity:0;pointer-events:none}
+.ctl button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
+/* score bar: 8% of the player, pinned to the top (controls live at the bottom). Visible only while the player UI is hidden, or while picking a game (Change game) */
+#sbar{position:fixed;left:0;right:0;top:0;height:8%;z-index:70;display:none;gap:2px;padding:2px;background:var(--gl-fill);overflow-x:auto;overflow-y:hidden;scrollbar-width:none;container-type:size;opacity:0;pointer-events:none;transition:opacity .2s}
+#sbar::-webkit-scrollbar{display:none}
+#sbar.on{display:flex}
+#sbar.vis,#sbar.pick{opacity:1;pointer-events:auto}
+#sbar.vis *{cursor:pointer}
+body.sbp #pl .ptop,body.sbp #pl .ctl,body.sbp #mv .ctl,body.sbp #mv .ml,body.sbp #mv .pmenu{opacity:0;pointer-events:none}
+body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
+.sbi{--o-base:var(--island);--o-a:var(--red-3);--o-b:var(--wine);--o-c:var(--plum);--o-f1:var(--coral);--o-f2:var(--wine);position:relative;isolation:isolate;flex:1 0 112px;min-width:0;height:100%;border-radius:12px;text-align:center;color:#fff;display:grid;grid-template-columns:1fr auto 1fr;grid-template-rows:1fr auto;align-items:center;justify-items:center;padding:1px 4px}
+.sbi img,.sbi b{width:clamp(14px,46cqh,28px);height:clamp(14px,46cqh,28px);object-fit:contain;font-size:clamp(9px,30cqh,13px);line-height:clamp(14px,46cqh,28px);overflow:hidden}
+.sbi .scr{font-size:clamp(11px,38cqh,20px);line-height:1;text-shadow:0 2px 10px rgba(0,0,0,.6);white-space:nowrap}
+.sbi .nt{grid-column:1/-1;font-size:clamp(9px,20cqh,12px);line-height:1;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.9);white-space:nowrap}
+.sbi.done{--o-a:#4a474f!important;--o-b:#3b393f!important;--o-c:#28262c!important;--o-f1:#605d66!important;--o-f2:#605d66!important}
+.sbi.off{opacity:.45}
+.sbi.cur{box-shadow:inset 0 0 0 2px var(--coral)}
+.sbi:focus{box-shadow:inset 0 0 0 3px var(--ink)}
+.sbe{margin:auto;color:var(--ink-2);font-size:11px}
 /* multiview: tiles are absolutely positioned boxes that only ever change left/top/width/height (never reparented) */
 #pl.mvh{display:none!important}
 #mv{position:fixed;inset:0;z-index:60;background:#000;display:none;overflow:hidden;outline:none}
 #mv.on{display:block}
 .mt{position:absolute;overflow:hidden;background:#000}
 .mt video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform-origin:center}
-.mt.au::after,.mt.fo::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:5}
+.mt.au::after,.mt.fo::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:5;transition:opacity .25s}
+.mt.pipi,.mt.pipi video{background:transparent}
 .mt.au::after{border:2px solid #fff}
 .mt.fo::before{border:3px dashed var(--red-3,#e33);z-index:6}
 .ml{position:absolute;left:6px;top:6px;z-index:4;padding:2px 10px;border-radius:999px;background:#000b;color:#fff;font-size:11px;font-weight:700;letter-spacing:.04em;pointer-events:none;max-width:90%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -160,7 +179,9 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 #mvt{position:absolute;top:12px;left:50%;transform:translateX(-50%);padding:6px 16px;border-radius:999px;background:#000c;color:#fff;font-weight:700;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
 #mvt.on{opacity:1}
 #mv.hide .ml,#mv.hide .ctl,#mv.hide .pmenu,#mv.hide #mvt{opacity:0;pointer-events:none}
-#mv.hide .mt.fo::before{display:none}
+#mv.hide .mt.fo::before,#mv.hide .mt.au::after{opacity:0}
+#mvm{z-index:25;transform:none;bottom:auto;right:auto;min-width:200px;max-width:320px}#mvm[hidden]{display:none}
+#mvm button.sel{background:rgba(242,240,244,.86);color:#141217;font-weight:700}#mvm button.sel small{color:#4B4652}
 #mv.hide,#mv.hide *{cursor:none}
 @media(max-width:700px){#mvb button{padding:10px 12px}#mvb{bottom:10px}#mvp{bottom:150px}}
 .pmenu{position:absolute;left:50%;bottom:62px;transform:translateX(-50%);max-height:62%;overflow-y:auto;scrollbar-width:none;min-width:260px;max-width:420px;
@@ -474,15 +495,15 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 <div class="ctl" id="pctl">
  <div class="grp"><span class="lbl">FEED</span><button id="bfeed"></button></div>
  <div class="grp"><span class="lbl">ZOOM</span><button class="sm" id="zm">-</button><button id="zv"></button><button class="sm" id="zp">+</button></div>
+ <div class="grp"><button id="bsc" aria-pressed="false" hidden>Scores</button><button id="bcg" hidden>Change game</button></div>
  <div class="grp"><button id="bgd">Guide</button><button id="bfav">Favorite</button><button id="bmv" hidden>Multiview</button></div>
 </div><div class="pmenu" id="pmenu" hidden></div></div>
-<div id="mv" tabindex="-1" aria-label="Multiview"><div id="mvt"></div><div class="pmenu" id="mvp" hidden></div><div class="ctl" id="mvb">
+<div id="mv" tabindex="-1" aria-label="Multiview"><div id="mvt"></div><div class="pmenu" id="mvp" hidden></div><div id="mvm" class="pmenu" hidden></div><div class="ctl" id="mvb">
  <div class="grp"><button data-a="lay" id="mvl"></button></div>
- <div class="grp"><span class="lbl">AUDIO</span><button data-a="au">Next</button></div>
- <div class="grp"><span class="lbl">ZOOM</span><button class="sm" data-a="zm">-</button><button id="mvz" data-a="zr"></button><button class="sm" data-a="zp">+</button></div>
  <div class="grp"><span class="lbl">ALL</span><button class="sm" data-a="am">-</button><button class="sm" data-a="ap">+</button></div>
- <div class="grp"><button data-a="add">+ Game</button><button data-a="sw">Swap</button><button data-a="fd">Feed</button><button data-a="rm">Remove</button><button data-a="ex">Exit</button></div>
+ <div class="grp"><button data-a="add">+ Game</button><button data-a="sc" aria-pressed="false">Scores</button><button data-a="ex">Exit</button></div>
 </div></div>
+<div id="sbar" aria-label="Scores"></div>
 <div id="gpop" hidden></div>
 <div id="gd" hidden><div id="gdh"></div><div id="gdr"></div><div id="gdb"></div></div>
 <div id="gp" hidden><div id="gbar"></div><iframe id="gf" title="NHL guide"></iframe></div>
@@ -554,7 +575,7 @@ function catDelete(x){if(x==="Other")return;allKeys().forEach(k=>{if(effCat(k)==
 const DUR=3.25*3600e3; // NHL game window on the TV clock
 /* ---------- live scores straight from the NHL API (no routine needed) ---------- */
 document.addEventListener("load",e=>{if(e.target.tagName==="IMG")e.target.classList.add("ld")},true);document.addEventListener("error",e=>{if(e.target.tagName==="IMG")e.target.classList.add("ld")},true); // image skeleton (CSS img:not(.ld)) ends on load or error
-const skify=h=>h.replace(/<button/g,"<div").replace(/<\/button>/g,"</div>").replace(/ focusable/g,"").replace(/ data-(?:g|l|i|id|s)=/g," data-x=").replace(/class="(pill|sr|gc|pg)\b/g,'class="skm $1'); // a real renderer's HTML -> inert skeleton card
+const skify=h=>h.replace(/<button/g,"<div").replace(/<\/button>/g,"</div>").replace(/ focusable/g,"").replace(/ data-(?:g|l|i|id|s)=/g," data-x=").replace(/class="(pill|sr|gc|pg|sbi)\b/g,'class="skm $1'); // a real renderer's HTML -> inert skeleton card
 const skN=(n,f)=>'<div inert aria-hidden="true" style="display:contents">'+skify(Array.from({length:n},(_,i)=>f(i)).join(""))+'</div>';
 const SKL='<i class="sk" style="display:inline-block;width:120px;height:11px;vertical-align:middle"></i>', SKI='<i class="sk" style="display:inline-block;width:60px;height:9px;vertical-align:middle"></i>';
 let scLoaded=0, scFail=0, plDone=0, epgF=0, gdFail=0, tmiL=0, nwsL=0;
@@ -577,11 +598,11 @@ function pollStandings(){const u="https://api-web.nhle.com/v1/standings/now";
 window.nhlRelay=(n,t,e)=>gPost({cmd:"nhl",n,t,e}); // Android.get runs its callback in this window; the guide iframe is another origin
 function pushGuideLive(){if(ST.length||SC.length)gPost({cmd:"api",standings:ST,scores:SC})}
 window.gotScores=(t,e)=>{
-  var first=!scLoaded; try{const d=JSON.parse(t); SC=d.games||[]; scLoaded=1; scFail=0}catch(x){log("scores failed",e||x);if(!scLoaded){scFail=1;if(tab==="scores"&&!$("#pl").classList.contains("on"))render()}return}
+  var first=!scLoaded; try{const d=JSON.parse(t); SC=d.games||[]; scLoaded=1; scFail=0}catch(x){log("scores failed",e||x);if(!scLoaded){scFail=1;if(tab==="scores"&&!$("#pl").classList.contains("on"))render();sbRefresh()}return}
   {const E=ls("endAt",{});let ch2=0;SC.forEach(x=>{if(/FINAL|OFF/.test(x.gameState)&&!E[x.id]){E[x.id]=Math.min(Date.now(),Date.parse(x.startTimeUTC)+DUR);ch2=1}});if(ch2)sv("endAt",E)} // when a game was first seen over: post-game button lasts 1 hour from here
   const sig=SC.map(x=>x.id+x.gameState+(x.clock&&x.clock.timeRemaining)+(x.awayTeam.score||0)+(x.homeTeam.score||0)+(x.goals||[]).length).join();
   if(sig!==scSig)pushGuideLive();
-  if(sig===scSig&&!first)return; scSig=sig; if(gdId&&!$("#gd").hidden)gdLoad();
+  if(sig===scSig&&!first)return; scSig=sig; sbRefresh(); if(gdId&&!$("#gd").hidden)gdLoad();
   if(tab==="scores"&&!$("#pl").classList.contains("on")){const y=$("#m").scrollTop;render();$("#m").scrollTop=y;return}
   if(tab!=="home"||$("#pl").classList.contains("on"))return;
   let redo=false;
@@ -922,13 +943,15 @@ function svOrder(feeds,f){ // addon feeds first (Canadian English, other English
   const have=new Set(feeds.map(x=>x.u)),add=(f||[]).filter(x=>!have.has(x.u)),en=x=>!/TVA|RDS|FR:|French/i.test(x.n),isCA=x=>/CA:/i.test(x.n);
   return [...add.filter(x=>en(x)&&isCA(x)),...add.filter(x=>en(x)&&!isCA(x)),...feeds.filter(en),...add.filter(x=>!en(x)),...feeds.filter(x=>!en(x))]}
 function addRecent(c){recent=[c.n,...recent.filter(n=>n!==c.n)].slice(0,12);sv("recent",recent)}
+function pttSet(g){ // player title: both teams or the channel name
+  const t=cur.t||[{},{}], logo=x=>x&&x.logo?`<img src="${x.logo}" alt="">`:"";
+  $("#ptt").innerHTML=(cur.tm&&cur.tm.length>1?logo(t[0])+`<span class="t disp">${esc(cur.tm[0])}</span><span class="vs disp" style="color:var(--muted)">VS</span><span class="t disp">${esc(cur.tm[1])}</span>${logo(t[1])}`
+    :`<span class="t disp">${esc(g.c.n)}</span>`)+(cur.s?`<span class="tag">${esc(cur.s)}</span>`:"")+`<span class="tag"> LIVE</span>`}
 function play(g,list){
   pvStop(); userPaused=false;
   const feeds=g.title?feedsFor(g):[g.c];
   cur={...g,feeds,list:list||feeds}; tried=new Set(); if(g.c.u!=="stremio")addRecent(g.c);
-  const t=cur.t||[{},{}], logo=x=>x&&x.logo?`<img src="${x.logo}" alt="">`:"";
-  $("#ptt").innerHTML=(cur.tm&&cur.tm.length>1?logo(t[0])+`<span class="t disp">${esc(cur.tm[0])}</span><span class="vs disp" style="color:var(--muted)">VS</span><span class="t disp">${esc(cur.tm[1])}</span>${logo(t[1])}`
-    :`<span class="t disp">${esc(g.c.n)}</span>`)+(cur.s?`<span class="tag">${esc(cur.s)}</span>`:"")+`<span class="tag"> LIVE</span>`;
+  pttSet(g);
   $("#pl").classList.add("on"); setZoom(100); $("#bmv").hidden=false;
   cur.t0=Date.now();
   const FR=/TVA|RDS|FR:|French/i, me0=cur;
@@ -937,14 +960,48 @@ function play(g,list){
     const fin=f=>{if(done||cur!==me0||!$("#pl").classList.contains("on"))return; done=true;clearTimeout(tm);
       const all=svOrder(me0.feeds,f);
       me0.feeds.length=0; me0.feeds.push(...all); // same array as me0.list for games
-      if(me0.feeds[0])setFeed(me0.feeds[0]); else msgP("No feed found for this game.","fail")},
+      if(me0.feeds[0])setFeed(fmPick(me0,me0.feeds)); else msgP("No feed found for this game.","fail")},
       tm=setTimeout(()=>fin([]),6e3);
     svFeeds(g.sid,f=>{if(done&&f&&f.length&&cur===me0&&$("#pl").classList.contains("on")){ // late addon answer after the fallback started: add feeds, keep what is playing
         const have=new Set(me0.feeds.map(x=>x.u)),add=f.filter(x=>!have.has(x.u)&&!FR.test(x.n)); if(add.length){me0.feeds.unshift(...add);$("#bfeed").textContent=me0.feed.n+"  ("+(me0.feeds.indexOf(me0.feed)+1)+"/"+me0.feeds.length+")"}
       } else fin(f)});
-  } else if(feeds[0])setFeed(feeds[0]); else msgP("Finding feeds...","full");
-  show(); zb(); fsLbl(); $("#bfeed").focus();
+  } else if(feeds[0])setFeed(fmPick(g,feeds)); else msgP("Finding feeds...","full");
+  $("#bsc").hidden=$("#bcg").hidden=!g.title; sbSync();
+  show(); zb(); fsLbl(); $("#bfeed").focus(); sbRefresh();
 }
+/* ---------- remembered feed per game (localStorage "feedMem", entries older than 2 days dropped) ---------- */
+const fmKey=g=>g&&g.title&&!g.ch?svNrm(g.title)+"@"+(g.st?Math.floor(g.st/864e5):0):"";
+function fmSet(g,c){const k=fmKey(g); if(!k||!c)return; const m=ls("feedMem",{}),t=Date.now(); for(const x in m)if(t-m[x].t>1728e5)delete m[x]; m[k]={u:c.u,n:c.n,t}; sv("feedMem",m)}
+function fmPick(g,feeds){const r=ls("feedMem",{})[fmKey(g)]; return r&&(feeds.find(f=>f.u===r.u)||feeds.find(f=>f.n===r.n))||feeds[0]}
+/* ---------- score bar: every game today, top strip, shows when the player UI hides; Change game uses it as the picker ---------- */
+let sbOn=ls("scoreBar",false), SB=[], SBP=0, SBT=null; // SBP: Change game picker open; SBT: the multiview tile being switched
+const sbTaken=g=>!!SBT&&MV.t.some(t=>t!==SBT&&t.g.title===g.title), sbOk=g=>!!(g.c&&g.c.u)&&!(g.sc&&g.sc.over)&&g.st<=Date.now()+40*6e4&&!sbTaken(g), sbCur=g=>SBT?SBT.g.title===g.title:mvOn()?MV.t.some(t=>t.g.title===g.title):!!(cur&&cur.title&&cur.title===g.title);
+function sbSync(){const pl=$("#pl"),b=$("#sbar"),mv=mvOn(),game=pl.classList.contains("on")&&!mv&&cur&&cur.title,on=!!(SBP||(sbOn&&(game||mv))),was=b.classList.contains("on");
+  b.classList.toggle("on",on); b.classList.toggle("pick",!!SBP); b.classList.toggle("vis",on&&!SBP&&(mv?mvEl.classList.contains("hide"):pl.classList.contains("hide")));
+  $("#bsc").setAttribute("aria-pressed",sbOn); const m=$("#mvb [data-a=sc]"); if(m)m.setAttribute("aria-pressed",sbOn); if(on&&!was)sbRefresh()}
+function sbItem(g,k){const c=g.sc,ok=sbOk(g),col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"",lg=(x,a)=>x&&x.logo?`<img src="${x.logo}" alt="">`:`<b class="disp">${esc(a)}</b>`;
+  return `<button class="sbi focusable${c&&c.over?" done":""}${ok?"":" off"}${sbCur(g)?" cur":""}" data-t="${esc(g.title)}" data-k="${k}" tabindex="-1" aria-disabled="${!ok}" aria-label="${esc(g.tm[0]+" vs "+g.tm[1]+", "+(c?c.score+", "+c.note:clk(g.st)))}" style="${col(g.t[0].c,"a")}${col(g.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${lg(g.t[0],g.hm)}<span class="scr disp">${c?esc(c.score):"VS"}</span>${lg(g.t[1],g.aw)}<span class="nt disp">${c?esc(c.note):esc(clk(g.st)).toUpperCase()}</span></button>`}
+function sbRefresh(){const b=$("#sbar"); if(!b.classList.contains("on"))return;
+  if(!scLoaded&&!scFail){b.innerHTML=skN(8,i=>sbItem({tm:["AAA","BBB"],t:[{},{}],hm:"BBB",aw:"AAA",title:"sk"+i,st:Date.now()},i));return}
+  const f=document.activeElement, ft=b.contains(f)&&f.dataset.t;
+  SB=(games().live||[]).slice().sort((a,b)=>a.st-b.st||a.title.localeCompare(b.title));
+  b.innerHTML=SB.length?SB.map(sbItem).join(""):'<span class="sbe">No NHL games today</span>';
+  const n=ft&&b.querySelector('[data-t="'+CSS.escape(ft)+'"]'); if(n)n.focus({preventScroll:true})}
+function sbFocus(el){const b=$("#sbar"); el.focus({preventScroll:true}); b.scrollLeft=Math.max(0,el.offsetLeft-(b.clientWidth-el.offsetWidth)/2)}
+function sbPick(on,t){const d=document.body;
+  if(!on){SBP=0;SBT=null;d.classList.remove("sbp");sbSync(); if(mvOn()){mvShow();mvEl.focus()}else{show();$("#bcg").focus()} return}
+  closeMenu(); mvMenuClose(); SBP=1; SBT=t||null; d.classList.add("sbp"); clearTimeout(hideT); sbSync(); sbRefresh();
+  const it=[...$("#sbar").querySelectorAll(".sbi")],c=it.find(x=>x.classList.contains("cur"))||it.find(x=>!x.classList.contains("off")); if(c)sbFocus(c)}
+function sbMove(d){const it=[...$("#sbar").querySelectorAll(".sbi")]; let i=it.indexOf(document.activeElement); while(it[i+=d]){if(!it[i].classList.contains("off")){sbFocus(it[i]);return}}}
+function sbGo(t){const g=SB.find(x=>x.title===t); if(!g||!sbOk(g)||(mvOn()&&!SBT))return; const s=SBT;
+  if(sbCur(g)){sbPick(0);return}
+  SBP=0;SBT=null;document.body.classList.remove("sbp");
+  if(s&&MV.t.includes(s)){mvSwap(s,g);sbSync();mvEl.focus();return}
+  clearTimeout(zapT); killHls(); const v=$("#v"); try{v.pause();v.removeAttribute("src");v.load()}catch(x){} play(g); sbSync()}
+$("#sbar").addEventListener("click",e=>{const b=e.target.closest(".sbi"); if(b)sbGo(b.dataset.t)});
+document.addEventListener("keydown",e=>{if(!SBP)return; const k=e.key, a=document.activeElement; // picker: Left/Right walk the bar (disabled games skipped), OK switches, Back (nemBack) cancels
+  if(k==="ArrowLeft"||k==="ArrowRight")sbMove(k==="ArrowRight"?1:-1); else if(k==="Enter"||k===" "){if(a.classList.contains("sbi"))sbGo(a.dataset.t)} else if(!/^Arrow/.test(k))return;
+  e.preventDefault();e.stopPropagation()},true);
 let zbT=0, zapT=0;
 function lazyFeed(n){ // stop the old stream now, start the new one only after Up/Down settles (no overlapping streams)
   clearTimeout(zapT); killHls(); const v=$("#v"); try{v.pause();v.removeAttribute("src");v.load()}catch(x){}
@@ -956,7 +1013,7 @@ function zap(d){ // Up/Down with controls hidden: next/previous channel (or feed
   const n=l[(i+d+l.length)%l.length];
   if(cur.title){tried=new Set();lazyFeed(n)}else{cur.c=n;addRecent(n);tried=new Set();cur.feeds=[n];$("#ptop .t").textContent=plain(n.n).toUpperCase();lazyFeed(n)}
   zb()}
-function stop(){clearTimeout(zapT);$("#zb").classList.remove("on");if($("#v").volume===.5&&vol0!==.5)$("#v").volume=vol0;closeMenu();killHls();const v=$("#v");v.pause();v.removeAttribute("src");v.load();msgP("");$("#pl").classList.remove("on");refocus()}
+function stop(){clearTimeout(zapT);$("#zb").classList.remove("on");if($("#v").volume===.5&&vol0!==.5)$("#v").volume=vol0;closeMenu();killHls();const v=$("#v");v.pause();v.removeAttribute("src");v.load();msgP("");$("#pl").classList.remove("on");sbSync();refocus()}
 function refocus(){const a=document.activeElement; if(a&&a!==document.body&&a.offsetParent)return; const f=document.querySelector("#hcar .watch[data-g=\""+hi+"\"]")||$("#m").querySelector(".focusable,button,input")||document.querySelector("header [data-t][aria-pressed=true]"); if(f)f.focus({preventScroll:true})}
 function openMenu(kind){
   const m=$("#pmenu"); menuOn=true; show();
@@ -986,17 +1043,18 @@ function chFeeds(c){ // this channel, plus other channels airing the same EPG ti
   const o=onNow(c),b=baseName(c.n),alt=ch.filter(x=>x!==c&&x.u&&on(x)&&(baseName(x.n)===b||(o&&(onNow(x)||{}).t===o.t))).slice(0,8); return [c,...alt]}
 function mvLayout(){
   const T=MV.t,n=T.length; if(!n)return;
-  const W=mvEl.clientWidth,H=mvEl.clientHeight,S=MVL[n],cs=S.includes(MV.sty[n])?MV.sty[n]:S[0],free=cs==="free",gz=MV.gz/100,
+  const W=mvEl.clientWidth,H0=mvEl.clientHeight,TB=sbOn?Math.round(H0*.08):0,H=H0-TB,S=MVL[n],cs=S.includes(MV.sty[n])?MV.sty[n]:S[0],free=cs==="free",gz=MV.gz/100,
     ord=[MV.a,...T.filter(x=>x!==MV.a)],R=free?0:MVS[cs][1](W<H*.9,W/H); MV.cs=cs;
   T.forEach(t=>{let r;
     if(free){const c=MVF[T.indexOf(t)],s=.6*t.bs*gz;r=[.5+(c[0]-.5)*gz-s/2,.5+(c[1]-.5)*gz-s/2,s,s]}else r=R[ord.indexOf(t)];
-    const e=t.el.style; e.left=r[0]*W+1+"px";e.top=r[1]*H+1+"px";e.width=r[2]*W-2+"px";e.height=r[3]*H-2+"px"; // 2px gaps
+    const e=t.el.style; e.left=r[0]*W+1+"px";e.top=TB+r[1]*H+1+"px";e.width=r[2]*W-2+"px";e.height=r[3]*H-2+"px"; // 2px gaps
+    t.el.classList.toggle("pipi",cs==="pip"&&t!==MV.a); // PiP inset: transparent, letterbox shows the main video
     e.zIndex=cs==="pip"?(t===MV.a?1:5):t===MV.a?10:1+ord.indexOf(t); // main on top, except the PiP inset
     t.v.style.transform="scale("+(free?1:Math.min(4,t.z/100*gz))+")"}); // crop zoom inside the tile
   mvMark()}
 function mvMark(){MV.t.forEach((t,i)=>{t.el.classList.toggle("au",t===MV.a);t.el.classList.toggle("fo",t===MV.f);
     t.lb.textContent=(i+1)+"  "+mvName(t.g)+(t===MV.a?"  · AUDIO":"")+(t.c&&!(t.g.ch&&t.c===t.g.c)?"  · "+baseName(t.c.n):"")});
-  const f=MV.f; $("#mvl").textContent="Layout: "+MVS[MV.cs][0]; $("#mvz").textContent=f?Math.round(MV.cs==="free"?f.bs*100:f.z)+"%":""}
+  const f=MV.f; $("#mvl").textContent="Layout: "+MVS[MV.cs][0]}
 function mvCap(t){ // size each tile's quality to its box; more streams = lower ceilings (main tile may go higher). autoLevelCapping never reloads.
   const h=t.hls,L=h&&h.levels; if(!L||!L.length)return;
   const n=MV.t.length,m=t===MV.a,base=m?[1080,1080,720,540][n-1]:[0,720,540,360][n-1],
@@ -1022,7 +1080,7 @@ function mvLoad(t,c){ // the ONLY place a tile (re)loads: first start, FEED chan
   }else{t.v.src=c.u;window.__mvLoads+=2;mvPlay(t)}
 }
 function mvFeeds(t){ // same feed order as single player: Stremio addon first (wait up to 6s), then playlist feeds
-  const g=t.g,k=t.k=(t.k||0)+1,base=g.ch?chFeeds(g.c):g.title?feedsFor(g):[g.c],go=()=>{if(!MV.t.includes(t)||t.k!==k)return;if(t.feeds[0])mvLoad(t,t.feeds[0]);else mvMsg(t,"No feed found for this game.","fail")};
+  const g=t.g,k=t.k=(t.k||0)+1,base=g.ch?chFeeds(g.c):g.title?feedsFor(g):[g.c],go=()=>{if(!MV.t.includes(t)||t.k!==k)return;if(t.feeds[0])mvLoad(t,fmPick(g,t.feeds));else mvMsg(t,"No feed found for this game.","fail")};
   t.feeds=base.slice(); if(!(g.sid&&g.title))return go();
   mvMsg(t,"Finding feeds..."); let done=0; const fin=f=>{if(done||t.k!==k)return;done=1;clearTimeout(tm);t.feeds=svOrder(base,f);go()},tm=setTimeout(()=>fin([]),6e3);
   svFeeds(g.sid,fin)}
@@ -1045,14 +1103,14 @@ function mvAdd(g,pre){ // pre = {feeds,c} when the game was already playing in t
 function mvSetAudio(t){if(!t)return; MV.t.forEach(x=>x.v.muted=x!==t); MV.a=MV.f=t; mvLayout(); mvCapAll(); mvPlay(t); mvShow()} // audio = muted flag only; the audio tile is the main tile
 function mvRemove(t){if(!t)return; if(MV.t.length<2)return mvClose();
   mvKill(t); MV.t=MV.t.filter(x=>x!==t); if(MV.f===t)MV.f=MV.t[0]; if(MV.a===t)mvSetAudio(MV.t[0]); else{mvLayout();mvCapAll()}}
-function mvClose(){MV.t.forEach(mvKill);MV.t=[];MV.a=MV.f=null;$("#mvp").hidden=true;clearTimeout(MV.ht);mvEl.classList.remove("on","hide");$("#pl").classList.remove("on","mvh");
+function mvClose(){$("#mvm").hidden=true;MV.t.forEach(mvKill);MV.t=[];MV.a=MV.f=null;$("#mvp").hidden=true;clearTimeout(MV.ht);mvEl.classList.remove("on","hide");$("#pl").classList.remove("on","mvh");
   const b=MV.back;MV.back=null; if(b&&b.isConnected&&b!==document.body)b.focus({preventScroll:true});else refocus()}
 function mvFeedMenu(t){ // FEED button: this tile's feeds, same labels/order as the single player menu; picking one reloads only this tile
   const m=$("#mvp"); if(!t)return; MV.mf=t; MV.sw=null;
   if(!t.feeds.length)return mvToast("Still finding feeds...");
   m.innerHTML=`<h3>CHOOSE A FEED (${esc(mvName(t.g))})</h3>`+t.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===t.c}" data-fi="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("");
   m.hidden=false; mvShow(); const a=m.querySelector("[aria-checked=true]")||m.querySelector("button"); a.focus(); a.scrollIntoView({block:"center"})}
-function mvFeed(t,i){const c=t&&t.feeds[i]; if(!c||!MV.t.includes(t))return; t.tried=new Set(); mvLoad(t,c); mvToast(baseName(c.n))}
+function mvFeed(t,i){const c=t&&t.feeds[i]; if(!c||!MV.t.includes(t))return; t.tried=new Set(); fmSet(t.g,c); mvLoad(t,c); mvToast(baseName(c.n))}
 function mvSwap(t,g){ // same slot, zoom and audio state; only this tile's stream is replaced
   if(!MV.t.includes(t))return; if(t.hls){t.hls.destroy();t.hls=null} try{t.v.pause();t.v.removeAttribute("src");t.v.load()}catch(x){}
   t.g=g; t.c=null; t.feeds=[]; t.tried=new Set(); mvMark(); mvFeeds(t); mvShow()}
@@ -1073,7 +1131,34 @@ function mvChList(){ // channel rows for the picker: favorites + recent first; a
   return MV.pc.map((c,k)=>{const o=onNow(c);return `<button data-pc="${k}"><span>${fav.includes(c.n)?"&#9733; ":""}${esc(baseName(c.n))}</span><small>${esc(o?o.t:c.g||"")}</small></button>`}).join("")||'<div class="empty">No channels match.</div>'}
 function mvToast(s){const e=$("#mvt");e.textContent=s;e.classList.add("on");clearTimeout(MV.tt);MV.tt=setTimeout(()=>e.classList.remove("on"),2e3);mvShow()}
 function mvShow(){mvEl.classList.remove("hide");clearTimeout(MV.ht);MV.ht=setTimeout(mvHide,3e3)} // every control, label, ring and the cursor go after 3s idle; the white audio outline stays
-function mvHide(){clearTimeout(MV.ht);$("#mvp").hidden=true;mvEl.classList.add("hide");mvEl.focus()}
+function mvHide(){clearTimeout(MV.ht);if(!$("#mvm").hidden)return; // the hold menu keeps the UI up
+  $("#mvp").hidden=true;mvEl.classList.add("hide");mvEl.focus()}
+/* ---------- per-tile menu: hold OK on a selected tile (or long-press / right-click) ---------- */
+const mvZl=t=>Math.round(MV.cs==="free"?t.bs*100:t.z)+"%";
+function mvMenu(t){if(!t||!MV.t.includes(t))return; const m=$("#mvm"); MV.mt=t; MV.f=t; mvMark(); mvShow();
+  m.innerHTML=`<h3>${esc(mvName(t.g))}</h3><button data-m="full"><span>Full screen</span></button><button data-m="zoom"><span>Zoom</span><small>&#9664; ${mvZl(t)} &#9654;</small></button><button data-m="feed"><span>Feed</span><small>${esc(t.c?baseName(t.c.n):"")}</small></button><button data-m="game"><span>Switch game</span></button><button data-m="au"><span>${t===MV.a?"Main (audio)":"Make audio / main"}</span></button><button data-m="rm"><span>Remove</span></button>`;
+  m.hidden=false; const r=t.el.getBoundingClientRect(),W=mvEl.clientWidth,H=mvEl.clientHeight,w=Math.min(m.offsetWidth,W-16),h=m.offsetHeight;
+  Object.assign(m.style,{left:mvC(r.left+r.width/2-w/2,8,W-w-8)+"px",top:mvC(r.top+r.height/2-h/2,8,Math.max(8,H-h-8))+"px",right:"auto",bottom:"auto",transform:"none"});
+  m.querySelector("button").focus()}
+function mvMenuClose(){const m=$("#mvm"); if(m.hidden)return false; m.hidden=true; MV.mt=null; mvShow(); mvEl.focus(); return true}
+function mvMenuAct(b){const t=MV.mt,k=b.dataset.m; if(!t||!MV.t.includes(t)){mvMenuClose();return}
+  if(k==="zoom"){MV.f=t;mvAct("zr");b.querySelector("small").innerHTML="&#9664; "+mvZl(t)+" &#9654;";return}
+  $("#mvm").hidden=true; MV.mt=null;
+  if(k==="full")mvFull(t); else if(k==="feed")mvFeedMenu(t); else if(k==="game")sbPick(1,t); else if(k==="au"){mvSetAudio(t);mvEl.focus()} else if(k==="rm"){mvRemove(t);mvEl.focus()}}
+function mvFull(t){ // reverse of the single -> multiview handover: this tile's playing <video> + hls become the single player (no reload); the other tiles are destroyed
+  const h=t.hls,v=t.v,g=t.g,feeds=t.feeds.length?t.feeds.slice():[t.c],c=t.c,zm=MV.cs==="free"?100:mvC(Math.round(t.z*MV.gz/100),50,200),old=$("#v"); if(!c)return;
+  t.hls=null; MV.t=MV.t.filter(x=>x!==t); t.el.remove(); mvClose(); // mvClose kills the other tiles only (t is no longer in MV.t)
+  killHls(); try{old.pause();old.removeAttribute("src");old.load()}catch(x){}
+  v.style.cssText=""; v.muted=false; v.id="v"; old.replaceWith(v); vBind(v); hls=h; userPaused=false; tried=new Set([c.u]);
+  if(h){h.autoLevelCapping=-1;h.config.maxBufferLength=20;h.config.maxMaxBufferLength=30; h.on(Hls.Events.ERROR,(e,d)=>{if(hls!==h||!d.fatal)return;
+    if(d.type===Hls.ErrorTypes.MEDIA_ERROR)h.recoverMediaError(); else if(d.type===Hls.ErrorTypes.NETWORK_ERROR)h.startLoad(); else msgP("This feed would not play. Open FEED and pick another.","fail")})}
+  cur=g.ch?{c,tm:[g.c.n],t:[{}],s:g.c.s,feeds,feed:c,list:ch.filter(on)}:{...g,c,feeds,feed:c,list:feeds}; cur.t0=Date.now();
+  pttSet(cur); $("#pl").classList.add("on"); setZoom(zm); msgP(""); $("#bmv").hidden=false; $("#bsc").hidden=$("#bcg").hidden=!cur.title;
+  $("#bfeed").textContent=c.n+(feeds.length>1?"  ("+(feeds.indexOf(c)+1)+"/"+feeds.length+")":""); favBtn(); fsLbl(); sbSync(); show(); v.play().catch(playErr); $("#bfeed").focus()}
+function mvMenuKey(k,a){const m=$("#mvm"),row=[...m.querySelectorAll("button")],i=row.indexOf(a);
+  if(k==="ArrowDown"&&row[i+1])row[i+1].focus(); else if(k==="ArrowUp"&&row[i-1])row[i-1].focus();
+  else if((k==="ArrowLeft"||k==="ArrowRight")&&a.dataset.m==="zoom"){const t=MV.mt;if(t){mvZoom(t,k==="ArrowRight"?1:-1);a.querySelector("small").innerHTML="&#9664; "+mvZl(t)+" &#9654;"}}
+  else if(k==="Enter"||k===" ")mvMenuAct(a)}
 function mvZoom(t,d){if(!t)return; if(MV.cs==="free")t.bs=mvC(Math.round(t.bs*10+d)/10,.4,2); else t.z=mvC(t.z+d*10,100,200); mvLayout(); mvCapAll()}
 function mvMove(d){const f=MV.f||MV.a,c=t=>{const r=t.el.getBoundingClientRect();return[r.left+r.width/2,r.top+r.height/2]},p=c(f),
     dx=d==="Right"?1:d==="Left"?-1:0,dy=d==="Down"?1:d==="Up"?-1:0; let best=null,bs=1e9;
@@ -1086,12 +1171,17 @@ function mvAct(a){const f=MV.f||MV.a,n=MV.t.length;
   else if(a==="zr"){if(MV.cs==="free")f.bs=1;else f.z=100;mvLayout();mvCapAll()}
   else if(a==="am"||a==="ap"){MV.gz=mvC(MV.gz+(a==="ap"?10:-10),100,200);mvLayout();mvCapAll();mvToast("All tiles "+MV.gz+"%")}
   else if(a==="add")mvPick();
+  else if(a==="sc"){sbOn=!sbOn;sv("scoreBar",sbOn);sbSync();mvLayout();mvCapAll()}
   else if(a==="fd")mvFeedMenu(f);
   else if(a==="sw")mvPick(1,f);
   else if(a==="rm")mvRemove(f);
   else if(a==="ex")mvClose()}
 mvEl.addEventListener("click",e=>{const b=e.target.closest("button"),tl=e.target.closest(".mt");
   if(e.target.id==="mvq")return;
+  if(Date.now()-(MV.nc||0)<700)return; // the click that ends a touch long-press
+  if(SBP){sbPick(0);return}
+  if(b&&b.dataset.m){mvMenuAct(b);return}
+  if(!$("#mvm").hidden&&!e.target.closest("#mvm")){mvMenuClose();return}
   if(!$("#mvp").hidden&&!e.target.closest("#mvp")){mvPick(0);if(!b)return} // click outside the menu closes it
   if(b&&b.dataset.pc!==undefined){const c=MV.pc[+b.dataset.pc],s=MV.sw;if(!c)return;mvPick(0);if(s)mvSwap(s,chG(c));else mvAdd(chG(c));return}
   if(b&&b.dataset.fi!==undefined){const t=MV.mf;mvPick(0);mvFeed(t,+b.dataset.fi)}
@@ -1106,6 +1196,7 @@ mvEl.addEventListener("input",e=>{if(e.target.id==="mvq"){MV.q=e.target.value;$(
 mvEl.addEventListener("keydown",e=>{const k=e.key,a=document.activeElement,inB=a.closest&&a.closest("#mvb"),inP=a.closest&&a.closest("#mvp");
   if(a.id==="mvq"){if(!/^(ArrowUp|ArrowDown|Enter)$/.test(k)){e.stopPropagation();mvShow();return}} // typing in the channel search: letters, digits, space, Left/Right stay in the field
   if(!/^(Arrow|Enter$|\s$|[1-4]$)/.test(k))return; e.preventDefault();e.stopPropagation();
+  if(!$("#mvm").hidden){mvShow();if(!e.repeat)mvMenuKey(k,a);return}
   if(mvEl.classList.contains("hide")){mvShow();return} mvShow();
   if(/^[1-4]$/.test(k)){mvSetAudio(MV.t[k-1]);return}
   if(inP||inB){const row=[...(inP?$("#mvp"):$("#mvb")).querySelectorAll("button,input")],i=row.indexOf(a),nx=i+(k==="ArrowRight"||k==="ArrowDown"||(k==="Enter"&&a.id==="mvq")?1:-1);
@@ -1115,9 +1206,16 @@ mvEl.addEventListener("keydown",e=>{const k=e.key,a=document.activeElement,inB=a
     else if((k==="ArrowRight"||k==="ArrowLeft")&&row[nx])row[nx].focus();
     else if(k==="ArrowUp")mvEl.focus();
     return}
-  if(k==="Enter"||k===" "){mvSetAudio(MV.f);return}
+  if(k==="Enter"||k===" "){if(!e.repeat){clearTimeout(MV.hold);MV.hp=1;const t=MV.f;MV.hold=setTimeout(()=>{MV.hp=0;mvMenu(t)},500)}return} // short OK (on release) = audio, hold ~500ms = tile menu
   mvMove(k.slice(5))},true);
+mvEl.addEventListener("keyup",e=>{if((e.key==="Enter"||e.key===" ")&&MV.hp){MV.hp=0;clearTimeout(MV.hold);if($("#mvm").hidden&&!SBP)mvSetAudio(MV.f)}},true);
+mvEl.addEventListener("contextmenu",e=>{const tl=e.target.closest(".mt");if(!tl)return;e.preventDefault();const t=MV.t.find(x=>x.el===tl);if(t)mvMenu(t)});
+{let p=null; // touch long-press on a tile
+ mvEl.addEventListener("pointerdown",e=>{if(e.pointerType!=="touch")return;const tl=e.target.closest(".mt");if(!tl)return;clearTimeout(MV.lp);p=[e.clientX,e.clientY];MV.lp=setTimeout(()=>{const t=MV.t.find(x=>x.el===tl);if(t){MV.nc=Date.now();mvMenu(t)}},500)});
+ mvEl.addEventListener("pointermove",e=>{if(p&&Math.hypot(e.clientX-p[0],e.clientY-p[1])>10){clearTimeout(MV.lp);p=null}});
+ ["pointerup","pointercancel"].forEach(v=>mvEl.addEventListener(v,()=>{clearTimeout(MV.lp);p=null}))}
 window.addEventListener("resize",()=>{if(mvOn()){mvLayout();mvCapAll()}});
+[$("#pl"),mvEl].forEach(x=>new MutationObserver(sbSync).observe(x,{attributes:true,attributeFilter:["class"]})); // score bar follows the player / multiview UI (fades while it is up)
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&mvOn())MV.t.forEach(t=>t.v.paused&&t.v.play().catch(()=>{}))});
 setInterval(()=>{if(mvOn()){mvMark();MV.t.forEach(t=>{const q=t.v.getVideoPlaybackQuality&&t.v.getVideoPlaybackQuality(); if(!q)return; // dropping frames (>10% over 4s): step this tile one level down, up to 3 steps
   const d=q.droppedVideoFrames-(t.qd||0),n=q.totalVideoFrames-(t.qn||0);t.qd=q.droppedVideoFrames;t.qn=q.totalVideoFrames;if(n>60&&d/n>.1&&t.pen<3){t.pen++;mvCap(t)}})}},4e3);
@@ -1167,14 +1265,15 @@ window.addEventListener("resize",gLayout);
 function fsLbl(){const b=$("#pfs");if(b)b.textContent=document.fullscreenElement?"Exit full screen":"Full screen"}
 document.addEventListener("fullscreenchange",fsLbl);
 window.nemBack=()=>{const pl=$("#pl");
-  if(mvOn()){if(!$("#mvp").hidden)mvPick(0);else if(!$("#mv").classList.contains("hide"))mvHide();else mvClose();return true}
+  if(SBP){sbPick(0);return true}
+  if(mvOn()){if(mvMenuClose());else if(!$("#mvp").hidden)mvPick(0);else if(!$("#mv").classList.contains("hide"))mvHide();else mvClose();return true}
   if(!$("#gd").hidden){closeGame();return true}
   if(!$("#gpop").hidden){closePop();return true}
   if(!$("#gp").hidden){ // guide: close its drawer first, then the panel (or go home from the tab)
     if(gDepth>0){gPost({cmd:"back"});return true}
     if(gSide()){guideClose();return true}
     go("home");return true}
-  if(pl.classList.contains("on")){ // Back: close open menu, then hide the controls, then leave the player
+  if(pl.classList.contains("on")){ // Back: cancel Change game, close open menu, then hide the controls, then leave the player
     if(closeMenu()){return true}
     if(!pl.classList.contains("hide")){clearTimeout(hideT);pl.classList.add("hide");return true}
     stop();return true}
@@ -1190,7 +1289,7 @@ $("#pl").addEventListener("keydown",e=>{
     e.preventDefault();e.stopPropagation();show();$("#bfeed").focus();return;
   }
   if(!menuOn&&/^Arrow/.test(e.key)){ // D-pad: top bar (Back, Full screen) <-> bottom bar
-    const top=[...document.querySelectorAll("#ptop button")],bot=[...document.querySelectorAll("#pctl button")],a=document.activeElement,
+    const top=[...document.querySelectorAll("#ptop button")],bot=[...document.querySelectorAll("#pctl button")].filter(b=>!b.hidden),a=document.activeElement,
       row=top.includes(a)?top:bot.includes(a)?bot:null;
     if(row){e.preventDefault();e.stopPropagation();const i=row.indexOf(a);
       if(e.key==="ArrowLeft"&&i>0)row[i-1].focus();else if(e.key==="ArrowRight"&&i<row.length-1)row[i+1].focus();
@@ -1198,12 +1297,14 @@ $("#pl").addEventListener("keydown",e=>{
       else if(e.key==="ArrowDown"&&row===top)bot[0].focus()}}
   show();
 },true);
-$("#pl").addEventListener("pointermove",show);$("#pl").addEventListener("mousemove",show);
+{const wake=e=>{if(!(e.target.closest&&e.target.closest("#sbar")))show()}; // hovering the visible score bar keeps it (so it can be clicked)
+$("#pl").addEventListener("pointermove",wake);$("#pl").addEventListener("mousemove",wake)}
 function vBind(v){v.addEventListener("playing",()=>msgP(""));
 v.addEventListener("waiting",()=>{clearTimeout(waitT);if(!$("#pbuf").classList.contains("on"))waitT=setTimeout(()=>msgP("Buffering...","mini"),700)});
 v.addEventListener("error",()=>{if(!hls)msgP("This feed would not play. Open FEED and pick another.","fail")})}
 vBind($("#v"));
 $("#pl").onclick=e=>{
+  if(SBP){sbPick(0);return}
   show(); if(menuOn&&!e.target.closest("#pmenu")){closeMenu();return} const b=e.target.closest("button"); if(!b)return; const v=$("#v");
   if(b.id==="bfeed")openMenu("feed");
   else if(b.id==="zv")openMenu("zoom");
@@ -1212,12 +1313,14 @@ $("#pl").onclick=e=>{
   else if(b.id==="bfav")toggleFav(cur.c.n);
   else if(b.id==="pback"){closeMenu();stop()}
   else if(b.id==="pfs"){const d=document;if(d.fullscreenElement)d.exitFullscreen&&d.exitFullscreen().catch(()=>{});else if(d.documentElement.requestFullscreen)d.documentElement.requestFullscreen().catch(()=>{})}
+  else if(b.id==="bsc"){sbOn=!sbOn;sv("scoreBar",sbOn);sbSync()}
+  else if(b.id==="bcg")sbPick(1);
   else if(b.id==="bgd")guideSide();
   else if(b.id==="bmv"){const chn=!cur.title,g=chn?chG(cur.feed||cur.c):cur,pre={feeds:chn?chFeeds(g.c):cur.feeds.slice(),c:cur.feed||cur.c},v=$("#v"),h=hls;closeMenu();clearTimeout(zapT);
     if(h&&v.readyState>0){ // hand the playing <video> + hls to multiview tile 1 (no restart); the player gets a fresh empty video
       const n=document.createElement("video");n.autoplay=true;n.setAttribute("playsinline","");v.before(n);v.removeAttribute("id");n.id="v";vBind(n);hls=null;pre.ad={v,h}}
     stop();mvAdd(g,pre);mvPick()}
-  else if(b.dataset.f!==undefined){closeMenu();tried=new Set();setFeed(cur.feeds[+b.dataset.f]);$("#bfeed").focus()}
+  else if(b.dataset.f!==undefined){closeMenu();tried=new Set();const f=cur.feeds[+b.dataset.f];fmSet(cur,f);setFeed(f);$("#bfeed").focus()}
   else if(b.dataset.z!==undefined){closeMenu();setZoom(+b.dataset.z);$("#zv").focus()}
 };
 function toggleFav(n){fav=fav.includes(n)?fav.filter(x=>x!==n):[...fav,n];sv("fav",fav);if(cur&&$("#pl").classList.contains("on"))favBtn()}

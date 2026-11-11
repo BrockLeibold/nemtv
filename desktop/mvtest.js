@@ -17,6 +17,7 @@ app.whenReady().then(async()=>{
     const [W,H]=sz.split("x").map(Number), phone=W<700; masters=0;
     const w=new BrowserWindow({width:W,height:H,useContentSize:true,show:true,frame:false,backgroundColor:"#000",webPreferences:{contextIsolation:false,webSecurity:false,zoomFactor:1,backgroundThrottling:false}});
     w.setContentSize(W,H); if(process.env.MV_DEBUG)w.webContents.on("console-message",(e,l,m)=>console.log("CONSOLE",l,String(m).slice(0,200))); const ev=js=>w.webContents.executeJavaScript(js), shot=async n=>{const im=await w.webContents.capturePage();fs.writeFileSync(path.join(OUT,n+"_"+sz+".png"),im.toPNG())};
+    const hold=async(k,ms)=>{w.webContents.sendInputEvent({type:"keyDown",keyCode:k});await sleep(ms);w.webContents.sendInputEvent({type:"keyUp",keyCode:k});await sleep(200)};
     const key=async k=>{w.webContents.sendInputEvent({type:"keyDown",keyCode:k});w.webContents.sendInputEvent({type:"keyUp",keyCode:k});await sleep(120)};
     if(process.env.MV_CPU){w.webContents.debugger.attach("1.3");await w.webContents.debugger.sendCommand("Emulation.setCPUThrottlingRate",{rate:+process.env.MV_CPU})} // weak-SoC stand-in
     await w.loadURL("http://127.0.0.1:47190/app.html"); await sleep(3500); w.focus();
@@ -62,10 +63,10 @@ app.whenReady().then(async()=>{
     await ev(`__mv.f=__mv.t[3];mvAct("rm");0`); await sleep(1200); s=await st(); await shot("3-after-remove"); log(s.n===3&&s.loads===base,sz+" remove tile: n="+s.n+" loads="+s.loads+" (no reload of others)");
     // auto-hide after 3s idle: bar, labels, rings gone; audio outline stays
     await ev(`__mv.sty[3]="main3";mvLayout();mvShow();0`); await sleep(3600); s=await st(); await shot("hidden");
-    const ui=await ev(`(()=>{const o=e=>+getComputedStyle(e).opacity;return {bar:o(document.querySelector('#mvb')),lb:o(document.querySelector('.ml')),ring:getComputedStyle(document.querySelector('.mt.fo'),'::before').display,aud:getComputedStyle(document.querySelector('.mt.au'),'::after').borderTopWidth,cur:getComputedStyle(document.getElementById('mv')).cursor}})()`);
+    const OUTL=`(()=>{const o=e=>+getComputedStyle(e).opacity;return {bar:o(document.querySelector('#mvb')),lb:o(document.querySelector('.ml')),ring:+getComputedStyle(document.querySelector('.mt.fo'),'::before').opacity,aud:+getComputedStyle(document.querySelector('.mt.au'),'::after').opacity,cur:getComputedStyle(document.getElementById('mv')).cursor,loads:__mvLoads}})()`; const ui=await ev(OUTL);
     log(await ev(`document.querySelectorAll('.mt.au').length===1&&__mv.t.filter(t=>!t.v.muted).length===1`),sz+" hidden: exactly one white outline tile + one unmuted");
-    log(s.hide&&ui.bar===0&&ui.lb===0&&ui.ring==="none"&&ui.aud==="2px"&&ui.cur==="none",sz+" auto-hide after 3s: "+JSON.stringify(ui));
-    await key("Down"); await sleep(400); s=await st(); await shot("shown-again"); log(!s.hide,sz+" any key shows the UI again");
+    log(s.hide&&ui.bar===0&&ui.lb===0&&ui.ring===0&&ui.aud===0&&ui.cur==="none",sz+" auto-hide after 3s: bar, labels, dotted selection and white audio outline all faded out: "+JSON.stringify(ui));
+    await key("Down"); await sleep(500); s=await st(); await shot("shown-again"); {const u2=await ev(OUTL);log(!s.hide&&u2.ring===1&&u2.aud===1&&u2.loads===ui.loads,sz+" any key shows the UI and fades both outlines back in, no new loads: "+JSON.stringify(u2))}
     // dropped frames over 5s
     await sleep(5000); const dq=await ev(`__mv.t.map(t=>{const q=t.v.getVideoPlaybackQuality();return [q.droppedVideoFrames,q.totalVideoFrames]})`); log(true,sz+" dropped/total frames per tile "+JSON.stringify(dq)+" pens="+(await ev(`JSON.stringify(__mv.t.map(t=>t.pen))`)));
     log(masters===4,sz+" master playlist requests: "+masters+" (expected 4 = one per game, none for layout/audio/zoom/remove)");
@@ -107,6 +108,7 @@ app.whenReady().then(async()=>{
     log(c.loads===2&&c.hc.filter(Boolean).length===1&&c.hc[c.mi]&&c.vs&&c.au&&c.pos&&c.tf&&c.main&&await ev(`__mv.t.filter(t=>!t.v.muted).length===1&&!__mv.a.v.muted`),sz+" swapping the audio tile keeps audio on that slot: "+JSON.stringify(c));
     await ev(`window.games=window.__g1;window.feedsFor=window.__f1;mvClose();0`); await sleep(300);
     // entry from the single player (Multiview button) and Back handling
+    await ev(`window.__g9=games;window.games=()=>({live:[],later:[]});0`);
     await ev(`(()=>{const g=__t(0);cur={...g,feeds:[g.c],feed:g.c,list:[g.c]};$("#pl").classList.add("on");$("#bmv").hidden=false;$("#bmv").click();0})()`); await sleep(1500);
     log(await ev(`mvOn()&&__mv.t.length===1&&$("#pl").classList.contains("mvh")&&!$("#pl video").src`),sz+" player Multiview button opens multiview with the game");
     await ev(`nemBack()`); log(await ev(`mvOn()&&$("#mv").classList.contains("hide")`),sz+" Back #1 hides the UI");
@@ -120,6 +122,7 @@ app.whenReady().then(async()=>{
     if(process.env.MV_DEBUG)console.log("ENTRY",await ev(`(()=>{const t=__mv.t[0];return JSON.stringify([mvOn(),__mv.t.length,t.v===__e0.v,t.hls===__e0.h,__mvLoads-__e0.l,t.c.u===cur.feed.u,!t.v.muted,t.v.currentTime>__e0.ct,!t.v.paused,t.v.readyState,t.v.videoHeight,document.querySelectorAll("#v").length,$("#v")!==t.v,t.v.id])})()`));
     log(await ev(`(()=>{const t=__mv.t[0];return mvOn()&&__mv.t.length===1&&t.v===__e0.v&&t.hls===__e0.h&&__mvLoads===__e0.l&&t.c.u===cur.feed.u&&t.c.n==="Alt feed 0"&&!t.v.muted&&__mv.a===t&&t.v.currentTime>__e0.ct&&!t.v.paused&&t.v.readyState>2&&t.v.videoHeight>0&&t.el.contains(t.v)&&document.querySelectorAll("#v").length===1&&$("#v")!==t.v&&!$("#v").getAttribute("src")&&t.v.id===""})()`),sz+" entry hands the running video + hls to tile 1: same feed, no restart, no new load, audio on");
     await ev(`nemBack();nemBack();0`); await sleep(300);
+    await ev(`window.games=window.__g9;0`);
     // ---- Live channels in multiview: menu add, picker (Channels section + search), mix with games, channel Feed menu, swap, handover from the single player ----
     await ev(`(()=>{const n=Date.now(),u=i=>"http://127.0.0.1:47191/g"+i+"/index.m3u8",e=(t)=>[[n-6e5,n+6e5,t+" | d"]];window.__ch0=ch;window.__ep0=EPG;
       ch=[0,1,2,3].map(i=>({n:"Chan"+i,u:u(i),g:"News",id:"c"+i,s:""}));ch.push({n:"Chan0 - feed 2",u:u(1),g:"News",id:"c9",s:""});
@@ -152,6 +155,107 @@ app.whenReady().then(async()=>{
     await ev(`$("#bmv").click()`); await sleep(3000);
     log(await ev(`(()=>{const t=__mv.t[0];return mvOn()&&__mv.t.length===1&&t.g.ch&&t.v===__e1.v&&t.hls===__e1.h&&__mvLoads===__e1.l&&/Chan0 - Show Zero/.test(t.lb.textContent)&&t.feeds.length===3&&!t.v.muted&&t.v.readyState>2})()`),sz+" channel handed over from the single player: same video+hls, no new load, alt feeds available");
     await ev(`nemBack();nemBack();ch=__ch0;EPG=__ep0;0`); await sleep(300);
+    // ---- PiP transparency, score bar in multiview, per-tile hold menu ----
+    await ev(`window.__g9=games;window.games=()=>({live:[],later:[]});sbOn=false;localStorage.setItem("scoreBar","false");sbSync();__add(0);__add(1);0`); await sleep(6000);
+    await ev(`__mv.sty[2]="pip";mvLayout();0`); await sleep(500);
+    const pip=await ev(`(()=>{const T=__mv.t,i=T.find(t=>t!==__mv.a);return {bg:getComputedStyle(i.el).backgroundColor,vbg:getComputedStyle(i.v).backgroundColor,cls:i.el.classList.contains("pipi"),mainBg:getComputedStyle(__mv.a.el).backgroundColor}})()`);
+    log(pip.cls&&pip.bg==="rgba(0, 0, 0, 0)"&&pip.vbg==="rgba(0, 0, 0, 0)"&&pip.mainBg==="rgb(0, 0, 0)",sz+" PiP inset tile is transparent (letterbox shows the main video): "+JSON.stringify(pip));
+    await shot("pip");
+    let l0=(await st()).loads; await ev(`mvAct("sc");0`); await sleep(500);
+    for(const sty of ["pip","side"]){await ev(`__mv.sty[2]="${sty}";mvLayout();0`);await sleep(300);
+      const r=await ev(`(()=>{const b=document.getElementById("sbar").getBoundingClientRect();return {on:document.getElementById("sbar").classList.contains("on"),bb:Math.round(b.bottom),h:Math.round(b.height),ph:innerHeight,tiles:__mv.t.map(t=>{const q=t.el.getBoundingClientRect();return [Math.round(q.top),Math.round(q.bottom),q.top<b.bottom-.5&&q.bottom>b.top+.5]}),loads:__mvLoads}})()`);
+      log(r.on&&Math.abs(r.h-r.ph*.08)<=1.5&&r.tiles.every(t=>!t[2])&&r.loads===l0,sz+" multiview "+sty+" with the score bar on: no tile intersects the bar, no reload "+JSON.stringify(r))}
+    await shot("pip-scorebar"); await ev(`mvAct("sc");__mv.sty[2]="pip";mvLayout();0`); await sleep(300);
+    log(await ev(`!document.getElementById("sbar").classList.contains("on")&&Math.round(__mv.a.el.getBoundingClientRect().top)<=2&&__mvLoads===${l0}`),sz+" bar off again: tiles use the full height, no reload");
+    await ev(`__add(2);0`); await sleep(6000); await ev(`__mv.sty[3]="main3";mvLayout();__vid=__mv.t.map(t=>t.v);window.__hh=__mv.t.map(t=>t.hls);0`); l0=(await st()).loads;
+    // short OK = audio only, no menu
+    await ev(`mvShow();__mv.f=__mv.t[1];mvEl.focus();0`); await key("Return"); await sleep(300);
+    log(await ev(`$("#mvm").hidden&&__mv.a===__mv.t[1]&&__mv.t.filter(t=>!t.v.muted).length===1&&__mvLoads===${l0}`),sz+" short OK gives audio and does not open the tile menu");
+    // hold OK on tile 3 -> menu with the five items
+    await ev(`mvShow();__mv.f=__mv.t[2];mvEl.focus();0`); await hold("Return",800);
+    const mn=await ev(`(()=>{const m=$("#mvm"),r=m.getBoundingClientRect();return {open:!m.hidden,items:[...m.querySelectorAll("button")].map(b=>b.dataset.m).join(),inside:r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight,focus:m.contains(document.activeElement)&&document.activeElement.dataset.m,tile:__mv.t.indexOf(__mv.mt),aud:__mv.t.indexOf(__mv.a),loads:__mvLoads}})()`);
+    log(mn.open&&mn.items==="full,zoom,feed,game,au,rm"&&mn.inside&&mn.focus==="full"&&mn.tile===2&&mn.aud===1&&mn.loads===l0,sz+" hold OK on tile 3 opens its menu (Full screen, Zoom, Feed, Switch game, Make audio, Remove), audio unchanged: "+JSON.stringify(mn));
+    await shot("tile-menu");
+    await key("Down"); await key("Right"); await key("Right"); await sleep(200);
+    log(await ev(`JSON.stringify(__mv.t.map(t=>t.z))==="[100,100,120]"&&__mvLoads===${l0}&&__mv.t.every((t,i)=>t.v===__vid[i]&&t.hls===__hh[i])&&/120%/.test($("#mvm [data-m=zoom]").textContent)`),sz+" Zoom Left/Right in the menu changes only tile 3, no reload");
+    await key("Return"); await sleep(200); log(await ev(`__mv.t[2].z===100&&!$("#mvm").hidden`),sz+" OK on Zoom resets it");
+    const sq=[]; for(let i=0;i<4;i++){await key("Down");sq.push(await ev(`document.activeElement.dataset.m`))}
+    log(sq.join()==="feed,game,au,rm",sz+" D-pad Down reaches every menu item: "+sq.join());
+    await ev(`nemBack()`); await sleep(200); log(await ev(`$("#mvm").hidden&&mvOn()&&__mv.t.length===3`),sz+" Back closes the tile menu, stays in multiview");
+    // Feed
+    await ev(`mvShow();__mv.f=__mv.t[2];mvEl.focus();0`); await hold("Return",800); await key("Down"); await key("Down"); await key("Return"); await sleep(300);
+    log(await ev(`$("#mvm").hidden&&!$("#mvp").hidden&&document.querySelectorAll("#mvp button[data-fi]").length===1`),sz+" menu Feed opens this tile's feed list"); await ev(`nemBack();0`); await sleep(200);
+    // Switch game -> score bar picker for the tile
+    await ev(`mvShow();__mv.f=__mv.t[2];mvEl.focus();0`); await hold("Return",800); await key("Down"); await key("Down"); await key("Down"); await key("Return"); await sleep(400);
+    log(await ev(`SBP&&SBT===__mv.t[2]&&document.getElementById("sbar").classList.contains("pick")&&document.body.classList.contains("sbp")`),sz+" menu Switch game opens the score bar picker for that tile");
+    await ev(`nemBack();0`); await sleep(300); log(await ev(`!SBP&&mvOn()&&__mv.t.length===3&&__mvLoads===${l0}`),sz+" Back cancels the picker, nothing reloaded");
+    // right-click opens the menu too; Make audio; Remove
+    await ev(`document.querySelectorAll(".mt")[2].dispatchEvent(new MouseEvent("contextmenu",{bubbles:true,cancelable:true}));0`); await sleep(300);
+    log(await ev(`!$("#mvm").hidden&&__mv.mt===__mv.t[2]`),sz+" right-click on a tile opens the menu");
+    await key("Down"); await key("Down"); await key("Down"); await key("Down"); await key("Return"); await sleep(400);
+    log(await ev(`$("#mvm").hidden&&__mv.a===__mv.t[2]&&__mvLoads===${l0}`),sz+" menu Make audio / main works, no reload");
+    await ev(`mvShow();__mv.f=__mv.t[2];mvEl.focus();0`); await hold("Return",800); for(let i=0;i<5;i++)await key("Down"); await key("Return"); await sleep(600);
+    log(await ev(`$("#mvm").hidden&&__mv.t.length===2&&__mvLoads===${l0}`),sz+" menu Remove drops the tile, others not reloaded");
+    log(await ev(`!document.querySelector("#mvb [data-a=zm],#mvb [data-a=au],#mvb [data-a=fd],#mvb [data-a=sw],#mvb [data-a=rm]")&&!!document.querySelector("#mvb [data-a=lay],#mvb [data-a=ap],#mvb [data-a=sc]")`),sz+" per-tile buttons are gone from the overlay, layout/zoom-all/scores stay");
+    // Full screen: this tile's video + hls become the single player, others destroyed, no reload
+    await ev(`mvShow();__mv.f=__mv.t[1];mvEl.focus();window.__fv=__mv.t[1].v;window.__fh=__mv.t[1].hls;window.__fo=__mv.t[0].hls;window.__ft=__mv.t[1].g.title;window.__fl=__mvLoads;0`); await hold("Return",800); await key("Return"); await sleep(1500);
+    log(await ev(`!mvOn()&&__mv.t.length===0&&$("#pl").classList.contains("on")&&!$("#pl").classList.contains("mvh")&&$("#v")===__fv&&hls===__fh&&__mvLoads===__fl&&cur.title===__ft&&cur.feed.u===__fh.url&&!$("#v").muted&&$("#v").readyState>2&&!$("#v").paused&&__fo.media===null&&document.querySelectorAll("#mv video").length===0&&document.querySelectorAll("#pl video").length===1`),sz+" menu Full screen: multiview closed, single player has the same video + hls (no reload), other tiles destroyed: "+await ev(`JSON.stringify([!mvOn(),$("#v")===__fv,hls===__fh,__mvLoads-__fl,cur.title===__ft,__fo.media===null,$("#v").readyState])`));
+    await ev(`nemBack();nemBack();0`); await sleep(300); log(await ev(`!$("#pl").classList.contains("on")`),sz+" Back in the single player behaves normally");
+    await ev(`stop();mvClose();window.games=window.__g9;0`); await sleep(300);
+    // ---- remembered feed per game: pick feed 2, close, reopen -> feed 2 loads (multiview and single player) ----
+    await ev(`localStorage.removeItem("feedMem");window.__f2=feedsFor;window.feedsFor=g=>[g.c,{n:"Alt feed M",u:"http://127.0.0.1:47191/g1/index.m3u8",g:"y"}];mvAdd(__t(0));0`); await sleep(4500);
+    log(await ev(`__mv.t[0].c.n==="Test feed 0"&&__mv.t[0].v.readyState>2`),sz+" feed memory: a new game starts on the normal first feed");
+    await ev(`mvFeed(__mv.t[0],1)`); await sleep(4500); await ev(`mvClose()`); await sleep(300);
+    await ev(`mvAdd(__t(0));0`); await sleep(4500);
+    log(await ev(`__mv.t[0].c.n==="Alt feed M"&&__mv.t[0].v.readyState>2&&!!JSON.parse(localStorage.getItem("feedMem"))`),sz+" feed memory: multiview reopen starts on the remembered feed 2");
+    await ev(`mvClose();0`); await sleep(300);
+    await ev(`play(__t(0));0`); await sleep(5000);
+    log(await ev(`cur.feed.n==="Alt feed M"&&hls&&$("#v").readyState>2`),sz+" feed memory: single player opens on the remembered feed");
+    await ev(`openMenu("feed");document.querySelector('#pmenu button[data-f="0"]').click();0`); await sleep(300); await ev(`stop();0`); await sleep(300);
+    await ev(`play(__t(0));0`); await sleep(1500);
+    log(await ev(`cur.feed.n==="Test feed 0"`),sz+" feed memory: Feed menu change in single player updates it");
+    await ev(`stop();window.feedsFor=window.__f2;0`); await sleep(300);
+    // ---- score bar ----
+    await ev(`window.__sg0=games;window.__sf0=feedsFor;window.feedsFor=g=>[g.c];scLoaded=1;
+      window.__sbg=n=>({live:Array.from({length:n},(_,i)=>{const g=__t(i%4),k=i%3;g.title="SB"+i+" at X";g.aw="A"+i;g.hm="H"+i;g.st=Date.now()+(i-n)*36e5/Math.max(1,n/4);g.t=[{c:"#c33"},{c:"#36c"}];
+        g.sc=k===1&&i>1?{score:"2 - 1",note:"FINAL",over:true}:{score:(i%4)+" - "+(i%2),note:"P2 12:34",over:false};return g}).concat([{...__t(0),title:"SBUP at X",aw:"UA",hm:"UH",st:Date.now()+3*36e5,t:[{},{}],sc:null}]),later:[]});
+      window.games=()=>__sbg(__N);__N=4;sbOn=true;0`);
+    await ev(`play(games().live[0]);0`); await sleep(5000);
+    await ev(`document.getElementById("pl").classList.add("hide");sbSync();sbRefresh();0`); await sleep(500);
+    const sbm=()=>ev(`(()=>{const pl=document.getElementById("pl"),b=document.getElementById("sbar"),R=b.getBoundingClientRect(),P=pl.getBoundingClientRect(),it=[...b.querySelectorAll(".sbi")].map(e=>e.getBoundingClientRect()),vis=it.filter(r=>r.right>R.left+1&&r.left<R.right-1),
+      ov=[];for(let i=0;i<it.length;i++)for(let j=i+1;j<it.length;j++){const a=it[i],c=it[j];if(a.left<c.right-.5&&c.left<a.right-.5&&a.top<c.bottom-.5&&c.top<a.bottom-.5)ov.push(i+"/"+j)}
+      const ins=[...b.querySelectorAll(".sbi")].every(e=>{const r=e.getBoundingClientRect(),q=[...e.children].filter(x=>x.className!=="skin");return q.every(c=>{const s=c.getBoundingClientRect();return s.left>=r.left-.5&&s.right<=r.right+.5&&s.top>=r.top-.5&&s.bottom<=r.bottom+.5})}),
+      fs=Math.min(...[...b.querySelectorAll(".nt")].map(e=>parseFloat(getComputedStyle(e).fontSize)));
+      return {n:it.length,h:R.height,ph:P.height,top:R.top,op:+getComputedStyle(b).opacity,ov,ins,fs,sw:b.scrollWidth,cw:b.clientWidth,minw:Math.min(...it.map(r=>r.width)),tops:it.every(r=>r.top>=R.top-.5&&r.bottom<=R.bottom+.5)}})()`);
+    let m=await sbm();
+    log(Math.abs(m.h-m.ph*.08)<=1.5&&m.top===0&&m.op===1,sz+" score bar: height "+m.h+" = 8% of player "+m.ph+", top, visible when UI hidden");
+    for(const N of [1,4,8,16]){await ev(`__N=${N};sbRefresh();0`);await sleep(300);m=await sbm();
+      const want=m.n===N+1; // N games + one upcoming
+      log(want&&m.ov.length===0&&m.ins&&m.tops&&m.fs>=9&&(m.sw<=m.cw+1||m.minw>=100),sz+" score bar N="+(N+1)+" games: no overlap, inside, text "+m.fs+"px, scroll="+(m.sw>m.cw+1)+" item min width "+Math.round(m.minw))}
+    await shot("scorebar-16"); await ev(`__N=4;sbRefresh();0`); await sleep(300); await shot("scorebar-4");
+    await ev(`show();0`); await sleep(500); const ui2=await ev(`(()=>{const o=e=>+getComputedStyle(document.querySelector(e)).opacity;return {bar:o("#sbar"),top:o("#ptop"),ctl:o("#pctl"),pe:getComputedStyle(document.getElementById("sbar")).pointerEvents}})()`);
+    log(ui2.bar===0&&ui2.top===1&&ui2.ctl===1&&ui2.pe==="none",sz+" score bar fades out when the player UI shows: "+JSON.stringify(ui2));
+    await ev(`document.getElementById("bsc").click();0`); await sleep(300);
+    log(await ev(`!sbOn&&localStorage.getItem("scoreBar")==="false"&&!$("#sbar").classList.contains("on")`),sz+" Scores button turns it off and remembers"); await ev(`document.getElementById("bsc").click();0`);
+    log(await ev(`sbOn&&localStorage.getItem("scoreBar")==="true"&&$("#sbar").classList.contains("on")`),sz+" Scores button turns it on and remembers");
+    // Change game -> Right -> OK; Back cancels; current game does not reload
+    await ev(`window.__h0=hls;window.__v0=$("#v");$("#bcg").click();0`); await sleep(500);
+    log(await ev(`SBP&&+getComputedStyle($("#sbar")).opacity===1&&+getComputedStyle($("#pctl")).opacity===0&&document.activeElement.classList.contains("cur")&&document.activeElement.dataset.t===cur.title`),sz+" Change game shows the bar focused on the current game");
+    await key("Right"); log(await ev(`document.activeElement.dataset.t==="SB1 at X"`),sz+" Right moves to the next live game");
+    await key("Left"); await key("Left"); log(await ev(`document.activeElement.dataset.t==="SB0 at X"`),sz+" Left stops at the first game");
+    await ev(`nemBack()`); await sleep(300); log(await ev(`!SBP&&cur.title==="SB0 at X"&&hls===__h0&&$("#v")===__v0`),sz+" Back cancels, current video untouched");
+    await ev(`$("#bcg").click();0`); await sleep(300); await key("Return"); await sleep(300);
+    log(await ev(`!SBP&&cur.title==="SB0 at X"&&hls===__h0`),sz+" OK on the current game closes the picker without reloading");
+    await ev(`$("#bcg").click();0`); await sleep(300); await key("Right"); await key("Return"); await sleep(5000);
+    log(await ev(`cur.title==="SB1 at X"&&hls!==__h0&&hls&&$("#v").readyState>2&&!SBP`),sz+" Change game -> Right -> OK switches to that game and it plays");
+    await ev(`$("#bcg").click();0`); await sleep(300);
+    log(await ev(`(()=>{const o=document.querySelector(".sbi.off"),n=document.querySelectorAll(".sbi").length;return !!o&&o.dataset.t==="SBUP at X"&&o.getAttribute("aria-disabled")==="true"})()`),sz+" the not-live game is shown disabled");
+    await ev(`window.__h1=hls;document.querySelector(".sbi.off").click();0`); await sleep(400);
+    log(await ev(`cur.title==="SB1 at X"&&hls===__h1&&SBP`),sz+" clicking a disabled game does nothing");
+    await ev(`document.querySelector('.sbi[data-t="SB0 at X"]').click();0`); await sleep(5000);
+    log(await ev(`cur.title==="SB0 at X"&&hls!==__h1&&$("#v").readyState>2&&!SBP`),sz+" mouse click on a game switches to it");
+    await ev(`$("#pl").classList.add("hide");0`); await sleep(500); await shot("scorebar-switched");
+    await ev(`stop();window.games=window.__sg0;window.feedsFor=window.__sf0;sbOn=false;sbSync();0`); await sleep(200);
     w.destroy();
   }
   console.log(fails?"FAILS "+fails:"FAILS 0"); app.exit(fails?1:0);

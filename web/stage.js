@@ -8,7 +8,7 @@ const f=path.join(O,"index.html"); let s=fs.readFileSync(f,"utf8");
 const sub=(a,b)=>{if(!s.includes(a))throw new Error("not found: "+a.slice(0,50));s=s.replace(a,()=>b)};
 sub('const GURL=window.Android?"https://guide.nemtv.local/index.html":"guide/index.html";','const GURL="guide/index.html";'); // guide is served at /guide/ here
 // Canada Stremio is the main feed: for a game with a Stremio listing, don't start a playlist feed first; the Canadian addon feed leads (setFeed on svFeeds). No Stremio result = falls back to feeds[0].
-sub('if(feeds[0])setFeed(feeds[0]); else msgP("Finding feeds...","full");','if(feeds[0]&&!g.sid)setFeed(feeds[0]); else msgP("Finding feeds...","full");');
+sub('if(feeds[0])setFeed(fmPick(g,feeds)); else msgP("Finding feeds...","full");','if(feeds[0]&&!g.sid)setFeed(fmPick(g,feeds)); else msgP("Finding feeds...","full");');
 fs.writeFileSync(path.join(O,"app.html"),s); fs.rmSync(f);
 // index.html = wrapper: wide TV windows run the 960x540 design in an iframe scaled to fit (like Electron's zoom factor: media queries + innerWidth inside see the TV size); phone/tablet/small windows run it 1:1
 fs.writeFileSync(f,`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NEMTV</title>

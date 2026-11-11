@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T17:00:00-05:00",
+ "updated": "2026-11-11T09:00:01-05:00",
  "teams": {
   "BOS": {
    "name": "Boston Bruins",
@@ -378,7 +378,7 @@
    "coach": "Jim Hiller",
    "gm": "John Chayka",
    "captain": 8479318,
-   "linesAsOf": "DailyFaceoff Nov 10",
+   "linesAsOf": "DailyFaceoff Nov 11",
    "lines": [
     [
      8484158,
@@ -1084,7 +1084,7 @@
    "coach": "Rick Bowness",
    "captain": null,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 9",
+   "linesAsOf": "DailyFaceoff Nov 11",
    "lines": [
     [
      8482720,
@@ -1092,9 +1092,9 @@
      8482660
     ],
     [
-     8477501,
+     8481716,
      8484166,
-     8481716
+     8477501
     ],
     [
      8482705,
@@ -1102,9 +1102,9 @@
      8479671
     ],
     [
+     8479066,
      8485469,
-     8478904,
-     8479066
+     8478904
     ]
    ],
    "pairs": [
@@ -1329,7 +1329,7 @@
    "coach": "Jared Bednar",
    "captain": 8476455,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 10",
+   "linesAsOf": "DailyFaceoff Nov 11",
    "lines": [
     [
      8477476,
@@ -1478,7 +1478,7 @@
    "coach": "Todd McLellan",
    "captain": null,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 10",
+   "linesAsOf": "DailyFaceoff Nov 11",
    "lines": [
     [
      8479337,
@@ -1492,8 +1492,8 @@
     ],
     [
      8479992,
-     8477456,
-     8483464
+     8483464,
+     8477456
     ],
     [
      8478891,
@@ -1503,11 +1503,11 @@
    ],
    "pairs": [
     [
-     8475279,
+     8482171,
      8481542
     ],
     [
-     8482171,
+     8475279,
      8475753
     ],
     [
@@ -1605,8 +1605,8 @@
     ]
    ],
    "goalies": [
-    8482221,
-    8477465
+    8477465,
+    8482221
    ],
    "out": [
     8483455,
@@ -1670,7 +1670,7 @@
    "coach": "Paul Maurice",
    "captain": 8477493,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 10",
+   "linesAsOf": "DailyFaceoff Nov 11",
    "lines": [
     [
      8480801,
@@ -1841,7 +1841,7 @@
    "coach": "John Hynes",
    "captain": 8474716,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 10",
+   "linesAsOf": "DailyFaceoff Nov 11",
    "lines": [
     [
      8478864,
@@ -1867,11 +1867,11 @@
    "pairs": [
     [
      8480800,
-     8474716
+     8476463
     ],
     [
-     8476874,
-     8476463
+     8474716,
+     8476874
     ],
     [
      8482641,
@@ -1926,7 +1926,7 @@
    "coach": "Martin St. Louis",
    "captain": 8480018,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 9",
+   "linesAsOf": "DailyFaceoff Nov 11",
    "lines": [
     [
      8481540,
@@ -2111,8 +2111,8 @@
     ]
    ],
    "goalies": [
-    8477424,
-    8481020
+    8481020,
+    8477424
    ],
    "out": [
     8476539,
@@ -2271,8 +2271,8 @@
     ]
    ],
    "goalies": [
-    8482193,
-    8476914
+    8476914,
+    8482193
    ],
    "out": [
     8485957,
@@ -2324,7 +2324,7 @@
    "coach": "Travis Green",
    "captain": 8478469,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 9",
+   "linesAsOf": "DailyFaceoff Nov 11",
    "lines": [
     [
      8476393,
@@ -2483,7 +2483,7 @@
    "coach": "Dan Muse",
    "captain": 8471675,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 8",
+   "linesAsOf": "DailyFaceoff Nov 11",
    "lines": [
     [
      8471215,
@@ -2491,19 +2491,19 @@
      8476483
     ],
     [
-     8478438,
+     8482475,
      8485414,
-     8482475
+     8481582
     ],
     [
-     8483808,
-     8482148,
+     8482758,
+     8478438,
      8479638
     ],
     [
      8480980,
      8481481,
-     8481582
+     8483487
     ]
    ],
    "pairs": [
@@ -2521,11 +2521,10 @@
     ]
    ],
    "goalies": [
-    8481668,
-    8483703
+    8483703,
+    8481668
    ],
    "out": [
-    8482758,
     8481725,
     8475810,
     8477845
@@ -2732,7 +2731,7 @@
    "coach": "Jim Montgomery",
    "captain": 8480023,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 10",
+   "linesAsOf": "DailyFaceoff Nov 11",
    "lines": [
     [
      8482077,
@@ -3201,7 +3200,7 @@
    "coach": "Spencer Carbery",
    "captain": 8471214,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 9",
+   "linesAsOf": "DailyFaceoff Nov 11",
    "lines": [
     [
      8477949,

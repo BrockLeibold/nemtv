@@ -964,7 +964,7 @@ function play(g,list){
       if(me0.feeds[0])setFeed(fmPick(me0,me0.feeds)); else msgP("No feed found for this game.","fail")},
       tm=setTimeout(()=>fin([]),6e3);
     svFeeds(g.sid,f=>{if(done&&f&&f.length&&cur===me0&&$("#pl").classList.contains("on")){ // late addon answer after the fallback started: add feeds, keep what is playing
-        const have=new Set(me0.feeds.map(x=>x.u)),add=f.filter(x=>!have.has(x.u)&&!FR.test(x.n)); if(add.length){me0.feeds.unshift(...add);$("#bfeed").textContent=me0.feed.n+"  ("+(me0.feeds.indexOf(me0.feed)+1)+"/"+me0.feeds.length+")"}
+        const have=new Set(me0.feeds.map(x=>x.u)),add=f.filter(x=>!have.has(x.u)&&!FR.test(x.n)); if(add.length){const all=svOrder(me0.feeds,add);me0.feeds.length=0;me0.feeds.push(...all);$("#bfeed").textContent=me0.feed.n+"  ("+(me0.feeds.indexOf(me0.feed)+1)+"/"+me0.feeds.length+")"}
       } else fin(f)});
   } else if(feeds[0])setFeed(fmPick(g,feeds)); else msgP("Finding feeds...","full");
   $("#bsc").hidden=$("#bcg").hidden=!g.title; sbSync();

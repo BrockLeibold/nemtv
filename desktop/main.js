@@ -9,7 +9,7 @@ const srv=http.createServer((q,r)=>{
 function start(){srv.once("error",e=>{if(e.code==="EADDRINUSE")srv.listen(0,"127.0.0.1")}); srv.listen(47099,"127.0.0.1")}
 app.whenReady().then(()=>{
   start(); srv.on("listening",()=>{
-    const w=new BrowserWindow({width:1280,height:720,backgroundColor:"#0F0E11",autoHideMenuBar:true,title:"NEMTV",icon:path.join(__dirname,"icon.png"),
+    const w=new BrowserWindow({width:1280,height:720,...(process.env.NEMTV_TEST?{opacity:0,skipTaskbar:true}:{}),backgroundColor:"#0F0E11",autoHideMenuBar:true,title:"NEMTV",icon:path.join(__dirname,"icon.png"),
       webPreferences:{preload:path.join(__dirname,"preload.js"),contextIsolation:false,webSecurity:false,autoplayPolicy:"no-user-gesture-required"}});
     const fit=()=>{const [cw,ch]=w.getContentSize(); w.webContents.setZoomFactor(Math.max(.3,Math.min(cw/960,ch/540)))}; // fit both ways: wide = more room sideways, tall = more room down
     w.on("resize",fit); w.webContents.on("did-finish-load",fit);
@@ -18,6 +18,7 @@ app.whenReady().then(()=>{
       else if(i.key==="Escape"){e.preventDefault();w.webContents.executeJavaScript("typeof nemBack==='function'&&nemBack()")}});
     w.on("app-command",(e,c)=>{if(c==="browser-backward")w.webContents.executeJavaScript("nemBack()")});
     w.loadURL("http://127.0.0.1:"+srv.address().port+"/");
+    if(process.env.NEMTV_TEST)w.webContents.setAudioMuted(true); // tests: hidden + muted (Brock)
     if(process.env.NEMTV_TEST)w.webContents.once("did-finish-load",async()=>{ // NEMTV_TEST=<dir> NEMTV_PAGES=home,guide: runs overlap.js on each page at many window shapes -> report.txt (+pngs)
       const chk=fs.readFileSync(path.join(__dirname,"overlap.js"),"utf8").replace(/^\s*\/\/.*$/mg,""),out=[],NL=String.fromCharCode(10),pages=(process.env.NEMTV_PAGES||"home").split(","),Q=JSON.stringify,sleep=t=>new Promise(r=>setTimeout(r,t)),ev=c=>w.webContents.executeJavaScript(c).catch(e=>{fs.appendFileSync(path.join(process.env.NEMTV_TEST,"errors.txt"),e.message+" :: "+c.slice(0,200)+String.fromCharCode(10));return ["FAIL eval-error "+e.message.slice(0,60)]});
       const SIZES=[[960,540],[1280,720],[1920,1080],[2000,833],[2560,1080],[3440,1440],[1147,1435],[800,1280],[600,900],[1024,600],[800,500],[640,360],[1366,768],[1100,1100],[480,960]];

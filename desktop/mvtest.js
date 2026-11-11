@@ -1,6 +1,7 @@
 // Multiview visual + behaviour test (real Chromium). Needs `node ../web/stage.js` and 4 multi-level HLS test sources in $MV_HLS/g0..g3/index.m3u8.
 // usage: MV_HLS=dir MV_OUT=dir npx electron mvtest.js [WxH ...]   -> writes <out>/<name>_<WxH>.png and prints PASS/FAIL lines (exit 1 on FAIL)
 const {app,BrowserWindow}=require("electron"),http=require("http"),fs=require("fs"),path=require("path");
+app.on("web-contents-created",(e,wc)=>wc.setAudioMuted(true)); // audio-muted-always: tests never make sound, windows stay hidden (Brock)
 const A=path.join(__dirname,"..","web","app"),HL=path.resolve(process.env.MV_HLS),OUT=process.env.MV_OUT||path.join(__dirname,"shots","mv");
 const MT={".html":"text/html",".js":"application/javascript",".css":"text/css",".json":"application/json",".png":"image/png",".jpg":"image/jpeg",".svg":"image/svg+xml",".ttf":"font/ttf",".woff2":"font/woff2",".m3u8":"application/vnd.apple.mpegurl",".ts":"video/mp2t"};
 let masters=0; const serve=(root,cnt)=>http.createServer((q,r)=>{let p=decodeURIComponent(q.url.split("?")[0]);if(p==="/")p="/index.html";const f=path.normalize(path.join(root,p));
@@ -15,7 +16,7 @@ app.whenReady().then(async()=>{
   const sizes=process.argv.slice(2).filter(a=>/^\d+x\d+$/.test(a)); if(!sizes.length)sizes.push("960x540");
   for(const sz of sizes){
     const [W,H]=sz.split("x").map(Number), phone=W<700; masters=0;
-    const w=new BrowserWindow({width:W,height:H,useContentSize:true,show:true,frame:false,backgroundColor:"#000",webPreferences:{contextIsolation:false,webSecurity:false,zoomFactor:1,backgroundThrottling:false}});
+    const w=new BrowserWindow({width:W,height:H,useContentSize:true,show:true,opacity:0,skipTaskbar:true,frame:false,backgroundColor:"#000",webPreferences:{contextIsolation:false,webSecurity:false,zoomFactor:1,backgroundThrottling:false}});
     w.setContentSize(W,H); if(process.env.MV_DEBUG)w.webContents.on("console-message",(e,l,m)=>console.log("CONSOLE",l,String(m).slice(0,200))); const ev=js=>w.webContents.executeJavaScript(js), shot=async n=>{const im=await w.webContents.capturePage();fs.writeFileSync(path.join(OUT,n+"_"+sz+".png"),im.toPNG())};
     const hold=async(k,ms)=>{w.webContents.sendInputEvent({type:"keyDown",keyCode:k});await sleep(ms);w.webContents.sendInputEvent({type:"keyUp",keyCode:k});await sleep(200)};
     const key=async k=>{w.webContents.sendInputEvent({type:"keyDown",keyCode:k});w.webContents.sendInputEvent({type:"keyUp",keyCode:k});await sleep(120)};

@@ -664,6 +664,7 @@ function feedsFor(g){ // strict: NHL network list for this game, checked against
 let svBase="", svMap={}, svCache={}, svVer=0, svN=0; // pair "A,B" -> [{id,t,live}]; meta id -> {t,f}
 const svNrm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]/g,"");
 const svAb=s=>{const k=svNrm(s),t=NHL.find(t=>k.endsWith(svNrm(t[1].match(/(Maple Leafs|Blue Jackets|Red Wings|Golden Knights|\S+)$/)[1])));return t&&t[0]}; // "LA Kings", "Montreal Canadiens", "St. Louis Blues" -> abbrev
+const svFr=x=>/TVA|RDS|FR\s*:|French/i.test(x.n), svCA=x=>/CA\s*(EN\s*)?:|Sportsnet|TSN/i.test(x.n)&&!svFr(x);
 function svGet(p,cb){const done=t=>{let o=null;try{o=JSON.parse(t)}catch(x){}cb(o)};
   if(window.Android&&Android.get){const f="gotSv"+(++svN);window[f]=(t,e)=>{delete window[f];done(e?"":t)};Android.get(svBase+p,f)}else fetch(svBase+p).then(r=>r.text()).then(done).catch(()=>done(""))}
 function svLoad(){if(!svBase)return;
@@ -680,7 +681,7 @@ function svId(g){const l=svMap[[g.aw,g.hm].sort()];if(!l||(g.sc&&g.sc.over))retu
 function svFeeds(id,cb){const c=svCache[id];if(c&&Date.now()-c.t<12e4)return cb(c.f);
   svGet("/stream/sport/"+encodeURIComponent(id)+".json",o=>{if(!o||!o.streams)return cb([]);
     const f=o.streams.filter(s=>s.url&&!/^\s*tip\b|external player/i.test((s.name||"")+" "+(s.title||""))).map(s=>({n:String(s.name||"Stream").replace(/^Leaf \([^)]*\)\s*[·-]\s*/,""),u:s.url,g:"Stremio"})),
-      r=c=>/TVA|RDS|FR:|French/i.test(c.n)?3:/CA:/i.test(c.n)?0:/Sportsnet|ESPN\+/i.test(c.n)?1:2; // Canadian English first, then Sportsnet/ESPN+, French last
+      r=c=>(svFr(c)?5:svCA(c)?0:/^NHL/i.test(c.n)?1:/^US\s*:/i.test(c.n)?2:/ESPN\+/i.test(c.n)?3:4)+(/^Backup/i.test(c.n)?.5:0); // CA English (TSN/Sportsnet), NHL league feed, US networks, US ESPN+, other, French last
     f.sort((a,b)=>r(a)-r(b)); svCache[id]={t:Date.now(),f}; log("stremio streams",f.length); cb(f)})}
 function bfName(g){ // name the Stremio addon feed when the game has one (warm cache), else "Stream addon"; otherwise the channel
   if(!g.sid)return baseName(g.c.n); const c=svCache[g.sid],f=c&&c.f&&c.f.find(x=>!/TVA|RDS|FR:|French/i.test(x.n)); return f?baseName(f.n):"Stream addon"}
@@ -940,7 +941,7 @@ function setFeed(c){
   }else{v.src=c.u;v.play().catch(playErr)}
 }
 function svOrder(feeds,f){ // addon feeds first (Canadian English, other English), then the playlist feeds, French last (shared by play() and multiview)
-  const have=new Set(feeds.map(x=>x.u)),add=(f||[]).filter(x=>!have.has(x.u)),en=x=>!/TVA|RDS|FR:|French/i.test(x.n),isCA=x=>/CA:/i.test(x.n);
+  const have=new Set(feeds.map(x=>x.u)),add=(f||[]).filter(x=>!have.has(x.u)),en=x=>!svFr(x),isCA=svCA;
   return [...add.filter(x=>en(x)&&isCA(x)),...add.filter(x=>en(x)&&!isCA(x)),...feeds.filter(en),...add.filter(x=>!en(x)),...feeds.filter(x=>!en(x))]}
 function addRecent(c){recent=[c.n,...recent.filter(n=>n!==c.n)].slice(0,12);sv("recent",recent)}
 function pttSet(g){ // player title: both teams or the channel name

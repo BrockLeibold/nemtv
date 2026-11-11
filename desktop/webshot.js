@@ -3,6 +3,7 @@
 // job: {out:"dir", shots:[{url:"/", size:"390x844", mobile:true, steps:[{name, pre, wait, frame:true|false}]}]}
 // per step: eval `pre` in the top window, wait, audit page (+guide iframe #gf), save <out>/<name>_<WxH>.png, append audit line to <out>/audit.txt
 const {app,BrowserWindow}=require("electron"),http=require("http"),fs=require("fs"),path=require("path");
+app.on("web-contents-created",(e,wc)=>wc.setAudioMuted(true)); // audio-muted-always: tests never make sound, windows stay hidden (Brock)
 const A=path.join(__dirname,"..","web","app"),T={".html":"text/html",".js":"application/javascript",".css":"text/css",".json":"application/json",".svg":"image/svg+xml",".png":"image/png",".ttf":"font/ttf",".jpg":"image/jpeg",".webp":"image/webp"};
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(q.url.split("?")[0]);if(p==="/")p="/index.html";if(p==="/guide/"||p==="/guide")p="/guide/index.html";
   const f=path.normalize(path.join(A,p));if(!f.startsWith(A)||!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.writeHead(404);return r.end()}
@@ -42,7 +43,7 @@ app.whenReady().then(async()=>{
   const job=JSON.parse(fs.readFileSync(process.env.WS_JOB,"utf8")),out=job.out;fs.mkdirSync(out,{recursive:true});
   for(const s of job.shots){
     const [W,H]=s.size.split("x").map(Number);
-    const w=new BrowserWindow({width:W,height:H,useContentSize:true,show:true,frame:false,backgroundColor:"#0F0E11",webPreferences:{contextIsolation:false,webSecurity:false,autoplayPolicy:"no-user-gesture-required",zoomFactor:1}});
+    const w=new BrowserWindow({width:W,height:H,useContentSize:true,show:true,opacity:0,skipTaskbar:true,frame:false,backgroundColor:"#0F0E11",webPreferences:{contextIsolation:false,webSecurity:false,autoplayPolicy:"no-user-gesture-required",zoomFactor:1}});
     w.setContentSize(W,H);
     const wc=w.webContents;
     if(s.mobile)wc.setUserAgent("Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Mobile Safari/537.36");

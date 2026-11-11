@@ -1,10 +1,13 @@
+/* one focus ring (white + dark double ring, same token as the app) and TV safe area */
+:root{--ring:0 0 0 2px #0F0E11,0 0 0 5px #F2F0F4;--ring-in:inset 0 0 0 2px #0F0E11,inset 0 0 0 5px #F2F0F4;--safe-x:0px;--safe-y:0px}
+@media(min-width:900px) and (min-aspect-ratio:3/2){:root{--safe-x:48px;--safe-y:27px}}
 /* NEMTV guide "deck": each section is one full screen paged LEFT/RIGHT (no scrolling down); tabs at the top show where you are.
    Rules (docs/UI-RULES.md): one grid owns the screen; every control is the same height with equal left/right padding; spacing only from the 4/8/12 scale;
    every number sits next to its label; content is sized to its cell and deck.js shrinks it until nothing clips. */
 :root{--ch:28px;--g4:4px;--g8:8px;--g12:12px;--cp:12px}
 html,body{height:100%;overflow:hidden}
 #scroller{position:fixed;inset:0;overflow:hidden!important;padding:0!important}
-#scroller>.wrap{height:100%;max-width:none;margin:0;padding:var(--g4) var(--g12) var(--g8)!important;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:var(--g4)}
+#scroller>.wrap{height:100%;max-width:none;margin:0;padding:var(--g4) max(var(--g12),var(--safe-x)) max(var(--g8),var(--safe-y))!important;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:var(--g4)}
 footer,.jump,#gamesBtn,#teamView{display:none!important}
 #news .block-h,#roster .block-h,#team .block-h{display:none!important}
 
@@ -78,7 +81,7 @@ footer,.jump,#gamesBtn,#teamView{display:none!important}
 .lp::before{content:"";position:absolute;inset:0;background:var(--lg,none) -30cqh 50%/auto 120% no-repeat;opacity:.3;pointer-events:none;z-index:0}
 .lp>*{position:relative;z-index:1}
 .lp.empty{background:var(--surface);opacity:.4}
-.lp:focus{outline:3px solid #FF8A5B!important;outline-offset:-3px}
+.lp:focus{outline:none!important;box-shadow:var(--ring-in)!important}
 .lp .ph{width:100%;height:100%;border-radius:0;object-fit:cover;object-position:50% 12%;background:none;-webkit-mask-image:none;mask-image:none}
 .lp .tx{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;padding:0 4px 0 0;line-height:1}
 .lp .pp{display:block;text-align:center;margin-bottom:2px;font:800 clamp(11px,min(13cqh,8cqw),13px)/1 var(--font-sans);font-style:normal;letter-spacing:.06em;color:var(--tx,#fff)}
@@ -127,7 +130,7 @@ footer,.jump,#gamesBtn,#teamView{display:none!important}
 .rc .rr>div{display:grid;grid-auto-rows:minmax(0,34px);min-height:0;min-width:0;align-content:start;gap:2px}
 .rside{display:grid;grid-template-rows:minmax(0,auto) minmax(0,auto);gap:var(--g8);min-height:0;align-content:start}
 .pr2{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:28px minmax(0,1fr) auto;grid-template-rows:1fr 1fr;column-gap:var(--g8);align-items:center;padding:2px var(--g8) 2px 4px;min-height:0;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink)}
-.pr2:focus{box-shadow:inset 0 0 0 2px #FF8A5B!important}
+.pr2:focus{box-shadow:var(--ring-in)!important}
 .pr2 .ph{grid-row:1/3;width:26px;height:26px}
 .pr2 .nm{grid-column:2;grid-row:1;font:700 12px/1.1 var(--font-sans);white-space:nowrap;overflow:hidden;align-self:end}
 .pr2 .nm .cp{background:var(--ink);color:var(--bg);border-radius:5px;padding:1px 4px;font-size:9px;margin-left:var(--g4)}
@@ -159,7 +162,7 @@ footer,.jump,#gamesBtn,#teamView{display:none!important}
 #tenH{margin-top:var(--g4)!important}
 .mini{display:grid;grid-auto-rows:minmax(0,1fr);gap:2px;min-height:0;flex:1}
 .mrow{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:var(--g8);align-items:center;min-height:0;padding:1px var(--g4);border-radius:8px}
-.mrow:focus{box-shadow:inset 0 0 0 2px #FF8A5B}
+.mrow:focus{box-shadow:var(--ring-in)}
 .mrow .ph{width:22px;height:22px}
 .mrow b{font-size:11.5px;white-space:nowrap;overflow:hidden}
 .mrow em{font-style:normal;font-size:11px;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -257,7 +260,7 @@ footer,.jump,#gamesBtn,#teamView{display:none!important}
 .pq-nav{display:flex;gap:8px;align-items:center}
 .pq-btn{height:34px;min-width:34px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.4);color:#fff;font:700 12px/1 var(--font-sans,system-ui,sans-serif);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
 .pq-btn:hover{background:rgba(255,255,255,.14)}
-.pq-btn:focus-visible{outline:3px solid #FF8A5B;outline-offset:2px}
+.pq-btn:focus-visible{outline:none;box-shadow:var(--ring)}
 .pq-x{font-size:20px;padding:0;width:34px}
 .pq-top{position:relative;flex:1 1 auto;min-height:0}
 .pq-art{position:absolute;top:0;right:0;bottom:0;width:50%;overflow:hidden}
@@ -320,7 +323,7 @@ footer,.jump,#gamesBtn,#teamView{display:none!important}
 .cdb{flex:1 1 auto;align-items:flex-start;justify-content:space-between;gap:4px;padding:4px 6px 0;min-height:18px}
 .cd.game .cdb{flex:none}
 .cg{flex:1 1 auto;flex-direction:column;align-items:flex-start;gap:2px;padding:0 6px 4px}
-.cdb:focus-visible,.cg:focus-visible,.cr:focus-visible,.cs:focus-visible,.calnav:focus-visible{outline:3px solid #FF8A5B;outline-offset:-3px}
+.cdb:focus-visible,.cg:focus-visible,.cr:focus-visible,.cs:focus-visible,.calnav:focus-visible{outline:none;box-shadow:var(--ring-in)}
 .cd .dn{font:800 12px/1 var(--font-sans);opacity:.85}
 .cd img{height:clamp(14px,3.6vh,26px);width:auto}
 .cd .cl{font-weight:700}

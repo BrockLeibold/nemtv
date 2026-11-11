@@ -41,3 +41,12 @@
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", add); else add();
 })();
+
+// web only: Back. Escape / Backspace (outside inputs) / browser-back / TV remote back keys call the same nemBack the Android bridge uses
+window.addEventListener("keydown", function (e) { // window = after the app's own document handlers
+  var t = e.target, typing = t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable);
+  var back = e.key === "Escape" || e.key === "BrowserBack" || e.key === "GoBack" || e.keyCode === 4 || e.keyCode === 10009 || e.keyCode === 461 || (e.key === "Backspace" && !typing);
+  if (!back || e.defaultPrevented) return;
+  e.preventDefault();
+  if (typeof window.nemBack !== "function" || !window.nemBack()) history.back();
+});

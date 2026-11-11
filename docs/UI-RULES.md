@@ -27,12 +27,12 @@ at 15 window shapes (`NEMTV_TEST=<dir> NEMTV_PAGES=home,guide,...`). A change is
 11. **No floating numbers.** A number always sits next to its label or name (`#73 Teddy Blueger`, `Points`, `G A P`).
 12. **Every item says what it is.** Logo + name, photo + name, icon + word. Icon-only only for the Setup circle.
 13. **One red/accent thing per screen** (the item that needs attention); selected state is a ring, never a fill that hides the logo.
-14. **Minimum text 9px effective**, body 11px+. The test warns below 8.5px after any zoom.
+14. **Minimum text 10px effective**, body 12px, Live chips 12px, player labels 13px. The test warns below 8.5px after any zoom.
 
 ## Controller (D-pad) and mouse
 15. **Everything is reachable with the D-pad** and nothing traps focus. Left/Right at the edge of a section pages to the next one,
     Up from the first row reaches the top bar, Back closes the top layer first.
-16. **Focus is always visible** (3px coral ring, offset 2px so the clipping parent never hides it).
+16. **Focus is always visible**: one token everywhere (app and guide), `--ring` / `--ring-in` = dark 2px + white 3px double ring (readable on any fill, inset variant where a parent clips). Never `box-shadow:none` on a focusable, never a per-screen colour.
 17. **OK on a thing does one clear thing.** Desktop: first click selects, second opens (hero games).
 18. **Targets are at least 14px** in each direction (warned otherwise).
 
@@ -59,7 +59,7 @@ The TV rules above stay. Below 700px wide, 520px tall, or on 4:3 / portrait tabl
 - Test: `cd desktop; node ../web/stage.js; MV_HLS=<dir with g0..g3/index.m3u8> MV_OUT=<dir> npx electron mvtest.js 960x540 390x844` -> FAILS 0.
 
 ## Score bar (#sbar, single player and multiview)
-- Thin strip, 8% of the player height, pinned to the top (controls live at the bottom). Every NHL game today from `games().live` (same data + 20 s `pollScores` refresh as Home/Scores; no new source). Items reuse the pill tokens (`--o-a/--o-b` team colours, `.skin/.mesh`, `.done` grey, coral ring = current game) and share the width (`flex:1 0 112px`); too many = the strip scrolls sideways, the focused game stays centred. Text/logos use `cqh` of the bar (>= 9px).
+- Thin strip, 8% of the player height, pinned to the top (controls live at the bottom). Every NHL game today from `games().live` (same data + 20 s `pollScores` refresh as Home/Scores; no new source). Items reuse the pill tokens (`--o-a/--o-b` team colours, `.skin/.mesh`, `.done` grey, coral ring = current game) and share the width (`flex:1 0 112px`); too many = the strip scrolls sideways, the focused game stays centred. Text/logos use `cqh` of the bar (>= 11px).
 - Visible only while the player / multiview UI is hidden (fades with `#pl.hide` / `#mv.hide`, `MutationObserver` -> `sbSync`) and only when the Scores button is on (`localStorage scoreBar`). Skeleton items while the first scores load (rule 25).
 - Change game (`#bcg`) = picker mode (`#sbar.pick`, `body.sbp`): UI hidden, bar shown and focused on the current game, Left/Right skip disabled games, OK/click switches (`sbGo` -> `play(g)`, same feed order), Back cancels, picking the current game does nothing. Disabled = not live (final, or more than 40 min to start) or no feed. In multiview the same bar picks the game for one tile (tile menu > Switch game; games already on screen are disabled); the old Swap picker stays reachable from code only.
 - Feed memory: the feed picked in a Feed menu (player or multiview tile) is saved per game (`feedMem`, normalized title + day, 2 days) and used when that game opens again if still available (`fmSet/fmPick`).
@@ -73,3 +73,12 @@ The TV rules above stay. Below 700px wide, 520px tall, or on 4:3 / portrait tabl
     - Replaced in place by the real render (same container, same size). Show only while actually loading: skeletons fade in after 150 ms (CSS animation delay), so a cache hit replaces them before they ever show.
     - Errors and empty results stay real messages ("Could not load the scores", "No NHL games on the board yet"), never a skeleton that never ends. Every loader sets a "done or failed" flag (`scLoaded/scFail`, `plDone`, `tmiL`, `nwsL`, `epgF`, `gdFail`).
     - Covers the app (boot, Home hero stats and team news, Scores, Live list/EPG/preview, Setup status, game popup, player buffering `#pbuf`, multiview tiles) and the guide (Overview, rail, News, Roster, Team, Games, box-score drawer, team switch).
+
+## TV design
+Full do/don't list: [tv-design/dos-donts.md](tv-design/dos-donts.md). Audit and fixes: [tv-design/audit.md](tv-design/audit.md).
+- **Safe area** on TV shapes (width >= 900px and aspect >= 3:2): `--safe-x:48px`, `--safe-y:27px` (5% of 960x540). Header, main, main.live, `.ptop`, `.ctl`, `#sbar`, `#gd` and the guide wrapper use `max(<old padding>, var(--safe-*))`. Phones and tablets get 0.
+- **Back on web**: `web/server/shim.js` maps Escape, Backspace (outside inputs), BrowserBack, GoBack and keyCodes 4 / 10009 / 461 to `window.nemBack()`, then `history.back()`.
+- **Header Down enters content on every tab** except Home and Guide (they have their own entry).
+- **Network**: the web-only score and standings fetches time out after 8 s (`FT()`); a failed game drawer shows a 16px message and a Try again button.
+- **No heavy blur** in the player buffer or the guide side panel (static gradient / solid fill instead); no `backdrop-filter` on full-screen panels.
+- Never `window.Android.x()` without `window.Android&&`.

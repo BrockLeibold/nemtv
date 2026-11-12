@@ -368,7 +368,7 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 #gbar .sp{flex:1}
 #gbar button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 /* Live page: one grid owns the screen (search, categories, info, list). Only the channel list scrolls, so nothing shows above it. Borders sit on one 4px grid */
-main.live{display:grid;grid-template-rows:auto auto minmax(0,1fr);overflow:hidden;padding:4px var(--pad-x) 0}
+main.live{display:grid;grid-template-rows:auto auto auto minmax(0,1fr);overflow:hidden;padding:4px max(28px,var(--safe-x)) 0}
 main.live::after{display:none}
 main.live .gs{margin:0 0 8px}
 main.live .chips.one{margin-bottom:8px}
@@ -498,15 +498,11 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 .ptop .pbtn:focus{box-shadow:var(--ring);border-color:var(--ink)}
 .gs input{min-height:var(--h-ctl)}
 .mask:not(:focus){-webkit-text-security:disc}
-.pill .mesh{background:var(--island)}.feat .mesh{background:var(--surface)}
-.pill .skin::after,.feat .skin::after{background:linear-gradient(90deg,var(--o-f1) 0 4px,transparent 4px calc(100% - 4px),var(--o-f2) calc(100% - 4px));opacity:1}
 .pill.cur{box-shadow:0 0 0 2px var(--ink-2)}.pill.cur:focus{box-shadow:var(--ring)}
 .grid.lg .pill.cur::before{content:"NOW SHOWING";position:absolute;top:3px;left:0;right:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--ink-2);z-index:1}
 .fn h3,.fn .hd,.fn .it,.nws .it,.nws .hd{font-size:11px}
 .fn .inj,.nws .inj{align-self:flex-start;font-size:11px;color:var(--ink-2);background:rgba(255,255,255,.1);border-radius:999px;padding:1px 8px}
 .fn .it i,.nws .it i{background:var(--ink-2)}
-.sr{background:var(--surface);box-shadow:inset 4px 0 0 var(--o-a),inset -4px 0 0 var(--o-b)}
-.sr.lv{box-shadow:inset 4px 0 0 var(--o-a),inset -4px 0 0 var(--o-b)}
 .sr.lv.fv{box-shadow:inset 0 0 0 2px var(--coral)}
 .sr:focus,.sr.lv:focus,.sr.lv.fv:focus{box-shadow:var(--ring)}
 .srn,.srg,.srg i{font-size:11px}.srn{min-width:96px}.srn .dot{margin-right:4px}
@@ -522,7 +518,6 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 .pmenu .pnote{padding:6px 14px;color:var(--muted)}
 /* Change game: wrapped top-pinned grid of big AWAY @ HOME items */
 .sbi .pk{display:none}
-.sbi .mesh{background:var(--island)}.sbi .skin::after{background:linear-gradient(90deg,var(--o-f1) 0 4px,transparent 4px calc(100% - 4px),var(--o-f2) calc(100% - 4px));opacity:1}
 /* Live: search + chips on one row, no empty info block, no guide column when there is no guide */
 .gtool{display:flex;gap:8px;align-items:center;margin:0 0 8px;min-width:0}.gtool .gs{flex:0 0 240px;margin:0}.gtool .chips{flex:1;min-width:0;margin:0}
 main.live .gtop{min-height:96px}
@@ -808,7 +803,7 @@ function pvSoon(c){ // starts 300ms after the focus settles, so fast scrolling l
       phls.on(Hls.Events.MANIFEST_PARSED,()=>PV.play().catch(()=>{}));phls.loadSource(c.u);phls.attachMedia(PV)}else{PV.src=c.u;PV.play().catch(()=>{})}
   },300)}
 PV.addEventListener("playing",()=>{const g=$("#gv");if(g&&tab==="live"&&pvKey)g.classList.add("on")});
-function gInfo(el){const box=$("#gi"); if(!box)return; if(!el){box.innerHTML="";return}
+function gInfo(el){const box=$("#gi"); if(!box)return; if(!el){box.innerHTML=`<div class="cn disp">Live TV</div><div class="sm">Move over a channel to see what is on.</div>`;return}
   const c=ch[+el.dataset.i]; if(!c)return; const rows=(EPG&&c.id&&EPG[c.id]||[]).slice().sort((a,b)=>a[0]-b[0]), t=Date.now();
   const pick=el.dataset.s?rows.find(x=>x[0]===+el.dataset.s):rows.find(x=>x[0]<=t&&x[1]>t), nx=pick&&rows.find(x=>x[0]>=pick[1]);
   box.innerHTML=`<div class="cn disp">${esc(baseName(c.n))}</div><div class="sm">${esc(c.g)}</div>`+(pick?`<div class="st">${esc(ttl(pick))}</div><div class="sm">${clk(pick[0])} - ${clk(pick[1])}${pick[0]<=t&&pick[1]>t?" &middot; on now":""}</div>`:`<div class="st">Live TV</div><div class="sm">${epgL()?SKI:"No guide data for this channel"}</div>`)+(nx?`<div class="nx">Next: ${esc(ttl(nx))} at ${clk(nx[0])}</div>`:"");
@@ -829,9 +824,8 @@ function guideList(vis){const q=gQ.trim().toLowerCase();
 function guideHTML(vis){
   const list=guideList(vis), end=gStart+36e5*3; LL=list;
   const day=new Date(gStart).toLocaleDateString([],{weekday:"short"});
-  let h=`<div class="gh"><div class="gcs">${day} &middot; &#9664; &#9654; time</div><div class="gt">${[0,1,2,3,4,5].map(i=>`<span style="left:${i/6*100}%">${clk(gStart+i*18e5)}</span>`).join("")}</div></div>`;
+  let h=`<div class="gh"><div class="gcs">${day} &middot; Left / Right for time</div><div class="gt">${[0,1,2,3,4,5].map(i=>`<span style="left:${i/6*100}%">${clk(gStart+i*18e5)}</span>`).join("")}</div></div>`;
   if(!list.length)return h+(plLoad()?skN(8,()=>'<div class="gr"><button class="gc focusable"><span class="chlogo"></span><b>Channel name</b></button><div class="gt"><button class="pg now focusable" style="left:2px;right:2px"><b>Live TV</b><small>x</small></button></div></div>'):`<div class="empty">${grp==="Favorites"?"No favorites yet. Press Menu on a channel to add one.":grp==="Recent"?"Nothing watched yet.":"No channels match."}</div>`);
-  if(!list.some(c=>EPG&&c.id&&EPG[c.id]&&EPG[c.id].length)&&!epgL())h=`<div class="gnone ne">No guide data. Showing channels only.</div>`+h;
   list.forEach(c=>{const i=ch.indexOf(c), rows=(EPG&&c.id&&EPG[c.id]?EPG[c.id].filter(x=>x[1]>gStart&&x[0]<end).sort((x,y)=>x[0]-y[0]):[]), t=Date.now();
     const blocks=rows.length?rows.map(x=>{const l=(Math.max(x[0],gStart)-gStart)/(end-gStart)*100,w=(Math.min(x[1],end)-Math.max(x[0],gStart))/(end-gStart)*100;
       return `<button class="pg focusable${x[0]<=t&&x[1]>t?" now":""}" data-i="${i}" data-s="${x[0]}" style="left:calc(${l}% + 2px);width:calc(${w}% - 4px)"><b>${esc(ttl(x))}</b><small>${clk(x[0])} - ${clk(x[1])}</small></button>`}).join("")
@@ -847,7 +841,7 @@ function render(){
   if(tab!=="live")pvStop();
   guideTab(tab==="guide");
   document.querySelectorAll("header [data-t]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===tab));
-  const m=$("#m"), vis=ch.filter(on); m.classList.toggle("live",tab==="live"&&!noCh());
+  const m=$("#m"), vis=ch.filter(on); m.classList.toggle("live",tab==="live");
   if(tab==="home"){
     const gm=games(); const rk=x=>x.sc&&x.sc.over?2:x.sc?0:1; G=gm.live.sort((a,b)=>rk(a)-rk(b)||(isFavG(a.aw,a.hm)?0:1)-(isFavG(b.aw,b.hm)?0:1)||a.st-b.st); L=gm.later;
     const favs=fav.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c)), rec=recent.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c));
@@ -872,7 +866,7 @@ function render(){
     const have=new Set(vis.map(catOf)), groups=["All","Favorites","Recent",...catList.filter(x=>have.has(x))];
     if(!groups.includes(grp))grp="All";
     if(!gStart||gStart<Date.now()-3*36e5)gStart=Math.floor(Date.now()/18e5)*18e5;
-    m.innerHTML=`<div class="gtool"><div class="gs"><input id="gs" class="focusable" type="search" placeholder="Search channels" value="${esc(gQ)}"></div><div class="chips one">${groups.map(g=>chip(g,g===grp,`data-grp="${esc(g)}"`)).join("")}</div></div><div class="gtop"><div class="gi" id="gi"></div><div class="gv" id="gv"><div class="pw" id="pw">Preview starts when a channel is focused</div></div></div><div id="gx">${guideHTML(vis)}</div>`;
+    m.innerHTML=`<div class="gs"><input id="gs" class="focusable" type="search" readonly placeholder="Search channels" value="${esc(gQ)}"></div><div class="chips one">${groups.map(g=>chip(g,g===grp,`data-grp="${esc(g)}"`)).join("")}</div><div class="gtop"><div class="gi" id="gi"></div><div class="gv" id="gv"><div class="pw" id="pw">Preview starts when a channel is focused</div></div></div><div id="gx">${guideHTML(vis)}</div>`;
     $("#gv").prepend(PV); gInfo(null);
   }else{
     m.innerHTML=`<h2 class="disp">Setup</h2><div class="chips">${[["s-pl","Playlist"],["s-tm","Teams &amp; sports"],["s-ch","Channels"]].map(j=>`<button class="chip focusable" data-jump="${j[0]}">${j[1]}</button>`).join("")}</div>
@@ -1487,7 +1481,7 @@ function catClick(b){const d=b.dataset, q=v=>'"'+CSS.escape(String(v))+'"', redo
 function centerRow(row){const sc=$("#gx"); if(!sc)return; const a=row.getBoundingClientRect(), b=sc.getBoundingClientRect(); sc.scrollTop+=(a.top+a.height/2)-(b.top+b.height/2)} // live list: focused channel sits mid-list; only #gx moves
 function focusScroll(el){if(el.closest(".hcar"))smoothTo($("#m"),0);else if(el.closest(".gs"))smoothTo($("#m"),0);else if(el.closest(".chips"))el.scrollIntoView({block:"nearest",inline:"nearest"});else if(el.closest(".gr"))centerRow(el.closest(".gr"));else if(el.closest(".grid,.cards"))alignRow(el);else el.scrollIntoView({block:"nearest"})}
 $("#m").addEventListener("input",e=>{if(e.target.id==="cc-q"){catQ=e.target.value;$("#ccl").innerHTML=catListHTML();return}if(e.target.id==="gs"){gQ=e.target.value;gRefresh()}});
-$("#m").addEventListener("keydown",e=>{if(e.key==="Enter"&&/^(u|cc-new|cc-ren)$/.test(e.target.id)){e.preventDefault();e.target.parentNode.querySelector("button").click();return}if(e.target.id==="cc-q"&&e.key==="ArrowDown"){e.preventDefault();const n=$("#ccl")&&$("#ccl").querySelector("button");if(n)n.focus();return}if(e.target.id==="gs"){if(e.key==="Enter"||e.key==="ArrowDown"){e.preventDefault();e.target.blur();const n=$("#m").querySelector(".chip")||$("#m").querySelector(".gc");if(n)n.focus()}else if(e.key==="ArrowUp"){e.preventDefault();const n=document.querySelector("header [aria-pressed=true]");if(n)n.focus()}}});
+$("#m").addEventListener("keydown",e=>{if(e.key==="Enter"&&/^(u|cc-new|cc-ren)$/.test(e.target.id)){e.preventDefault();e.target.parentNode.querySelector("button").click();return}if(e.target.id==="cc-q"&&e.key==="ArrowDown"){e.preventDefault();const n=$("#ccl")&&$("#ccl").querySelector("button");if(n)n.focus();return}if(e.target.id==="gs"&&e.target.readOnly&&e.key==="Enter"){e.preventDefault();e.target.readOnly=false;e.target.focus();return}if(e.target.id==="gs"){if(e.key==="Enter"||e.key==="ArrowDown"){e.preventDefault();e.target.blur();const n=$("#m").querySelector(".chip")||$("#m").querySelector(".gc");if(n)n.focus()}else if(e.key==="ArrowUp"){e.preventDefault();const n=document.querySelector("header [aria-pressed=true]");if(n)n.focus()}}});
 $("header").onclick=e=>{const b=e.target.closest("button");if(b)go(b.dataset.t)};
 $("#m").onclick=e=>{
   const go0=e.target.closest("[data-go]"); if(go0)return go(go0.dataset.go);
@@ -1531,4 +1525,7 @@ let gSig=""; const gSigOf=()=>{const g=games();return g.live.length+":"+g.later.
 setTimeout(()=>{gSig=gSigOf()},3000);
 setInterval(()=>{if((tab==="home"||tab==="live")&&!$("#pl").classList.contains("on")){const n=gSigOf();if(n!==gSig){gSig=n;rerender()}}},60000);
 
+// Live search: hover or D-pad focus does not enter it; OK or a click does (Brock 2026-11-12)
+document.addEventListener("click",e=>{if(e.target.id==="gs"&&e.target.readOnly){e.target.readOnly=false;e.target.focus()}},true);
+document.addEventListener("focusout",e=>{if(e.target.id==="gs")e.target.readOnly=true},true);
 </script></body></html>

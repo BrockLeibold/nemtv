@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T09:00:01-05:00",
+ "updated": "2026-11-12T17:00:01-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -129,9 +129,9 @@
     }
    ],
    "injuries": [
-    "Zack MacEwen (day-to-day)",
+    "Zack MacEwen (wrist, day-to-day)",
+    "Colton Sissons (IR)",
     "Morgan Rielly (day-to-day)",
-    "Colton Sissons (out)",
     "Kirill Marchenko (IR)",
     "Miles Wood (undisclosed, IR)",
     "Nick Blankenburg (undisclosed, IR)",
@@ -261,16 +261,23 @@
     }
    ],
    "injuries": [
-    "Alex Lyon (shoulder, IR)",
-    "Konsta Helenius (upper body, out)",
+    "Konsta Helenius (IR)",
     "Justin Danforth (upper body, IR)",
-    "Matt Grzelcyk (lower body, IR)"
+    "Matt Grzelcyk (lower body, IR)",
+    "Alex Lyon (IR)"
    ]
   },
   "CAR": {
    "headline": "The Hurricanes beat Chicago 9-2 on Saturday and leave for two games against Seattle in Finland.",
    "game": "Next: Thu Nov 12, 12:00 PM ET at SEA, Veikkaus Arena, Helsinki (NHLN, Prime Video, SN+, TVAS). Starter not announced.",
    "items": [
+    {
+     "title": "Finnish native Aho scores twice as first-place Hurricanes top Kraken 4-1 in Helsinki",
+     "summary": "— Sebastian Aho scored twice in front of the home crowd and the Carolina Hurricanes opened the NHL’s Global Series in the Finnish capital with a 4-1 victory over the Seattle Kraken on Thursday.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401891808",
+     "date": "2026-11-12"
+    },
     {
      "title": "Hurricanes play the Kraken after Martinook's 2-goal showing",
      "summary": "Carolina Hurricanes (14-3-2, in the Metropolitan Division) vs. Seattle Kraken (9-6-1, in the Pacific Division)",
@@ -308,7 +315,6 @@
     }
    ],
    "injuries": [
-    "William Carrier (day-to-day)",
     "Jordan Staal (IR)"
    ]
   },
@@ -434,8 +440,7 @@
    "injuries": [
     "Kevin Bahl (IR)",
     "Jonathan Huberdeau (hip, IR)",
-    "Connor Zary (out)",
-    "Samuel Honzek (out)"
+    "Connor Zary (out)"
    ]
   },
   "CHI": {
@@ -486,8 +491,8 @@
     }
    ],
    "injuries": [
-    "Patrick Kane (upper body, IR)",
-    "Bowen Byram (upper body, IR)"
+    "Bowen Byram (upper body, IR)",
+    "Patrick Kane (out)"
    ]
   },
   "COL": {
@@ -802,7 +807,6 @@
     }
    ],
    "injuries": [
-    "Sandis Vilmanis (undisclosed, out)",
     "Brad Marchand (knee, IR)",
     "Aleksander Barkov (knee, IR)",
     "Jonah Gadjovich (upper body, IR)"
@@ -812,6 +816,13 @@
    "headline": "The Kings lost 5-2 to the Penguins on Saturday and fell to 5-8-2.",
    "game": "Next: Tue Nov 10, 10:00 PM ET vs Nashville, Crypto.com Arena (ESPN+, Disney+, Hulu, SNE). Starter not announced.",
    "items": [
+    {
+     "title": "Kings' Kevin Fiala 'looks good,' coach says, will debut Thursday vs. Islanders",
+     "summary": "Kings coach Peter Laviolette said forward Kevin Fiala \"looks good\" and will make his season debut Thursday night against the Islanders, his first game since breaking his leg at the Winter Olympics.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50464345/kings-fiala-looks-good-says-coach-debut-vs-islanders",
+     "date": "2026-11-12"
+    },
     {
      "title": "Islanders take losing streak into game against the Kings",
      "summary": "New York Islanders (7-6-4, in the Metropolitan Division) vs. Los Angeles Kings (5-9-2, in the Pacific Division)",
@@ -860,19 +871,10 @@
      "source": "The Sporting Tribune",
      "url": "https://www.thesportingtribune.com/2026/11/07/ugly-start-buries-kings-in-loss-against-penguins",
      "date": "2026-11-07"
-    },
-    {
-     "title": "Kings activate Alex Turcotte from injured reserve",
-     "summary": "Turcotte was activated before the Penguins game after being on injured reserve since Oct. 10.",
-     "source": "LA Kings",
-     "url": "https://www.nhl.com/kings/news/la-kings-activate-alex-turcotte-from-injured-reserve-november-7",
-     "date": "2026-11-07"
     }
    ],
    "injuries": [
-    "Drew Doughty (day-to-day)",
-    "Erik Gustafsson (day-to-day)",
-    "Kevin Fiala (lower leg, IR)",
+    "Erik Gustafsson (out)",
     "Jakub Dvorak (IR)"
    ]
   },
@@ -1004,11 +1006,11 @@
     }
    ],
    "injuries": [
-    "Mike Matheson (day-to-day)",
     "Ivan Demidov (foot, IR)",
     "Sam Montembeault (lower body, IR)",
     "Bryce Pickford (IR)",
-    "Lucas Condotta (IR)"
+    "Lucas Condotta (IR)",
+    "Mike Matheson (out)"
    ]
   },
   "NJD": {
@@ -1073,8 +1075,9 @@
     }
    ],
    "injuries": [
+    "Johnathan Kovacevic (undisclosed, out)",
+    "Brett Pesce (out)",
     "Anthony Mantha (throat, IR)",
-    "Johnathan Kovacevic (day-to-day)",
     "Seamus Casey (IR)"
    ]
   },
@@ -1140,7 +1143,7 @@
     }
    ],
    "injuries": [
-    "Jonathan Marchessault (out)",
+    "Jonathan Marchessault (day-to-day)",
     "William Trudeau (IR)"
    ]
   },
@@ -1206,9 +1209,8 @@
     }
    ],
    "injuries": [
-    "Matias Maccelli (lower body, IR)",
+    "Jean-Gabriel Pageau (out)",
     "Mathew Barzal (knee, IR)",
-    "Ryan Pulock (out)",
     "Calum Ritchie (IR)",
     "Alexander Romanov (IR)"
    ]
@@ -1346,7 +1348,6 @@
    ],
    "injuries": [
     "Nick Cousins (out)",
-    "Linus Ullmark (day-to-day)",
     "Andre Burakovsky (IR)",
     "Warren Foegele (knee, IR)",
     "William Eklund (IR)"
@@ -1491,6 +1492,13 @@
    "game": "Next: Thu Nov 12, 12:00 PM ET vs Carolina Hurricanes, Veikkaus Arena in Helsinki (CARNHL, HHN, KONG, NHLN, Prime Video, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Finnish native Aho scores twice as first-place Hurricanes top Kraken 4-1 in Helsinki",
+     "summary": "— Sebastian Aho scored twice in front of the home crowd and the Carolina Hurricanes opened the NHL’s Global Series in the Finnish capital with a 4-1 victory over the Seattle Kraken on Thursday.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401891808",
+     "date": "2026-11-12"
+    },
+    {
      "title": "Hurricanes play the Kraken after Martinook's 2-goal showing",
      "summary": "Carolina Hurricanes (14-3-2, in the Metropolitan Division) vs. Seattle Kraken (9-6-1, in the Pacific Division)",
      "source": "ESPN",
@@ -1527,10 +1535,10 @@
     }
    ],
    "injuries": [
+    "Jacob Melanson (chest, IR)",
     "Nikke Kokko (IR)",
     "Curtis Douglas (IR)",
     "Jared McCann (lower body, IR)",
-    "Jacob Melanson (IR)",
     "Ryan Lindgren (upper body, IR)",
     "Jake O'Brien (lower body, IR)"
    ]
@@ -1783,9 +1791,9 @@
     }
    ],
    "injuries": [
-    "Nick Schmaltz (day-to-day)",
-    "Logan Cooley (out)",
-    "Nate Schmidt (IR)",
+    "Nate Schmidt (upper body, IR)",
+    "Logan Cooley (upper body, out)",
+    "Nick Schmaltz (lower body, day-to-day)",
     "Dylan Guenther (IR)",
     "John Marino (IR)",
     "Maveric Lamoureux (IR)"

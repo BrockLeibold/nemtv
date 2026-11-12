@@ -216,6 +216,27 @@ public class Main extends Activity {
         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
   }
 
+  // Held OK (DPAD_CENTER / Enter): the WebView does not reliably pass key repeats, so Java spots the long press
+  // and calls nemHold() in JS (multiview tile menu). The repeats and the release after it are swallowed.
+  boolean held;
+  @Override public boolean dispatchKeyEvent(android.view.KeyEvent e) {
+    int k = e.getKeyCode();
+    if (k == android.view.KeyEvent.KEYCODE_DPAD_CENTER || k == android.view.KeyEvent.KEYCODE_ENTER || k == android.view.KeyEvent.KEYCODE_NUMPAD_ENTER) {
+      if (e.getAction() == android.view.KeyEvent.ACTION_DOWN) {
+        if (e.getRepeatCount() == 0) held = false;
+        else {
+          if (!held && e.getEventTime() - e.getDownTime() >= 450) { held = true; w.evaluateJavascript("window.nemHold&&nemHold()", null); }
+          return true;
+        }
+      } else if (e.getAction() == android.view.KeyEvent.ACTION_UP && held) {
+        held = false;
+        w.evaluateJavascript("window.nemHoldEnd&&nemHoldEnd()", null);
+        return true;
+      }
+    }
+    return super.dispatchKeyEvent(e);
+  }
+
   @Override public void onBackPressed() {
     w.evaluateJavascript("nemBack()", new android.webkit.ValueCallback<String>() {
       public void onReceiveValue(String v) { if ("false".equals(v)) finish(); }

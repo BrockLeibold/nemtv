@@ -1528,4 +1528,7 @@ setInterval(()=>{if((tab==="home"||tab==="live")&&!$("#pl").classList.contains("
 // Live search: hover or D-pad focus does not enter it; OK or a click does (Brock 2026-11-12)
 document.addEventListener("click",e=>{if(e.target.id==="gs"&&e.target.readOnly){e.target.readOnly=false;e.target.focus()}},true);
 document.addEventListener("focusout",e=>{if(e.target.id==="gs")e.target.readOnly=true},true);
+// Onn: Main.java calls these when OK is held (WebView drops key repeats). Multiview only: open the focused tile's menu.
+window.nemHold=()=>{if(!mvOn()||SBP||!$("#mvm").hidden)return;clearTimeout(MV.hold);MV.hp=0;mvShow();const t=MV.f||MV.a;if(t)mvMenu(t)};
+window.nemHoldEnd=()=>{clearTimeout(MV.hold);MV.hp=0};
 </script></body></html>

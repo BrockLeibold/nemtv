@@ -165,7 +165,7 @@ app.whenReady().then(async()=>{
     let l0=(await st()).loads; await ev(`mvAct("sc");0`); await sleep(500);
     for(const sty of ["pip","side"]){await ev(`__mv.sty[2]="${sty}";mvLayout();0`);await sleep(300);
       const r=await ev(`(()=>{const b=document.getElementById("sbar").getBoundingClientRect();return {on:document.getElementById("sbar").classList.contains("on"),bb:Math.round(b.bottom),h:Math.round(b.height),ph:innerHeight,tiles:__mv.t.map(t=>{const q=t.el.getBoundingClientRect();return [Math.round(q.top),Math.round(q.bottom),q.top<b.bottom-.5&&q.bottom>b.top+.5]}),loads:__mvLoads}})()`);
-      log(r.on&&Math.abs(r.h-r.ph*.08)<=1.5&&r.tiles.every(t=>!t[2])&&r.loads===l0,sz+" multiview "+sty+" with the score bar on: no tile intersects the bar, no reload "+JSON.stringify(r))}
+      log(r.on&&Math.abs(r.h-Math.max(26,r.ph*.05))<=1.5&&r.tiles.every(t=>!t[2])&&r.loads===l0,sz+" multiview "+sty+" with the score bar on: no tile intersects the bar, no reload "+JSON.stringify(r))}
     await shot("pip-scorebar"); await ev(`mvAct("sc");__mv.sty[2]="pip";mvLayout();0`); await sleep(300);
     log(await ev(`!document.getElementById("sbar").classList.contains("on")&&Math.round(__mv.a.el.getBoundingClientRect().top)<=2&&__mvLoads===${l0}`),sz+" bar off again: tiles use the full height, no reload");
     await ev(`__add(2);0`); await sleep(6000); await ev(`__mv.sty[3]="main3";mvLayout();__vid=__mv.t.map(t=>t.v);window.__hh=__mv.t.map(t=>t.hls);0`); l0=(await st()).loads;
@@ -227,9 +227,9 @@ app.whenReady().then(async()=>{
       ov=[];for(let i=0;i<it.length;i++)for(let j=i+1;j<it.length;j++){const a=it[i],c=it[j];if(a.left<c.right-.5&&c.left<a.right-.5&&a.top<c.bottom-.5&&c.top<a.bottom-.5)ov.push(i+"/"+j)}
       const ins=[...b.querySelectorAll(".sbi")].every(e=>{const r=e.getBoundingClientRect(),q=[...e.children].filter(x=>x.className!=="skin");return q.every(c=>{const s=c.getBoundingClientRect();return s.left>=r.left-.5&&s.right<=r.right+.5&&s.top>=r.top-.5&&s.bottom<=r.bottom+.5})}),
       fs=Math.min(...[...b.querySelectorAll(".nt")].map(e=>parseFloat(getComputedStyle(e).fontSize)));
-      return {n:it.length,h:R.height,ph:P.height,top:R.top,op:+getComputedStyle(b).opacity,ov,ins,fs,sw:b.scrollWidth,cw:b.clientWidth,minw:Math.min(...it.map(r=>r.width)),tops:it.every(r=>r.top>=R.top-.5&&r.bottom<=R.bottom+.5)}})()`);
+      return {n:it.length,h:R.height,ph:P.height,top:R.top,bot:Math.round(R.bottom),op:+getComputedStyle(b).opacity,ov,ins,fs,sw:b.scrollWidth,cw:b.clientWidth,minw:Math.min(...it.map(r=>r.width)),tops:it.every(r=>r.top>=R.top-.5&&r.bottom<=R.bottom+.5)}})()`);
     let m=await sbm();
-    log(Math.abs(m.h-m.ph*.08)<=1.5&&m.top===0&&m.op===1,sz+" score bar: height "+m.h+" = 8% of player "+m.ph+", top, visible when UI hidden");
+    log(Math.abs(m.h-Math.max(26,m.ph*.05))<=1.5&&Math.abs(m.bot-m.ph)<=1.5&&m.op===1,sz+" score bar: height "+m.h+" = 5% of player "+m.ph+", bottom, visible when UI hidden");
     for(const N of [1,4,8,16]){await ev(`__N=${N};sbRefresh();0`);await sleep(300);m=await sbm();
       const want=m.n===N+1; // N games + one upcoming
       log(want&&m.ov.length===0&&m.ins&&m.tops&&m.fs>=9&&(m.sw<=m.cw+1||m.minw>=100),sz+" score bar N="+(N+1)+" games: no overlap, inside, text "+m.fs+"px, scroll="+(m.sw>m.cw+1)+" item min width "+Math.round(m.minw))}

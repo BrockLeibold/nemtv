@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NEMTV</title>
-<style>
+<style>html.andr #pfs{display:none!important}
 /* NEMOS dark tokens, copied from the live local NEMOS (whisper-hub/nemos-src) */
 @font-face{font-family:"NemFB";src:local("Inter Bold"),local("Inter-Bold"),local("Roboto Bold"),local("Roboto-Bold"),local("Arial Bold"),local("Arial-BoldMT");font-weight:400}
 @font-face{font-family:"Jersey M54";src:url(jersey.ttf) format("truetype");unicode-range:U+002E,U+0030-0039,U+0041-005A,U+0061-007A}
@@ -129,7 +129,7 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 #pl.on{display:block}
 #pl video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform-origin:center}
 .ptop,.ctl{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;transition:opacity .2s}
-.ptop{top:max(0px,calc(var(--safe-y) - 12px));padding:12px max(28px,var(--safe-x));gap:10px;background:linear-gradient(#000b,#0000)}
+.ptop{top:0;padding:max(12px,var(--safe-y)) max(28px,var(--safe-x)) 12px;gap:10px;background:linear-gradient(#000b,#0000)}
 .ptop .ptt{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;min-width:0}
 .pbtn{padding:12px 26px;border-radius:999px;background:var(--gl-fill);border:2px solid var(--line-strong);box-shadow:var(--gl-shadow);color:var(--ink);font-weight:700;font-size:20px;white-space:nowrap}
 .pbtn:focus-visible{border-color:var(--ink)}
@@ -144,18 +144,18 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 #pl.hide,#pl.hide *{cursor:none}
 #pl.hide .ptop,#pl.hide .ctl{opacity:0;pointer-events:none}
 .ctl button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
-/* score bar: 8% of the player, pinned to the top (controls live at the bottom). Visible only while the player UI is hidden, or while picking a game (Change game) */
-#sbar{position:fixed;left:0;right:0;top:0;height:8%;z-index:70;display:none;gap:2px;padding:6px max(2px,var(--safe-x)) 2px;background:var(--gl-fill);overflow-x:auto;overflow-y:hidden;scrollbar-width:none;container-type:size;opacity:0;pointer-events:none;transition:opacity .2s}
+/* score bar: 5% of the player, pinned to the bottom (Brock 2026-11-11). Visible only while the player UI is hidden, or while picking a game (Change game) */
+#sbar{position:fixed;left:0;right:0;bottom:0;height:5%;min-height:26px;z-index:70;display:none;gap:2px;padding:2px max(2px,var(--safe-x)) 4px;background:var(--gl-fill);overflow-x:auto;overflow-y:hidden;scrollbar-width:none;container-type:size;opacity:0;pointer-events:none;transition:opacity .2s}
 #sbar::-webkit-scrollbar{display:none}
 #sbar.on{display:flex}
 #sbar.vis,#sbar.pick{opacity:1;pointer-events:auto}
 #sbar.vis *{cursor:pointer}
 body.sbp #pl .ptop,body.sbp #pl .ctl,body.sbp #mv .ctl,body.sbp #mv .ml,body.sbp #mv .pmenu{opacity:0;pointer-events:none}
 body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
-.sbi{--o-base:var(--island);--o-a:var(--red-3);--o-b:var(--wine);--o-c:var(--plum);--o-f1:var(--coral);--o-f2:var(--wine);position:relative;isolation:isolate;flex:1 0 112px;min-width:0;height:100%;border-radius:12px;text-align:center;color:#fff;display:grid;grid-template-columns:1fr auto 1fr;grid-template-rows:1fr auto;align-items:center;justify-items:center;padding:1px 4px}
-.sbi img,.sbi b{width:clamp(14px,46cqh,28px);height:clamp(14px,46cqh,28px);object-fit:contain;font-size:clamp(11px,30cqh,13px);line-height:clamp(14px,46cqh,28px);overflow:hidden}
-.sbi .scr{font-size:clamp(11px,38cqh,20px);line-height:1;text-shadow:0 2px 10px rgba(0,0,0,.6);white-space:nowrap}
-.sbi .nt{grid-column:1/-1;font-size:clamp(11px,20cqh,12px);line-height:1;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.9);white-space:nowrap}
+.sbi{--o-base:var(--island);--o-a:var(--red-3);--o-b:var(--wine);--o-c:var(--plum);--o-f1:var(--coral);--o-f2:var(--wine);position:relative;isolation:isolate;flex:1 0 auto;min-width:150px;height:100%;border-radius:999px;text-align:center;color:#fff;display:grid;grid-template-columns:auto auto auto auto;grid-template-rows:1fr;column-gap:6px;align-items:center;justify-content:center;padding:1px 6px}
+.sbi img,.sbi b{width:clamp(14px,70cqh,26px);height:clamp(14px,70cqh,26px);object-fit:contain;font-size:clamp(11px,40cqh,13px);line-height:clamp(14px,70cqh,26px);overflow:hidden}
+.sbi .scr{font-size:clamp(12px,60cqh,22px);line-height:1;text-shadow:0 2px 10px rgba(0,0,0,.6);white-space:nowrap}
+.sbi .nt{font-size:clamp(11px,40cqh,14px);line-height:1;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.9);white-space:nowrap}
 .sbi.done{--o-a:#4a474f!important;--o-b:#3b393f!important;--o-c:#28262c!important;--o-f1:#605d66!important;--o-f2:#605d66!important}
 .sbi.off{opacity:.45}.sbi.off:focus,.sbi.off.cur{opacity:1}
 .sbi.cur{box-shadow:inset 0 0 0 2px var(--coral)}
@@ -489,7 +489,7 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 <nav id="nav"><button data-t="home"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Home</span></button><button data-t="scores"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Scores</span></button><button data-t="schedule"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Schedule</span></button><button data-t="live"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Live</span></button><button data-t="guide"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Guide</span></button></nav><button id="setb" data-t="setup" aria-label="Setup"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2.2-1.3L14 3h-4l-.4 2.5a7 7 0 0 0-2.2 1.3l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .9.1 1.3l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2.2 1.3L10 21h4l.4-2.5a7 7 0 0 0 2.2-1.3l2.3 1 2-3.4-2-1.5c.1-.4.1-.9.1-1.3z"/></svg></button></header>
 <main id="m"></main>
 <div id="boot"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="rows" id="brows"></div><div class="ttl"><img src="nemtv-logo.png" alt="NEMTV" style="height:64px"></div><div class="tag disp">NHL &middot; LIVE TV</div><div class="bar sk"></div><div class="st" id="bst"></div></div>
-<div id="pl"><video id="v" autoplay playsinline></video>
+<div id="pl" tabindex="-1" style="outline:none"><video id="v" autoplay playsinline></video>
 <div id="pbuf"><div class="mesh2"></div><div class="sk skf"></div><div id="pbc"></div><div class="bar sk"></div><div class="stt" id="pst"></div></div>
 <div class="ptop" id="ptop"><button class="pbtn" id="pback">&#8592; Back</button><div class="ptt" id="ptt"></div><button class="pbtn" id="pfs">Full screen</button></div><div id="zb"></div>
 <div class="ctl" id="pctl">
@@ -512,7 +512,7 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 <script src="hls.min.js"></script>
 <script src="nhl_schedule.js"></script>
 <script src="nhl_logos.js"></script>
-<script>
+<script>if(window.Android)document.documentElement.classList.add("andr");
 const $=s=>document.querySelector(s), ls=(k,d)=>{try{return JSON.parse(localStorage[k])}catch(e){return d}}, sv=(k,v)=>{try{localStorage[k]=JSON.stringify(v)}catch(e){}};
 const log=(...a)=>console.log(a.join(" "));
 const SPORTS=[["NFL",/\bnfl\b/i],["NBA",/\bnba\b|\bwnba\b/i],["MLB",/\bmlb\b/i],["NHL",/\bnhl\b/i],["UFC",/\bufc\b|\bmma\b|\bboxing\b|\bpfl\b/i],
@@ -1046,7 +1046,7 @@ function chFeeds(c){ // this channel, plus other channels airing the same EPG ti
   const o=onNow(c),b=baseName(c.n),alt=ch.filter(x=>x!==c&&x.u&&on(x)&&(baseName(x.n)===b||(o&&(onNow(x)||{}).t===o.t))).slice(0,8); return [c,...alt]}
 function mvLayout(){
   const T=MV.t,n=T.length; if(!n)return;
-  const W=mvEl.clientWidth,H0=mvEl.clientHeight,TB=sbOn?Math.round(H0*.08):0,H=H0-TB,S=MVL[n],cs=S.includes(MV.sty[n])?MV.sty[n]:S[0],free=cs==="free",gz=MV.gz/100,
+  const W=mvEl.clientWidth,H0=mvEl.clientHeight,TB=0,H=H0-(sbOn?Math.max(26,Math.round(H0*.05)):0),S=MVL[n],cs=S.includes(MV.sty[n])?MV.sty[n]:S[0],free=cs==="free",gz=MV.gz/100,
     ord=[MV.a,...T.filter(x=>x!==MV.a)],R=free?0:MVS[cs][1](W<H*.9,W/H); MV.cs=cs;
   T.forEach(t=>{let r;
     if(free){const c=MVF[T.indexOf(t)],s=.6*t.bs*gz;r=[.5+(c[0]-.5)*gz-s/2,.5+(c[1]-.5)*gz-s/2,s,s]}else r=R[ord.indexOf(t)];
@@ -1288,9 +1288,10 @@ $("#pl").addEventListener("keydown",e=>{
   if(hidden&&!menuOn){
     // D-pad just opens the controls (never touches the stream); only dedicated channel keys zap
     if(e.key==="PageUp"||e.key==="PageDown"||e.keyCode===166||e.keyCode===167){e.preventDefault();e.stopPropagation();zap(e.key==="PageDown"||e.keyCode===167?1:-1);show();return}
-    if(cur&&!cur.title&&(e.key==="ArrowUp"||e.key==="ArrowDown")){e.preventDefault();e.stopPropagation();zap(e.key==="ArrowDown"?1:-1);return} // live TV: Up/Down changes channel
+    if(e.key==="ArrowUp"){e.preventDefault();e.stopPropagation();return} // Up while hidden: stays hidden (Brock 2026-11-11: Down shows UI, Up hides it)
     e.preventDefault();e.stopPropagation();show();$("#bfeed").focus();return;
   }
+  if(!menuOn&&e.key==="ArrowUp"){e.preventDefault();e.stopPropagation();clearTimeout(hideT);$("#pl").classList.add("hide");$("#pl").focus({preventScroll:true});return} // Up hides the UI
   if(!menuOn&&/^Arrow/.test(e.key)){ // D-pad: top bar (Back, Full screen) <-> bottom bar
     const top=[...document.querySelectorAll("#ptop button")],bot=[...document.querySelectorAll("#pctl button")].filter(b=>!b.hidden),a=document.activeElement,
       row=top.includes(a)?top:bot.includes(a)?bot:null;

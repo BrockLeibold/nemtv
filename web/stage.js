@@ -15,7 +15,7 @@ fs.writeFileSync(f,`<!doctype html><html lang="en"><head><meta charset="utf-8"><
 <link rel="icon" href="nemtv-logo.png"><style>html,body{margin:0;height:100%;overflow:hidden;background:#0b0a0d}iframe{position:fixed;left:0;top:0;border:0;transform-origin:0 0;background:#0b0a0d}</style></head><body>
 <iframe id="a" src="app.html" allow="fullscreen; autoplay" allowfullscreen></iframe>
 <script>(function(){var f=document.getElementById("a"),M="(max-width:900px),(max-height:520px),(min-width:701px) and (max-aspect-ratio:3/2)";
-function fit(){var w=innerWidth,h=innerHeight,z=1;if(w>1100&&!matchMedia(M).matches)z=Math.max(.3,Math.min(w/960,h/540));
+function fit(){var w=innerWidth,h=innerHeight,z=1;if(w>1100&&!matchMedia(M).matches)z=Math.max(1,Math.min(w/960,h/540)*.5); // desktop UI at half size (Brock 2026-11-11)
 f.style.width=w/z+"px";f.style.height=h/z+"px";f.style.transform=z===1?"none":"scale("+z+")"}
 addEventListener("resize",fit);fit();f.addEventListener("load",function(){try{f.contentWindow.focus()}catch(e){}});
 document.addEventListener("keydown",function(){try{f.contentWindow.focus()}catch(e){}})})()</script></body></html>`);

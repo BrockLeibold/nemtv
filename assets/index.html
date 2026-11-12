@@ -10,7 +10,7 @@
   --bg:#0F0E11;--surface:#19171C;--surface-2:#242128;--line:#2D2A31;--line-strong:#3B3741;
   --ink:#F2F0F4;--ink-2:#C9C4CF;--muted:#8F8996;--accent:#F0435F;
   --red:#D21F3C;--red-3:#B8182F;--coral:#FF8A5B;--plum:#2B2731;--wine:#5C2330;--island:#211E25;
-  --gl-fill:rgba(33,30,37,.62);--safe-x:0px;--safe-y:0px;
+  --gl-fill:rgba(33,30,37,.62);--safe-x:0px;--safe-y:0px;--h-ctl:34px;--pad-x:max(28px,var(--safe-x),calc((100vw - 1280px)/2));
   --ring:0 0 0 2px #0F0E11,0 0 0 5px #F2F0F4;--ring-in:inset 0 0 0 2px #0F0E11,inset 0 0 0 5px #F2F0F4;
   --gl-sheen:linear-gradient(135deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.03) 45%,rgba(255,255,255,.07) 100%);
   --gl-shadow:0 12px 34px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(255,255,255,.05);
@@ -23,10 +23,10 @@ button,input{font:inherit;color:inherit}
 button{border:0;background:none;cursor:pointer;text-align:inherit}
 .disp{font-family:"Jersey M54","NemFB",Inter,sans-serif;text-transform:uppercase;font-synthesis:none;letter-spacing:.02em}
 
-header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:max(10px,var(--safe-y)) max(28px,var(--safe-x)) 6px}
+header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:max(10px,var(--safe-y)) var(--pad-x) 6px}
 .brand{justify-self:start;display:flex}.brand img{height:18px}
 nav{display:flex;gap:4px;padding:3px;border-radius:999px;background:var(--gl-fill);box-shadow:var(--gl-shadow);border:1px solid var(--line)}
-nav{gap:2px}header [data-t]{display:flex;align-items:center;justify-content:center;gap:6px;padding:6px 15px 6px 13px;border-radius:999px;color:var(--ink-2);font-weight:600;text-align:center}nav button svg{flex:none}
+nav{gap:2px}header [data-t]{display:flex;align-items:center;justify-content:center;gap:6px;padding:6px 15px 6px 13px;min-height:var(--h-ctl);border-radius:999px;color:var(--ink-2);font-weight:600;text-align:center}nav button svg{flex:none}
 #setb{grid-column:3;justify-self:end;width:34px;height:34px;padding:0;border-radius:50%;background:var(--gl-fill);border:1px solid var(--line)}
 #setb[aria-pressed=true]{background:rgba(244,242,246,.86)}
 header [data-t][aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
@@ -34,7 +34,7 @@ header [data-t][aria-pressed=true]{background:rgba(244,242,246,.86);color:#14121
 button:focus-visible,input:focus-visible,.focusable:focus{box-shadow:var(--ring)}
 
 
-main{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:4px max(28px,var(--safe-x)) max(24px,var(--safe-y));scrollbar-width:none}
+main{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:4px var(--pad-x) max(24px,var(--safe-y));scrollbar-width:none}
 main::-webkit-scrollbar{display:none}
 main::after{content:"";display:block;height:62%}
 h2{font-size:15px;margin:10px 0 8px}
@@ -81,7 +81,7 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 
 /* chips (Live filters, Home shortcuts) */
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.chip{padding:5px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2);font-weight:600;white-space:nowrap}
+.chip{padding:5px 12px;min-height:var(--h-ctl);display:inline-flex;align-items:center;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2);font-weight:600;white-space:nowrap}
 .chip[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217;border-color:transparent}
 
 /* channel cards: what is on right now */
@@ -139,13 +139,13 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 .ctl{bottom:max(16px,var(--safe-y));padding:0 var(--safe-x);gap:6px;flex-wrap:nowrap;transform-origin:50% 100%;transform:scale(var(--cs,1))} /* one line always; ctlFit shrinks it to the width */
 #bfeed{max-width:180px;overflow:hidden;text-overflow:ellipsis}
 .ctl .grp{display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;background:var(--gl-fill);box-shadow:var(--gl-shadow);border:1px solid var(--line-strong)}
-.ctl button{padding:6px 14px;border-radius:999px;color:var(--ink);font-weight:600;white-space:nowrap;text-align:center}
+.ctl button{padding:6px 14px;min-height:var(--h-ctl);border-radius:999px;color:var(--ink);font-weight:600;white-space:nowrap;text-align:center}
 .ctl button.sm{padding:6px 10px}
 .ctl .lbl{color:var(--muted);padding:0 4px 0 10px;font-size:13px;letter-spacing:.1em}
 #pl.hide,#pl.hide *{cursor:none}
 #pl.hide .ptop,#pl.hide .ctl{opacity:0;pointer-events:none}
-.ctl button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
-/* score bar: 5% of the player, pinned to the bottom (Brock 2026-11-11). Visible only while the player UI is hidden, or while picking a game (Change game) */
+.ctl button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--ink)}.ctl button[aria-pressed=true]:not(#bfav)::after{content:"\2713";margin-left:6px}.ctl button[aria-pressed=true]:focus-visible{box-shadow:inset 0 0 0 2px var(--ink),var(--ring)}
+/* score bar: passive strip = 8% (min 40px) of the player + the bottom safe area, pinned to the bottom (Brock 2026-11-11); Change game turns it into a big top-pinned picker (.pick). Visible only while the player UI is hidden, or while picking a game (Change game) */
 #sbar{position:fixed;left:0;right:0;bottom:0;height:5%;min-height:26px;z-index:70;display:none;gap:2px;padding:2px max(2px,var(--safe-x)) 4px;background:var(--gl-fill);overflow-x:auto;overflow-y:hidden;scrollbar-width:none;container-type:size;align-items:stretch;opacity:0;pointer-events:none;transition:opacity .2s}
 #sbar::-webkit-scrollbar{display:none}
 #sbar.on{display:flex}
@@ -191,7 +191,7 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 .pmenu{position:absolute;left:50%;bottom:62px;transform:translateX(-50%);max-height:62%;overflow-y:auto;scrollbar-width:none;min-width:260px;max-width:420px;
   padding:6px;border-radius:22px;background:rgba(25,23,28,.94);box-shadow:var(--gl-shadow);border:1px solid var(--line-strong)}
 .pmenu::-webkit-scrollbar{display:none}
-.pmenu button{display:flex;justify-content:space-between;gap:12px;width:100%;padding:7px 14px;border-radius:999px;text-align:left}
+.pmenu button{display:flex;align-items:center;min-height:32px;justify-content:space-between;gap:12px;width:100%;padding:7px 14px;border-radius:999px;text-align:left}
 .pmenu button[aria-checked=true]{background:rgba(242,240,244,.86);color:#141217;font-weight:700}
 .pmenu small{color:var(--muted)}
 .pmenu button[aria-checked=true] small{color:#4B4652}
@@ -229,11 +229,11 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 .dots i.c{box-shadow:0 0 0 2px var(--coral);background:#fff}
 .dots b{margin-left:6px;color:#fff}
 #gd{position:fixed;inset:0;z-index:95;background:#0a090c;display:flex;flex-direction:column}#gd[hidden]{display:none}
-#gdh{display:flex;align-items:center;gap:6px;padding:max(8px,var(--safe-y)) max(12px,var(--safe-x)) 8px;border-bottom:1px solid rgba(255,255,255,.1);flex:none}#gdh .t{flex:1;text-align:right;font-weight:800;font-size:15px}
+#gdh{display:flex;align-items:center;gap:6px;padding:max(12px,var(--safe-y)) max(28px,var(--safe-x)) 8px;border-bottom:1px solid rgba(255,255,255,.1);flex:none}#gdh .t{flex:1;text-align:right;font-weight:800;font-size:15px}
 #gdh button,#gdr button{padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font-weight:700;font-size:11px}
-#gdh button[aria-pressed=true],#gdr button[aria-pressed=true]{background:#F2F0F4;color:#141217}#gdr{display:flex;gap:6px;padding:6px max(12px,var(--safe-x));flex:none}#gdr:empty{display:none}
+#gdh button[aria-pressed=true],#gdr button[aria-pressed=true]{background:#F2F0F4;color:#141217}#gdr{display:flex;gap:6px;padding:6px max(28px,var(--safe-x));flex:none}#gdr:empty{display:none}
 #gdh button:focus,#gdr button:focus{outline:none;box-shadow:var(--ring)}
-#gdb{flex:1;overflow:hidden;padding:0 max(12px,var(--safe-x)) max(10px,var(--safe-y))}
+#gdb{flex:1;overflow:hidden;padding:0 max(28px,var(--safe-x)) max(10px,var(--safe-y))}
 .gt{width:100%;border-collapse:collapse;font-size:10px;table-layout:fixed}.gt th{color:var(--muted);font-weight:700;text-align:right;padding:5px 3px;background:#17151b}.gt td{padding:4px 3px;text-align:right;border-bottom:1px solid rgba(255,255,255,.05)}
 .gt th:nth-child(1),.gt td:nth-child(1){width:26px;text-align:center}.gt th:nth-child(2),.gt td:nth-child(2){width:116px;text-align:left}.gt td:nth-child(2){font-weight:700}.gt td.z{color:#6b6672}.gt td.h{color:#fff;font-weight:800}
 .gs{display:grid;grid-template-columns:1fr 1fr;gap:12px}.gs h3{margin:8px 0 4px;font-size:11px;color:var(--muted);letter-spacing:.08em}
@@ -299,7 +299,7 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 .ft-st div{background:rgba(0,0,0,.28);border-radius:12px;padding:3px 8px;text-align:center}
 .ft-st small{display:block;font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.7)}
 .ft-st b{font-size:12px}
-.chip.ft{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 6px}.chip.ft img{width:22px;height:22px;object-fit:contain}.chip.ft[aria-pressed=true]::after{content:"°5";color:#141217;font-size:13px}
+.chip.ft{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 6px}.chip.ft img{width:22px;height:22px;object-fit:contain}.chip.ft[aria-pressed=true]::after{content:"\2713";color:#141217;font-size:13px}
 .fstar{position:absolute;top:4px;left:5px;width:20px;height:20px;border-radius:50%;background:#fff;color:#141217;font-size:13px;line-height:20px;text-align:center;box-shadow:0 0 0 2px rgba(0,0,0,.45),0 0 10px rgba(255,255,255,.55);z-index:3}.sr .fstar{top:50%;left:9px;margin-top:-10px}.sr.fv{padding-left:36px}.feat.fv::after{content:"\2605  FAVORITE";position:absolute;top:9px;left:92px;font-size:11px;font-weight:800;letter-spacing:.1em;color:#141217;background:#FFB81C;border-radius:999px;padding:3px 10px;box-shadow:0 0 12px rgba(255,184,28,.6)}
 .pill .fstar{top:10px;left:16px}
 .gs{display:flex;gap:8px;align-items:center;margin-bottom:8px}.gs input{flex:1;padding:7px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink)}
@@ -368,7 +368,7 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 #gbar .sp{flex:1}
 #gbar button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 /* Live page: one grid owns the screen (search, categories, info, list). Only the channel list scrolls, so nothing shows above it. Borders sit on one 4px grid */
-main.live{display:grid;grid-template-rows:auto auto auto minmax(0,1fr);overflow:hidden;padding:4px max(28px,var(--safe-x)) 0}
+main.live{display:grid;grid-template-rows:auto auto minmax(0,1fr);overflow:hidden;padding:4px var(--pad-x) 0}
 main.live::after{display:none}
 main.live .gs{margin:0 0 8px}
 main.live .chips.one{margin-bottom:8px}
@@ -399,21 +399,21 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 
 /* ===== PHONE / SMALL WINDOWS (docs/UI-RULES.md still rules the TV; this block only runs below 700px wide or 520px tall, never on the 960x540 TV layout) =====
    text >= 11px, controls >= 40px, one column, no sideways page scroll */
-@media (max-width:700px),(max-height:520px),(min-width:701px) and (max-aspect-ratio:3/2){ /* readability + touch sizes: phone, landscape phone, tablets (4:3 and portrait) */
+@media (max-width:700px),(max-height:520px),(min-width:701px) and (max-aspect-ratio:3/2){ :root{--h-ctl:44px} /* readability + touch sizes: phone, landscape phone, tablets (4:3 and portrait) */
  .pill .vs,.pill .sp,.pill .live,#boot .tag,#boot .st,.ptop .tag,.ctl .lbl,.pmenu h3,.dots,.gt,.gsc span,.ev,.g3 h3,.star div,.gm,.ppg,.gtm,.bv,.pc .tv,.srn,.srg,.srg i,.fn h3,.fn .hd,.fn .it,.fn .inj,.ft-top,.ft-team small,.ft-st small,.gcs,.gc small,.pg small,#zb small,.grid.lg .pill .tm,.ft-bot .tv,.grid.cal .pill .tm,.grid.lg .pill .live,.grid.lg .pill.done .live,.grid.cal .pill .live,.grid.cal .pill.done .live,.pill .rec,.pill .tvl,.nws h3,.nws .hd,.nws .it,.nws .inj,#gbar button,main.live .chip,main.live .chlogo i{font-size:11px}
- header [data-t]{min-height:40px}
+ header [data-t]{min-height:var(--h-ctl)}
  #setb{width:44px;height:44px;min-height:44px}
- .chip,main.live .chip{min-height:40px;display:inline-flex;align-items:center;padding:0 14px;font-size:12px}
+ .chip,main.live .chip{min-height:var(--h-ctl);display:inline-flex;align-items:center;padding:0 14px;font-size:12px}
  .chip.ft{padding:0 14px 0 8px}
  .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
  .gs input{min-height:44px}
  .pbtn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
  .watch{min-height:44px}
- .ctl button{min-height:40px;padding:0 14px;min-width:44px}.ctl button.sm{padding:0 14px}
+ .ctl button{min-height:var(--h-ctl);padding:0 14px;min-width:44px}.ctl button.sm{padding:0 14px}
  small{font-size:11px}
  .pmenu button{min-height:44px}
  #gbar{height:44px}#gbar button{height:40px;min-width:40px;padding:0 12px;font-size:12px}
- #gdh{flex-wrap:wrap}#gdh button,#gdr button{min-height:40px}
+ #gdh{flex-wrap:wrap}#gdh button,#gdr button{min-height:var(--h-ctl)}
 }
 @media (max-width:700px),(max-height:520px){  /* phone layout */
  header{padding:6px 12px}
@@ -488,6 +488,61 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
  .grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
  .srl{grid-template-columns:1fr 1fr}
 }
+
+/* ===== NEMOS rebuild 2026-11-12: one control height (--h-ctl), one red (live dot), flat pills, big picker ===== */
+.btn{min-height:var(--h-ctl);display:inline-flex;align-items:center;justify-content:center}
+.btn.danger{background:none;color:#ff9aa8;text-decoration:underline;padding:6px 8px}
+.pbtn{min-height:var(--h-ctl);display:inline-flex;align-items:center;justify-content:center}
+#gpop .pbtn{font-size:12px}
+.ptop .pbtn{background:var(--gl-fill);color:var(--ink);border:1px solid var(--line-strong);box-shadow:none;font-size:14px}
+.ptop .pbtn:focus{box-shadow:var(--ring);border-color:var(--ink)}
+.gs input{min-height:var(--h-ctl)}
+.mask:not(:focus){-webkit-text-security:disc}
+.pill .mesh{background:var(--island)}.feat .mesh{background:var(--surface)}
+.pill .skin::after,.feat .skin::after{background:linear-gradient(90deg,var(--o-f1) 0 4px,transparent 4px calc(100% - 4px),var(--o-f2) calc(100% - 4px));opacity:1}
+.pill.cur{box-shadow:0 0 0 2px var(--ink-2)}.pill.cur:focus{box-shadow:var(--ring)}
+.grid.lg .pill.cur::before{content:"NOW SHOWING";position:absolute;top:3px;left:0;right:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--ink-2);z-index:1}
+.fn h3,.fn .hd,.fn .it,.nws .it,.nws .hd{font-size:11px}
+.fn .inj,.nws .inj{align-self:flex-start;font-size:11px;color:var(--ink-2);background:rgba(255,255,255,.1);border-radius:999px;padding:1px 8px}
+.fn .it i,.nws .it i{background:var(--ink-2)}
+.sr{background:var(--surface);box-shadow:inset 4px 0 0 var(--o-a),inset -4px 0 0 var(--o-b)}
+.sr.lv{box-shadow:inset 4px 0 0 var(--o-a),inset -4px 0 0 var(--o-b)}
+.sr.lv.fv{box-shadow:inset 0 0 0 2px var(--coral)}
+.sr:focus,.sr.lv:focus,.sr.lv.fv:focus{box-shadow:var(--ring)}
+.srn,.srg,.srg i{font-size:11px}.srn{min-width:96px}.srn .dot{margin-right:4px}
+.sr.pre{padding:6px 12px}.sr.pre .srg{display:none}.sr.pre .srs img{width:22px;height:22px}.sr.pre .srs b{font-size:16px}.sr.pre .srm{font-size:18px}
+.hmk{font-style:normal;font-size:11px;letter-spacing:.1em;color:var(--muted)}
+.dh.today .dn{box-shadow:inset 0 0 0 2px var(--line-strong)}
+.dchips{position:sticky;top:0;z-index:6;background:var(--bg);padding:4px 0;margin-bottom:0}
+.dh{scroll-margin-top:48px}
+.empty.noplay{align-items:center;text-align:center;margin:8vh auto 0;max-width:420px}
+/* player bar: Feed is the one filled pill; zoom is one button; empty groups vanish */
+.ctl #bfeed{background:var(--ink);color:#141217;font-weight:700;max-width:240px}
+.ctl .grp:not(:has(button:not([hidden]))){display:none}
+.pmenu .pnote{padding:6px 14px;color:var(--muted)}
+/* Change game: wrapped top-pinned grid of big AWAY @ HOME items */
+.sbi .pk{display:none}
+.sbi .mesh{background:var(--island)}.sbi .skin::after{background:linear-gradient(90deg,var(--o-f1) 0 4px,transparent 4px calc(100% - 4px),var(--o-f2) calc(100% - 4px));opacity:1}
+/* Live: search + chips on one row, no empty info block, no guide column when there is no guide */
+.gtool{display:flex;gap:8px;align-items:center;margin:0 0 8px;min-width:0}.gtool .gs{flex:0 0 240px;margin:0}.gtool .chips{flex:1;min-width:0;margin:0}
+main.live .gtop{min-height:96px}
+main.live .gtop:has(#gi:empty):not(:has(.gv.on,.gv.ld)){display:none}
+main.live .gv:not(.on):not(.ld){display:none}
+#gx:has(.ne) .gh{display:none}#gx:has(.ne) .gr .gt{display:none}main.live #gx:has(.ne) .gc{width:100%;max-width:560px}
+.gnone{color:var(--muted);padding:0 4px 8px}
+.gc:focus ~ .gt .pg.now{box-shadow:inset 0 0 0 2px var(--ink)}
+/* game detail */
+#gdh button,#gdr button{min-height:var(--h-ctl);font-size:12px;display:inline-flex;align-items:center}
+#gdh [data-gx]{background:transparent;box-shadow:inset 0 0 0 2px var(--line-strong)}
+#gdh button:focus,#gdr button:focus{box-shadow:var(--ring)}
+/* multiview */
+.mt.fo::before{border-color:var(--ink)}.mt.fo.au::before{display:none}
+.mt[data-err]{background:#17090c}.mt[data-err] .mx{font-size:14px;font-weight:700}
+#mvm button.danger{color:#ff9aa8;margin-top:8px}
+#mvp button,#mvp h3{font-size:13px}#mvp input{font-size:13px;padding:9px 14px}
+#mv .mvh{position:absolute;left:0;right:0;bottom:calc(max(16px,var(--safe-y)) + var(--h-ctl) + 18px);text-align:center;color:var(--ink-2);font-size:12px;text-shadow:0 1px 6px #000;pointer-events:none;z-index:19;transition:opacity .2s}
+#mv.hide .mvh{opacity:0}
+@media (max-width:700px){#mv .mvh{bottom:72px}.gtool{flex-wrap:wrap}.gtool .gs{flex:1 1 100%}.gtool .chips{flex:1 1 100%}.dchips{top:0}}
 </style></head><body>
 <header><span class="brand"><img src="nemtv-logo.png" alt="NEMTV"></span>
 <nav id="nav"><button data-t="home"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Home</span></button><button data-t="scores"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Scores</span></button><button data-t="schedule"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Schedule</span></button><button data-t="live"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Live</span></button><button data-t="guide"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Guide</span></button></nav><button id="setb" data-t="setup" aria-label="Setup"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2.2-1.3L14 3h-4l-.4 2.5a7 7 0 0 0-2.2 1.3l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .9.1 1.3l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2.2 1.3L10 21h4l.4-2.5a7 7 0 0 0 2.2-1.3l2.3 1 2-3.4-2-1.5c.1-.4.1-.9.1-1.3z"/></svg></button></header>
@@ -497,14 +552,13 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 <div id="pbuf"><div class="mesh2"></div><div class="sk skf"></div><div id="pbc"></div><div class="bar sk"></div><div class="stt" id="pst"></div></div>
 <div class="ptop" id="ptop"><button class="pbtn" id="pback">&#8592; Back</button><div class="ptt" id="ptt"></div><button class="pbtn" id="pfs">Full screen</button></div><div id="zb"></div>
 <div class="ctl" id="pctl">
- <div class="grp"><span class="lbl">FEED</span><button id="bfeed"></button></div>
- <div class="grp"><span class="lbl">ZOOM</span><button class="sm" id="zm">-</button><button id="zv"></button><button class="sm" id="zp">+</button></div>
+ <div class="grp"><button id="bfeed"></button><button id="zv" aria-label="Zoom"></button><button class="sm" id="zm" hidden>-</button><button class="sm" id="zp" hidden>+</button></div>
  <div class="grp"><button id="bsc" aria-pressed="false" hidden>Scores</button><button id="bcg" hidden>Change game</button></div>
- <div class="grp"><button id="bgd">Guide</button><button id="bfav">Favorite</button><button id="bmv" hidden>Multiview</button></div>
+ <div class="grp"><button id="bgd">Guide</button><button id="bfav" aria-pressed="false">Favorite</button><button id="bmv" hidden>Multiview</button></div>
 </div><div class="pmenu" id="pmenu" hidden></div></div>
-<div id="mv" tabindex="-1" aria-label="Multiview"><div id="mvt"></div><div class="pmenu" id="mvp" hidden></div><div id="mvm" class="pmenu" hidden></div><div class="ctl" id="mvb">
+<div id="mv" tabindex="-1" aria-label="Multiview"><div id="mvt"></div><div class="mvh">Hold OK (or long-press) on a tile for options</div><div class="pmenu" id="mvp" hidden></div><div id="mvm" class="pmenu" hidden></div><div class="ctl" id="mvb">
  <div class="grp"><button data-a="lay" id="mvl"></button></div>
- <div class="grp"><span class="lbl">ALL</span><button class="sm" data-a="am">-</button><button class="sm" data-a="ap">+</button></div>
+ <div class="grp"><span class="lbl" id="mvz">ALL ZOOM 100%</span><button class="sm" data-a="am">-</button><button class="sm" data-a="ap">+</button></div>
  <div class="grp"><button data-a="add">+ Game</button><button data-a="sc" aria-pressed="false">Scores</button><button data-a="ex">Exit</button></div>
 </div></div>
 <div id="sbar" aria-label="Scores"></div>
@@ -584,7 +638,7 @@ const skN=(n,f)=>'<div inert aria-hidden="true" style="display:contents">'+skify
 const SKL='<i class="sk" style="display:inline-block;width:120px;height:11px;vertical-align:middle"></i>', SKI='<i class="sk" style="display:inline-block;width:60px;height:9px;vertical-align:middle"></i>';
 const FT=()=>({signal:window.AbortSignal&&AbortSignal.timeout?AbortSignal.timeout(8000):undefined});
 let scLoaded=0, scFail=0, plDone=0, epgF=0, gdFail=0, tmiL=0, nwsL=0;
-const plLoad=()=>!!url&&!ch.length&&!plDone;
+const plLoad=()=>!!url&&!ch.length&&!plDone&&!!(window.Android||window.NEMDESK); // plain web never loads a playlist, so it is never "loading"
 let SC=[], scSig="";
 const scoreOf=(aw,hm,st)=>SC.find(x=>x.awayTeam&&x.homeTeam&&x.awayTeam.abbrev===aw&&x.homeTeam.abbrev===hm&&Math.abs(Date.parse(x.startTimeUTC)-st)<14*3600e3);
 function scInfo(x){ // {score:"2 - 1", note:"P2 12:34"} or null before the puck drops
@@ -611,9 +665,9 @@ window.gotScores=(t,e)=>{
   if(tab==="scores"&&!$("#pl").classList.contains("on")){const y=$("#m").scrollTop;render();$("#m").scrollTop=y;return}
   if(tab!=="home"||$("#pl").classList.contains("on"))return;
   let redo=false;
-  document.querySelectorAll("#m [data-g]").forEach(b=>{const g=G[+b.dataset.g]; if(!g)return; g.sc=scInfo(scoreOf(g.aw,g.hm,g.st));
+  document.querySelectorAll("#m .pill[data-g]").forEach(b=>{const g=G[+b.dataset.g]; if(!g)return; g.sc=scInfo(scoreOf(g.aw,g.hm,g.st));
     const sc=b.querySelector(".scr"), lv=b.querySelector(".live");
-    if(g.sc&&sc){sc.textContent=g.sc.score; lv.innerHTML=(g.sc.over?"":'')+esc(g.sc.note)} else if(g.sc!==null&&!sc)redo=true});
+    if(g.sc&&sc){sc.textContent=g.sc.score; lv.innerHTML=(g.sc.over?"":'<i class="dot"></i>')+esc(g.sc.note)} else if(g.sc!==null&&!sc)redo=true});
   if(redo)rerender(); else heroRefresh()
 };
 function pollScores(){const u="https://api-web.nhle.com/v1/score/now";
@@ -685,7 +739,7 @@ function svId(g){const l=svMap[[g.aw,g.hm].sort()];if(!l||(g.sc&&g.sc.over))retu
   l.forEach(x=>{const v=x.live?(Math.abs(now-g.st)<5*36e5?Math.abs(now-g.st):1e18):Math.abs(x.t-g.st);if(v<d){d=v;b=x.id}});return b}
 function svFeeds(id,cb){const c=svCache[id];if(c&&Date.now()-c.t<12e4)return cb(c.f);
   svGet("/stream/sport/"+encodeURIComponent(id)+".json",o=>{if(!o||!o.streams)return cb([]);
-    const f=o.streams.filter(s=>s.url&&!/^\s*tip\b|external player/i.test((s.name||"")+" "+(s.title||""))).map(s=>({n:String(s.name||"Stream").replace(/^Leaf \([^)]*\)\s*[·-]\s*/,""),u:s.url,g:"Stremio"})),
+    const f=o.streams.filter(s=>s.url&&!/^\s*(?:tip\b|note\s*:)|external player/i.test((s.name||"")+" "+(s.title||""))).map(s=>({n:String(s.name||"Stream").replace(/^Leaf \([^)]*\)\s*[·-]\s*/,""),u:s.url,g:"Stremio"})),
       r=c=>(svFr(c)?5:svCA(c)?0:/^NHL/i.test(c.n)?1:/^US\s*:/i.test(c.n)?2:/ESPN\+/i.test(c.n)?3:4)+(/^Backup/i.test(c.n)?.5:0); // CA English (TSN/Sportsnet), NHL league feed, US networks, US ESPN+, other, French last
     f.sort((a,b)=>r(a)-r(b)); svCache[id]={t:Date.now(),f}; log("stremio streams",f.length); cb(f)})}
 function bfName(g){ // name the Stremio addon feed when the game has one (warm cache), else "Stream addon"; otherwise the channel
@@ -712,7 +766,7 @@ function featHTML(g,k){ if(!g)return "";
   const sog=x&&x.homeTeam&&x.homeTeam.sog!==undefined?[x.homeTeam.sog,x.awayTeam.sog]:["-","-"];
   const cell=(l,a,b)=>`<div><small>${l}</small><b>${tmiL?`${esc(a)} &nbsp;|&nbsp; ${esc(b)}`:'<i class="sk" style="display:inline-block;width:5em;height:1em;vertical-align:middle"></i>'}</b></div>`;
   return `<span class="skin"><span class="mesh"></span></span><div class="fl">
-   <div class="ft-top"><b>${sc?(sc.over?"GAME OVER":esc(sc.note)):"STARTS "+esc(clk(g.st)).toUpperCase()}</b><span>${k+1} / ${G.length} &middot; ${esc((g.nets||[]).join(" / "))}</span></div>
+   <div class="ft-top"><b>${sc?(sc.over?"GAME OVER":esc(sc.note)):"STARTS "+esc(clk(g.st)).toUpperCase()}</b><span>${k+1} / ${G.length} &middot; ${esc(netStr(g))}</span></div>
    <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span><small>${esc(recOf(g.hm)||"HOME")}</small></div>
     <div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${sc&&sc.over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div>
     <div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span><small>${esc(recOf(g.aw)||"AWAY")}</small></div></div>
@@ -722,38 +776,39 @@ function featHTML(g,k){ if(!g)return "";
 const slideStyle=g=>{const c=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";return c(g.t[0].c,"a")+c(g.t[1].c,"b")};
 function heroSet(){const c=$("#hcar"); if(!c)return;
   const ae=document.activeElement, fk=ae&&ae.classList&&ae.classList.contains("watch")?ae.dataset.g:null;
-  c.innerHTML=G.map((g,k)=>`<div class="feat${g.sc&&g.sc.over?" done":""}${starOn(g.aw,g.hm)?" fv":""}" data-k="${k}" style="${slideStyle(g)}">${featHTML(g,k)}</div>`).join("");
+  c.innerHTML=G.map((g,k)=>`<div class="feat${g.sc&&g.sc.over?" done":""}${starOn(g.aw,g.hm)?" fv":""}" data-k="${k}" style="${slideStyle(g)}">${featHTML(g,k)}<button class="watch hit focusable" data-g="${k}" aria-label="${esc(g.tm[0]+" vs "+g.tm[1]+": game options")}"></button></div>`).join("");
   c.scrollLeft=(c.children[hi]||{}).offsetLeft||0; markCur(); setTimeout(updateDots,50);
   if(fk!==null){const w=c.querySelector('.watch[data-g="'+fk+'"]'); if(w)w.focus({preventScroll:true})}}
 function heroRefresh(){if(tab==="home"&&$("#hcar"))heroSet()}
 function pillHTML(c,k,kind,cal){
   const col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";
   const fs=starOn(c.aw,c.hm,c.sc&&c.sc.over)?`<span class="fstar">&#9733;</span>`:"";
-  return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${fs}<span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(c.nets.join(" / "))}</span>`:""}<span class="live">${kind==="later"?(cal?esc(new Date(c.st).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})):"STARTS "+esc(fmtT(c.st)).toUpperCase()):c.sc?(c.sc.over?esc(c.sc.note):''+esc(c.sc.note)):esc(clk(c.st)).toUpperCase()}</span></button>`;
+  return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${fs}<span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(netStr(c))}</span>`:""}<span class="live">${kind==="later"?(cal?esc(new Date(c.st).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})):"STARTS "+esc(fmtT(c.st)).toUpperCase()):c.sc?(c.sc.over?esc(c.sc.note):'<i class="dot"></i>'+esc(c.sc.note)):esc(clk(c.st)).toUpperCase()}</span></button>`;
 }
 const chanCard=c=>`<button class="cc focusable" data-i="${ch.indexOf(c)}"><b>${esc(baseName(c.n))}</b>${fav.includes(c.n)?'<span class="star">&#9733;</span>':""}<span class="nw none">${esc(c.g)}</span></button>`;
 const chip=(label,pressed,attr)=>`<button class="chip focusable" ${attr} aria-pressed="${pressed}">${esc(label)}</button>`;
 
 function daysHTML(L,keep,cal){ // one block per day: Today, then weekday names; keep(offset) picks which days
-  let h="";const sd=new Date(new Date().setHours(0,0,0,0)).getTime(), days={};
+  let h="",dc="";const sd=new Date(new Date().setHours(0,0,0,0)).getTime(), days={};
   L.forEach((c,k)=>{const o=Math.round((new Date(new Date(c.st).setHours(0,0,0,0))-sd)/864e5);if(keep(o))(days[o]=days[o]||[]).push([c,k])});
   Object.keys(days).sort((x,y)=>x-y).forEach(o=>{const nm=+o===0?"Today":new Date(sd+o*864e5+36e5).toLocaleDateString([],{weekday:"long"});
     const d=new Date(sd+o*864e5+36e5), rows=days[o].slice().sort((x,y)=>(isFavG(x[0].aw,x[0].hm)?0:1)-(isFavG(y[0].aw,y[0].hm)?0:1)).map(([c,k])=>pillHTML(c,k,"later",cal)).join("");
-    h+=cal?`<div class="dh${+o===0?" today":""}"><span class="dn disp">${d.getDate()}</span><span class="dw"><b>${nm==="Today"?"Today, "+d.toLocaleDateString([],{weekday:"long"}):nm}</b><small>${d.toLocaleDateString([],{month:"long"})} &middot; ${days[o].length} games</small></span></div><div class="grid cal">${rows}</div>`
-      :`<h2 class="disp">${nm}<small style="color:var(--muted);font-size:.6em;margin-left:8px">${d.toLocaleDateString([],{month:"short",day:"numeric"})}</small></h2><div class="grid">${rows}</div>`});  return h}
+    if(cal)dc+=`<button class="chip focusable" data-day="${o}">${+o===0?"Today":esc(d.toLocaleDateString([],{weekday:"short"}))+" "+d.getDate()}</button>`;
+    h+=cal?`<div class="dh${+o===0?" today":""}" id="d${o}"><span class="dn disp">${d.getDate()}</span><span class="dw"><b>${nm==="Today"?"Today, "+d.toLocaleDateString([],{weekday:"long"}):nm}</b><small>${d.toLocaleDateString([],{month:"long"})} &middot; ${days[o].length} games</small></span></div><div class="grid cal">${rows}</div>`
+      :`<h2 class="disp">${nm}<small style="color:var(--muted);font-size:.6em;margin-left:8px">${d.toLocaleDateString([],{month:"short",day:"numeric"})}</small></h2><div class="grid">${rows}</div>`});  return (cal&&dc?`<div class="chips one dchips">${dc}</div>`:"")+h}
 let gQ="", gStart=0;
 const PV=document.createElement("video"); PV.muted=true; PV.playsInline=true; PV.setAttribute("playsinline","");
 let phls=null, pvT=0, pvI=0, pvKey="";
-function pvStop(){clearTimeout(pvT);clearInterval(pvI);pvKey="";if(phls){phls.destroy();phls=null}try{PV.pause();PV.removeAttribute("src");PV.load()}catch(x){}const g=$("#gv");if(g)g.classList.remove("on")}
+function pvStop(){clearTimeout(pvT);clearInterval(pvI);pvKey="";if(phls){phls.destroy();phls=null}try{PV.pause();PV.removeAttribute("src");PV.load()}catch(x){}const g=$("#gv");if(g)g.classList.remove("on","ld")}
 function pvSoon(c){ // starts 300ms after the focus settles, so fast scrolling loads nothing; no countdown
   if(pvKey===c.u)return; pvStop(); pvKey=c.u; const pw=$("#pw");
-  pvT=setTimeout(()=>{if(pw)pw.innerHTML='<i class="sk"></i>';
+  pvT=setTimeout(()=>{if(pw)pw.innerHTML='<i class="sk"></i>';{const g=$("#gv");if(g)g.classList.add("ld")}
     if(window.Hls&&Hls.isSupported()){phls=new Hls({maxBufferLength:8,capLevelToPlayerSize:true,startLevel:0});
       phls.on(Hls.Events.ERROR,(e,d)=>{if(d.fatal){if(pw)pw.textContent="Preview unavailable";$("#gv")&&$("#gv").classList.remove("on")}});
       phls.on(Hls.Events.MANIFEST_PARSED,()=>PV.play().catch(()=>{}));phls.loadSource(c.u);phls.attachMedia(PV)}else{PV.src=c.u;PV.play().catch(()=>{})}
   },300)}
 PV.addEventListener("playing",()=>{const g=$("#gv");if(g&&tab==="live"&&pvKey)g.classList.add("on")});
-function gInfo(el){const box=$("#gi"); if(!box)return; if(!el){box.innerHTML=`<div class="cn disp">Live TV</div><div class="sm">Move over a channel to see what is on.</div>`;return}
+function gInfo(el){const box=$("#gi"); if(!box)return; if(!el){box.innerHTML="";return}
   const c=ch[+el.dataset.i]; if(!c)return; const rows=(EPG&&c.id&&EPG[c.id]||[]).slice().sort((a,b)=>a[0]-b[0]), t=Date.now();
   const pick=el.dataset.s?rows.find(x=>x[0]===+el.dataset.s):rows.find(x=>x[0]<=t&&x[1]>t), nx=pick&&rows.find(x=>x[0]>=pick[1]);
   box.innerHTML=`<div class="cn disp">${esc(baseName(c.n))}</div><div class="sm">${esc(c.g)}</div>`+(pick?`<div class="st">${esc(ttl(pick))}</div><div class="sm">${clk(pick[0])} - ${clk(pick[1])}${pick[0]<=t&&pick[1]>t?" &middot; on now":""}</div>`:`<div class="st">Live TV</div><div class="sm">${epgL()?SKI:"No guide data for this channel"}</div>`)+(nx?`<div class="nx">Next: ${esc(ttl(nx))} at ${clk(nx[0])}</div>`:"");
@@ -774,8 +829,9 @@ function guideList(vis){const q=gQ.trim().toLowerCase();
 function guideHTML(vis){
   const list=guideList(vis), end=gStart+36e5*3; LL=list;
   const day=new Date(gStart).toLocaleDateString([],{weekday:"short"});
-  let h=`<div class="gh"><div class="gcs">${day} &middot; Left / Right for time</div><div class="gt">${[0,1,2,3,4,5].map(i=>`<span style="left:${i/6*100}%">${clk(gStart+i*18e5)}</span>`).join("")}</div></div>`;
+  let h=`<div class="gh"><div class="gcs">${day} &middot; &#9664; &#9654; time</div><div class="gt">${[0,1,2,3,4,5].map(i=>`<span style="left:${i/6*100}%">${clk(gStart+i*18e5)}</span>`).join("")}</div></div>`;
   if(!list.length)return h+(plLoad()?skN(8,()=>'<div class="gr"><button class="gc focusable"><span class="chlogo"></span><b>Channel name</b></button><div class="gt"><button class="pg now focusable" style="left:2px;right:2px"><b>Live TV</b><small>x</small></button></div></div>'):`<div class="empty">${grp==="Favorites"?"No favorites yet. Press Menu on a channel to add one.":grp==="Recent"?"Nothing watched yet.":"No channels match."}</div>`);
+  if(!list.some(c=>EPG&&c.id&&EPG[c.id]&&EPG[c.id].length)&&!epgL())h=`<div class="gnone ne">No guide data. Showing channels only.</div>`+h;
   list.forEach(c=>{const i=ch.indexOf(c), rows=(EPG&&c.id&&EPG[c.id]?EPG[c.id].filter(x=>x[1]>gStart&&x[0]<end).sort((x,y)=>x[0]-y[0]):[]), t=Date.now();
     const blocks=rows.length?rows.map(x=>{const l=(Math.max(x[0],gStart)-gStart)/(end-gStart)*100,w=(Math.min(x[1],end)-Math.max(x[0],gStart))/(end-gStart)*100;
       return `<button class="pg focusable${x[0]<=t&&x[1]>t?" now":""}" data-i="${i}" data-s="${x[0]}" style="left:calc(${l}% + 2px);width:calc(${w}% - 4px)"><b>${esc(ttl(x))}</b><small>${clk(x[0])} - ${clk(x[1])}</small></button>`}).join("")
@@ -791,12 +847,12 @@ function render(){
   if(tab!=="live")pvStop();
   guideTab(tab==="guide");
   document.querySelectorAll("header [data-t]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===tab));
-  const m=$("#m"), vis=ch.filter(on); m.classList.toggle("live",tab==="live");
+  const m=$("#m"), vis=ch.filter(on); m.classList.toggle("live",tab==="live"&&!noCh());
   if(tab==="home"){
     const gm=games(); const rk=x=>x.sc&&x.sc.over?2:x.sc?0:1; G=gm.live.sort((a,b)=>rk(a)-rk(b)||(isFavG(a.aw,a.hm)?0:1)-(isFavG(b.aw,b.hm)?0:1)||a.st-b.st); L=gm.later;
     const favs=fav.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c)), rec=recent.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c));
     let h=(G.length?"":`<h2 class="disp">NHL today</h2>`)+(G.length?(hi=Math.min(hi,G.length-1),`<div class="lz"><div class="lzh"><h2 class="disp">NHL today</h2><span class="dots" id="dots"></span></div><div class="hcar" id="hcar" data-pages></div><div class="gw" id="gw" data-pages><div class="grid lg">${G.map((c,k)=>pillHTML(c,k,"live")).join("")}</div></div></div>`)
-      :`<div class="empty">${ch.length?"No NHL games on right now."+(L.length?" Next up: "+esc(L[0].title)+", "+esc(fmtT(L[0].st))+".":""):"No playlist yet. Open Setup and add your M3U link."}</div>`);
+      :(noCh()?noPl():`<div class="empty">${ch.length?"No NHL games on right now."+(L.length?" Next up: "+esc(L[0].title)+", "+esc(fmtT(L[0].st))+".":""):"Loading your playlist..."}</div>`));
     h+=daysHTML(L,o=>o===0);
     m.innerHTML=h; if(tab==="home")heroSet();
   }else if(tab==="schedule"){
@@ -808,37 +864,43 @@ function render(){
     const per=g=>{const d=g.periodDescriptor||{};return d.periodType==="OT"?"OT":d.periodType==="SO"?"SO":"P"+(g.period||d.number||1)};
     const row=x=>{const a=tm(x.awayTeam),h=tm(x.homeTeam),i=scInfo(x),gs=(x.goals||[]).slice(-3).reverse(),lv=ord(x)===0;
       const gh=gs.map((g,k)=>`<span class="gl${k?"":" new"}"><b>${esc(g.teamAbbrev)}</b> ${esc((g.name&&g.name.default)||"")} <em>${esc(per({period:g.period,periodDescriptor:g.periodDescriptor}))} ${esc(g.timeInPeriod||"")}</em> ${g.awayScore}-${g.homeScore}${g.strength&&g.strength!=="ev"?" "+esc(g.strength.toUpperCase()):""}</span>`).join("");
-      return `<button data-id="${x.id}" class="sr focusable${i&&i.over?" done":""}${lv?" lv":""}${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?" fv":""}" style="--o-a:${h.c};--o-b:${a.c}">${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?`<span class="fstar">&#9733;</span>`:""}<span class="srt"><span class="srs">${h.logo?`<img src="${h.logo}" alt="">`:""}<b class="disp">${esc(x.homeTeam.abbrev)}</b></span><span class="srm disp">${i?esc(i.score):"VS"}</span><span class="srs">${a.logo?`<img src="${a.logo}" alt="">`:""}<b class="disp">${esc(x.awayTeam.abbrev)}</b></span><span class="srn">${i?esc(i.note):esc(fmtT(Date.parse(x.startTimeUTC)))}</span></span>${gh?`<span class="srg"><i>LAST GOAL</i>${gh}</span>`:`<span class="srg none">${i?"No goals yet":"Not started"}</span>`}</button>`};
+      return `<button data-id="${x.id}" class="sr focusable${i?"":" pre"}${i&&i.over?" done":""}${lv?" lv":""}${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?" fv":""}" style="--o-a:${h.c};--o-b:${a.c}">${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?`<span class="fstar">&#9733;</span>`:""}<span class="srt"><span class="srs">${h.logo?`<img src="${h.logo}" alt="">`:""}<b class="disp">${esc(x.homeTeam.abbrev)}</b><i class="hmk">HOME</i></span><span class="srm disp">${i?esc(i.score):"VS"}</span><span class="srs">${a.logo?`<img src="${a.logo}" alt="">`:""}<b class="disp">${esc(x.awayTeam.abbrev)}</b></span><span class="srn">${i?(lv?'<i class="dot"></i>LIVE &middot; ':"")+esc(i.note):esc(fmtT(Date.parse(x.startTimeUTC)))}</span></span>${gh?`<span class="srg"><i>LAST GOAL</i>${gh}</span>`:`<span class="srg none">${i?"No goals yet":"Not started"}</span>`}</button>`};
     const FK={id:0,gameState:"FUT",startTimeUTC:new Date().toISOString(),awayTeam:{abbrev:"AAA"},homeTeam:{abbrev:"BBB"},goals:[]};
-    m.innerHTML=`<div class="lzh"><h2 class="disp">Scores today</h2><span class="sub" style="margin:0">${scLoaded?`${nLive} live &middot; ${gl.length} games`:SKL}</span></div>`+(gl.length?`<div class="srl">${gl.map(row).join("")}</div>`:!scLoaded&&!scFail?`<div class="srl">${skN(8,()=>row(FK))}</div>`:scFail?`<div class="empty">Could not load the scores. Trying again.</div>`:`<div class="empty">No NHL games on the board yet.</div>`);
+    m.innerHTML=`<div class="lzh"><h2 class="disp">Scores today</h2><span class="sub" style="margin:0">${scLoaded?`${nLive} live &middot; ${gl.length} games`:SKL}</span></div>`+(gl.length?`<div class="srl">${gl.map(row).join("")}</div>`:!scLoaded&&!scFail?`<div class="srl">${skN(8,()=>row(FK))}</div>`:scFail?`<div class="empty gerr"><div>Could not load the scores.</div><button class="btn focusable" id="scretry">Try again</button></div>`:`<div class="empty">No NHL games on the board yet.</div>`);
+  }else if(tab==="live"&&noCh()){ m.innerHTML=noPl();
   }else if(tab==="live"){
     const have=new Set(vis.map(catOf)), groups=["All","Favorites","Recent",...catList.filter(x=>have.has(x))];
     if(!groups.includes(grp))grp="All";
     if(!gStart||gStart<Date.now()-3*36e5)gStart=Math.floor(Date.now()/18e5)*18e5;
-    m.innerHTML=`<div class="gs"><input id="gs" class="focusable" type="search" placeholder="Search channels" value="${esc(gQ)}"></div><div class="chips one">${groups.map(g=>chip(g,g===grp,`data-grp="${esc(g)}"`)).join("")}</div><div class="gtop"><div class="gi" id="gi"></div><div class="gv" id="gv"><div class="pw" id="pw">Preview starts when a channel is focused</div></div></div><div id="gx">${guideHTML(vis)}</div>`;
+    m.innerHTML=`<div class="gtool"><div class="gs"><input id="gs" class="focusable" type="search" placeholder="Search channels" value="${esc(gQ)}"></div><div class="chips one">${groups.map(g=>chip(g,g===grp,`data-grp="${esc(g)}"`)).join("")}</div></div><div class="gtop"><div class="gi" id="gi"></div><div class="gv" id="gv"><div class="pw" id="pw">Preview starts when a channel is focused</div></div></div><div id="gx">${guideHTML(vis)}</div>`;
     $("#gv").prepend(PV); gInfo(null);
   }else{
-    m.innerHTML=`<h2 class="disp">Setup</h2><div class="sub">M3U playlist link</div>
-      <div class="field"><input id="u" type="url" value="${esc(url)}" placeholder="http://..."><button class="btn" id="go">Load</button></div>
+    m.innerHTML=`<h2 class="disp">Setup</h2><div class="chips">${[["s-pl","Playlist"],["s-tm","Teams &amp; sports"],["s-ch","Channels"]].map(j=>`<button class="chip focusable" data-jump="${j[0]}">${j[1]}</button>`).join("")}</div>
+      <h2 class="disp" id="s-pl">Playlist</h2><div class="sub">M3U playlist link. Paste the link from your provider.</div>
+      <div class="field"><input id="u" class="mask focusable" type="url" value="${esc(url)}" placeholder="http://..." autocomplete="off"><button class="btn focusable" id="go">Load</button></div>
       <div class="sub" id="st">${msg==="Loading..."?SKL:esc(msg||ch.length+" channels loaded")}</div>
-      <h2 class="disp" style="margin-top:14px">Favorite teams</h2><div class="sub">Their games show first, with a star while live.</div><div class="chips">${NHL.map(t=>`<button class="chip ft focusable" data-ft="${t[0]}" aria-pressed="${favT.includes(t[0])}">${(window.LOGO||{})[t[0]]?`<img src="${window.LOGO[t[0]]}" alt="">`:""}<span>${esc(t[1])}</span></button>`).join("")}</div>
+      <h2 class="disp" id="s-tm" style="margin-top:14px">Favorite teams</h2><div class="sub">Their games show first, with a star while live.</div><div class="chips">${NHL.map(t=>`<button class="chip ft focusable" data-ft="${t[0]}" aria-pressed="${favT.includes(t[0])}">${(window.LOGO||{})[t[0]]?`<img src="${window.LOGO[t[0]]}" alt="">`:""}<span>${esc(t[1])}</span></button>`).join("")}</div>
       <h2 class="disp" style="margin-top:14px">Sports</h2><div class="sub">Turn a sport off to hide its games and channels.</div>${sportRows()}${catSettingsHTML()}`;
   }
-  const f=m.querySelector("button,input"); if(f&&!document.activeElement.closest("main")) f.focus();
+  const f=firstF(m); if(f&&!document.activeElement.closest("main")){f.focus({preventScroll:true});if(tab==="home")m.scrollTop=0}
 }
 let LL=[], deskSel=null;
+const netStr=g=>[...new Set((g.nets||[]).map(n=>String(n).trim().replace(/^[A-Z]{2,3}(?=NHL$)/,"")).filter(Boolean))].join(" / "); // data has a glued code like MINNHL
+const noCh=()=>!ch.length&&!plLoad();
+const noPl=()=>`<div class="empty gerr noplay"><div>${url?"Your playlist did not load. Check the link in Setup.":"No playlist yet. Add your M3U link to start watching."}</div><button class="btn focusable" data-go="setup">${url?"Open Setup":"Add playlist"}</button></div>`;
+function firstF(m){return (tab==="home"&&m.querySelector("#hcar .watch"))||(tab==="schedule"&&m.querySelector(".grid.cal .pill"))||m.querySelector("button,input")} // first focus: hero on Home, first game on Schedule
 /* ---------- game popup: pick Watch / Live stats ---------- */
 let popG=null,popBack=null;
 function openPop(g){if(!g)return;popG=g;popBack=document.activeElement;const sc=g.sc,over=sc&&sc.over,x=scoreOf(g.aw,g.hm,g.st),logo=t=>t.logo?`<img src="${t.logo}" alt="">`:"";
-  const hasF=!!(g.c&&g.c.u), mvb=!over&&hasF&&(sc||Date.now()>=g.st-40*6e4)?'<button class="pbtn alt" data-pa="mv">MULTIVIEW +</button>':"", btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>${g.c&&g.c.u&&x&&Date.now()<(ls("endAt",{})[x.id]||0)+36e5?`<button class="pbtn alt" data-pa="play">WATCH POST GAME</button>`:""}`:sc?(hasF?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="sum">LIVE STATS</button>`):(hasF&&Date.now()>=g.st-40*6e4?`<button class="pbtn" data-pa="play">WATCH PRE-GAME</button>`:"")+`<button class="pbtn alt" data-pa="t0">${esc(g.tm[0].split(" ").pop().toUpperCase())} IN GUIDE</button><button class="pbtn alt" data-pa="t1">${esc(g.tm[1].split(" ").pop().toUpperCase())} IN GUIDE</button>`;
+  const hasF=!!(g.c&&g.c.u), mvb=!over&&hasF&&(sc||Date.now()>=g.st-40*6e4)?'<button class="pbtn alt" data-pa="mv">MULTIVIEW +</button>':"", btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>${g.c&&g.c.u&&x&&Date.now()<(ls("endAt",{})[x.id]||0)+36e5?`<button class="pbtn alt" data-pa="play">WATCH POST GAME</button>`:""}`:sc?(hasF?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="sum">LIVE STATS</button>`):(hasF&&Date.now()>=g.st-40*6e4?`<button class="pbtn" data-pa="play">WATCH PRE-GAME</button>`:"")+`<button class="pbtn${hasF&&Date.now()>=g.st-40*6e4?" alt":""}" data-pa="t0">TEAM GUIDE: ${esc(g.tm[0].split(" ").pop().toUpperCase())}</button><button class="pbtn alt" data-pa="t1">TEAM GUIDE: ${esc(g.tm[1].split(" ").pop().toUpperCase())}</button>`;
   if(g.sid)svFeeds(g.sid,()=>{}); // warm the 2 min stream cache so Watch starts fast
-  const p=$("#gpop");p.innerHTML=`<div class="pc${over?" done":""}" style="${slideStyle(g)}"><span class="skin"><span class="mesh"></span></span><div class="pi"><div class="ft-top"><b>${sc?(over?"GAME OVER":esc(sc.note)):esc(fmtT(g.st))}</b><span>${esc((g.nets||[]).join(" / "))}</span></div>
-    <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span></div><div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div><div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span></div></div>
-    <div class="tv">${over?"This game has ended":sc?(g.c&&g.c.u?"Best feed: "+esc(bfName(g)):"No channel carries this game"):hasF&&Date.now()>=g.st-40*6e4?"Pre-game on "+esc(bfName(g)):"Game has not started yet"}</div><div class="pb">${btns}${mvb}</div></div></div>`;
+  const p=$("#gpop");p.innerHTML=`<div class="pc${over?" done":""}" style="${slideStyle(g)}"><span class="skin"><span class="mesh"></span></span><div class="pi"><div class="ft-top"><b>${sc?(over?"GAME OVER":esc(sc.note)):esc(fmtT(g.st))}</b><span>${esc(netStr(g))}</span></div>
+    <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span><small>HOME</small></div><div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div><div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span><small>AWAY</small></div></div>
+    <div class="tv">${over?"This game has ended":sc?(g.c&&g.c.u?"Best feed: "+esc(bfName(g)):"No channel carries this game"):hasF&&Date.now()>=g.st-40*6e4?"Pre-game on "+esc(bfName(g)):"Game has not started yet"}</div><div class="pb">${btns}${mvb}<button class="pbtn alt" data-pa="close">CLOSE</button></div></div></div>`;
   p.hidden=false;p.querySelector(".pbtn").focus()}
 let popC=null;
 function openChMenu(c){if(!c||!$("#gpop").hidden)return;popC=c;popG=null;popBack=document.activeElement;const o=onNow(c);
-  $("#gpop").innerHTML=`<div class="pc"><span class="skin"><span class="mesh"></span></span><div class="pi"><div class="ft-top"><b>${esc(baseName(c.n))}</b><span>${esc(c.g||"")}</span></div><div class="ft-mid"><div class="ft-team"><span class="nm disp">${esc(o?o.t:"Live TV")}</span></div></div><div class="pb"><button class="pbtn" data-pa="cplay">WATCH</button><button class="pbtn alt" data-pa="cmv">MULTIVIEW +</button><button class="pbtn alt" data-pa="cfav">${fav.includes(c.n)?"UNFAVORITE":"FAVORITE"}</button></div></div></div>`;
+  $("#gpop").innerHTML=`<div class="pc"><span class="skin"><span class="mesh"></span></span><div class="pi"><div class="ft-top"><b>${esc(baseName(c.n))}</b><span>${esc(c.g||"")}</span></div><div class="ft-mid"><div class="ft-team"><span class="nm disp">${esc(o?o.t:"Live TV")}</span></div></div><div class="pb"><button class="pbtn" data-pa="cplay">WATCH</button><button class="pbtn alt" data-pa="cmv">MULTIVIEW +</button><button class="pbtn alt" data-pa="cfav">${fav.includes(c.n)?"UNFAVORITE":"FAVORITE"}</button><button class="pbtn alt" data-pa="close">CLOSE</button></div></div></div>`;
   $("#gpop").hidden=false;$("#gpop").querySelector(".pbtn").focus()}
 function closePop(){$("#gpop").hidden=true;if(popBack&&popBack.isConnected)popBack.focus({preventScroll:true})}
 $("#gpop").addEventListener("click",e=>{const b=e.target.closest("button");if(!b){closePop();return}const a=b.dataset.pa,g=popG;if(!a)return;
@@ -866,7 +928,7 @@ function gdLoad(){const id=gdId,u="https://api-web.nhle.com/v1/gamecenter/"+id+"
   get("landing","gotGL");get("right-rail","gotGR");get("boxscore","gotGB");get("play-by-play","gotGP")}
 function gdRender(){const sc=SC.find(x=>x.id===gdId),b=gdBox,L0=gdLand,aw=(sc&&sc.awayTeam)||(b&&b.awayTeam)||(L0&&L0.awayTeam)||{},hm=(sc&&sc.homeTeam)||(b&&b.homeTeam)||(L0&&L0.homeTeam)||{};
   const h=$("#gdh"),cur=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.gt,curS=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.gs;
-  h.innerHTML=`<button data-gx="1">X</button><button data-gt="sum" aria-pressed="${gdTab==="sum"}">Summary</button><button data-gt="box" aria-pressed="${gdTab==="box"}">${/OFF|FINAL/.test((sc&&sc.gameState)||(L0&&L0.gameState)||"")?"Stats":"Box Score"}</button><button data-gt="pbp" aria-pressed="${gdTab==="pbp"}">Play-by-Play</button><span class="t disp">${esc(hm.abbrev||"")} vs ${esc(aw.abbrev||"")}</span>`;
+  h.innerHTML=`<button data-gx="1">&#8592; Back</button><button data-gt="sum" aria-pressed="${gdTab==="sum"}">Summary</button><button data-gt="box" aria-pressed="${gdTab==="box"}">${/OFF|FINAL/.test((sc&&sc.gameState)||(L0&&L0.gameState)||"")?"Stats":"Box Score"}</button><button data-gt="pbp" aria-pressed="${gdTab==="pbp"}">Play-by-Play</button><span class="t disp">${esc(hm.abbrev||"")} vs ${esc(aw.abbrev||"")}</span>`;
   if(cur){const f=h.querySelector("[data-gt="+cur+"]");if(f)f.focus()}
   const rb=$("#gdr");rb.innerHTML=gdTab==="box"?`<button data-gs="h" aria-pressed="${gdSide==="h"}">${esc(hm.abbrev||"Home")}</button><button data-gs="a" aria-pressed="${gdSide==="a"}">${esc(aw.abbrev||"Away")}</button>`:"";
   if(curS){const f=rb.querySelector("[data-gs="+curS+"]");if(f)f.focus()}
@@ -913,9 +975,9 @@ $("#gd").addEventListener("keydown",e=>{const k=e.key;if(!/^Arrow/.test(k))retur
 /* ---------- player ---------- */
 function ctlFit(){for(const el of [$("#pctl"),$("#mvb")]){if(!el||!el.offsetParent)continue;const g=parseFloat(getComputedStyle(el).columnGap)||0,k=[...el.children].filter(x=>x.offsetWidth),w=k.reduce((a,x)=>a+x.offsetWidth,0)+g*(k.length-1),W=(el.parentNode.clientWidth||innerWidth)-16;el.style.setProperty("--cs",Math.min(1,W/Math.max(1,w)).toFixed(3))}}
 window.addEventListener("resize",ctlFit);
-function show(){const pl=$("#pl");pl.classList.remove("hide");requestAnimationFrame(ctlFit);clearTimeout(hideT);hideT=setTimeout(()=>{if(!menuOn)pl.classList.add("hide")},4000)}
-function setZoom(z){zoom=Math.max(50,Math.min(200,z));$("#v").style.transform="scale("+zoom/100+")";$("#zv").textContent=zoom+"%"}
-function favBtn(){$("#bfav").textContent=fav.includes(cur.c.n)?"Unfavorite":"Favorite"}
+function show(){const pl=$("#pl");pl.classList.remove("hide");requestAnimationFrame(ctlFit);clearTimeout(hideT);hideT=setTimeout(()=>{if(!menuOn&&!$("#pbuf").classList.contains("on"))pl.classList.add("hide")},4000)} // never auto-hide while connecting / buffering / failed: the message and the Feed button stay up
+function setZoom(z){zoom=Math.max(50,Math.min(200,z));$("#v").style.transform="scale("+zoom/100+")";$("#zv").textContent="Zoom "+zoom+"%"}
+function favBtn(){const f=fav.includes(cur.c.n),b=$("#bfav");b.textContent=f?"Unfavorite":"Favorite";b.setAttribute("aria-pressed",f)}
 let waitT=0;
 function bufBuild(){ // big loading card: both teams on their colours, or the channel name
   const pb=$("#pbuf"), t=cur&&cur.t&&cur.t.length>1?cur.t:[{},{}], two=cur&&cur.tm&&cur.tm.length>1&&t[0].logo&&t[1].logo;
@@ -925,7 +987,7 @@ function bufBuild(){ // big loading card: both teams on their colours, or the ch
 }
 function msgP(t,mode){ // mode: "full" first load, "fail" dead end, "mini" mid-stream stall; empty text hides it
   const pb=$("#pbuf"); clearTimeout(waitT);
-  if(!t){pb.classList.remove("on","mini","fail");return}
+  if(!t){pb.classList.remove("on","mini","fail");if($("#pl").classList.contains("on")&&!$("#pl").classList.contains("hide"))show();return}
   pb.classList.toggle("mini",mode==="mini"); pb.classList.toggle("fail",mode==="fail");
   if(mode!=="mini")bufBuild();
   $("#pst").textContent=t; pb.setAttribute("aria-label",t); pb.classList.add("on");
@@ -985,11 +1047,12 @@ function fmPick(g,feeds){const r=ls("feedMem",{})[fmKey(g)]; return r&&(feeds.fi
 /* ---------- score bar: every game today, top strip, shows when the player UI hides; Change game uses it as the picker ---------- */
 let sbOn=ls("scoreBar",false), SB=[], SBP=0, SBT=null; // SBP: Change game picker open; SBT: the multiview tile being switched
 const sbTaken=g=>!!SBT&&MV.t.some(t=>t!==SBT&&t.g.title===g.title), sbOk=g=>!!(g.c&&g.c.u)&&!(g.sc&&g.sc.over)&&g.st<=Date.now()+40*6e4&&!sbTaken(g), sbCur=g=>SBT?SBT.g.title===g.title:mvOn()?MV.t.some(t=>t.g.title===g.title):!!(cur&&cur.title&&cur.title===g.title);
+const sbH=H0=>Math.max(26,Math.round(H0*.05)); // Brock: bar 5% at the bottom, one line
 function sbSync(){const pl=$("#pl"),b=$("#sbar"),mv=mvOn(),game=pl.classList.contains("on")&&!mv&&cur&&cur.title,on=!!(SBP||(sbOn&&(game||mv))),was=b.classList.contains("on");
   b.classList.toggle("on",on); b.classList.toggle("pick",!!SBP); b.classList.toggle("vis",on&&!SBP&&(mv?mvEl.classList.contains("hide"):pl.classList.contains("hide")));
   $("#bsc").setAttribute("aria-pressed",sbOn); const m=$("#mvb [data-a=sc]"); if(m)m.setAttribute("aria-pressed",sbOn); if(on&&!was)sbRefresh()}
-function sbItem(g,k){const c=g.sc,ok=sbOk(g),col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"",lg=(x,a)=>x&&x.logo?`<img src="${x.logo}" alt="">`:`<b class="disp">${esc(a)}</b>`;
-  return `<button class="sbi focusable${c&&c.over?" done":""}${ok?"":" off"}${sbCur(g)?" cur":""}" data-t="${esc(g.title)}" data-k="${k}" tabindex="-1" aria-disabled="${!ok}" aria-label="${esc(g.tm[0]+" vs "+g.tm[1]+", "+(c?c.score+", "+c.note:clk(g.st)))}" style="${col(g.t[0].c,"a")}${col(g.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${lg(g.t[0],g.hm)}<span class="scr disp">${c?esc(c.score):"VS"}</span>${lg(g.t[1],g.aw)}<span class="nt disp">${c?esc(c.note):esc(clk(g.st)).toUpperCase()}</span></button>`}
+function sbItem(g,k){const c=g.sc,ok=sbOk(g),s=c?String(c.score).split(" - "):0,col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"",lg=(x,a)=>x&&x.logo?`<img src="${x.logo}" alt="">`:`<b class="disp">${esc(a)}</b>`;
+  return `<button class="sbi focusable${c&&c.over?" done":""}${ok?"":" off"}${sbCur(g)?" cur":""}" data-t="${esc(g.title)}" data-k="${k}" tabindex="-1" aria-disabled="${!ok}" aria-label="${esc(g.tm[0]+" vs "+g.tm[1]+", "+(c?c.score+", "+c.note:clk(g.st)))}" style="${col(g.t[0].c,"a")}${col(g.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${lg(g.t[0],g.hm)}<span class="scr disp">${c?esc(c.score):"VS"}</span>${lg(g.t[1],g.aw)}<span class="nt disp">${c?esc(c.note):esc(clk(g.st)).toUpperCase()}</span><span class="pk"><span class="pt disp">${esc(g.aw)}${s?" "+s[1]:""} @ ${esc(g.hm)}${s?" "+s[0]:""}</span><span class="pn disp">${c?esc(c.note):esc(clk(g.st)).toUpperCase()}</span></span></button>`}
 function sbRefresh(){const b=$("#sbar"); if(!b.classList.contains("on"))return;
   if(!scLoaded&&!scFail){b.innerHTML=skN(8,i=>sbItem({tm:["AAA","BBB"],t:[{},{}],hm:"BBB",aw:"AAA",title:"sk"+i,st:Date.now()},i));return}
   const f=document.activeElement, ft=b.contains(f)&&f.dataset.t;
@@ -997,7 +1060,8 @@ function sbRefresh(){const b=$("#sbar"); if(!b.classList.contains("on"))return;
   b.innerHTML=SB.length?SB.map(sbItem).join(""):'<span class="sbe">No other NHL games</span>';
   b.classList.remove("tight"); if(b.scrollWidth>b.clientWidth+1)b.classList.add("tight"); // too many games: drop the clock so more fit on the one line
   const n=ft&&b.querySelector('[data-t="'+CSS.escape(ft)+'"]'); if(n)n.focus({preventScroll:true})}
-function sbFocus(el){const b=$("#sbar"); el.focus({preventScroll:true}); b.scrollLeft=Math.max(0,el.offsetLeft-(b.clientWidth-el.offsetWidth)/2)}
+function sbFocus(el){const b=$("#sbar"); el.focus({preventScroll:true}); b.scrollLeft=Math.max(0,el.offsetLeft-(b.clientWidth-el.offsetWidth)/2); el.scrollIntoView({block:"nearest"})}
+function sbMoveV(d){const a=document.activeElement,it=[...$("#sbar").querySelectorAll(".sbi:not(.off)")]; if(!it.includes(a))return; const r=a.getBoundingClientRect(); let best=null,bs=1e9; it.forEach(x=>{const q=x.getBoundingClientRect(),dy=(q.top-r.top)*d; if(dy<8)return; const v=dy*3+Math.abs(q.left-r.left); if(v<bs){bs=v;best=x}}); if(best)sbFocus(best)} // picker is a wrapped grid: Up/Down jump to the nearest game in the next row
 function sbPick(on,t){const d=document.body;
   if(!on){SBP=0;SBT=null;d.classList.remove("sbp");sbSync(); if(mvOn()){mvShow();mvEl.focus()}else{show();$("#bcg").focus()} return}
   closeMenu(); mvMenuClose(); SBP=1; SBT=t||null; d.classList.add("sbp"); clearTimeout(hideT); sbSync(); sbRefresh();
@@ -1010,7 +1074,7 @@ function sbGo(t){const g=SB.find(x=>x.title===t); if(!g||!sbOk(g)||(mvOn()&&!SBT
   clearTimeout(zapT); killHls(); const v=$("#v"); try{v.pause();v.removeAttribute("src");v.load()}catch(x){} play(g); sbSync()}
 $("#sbar").addEventListener("click",e=>{const b=e.target.closest(".sbi"); if(b)sbGo(b.dataset.t)});
 document.addEventListener("keydown",e=>{if(!SBP)return; const k=e.key, a=document.activeElement; // picker: Left/Right walk the bar (disabled games skipped), OK switches, Back (nemBack) cancels
-  if(k==="ArrowLeft"||k==="ArrowRight")sbMove(k==="ArrowRight"?1:-1); else if(k==="Enter"||k===" "){if(a.classList.contains("sbi"))sbGo(a.dataset.t)} else if(!/^Arrow/.test(k))return;
+  if(k==="ArrowLeft"||k==="ArrowRight")sbMove(k==="ArrowRight"?1:-1); else if(k==="ArrowUp"||k==="ArrowDown"){} else if(k==="Enter"||k===" "){if(a.classList.contains("sbi"))sbGo(a.dataset.t)} else if(!/^Arrow/.test(k))return;
   e.preventDefault();e.stopPropagation()},true);
 let zbT=0, zapT=0;
 function lazyFeed(n){ // stop the old stream now, start the new one only after Up/Down settles (no overlapping streams)
@@ -1027,7 +1091,7 @@ function stop(){clearTimeout(zapT);$("#zb").classList.remove("on");if($("#v").vo
 function refocus(){const a=document.activeElement; if(a&&a!==document.body&&a.offsetParent)return; const f=document.querySelector("#hcar .watch[data-g=\""+hi+"\"]")||$("#m").querySelector(".focusable,button,input")||document.querySelector("header [data-t][aria-pressed=true]"); if(f)f.focus({preventScroll:true})}
 function openMenu(kind){
   const m=$("#pmenu"); menuOn=true; show();
-  if(kind==="feed")m.innerHTML=`<h3>CHOOSE A FEED FOR THIS GAME</h3>`+cur.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===cur.feed}" data-f="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("");
+  if(kind==="feed")m.innerHTML=`<h3>${cur.title?"CHOOSE A FEED":"FEED"}</h3>`+cur.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===cur.feed}" data-f="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("")+(cur.feeds.length<2?'<div class="pnote">Only one feed for this one</div>':"");
   else m.innerHTML=`<h3>ZOOM</h3>`+[50,75,85,90,95,100,105,110,115,120,125,130,140,150,175,200].map(z=>`<button role="menuitemradio" aria-checked="${z===zoom}" data-z="${z}"><span>${z}%</span><small>${z===100?"fit to screen":""}</small></button>`).join("");
   m.hidden=false; const a=m.querySelector('[aria-checked=true]')||m.querySelector("button"); a.focus(); a.scrollIntoView({block:"center"});
 }
@@ -1053,7 +1117,7 @@ function chFeeds(c){ // this channel, plus other channels airing the same EPG ti
   const o=onNow(c),b=baseName(c.n),alt=ch.filter(x=>x!==c&&x.u&&on(x)&&(baseName(x.n)===b||(o&&(onNow(x)||{}).t===o.t))).slice(0,8); return [c,...alt]}
 function mvLayout(){
   const T=MV.t,n=T.length; if(!n)return;
-  const W=mvEl.clientWidth,H0=mvEl.clientHeight,TB=0,H=H0-(sbOn?Math.max(26,Math.round(H0*.05)):0),S=MVL[n],cs=S.includes(MV.sty[n])?MV.sty[n]:S[0],free=cs==="free",gz=MV.gz/100,
+  const W=mvEl.clientWidth,H0=mvEl.clientHeight,TB=0,H=H0-(sbOn?sbH(H0):0),S=MVL[n],cs=S.includes(MV.sty[n])?MV.sty[n]:S[0],free=cs==="free",gz=MV.gz/100,
     ord=[MV.a,...T.filter(x=>x!==MV.a)],R=free?0:MVS[cs][1](W<H*.9,W/H); MV.cs=cs;
   T.forEach(t=>{let r;
     if(free){const c=MVF[T.indexOf(t)],s=.6*t.bs*gz;r=[.5+(c[0]-.5)*gz-s/2,.5+(c[1]-.5)*gz-s/2,s,s]}else r=R[ord.indexOf(t)];
@@ -1064,7 +1128,7 @@ function mvLayout(){
   mvMark()}
 function mvMark(){MV.t.forEach((t,i)=>{t.el.classList.toggle("au",t===MV.a);t.el.classList.toggle("fo",t===MV.f);
     t.lb.textContent=(i+1)+"  "+mvName(t.g)+(t===MV.a?"  · AUDIO":"")+(t.c&&!(t.g.ch&&t.c===t.g.c)?"  · "+baseName(t.c.n):"")});
-  const f=MV.f; $("#mvl").textContent="Layout: "+MVS[MV.cs][0]}
+  const f=MV.f; $("#mvl").textContent="Layout: "+MVS[MV.cs][0]; $("#mvz").textContent="ALL ZOOM "+MV.gz+"%"}
 function mvCap(t){ // size each tile's quality to its box; more streams = lower ceilings (main tile may go higher). autoLevelCapping never reloads.
   const h=t.hls,L=h&&h.levels; if(!L||!L.length)return;
   const n=MV.t.length,m=t===MV.a,base=m?[1080,1080,720,540][n-1]:[0,720,540,360][n-1],
@@ -1075,11 +1139,11 @@ function mvCap(t){ // size each tile's quality to its box; more streams = lower 
   t.cp=i;
   h.config.maxBufferLength=m?14:6; h.config.maxMaxBufferLength=m?20:8} // muted tiles keep a tiny buffer
 const mvCapAll=()=>MV.t.forEach(mvCap);
-const mvMsg=(t,s,m)=>{t.mx.style.color=m==="fail"?"#f88":"";if(s&&m!=="fail")t.mx.innerHTML='<i class="sk"></i>';else t.mx.textContent=s};
+const mvMsg=(t,s,m)=>{t.mx.style.color=m==="fail"?"#f88":"";if(m==="fail"&&s)t.el.dataset.err=1;else delete t.el.dataset.err;if(s&&m!=="fail")t.mx.innerHTML='<i class="sk"></i>';else t.mx.textContent=s};
 function mvPlay(t){t.v.play().catch(()=>{if(!t.v.muted&&t===MV.a){t.v.muted=true;t.v.play().catch(()=>{});mvToast("Press OK on the game for sound")}})}
 function mvHook(t,h){let rec=0; h.on(Hls.Events.ERROR,(e,d)=>{if(!d.fatal||t.hls!==h)return; log("mv hls",d.type,d.details);
   if(rec++<2){if(d.type===Hls.ErrorTypes.MEDIA_ERROR){h.recoverMediaError();return}if(d.type===Hls.ErrorTypes.NETWORK_ERROR){h.startLoad();return}}
-  const nx=t.feeds.find(f=>!t.tried.has(f.u)); if(nx)mvLoad(t,nx); else mvMsg(t,"No feed would play. Press FEED.","fail")})}
+  const nx=t.feeds.find(f=>!t.tried.has(f.u)); if(nx)mvLoad(t,nx); else mvMsg(t,"This feed failed. Hold OK to change it","fail")})}
 function mvLoad(t,c){ // the ONLY place a tile (re)loads: first start, FEED change, or a fatal stream error
   t.c=c; t.tried.add(c.u); mvMsg(t,"Connecting to "+baseName(c.n)+"..."); mvMark();
   if(t.hls){t.hls.destroy();t.hls=null}
@@ -1101,7 +1165,7 @@ function mvAdd(g,pre){ // pre = {feeds,c} when the game was already playing in t
   if(MV.t.length>=MVMAX){mvToast("Multiview is full (4 games)");return}
   const el=document.createElement("div"); el.className="mt"; el.innerHTML='<video muted playsinline autoplay disablepictureinpicture></video><div class="ml"></div><div class="mx"></div>';
   const t={g,el,v:el.firstChild,lb:el.children[1],mx:el.children[2],feeds:[],tried:new Set(),hls:null,c:null,z:100,bs:1,pen:0};
-  t.v.addEventListener("playing",()=>mvMsg(t,"")); t.v.addEventListener("error",()=>{if(!t.hls)mvMsg(t,"This feed would not play","fail")});
+  t.v.addEventListener("playing",()=>mvMsg(t,"")); t.v.addEventListener("error",()=>{if(!t.hls)mvMsg(t,"This feed failed. Hold OK to change it","fail")});
   mvEl.insertBefore(el,$("#mvt")); MV.t.push(t);
   if(!MV.a){MV.a=MV.f=t;t.v.muted=false}
   mvLayout();
@@ -1146,7 +1210,7 @@ function mvHide(){clearTimeout(MV.ht);if(!$("#mvm").hidden)return; // the hold m
 /* ---------- per-tile menu: hold OK on a selected tile (or long-press / right-click) ---------- */
 const mvZl=t=>Math.round(MV.cs==="free"?t.bs*100:t.z)+"%";
 function mvMenu(t){if(!t||!MV.t.includes(t))return; const m=$("#mvm"); MV.mt=t; MV.f=t; mvMark(); mvShow();
-  m.innerHTML=`<h3>${esc(mvName(t.g))}</h3><button data-m="full"><span>Full screen</span></button><button data-m="zoom"><span>Zoom</span><small>&#9664; ${mvZl(t)} &#9654;</small></button><button data-m="feed"><span>Feed</span><small>${esc(t.c?baseName(t.c.n):"")}</small></button><button data-m="game"><span>Switch game</span></button><button data-m="au"><span>${t===MV.a?"Main (audio)":"Make audio / main"}</span></button><button data-m="rm"><span>Remove</span></button>`;
+  m.innerHTML=`<h3>${esc(mvName(t.g))}</h3><button data-m="full"><span>Full screen</span></button><button data-m="zoom"><span>Zoom</span><small>&#9664; ${mvZl(t)} &#9654;</small></button><button data-m="feed"><span>Feed</span><small>${esc(t.c?baseName(t.c.n):"")}</small></button><button data-m="game"><span>Switch game</span></button><button data-m="au"><span>${t===MV.a?"Main (audio)":"Make audio / main"}</span></button><button data-m="rm" class="danger"><span>Remove</span></button>`;
   m.hidden=false; const r=t.el.getBoundingClientRect(),W=mvEl.clientWidth,H=mvEl.clientHeight,w=Math.min(m.offsetWidth,W-16),h=m.offsetHeight,bb=$("#mvb").getBoundingClientRect(),HB=bb.height?Math.min(H,bb.top):H; // keep the menu above the control bar
   Object.assign(m.style,{left:mvC(r.left+r.width/2-w/2,8,W-w-8)+"px",top:mvC(r.top+r.height/2-h/2,8,Math.max(8,HB-h-8))+"px",right:"auto",bottom:"auto",transform:"none"});
   m.querySelector("button").focus()}
@@ -1271,7 +1335,7 @@ $("#gbar").onclick=e=>{const b=e.target.closest("button"); if(!b)return; const q
   else if(q==="close")guideClose(); else if(q==="game")gPost({cmd:"matchup",away:cur.aw,home:cur.hm,start:cur.st});
   else if(q==="team")gPost({cmd:"team",ab:b.dataset.ab}); else if(q==="games")gPost({cmd:"games"})};
 $("#gbar").addEventListener("keydown",e=>{if(e.key==="ArrowDown"){e.preventDefault();gFocus()}});
-$("header").addEventListener("keydown",e=>{if(e.key==="ArrowDown"&&tab==="guide"){e.preventDefault();gFocus()}else if(e.key==="ArrowDown"&&tab!=="home"&&!/^(INPUT|TEXTAREA)$/.test(e.target.tagName)){const f=$("#m").querySelector(".focusable,.chip,.gc,.pg,.pill,input,button");if(f){e.preventDefault();f.focus({preventScroll:true});$("#m").scrollTop=0}}});
+$("header").addEventListener("keydown",e=>{if(e.key==="ArrowDown"&&tab==="guide"){e.preventDefault();gFocus()}else if(e.key==="ArrowDown"&&tab!=="home"&&!/^(INPUT|TEXTAREA)$/.test(e.target.tagName)){const f=(tab==="schedule"&&firstF($("#m")))||$("#m").querySelector(".focusable,.chip,.gc,.pg,.pill,input,button");if(f){e.preventDefault();f.focus({preventScroll:true});$("#m").scrollTop=0}}});
 window.addEventListener("resize",gLayout);
 function fsLbl(){const b=$("#pfs");if(b)b.textContent=document.fullscreenElement?"Exit full screen":"Full screen"}
 document.addEventListener("fullscreenchange",fsLbl);
@@ -1364,14 +1428,15 @@ function smoothTo(m,y){cancelAnimationFrame(scT);const y0=m.scrollTop,d=y-y0;if(
 function alignRow(el){const gw=el.closest(".gw");
   if(gw){ // live games: the hero stays put, only the games strip scrolls (one row per press)
     smoothTo($("#m"),0); const y=el.getBoundingClientRect().top-gw.getBoundingClientRect().top+gw.scrollTop-9; smoothTo(gw,y); setTimeout(updateDots,200); return}
-  const m=$("#m"), g=el.closest(".grid,.cards"), top=g&&g.previousElementSibling&&(/^H2$/.test(g.previousElementSibling.tagName)||g.previousElementSibling.classList.contains("dh"))&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?g.previousElementSibling:el;
-  smoothTo(m,top.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-6)}
+  const m=$("#m"), sk=m.querySelector(".dchips"), g=el.closest(".grid,.cards"), top=g&&g.previousElementSibling&&(/^H2$/.test(g.previousElementSibling.tagName)||g.previousElementSibling.classList.contains("dh"))&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?g.previousElementSibling:el;
+  smoothTo(m,top.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-(sk?sk.offsetHeight+6:6))}
 $("#m").addEventListener("focusin",e=>{const t=e.target; if(t.closest&&t.closest(".grid,.cards")){alignRow(t); if(t.classList.contains("pill")&&t.dataset.g!==undefined&&+t.dataset.g!==hi)slideTo(+t.dataset.g,1)} else if(t.closest&&t.closest(".hcar"))smoothTo($("#m"),0);
 });
 // D-pad inside the home/live/sports pages: we pick the next item ourselves, so one press = one item and we control the viewport
 const ARR={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};
 $("#m").addEventListener("keydown",e=>{
-  const d=ARR[e.key]; if(!d)return; const a=document.activeElement; if(!a||!$("#m").contains(a)||a.tagName==="INPUT")return;
+  const d=ARR[e.key]; if(!d)return; const a=document.activeElement; if(!a||!$("#m").contains(a)||(a.tagName==="INPUT"&&(d[0]||a.id==="gs"||a.id==="cc-q")))return;
+  if(a.classList.contains("watch")&&d[1]>0){const p=$("#m").querySelector('.pill[data-g="'+a.dataset.g+'"]');if(p){e.preventDefault();e.stopPropagation();p.focus({preventScroll:true});focusScroll(p);return}} // Down from the hero = the same game's pill
   if(a.classList.contains("watch")&&d[0]){e.preventDefault();e.stopPropagation();const sib=a.classList.contains("sumb")?(d[0]<0?a.previousElementSibling:null):(d[0]>0?a.nextElementSibling:null);if(sib){sib.focus({preventScroll:true});return}const k=+a.dataset.g+d[0];if(k>=0&&k<G.length)slideTo(k);return} // carousel: left/right = previous/next live game
   if(tab==="live"&&d[0]&&a.classList.contains("pg")){e.preventDefault();e.stopPropagation();const sib=d[0]>0?a.nextElementSibling:a.previousElementSibling;if(sib&&sib.classList.contains("pg")){sib.focus({preventScroll:true});return}
     const now=Math.floor(Date.now()/18e5)*18e5; if(d[0]>0)gShift(1,a); else if(gStart>now)gShift(-1,a); else a.closest(".gr").querySelector(".gc").focus({preventScroll:true}); return}
@@ -1389,7 +1454,7 @@ $("#m").addEventListener("keydown",e=>{
   if(best){best.focus({preventScroll:true});focusScroll(best)}
   else if(d[1]<0){const n=document.querySelector("header [data-t][aria-pressed=true]");if(n){n.focus();smoothTo($("#m"),0)}}
 },true);
-let catSel=null, catPick=null, catQ="";
+let catSel=null, catPick=null, catQ="", catOpen=false, catDel="", catDelT=0;
 const ckeys=()=>{const seen=new Map();ch.forEach(c=>{const k=ckey(c);if(!seen.has(k))seen.set(k,c)});return [...seen.values()]};
 function catListHTML(){const q=catQ.trim().toLowerCase();
   const rows=ckeys().filter(c=>!q||baseName(c.n).toLowerCase().includes(q)).slice(0,40);
@@ -1398,13 +1463,15 @@ function catSettingsHTML(){
   const cnt={};ch.forEach(c=>{const x=catOf(c);cnt[x]=(cnt[x]||0)+1});
   const sel=catSel&&catList.includes(catSel)?catSel:catList[0];
   const pick=catPick?ckeys().find(c=>ckey(c)===catPick):null;
-  return `<h2 class="disp" style="margin-top:14px">Channel categories</h2><div class="sub">Move any channel to another category. The Live page updates at once.</div>
-    <div class="chips">${catList.map(x=>`<button class="chip focusable" data-cc-sel="${esc(x)}" aria-pressed="${x===sel}">${esc(x)} &middot; ${cnt[x]||0}</button>`).join("")}</div>
+  const head=`<h2 class="disp" id="s-ch" style="margin-top:14px">Channel categories</h2><div class="sub">Move any channel to another category. The Live page updates at once.</div><div class="field"><button class="btn focusable" data-cc-act="toggle" aria-expanded="${catOpen}">${catOpen?"Hide categories":"Manage categories"}</button></div>`;
+  if(!catOpen)return head;
+  return head+`<div class="chips">${catList.map(x=>`<button class="chip focusable" data-cc-sel="${esc(x)}" aria-pressed="${x===sel}">${esc(x)} &middot; ${cnt[x]||0}</button>`).join("")}</div>
     <div class="field"><input id="cc-new" class="focusable" placeholder="New category name"><button class="btn focusable" data-cc-act="add">Add category</button></div>
-    <div class="field"><input id="cc-ren" class="focusable" placeholder="Rename ${esc(sel)} to"><button class="btn focusable" data-cc-act="rename" data-cc-cat="${esc(sel)}">Rename</button>${sel&&sel!=="Other"?`<button class="btn focusable" data-cc-act="delete" data-cc-cat="${esc(sel)}">Delete</button>`:""}</div>
+    <div class="field"><input id="cc-ren" class="focusable" placeholder="Rename ${esc(sel)} to"><button class="btn focusable" data-cc-act="rename" data-cc-cat="${esc(sel)}">Rename</button></div>
     <div class="field"><input id="cc-q" class="focusable" type="search" placeholder="Search channels" value="${esc(catQ)}"></div>
     <div id="ccl" class="ccl">${catListHTML()}</div>
-    ${pick?`<div class="sub">Move <b>${esc(baseName(pick.n))}</b> to:</div><div class="chips">${catList.map(x=>`<button class="chip focusable" data-cc-set="${esc(x)}">${esc(x)}</button>`).join("")}</div>`:""}`;
+    ${pick?`<div class="sub">Move <b>${esc(baseName(pick.n))}</b> to:</div><div class="chips">${catList.map(x=>`<button class="chip focusable" data-cc-set="${esc(x)}">${esc(x)}</button>`).join("")}</div>`:""}
+    ${sel&&sel!=="Other"?`<div class="field" style="margin-top:18px"><button class="btn danger focusable" data-cc-act="delete" data-cc-cat="${esc(sel)}">Delete category ${esc(sel)}</button></div>`:""}`;
 }
 function catClick(b){const d=b.dataset, q=v=>'"'+CSS.escape(String(v))+'"', redo=s=>{render();const n=s&&$("#m").querySelector(s);if(n)n.focus()};
   if(d.ccSel!==undefined){catSel=d.ccSel;catPick=null;return redo('[data-cc-sel='+q(d.ccSel)+']')}
@@ -1412,14 +1479,21 @@ function catClick(b){const d=b.dataset, q=v=>'"'+CSS.escape(String(v))+'"', redo
   if(d.ccSet!==undefined){const k=catPick;catPick=null;if(k)catMove(k,d.ccSet);return redo('[data-cc-ch='+q(k)+']')}
   if(d.ccAct==="add"){const v=$("#cc-new").value;if(catAdd(v))catSel=v.trim();catPick=null;return redo('[data-cc-sel='+q(catSel)+']')}
   if(d.ccAct==="rename"){const v=$("#cc-ren").value;if(catRename(d.ccCat,v))catSel=v.trim();return redo('[data-cc-sel='+q(catSel)+']')}
-  if(d.ccAct==="delete"){catDelete(d.ccCat);catSel=null;return redo(null)}
+  if(d.ccAct==="toggle"){catOpen=!catOpen;return redo('[data-cc-act="toggle"]')}
+  if(d.ccAct==="delete"){ // two taps: the first arms it for 4s
+    if(catDel!==d.ccCat){catDel=d.ccCat;b.textContent="Tap again to delete "+d.ccCat;clearTimeout(catDelT);catDelT=setTimeout(()=>{catDel="";if(b.isConnected)b.textContent="Delete category "+d.ccCat},4000);return}
+    clearTimeout(catDelT);catDel="";catDelete(d.ccCat);catSel=null;return redo(null)}
 }
 function centerRow(row){const sc=$("#gx"); if(!sc)return; const a=row.getBoundingClientRect(), b=sc.getBoundingClientRect(); sc.scrollTop+=(a.top+a.height/2)-(b.top+b.height/2)} // live list: focused channel sits mid-list; only #gx moves
-function focusScroll(el){if(el.closest(".hcar"))smoothTo($("#m"),0);else if(el.closest(".gs"))smoothTo($("#m"),0);else if(el.closest(".chips"))el.scrollIntoView({block:"nearest",inline:"nearest"});else if(el.closest(".gr"))centerRow(el.closest(".gr"));else if(el.closest(".grid,.cards"))alignRow(el)}
+function focusScroll(el){if(el.closest(".hcar"))smoothTo($("#m"),0);else if(el.closest(".gs"))smoothTo($("#m"),0);else if(el.closest(".chips"))el.scrollIntoView({block:"nearest",inline:"nearest"});else if(el.closest(".gr"))centerRow(el.closest(".gr"));else if(el.closest(".grid,.cards"))alignRow(el);else el.scrollIntoView({block:"nearest"})}
 $("#m").addEventListener("input",e=>{if(e.target.id==="cc-q"){catQ=e.target.value;$("#ccl").innerHTML=catListHTML();return}if(e.target.id==="gs"){gQ=e.target.value;gRefresh()}});
-$("#m").addEventListener("keydown",e=>{if(e.target.id==="cc-q"&&e.key==="ArrowDown"){e.preventDefault();const n=$("#ccl")&&$("#ccl").querySelector("button");if(n)n.focus();return}if(e.target.id==="gs"){if(e.key==="Enter"||e.key==="ArrowDown"){e.preventDefault();e.target.blur();const n=$("#m").querySelector(".chip")||$("#m").querySelector(".gc");if(n)n.focus()}else if(e.key==="ArrowUp"){e.preventDefault();const n=document.querySelector("header [aria-pressed=true]");if(n)n.focus()}}});
+$("#m").addEventListener("keydown",e=>{if(e.key==="Enter"&&/^(u|cc-new|cc-ren)$/.test(e.target.id)){e.preventDefault();e.target.parentNode.querySelector("button").click();return}if(e.target.id==="cc-q"&&e.key==="ArrowDown"){e.preventDefault();const n=$("#ccl")&&$("#ccl").querySelector("button");if(n)n.focus();return}if(e.target.id==="gs"){if(e.key==="Enter"||e.key==="ArrowDown"){e.preventDefault();e.target.blur();const n=$("#m").querySelector(".chip")||$("#m").querySelector(".gc");if(n)n.focus()}else if(e.key==="ArrowUp"){e.preventDefault();const n=document.querySelector("header [aria-pressed=true]");if(n)n.focus()}}});
 $("header").onclick=e=>{const b=e.target.closest("button");if(b)go(b.dataset.t)};
 $("#m").onclick=e=>{
+  const go0=e.target.closest("[data-go]"); if(go0)return go(go0.dataset.go);
+  if(e.target.closest("#scretry")){scFail=0;render();pollScores();return}
+  const jp=e.target.closest("[data-jump]"); if(jp){const t=$("#"+jp.dataset.jump),m=$("#m"); if(t)smoothTo(m,t.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-6); const n=m.querySelector({"s-pl":"#u","s-tm":".chip.ft","s-ch":"[data-cc-act=toggle]"}[jp.dataset.jump]); if(n)n.focus({preventScroll:true}); return}
+  const dy=e.target.closest("[data-day]"); if(dy){const t=$("#d"+dy.dataset.day),m=$("#m"),k=m.querySelector(".dchips"); if(t){smoothTo(m,t.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-(k?k.offsetHeight+6:6)); const p=t.nextElementSibling&&t.nextElementSibling.querySelector(".pill"); if(p)p.focus({preventScroll:true})} return}
   const cc=e.target.closest("[data-cc-sel],[data-cc-ch],[data-cc-set],[data-cc-act]"); if(cc)return catClick(cc);
   const ft=e.target.closest("[data-ft]"); if(ft){const k=ft.dataset.ft;favT=favT.includes(k)?favT.filter(x=>x!==k):[...favT,k];sv("favT",favT);ft.setAttribute("aria-pressed",favT.includes(k));return}
   const sr=e.target.closest(".sr"); if(sr)return openGame(+sr.dataset.id);
@@ -1444,9 +1518,9 @@ render();
 const bootAt=Date.now(); let bootDone=false;
 (function(){const k=Object.keys(window.LOGO||{}).sort(()=>Math.random()-.5);
   $("#brows").innerHTML=[0,1,2].map(r=>{const l=k.filter((_,i)=>i%3===r),h=l.concat(l).map(a=>`<img src="${window.LOGO[a]}" alt="">`).join("");return `<div class="r">${h}</div>`}).join("")})();
-function bootOff(){if(bootDone)return;bootDone=true;const wait=Math.max(0,2200-(Date.now()-bootAt));setTimeout(()=>{$("#boot").classList.add("out");setTimeout(()=>$("#boot").remove(),700);const f=$("#m").querySelector("button,input");if(f)f.focus()},wait)}
+function bootOff(){if(bootDone)return;bootDone=true;const wait=Math.max(0,2200-(Date.now()-bootAt));setTimeout(()=>{$("#boot").classList.add("out");setTimeout(()=>$("#boot").remove(),700);const f=firstF($("#m"));if(f)f.focus({preventScroll:true})},wait)}
 setTimeout(bootOff,9000); // never hang on the splash
-if(ch.length)bootOff();
+if(ch.length||!url||!(window.Android||window.NEMDESK))bootOff(); // no playlist stored, or plain web (nothing will ever load one): do not hold the splash
 document.querySelectorAll("img").forEach(i=>{if(i.complete)i.classList.add("ld")});
 log("NEMTV start",new Date().toString(),"games",(window.SCHED||[]).length);
 if(window.Android&&(window.CFG||{}).repo)Android.guideSync(CFG.repo,CFG.branch||"main");

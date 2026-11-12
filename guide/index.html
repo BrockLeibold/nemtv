@@ -1030,7 +1030,7 @@ function renderNews() {
   $("#newsUpd").textContent = NEWS ? `${NEWS.edition || "Update"} · ${new Date(NEWS.updated).toLocaleString("en-GB", {...ET, weekday:"short", day:"numeric", month:"short", hour:"numeric", minute:"2-digit"})} ET` : "";
   if (!n) { $("#newsLead").textContent = "No news yet. The next update comes on the next game day."; $("#newsList").innerHTML = ""; $("#newsGame").textContent = ""; $("#newsInj").innerHTML = ""; return; }
   $("#newsLead").textContent = n.headline;
-  $("#newsList").innerHTML = (n.items || []).map(i => `<div class="ni"><a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a><p>${esc(i.summary)}</p><span class="eyebrow">${esc(i.source)} · ${esc(i.date)}</span></div>`).join("");
+  $("#newsList").innerHTML = (n.items || []).map((i, k) => `<div class="ni"><a href="${esc(i.url)}" target="_blank" rel="noopener" data-i="${k}"><span class="nt">${esc(i.title)}</span><p>${esc(i.summary)}</p><span class="eyebrow">${esc(i.source)} · ${esc(i.date)}</span></a></div>`).join("");
   $("#newsGame").textContent = n.game || "";
   $("#newsInj").innerHTML = (n.injuries || []).map(x => `<span class="chip l ${/game-time|illness|day/i.test(x) ? "q" : "inj"}">${esc(x)}</span>`).join("") || '<span class="chip l good">None reported</span>';
 }
@@ -1222,7 +1222,7 @@ function renderNav() {
     }</div>`).join("")}</div>`;
 }
 function openPicker() { const r = $("#switchBtn").getBoundingClientRect(); $("#picker").style.setProperty("--pk-top", Math.max(12, r.bottom + 8) + "px"); $("#picker").hidden = false; $("#scrim").hidden = false; $("#switchBtn").setAttribute("aria-expanded", "true"); const c = $("#picker [aria-current=\"true\"]"); (c || $("#pkClose")).focus(); }
-function closePicker() { if ($("#picker").hidden) return; $("#picker").hidden = true; if (!state.open) $("#scrim").hidden = true; $("#switchBtn").setAttribute("aria-expanded", "false"); }
+function closePicker() { if ($("#picker").hidden) return; const a = document.activeElement, had = !a || a === document.body || $("#picker").contains(a); $("#picker").hidden = true; if (had) $("#switchBtn").focus(); if (!state.open) $("#scrim").hidden = true; $("#switchBtn").setAttribute("aria-expanded", "false"); }
 async function setTeam(ab) {
   if (!LT(ab)) return;
   closePicker(); closePlayer();
@@ -1357,6 +1357,18 @@ function boxTable(side) {
     <div class="bxw"><table class="bx" style="min-width:420px"><thead><tr><th>#</th><th>Goalie</th><th>SV</th><th>SA</th><th>GA</th><th>SV%</th><th>TOI</th></tr></thead><tbody>${gkr}</tbody></table></div>`;
 }
 let GSTATE = {id:null, tab:"away"};
+let gLast = null; // what had focus when the game drawer opened, so Back/Escape returns the D-pad there
+// News on the TV: a story opens in the drawer (headline, summary, source) instead of a browser the remote cannot leave
+function openNews(k) {
+  const it = (NEWS?.teams?.[state.team]?.items || [])[k]; if (!it) return;
+  closePicker(); if (state.open) closePlayer();
+  let host = ""; try { host = new URL(it.url).hostname.replace(/^www\./, ""); } catch (e) {}
+  GSTATE = {id:null, tab:"away"};
+  const dr = $("#gdrawer");
+  dr.innerHTML = `<div class="gd-h"><div><div class="eyebrow" id="gTitle">News · ${esc(it.source)} · ${esc(it.date)}</div></div><button class="x" id="gClose" aria-label="Close">${ICO.close}</button></div><div class="gd-b"><h3 class="nd-t">${esc(it.title)}</h3><p class="nd-p">${esc(it.summary)}</p><p class="caption">Read the full story on your phone${host ? " at " + esc(host) : ""}.</p></div>`;
+  if (dr.hidden) { gLast = document.activeElement; dr.hidden = false; $("#scrim").hidden = false; dr.scrollTop = 0; }
+  $("#gClose").focus();
+}
 async function openGame(id, tab) {
   const g = SCHED && SCHED.games.find(x => x.id === +id); if (!g) return;
   closePicker(); if (state.open) closePlayer();
@@ -1371,7 +1383,7 @@ async function openGame(id, tab) {
     </div>`;
   const dr = $("#gdrawer");
   dr.innerHTML = head + `<div class="gd-b" aria-hidden="true"><i class="sk" style="height:72px;margin-bottom:8px"></i><i class="sk" style="height:140px;margin-bottom:8px"></i><i class="sk" style="height:96px"></i></div>`;
-  if (dr.hidden) { dr.hidden = false; $("#scrim").hidden = false; dr.scrollTop = 0; $("#gClose").focus(); }
+  if (dr.hidden) { gLast = document.activeElement; dr.hidden = false; $("#scrim").hidden = false; dr.scrollTop = 0; $("#gClose").focus(); }
   const seriesHtml = `<div class="gd-sec"><div class="eyebrow">${esc(s.text)}</div>${s.prev.map(x => `<button type="button" class="mini-g" data-game="${x.id}"><span>${longDay(etDay(x.start), {month:"short", day:"numeric"})} · ${esc(x.away)} at ${esc(x.home)}</span><span class="tab"><b>${esc(winOf(x))}</b> ${Math.max(x.as, x.hs)}-${Math.min(x.as, x.hs)}${endTag(x) ? " " + endTag(x) : ""}</span></button>`).join("")}</div>`;
   let body = "";
   if (final) {
@@ -1397,7 +1409,7 @@ async function openGame(id, tab) {
   }
   dr.innerHTML = head + `<div class="gd-b">${body}<p class="caption">Tap a team name to open its page. Tap any past game to see its box score.</p></div>`;
 }
-function closeGame() { const d = $("#gdrawer"); if (d.hidden) return; d.hidden = true; GSTATE.id = null; if (!state.open && $("#picker").hidden) $("#scrim").hidden = true; }
+function closeGame() { const d = $("#gdrawer"); if (d.hidden) return; d.hidden = true; GSTATE.id = null; if (!state.open && $("#picker").hidden) $("#scrim").hidden = true; if (gLast && document.body.contains(gLast)) gLast.focus(); gLast = null; }
 
 document.addEventListener("click", e => {
   const t = e.target.closest("button, tr[data-id]"); if (!t) { if (e.target.id === "scrim") { closePicker(); closePlayer(); closeGame(); } return; }

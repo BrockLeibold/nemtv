@@ -489,3 +489,93 @@ html.skon .sk,html.skon .skm{opacity:1} /* deck.js adds html.skon after 150ms: t
 html.skon img[src]:not(.ld){background-color:var(--skc)}
 .skw{display:contents}
 @media(prefers-reduced-motion:reduce){.sk::after,.skm::after{animation:none}}
+
+/* ======================================================================================================
+   NEMOS pass (rebuild): bigger TV targets, one neutral selection colour, one primary action per view,
+   one meaning per calendar state, one focus ring. Team colour stays on identity surfaces (hero, lineup cards).
+   ====================================================================================================== */
+:root{--ch:40px}
+#tabs button[aria-current=true]{background:var(--ink);color:var(--bg)}
+#tabs button:focus-visible,.switch:focus-visible,.rbtn:focus-visible,.rchip:focus-visible,.caltoday:focus-visible{outline:none;box-shadow:var(--ring)}
+.ovnext:focus-visible,.ni a:focus-visible,.rlogos .lg:focus-visible,.mrow:focus-visible,summary.h3:focus-visible{outline:none;box-shadow:var(--ring-in)}
+/* the 32-logo rail is a second switcher: the picker is the single path on the TV and on narrow screens */
+html.tv .rail,html.cz .rail{display:none!important}
+@media (max-width:960px){.rail{display:none!important}}
+.rlogos .lg[aria-pressed=true]{background:var(--surface);box-shadow:inset 0 0 0 2px var(--ink)}
+
+/* Overview: Next game is the one primary action (stronger fill + accent edge); the other cards are flat read-outs */
+button.ovc{font:inherit;text-align:left;cursor:pointer;width:100%}
+.ovc:not(.ovnext){-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(12,12,16,.42);border-color:rgba(255,255,255,.1)}
+.ovc.ovnext{background:color-mix(in srgb,var(--tc,#1B3A8A) 45%,rgba(12,12,16,.82));border-color:color-mix(in srgb,var(--tc,#fff) 55%,#fff 22%);border-left:4px solid var(--tc,#fff)}
+.ovc.ovnext::before{display:none}
+.ovnext .ovl{display:flex;justify-content:space-between;align-items:center;gap:var(--g8)}
+.ovgo{letter-spacing:.06em;opacity:.95}
+.fail{grid-row:1/-1;display:grid;place-content:center;justify-items:center;gap:var(--g12);text-align:center;font:600 16px/1.3 var(--font-sans)}
+.fail p{margin:0}
+.rbtn{height:var(--ch);padding:0 24px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:700 14px/1 var(--font-sans);cursor:pointer}
+
+/* News: the whole story is the target (title + summary + source inside the link) */
+.ni{padding:0!important}
+.ni a{display:block!important;padding:10px 8px!important;min-height:44px;border-radius:12px}
+.ni a .nt{display:block}
+.ni a p{margin:3px 0;font-weight:400;color:var(--ink-2)}
+.ni a:hover{text-decoration:none}
+.ni a:hover .nt{text-decoration:underline;text-underline-offset:3px}
+html:not(.cz) .ni p{-webkit-line-clamp:2}
+.nd-t{margin:0 0 var(--g12);font:800 22px/1.2 var(--font-sans)}
+.nd-p{margin:0 0 var(--g12);font-size:16px;line-height:1.45;color:var(--ink-2)}
+
+/* Roster: filtered list (from the Team slide) and the phone's grouped list */
+#rfilt{display:none;min-height:0;min-width:0}
+.s-ro.filt #rfilt{display:grid;grid-template-rows:auto minmax(0,1fr);gap:var(--g8)}
+.s-ro.filt #lines{display:none}
+.rfl{min-height:0;min-width:0;overflow:hidden}
+.rchip{justify-self:start;display:inline-flex;align-items:center;gap:var(--g8);height:var(--ch);padding:0 var(--g12) 0 var(--cp);border:0;border-radius:999px;background:var(--surface);box-shadow:var(--ring-line);color:var(--ink);font:700 13px/1 var(--font-sans);cursor:pointer}
+.rchip b{font-size:20px;line-height:1;font-weight:600}
+.lp{background:color-mix(in srgb,var(--tc,#1B3A8A) 85%,#000)}
+details.rc{display:block}
+details.rc>summary{list-style:none}
+details.rc>summary::-webkit-details-marker{display:none}
+details.rc>summary::after{content:"+";margin-left:auto;font:700 18px/1 var(--font-sans);color:var(--muted)}
+details.rc[open]>summary::after{content:"\2212"}
+html.cz .rg{height:auto;grid-template-columns:minmax(0,1fr);gap:var(--g8)}
+html.cz #rfilt{grid-template-rows:none}
+html.cz .rfl{overflow:visible}
+html.cz summary.h3{display:flex;align-items:center;min-height:44px;margin:0;padding:0 var(--g12);border-radius:12px;background:var(--surface);box-shadow:var(--ring-line);cursor:pointer}
+html.cz details.rc[open]>summary{margin-bottom:var(--g4)}
+html.cz .rc .rr>div{grid-auto-rows:minmax(48px,auto)}
+html.cz .pr2{min-height:48px;grid-template-rows:auto auto}
+html.cz .lp .tx{background:color-mix(in srgb,var(--tc,#1B3A8A) 85%,#000)}
+html.cz .lp .ln{overflow-wrap:normal;word-break:normal;hyphens:none}
+
+/* Team: calmer panels, readable years, two clean lists on the right */
+html:not(.cz) #regions{display:none!important}
+.bar em,.ten .v{white-space:nowrap}
+.ten{grid-template-columns:8em minmax(0,1fr) 4.5ch}
+.panel .mini+.h3{margin-top:var(--g12)}
+#capcol{display:grid;grid-template-rows:repeat(2,minmax(0,1fr));gap:var(--g8);min-height:0;min-width:0}
+#capcol .panel{padding:var(--g8) var(--g12)!important}
+html:not(.cz) .mini{grid-auto-rows:minmax(34px,1fr)}
+html:not(.cz) .mrow{min-height:34px}
+html.cz #capcol{grid-template-rows:none;gap:var(--g8)}
+
+/* Games: today = underline on the number, selected = fill, focus = the ring, never the same style twice */
+.cd.today,.cd.sel,.cd.sel.today,.cr.today{box-shadow:none}
+.cd.sel{background:color-mix(in srgb,var(--ink,#fff) 20%,transparent)}
+.cd.today .dn,.cs.today b{text-decoration:underline;text-decoration-color:var(--tc,#fff);text-decoration-thickness:3px;text-underline-offset:3px;opacity:1}
+html.cz .cs.today,html.cz .cs[aria-pressed=true]{box-shadow:none}
+.cdb{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:2px;padding:4px 6px;min-height:0}
+.cd.game .cdb{flex:1 1 auto}
+.cdb:focus-visible{outline:none;box-shadow:var(--ring-in)}
+.cdt{display:flex;justify-content:space-between;align-items:flex-start;gap:4px}
+.cg{flex:none;display:flex;flex-direction:column;gap:2px;padding:0}
+.tpill{justify-self:start;font:800 10px/1 var(--font-sans);font-style:normal;letter-spacing:.08em;text-transform:uppercase;padding:3px 6px;border-radius:999px;background:var(--tc,#fff);color:var(--tx,#000)}
+.calbar{position:relative}
+.caltoday{position:absolute;right:0;top:50%;transform:translateY(-50%);height:44px;padding:0 var(--g12);border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:inherit;font:700 12px/1 var(--font-sans);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.offl{position:absolute;left:0;top:50%;transform:translateY(-50%);max-width:30%;opacity:.85}
+html.cz .caltoday,html.cz .offl{position:static;transform:none;max-width:none}
+html.cz .calbar{flex-wrap:wrap}
+html.cz .offl{flex:1 1 100%;text-align:center}
+html.cz .calday{display:none}
+html:not(.cz) .rc .rr>div{grid-auto-rows:minmax(0,44px)}
+.lp.g .sx .s1{white-space:normal;overflow-wrap:normal}

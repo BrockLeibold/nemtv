@@ -37,7 +37,8 @@
   setTimeout(function () { document.documentElement.classList.add("skon"); }, 150); // skeletons stay invisible for the first 150ms (cache hits never flash)
   window.skFail = function () { // data never came: real message, no skeletons left behind
     document.querySelectorAll(".sk,.skm,.skw,.ni[inert]").forEach(function (e) { if (e.parentNode) e.remove(); });
-    var o = $("#ov") || document.createElement("div"); o.id = "ov"; o.innerHTML = '<p class="caption">Couldn\'t load the roster data. Reload the page to try again.</p>'; if (!o.parentNode && o0) o0.insertBefore(o, o0.firstChild);
+    var o = $("#ov") || document.createElement("div"); o.id = "ov"; o.innerHTML = '<div class="fail"><p>Couldn\'t load the roster data.</p><button type="button" id="retry" class="rbtn">Try again</button></div>'; if (!o.parentNode && o0) o0.insertBefore(o, o0.firstChild);
+    var rb = $("#retry"); if (rb) { rb.addEventListener("click", function () { location.reload(); }); rb.focus(); }
   };
   document.addEventListener("load", function (e) { if (e.target.tagName === "IMG") e.target.classList.add("ld"); }, true);
   document.addEventListener("error", function (e) { if (e.target.tagName === "IMG") e.target.classList.add("ld"); }, true);
@@ -48,8 +49,11 @@
   function width() { return deck.clientWidth || 1; }
   function mark() {
     cur = Math.max(0, Math.min(DEFS.length - 1, Math.round(deck.scrollLeft / width())));
-    tabs.querySelectorAll("button").forEach(function (b, k) { b.setAttribute("aria-current", String(k === cur)); });
+    tabs.querySelectorAll("button").forEach(function (b, k) { b.setAttribute("aria-current", String(k === cur)); b.tabIndex = k === cur ? 0 : -1; }); // roving: one stop in the strip, Up/Down leaves it
   }
+  function isTV() { try { return !!(window.Android || (window.parent && window.parent !== window && window.parent.Android)); } catch (e) { return false; } }
+  window.deckIsTV = isTV;
+  if (isTV()) document.documentElement.classList.add("tv");
   var syncT = 0;
   function sync() { // keep the guide's data mode in step with the slide
     clearTimeout(syncT); syncT = setTimeout(function () {
@@ -60,22 +64,61 @@
     }, 80);
   }
   function go(k, instant) {
-    k = Math.max(0, Math.min(DEFS.length - 1, k)); cur = k;
+    var from = cur; k = Math.max(0, Math.min(DEFS.length - 1, k)); cur = k;
+    if (from === 2 && k !== 2 && typeof state !== "undefined" && (state.acq.size || state.q)) clearFilter(); // a filter lives only while the Roster slide is open, so the player page order is never stale
     deck.style.scrollBehavior = "auto"; deck.scrollLeft = k * width();
     mark(); sync(); if (k === 4) renderCal(); if (window.guideReport) guideReport();
   }
+  function clearFilter() { state.pos = "all"; state.acq.clear(); state.q = ""; var q = $("#q"); if (q) q.value = ""; try { renderRoster(); } catch (e) {} }
+  function firstFocus(root) { var q = root.querySelectorAll("button,a[href],[tabindex]:not([tabindex='-1']),summary"); for (var i = 0; i < q.length; i++) if (q[i].tabIndex >= 0 && q[i].offsetParent && q[i].getClientRects().length) return q[i]; return null; }
   deck.addEventListener("scroll", function () { var o = cur; mark(); if (o !== cur) sync(); });
   tabs.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) go(+b.dataset.slide); });
   window.deckStep = function (d) { var o = cur; go(cur + d); return o !== cur; };
   window.deckGo = go;
   window.deckSlideEl = function () { return slides[cur]; };
   window.deckCur = function () { return cur; };
-  // arrow keys: left/right at the edge of a slide page to the next section; [ ] and PageUp/PageDown always page
+  // tab strip: selection follows focus (Left/Right changes the slide at once)
+  tabs.addEventListener("keydown", function (e) {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    var b = e.target.closest("button"); if (!b) return;
+    var k = +b.dataset.slide + (e.key === "ArrowRight" ? 1 : -1); e.preventDefault();
+    if (k < 0 || k >= DEFS.length) return;
+    go(k); tabs.querySelectorAll("button")[k].focus();
+  });
+  // arrow keys: move focus to the nearest control in that direction (plain browsers have no spatial navigation; on the TV the WebView
+  // does it natively, so there we only act at the edge); left/right with nothing beside the focus pages to the next section; [ ] and PageUp/PageDown always page
+  function focusables(scope) {
+    var out = [], q = scope.querySelectorAll("button,a[href],input,select,summary,[tabindex]");
+    for (var i = 0; i < q.length; i++) { var f = q[i]; if (f.tabIndex < 0 || f.disabled || !f.offsetParent) continue; var sl = f.closest(".slide"); if (sl && sl !== slides[cur]) continue; var r = f.getBoundingClientRect(); if (r.width < 2 || r.height < 2 || r.right <= 0 || r.left >= innerWidth || r.bottom <= 0 || r.top >= innerHeight) continue; out.push(f); }
+    return out;
+  }
+  function nearest(el, dx, dy, scope) {
+    var r = el.getBoundingClientRect(), cx = (r.left + r.right) / 2, cy = (r.top + r.bottom) / 2, best = null, bs = 1e9;
+    focusables(scope).forEach(function (f) {
+      if (f === el || el.contains(f) || f.contains(el)) return;
+      var b = f.getBoundingClientRect(), bx = (b.left + b.right) / 2, by = (b.top + b.bottom) / 2, p, c;
+      if (dx) { p = (bx - cx) * dx; if (p < 2 || b.top >= r.bottom - 1 || b.bottom <= r.top + 1) return; c = Math.abs(by - cy); }
+      else { p = (by - cy) * dy; if (p < 2) return; c = Math.abs(bx - cx) * 3; }
+      if (p + c < bs) { bs = p + c; best = f; }
+    });
+    return best;
+  }
   document.addEventListener("keydown", function (e) {
     if (e.defaultPrevented) return;
     var t = e.target || {}; if (/INPUT|TEXTAREA|SELECT/.test(t.tagName)) return;
-    if (e.key === "PageDown" || e.key === "]") { e.preventDefault(); window.deckStep(1); }
-    else if (e.key === "PageUp" || e.key === "[") { e.preventDefault(); window.deckStep(-1); }
+    if (e.key === "PageDown" || e.key === "]") { e.preventDefault(); window.deckStep(1); return; }
+    if (e.key === "PageUp" || e.key === "[") { e.preventDefault(); window.deckStep(-1); return; }
+    if (e.altKey || e.ctrlKey || e.metaKey || !/^Arrow(Left|Right|Up|Down)$/.test(e.key)) return;
+    var pq = document.getElementById("pq"); if (pq && !pq.hidden) return; // the player page owns its arrows
+    var ov = $("#picker:not([hidden]),#gdrawer:not([hidden]),#drawer:not([hidden])"), scope = ov || document.body;
+    if (!t.matches || !scope.contains(t) || t === document.body) { var f0 = firstFocus(ov || slides[cur]); if (f0) { e.preventDefault(); f0.focus(); } return; }
+    var dx = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0, dy = e.key === "ArrowDown" ? 1 : e.key === "ArrowUp" ? -1 : 0;
+    if (t.closest && t.closest("#rail .lg") && dx) { // the rail is one stop; Left/Right walk along it
+      var lg = [].slice.call(document.querySelectorAll("#rail .lg")), i = lg.indexOf(t) + dx; if (lg[i]) { e.preventDefault(); lg[i].focus(); } return;
+    }
+    var n = nearest(t, dx, dy, scope);
+    if (n) { if (!isTV()) { e.preventDefault(); n.focus(); } return; }
+    if (dx && !ov && slides[cur].contains(t)) { e.preventDefault(); if (window.deckStep(dx)) { var nf = firstFocus(slides[cur]); if (nf) nf.focus(); } }
   });
   window.addEventListener("resize", function () { deck.scrollLeft = cur * width(); fitSoon(); });
 
@@ -96,13 +139,20 @@
   /* compact = phone / narrow window drawn at real size (class html.cz switches deck.css's compact layout on). The TV's quarter-width side panel is
      drawn zoomed out by the host (root zoom < 1): that one keeps the zoom-fit deck. */
   var cmq = window.matchMedia("(max-width:900px),(max-width:1100px) and (min-height:640px),(max-height:440px)"), root = document.documentElement;
-  function setCz() { var c = cmq.matches && !(parseFloat(root.style.zoom) < .99); root.classList.toggle("cz", c); return c; }
-  setCz(); window.addEventListener("resize", setCz);
-  new MutationObserver(function () { var o = root.classList.contains("cz"); setCz(); if (o !== root.classList.contains("cz")) { fitSoon(); deck.scrollLeft = cur * width(); } }).observe(root, { attributes: true, attributeFilter: ["style"] });
+  function setCz() { var c = cmq.matches && !(parseFloat(root.style.zoom) < .99) && root.dataset.bz !== "1"; root.classList.toggle("cz", c); return c; }
+  /* a big plain viewport (1080p monitor / Docker twin) draws the 960x540 design scaled up, so it reads from the sofa; a host-set zoom (side panel) is left alone */
+  function bigZoom() {
+    var mine = root.dataset.bz === "1", hz = parseFloat(root.style.zoom), z = Math.round(Math.min(innerWidth / 960, innerHeight / 540) * 100) / 100;
+    if (!mine && hz && hz !== 1) return;
+    if (innerWidth <= 1100 || cmq.matches && !mine || z < 1.05) { if (mine) { root.style.zoom = ""; delete root.dataset.bz; } return; }
+    if (hz !== z) { root.style.zoom = z; root.dataset.bz = "1"; }
+  }
+  bigZoom(); setCz(); window.addEventListener("resize", function () { bigZoom(); setCz(); rtoggle(); });
+  new MutationObserver(function () { var o = root.classList.contains("cz"); setCz(); if (o !== root.classList.contains("cz")) { fitSoon(); deck.scrollLeft = cur * width(); rtoggle(); } }).observe(root, { attributes: true, attributeFilter: ["style"] });
   function fitOne(s) {
     var i = s.firstChild; i.style.zoom = ""; var z = 1;
     if (root.classList.contains("cz")) { s.dataset.z = 1; return; }
-    while (z > .5 && over(i)) { z = Math.round((z - .03) * 100) / 100; i.style.zoom = z; }
+    while (z > .88 && over(i)) { z = Math.round((z - .03) * 100) / 100; i.style.zoom = z; }
     s.dataset.z = z;
   }
   function fitAllSlides() { slides.forEach(fitOne); deck.scrollLeft = cur * width(); }
@@ -118,20 +168,43 @@
     var slot = lineSlot(p).replace("Line ", "L").replace("Pair ", "D");
     return '<button type="button" class="pr2' + q + '" data-id="' + p.id + '">' + ph(p) + '<span class="nm">#' + (p.num == null ? "" : p.num) + " " + esc(p.first) + " " + dn(p.last) + (p.captain ? '<span class="cp">C</span>' : "") + dot + '</span><span class="sub2">' + p.pos + (slot ? " · " + slot : "") + " · " + age(p.born) + " yrs · " + esc(p.country) + '</span><span class="st">' + st + '</span><span class="av">' + (p.contract ? money(p.contract.aav) + " thru " + String(p.contract.ends).slice(-2) : "") + "</span></button>";
   }
-  function col(title, list, split) {
-    var h = '<div class="h3">' + title + "<i>" + list.length + " players</i></div>";
-    if (!list.length) return '<div class="rc">' + h + "<div></div></div>";
-    var body;
-    if (split) { var n = Math.ceil(list.length / 2); body = '<div class="rr"><div>' + list.slice(0, n).map(prow).join("") + "</div><div>" + list.slice(n).map(prow).join("") + "</div></div>"; }
-    else body = '<div class="rr"><div>' + list.map(prow).join("") + "</div></div>";
-    return '<div class="rc">' + h + body + "</div>";
+  function col(title, list, split, det, open) {
+    var n = list.length + " player" + (list.length === 1 ? "" : "s");
+    var h = det ? '<summary class="h3">' + title + "<i>" + n + "</i></summary>" : '<div class="h3">' + title + "<i>" + n + "</i></div>", tag = det ? "details" : "div";
+    var body = "", at = det ? ' class="rc"' + (open ? " open" : "") : ' class="rc"';
+    if (list.length) {
+      if (split && !det) { var k = Math.ceil(list.length / 2); body = '<div class="rr"><div>' + list.slice(0, k).map(prow).join("") + "</div><div>" + list.slice(k).map(prow).join("") + "</div></div>"; }
+      else body = '<div class="rr"><div>' + list.map(prow).join("") + "</div></div>";
+    } else body = "<div></div>";
+    return "<" + tag + at + ">" + h + body + "</" + tag + ">";
+  }
+  function rosterHTML(det) {
+    var list = PL().filter(matches).sort(sorter); if (!list.length) return "";
+    var F = list.filter(function (p) { return p.group === "F"; }), D = list.filter(function (p) { return p.group === "D"; }), G = list.filter(function (p) { return p.group === "G"; });
+    if (det) return '<div class="rg">' + col("Forwards", F, true, true, true) + col("Defence", D, false, true) + col("Goalies", G, false, true) + "</div>";
+    return '<div class="rg">' + col("Forwards", F, true) + '<div class="rside">' + col("Defence", D, false) + col("Goalies", G, false) + "</div></div>";
   }
   function denseRoster() {
     var body = $("#rosterBody"); if (!body || typeof PL !== "function") return;
-    var list = PL().filter(matches).sort(sorter); if (!list.length) return;
-    var F = list.filter(function (p) { return p.group === "F"; }), D = list.filter(function (p) { return p.group === "D"; }), G = list.filter(function (p) { return p.group === "G"; });
-    body.innerHTML = '<div class="rg">' + col("Forwards", F, true) + '<div class="rside">' + col("Defence", D, false) + col("Goalies", G, false) + "</div></div>";
+    var h = rosterHTML(false); if (h) body.innerHTML = h;
+    renderFilt();
   }
+  /* The Roster slide shows the lineup; once a Team-slide row or bar filters the roster (or on a phone) it shows the dense list instead, under a removable chip */
+  var rf = null;
+  function filtLabel() {
+    var a = []; if (state.acq.size) state.acq.forEach(function (k) { try { a.push(ACQ[k].label(T().short)); } catch (e) { a.push(k); } }); if (state.q) a.push(state.q); return a.join(", ");
+  }
+  function renderFilt() {
+    var s = slides[2], i = s && s.firstChild; if (!i || typeof PL !== "function" || typeof state === "undefined") return;
+    if (!rf) { rf = document.createElement("div"); rf.id = "rfilt"; i.insertBefore(rf, i.firstChild); rf.addEventListener("click", function (e) { if (e.target.closest("#rfx")) { clearFilter(); var f = firstFocus(s); if (f) f.focus(); } }); }
+    var on = state.acq.size || state.q, cz = root.classList.contains("cz"), a = document.activeElement, hadFocus = a && rf.contains(a) && a.id !== "rfx";
+    s.classList.toggle("filt", !!(on || cz));
+    if (!on && !cz) { rf.innerHTML = ""; return; }
+    var list = rosterHTML(cz);
+    rf.innerHTML = (on ? '<button type="button" class="rchip" id="rfx" aria-label="Clear filter ' + esc(filtLabel()) + '"><span>Filtered: ' + esc(filtLabel()) + '</span><b aria-hidden="true">&times;</b></button>' : "") + (list ? "<div class=\"rfl\">" + list + "</div>" : '<p class="caption">No players match.</p>');
+    if (hadFocus) { var f = firstFocus(rf); if (f) f.focus({ preventScroll: true }); }
+  }
+  function rtoggle() { if (typeof state !== "undefined" && typeof DATA !== "undefined" && DATA) { try { renderFilt(); } catch (e) {} } }
   /* ---- Overview: the whole lineup, "starting lineup" cards (photo left, big number right, name under it) ---- */
   function renderLines() {
     var el = $("#lines"); if (!el || typeof T !== "function" || typeof DATA === "undefined" || !DATA) return;
@@ -157,15 +230,16 @@
   /* ---- Team: cap hits + scoring leaders ---- */
   function renderCap() {
     var host = $("#team .panels"); if (!host || typeof PL !== "function" || typeof DATA === "undefined" || !DATA) return;
-    var pn = $("#cap"); if (!pn) { pn = document.createElement("div"); pn.className = "panel"; pn.id = "cap"; host.appendChild(pn); }
+    var col3 = $("#capcol"); if (!col3) { col3 = document.createElement("div"); col3.id = "capcol"; col3.innerHTML = '<div class="panel" id="cap"></div><div class="panel" id="lead"></div>'; host.appendChild(col3); }
     var P = PL(), row = function (p, r) { return '<button type="button" class="mrow" data-id="' + p.id + '">' + ph(p, "s") + "<b>" + esc(p.first[0]) + ". " + dn(p.last) + "</b><em>" + r + "</em></button>"; };
-    var cap = P.filter(function (p) { return p.contract; }).sort(function (a, b) { return b.contract.aav - a.contract.aav; }).slice(0, 7);
-    var sc = P.filter(function (p) { return p.group !== "G" && p.now && p.now.gp; }).sort(function (a, b) { return b.now.pts - a.now.pts || b.now.g - a.now.g; }).slice(0, 7);
-    pn.innerHTML = '<div class="h3">Top cap hits<i>AAV · through</i></div><div class="mini">' + (cap.length ? "" : '<div class="muted">Contract data not available yet</div>') + cap.map(function (p) { return row(p, money(p.contract.aav) + " · " + String(p.contract.ends).slice(0, 4) + "-" + String(p.contract.ends).slice(-2)); }).join("") + '</div><div class="h3">Scoring leaders<i>G · A · P</i></div><div class="mini">' + sc.map(function (p) { return row(p, p.now.g + " · " + p.now.a + " · " + p.now.pts); }).join("") + "</div>";
+    var cap = P.filter(function (p) { return p.contract; }).sort(function (a, b) { return b.contract.aav - a.contract.aav; }).slice(0, 5);
+    var sc = P.filter(function (p) { return p.group !== "G" && p.now && p.now.gp; }).sort(function (a, b) { return b.now.pts - a.now.pts || b.now.g - a.now.g; }).slice(0, 5);
+    $("#cap").innerHTML = '<div class="h3">Top cap hits<i>AAV · through</i></div><div class="mini">' + (cap.length ? "" : '<div class="muted">Contract data not available yet</div>') + cap.map(function (p) { return row(p, money(p.contract.aav) + " · " + String(p.contract.ends).slice(0, 4) + "-" + String(p.contract.ends).slice(-2)); }).join("") + "</div>";
+    $("#lead").innerHTML = '<div class="h3">Scoring leaders<i>G · A · P</i></div><div class="mini">' + (sc.length ? "" : '<div class="muted">No games played yet</div>') + sc.map(function (p) { return row(p, p.now.g + " · " + p.now.a + " · " + p.now.pts); }).join("") + "</div>";
   }
   /* ---- live NHL schedule for the current team. api-web.nhle.com sends no CORS header: on the TV the host fetches it (Android.get);
      on the PC Electron runs with webSecurity off, so a plain fetch works. Falls back to the bundled schedule. ---- */
-  var nhlN = 0, LIVE = {}; // LIVE[abbr] = that team's games, in the bundled schedule's shape
+  var nhlN = 0, LIVE = {}, OFF = {}; // OFF[abbr]: the last live refresh failed // LIVE[abbr] = that team's games, in the bundled schedule's shape
   function nhlGet(path, cb) {
     var url = "https://api-web.nhle.com/" + path, A = null;
     try { A = window.Android || (window.parent && window.parent.Android) || null; } catch (e) {}
@@ -182,7 +256,8 @@
   function loadLive(ab) { // refresh every 10 minutes and on team change; a failed load keeps the last good data (or the bundled schedule)
     if (!ab) return;
     nhlGet("v1/club-schedule-season/" + ab + "/now", function (t, e) {
-      try { var j = JSON.parse(t); if (j && j.games && j.games.length) LIVE[ab] = liveRows(j, ab); } catch (x) { console.log("deck live " + ab + " " + (e || x)); }
+      OFF[ab] = true;
+      try { var j = JSON.parse(t); if (j && j.games && j.games.length) { LIVE[ab] = liveRows(j, ab); OFF[ab] = false; } } catch (x) { console.log("deck live " + ab + " " + (e || x)); }
       if (typeof state !== "undefined" && state.team === ab) { renderOv(); renderCal(); }
     });
   }
@@ -205,14 +280,14 @@
     if (isLiveG(g)) return "LIVE " + g.us + "-" + g.them;
     return (g.home ? "vs " : "@ ") + esc(g.opp);
   }
-  function gRow(g, n, wd, today) { // one game as a full-width button (day list + compact month list)
+  function gRow(g, n, wd, today, skip) { // one game as a full-width button (compact month list); the day panel's copy is a read-only echo (tabindex -1)
     var pl = fin(g), lv = isLiveG(g);
-    return '<button type="button" class="cr game' + (pl ? " done" : "") + (lv ? " live" : "") + (today ? " today" : "") + '" data-gid="' + g.id + '"><span class="cd-d"><b>' + n + "</b><i>" + wd + '</i></span><img src="logos/' + esc(g.opp) + '.svg" alt=""><span class="cd-t"><b>' + (g.home ? "vs " : "at ") + esc(g.oppShort || g.opp) + "</b><span>" + (pl ? "Final" + (g.ot !== "REG" ? " " + g.ot : "") : lv ? "Live" : timeOf(g)) + (g.venue ? " &middot; " + esc(g.venue) : "") + '</span></span><span class="cd-s">' + (pl ? (g.us > g.them ? "W " : "L ") + g.us + "-" + g.them : lv ? g.us + "-" + g.them : "") + "</span></button>";
+    return '<button type="button" class="cr game' + (pl ? " done" : "") + (lv ? " live" : "") + (today ? " today" : "") + '" data-gid="' + g.id + '"' + (skip ? ' tabindex="-1"' : "") + '><span class="cd-d"><b>' + n + "</b><i>" + wd + '</i></span><img src="logos/' + esc(g.opp) + '.svg" alt=""><span class="cd-t"><b>' + (g.home ? "vs " : "at ") + esc(g.oppShort || g.opp) + "</b>" + (today ? '<em class="tpill">Today</em>' : "") + "<span>" + (pl ? "Final" + (g.ot !== "REG" ? " " + g.ot : "") : lv ? "Live" : timeOf(g)) + (g.venue ? " &middot; " + esc(g.venue) : "") + '</span></span><span class="cd-s">' + (pl ? (g.us > g.them ? "W " : "L ") + g.us + "-" + g.them : lv ? g.us + "-" + g.them : "") + "</span></button>";
   }
   function dayRows(iso) {
     var d = new Date(iso + "T12:00:00Z"), n = d.getUTCDate(), wd = d.toLocaleDateString("en-US", { timeZone: "UTC", weekday: "short" }), l = calBy[iso] || [];
     return '<h4 class="calh">' + esc(d.toLocaleDateString("en-US", { timeZone: "UTC", weekday: "long", month: "long", day: "numeric" })) + " &middot; " + (l.length ? l.length + " game" + (l.length > 1 ? "s" : "") : "no games") + "</h4>" +
-      (l.length ? l.map(function (g) { return gRow(g, n, wd, iso === todayET()); }).join("") : '<div class="none">No games on this day</div>');
+      (l.length ? l.map(function (g) { return gRow(g, n, wd, iso === todayET(), true); }).join("") : '<div class="none">No games on this day</div>');
   }
   function selectDay(iso) { // update in place (no rebuild), so the D-pad focus stays on the day button
     calSel = iso; var c = $("#cal"); if (!c) return;
@@ -226,7 +301,7 @@
     var csk = $("#calsk"); if (csk) csk.remove();
     var c = $("#cal");
     if (!c) { c = document.createElement("div"); c.id = "cal"; s.appendChild(c); c.addEventListener("click", calClick); }
-    var a = document.activeElement, keep = a && c.contains(a) ? (a.dataset.cday ? '[data-cday="' + a.dataset.cday + '"]' : a.dataset.gid ? '[data-gid="' + a.dataset.gid + '"]' : a.dataset.m ? '.calnav[data-m="' + a.dataset.m + '"]' : "") : "";
+    var a = document.activeElement, keep = a && c.contains(a) ? (a.dataset.cday ? '[data-cday="' + a.dataset.cday + '"]' : a.dataset.gid ? '[data-gid="' + a.dataset.gid + '"]' : a.dataset.m ? '.calnav[data-m="' + a.dataset.m + '"]' : a.dataset.today ? ".caltoday" : "") : "";
     var today = todayET();
     if (!calM) calM = { y: +today.slice(0, 4), m: +today.slice(5, 7) - 1 };
     var first = new Date(Date.UTC(calM.y, calM.m, 1)), lead = (first.getUTCDay() + 6) % 7, days = new Date(Date.UTC(calM.y, calM.m + 1, 0)).getUTCDate(), rows = Math.ceil((lead + days) / 7), pre = calM.y + "-" + pad2(calM.m + 1);
@@ -238,22 +313,25 @@
       if (n < 1 || n > days) { cells += '<div class="cd out"></div>'; continue; }
       var iso = isoOf(calM.y, calM.m, n), g = (calBy[iso] || [])[0], wd = new Date(Date.UTC(calM.y, calM.m, n)).toLocaleDateString("en-US", { timeZone: "UTC", weekday: "short" }), sel = iso === calSel;
       var cls = "cd" + (iso === today ? " today" : "") + (sel ? " sel" : "") + (g ? " game" + (fin(g) ? " done" : "") + (isLiveG(g) ? " live" : "") : "");
-      var lab = new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { timeZone: "UTC", weekday: "long", month: "long", day: "numeric" }) + (g ? ", game vs " + g.opp : ", no games");
-      cells += '<div class="' + cls + '"><button type="button" class="cdb" data-cday="' + iso + '" aria-pressed="' + sel + '" aria-label="' + esc(lab) + '"><b class="dn">' + n + "</b>" + (g ? '<img src="logos/' + esc(g.opp) + '.svg" alt="">' : "") + "</button>" +
-        (g ? '<button type="button" class="cg" data-gid="' + g.id + '" aria-label="' + esc((g.home ? "vs " : "at ") + g.opp + ", " + (fin(g) ? "final" : isLiveG(g) ? "live" : timeOf(g)) + ", open game") + '"><span class="cl">' + gShort(g) + '</span><span class="ct">' + (fin(g) ? "Final" : isLiveG(g) ? "Live" : timeOf(g)) + "</span></button>" : "") + "</div>";
-      strip += '<button type="button" class="cs' + (g ? " game" : "") + (iso === today ? " today" : "") + '" data-cday="' + iso + '" aria-pressed="' + sel + '" aria-label="' + esc(lab) + '"><i>' + wd + "</i><b>" + n + "</b><u></u></button>";
+      var lab = new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { timeZone: "UTC", weekday: "long", month: "long", day: "numeric" }) + (g ? ", game " + (g.home ? "vs " : "at ") + g.opp + ", " + (fin(g) ? "final" : isLiveG(g) ? "live" : timeOf(g)) + ", open game" : ", no games") + (iso === today ? ", today" : "");
+      // a game day is ONE stop that opens the game; days without a game are mouse/touch only (tabindex -1)
+      cells += '<div class="' + cls + '"><button type="button" class="cdb" data-cday="' + iso + '"' + (g ? ' data-gid="' + g.id + '"' : ' tabindex="-1"') + ' aria-pressed="' + sel + '" aria-label="' + esc(lab) + '"><span class="cdt"><b class="dn">' + n + "</b>" + (g ? '<img src="logos/' + esc(g.opp) + '.svg" alt="">' : "") + "</span>" +
+        (g ? '<span class="cg"><span class="cl">' + gShort(g) + '</span><span class="ct">' + (fin(g) ? "Final" : isLiveG(g) ? "Live" : timeOf(g)) + "</span></span>" : "") + "</button></div>";
+      strip += '<button type="button" class="cs' + (g ? " game" : "") + (iso === today ? " today" : "") + '" data-cday="' + iso + '" tabindex="-1" aria-pressed="' + sel + '" aria-label="' + esc(lab) + '"><i>' + wd + "</i><b>" + n + "</b><u></u></button>";
       if (g) list += gRow(g, n, wd, iso === today);
     }
     var head = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(function (d) { return '<div class="cdh">' + d + "</div>"; }).join("");
-    c.innerHTML = '<div class="calbar"><button type="button" class="calnav" data-m="-1" aria-label="Previous month">' + arw(-1) + "</button><h3>" + esc(title) + '</h3><button type="button" class="calnav" data-m="1" aria-label="Next month">' + arw(1) + "</button></div>" +
+    var atToday = calM.y === +today.slice(0, 4) && calM.m === +today.slice(5, 7) - 1 && calSel === today;
+    c.innerHTML = '<div class="calbar"><button type="button" class="calnav" data-m="-1" aria-label="Previous month">' + arw(-1) + "</button><h3>" + esc(title) + '</h3><button type="button" class="calnav" data-m="1" aria-label="Next month">' + arw(1) + '</button><button type="button" class="caltoday" data-today="1"' + (atToday ? ' tabindex="-1" aria-hidden="true" style="visibility:hidden"' : "") + ">Today</button>" + (OFF[state.team] ? '<span class="caption offl" role="status">Offline. Showing ' + (LIVE[state.team] ? "the last update" : "the saved schedule") + "</span>" : "") + "</div>" +
       '<div class="calstrip">' + strip + '</div><div class="calg" style="grid-template-rows:auto repeat(' + rows + ',minmax(0,1fr))">' + head + cells + '</div><div class="calday">' + dayRows(calSel) + '</div><div class="callist"><h4 class="calh">Games this month</h4>' + (list || '<div class="none">No games this month</div>') + "</div>";
     if (keep) { var k = c.querySelector(keep); if (k) k.focus({ preventScroll: true }); }
     var st = c.querySelector(".cs[aria-pressed=true]"); if (st && st.offsetParent) try { st.scrollIntoView({ block: "nearest", inline: "center" }); } catch (e) {}
   }
   function calClick(e) {
     var t = e.target, b = t.closest && t.closest(".calnav"), dy = t.closest && t.closest("[data-cday]"), g = t.closest && t.closest("[data-gid]");
+    if (t.closest && t.closest("[data-today]")) { var td = todayET(); calM = { y: +td.slice(0, 4), m: +td.slice(5, 7) - 1 }; calSel = td; renderCal(); var k = $('#cal [data-cday="' + td + '"]'); if (k) k.focus({ preventScroll: true }); return; }
     if (b) { var d = new Date(Date.UTC(calM.y, calM.m + (+b.dataset.m), 1)); calM = { y: d.getUTCFullYear(), m: d.getUTCMonth() }; renderCal(); return; }
-    if (dy) { selectDay(dy.dataset.cday); return; }
+    if (dy) selectDay(dy.dataset.cday);
     // any game (played, live, upcoming) opens the guide's game drawer: box score for finals, matchup for the rest
     if (g && typeof openGame === "function") openGame(+g.dataset.gid);
   }
@@ -265,6 +343,7 @@
     var pq = document.getElementById("pq");
     if (pq && !pq.hidden) { closePlayer(); return true; }
     if ($("#gdrawer:not([hidden]),#drawer:not([hidden]),#picker:not([hidden])")) return false;
+    if (cur === 2 && (state.acq.size || state.q)) { clearFilter(); var f2 = firstFocus(slides[2]); if (f2) f2.focus(); return true; } // Back clears a Team-slide filter before it leaves the Roster
     if (cur > 0) { go(0); var t0 = tabs.querySelector("button"); if (t0) t0.focus(); return true; } // Back: Overview first, then out of the guide
     return false;
   }
@@ -294,25 +373,28 @@
     var cards = [
       card("Record", '<b class="ovv">' + esc(t.record || "—").replace(/-/g, '<i class="rs">–</i>') + '</b><span class="ovs">' + (t.gp != null ? t.gp + " games played" : "") + "</span>"),
       card("Points", '<b class="ovv">' + (t.points == null ? "—" : t.points) + '</b><span class="ovs">' + (t.divRank ? ordinal(t.divRank) + " in " + esc(t.division || "") : "") + "</span>"),
-      card("Streak", '<b class="ovv">' + esc(t.streak || "—") + '</b><span class="ovs">L10 ' + esc(t.l10 || "—") + "</span>"),
+      card("Streak", '<b class="ovv">' + esc(t.streak || "None") + '</b><span class="ovs">' + (t.l10 ? "L10 " + esc(t.l10) : t.streak ? "" : "Not played yet") + "</span>"),
       nextCard(t)
     ];
+    var a = document.activeElement, refocus = a && a.classList && a.classList.contains("ovnext") && h.contains(a);
     h.innerHTML = hero + '<div class="ovcards">' + cards.join("") + "</div>";
+    if (refocus) { var nb = h.querySelector(".ovnext[data-gid]"); if (nb) nb.focus({ preventScroll: true }); }
   }
   // Next game card: plain text from nextGame() (the old orb is hidden on this slide, #gameday stays parked)
   function nextCard(t) {
-    var g = nextFor(state.team), today = g && etDay(g.start) === todayET();
-    return '<div class="ovc ovnext"><span class="ovl">' + (today ? "Game day" : "Next game") + "</span>" + (g ?
+    var g = nextFor(state.team), today = g && etDay(g.start) === todayET(), lab = today ? "Game day" : "Next game";
+    if (!g) return '<div class="ovc ovnext"><span class="ovl">' + lab + '</span><b class="ovv">Season over</b></div>';
+    var when = (today ? "Tonight" : gDate(g)) + " · " + gTime(g) + " ET · " + esc(g.venue);
+    return '<button type="button" class="ovc ovnext" data-gid="' + g.id + '" aria-label="' + lab + ": " + (g.home ? "vs " : "at ") + esc(g.oppShort) + ", " + (today ? "tonight" : gDate(g)) + " " + gTime(g) + ' ET. Open game"><span class="ovl">' + lab + '<span class="ovgo" aria-hidden="true">Open &rsaquo;</span></span>' +
       '<div class="ovrow"><img class="ovlg" src="logos/' + esc(g.opp) + '.svg" alt=""><b class="ovv">' + (g.home ? "vs" : "at") + " " + esc(g.oppShort) + "</b></div>" +
-      '<span class="ovs">' + (today ? "Tonight" : gDate(g)) + " · " + gTime(g) + " ET · " + esc(g.venue) + "</span>"
-      : '<b class="ovv">Season over</b>') + "</div>";
+      '<span class="ovs">' + when + "</span></button>";
   }
   function extras() { renderLines(); renderOv(); renderCap(); }
 
   /* wrap the guide's own renderers (declared with function, so they can be replaced) */
   function wrapFn(name, after) { var f = window[name]; if (typeof f !== "function") return; window[name] = function () { var r = f.apply(this, arguments); try { after(); } catch (e) { console.log("deck " + name + " " + e); } return r; }; }
   wrapFn("renderRoster", function () { denseRoster(); fitSoon(); });
-  wrapFn("renderAll", function () { extras(); fitSoon(); });
+  wrapFn("renderAll", function () { extras(); railRove(); fitSoon(); });
   wrapFn("renderGames", function () { var g = $("#mgrid"); if (g) g.dataset.n = g.querySelectorAll(".mc").length; fitSoon(); });
   var _setTeam = window.setTeam;
   // any team switch (picker, rail logo, host message) lands on that team's Overview
@@ -320,23 +402,37 @@
     if (typeof DATA !== "undefined" && DATA && DATA.teams && !DATA.teams[ab]) { var oo = $("#ov"); if (oo) oo.innerHTML = skOv(); } // not cached: skeleton Overview until it loads
     return _setTeam(ab).then(function () {
       loadLive(ab);
-      var a = document.activeElement; // the picker closed under the focus: put it back on the team button so the D-pad has somewhere to start
-      if (booted && (!a || a === document.body || !a.offsetParent)) { var sb = $("#switchBtn"); if (sb) sb.focus(); }
       go(0); fitSoon();
+      var a = document.activeElement; // the picker or game drawer closed under the focus: put it back on the team button so the D-pad has somewhere to start
+      if (booted && (!a || a === document.body || !a.offsetParent || !(top.contains(a) || slides[0].contains(a)))) { var sb = $("#switchBtn"); if (sb) sb.focus(); }
+      railRove();
     }, function (e) { try { renderOv(); } catch (x) {} throw e; });
   };
   var _setMode = window.setMode;
   if (_setMode) window.setMode = function (m, d) { var r = _setMode(m, d); if (m === "games" && booted && cur !== 4) go(4); fitSoon(); return r; };
   window.showMode = function () { // never hide a slide: only update the pressed states
     var g = state.mode === "games"; document.querySelectorAll("#rail .lg").forEach(function (b) { b.setAttribute("aria-pressed", String(!g && b.dataset.team === state.team)); });
+    railRove();
   };
+  /* the rail is ONE tab stop (the current team); Left/Right walk along it (keydown above), Up/Down leaves. It is hidden on the TV and on narrow screens, where the picker is the single path. */
+  function railRove() {
+    var all = document.querySelectorAll("#rail .lg"), cur2 = document.querySelector('#rail .lg[aria-pressed="true"]') || all[0];
+    all.forEach(function (b) { b.tabIndex = b === cur2 ? 0 : -1; if (!b.title) b.title = b.getAttribute("aria-label") || ""; });
+  }
   // section buttons inside the guide ("News and lines ->") used scrollIntoView: page there instead
   document.addEventListener("click", function (e) {
     var b = e.target.closest && e.target.closest("[data-goto]"); if (!b) return;
     var m = { news: 1, roster: 2, team: 3 }[b.dataset.goto]; if (m != null) { e.stopImmediatePropagation(); go(m); }
   }, true);
-  document.addEventListener("click", function (e) { // roster filters from the Team slide jump to Roster
-    var b = e.target.closest && e.target.closest(".acqrow,.bar[data-q]"); if (b) setTimeout(function () { go(2); }, 0);
+  document.addEventListener("click", function (e) { // roster filters from the Team slide open the Roster slide, showing the filtered list under a chip
+    var b = e.target.closest && e.target.closest(".acqrow,.bar[data-q]"); if (!b) return;
+    setTimeout(function () { renderFilt(); go(2); var c = $("#rfx"); if (c) c.focus({ preventScroll: true }); }, 0);
+  });
+  document.addEventListener("click", function (e) { // Overview: the next-game card opens the game drawer
+    var b = e.target.closest && e.target.closest(".ovnext[data-gid]"); if (b && typeof openGame === "function") openGame(+b.dataset.gid);
+  });
+  document.addEventListener("click", function (e) { // News on the TV: no browser to land in, so the story opens in the guide's own drawer
+    var a = e.target.closest && e.target.closest("#newsList a[data-i]"); if (a && isTV() && typeof openNews === "function") { e.preventDefault(); openNews(+a.dataset.i); }
   });
   // boot: wait for the guide's data, then start on Overview in team mode
   var tries = 0, iv = setInterval(function () {
@@ -347,7 +443,9 @@
         if (state.mode === "games") { var wantGames = /^#games/i.test(H0); state.mode = "team"; try { renderAll(); } catch (e) { console.log("deck boot " + e); } if (wantGames) { booted = true; setMode("games", state.day); go(4); return; } }
         else { denseRoster(); extras(); }
       }
-      booted = true; go(0); fitSoon();
+      booted = true; go(0); fitSoon(); railRove();
+      var bootFocus = function () { var f = document.activeElement; if (f && f !== document.body && f.offsetParent) return; var nb = $(".ovnext[data-gid]"); if (nb && cur === 0) nb.focus({ preventScroll: true }); }; // the primary action is where the D-pad starts (retried: the first renders replace the card)
+      bootFocus(); setTimeout(bootFocus, 500); setTimeout(bootFocus, 1800);
     }
   }, 100);
   mark();

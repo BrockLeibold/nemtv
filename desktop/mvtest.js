@@ -128,7 +128,7 @@ app.whenReady().then(async()=>{
     await ev(`(()=>{const n=Date.now(),u=i=>"http://127.0.0.1:47191/g"+i+"/index.m3u8",e=(t)=>[[n-6e5,n+6e5,t+" | d"]];window.__ch0=ch;window.__ep0=EPG;
       ch=[0,1,2,3].map(i=>({n:"Chan"+i,u:u(i),g:"News",id:"c"+i,s:""}));ch.push({n:"Chan0 - feed 2",u:u(1),g:"News",id:"c9",s:""});
       EPG={c0:e("Show Zero"),c1:e("Show Zero"),c2:e("Show Two"),c3:e("Show Three"),c9:e("Other")};__mvBase=__mvLoads;openChMenu(ch[0]);0})()`); await sleep(300);
-    log(await ev(`!$("#gpop").hidden&&document.querySelectorAll("#gpop [data-pa]").length===3&&/Show Zero/.test($("#gpop").textContent)&&!!$("#gpop [data-pa=cmv]")`),sz+" channel menu (Menu key / right-click) offers Watch, Multiview +, Favorite");
+    log(await ev(`!$("#gpop").hidden&&document.querySelectorAll("#gpop [data-pa]:not([data-pa=x]):not([data-pa=close])").length===3&&/Show Zero/.test($("#gpop").textContent)&&!!$("#gpop [data-pa=cmv]")`),sz+" channel menu (Menu key / right-click) offers Watch, Multiview +, Favorite");
     await ev(`$("#gpop [data-pa=cmv]").click()`); await sleep(5000);
     log(await ev(`mvOn()&&__mv.t.length===1&&__mv.t[0].g.ch&&__mv.t[0].v.readyState>2&&__mvLoads-__mvBase===2&&/Chan0 - Show Zero/.test(__mv.t[0].lb.textContent)&&$("#gpop").hidden`),sz+" '+ Multiview' on a channel adds it, tile labelled channel + now-playing title");
     log(await ev(`document.querySelectorAll("#mvp button[data-pc]").length===3&&!!$("#mvq")&&/CHANNEL/.test($("#mvp").textContent)&&1`),sz+" picker has a Channels section (feed variants hidden, already-added channel hidden): "+await ev(`[...document.querySelectorAll("#mvp button[data-pc]")].map(x=>x.textContent).join()+"|"+$("#mvp").hidden`));

@@ -136,7 +136,8 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 .ptop img{width:26px;height:26px;object-fit:contain}
 .ptop .t{font-size:15px}
 .ptop .tag{padding:2px 10px;border-radius:999px;background:var(--gl-fill);border:1px solid var(--line-strong);color:var(--ink-2);font-size:13px;letter-spacing:.1em}
-.ctl{bottom:max(16px,var(--safe-y));padding:0 var(--safe-x);gap:6px;flex-wrap:wrap}
+.ctl{bottom:max(16px,var(--safe-y));padding:0 var(--safe-x);gap:6px;flex-wrap:nowrap;transform-origin:50% 100%;transform:scale(var(--cs,1))} /* one line always; ctlFit shrinks it to the width */
+#bfeed{max-width:180px;overflow:hidden;text-overflow:ellipsis}
 .ctl .grp{display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;background:var(--gl-fill);box-shadow:var(--gl-shadow);border:1px solid var(--line-strong)}
 .ctl button{padding:6px 14px;border-radius:999px;color:var(--ink);font-weight:600;white-space:nowrap;text-align:center}
 .ctl button.sm{padding:6px 10px}
@@ -145,21 +146,24 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 #pl.hide .ptop,#pl.hide .ctl{opacity:0;pointer-events:none}
 .ctl button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 /* score bar: 5% of the player, pinned to the bottom (Brock 2026-11-11). Visible only while the player UI is hidden, or while picking a game (Change game) */
-#sbar{position:fixed;left:0;right:0;bottom:0;height:5%;min-height:26px;z-index:70;display:none;gap:2px;padding:2px max(2px,var(--safe-x)) 4px;background:var(--gl-fill);overflow-x:auto;overflow-y:hidden;scrollbar-width:none;container-type:size;opacity:0;pointer-events:none;transition:opacity .2s}
+#sbar{position:fixed;left:0;right:0;bottom:0;height:5%;min-height:26px;z-index:70;display:none;gap:2px;padding:2px max(2px,var(--safe-x)) 4px;background:var(--gl-fill);overflow-x:auto;overflow-y:hidden;scrollbar-width:none;container-type:size;align-items:stretch;opacity:0;pointer-events:none;transition:opacity .2s}
 #sbar::-webkit-scrollbar{display:none}
 #sbar.on{display:flex}
 #sbar.vis,#sbar.pick{opacity:1;pointer-events:auto}
 #sbar.vis *{cursor:pointer}
 body.sbp #pl .ptop,body.sbp #pl .ctl,body.sbp #mv .ctl,body.sbp #mv .ml,body.sbp #mv .pmenu{opacity:0;pointer-events:none}
 body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
-.sbi{--o-base:var(--island);--o-a:var(--red-3);--o-b:var(--wine);--o-c:var(--plum);--o-f1:var(--coral);--o-f2:var(--wine);position:relative;isolation:isolate;flex:1 0 auto;min-width:150px;height:100%;border-radius:999px;text-align:center;color:#fff;display:grid;grid-template-columns:auto auto auto auto;grid-template-rows:1fr;column-gap:6px;align-items:center;justify-content:center;padding:1px 6px}
+.sbi{--o-base:var(--island);--o-a:var(--red-3);--o-b:var(--wine);--o-c:var(--plum);--o-f1:var(--coral);--o-f2:var(--wine);position:relative;isolation:isolate;flex:0 0 auto;height:100%;border-radius:999px;text-align:center;color:#fff;display:grid;grid-template-columns:auto auto auto auto;grid-template-rows:1fr;column-gap:4px;align-items:center;justify-content:center;padding:1px 8px;white-space:nowrap}
+#sbar.tight .sbi{padding:1px 6px;column-gap:3px}#sbar.tight .sbi .nt{display:none}
+.sbi:first-child{margin-left:auto}.sbi:last-child{margin-right:auto} /* centred when they fit, scrolls from the left when not */
 .sbi img,.sbi b{width:clamp(14px,70cqh,26px);height:clamp(14px,70cqh,26px);object-fit:contain;font-size:clamp(11px,40cqh,13px);line-height:clamp(14px,70cqh,26px);overflow:hidden}
 .sbi .scr{font-size:clamp(12px,60cqh,22px);line-height:1;text-shadow:0 2px 10px rgba(0,0,0,.6);white-space:nowrap}
 .sbi .nt{font-size:clamp(11px,40cqh,14px);line-height:1;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.9);white-space:nowrap}
 .sbi.done{--o-a:#4a474f!important;--o-b:#3b393f!important;--o-c:#28262c!important;--o-f1:#605d66!important;--o-f2:#605d66!important}
 .sbi.off{opacity:.45}.sbi.off:focus,.sbi.off.cur{opacity:1}
-.sbi.cur{box-shadow:inset 0 0 0 2px var(--coral)}
-.sbi:focus{box-shadow:var(--ring-in)}
+.sbi::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2}
+.sbi.cur::after{box-shadow:inset 0 0 0 2px var(--coral)}
+.sbi:focus{outline:none}.sbi:focus::after{box-shadow:inset 0 0 0 3px #fff,0 0 0 2px rgba(0,0,0,.5)} /* ring above the orb skin, which hid the old box-shadow */
 .sbe{margin:auto;color:var(--ink-2);font-size:11px}
 /* multiview: tiles are absolutely positioned boxes that only ever change left/top/width/height (never reparented) */
 #pl.mvh{display:none!important}
@@ -907,7 +911,9 @@ $("#gd").addEventListener("keydown",e=>{const k=e.key;if(!/^Arrow/.test(k))retur
 },true);
 
 /* ---------- player ---------- */
-function show(){const pl=$("#pl");pl.classList.remove("hide");clearTimeout(hideT);hideT=setTimeout(()=>{if(!menuOn)pl.classList.add("hide")},4000)}
+function ctlFit(){for(const el of [$("#pctl"),$("#mvb")]){if(!el||!el.offsetParent)continue;const g=parseFloat(getComputedStyle(el).columnGap)||0,k=[...el.children].filter(x=>x.offsetWidth),w=k.reduce((a,x)=>a+x.offsetWidth,0)+g*(k.length-1),W=(el.parentNode.clientWidth||innerWidth)-16;el.style.setProperty("--cs",Math.min(1,W/Math.max(1,w)).toFixed(3))}}
+window.addEventListener("resize",ctlFit);
+function show(){const pl=$("#pl");pl.classList.remove("hide");requestAnimationFrame(ctlFit);clearTimeout(hideT);hideT=setTimeout(()=>{if(!menuOn)pl.classList.add("hide")},4000)}
 function setZoom(z){zoom=Math.max(50,Math.min(200,z));$("#v").style.transform="scale("+zoom/100+")";$("#zv").textContent=zoom+"%"}
 function favBtn(){$("#bfav").textContent=fav.includes(cur.c.n)?"Unfavorite":"Favorite"}
 let waitT=0;
@@ -987,8 +993,9 @@ function sbItem(g,k){const c=g.sc,ok=sbOk(g),col=(x,v)=>x?`--o-${v}:${x};--o-f${
 function sbRefresh(){const b=$("#sbar"); if(!b.classList.contains("on"))return;
   if(!scLoaded&&!scFail){b.innerHTML=skN(8,i=>sbItem({tm:["AAA","BBB"],t:[{},{}],hm:"BBB",aw:"AAA",title:"sk"+i,st:Date.now()},i));return}
   const f=document.activeElement, ft=b.contains(f)&&f.dataset.t;
-  SB=(games().live||[]).slice().sort((a,b)=>a.st-b.st||a.title.localeCompare(b.title));
-  b.innerHTML=SB.length?SB.map(sbItem).join(""):'<span class="sbe">No NHL games today</span>';
+  SB=(games().live||[]).filter(g=>SBP||!sbCur(g)).slice().sort((a,b)=>a.st-b.st||a.title.localeCompare(b.title));
+  b.innerHTML=SB.length?SB.map(sbItem).join(""):'<span class="sbe">No other NHL games</span>';
+  b.classList.remove("tight"); if(b.scrollWidth>b.clientWidth+1)b.classList.add("tight"); // too many games: drop the clock so more fit on the one line
   const n=ft&&b.querySelector('[data-t="'+CSS.escape(ft)+'"]'); if(n)n.focus({preventScroll:true})}
 function sbFocus(el){const b=$("#sbar"); el.focus({preventScroll:true}); b.scrollLeft=Math.max(0,el.offsetLeft-(b.clientWidth-el.offsetWidth)/2)}
 function sbPick(on,t){const d=document.body;
@@ -1133,7 +1140,7 @@ function mvChList(){ // channel rows for the picker: favorites + recent first; a
   MV.pc=[...new Set(l)].slice(0,40);
   return MV.pc.map((c,k)=>{const o=onNow(c);return `<button data-pc="${k}"><span>${fav.includes(c.n)?"&#9733; ":""}${esc(baseName(c.n))}</span><small>${esc(o?o.t:c.g||"")}</small></button>`}).join("")||'<div class="empty">No channels match.</div>'}
 function mvToast(s){const e=$("#mvt");e.textContent=s;e.classList.add("on");clearTimeout(MV.tt);MV.tt=setTimeout(()=>e.classList.remove("on"),2e3);mvShow()}
-function mvShow(){mvEl.classList.remove("hide");clearTimeout(MV.ht);MV.ht=setTimeout(mvHide,3e3)} // every control, label, ring and the cursor go after 3s idle; the white audio outline stays
+function mvShow(){if(mvEl.classList.contains("hide"))requestAnimationFrame(ctlFit);mvEl.classList.remove("hide");clearTimeout(MV.ht);MV.ht=setTimeout(mvHide,3e3)} // every control, label, ring and the cursor go after 3s idle; the white audio outline stays
 function mvHide(){clearTimeout(MV.ht);if(!$("#mvm").hidden)return; // the hold menu keeps the UI up
   $("#mvp").hidden=true;mvEl.classList.add("hide");mvEl.focus()}
 /* ---------- per-tile menu: hold OK on a selected tile (or long-press / right-click) ---------- */
@@ -1200,7 +1207,8 @@ mvEl.addEventListener("keydown",e=>{const k=e.key,a=document.activeElement,inB=a
   if(a.id==="mvq"){if(!/^(ArrowUp|ArrowDown|Enter)$/.test(k)){e.stopPropagation();mvShow();return}} // typing in the channel search: letters, digits, space, Left/Right stay in the field
   if(!/^(Arrow|Enter$|\s$|[1-4]$)/.test(k))return; e.preventDefault();e.stopPropagation();
   if(!$("#mvm").hidden){mvShow();if(!e.repeat)mvMenuKey(k,a);return}
-  if(mvEl.classList.contains("hide")){mvShow();return} mvShow();
+  const hold=h=>{clearTimeout(MV.hold);MV.hp=h;const t=MV.f||MV.a;MV.hold=setTimeout(()=>{MV.hp=0;mvMenu(t)},500)};
+  if(mvEl.classList.contains("hide")){mvShow();if((k==="Enter"||k===" ")&&!e.repeat)hold(2);return} mvShow(); // hold OK works even while the UI is hidden (short press there only wakes the UI)
   if(/^[1-4]$/.test(k)){mvSetAudio(MV.t[k-1]);return}
   if(inP||inB){const row=[...(inP?$("#mvp"):$("#mvb")).querySelectorAll("button,input")],i=row.indexOf(a),nx=i+(k==="ArrowRight"||k==="ArrowDown"||(k==="Enter"&&a.id==="mvq")?1:-1);
     if(a.id==="mvq"){if(row[nx])row[nx].focus()}
@@ -1209,12 +1217,12 @@ mvEl.addEventListener("keydown",e=>{const k=e.key,a=document.activeElement,inB=a
     else if((k==="ArrowRight"||k==="ArrowLeft")&&row[nx])row[nx].focus();
     else if(k==="ArrowUp")mvEl.focus();
     return}
-  if(k==="Enter"||k===" "){if(!e.repeat){clearTimeout(MV.hold);MV.hp=1;const t=MV.f;MV.hold=setTimeout(()=>{MV.hp=0;mvMenu(t)},500)}return} // short OK (on release) = audio, hold ~500ms = tile menu
+  if(k==="Enter"||k===" "){if(!e.repeat)hold(1);return} // short OK (on release) = audio, hold ~500ms = tile menu
   mvMove(k.slice(5))},true);
-mvEl.addEventListener("keyup",e=>{if((e.key==="Enter"||e.key===" ")&&MV.hp){MV.hp=0;clearTimeout(MV.hold);if($("#mvm").hidden&&!SBP)mvSetAudio(MV.f)}},true);
-mvEl.addEventListener("contextmenu",e=>{const tl=e.target.closest(".mt");if(!tl)return;e.preventDefault();const t=MV.t.find(x=>x.el===tl);if(t)mvMenu(t)});
-{let p=null; // touch long-press on a tile
- mvEl.addEventListener("pointerdown",e=>{if(e.pointerType!=="touch")return;const tl=e.target.closest(".mt");if(!tl)return;clearTimeout(MV.lp);p=[e.clientX,e.clientY];MV.lp=setTimeout(()=>{const t=MV.t.find(x=>x.el===tl);if(t){MV.nc=Date.now();mvMenu(t)}},500)});
+mvEl.addEventListener("keyup",e=>{if((e.key==="Enter"||e.key===" ")&&MV.hp){const h=MV.hp;MV.hp=0;clearTimeout(MV.hold);if(h===1&&$("#mvm").hidden&&!SBP)mvSetAudio(MV.f)}},true);
+mvEl.addEventListener("contextmenu",e=>{if(e.target.closest("#mvb,#mvm,#mvp"))return;e.preventDefault();const tl=e.target.closest(".mt"),t=tl?MV.t.find(x=>x.el===tl):MV.f||MV.a;MV.hp=0;clearTimeout(MV.hold);if(t)mvMenu(t)}); // right-click, or the WebView turning a held OK into a long-press
+{let p=null; // touch or mouse long-press on a tile
+ mvEl.addEventListener("pointerdown",e=>{if(e.button)return;const tl=e.target.closest(".mt");if(!tl)return;clearTimeout(MV.lp);p=[e.clientX,e.clientY];MV.lp=setTimeout(()=>{const t=MV.t.find(x=>x.el===tl);if(t){MV.nc=Date.now();mvMenu(t)}},500)});
  mvEl.addEventListener("pointermove",e=>{if(p&&Math.hypot(e.clientX-p[0],e.clientY-p[1])>10){clearTimeout(MV.lp);p=null}});
  ["pointerup","pointercancel"].forEach(v=>mvEl.addEventListener(v,()=>{clearTimeout(MV.lp);p=null}))}
 window.addEventListener("resize",()=>{if(mvOn()){mvLayout();mvCapAll()}});

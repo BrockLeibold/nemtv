@@ -225,14 +225,14 @@ app.whenReady().then(async()=>{
     await ev(`document.getElementById("pl").classList.add("hide");sbSync();sbRefresh();0`); await sleep(500);
     const sbm=()=>ev(`(()=>{const pl=document.getElementById("pl"),b=document.getElementById("sbar"),R=b.getBoundingClientRect(),P=pl.getBoundingClientRect(),it=[...b.querySelectorAll(".sbi")].map(e=>e.getBoundingClientRect()),vis=it.filter(r=>r.right>R.left+1&&r.left<R.right-1),
       ov=[];for(let i=0;i<it.length;i++)for(let j=i+1;j<it.length;j++){const a=it[i],c=it[j];if(a.left<c.right-.5&&c.left<a.right-.5&&a.top<c.bottom-.5&&c.top<a.bottom-.5)ov.push(i+"/"+j)}
-      const ins=[...b.querySelectorAll(".sbi")].every(e=>{const r=e.getBoundingClientRect(),q=[...e.children].filter(x=>x.className!=="skin");return q.every(c=>{const s=c.getBoundingClientRect();return s.left>=r.left-.5&&s.right<=r.right+.5&&s.top>=r.top-.5&&s.bottom<=r.bottom+.5})}),
+      const ins=[...b.querySelectorAll(".sbi")].every(e=>{const r=e.getBoundingClientRect(),q=[...e.children].filter(x=>x.className!=="skin"&&x.offsetWidth);return q.every(c=>{const s=c.getBoundingClientRect();return s.left>=r.left-.5&&s.right<=r.right+.5&&s.top>=r.top-.5&&s.bottom<=r.bottom+.5})}),
       fs=Math.min(...[...b.querySelectorAll(".nt")].map(e=>parseFloat(getComputedStyle(e).fontSize)));
       return {n:it.length,h:R.height,ph:P.height,top:R.top,bot:Math.round(R.bottom),op:+getComputedStyle(b).opacity,ov,ins,fs,sw:b.scrollWidth,cw:b.clientWidth,minw:Math.min(...it.map(r=>r.width)),tops:it.every(r=>r.top>=R.top-.5&&r.bottom<=R.bottom+.5)}})()`);
     let m=await sbm();
     log(Math.abs(m.h-Math.max(26,m.ph*.05))<=1.5&&Math.abs(m.bot-m.ph)<=1.5&&m.op===1,sz+" score bar: height "+m.h+" = 5% of player "+m.ph+", bottom, visible when UI hidden");
     for(const N of [1,4,8,16]){await ev(`__N=${N};sbRefresh();0`);await sleep(300);m=await sbm();
-      const want=m.n===N+1; // N games + one upcoming
-      log(want&&m.ov.length===0&&m.ins&&m.tops&&m.fs>=9&&(m.sw<=m.cw+1||m.minw>=100),sz+" score bar N="+(N+1)+" games: no overlap, inside, text "+m.fs+"px, scroll="+(m.sw>m.cw+1)+" item min width "+Math.round(m.minw))}
+      const want=m.n===N&&!(await ev(`!!document.querySelector('#sbar [data-t="SB0 at X"]')`)); // N games + one upcoming, minus the one being watched (SB0)
+      log(want&&m.ov.length===0&&m.ins&&m.tops&&m.fs>=9&&(m.sw<=m.cw+1||m.minw>=60),sz+" score bar N="+(N+1)+" games: no overlap, inside, text "+m.fs+"px, scroll="+(m.sw>m.cw+1)+" item min width "+Math.round(m.minw))}
     await shot("scorebar-16"); await ev(`__N=4;sbRefresh();0`); await sleep(300); await shot("scorebar-4");
     await ev(`show();0`); await sleep(500); const ui2=await ev(`(()=>{const o=e=>+getComputedStyle(document.querySelector(e)).opacity;return {bar:o("#sbar"),top:o("#ptop"),ctl:o("#pctl"),pe:getComputedStyle(document.getElementById("sbar")).pointerEvents}})()`);
     log(ui2.bar===0&&ui2.top===1&&ui2.ctl===1&&ui2.pe==="none",sz+" score bar fades out when the player UI shows: "+JSON.stringify(ui2));

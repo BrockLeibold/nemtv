@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T17:00:01-05:00",
+ "updated": "2026-11-12T09:00:01-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -144,6 +144,13 @@
    "game": "Next: Sun Nov 08, 8:00 PM ET vs Pittsburgh, Honda Center (Prime Video, SN, SN-PIT). Expected starter: Ville Husso (could start).",
    "items": [
     {
+     "title": "Nils Hoglander, Shane Wright lead Predators past Ducks 4-2 for their 6th straight victory",
+     "summary": "— Shane Wright, Nils Hoglander and Jayden Struble had a goal and an assist apiece, and the Nashville Predators extended their winning streak to six games with a 4-2 victory over the Anaheim Ducks on Wednesday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892694",
+     "date": "2026-11-12"
+    },
+    {
      "title": "Predators bring 5-game win streak into matchup against the Ducks",
      "summary": "Nashville Predators (9-4-5, in the Central Division) vs. Anaheim Ducks (10-7-1, in the Pacific Division)",
      "source": "ESPN",
@@ -194,16 +201,29 @@
     }
    ],
    "injuries": [
+    "Ryan Poehling (lower body, IR)",
     "Ian Moore (lower body, IR)",
-    "A.J. Greer (upper body, IR)",
-    "Ryan Poehling (knee, IR)",
-    "Troy Terry (IR)"
+    "A.J. Greer (upper body, IR)"
    ]
   },
   "BUF": {
    "headline": "In progress at 5 PM ET: Vegas led Buffalo 1-0 on a Mitch Marner goal. The Sabres host Vegas on Sunday after a 5-2 win over Columbus on Friday.",
    "game": "Next: Sun Nov 08, 3:30 PM ET vs VGK, KeyBank Center (MSG-B, SCRIPPS, SN1, TVAS). Colten Ellis expected to start (Die by the Blade); THN projected Luukkonen.",
    "items": [
+    {
+     "title": "Blackhawks play the Sabres on losing streak",
+     "summary": "Buffalo Sabres (8-7-3, in the Atlantic Division) vs. Chicago Blackhawks (4-13-1, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892702",
+     "date": "2026-11-12"
+    },
+    {
+     "title": "Kucherov has natural hat trick in Lightning's 8-3 romp over Sabres",
+     "summary": "— Nikita Kucherov had a natural hat trick and an assist — all in the third period — and the Tampa Bay Lightning beat the Buffalo Sabres 8-3 on Wednesday night for their fourth victory in five games.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892690",
+     "date": "2026-11-12"
+    },
     {
      "title": "Lightning play the Sabres after Holmberg's 2-goal showing",
      "summary": "Tampa Bay Lightning (11-4-2, in the Atlantic Division) vs. Buffalo Sabres (8-6-3, in the Atlantic Division)",
@@ -297,6 +317,13 @@
    "game": "Next: Tue Nov 10, 7:30 PM ET vs FLA, Nationwide Arena (Disney+, ESPN+, HULU, SN). Starter not announced.",
    "items": [
     {
+     "title": "Lightning play the Blue Jackets following Kucherov's hat trick",
+     "summary": "Tampa Bay Lightning (12-4-2, in the Atlantic Division) vs. Columbus Blue Jackets (7-9, in the Metropolitan Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892701",
+     "date": "2026-11-12"
+    },
+    {
      "title": "Bennett scores twice as Panthers stop 2-game skid with a 4-1 win over Blue Jackets",
      "summary": "— Sam Bennett scored twice, and the Florida Panthers snapped a two-game skid with a 4-1 win over the Columbus Blue Jackets on Tuesday night.",
      "source": "ESPN",
@@ -355,6 +382,13 @@
    "game": "Next: Sun Nov 08, 7:00 PM ET vs Philadelphia, Scotiabank Saddledome (NBCSP, SNW). Expected starter: Devin Cooley.",
    "items": [
     {
+     "title": "Zibanejad scores twice as Rangers beat Flames 3-1 for 4th win in 5 games",
+     "summary": "— Mika Zibanejad scored twice in the second period, Joonas Korpisalo made 29 saves and the New York Rangers beat the Calgary Flames 3-1 on Wednesday night for their fourth victory in five games.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892691",
+     "date": "2026-11-12"
+    },
+    {
      "title": "Flames host the Rangers after overtime win",
      "summary": "New York Rangers (10-8-1, in the Metropolitan Division) vs. Calgary Flames (8-9-1, in the Pacific Division)",
      "source": "ESPN",
@@ -408,6 +442,13 @@
    "headline": "The Blackhawks lost 9-2 at Carolina on Saturday for their sixth straight loss.",
    "game": "Next: Thu Nov 12, 8:00 PM ET vs Buffalo Sabres, United Center (CHSN, MSG-B). Starter not announced.",
    "items": [
+    {
+     "title": "Blackhawks play the Sabres on losing streak",
+     "summary": "Buffalo Sabres (8-7-3, in the Atlantic Division) vs. Chicago Blackhawks (4-13-1, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892702",
+     "date": "2026-11-12"
+    },
     {
      "title": "Losing streak hits six",
      "summary": "Chicago is 0-8-1 on the road and was outscored 18-6 on a three-game trip. Kantserov extended his point streak to eight games.",
@@ -635,6 +676,20 @@
    "game": "Next: Mon Nov 9, 8:00 PM ET vs NY Rangers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Wysh List: Will Connor McDavid break 200 points? The cases for and against",
+     "summary": "The Oilers superstar is on pace to break a benchmark that hasn't been hit since the 1980s.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50455208/nhl-2026-27-connor-mcdavid-points-record-stats-200-wayne-gretzky",
+     "date": "2026-11-12"
+    },
+    {
+     "title": "Bouchard scores in OT to lift the Oilers past the Flyers, 3-2",
+     "summary": "— Evan Bouchard scored on a one-timer from the left side 47 seconds into overtime and the Edmonton Oilers beat the Philadelphia Flyers 3-2 on Wednesday night for their third straight victory.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892692",
+     "date": "2026-11-12"
+    },
+    {
      "title": "Draisaitl scores twice and McDavid nets goal to extend point streak as Oilers top Rangers 3-1",
      "summary": "— Leon Draisaitl scored twice, Connor McDavid also had a goal and the Edmonton Oilers held off the New York Rangers 3-1 on Monday night to sweep their season series.",
      "source": "ESPN",
@@ -675,20 +730,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892680",
      "date": "2026-11-08"
-    },
-    {
-     "title": "Draisaitl scores twice, McDavid has 3 assists to extend streak and Oilers beat skidding Canucks 4-2",
-     "summary": "— Leon Draisaitl had two goals and an assist, Connor McDavid added three more assists and the Edmonton Oilers beat the struggling Vancouver Canucks 4-2 on Saturday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892673",
-     "date": "2026-11-08"
-    },
-    {
-     "title": "Canucks at Oilers projected lineups",
-     "summary": "Edmonton assigned goalie Matt Tomkins to AHL Bakersfield and placed defenseman Atro Leppanen on waivers. Jarry dressed as backup after missing the previous game with illness.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
-     "date": "2026-11-07"
     }
    ],
    "injuries": [
@@ -1032,8 +1073,8 @@
     }
    ],
    "injuries": [
+    "Anthony Mantha (throat, IR)",
     "Johnathan Kovacevic (day-to-day)",
-    "Anthony Mantha (out)",
     "Seamus Casey (IR)"
    ]
   },
@@ -1041,6 +1082,20 @@
    "headline": "The Predators beat St. Louis 3-1 at home on Saturday for their fourth straight win.",
    "game": "Next: Tue Nov 10, 10:00 PM ET at Los Angeles Kings, Crypto.com Arena (Disney+, ESPN+, HULU, SNE). Starter not announced.",
    "items": [
+    {
+     "title": "Golden Knights bring winning streak into home matchup with the Predators",
+     "summary": "Nashville Predators (10-4-5, in the Central Division) vs. Vegas Golden Knights (13-5-2, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892707",
+     "date": "2026-11-12"
+    },
+    {
+     "title": "Nils Hoglander, Shane Wright lead Predators past Ducks 4-2 for their 6th straight victory",
+     "summary": "— Shane Wright, Nils Hoglander and Jayden Struble had a goal and an assist apiece, and the Nashville Predators extended their winning streak to six games with a 4-2 victory over the Anaheim Ducks on Wednesday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892694",
+     "date": "2026-11-12"
+    },
     {
      "title": "Predators bring 5-game win streak into matchup against the Ducks",
      "summary": "Nashville Predators (9-4-5, in the Central Division) vs. Anaheim Ducks (10-7-1, in the Pacific Division)",
@@ -1082,24 +1137,10 @@
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026",
      "date": "2026-11-07"
-    },
-    {
-     "title": "Wright traded to Predators by Kraken",
-     "summary": "Nashville acquired center Shane Wright from Seattle for Matthew Wood in a one-for-one trade on Nov. 1. Coach Andrew Brunette said he hopes Wright can become a top-six forward.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/topic/trade-coverage/shane-wright-traded-to-nashville-predators-by-seattle-kraken-for-matthew-wood",
-     "date": "2026-11-03"
-    },
-    {
-     "title": "Predators place Trudeau on injured reserve",
-     "summary": "William Trudeau went on injured reserve with an upper-body injury after leaving the Oct. 8 game in Montreal. He was listed week-to-week.",
-     "source": "The Hockey News",
-     "url": "https://thehockeynews.com/nhl/nashville-predators/latest-news/predators-place-trudeau-on-injured-reserve",
-     "date": "2026-10-09"
     }
    ],
    "injuries": [
-    "Jonathan Marchessault (day-to-day)",
+    "Jonathan Marchessault (out)",
     "William Trudeau (IR)"
    ]
   },
@@ -1176,6 +1217,20 @@
    "headline": "The Rangers beat Seattle 4-3 on Saturday for their third straight win.",
    "game": "Next: Mon Nov 09, 8:00 PM ET at Edmonton Oilers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
+    {
+     "title": "Rangers visit the Canucks after Zibanejad's 2-goal game",
+     "summary": "New York Rangers (11-8-1, in the Metropolitan Division) vs. Vancouver Canucks (3-16-1, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892706",
+     "date": "2026-11-12"
+    },
+    {
+     "title": "Zibanejad scores twice as Rangers beat Flames 3-1 for 4th win in 5 games",
+     "summary": "— Mika Zibanejad scored twice in the second period, Joonas Korpisalo made 29 saves and the New York Rangers beat the Calgary Flames 3-1 on Wednesday night for their fourth victory in five games.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892691",
+     "date": "2026-11-12"
+    },
     {
      "title": "Draisaitl scores twice and McDavid nets goal to extend point streak as Oilers top Rangers 3-1",
      "summary": "— Leon Draisaitl scored twice, Connor McDavid also had a goal and the Edmonton Oilers held off the New York Rangers 3-1 on Monday night to sweep their season series.",
@@ -1302,6 +1357,13 @@
    "game": "Next: Sun Nov 08, 7:00 PM ET at Calgary, Scotiabank Saddledome (NBCSP, SNW). Expected starter: Dan Vladar (projected).",
    "items": [
     {
+     "title": "Bouchard scores in OT to lift the Oilers past the Flyers, 3-2",
+     "summary": "— Evan Bouchard scored on a one-timer from the left side 47 seconds into overtime and the Edmonton Oilers beat the Philadelphia Flyers 3-2 on Wednesday night for their third straight victory.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892692",
+     "date": "2026-11-12"
+    },
+    {
      "title": "Sources: Flyers have not received formal trade request from Matvei Michkov",
      "summary": "The Flyers have not received a formal trade request from Matvei Michkov and were surprised to hear he wanted to play elsewhere, sources told ESPN on Tuesday.",
      "source": "ESPN",
@@ -1349,24 +1411,24 @@
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/philadelphia-flyers-calgary-flames-game-preview-november-8-2026",
      "date": "2026-11-08"
-    },
-    {
-     "title": "Flames Game Day: a Sunday visit from the Flyers",
-     "summary": "Dan Vladar is projected to start against Calgary, with Joseph Woll as backup.",
-     "source": "FlamesNation",
-     "url": "https://flamesnation.ca/news/calgary-flames-philadelphia-flyers-preview-cooley-vladar-2026",
-     "date": "2026-11-08"
     }
    ],
    "injuries": [
-    "Nikita Grebenkin (back, IR)",
-    "Rasmus Ristolainen (IR)"
+    "Noel Acciari (day-to-day)",
+    "Nikita Grebenkin (back, IR)"
    ]
   },
   "PIT": {
    "headline": "The Penguins (6-9-2) play at Anaheim on the second night of a back-to-back after a 5-2 win in Los Angeles ended a four-game skid.",
    "game": "Next: Sun Nov 08, 8:00 PM ET at Anaheim, Honda Center (Prime Video, SN, SN-PIT). Expected starter: Arturs Silovs.",
    "items": [
+    {
+     "title": "Penguins beat Sharks 3-2 in shootout after blowing 2-goal lead in 3rd period",
+     "summary": "— Ben Kindel scored in regulation and had the lone shootout goal and the Pittsburgh Penguins beat the San Jose Sharks 3-2 on Wednesday night after blowing a two-goal lead in third period.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892695",
+     "date": "2026-11-12"
+    },
     {
      "title": "Sharks in action against the Penguins after shootout victory",
      "summary": "Pittsburgh Penguins (6-10-2, in the Metropolitan Division) vs. San Jose Sharks (8-11-1, in the Pacific Division)",
@@ -1415,17 +1477,9 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892679",
      "date": "2026-11-08"
-    },
-    {
-     "title": "Sidney Crosby takes sole possession of 6th on NHL scoring list in Penguins' 5-2 win over Kings",
-     "summary": "— Sidney Crosby scored two goals while moving into sole possession of sixth place on the NHL’s career scoring list, and the Pittsburgh Penguins snapped their four-game skid with a 5-2 victory over the Los Angeles Kings on Saturday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892672",
-     "date": "2026-11-08"
     }
    ],
    "injuries": [
-    "Ville Koivunen (day-to-day)",
     "Elmer Soderblom (upper body, IR)",
     "Bryan Rust (lower body, IR)",
     "Trevor van Riemsdyk (IR)",
@@ -1485,6 +1539,13 @@
    "headline": "The Sharks lost 4-3 in Dallas for their fifth straight loss and return home to face the Islanders.",
    "game": "Next: Mon Nov 09, 10:00 PM ET vs NYI, SAP Center at San Jose (NBCSCA, MSGSN). Starter not announced.",
    "items": [
+    {
+     "title": "Penguins beat Sharks 3-2 in shootout after blowing 2-goal lead in 3rd period",
+     "summary": "— Ben Kindel scored in regulation and had the lone shootout goal and the Pittsburgh Penguins beat the San Jose Sharks 3-2 on Wednesday night after blowing a two-goal lead in third period.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892695",
+     "date": "2026-11-12"
+    },
     {
      "title": "Sharks in action against the Penguins after shootout victory",
      "summary": "Pittsburgh Penguins (6-10-2, in the Metropolitan Division) vs. San Jose Sharks (8-11-1, in the Pacific Division)",
@@ -1546,6 +1607,13 @@
    "game": "Next: Tue Nov 10, 8:00 PM ET vs Detroit Red Wings, Enterprise Center (HBO MAX, SN+, TNT). Starter not announced.",
    "items": [
     {
+     "title": "Mammoth bring 3-game losing streak into matchup against the Blues",
+     "summary": "St. Louis Blues (8-8-2, in the Central Division) vs. Utah Mammoth (10-8-1, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892704",
+     "date": "2026-11-12"
+    },
+    {
      "title": "Snuggerud's goal, assist help power the Blues to a 3-2 victory over the Red Wings",
      "summary": "— Jimmy Snuggerud had a goal and an assist and his score in the third period was the winner as the St. Louis Blues beat the Detroit Red Wings 3-2 on Tuesday night.",
      "source": "ESPN",
@@ -1592,6 +1660,20 @@
    "game": "Next: Sun Nov 08, 6:00 PM ET at WPG, Canada Life Centre (TSN3, The Spot). Andrei Vasilevskiy projected to start.",
    "items": [
     {
+     "title": "Lightning play the Blue Jackets following Kucherov's hat trick",
+     "summary": "Tampa Bay Lightning (12-4-2, in the Atlantic Division) vs. Columbus Blue Jackets (7-9, in the Metropolitan Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892701",
+     "date": "2026-11-12"
+    },
+    {
+     "title": "Kucherov has natural hat trick in Lightning's 8-3 romp over Sabres",
+     "summary": "— Nikita Kucherov had a natural hat trick and an assist — all in the third period — and the Tampa Bay Lightning beat the Buffalo Sabres 8-3 on Wednesday night for their fourth victory in five games.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892690",
+     "date": "2026-11-12"
+    },
+    {
      "title": "Lightning play the Sabres after Holmberg's 2-goal showing",
      "summary": "Tampa Bay Lightning (11-4-2, in the Atlantic Division) vs. Buffalo Sabres (8-6-3, in the Atlantic Division)",
      "source": "ESPN",
@@ -1632,23 +1714,10 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892677",
      "date": "2026-11-08"
-    },
-    {
-     "title": "Nikita Kucherov scores power-play goal in overtime and Lightning rally for 4-3 win over Wild",
-     "summary": "— Nikita Kucherov scored a power-play goal 3:23 into overtime and the Tampa Bay Lightning rallied past the Minnesota Wild 4-3 on Saturday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892670",
-     "date": "2026-11-08"
-    },
-    {
-     "title": "Gourde out until December",
-     "summary": "Yanni Gourde is recovering from offseason hip surgery. Dominic James broke his hand in training.",
-     "source": "Daily Faceoff",
-     "url": "https://www.dailyfaceoff.com/news/tampa-bay-lightning-yanni-gourde-out-december-dominic-james-miss-time-nhl-news",
-     "date": "2026-09-16"
     }
    ],
    "injuries": [
+    "Erik Cernak (out)",
     "Brayden Point (IR)"
    ]
   },
@@ -1656,6 +1725,20 @@
    "headline": "The Mammoth lost 4-2 in Ottawa on Saturday to finish a five-game road trip 2-2-1.",
    "game": "Next: Wed Nov 11, 9:30 PM ET at Vegas Golden Knights, T-Mobile Arena (HBO MAX, TNT, truTV). Starter not announced.",
    "items": [
+    {
+     "title": "Mammoth bring 3-game losing streak into matchup against the Blues",
+     "summary": "St. Louis Blues (8-8-2, in the Central Division) vs. Utah Mammoth (10-8-1, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892704",
+     "date": "2026-11-12"
+    },
+    {
+     "title": "Stone moves within 2 points of breaking Vegas’ career scoring record in 5-3 win over Utah",
+     "summary": "— Mark Stone had an early assist to move within two points of breaking Vegas’ career scoring record, Ivan Barbashev scored twice in the second period and the Golden Knights beat the Utah Mammoth 5-3 on Wednesday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892693",
+     "date": "2026-11-12"
+    },
     {
      "title": "Vegas plays Utah following Hertl's 2-goal showing",
      "summary": "Utah Mammoth (10-7-1, in the Central Division) vs. Vegas Golden Knights (12-5-2, in the Pacific Division)",
@@ -1700,9 +1783,10 @@
     }
    ],
    "injuries": [
-    "Dylan Guenther (day-to-day)",
-    "Nate Schmidt (upper body, out)",
-    "Kailer Yamamoto (upper body, IR)",
+    "Nick Schmaltz (day-to-day)",
+    "Logan Cooley (out)",
+    "Nate Schmidt (IR)",
+    "Dylan Guenther (IR)",
     "John Marino (IR)",
     "Maveric Lamoureux (IR)"
    ]
@@ -1711,6 +1795,13 @@
    "headline": "The Canucks lost 4-2 in Edmonton on Saturday for their fifth straight loss and are 3-15-1.",
    "game": "Next: Mon Nov 9, 9:30 PM ET vs Philadelphia, Rogers Arena (NBCSP, SN+). Starter not announced.",
    "items": [
+    {
+     "title": "Rangers visit the Canucks after Zibanejad's 2-goal game",
+     "summary": "New York Rangers (11-8-1, in the Metropolitan Division) vs. Vancouver Canucks (3-16-1, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892706",
+     "date": "2026-11-12"
+    },
     {
      "title": "Flyers hold off the Canucks 3-1 in a matchup of struggling squads",
      "summary": "— Michael Bunting and Travis Konecny scored in the first two periods to help the Philadelphia Flyers beat the Vancouver Canucks 3-1 on Monday night in a matchup of struggling teams.",
@@ -1773,6 +1864,20 @@
    "game": "Next: Sun Nov 08, 3:30 PM ET at BUF, KeyBank Center (MSG-B, SCRIPPS, SN1, TVAS). Carter Hart projected to start.",
    "items": [
     {
+     "title": "Golden Knights bring winning streak into home matchup with the Predators",
+     "summary": "Nashville Predators (10-4-5, in the Central Division) vs. Vegas Golden Knights (13-5-2, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892707",
+     "date": "2026-11-12"
+    },
+    {
+     "title": "Stone moves within 2 points of breaking Vegas’ career scoring record in 5-3 win over Utah",
+     "summary": "— Mark Stone had an early assist to move within two points of breaking Vegas’ career scoring record, Ivan Barbashev scored twice in the second period and the Golden Knights beat the Utah Mammoth 5-3 on Wednesday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892693",
+     "date": "2026-11-12"
+    },
+    {
      "title": "Vegas plays Utah following Hertl's 2-goal showing",
      "summary": "Utah Mammoth (10-7-1, in the Central Division) vs. Vegas Golden Knights (12-5-2, in the Pacific Division)",
      "source": "ESPN",
@@ -1809,8 +1914,7 @@
     }
    ],
    "injuries": [
-    "Noah Hanifin (out)",
-    "Parker Wotherspoon (IR)"
+    "Noah Hanifin (out)"
    ]
   },
   "WPG": {

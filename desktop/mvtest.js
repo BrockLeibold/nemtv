@@ -219,7 +219,7 @@ app.whenReady().then(async()=>{
     // ---- score bar ----
     await ev(`window.__sg0=games;window.__sf0=feedsFor;window.feedsFor=g=>[g.c];scLoaded=1;
       window.__sbg=n=>({live:Array.from({length:n},(_,i)=>{const g=__t(i%4),k=i%3;g.title="SB"+i+" at X";g.aw="A"+i;g.hm="H"+i;g.st=Date.now()+(i-n)*36e5/Math.max(1,n/4);g.t=[{c:"#c33"},{c:"#36c"}];
-        g.sc=k===1&&i>1?{score:"2 - 1",note:"FINAL",over:true}:{score:(i%4)+" - "+(i%2),note:"P2 12:34",over:false};return g}).concat([{...__t(0),title:"SBUP at X",aw:"UA",hm:"UH",st:Date.now()+3*36e5,t:[{},{}],sc:null}]),later:[]});
+        g.sc=k===1&&i>1?{score:"2 - 1",note:"FINAL",over:true}:{score:(i%4)+" - "+(i%2),note:i===2?"INT 1 10:00":"P2 12:34",over:false,n:i===2?1:2,it:i===2,pt:"REG",tr:"12:34",prog:i===2?null:.38};return g}).concat([{...__t(0),title:"SBUP at X",aw:"UA",hm:"UH",st:Date.now()+3*36e5,t:[{},{}],sc:null}]),later:[]});
       window.games=()=>__sbg(__N);__N=4;sbOn=true;0`);
     await ev(`play(games().live[0]);0`); await sleep(5000);
     await ev(`document.getElementById("pl").classList.add("hide");sbSync();sbRefresh();0`); await sleep(500);

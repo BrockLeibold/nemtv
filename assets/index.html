@@ -68,16 +68,12 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 .skin::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,var(--o-f1),transparent 22%,transparent 78%,var(--o-f2));opacity:.55;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
 .pill .side{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
 .pill .side img{width:54px;height:54px;object-fit:contain;}
-.pill .tm{font-size:11px;line-height:1.05;word-break:break-word}
+.pill .tm{font-size:12px;line-height:1.05;overflow-wrap:normal;word-break:normal;hyphens:none;text-wrap:balance}
 .pill .mid{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 4px}
 .pill .vs{color:rgba(255,255,255,.8);font-size:10px}
 .pill .sp{position:absolute;top:7px;left:0;right:0;font-size:10px;color:rgba(255,255,255,.85);letter-spacing:.12em}
-.pill .live{position:absolute;bottom:6px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:4px;font-size:10px;color:rgba(255,255,255,.9);font-weight:700;letter-spacing:.1em}
+.pill .live{position:absolute;bottom:6px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:4px;font-size:12px;color:rgba(255,255,255,.9);font-weight:700;letter-spacing:.1em}
 .pill .scr{font-size:19px;line-height:1;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6);letter-spacing:.02em}
-.pill.later{opacity:.82}
-.dot{display:none!important;display:inline-block}
-@keyframes ping{50%{opacity:.35}}
-@media(prefers-reduced-motion:reduce){.dot{animation:none}}
 
 /* chips (Live filters, Home shortcuts) */
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
@@ -131,7 +127,7 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 .ptop,.ctl{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;transition:opacity .2s}
 .ptop{top:0;padding:max(12px,var(--safe-y)) max(28px,var(--safe-x)) 12px;gap:10px;background:linear-gradient(#000b,#0000)}
 .ptop .ptt{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;min-width:0}
-.pbtn{padding:12px 26px;border-radius:999px;background:var(--gl-fill);border:2px solid var(--line-strong);box-shadow:var(--gl-shadow);color:var(--ink);font-weight:700;font-size:20px;white-space:nowrap}
+.pbtn{padding:6px 14px;border-radius:999px;background:rgba(244,242,246,.92);border:2px solid var(--line-strong);box-shadow:var(--gl-shadow);color:#141217;font-weight:800;font-size:11px;white-space:nowrap;min-height:var(--h-ctl);display:inline-flex;align-items:center;justify-content:center}
 .pbtn:focus-visible{border-color:var(--ink)}
 .ptop img{width:26px;height:26px;object-fit:contain}
 .ptop .t{font-size:15px}
@@ -141,7 +137,7 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 .ctl .grp{display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;background:var(--gl-fill);box-shadow:var(--gl-shadow);border:1px solid var(--line-strong)}
 .ctl button{padding:6px 14px;min-height:var(--h-ctl);border-radius:999px;color:var(--ink);font-weight:600;white-space:nowrap;text-align:center}
 .ctl button.sm{padding:6px 10px}
-.ctl .lbl{color:var(--muted);padding:0 4px 0 10px;font-size:13px;letter-spacing:.1em}
+.ctl .lbl{color:var(--muted);padding:0 4px 0 10px;font-size:13px;letter-spacing:.1em;white-space:nowrap}
 #pl.hide,#pl.hide *{cursor:none}
 #pl.hide .ptop,#pl.hide .ctl{opacity:0;pointer-events:none}
 .ctl button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--ink)}.ctl button[aria-pressed=true]:not(#bfav)::after{content:"\2713";margin-left:6px}.ctl button[aria-pressed=true]:focus-visible{box-shadow:inset 0 0 0 2px var(--ink),var(--ring)}
@@ -168,7 +164,7 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 .sbi.done{--o-a:#4a474f!important;--o-b:#3b393f!important;--o-c:#28262c!important;--o-f1:#605d66!important;--o-f2:#605d66!important}
 .sbi.off{opacity:.45}.sbi.off:focus,.sbi.off.cur{opacity:1}
 .sbi::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2}
-.sbi.cur::after{box-shadow:inset 0 0 0 2px var(--coral)}
+.sbi.cur::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.8)}
 .sbi:focus{outline:none}.sbi:focus::after{box-shadow:inset 0 0 0 3px #fff,0 0 0 2px rgba(0,0,0,.5)} /* ring above the orb skin, which hid the old box-shadow */
 .sbe{margin:auto;color:var(--ink-2);font-size:11px}
 /* multiview: tiles are absolutely positioned boxes that only ever change left/top/width/height (never reparented) */
@@ -201,7 +197,7 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 .pmenu button[aria-checked=true]{background:rgba(242,240,244,.86);color:#141217;font-weight:700}
 .pmenu small{color:var(--muted)}
 .pmenu button[aria-checked=true] small{color:#4B4652}
-.pmenu input{width:100%;margin:2px 0 6px;padding:7px 14px;border-radius:999px;border:0;background:rgba(0,0,0,.35);color:#fff;font:inherit;font-size:12px}.pmenu input:focus{outline:3px solid var(--coral);outline-offset:1px}
+.pmenu input{width:100%;margin:2px 0 6px;padding:7px 14px;border-radius:999px;border:0;background:rgba(0,0,0,.35);color:#fff;font:inherit;font-size:12px}.pmenu input:focus{outline:3px solid var(--ink);outline-offset:1px}
 .pmenu h3{font-size:13px;color:var(--muted);letter-spacing:.1em;padding:4px 14px 6px}
 #pbuf{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;background:#09080b;pointer-events:none;
   --o-a:var(--red-3);--o-b:var(--wine)}
@@ -226,13 +222,13 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 @media(prefers-reduced-motion:reduce){#pbuf *:not(.sk){animation:none!important}}
 /* hero: featured live game + live cards + team news */
 /* home = ONE grid that owns every cell: title row, hero cell, game-strip cell. Cells size the content; too small = main scrolls */
-.lz{height:100%;min-height:340px;display:grid;grid-template-rows:auto minmax(0,3fr) minmax(0,2fr);gap:8px}
+.lz{height:100%;min-height:340px;display:grid;grid-template-rows:auto minmax(250px,1fr) fit-content(26vh);gap:8px}
 .lzh{display:flex;align-items:center;justify-content:space-between;flex:none}
 .lzh h2{margin:0}
-.dots{display:flex;align-items:center;gap:4px;font-size:10px;letter-spacing:.1em;color:var(--ink-2)}
+.dots{display:flex;align-items:center;gap:4px;font-size:12px;letter-spacing:.1em;color:var(--ink-2)}
 .dots i{width:7px;height:7px;border-radius:50%;background:transparent;box-shadow:inset 0 0 0 1.5px var(--muted)}
 .dots i.v{background:#fff;box-shadow:none}
-.dots i.c{box-shadow:0 0 0 2px var(--coral);background:#fff}
+.dots i.c{box-shadow:0 0 0 2px var(--ink);background:#fff}
 .dots b{margin-left:6px;color:#fff}
 #gd{position:fixed;inset:0;z-index:95;background:#0a090c;display:flex;flex-direction:column}#gd[hidden]{display:none}
 #gdh{display:flex;align-items:center;gap:6px;padding:max(12px,var(--safe-y)) max(28px,var(--safe-x)) 8px;border-bottom:1px solid rgba(255,255,255,.1);flex:none}#gdh .t{flex:1;text-align:right;font-weight:800;font-size:15px}
@@ -240,41 +236,41 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 #gdh button[aria-pressed=true],#gdr button[aria-pressed=true]{background:#F2F0F4;color:#141217}#gdr{display:flex;gap:6px;padding:6px max(28px,var(--safe-x));flex:none}#gdr:empty{display:none}
 #gdh button:focus,#gdr button:focus{outline:none;box-shadow:var(--ring)}
 #gdb{flex:1;overflow:hidden;padding:0 max(28px,var(--safe-x)) max(10px,var(--safe-y))}
-.gt{width:100%;border-collapse:collapse;font-size:10px;table-layout:fixed}.gt th{color:var(--muted);font-weight:700;text-align:right;padding:5px 3px;background:#17151b}.gt td{padding:4px 3px;text-align:right;border-bottom:1px solid rgba(255,255,255,.05)}
+.gt{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}.gt th{color:var(--muted);font-weight:700;text-align:right;padding:5px 3px;background:#17151b}.gt td{padding:4px 3px;text-align:right;border-bottom:1px solid rgba(255,255,255,.05)}
 .gt th:nth-child(1),.gt td:nth-child(1){width:26px;text-align:center}.gt th:nth-child(2),.gt td:nth-child(2){width:116px;text-align:left}.gt td:nth-child(2){font-weight:700}.gt td.z{color:#6b6672}.gt td.h{color:#fff;font-weight:800}
-.gs{display:grid;grid-template-columns:1fr 1fr;gap:12px}.gs h3{margin:8px 0 4px;font-size:11px;color:var(--muted);letter-spacing:.08em}
-.gsc{display:flex;align-items:center;justify-content:center;gap:18px;padding:10px 0}.gsc .disp{font-size:34px}.gsc img{width:40px;height:40px}.gsc span{font-size:10px;color:var(--muted)}
-.ev{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:10.5px}.ev b{min-width:36px}.ev em{font-style:normal;color:var(--muted);min-width:56px}.ev.g{color:#fff;font-weight:700}.ev:not(.g){color:var(--ink-2)}
-.gsc2{display:flex;justify-content:center}.gsh{display:flex;align-items:center;gap:22px;padding:2px 0 4px}.gsh .disp{font-size:34px}.gsh img{width:38px;height:38px}.gsh span{font-size:11px;color:var(--muted);min-width:70px;text-align:center}
-.g3{display:grid;grid-template-columns:.9fr 1.25fr 1fr;gap:12px;align-items:start;padding-bottom:40px}.g3 h3{margin:8px 0 4px;font-size:10px;color:var(--muted);letter-spacing:.08em}
+.gs{display:grid;grid-template-columns:1fr 1fr;gap:12px}.gs h3{margin:8px 0 4px;font-size:12px;color:var(--muted);letter-spacing:.08em}
+.gsc{display:flex;align-items:center;justify-content:center;gap:18px;padding:10px 0}.gsc .disp{font-size:34px}.gsc img{width:40px;height:40px}.gsc span{font-size:12px;color:var(--muted)}
+.ev{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px}.ev b{min-width:36px}.ev em{font-style:normal;color:var(--muted);min-width:56px}.ev.g{color:#fff;font-weight:700}.ev:not(.g){color:var(--ink-2)}
+.gsc2{display:flex;justify-content:center}.gsh{display:flex;align-items:center;gap:22px;padding:2px 0 4px}.gsh .disp{font-size:34px}.gsh img{width:38px;height:38px}.gsh span{font-size:12px;color:var(--muted);min-width:70px;text-align:center}
+.g3{display:grid;grid-template-columns:.9fr 1.25fr 1fr;gap:12px;align-items:start;padding-bottom:40px}.g3 h3{margin:8px 0 4px;font-size:12px;color:var(--muted);letter-spacing:.08em}
 .g3 .ls td img{width:16px;height:16px;vertical-align:middle}.ls th:nth-child(2),.ls td:nth-child(2){width:auto}.ls td:nth-child(n+3),.ls th:nth-child(n+3){text-align:center}
-.star{display:flex;gap:8px;align-items:center;background:#15131a;border-radius:12px;padding:5px 8px;margin-bottom:5px}.star img{width:34px;height:34px;border-radius:50%;background:#2a2630;object-fit:cover}.star div{display:flex;flex-direction:column;font-size:10px}.star b{font-size:11px}.star span{color:var(--muted)}.star .hn{color:#fff}
+.star{display:flex;gap:8px;align-items:center;background:#15131a;border-radius:12px;padding:5px 8px;margin-bottom:5px}.star img{width:34px;height:34px;border-radius:50%;background:#2a2630;object-fit:cover}.star div{display:flex;flex-direction:column;font-size:12px}.star b{font-size:12px}.star span{color:var(--muted)}.star .hn{color:#fff}
 .gc{display:grid;grid-template-columns:34px 1fr auto auto;gap:8px;align-items:center;background:#15131a;border-radius:12px;padding:6px 8px;margin-bottom:5px;box-shadow:inset 3px 0 0 var(--o-a)}.gc .mug{width:34px;height:34px;border-radius:50%;background:#2a2630;object-fit:cover}
-.gm{display:flex;flex-direction:column;font-size:10px;min-width:0}.gm b{font-size:11px}.gm span{color:var(--muted)}.ppg{font-style:normal;background:#d21f3c;color:#fff;border-radius:4px;padding:0 4px;margin-left:5px;font-size:10px}
-.gsx{display:flex;align-items:center;gap:5px}.sepb{font:800 15px Inter,Roboto,Arial,sans-serif;color:var(--muted)}.gsx img{width:16px;height:16px}.gsx b{font-size:18px}.gtm{display:flex;flex-direction:column;font-size:10px;color:var(--muted);min-width:42px;text-align:right}.gtm span:first-child{color:#fff}
-.br{margin-bottom:5px}.bv{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;font-size:10px;line-height:1;color:var(--muted)}.bv span{text-align:center}.bv b{color:#fff;font-size:13px;line-height:1}.bv b:last-child{text-align:right}.bb{display:flex;gap:6px;margin-top:1px}.bb i{display:block;height:5px;border-radius:3px;transform:skewX(-20deg)}
+.gm{display:flex;flex-direction:column;font-size:12px;min-width:0}.gm b{font-size:12px}.gm span{color:var(--muted)}.ppg{font-style:normal;background:#d21f3c;color:#fff;border-radius:4px;padding:0 4px;margin-left:5px;font-size:12px}
+.gsx{display:flex;align-items:center;gap:5px}.sepb{font:800 15px Inter,Roboto,Arial,sans-serif;color:var(--muted)}.gsx img{width:16px;height:16px}.gsx b{font-size:18px}.gtm{display:flex;flex-direction:column;font-size:12px;color:var(--muted);min-width:42px;text-align:right}.gtm span:first-child{color:#fff}
+.br{margin-bottom:5px}.bv{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;font-size:12px;line-height:1;color:var(--muted)}.bv span{text-align:center}.bv b{color:#fff;font-size:13px;line-height:1}.bv b:last-child{text-align:right}.bb{display:flex;gap:6px;margin-top:1px}.bb i{display:block;height:5px;border-radius:3px;transform:skewX(-20deg)}
 #gpop{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center}#gpop[hidden]{display:none}
 .pc{--o-a:var(--red-3);--o-b:var(--wine);--o-c:var(--plum);--o-base:var(--island);position:relative;isolation:isolate;width:40vw;aspect-ratio:16/9;border-radius:26px;overflow:hidden;color:#fff;background:#141217}
 .pc.done{--o-a:#4a474f!important;--o-b:#3b393f!important;--o-c:#28262c!important;--o-f1:#605d66!important;--o-f2:#605d66!important}
 .pi{position:absolute;inset:0;padding:12px 16px 12px;display:flex;flex-direction:column;gap:5px}.pc .ft-mid{flex:1}.pc .ft-team img{width:48px;height:48px}.pc .ft-team .nm{font-size:11px}.pc .ft-sc{font-size:40px}.pc .ft-over{font-size:11px;padding:1px 10px;margin-top:3px}
-.pc .tv{font-size:10px;color:rgba(255,255,255,.85);text-align:center}.pb{display:flex;flex-wrap:wrap;gap:6px 8px;justify-content:center;margin-top:9px}
-.pbtn{padding:6px 14px;border-radius:999px;background:rgba(244,242,246,.92);color:#141217;font-weight:800;font-size:11px}.pbtn.alt{background:rgba(0,0,0,.35);color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+.pc .tv{font-size:12px;color:rgba(255,255,255,.85);text-align:center}.pb{display:flex;flex-wrap:wrap;gap:6px 8px;justify-content:center;margin-top:9px}
+.pbtn.alt{background:rgba(0,0,0,.35);color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
 .pbtn:focus{outline:none;box-shadow:var(--ring)}
 #gpop .pc{width:max(40vw,min(560px,92vw))}
 .srl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .sr{position:relative;isolation:isolate;border-radius:18px;padding:10px 12px;color:#fff;text-align:left;display:flex;flex-direction:column;gap:8px;background:linear-gradient(100deg,color-mix(in srgb,var(--o-a) 32%,#141217),#141217 50%,color-mix(in srgb,var(--o-b) 32%,#141217))}
-.sr.lv{box-shadow:inset 0 0 0 1.5px var(--coral)}.sr.lv:focus{box-shadow:inset 0 0 0 1.5px var(--coral),var(--ring)}.sr.done{filter:grayscale(.8);opacity:.7}
+.sr.lv{box-shadow:inset 0 0 0 1.5px var(--coral)}.sr.lv:focus{box-shadow:inset 0 0 0 1.5px var(--coral),var(--ring)}.sr.done{background:linear-gradient(100deg,color-mix(in srgb,var(--o-a) 10%,#141217),#141217 50%,color-mix(in srgb,var(--o-b) 10%,#141217))}
 .srt{display:flex;align-items:center;gap:8px}.srs{display:flex;align-items:center;gap:6px;flex:1}.srs:last-of-type{justify-content:flex-end}
-.srs img{width:28px;height:28px}.srs b{font-size:20px}.srm{font-size:26px;min-width:76px;text-align:center}.srn{font-size:10px;color:var(--muted);min-width:64px;text-align:right}
-.srg{display:flex;flex-direction:column;gap:2px;font-size:10.5px;background:rgba(10,9,12,.5);border-radius:12px;padding:6px 9px}.srg.none{color:var(--muted)}
-.srg i{font-style:normal;font-size:10px;letter-spacing:.08em;color:var(--muted)}.gl em{font-style:normal;color:var(--muted)}.gl.new{color:#fff}.gl:not(.new){opacity:.65}
+.srs img{width:28px;height:28px}.srs b{font-size:20px}.srm{font-size:26px;min-width:76px;text-align:center}.srn{font-size:12px;color:var(--muted);min-width:64px;text-align:right}
+.srg{display:flex;flex-direction:column;gap:2px;font-size:12px;background:rgba(10,9,12,.5);border-radius:12px;padding:6px 9px}.srg.none{color:var(--muted)}
+.srg i{font-style:normal;font-size:12px;letter-spacing:.08em;color:var(--muted)}.gl em{font-style:normal;color:var(--muted)}.gl.new{color:#fff}.gl:not(.new){color:var(--ink-2)}
 .gw{flex:1;min-height:0;overflow:hidden;padding:9px 8px 0;margin:0 -8px}
 .hero{display:flex;flex-direction:column;gap:12px}
 /* finished games: greyed orb, dimmed loser, big FINAL */
 .pill.done,.feat.done{--o-a:#4a474f!important;--o-b:#3b393f!important;--o-c:#28262c!important;--o-f1:#605d66!important;--o-f2:#605d66!important}
 .pill.done .scr,.feat.done .ft-sc{color:#fff}
-.lose{opacity:.45}
-.pill.done .live{bottom:0;padding:5px 0;background:rgba(0,0,0,.6);border-radius:0 0 22px 22px;font-size:11px;letter-spacing:.24em;color:#fff}
+.lose{opacity:.75}
+.pill.done .live{bottom:0;padding:5px 0;background:rgba(0,0,0,.6);border-radius:0 0 22px 22px;font-size:12px;letter-spacing:.24em;color:#fff}
 .pill.done .tvl{display:none}
 .ft-over{display:inline-block;margin-top:6px;padding:3px 16px;border:2px solid rgba(255,255,255,.85);border-radius:999px;font-size:22px;letter-spacing:.16em;color:#fff}
 .watch.hit{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;border-radius:26px;background:transparent;z-index:2}.watch.hit:focus{outline:none;box-shadow:var(--ring-in)}
@@ -287,40 +283,42 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 .fn .tn{display:flex;flex-direction:column;gap:3px}
 .fn .tn+.tn{border-top:1px solid rgba(255,255,255,.14);padding-top:7px}
 .fn .th{display:flex;align-items:center;gap:6px}.fn .th img{width:20px;height:20px;object-fit:contain}
-.fn .hd{font-size:10px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.fn .hd{font-size:10px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .fn .it{font-size:10px;line-height:1.3;color:rgba(255,255,255,.8);display:flex;gap:5px}
 .fn .it i{flex:none;width:4px;height:4px;border-radius:50%;background:var(--coral);margin-top:4px}
 .fn .inj{font-size:10px;color:var(--coral)}
 .feat .skin::after{opacity:.6}
-.ft-top{display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:.12em;color:rgba(255,255,255,.88)}
+.nwb{display:none;position:relative;z-index:3;align-self:flex-start}.nwb[aria-expanded=true]{background:rgba(244,242,246,.86);color:#141217;border-color:transparent}
+@media(max-width:700px){.nwb{display:inline-flex}.fn .tn,.fn h3{display:none}.fn.open .tn{display:flex}.fn.open h3{display:block}.fn:not(.open){background:none;padding:0}.ft-st b{font-size:12px;white-space:nowrap}}
+.ft-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,.88)}
 .ft-top b{display:inline-flex;align-items:center;gap:5px}
 .ft-mid{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;text-align:center;gap:8px;flex:1}
 .ft-team{display:flex;flex-direction:column;align-items:center;gap:3px}
 .ft-team img{width:80px;height:80px;width:clamp(32px,24cqh,80px);height:clamp(32px,24cqh,80px);object-fit:contain}
 .ft-team .nm{font-size:16px;line-height:1.05;max-width:100%;overflow-wrap:anywhere}
-.ft-team small{font-size:10px;color:rgba(255,255,255,.8)}
+.ft-team small{font-size:12px;color:rgba(255,255,255,.8)}
 .ft-sc{font-size:62px;font-size:clamp(28px,24cqh,62px);line-height:.9}
 .ft-note{font-size:12px;color:rgba(255,255,255,.9);margin-top:4px;letter-spacing:.06em}
 .ft-st{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .ft-st div{background:rgba(0,0,0,.28);border-radius:12px;padding:3px 8px;text-align:center}
-.ft-st small{display:block;font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.7)}
+.ft-st small{display:block;font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.7)}
 .ft-st b{font-size:12px}
 .chip.ft{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 6px}.chip.ft img{width:22px;height:22px;object-fit:contain}.chip.ft[aria-pressed=true]::after{content:"\2713";color:#141217;font-size:13px}
 .fstar{position:absolute;top:4px;left:5px;width:20px;height:20px;border-radius:50%;background:#fff;color:#141217;font-size:13px;line-height:20px;text-align:center;box-shadow:0 0 0 2px rgba(0,0,0,.45),0 0 10px rgba(255,255,255,.55);z-index:3}.sr .fstar{top:50%;left:9px;margin-top:-10px}.sr.fv{padding-left:36px}.feat.fv::after{content:"\2605  FAVORITE";position:absolute;top:9px;left:92px;font-size:11px;font-weight:800;letter-spacing:.1em;color:#141217;background:#FFB81C;border-radius:999px;padding:3px 10px;box-shadow:0 0 12px rgba(255,184,28,.6)}
 .pill .fstar{top:10px;left:16px}
 .gs{display:flex;gap:8px;align-items:center;margin-bottom:8px}.gs input{flex:1;padding:7px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink)}
-.gh{position:sticky;top:-4px;z-index:5;display:flex;background:var(--bg);padding:6px 0 4px}.gcs{flex:none;width:150px;color:var(--muted);font-size:10px;padding-left:4px;align-self:center}
+.gh{position:sticky;top:-4px;z-index:5;display:flex;background:var(--bg);padding:6px 0 4px}.gcs{flex:none;width:150px;color:var(--muted);font-size:12px;padding-left:4px;align-self:center}
 .gt{position:relative;flex:1;height:100%}.gh .gt{height:22px}.gh .gt span{position:absolute;top:2px;font-weight:700;font-size:11px;color:var(--ink-2);transform:none;padding-left:6px;border-left:1px solid var(--line-strong)}
 .gr{display:flex;height:46px;margin-bottom:4px;content-visibility:auto;contain-intrinsic-size:0 46px}
 .gc{flex:none;width:146px;margin-right:4px;display:flex;flex-direction:column;justify-content:center;padding:4px 12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line)}
-.gc b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}.gc small{color:var(--muted);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gc b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}.gc small{color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pg{position:absolute;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:3px 10px;border-radius:12px;background:var(--surface);border:1px solid var(--line);overflow:hidden;box-sizing:border-box;box-shadow:inset 0 0 0 1px var(--bg)}
-.pg b{font-weight:700;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pg small{color:var(--muted);font-size:10px;white-space:nowrap}
+.pg b{font-weight:700;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pg small{color:var(--muted);font-size:12px;white-space:nowrap}
 .pg.now{background:#2a2530;border-color:var(--line-strong)}.pg.now small{color:var(--ink-2)}
 #m{scroll-padding-bottom:12px}
 #zb{position:absolute;right:34px;top:50%;transform:translateY(-50%);width:300px;z-index:7;display:none;flex-direction:column;gap:6px}#zb.on{display:flex}
 #zb div{padding:8px 14px;border-radius:14px;background:rgba(15,14,17,.82);border:1px solid var(--line-strong);opacity:.7}
-#zb div.c{opacity:1;background:rgba(242,240,244,.92);color:#141217}#zb b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#zb small{font-size:10px;color:var(--ink-2)}#zb div.c small{color:#4B4652}
+#zb div.c{opacity:1;background:rgba(242,240,244,.92);color:#141217}#zb b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#zb small{font-size:12px;color:var(--ink-2)}#zb div.c small{color:#4B4652}
 #pbuf{background:#0b0a0d}#pbuf .mesh2{display:none}#pbuf .tm2 img{animation:none;width:64px;height:64px;filter:none}#pbuf .chn{font-size:30px;text-shadow:none}#pbuf .nm{font-size:15px;text-shadow:none}
 #pbuf .bar{width:140px;height:3px}#pbuf .stt{color:var(--muted)}
 .gtop{position:sticky;top:0;z-index:6;display:flex;gap:16px;height:142px;padding:4px 0 8px;background:var(--bg)}
@@ -333,24 +331,24 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 @media (max-aspect-ratio:1/1){ /* tall / portrait windows: hero stacks, bigger type */
  .lz{grid-template-rows:auto auto minmax(0,1fr)}.hcar{container-type:normal}.ft-team img{width:120px;height:120px}.ft-sc{font-size:90px}
  .feat{grid-template-columns:1fr;gap:12px;padding:20px 22px}.ft-team img{width:120px;height:120px}.ft-team .nm{font-size:24px}.ft-sc{font-size:90px}.ft-st b{font-size:15px}.ft-st small{font-size:10px}.ft-top{font-size:11px}.fn{padding:14px 16px}
- .grid.lg .pill{width:calc(25% - 8px);height:96px}.grid.lg .pill .side img{width:38px;height:38px}.grid.lg .pill .tm{font-size:10px}}
+ .grid.lg .pill{width:calc(25% - 8px);height:96px}.grid.lg .pill .side img{width:38px;height:38px}.grid.lg .pill .tm{font-size:12px}}
 .fbt{display:flex;gap:8px}.sumb{background:transparent!important;color:#fff!important;border:2px solid rgba(255,255,255,.8)}
 .ft-bot{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.ft-bot .tv{font-size:10px;color:rgba(255,255,255,.85)}
+.ft-bot .tv{font-size:12px;color:rgba(255,255,255,.85)}
 .watch{padding:7px 18px;border-radius:999px;background:rgba(244,242,246,.92);color:#141217;font-weight:800;font-size:11px}
 .grid.lg{justify-content:center}
 .grid.cal{justify-content:flex-start;gap:8px}
 .dh{display:flex;align-items:center;gap:12px;margin:16px 0 8px}.dh::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.12)}
 .dn{font-size:34px;line-height:1;min-width:60px;text-align:center;padding:6px 10px;border-radius:14px;background:rgba(255,255,255,.08)}.dh.today .dn{box-shadow:inset 0 0 0 2px var(--coral)}
-.dw b{display:block;font-size:15px}.dw small{color:var(--muted);font-size:11px}
-.grid.lg .pill{width:calc(25% - 8px);aspect-ratio:auto;height:75px;padding:6px 6px 15px;border-radius:16px}
-.grid.cal .pill{width:calc(25% - 8px);aspect-ratio:auto;height:75px;padding:6px 6px 15px;border-radius:16px}
-.grid.lg .pill .side{gap:1px}.grid.lg .pill .side img{width:30px;height:30px}.grid.lg .pill .tm{font-size:10px}.grid.lg .pill .scr{font-size:15px}
-.grid.cal .pill .side{gap:1px}.grid.cal .pill .side img{width:30px;height:30px}.grid.cal .pill .tm{font-size:10px}.grid.cal .pill .scr{font-size:15px}
-.grid.lg .pill .sp,.grid.lg .pill .rec,.grid.lg .pill .tvl{display:none}.grid.lg .pill .live{bottom:3px;font-size:10px}.grid.lg .pill.done .live{bottom:0;padding:3px 0;font-size:10px;border-radius:0 0 16px 16px}
-.grid.cal .pill .sp,.grid.cal .pill .rec,.grid.cal .pill .tvl{display:none}.grid.cal .pill .live{bottom:3px;font-size:10px}.grid.cal .pill.done .live{bottom:0;padding:3px 0;font-size:10px;border-radius:0 0 16px 16px}
-.pill .rec{font-size:10px;color:rgba(255,255,255,.8);letter-spacing:.04em}
-.pill .tvl{position:absolute;bottom:20px;left:0;right:0;font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.06em}
+.dw b{display:block;font-size:15px}.dw small{color:var(--muted);font-size:12px}
+.grid.lg .pill{width:calc(25% - 8px);aspect-ratio:auto;height:80px;padding:6px 6px 20px;border-radius:16px}
+.grid.cal .pill{width:calc(25% - 8px);aspect-ratio:auto;height:80px;padding:6px 6px 20px;border-radius:16px}
+.grid.lg .pill .side{gap:1px}.grid.lg .pill .side img{width:26px;height:26px}.grid.lg .pill .tm{font-size:12px}.grid.lg .pill .scr{font-size:15px}
+.grid.cal .pill .side{gap:1px}.grid.cal .pill .side img{width:26px;height:26px}.grid.cal .pill .tm{font-size:12px}.grid.cal .pill .scr{font-size:15px}
+.grid.lg .pill .sp,.grid.lg .pill .rec,.grid.lg .pill .tvl{display:none}.grid.lg .pill .live{bottom:3px;font-size:12px}.grid.lg .pill.done .live{bottom:0;padding:2px 0;font-size:12px;border-radius:0 0 16px 16px}
+.grid.cal .pill .sp,.grid.cal .pill .rec,.grid.cal .pill .tvl{display:none}.grid.cal .pill .live{bottom:3px;font-size:12px}.grid.cal .pill.done .live{bottom:0;padding:2px 0;font-size:12px;border-radius:0 0 16px 16px}
+.pill .rec{font-size:12px;color:rgba(255,255,255,.8);letter-spacing:.04em}
+.pill .tvl{position:absolute;bottom:20px;left:0;right:0;font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.06em}
 .nws{background:rgba(25,23,28,.92);border:1px solid var(--line);border-radius:26px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
 .nws h3{font-size:10px;letter-spacing:.14em;color:var(--muted)}
 .nws .tn{display:flex;flex-direction:column;gap:4px;padding-top:8px;border-top:1px solid var(--line)}
@@ -374,7 +372,7 @@ body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 #gbar .sp{flex:1}
 #gbar button[aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 /* Live page: one grid owns the screen (search, categories, info, list). Only the channel list scrolls, so nothing shows above it. Borders sit on one 4px grid */
-main.live{display:grid;grid-template-rows:auto auto auto minmax(0,1fr);overflow:hidden;padding:4px max(28px,var(--safe-x)) 0}
+main.live{display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto;overflow:hidden;padding:4px max(28px,var(--safe-x)) 0}
 main.live::after{display:none}
 main.live .gs{margin:0 0 8px}
 main.live .chips.one{margin-bottom:8px}
@@ -498,7 +496,6 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 /* ===== NEMOS rebuild 2026-11-12: one control height (--h-ctl), one red (live dot), flat pills, big picker ===== */
 .btn{min-height:var(--h-ctl);display:inline-flex;align-items:center;justify-content:center}
 .btn.danger{background:none;color:#ff9aa8;text-decoration:underline;padding:6px 8px}
-.pbtn{min-height:var(--h-ctl);display:inline-flex;align-items:center;justify-content:center}
 #gpop .pbtn{font-size:12px}
 .ptop .pbtn{background:var(--gl-fill);color:var(--ink);border:1px solid var(--line-strong);box-shadow:none;font-size:14px}
 .ptop .pbtn:focus{box-shadow:var(--ring);border-color:var(--ink)}
@@ -506,12 +503,11 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 .mask:not(:focus){-webkit-text-security:disc}
 .pill.cur{box-shadow:0 0 0 2px var(--ink-2)}.pill.cur:focus{box-shadow:var(--ring)}
 .grid.lg .pill.cur::before{content:"NOW SHOWING";position:absolute;top:3px;left:0;right:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--ink-2);z-index:1}
-.fn h3,.fn .hd,.fn .it,.nws .it,.nws .hd{font-size:11px}
-.fn .inj,.nws .inj{align-self:flex-start;font-size:11px;color:var(--ink-2);background:rgba(255,255,255,.1);border-radius:999px;padding:1px 8px}
+.fn h3,.fn .hd,.fn .it,.nws .it,.nws .hd{font-size:12px}
+.fn .inj,.nws .inj{align-self:flex-start;font-size:12px;color:var(--ink-2);background:rgba(255,255,255,.1);border-radius:999px;padding:1px 8px}
 .fn .it i,.nws .it i{background:var(--ink-2)}
-.sr.lv.fv{box-shadow:inset 0 0 0 2px var(--coral)}
-.sr:focus,.sr.lv:focus,.sr.lv.fv:focus{box-shadow:var(--ring)}
-.srn,.srg,.srg i{font-size:11px}.srn{min-width:96px}.srn .dot{margin-right:4px}
+.sr:focus,.sr.lv:focus{box-shadow:var(--ring)}
+.srn,.srg,.srg i{font-size:12px}.srn{min-width:96px}
 .sr.pre{padding:6px 12px}.sr.pre .srg{display:none}.sr.pre .srs img{width:22px;height:22px}.sr.pre .srs b{font-size:16px}.sr.pre .srm{font-size:18px}
 .hmk{font-style:normal;font-size:11px;letter-spacing:.1em;color:var(--muted)}
 .dh.today .dn{box-shadow:inset 0 0 0 2px var(--line-strong)}
@@ -521,6 +517,19 @@ main.live .chlogo img{position:absolute;left:3px;top:3px;width:24px;height:24px;
 /* player bar: Feed is the one filled pill; zoom is one button; empty groups vanish */
 .ctl #bfeed{background:var(--ink);color:#141217;font-weight:700;max-width:240px}
 .ctl .grp:not(:has(button:not([hidden]))){display:none}
+/* icon-only bar: ctlFit adds .ico when the labelled bar would shrink below 85%; labels hide (aria-labels stay), the bar never wraps and is never scaled below that */
+.ctl.ico button:not(.sm){font-size:0;gap:0;min-width:var(--h-ctl);padding:0 10px;display:inline-flex;align-items:center;justify-content:center}.ctl.ico button:not(.sm)::before{content:"";width:20px;height:20px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat}.ctl.ico button::after,.ctl.ico .lbl{display:none!important}
+#bfeed{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M4%206h16M4%2012h16M4%2018h10'/%3E%3C/svg%3E")}
+#zv{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='11'%20cy='11'%20r='7'/%3E%3Cpath%20d='M21%2021l-5-5M8%2011h6M11%208v6'/%3E%3C/svg%3E")}
+#bsc{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M4%2020V10M10%2020V4M16%2020v-7M22%2020H2'/%3E%3C/svg%3E")}
+#bcg{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M7%207h13l-4-4M17%2017H4l4%204'/%3E%3C/svg%3E")}
+#bgd{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='12'%20cy='12'%20r='9'/%3E%3Cpath%20d='M15.5%208.5l-2%205-5%202%202-5z'/%3E%3C/svg%3E")}
+#bfav{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M12%203l2.8%205.8%206.2.9-4.5%204.4%201.1%206.2L12%2017.3%206.4%2020.3l1.1-6.2L3%209.7l6.2-.9z'/%3E%3C/svg%3E")}
+#bmv{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Crect%20x='3'%20y='3'%20width='8'%20height='8'%20rx='1'/%3E%3Crect%20x='13'%20y='3'%20width='8'%20height='8'%20rx='1'/%3E%3Crect%20x='3'%20y='13'%20width='8'%20height='8'%20rx='1'/%3E%3Crect%20x='13'%20y='13'%20width='8'%20height='8'%20rx='1'/%3E%3C/svg%3E")}
+#mvl{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Crect%20x='3'%20y='3'%20width='8'%20height='8'%20rx='1'/%3E%3Crect%20x='13'%20y='3'%20width='8'%20height='8'%20rx='1'/%3E%3Crect%20x='3'%20y='13'%20width='18'%20height='8'%20rx='1'/%3E%3C/svg%3E")}
+#mvb [data-a=add]{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M12%205v14M5%2012h14'/%3E%3C/svg%3E")}
+#mvb [data-a=sc]{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M4%2020V10M10%2020V4M16%2020v-7M22%2020H2'/%3E%3C/svg%3E")}
+#mvb [data-a=ex]{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M6%206l12%2012M18%206L6%2018'/%3E%3C/svg%3E")}
 .pmenu .pnote{padding:6px 14px;color:var(--muted)}
 /* Change game: wrapped top-pinned grid of big AWAY @ HOME items */
 .sbi .pk{display:none}
@@ -531,6 +540,8 @@ main.live .gtop:has(#gi:empty):not(:has(.gv.on,.gv.ld)){display:none}
 main.live .gv:not(.on):not(.ld){display:none}
 #gx:has(.ne) .gh{display:none}#gx:has(.ne) .gr .gt{display:none}main.live #gx:has(.ne) .gc{width:100%;max-width:560px}
 .gnone{color:var(--muted);padding:0 4px 8px}
+#tip{position:fixed;left:50%;bottom:max(16px,var(--safe-y));transform:translateX(-50%);z-index:40;max-width:90vw;padding:6px 16px;border-radius:999px;background:var(--gl-fill);border:1px solid var(--line-strong);box-shadow:var(--gl-shadow);color:var(--ink);font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s}#tip.on{opacity:1}
+.keys{color:var(--muted);padding:4px 0 max(6px,var(--safe-y))}@media(pointer:coarse){.keys{display:none}}
 .gc:focus ~ .gt .pg.now{box-shadow:inset 0 0 0 2px var(--ink)}
 /* game detail */
 #gdh button,#gdr button{min-height:var(--h-ctl);font-size:12px;display:inline-flex;align-items:center}
@@ -542,29 +553,29 @@ main.live .gv:not(.on):not(.ld){display:none}
 #mvm button.danger{color:#ff9aa8;margin-top:8px}
 #mvp button,#mvp h3{font-size:13px}#mvp input{font-size:13px;padding:9px 14px}
 #mv .mvh{position:absolute;left:0;right:0;bottom:calc(max(16px,var(--safe-y)) + var(--h-ctl) + 18px);text-align:center;color:var(--ink-2);font-size:12px;text-shadow:0 1px 6px #000;pointer-events:none;z-index:19;transition:opacity .2s}
-#mv.hide .mvh{opacity:0}
-@media (max-width:700px){#mv .mvh{bottom:72px}.gtool{flex-wrap:wrap}.gtool .gs{flex:1 1 100%}.gtool .chips{flex:1 1 100%}.dchips{top:0}}
+@media (max-width:700px){.srt{flex-wrap:wrap}.srn{flex:1 0 100%;min-width:0;text-align:left}#mv .mvh{bottom:72px}.gtool{flex-wrap:wrap}.gtool .gs{flex:1 1 100%}.gtool .chips{flex:1 1 100%}.dchips{top:0}}
 </style></head><body>
 <header><span class="brand"><img src="nemtv-logo.png" alt="NEMTV"></span>
 <nav id="nav"><button data-t="home"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Home</span></button><button data-t="scores"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Scores</span></button><button data-t="schedule"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Schedule</span></button><button data-t="live"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Live</span></button><button data-t="guide"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Guide</span></button></nav><button id="setb" data-t="setup" aria-label="Setup"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2.2-1.3L14 3h-4l-.4 2.5a7 7 0 0 0-2.2 1.3l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .9.1 1.3l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2.2 1.3L10 21h4l.4-2.5a7 7 0 0 0 2.2-1.3l2.3 1 2-3.4-2-1.5c.1-.4.1-.9.1-1.3z"/></svg></button></header>
 <main id="m"></main>
 <div id="boot"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="rows" id="brows"></div><div class="ttl"><img src="nemtv-logo.png" alt="NEMTV" style="height:64px"></div><div class="tag disp">NHL &middot; LIVE TV</div><div class="bar sk"></div><div class="st" id="bst"></div></div>
 <div id="pl" tabindex="-1" style="outline:none"><video id="v" autoplay playsinline></video>
-<div id="pbuf"><div class="mesh2"></div><div class="sk skf"></div><div id="pbc"></div><div class="bar sk"></div><div class="stt" id="pst"></div></div>
+<div id="pbuf"><div class="mesh2"></div><div class="sk skf"></div><div id="pbc"></div><div class="bar sk"></div><div class="stt" id="pst" role="status" aria-live="polite"></div></div>
 <div class="ptop" id="ptop"><button class="pbtn" id="pback">&#8592; Back</button><div class="ptt" id="ptt"></div><button class="pbtn" id="pfs">Full screen</button></div><div id="zb"></div>
 <div class="ctl" id="pctl">
  <div class="grp"><button id="bfeed"></button><button id="zv" aria-label="Zoom"></button><button class="sm" id="zm" hidden>-</button><button class="sm" id="zp" hidden>+</button></div>
- <div class="grp"><button id="bsc" aria-pressed="false" hidden>Scores</button><button id="bcg" hidden>Change game</button></div>
- <div class="grp"><button id="bgd">Guide</button><button id="bfav" aria-pressed="false">Favorite</button><button id="bmv" hidden>Multiview</button></div>
-</div><div class="pmenu" id="pmenu" hidden></div></div>
-<div id="mv" tabindex="-1" aria-label="Multiview"><div id="mvt"></div><div class="mvh">Hold OK (or long-press) on a tile for options</div><div class="pmenu" id="mvp" hidden></div><div id="mvm" class="pmenu" hidden></div><div class="ctl" id="mvb">
- <div class="grp"><button data-a="lay" id="mvl"></button></div>
+ <div class="grp"><button id="bsc" aria-label="Scores" aria-pressed="false" hidden>Scores</button><button id="bcg" aria-label="Change game" hidden>Change game</button></div>
+ <div class="grp"><button id="bgd" aria-label="Guide">Guide</button><button id="bfav" aria-pressed="false">Favorite</button><button id="bmv" aria-label="Multiview" hidden>Multiview</button></div>
+</div><div class="pmenu" id="pmenu" role="menu" aria-label="Options" hidden></div></div>
+<div id="mv" tabindex="-1" aria-label="Multiview"><div id="mvt" role="status" aria-live="polite"></div><div class="mvh">Hold OK (or long-press) on a tile for options</div><div class="pmenu" id="mvp" hidden></div><div id="mvm" class="pmenu" role="menu" aria-label="Tile options" hidden></div><div class="ctl" id="mvb">
+ <div class="grp"><button data-a="lay" id="mvl" aria-label="Layout"></button></div>
  <div class="grp"><span class="lbl" id="mvz">ALL ZOOM 100%</span><button class="sm" data-a="am">-</button><button class="sm" data-a="ap">+</button></div>
- <div class="grp"><button data-a="add">+ Game</button><button data-a="sc" aria-pressed="false">Scores</button><button data-a="ex">Exit</button></div>
+ <div class="grp"><button data-a="add" aria-label="Add game">+ Game</button><button data-a="sc" aria-label="Scores" aria-pressed="false">Scores</button><button data-a="ex" aria-label="Exit">Exit</button></div>
 </div></div>
 <div id="sbar" aria-label="Scores"></div>
-<div id="gpop" hidden></div>
-<div id="gd" hidden><div id="gdh"></div><div id="gdr"></div><div id="gdb"></div></div>
+<div id="tip" role="status" aria-live="polite"></div>
+<div id="gpop" role="dialog" aria-modal="true" aria-label="Game options" hidden></div>
+<div id="gd" role="dialog" aria-modal="true" aria-label="Game detail" hidden><div id="gdh"></div><div id="gdr"></div><div id="gdb"></div></div>
 <div id="gp" hidden><div id="gbar"></div><iframe id="gf" title="NHL guide"></iframe></div>
 <script src="config.js"></script>
 <script src="categories.js"></script>
@@ -608,6 +619,7 @@ const NHL=[["ANA","Anaheim Ducks","#F47A38"],["BOS","Boston Bruins","#FFB81C"],[
 ["PHI","Philadelphia Flyers","#F74902"],["PIT","Pittsburgh Penguins","#FCB514"],["SEA","Seattle Kraken","#68A2B9"],["SJS","San Jose Sharks","#00A0AA"],["STL","St Louis Blues","#1C57C4"],
 ["TBL","Tampa Bay Lightning","#1E8AD8"],["TOR","Toronto Maple Leafs","#2F6FD6"],["UTA","Utah Mammoth","#6CACE4"],["UTA","Utah Hockey Club","#6CACE4"],["VAN","Vancouver Canucks","#2A7DC0"],
 ["VGK","Vegas Golden Knights","#B4975A"],["WSH","Washington Capitals","#C8102E"],["WPG","Winnipeg Jets","#3D6DB5"]];
+const DIVS=[["BOS","BUF","DET","FLA","MTL","OTT","TBL","TOR"],["CAR","CBJ","NJD","NYI","NYR","PHI","PIT","WSH"],["CHI","COL","DAL","MIN","NSH","STL","UTA","WPG"],["ANA","CGY","EDM","LAK","SEA","SJS","VAN","VGK"]]; // Setup team chips: one row per division
 const team=n=>{const k=nk(n),t=NHL.find(t=>nk(t[1])===k);return t?{logo:(window.LOGO||{})[t[0]],c:t[2]}:{}};
 
 const on=c=>!c.s||!off.includes(c.s);
@@ -638,7 +650,7 @@ const skify=h=>h.replace(/<button/g,"<div").replace(/<\/button>/g,"</div>").repl
 const skN=(n,f)=>'<div inert aria-hidden="true" style="display:contents">'+skify(Array.from({length:n},(_,i)=>f(i)).join(""))+'</div>';
 const SKL='<i class="sk" style="display:inline-block;width:120px;height:11px;vertical-align:middle"></i>', SKI='<i class="sk" style="display:inline-block;width:60px;height:9px;vertical-align:middle"></i>';
 const FT=()=>({signal:window.AbortSignal&&AbortSignal.timeout?AbortSignal.timeout(8000):undefined});
-let scLoaded=0, scFail=0, plDone=0, epgF=0, gdFail=0, tmiL=0, nwsL=0;
+const LOADING="\u2026"; let plT=0, scLoaded=0, scFail=0, plDone=0, epgF=0, gdFail=0, tmiL=0, nwsL=0;
 const plLoad=()=>!!url&&!ch.length&&!plDone&&!!(window.Android||window.NEMDESK); // plain web never loads a playlist, so it is never "loading"
 let SC=[], scSig="";
 const scoreOf=(aw,hm,st)=>SC.find(x=>x.awayTeam&&x.homeTeam&&x.awayTeam.abbrev===aw&&x.homeTeam.abbrev===hm&&Math.abs(Date.parse(x.startTimeUTC)-st)<14*3600e3);
@@ -649,7 +661,7 @@ function scInfo(x){ // {score:"2 - 1", note:"P2 12:34"} or null before the puck 
   const note=over?"FINAL"+(pd.periodType==="OT"?" / OT":pd.periodType==="SO"?" / SO":""):ck.inIntermission?"INT "+n+" "+(ck.timeRemaining||""):per+" "+(ck.timeRemaining||"");
   const rs=String(ck.timeRemaining||"").split(":"), rem=rs.length==2?(+rs[0])*60+(+rs[1]):NaN, len=pd.periodType==="OT"&&x.gameType!==3?300:1200;
   const prog=over||ck.inIntermission||pd.periodType==="SO"||isNaN(rem)?null:Math.max(0,Math.min(1,1-rem/len));
-  return {n,it:!!ck.inIntermission,pt:pd.periodType,tr:ck.timeRemaining||"",prog,score:(x.homeTeam.score||0)+" - "+(x.awayTeam.score||0),note,over,win:over?((x.awayTeam.score||0)>(x.homeTeam.score||0)?"a":(x.awayTeam.score||0)<(x.homeTeam.score||0)?"h":""):""};
+  return {n,it:!!ck.inIntermission,pt:pd.periodType,tr:ck.timeRemaining||"",prog,score:(x.awayTeam.score||0)+" - "+(x.homeTeam.score||0),note,over,win:over?((x.awayTeam.score||0)>(x.homeTeam.score||0)?"a":(x.awayTeam.score||0)<(x.homeTeam.score||0)?"h":""):""};
 }
 let ST=[];
 function applyStandings(){ST.forEach(x=>{const t=TMI[x.teamAbbrev&&x.teamAbbrev.default]; if(!t)return;
@@ -670,7 +682,7 @@ window.gotScores=(t,e)=>{
   let redo=false;
   document.querySelectorAll("#m .pill[data-g]").forEach(b=>{const g=G[+b.dataset.g]; if(!g)return; g.sc=scInfo(scoreOf(g.aw,g.hm,g.st));
     const sc=b.querySelector(".scr"), lv=b.querySelector(".live");
-    if(g.sc&&sc){sc.textContent=g.sc.score; lv.innerHTML=(g.sc.over?"":'<i class="dot"></i>')+esc(g.sc.note)} else if(g.sc!==null&&!sc)redo=true});
+    if(g.sc&&sc){sc.textContent=g.sc.score; lv.innerHTML=esc(g.sc.note)} else if(g.sc!==null&&!sc)redo=true});
   if(redo)rerender(); else heroRefresh()
 };
 function pollScores(){const u="https://api-web.nhle.com/v1/score/now";
@@ -683,7 +695,7 @@ function games(){ // from the bundled NHL schedule + the TV box clock
     const sx=scoreOf(aw,hm,st), end=(sx&&endAtMap()[sx.id])||st+3.5*3600e3; // final time if seen, else start+3.5h
     if(st>=sod+7*864e5||(st<sod?t>=end+90*60e3:st+DUR<=t&&!sx))return; // yesterday's (past-midnight) games stay until 90 min after they end; finished games from today stay (greyed, FINAL)
     const A=ABBR[aw],H=ABBR[hm]; if(!A||!H)return;
-    const g={s:"NHL",tm:[H.name,A.name],t:[H,A],st,aw,hm,nets,title:A.name+" at "+H.name}; // home team on the left
+    const g={s:"NHL",tm:[A.name,H.name],t:[A,H],st,aw,hm,nets,title:A.name+" at "+H.name}; // AWAY team on the left (Brock 2026-11-12), home on the right
     g.sc=scInfo(scoreOf(aw,hm,st)); g.c=feedsFor(g)[0]||{n:"No matching channel",u:"",g:""};
     g.sid=svId(g); if(g.sid&&!g.c.u)g.c={n:"Stream addon",u:"stremio",g:"Stremio"}; // addon feeds count as a feed (real list loads on Watch)
     (st<=t||st<sod+864e5?live:later).push(g); // today's games (not started, live, finished) all go in the hero
@@ -752,7 +764,7 @@ function bfName(g){ // name the Stremio addon feed when the game has one (warm c
 const fmtT=ms=>{const d=new Date(ms);return d.toLocaleDateString([],{weekday:"short",month:"short",day:"numeric"})+", "+d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})};
 
 /* ---------- hero data: standings + team news from the guide (git-synced) ---------- */
-let TMI={}, NWS={}, hi=0;
+let TMI={}, NWS={}, hi=0, nwOpen=false; // nwOpen: phone Home hero news chip
 function loadHeroData(){const B=GURL.replace(/index\.html$/,"");
   fetch(B+"data/league.json").then(r=>r.json()).then(d=>{TMI={};(d.teams||[]).forEach(t=>TMI[t.abbrev]=t);applyStandings();heroRefresh()}).catch(()=>{}).then(()=>{tmiL=1;heroRefresh()});
   fetch(B+"news.json").then(r=>r.json()).then(d=>{NWS=d.teams||{};heroRefresh()}).catch(()=>{}).then(()=>{nwsL=1;heroRefresh()})}
@@ -762,20 +774,20 @@ function newsHTML(g){
     if(!n&&!nwsL)return `<div class="tn"><div class="th">${lg}<b class="disp">${esc(ab)}</b></div><div class="hd"><i class="sk" style="height:1.1em;width:90%"></i></div><div class="it"><i class="sk" style="height:1em;width:70%"></i></div></div>`;
     if(!n)return `<div class="tn"><div class="th">${lg}<b class="disp">${esc(ab)}</b></div><div class="hd">News loads with the guide.</div></div>`;
     const inj=(n.injuries||[]).length;
-    return `<div class="tn"><div class="th">${lg}<b class="disp">${esc(ab)}</b></div><div class="hd">${esc(n.headline||"")}</div>${(n.items||[]).slice(0,1).map(i=>`<div class="it"><i></i><span>${esc(i.title)}</span></div>`).join("")}${inj?`<div class="inj">${inj} injury note${inj>1?"s":""}</div>`:""}</div>`};
-  return `<h3 class="disp">TEAM NEWS</h3>`+one(g.hm,g.t[0])+one(g.aw,g.t[1])}
+    return `<div class="tn"><div class="th">${lg}<b class="disp">${esc(ab)}</b></div><div class="hd">${esc(n.headline||"")}</div>${inj?`<div class="inj">${inj} injury note${inj>1?"s":""}</div>`:""}</div>`};
+  return `<h3 class="disp">TEAM NEWS</h3>`+one(g.aw,g.t[0])+one(g.hm,g.t[1])}
 function featHTML(g,k){ if(!g)return "";
   const H=TMI[g.hm]||{}, A=TMI[g.aw]||{}, sc=g.sc, x=scoreOf(g.aw,g.hm,g.st), logo=t=>t.logo?`<img src="${t.logo}" alt="">`:"";
-  const sog=x&&x.homeTeam&&x.homeTeam.sog!==undefined?[x.homeTeam.sog,x.awayTeam.sog]:["-","-"];
+  const sog=x&&x.homeTeam&&x.homeTeam.sog!==undefined?[x.awayTeam.sog,x.homeTeam.sog]:["-","-"];
   const cell=(l,a,b)=>`<div><small>${l}</small><b>${tmiL?`${esc(a)} &nbsp;|&nbsp; ${esc(b)}`:'<i class="sk" style="display:inline-block;width:5em;height:1em;vertical-align:middle"></i>'}</b></div>`;
   return `<span class="skin"><span class="mesh"></span></span><div class="fl">
    <div class="ft-top"><b>${sc?(sc.over?"GAME OVER":esc(sc.note)):"STARTS "+esc(clk(g.st)).toUpperCase()}</b><span>${k+1} / ${G.length} &middot; ${esc(netStr(g))}</span></div>
-   <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span><small>${esc(recOf(g.hm)||"HOME")}</small></div>
+   <div class="ft-mid"><div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span><small>${esc(recOf(g.aw)||"AWAY")}</small></div>
     <div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${sc&&sc.over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div>
-    <div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span><small>${esc(recOf(g.aw)||"AWAY")}</small></div></div>
-   <div class="ft-st">${cell("POINTS",H.points!==undefined?H.points:"-",A.points!==undefined?A.points:"-")}${cell("RECORD",H.record||"-",A.record||"-")}${cell("LAST 10",H.l10||"-",A.l10||"-")}${cell("STREAK",H.streak||"-",A.streak||"-")}${cell("GOALS F-A",H.gf!==undefined?H.gf+"-"+H.ga:"-",A.gf!==undefined?A.gf+"-"+A.ga:"-")}${cell("SHOTS",sog[0],sog[1])}</div>
+    <div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span><small>${esc(recOf(g.hm)||"HOME")}</small></div></div>
+   <div class="ft-st">${cell("POINTS",A.points!==undefined?A.points:"-",H.points!==undefined?H.points:"-")}${cell("RECORD",A.record||"-",H.record||"-")}${cell("LAST 10",A.l10||"-",H.l10||"-")}${cell("STREAK",A.streak||"-",H.streak||"-")}${cell("GOALS F-A",A.gf!==undefined?A.gf+"-"+A.ga:"-",H.gf!==undefined?H.gf+"-"+H.ga:"-")}${cell("SHOTS",sog[0],sog[1])}</div>
    <div class="ft-bot"><span class="tv">${sc&&sc.over?"This game has ended":!sc?(g.c&&g.c.u&&Date.now()>=g.st-40*6e4?"Pre-game on "+esc(bfName(g)):"Game has not started yet"):g.c&&g.c.u?"Best feed: "+esc(bfName(g)):"No feed found"}</span></div></div>
-   <div class="fn">${newsHTML(g)}</div>`}
+   <div class="fn${nwOpen?" open":""}"><button class="chip nwb focusable" aria-expanded="${nwOpen}">News</button>${newsHTML(g)}</div>`}
 const slideStyle=g=>{const c=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";return c(g.t[0].c,"a")+c(g.t[1].c,"b")};
 function heroSet(){const c=$("#hcar"); if(!c)return;
   const ae=document.activeElement, fk=ae&&ae.classList&&ae.classList.contains("watch")?ae.dataset.g:null;
@@ -786,7 +798,7 @@ function heroRefresh(){if(tab==="home"&&$("#hcar"))heroSet()}
 function pillHTML(c,k,kind,cal){
   const col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"";
   const fs=starOn(c.aw,c.hm,c.sc&&c.sc.over)?`<span class="fstar">&#9733;</span>`:"";
-  return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${fs}<span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(netStr(c))}</span>`:""}<span class="live">${kind==="later"?(cal?esc(new Date(c.st).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})):"STARTS "+esc(fmtT(c.st)).toUpperCase()):c.sc?(c.sc.over?esc(c.sc.note):'<i class="dot"></i>'+esc(c.sc.note)):esc(clk(c.st)).toUpperCase()}</span></button>`;
+  return `<button class="pill focusable${kind==="later"?" later":""}${c.sc&&c.sc.over?" done":""}" data-${kind==="later"?"l":"g"}="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${fs}<span class="sp disp">${esc(c.s)}</span><span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${c.t[0].logo?`<img src="${c.t[0].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[0])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.aw))}</span>`:""}</span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${c.t[1].logo?`<img src="${c.t[1].logo}" alt="">`:""}<span class="tm disp">${esc(c.tm[1])}</span>${kind==="live"?`<span class="rec">${esc(recOf(c.hm))}</span>`:""}</span>${kind==="live"&&c.nets&&c.nets.length?`<span class="tvl">${esc(netStr(c))}</span>`:""}<span class="live">${kind==="later"?(cal?esc(new Date(c.st).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})):"STARTS "+esc(fmtT(c.st)).toUpperCase()):c.sc?esc(c.sc.note):esc(clk(c.st)).toUpperCase()}</span></button>`;
 }
 const chanCard=c=>`<button class="cc focusable" data-i="${ch.indexOf(c)}"><b>${esc(baseName(c.n))}</b>${fav.includes(c.n)?'<span class="star">&#9733;</span>':""}<span class="nw none">${esc(c.g)}</span></button>`;
 const chip=(label,pressed,attr)=>`<button class="chip focusable" ${attr} aria-pressed="${pressed}">${esc(label)}</button>`;
@@ -848,13 +860,13 @@ function sportRows(){const gm=games(), ss=[...new Set([...ch.map(c=>c.s),...gm.l
 function render(){
   if(tab!=="live")pvStop();
   guideTab(tab==="guide");
-  document.querySelectorAll("header [data-t]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===tab));
+  document.querySelectorAll("header [data-t]").forEach(b=>{b.setAttribute("aria-pressed",b.dataset.t===tab);if(b.dataset.t===tab)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
   const m=$("#m"), vis=ch.filter(on); m.classList.toggle("live",tab==="live");
   if(tab==="home"){
     const gm=games(); const rk=x=>x.sc&&x.sc.over?2:x.sc?0:1; G=gm.live.sort((a,b)=>rk(a)-rk(b)||(isFavG(a.aw,a.hm)?0:1)-(isFavG(b.aw,b.hm)?0:1)||a.st-b.st); L=gm.later;
     const favs=fav.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c)), rec=recent.map(n=>ch.find(c=>c.n===n)).filter(c=>c&&on(c));
     let h=(G.length?"":`<h2 class="disp">NHL today</h2>`)+(G.length?(hi=Math.min(hi,G.length-1),`<div class="lz"><div class="lzh"><h2 class="disp">NHL today</h2><span class="dots" id="dots"></span></div><div class="hcar" id="hcar" data-pages></div><div class="gw" id="gw" data-pages><div class="grid lg">${G.map((c,k)=>pillHTML(c,k,"live")).join("")}</div></div></div>`)
-      :(noCh()?noPl():`<div class="empty">${ch.length?"No NHL games on right now."+(L.length?" Next up: "+esc(L[0].title)+", "+esc(fmtT(L[0].st))+".":""):"Loading your playlist..."}</div>`));
+      :(noCh()?noPl():`<div class="empty">${ch.length?"No NHL games on right now."+(L.length?" Next up: "+esc(L[0].title)+", "+esc(fmtT(L[0].st))+".":""):SKL}</div>`));
     h+=daysHTML(L,o=>o===0);
     m.innerHTML=h; if(tab==="home")heroSet();
   }else if(tab==="schedule"){
@@ -866,22 +878,22 @@ function render(){
     const per=g=>{const d=g.periodDescriptor||{};return d.periodType==="OT"?"OT":d.periodType==="SO"?"SO":"P"+(g.period||d.number||1)};
     const row=x=>{const a=tm(x.awayTeam),h=tm(x.homeTeam),i=scInfo(x),gs=(x.goals||[]).slice(-3).reverse(),lv=ord(x)===0;
       const gh=gs.map((g,k)=>`<span class="gl${k?"":" new"}"><b>${esc(g.teamAbbrev)}</b> ${esc((g.name&&g.name.default)||"")} <em>${esc(per({period:g.period,periodDescriptor:g.periodDescriptor}))} ${esc(g.timeInPeriod||"")}</em> ${g.awayScore}-${g.homeScore}${g.strength&&g.strength!=="ev"?" "+esc(g.strength.toUpperCase()):""}</span>`).join("");
-      return `<button data-id="${x.id}" class="sr focusable${i?"":" pre"}${i&&i.over?" done":""}${lv?" lv":""}${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?" fv":""}" style="--o-a:${h.c};--o-b:${a.c}">${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?`<span class="fstar">&#9733;</span>`:""}<span class="srt"><span class="srs">${h.logo?`<img src="${h.logo}" alt="">`:""}<b class="disp">${esc(x.homeTeam.abbrev)}</b><i class="hmk">HOME</i></span><span class="srm disp">${i?esc(i.score):"VS"}</span><span class="srs">${a.logo?`<img src="${a.logo}" alt="">`:""}<b class="disp">${esc(x.awayTeam.abbrev)}</b></span><span class="srn">${i?(lv?'<i class="dot"></i>LIVE &middot; ':"")+esc(i.note):esc(fmtT(Date.parse(x.startTimeUTC)))}</span></span>${gh?`<span class="srg"><i>LAST GOAL</i>${gh}</span>`:`<span class="srg none">${i?"No goals yet":"Not started"}</span>`}</button>`};
+      return `<button data-id="${x.id}" class="sr focusable${i?"":" pre"}${i&&i.over?" done":""}${lv?" lv":""}${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?" fv":""}" style="--o-a:${a.c};--o-b:${h.c}">${isFavG(x.awayTeam.abbrev,x.homeTeam.abbrev)?`<span class="fstar">&#9733;</span>`:""}<span class="srt"><span class="srs">${a.logo?`<img src="${a.logo}" alt="">`:""}<b class="disp">${esc(x.awayTeam.abbrev)}</b></span><span class="srm disp">${i?esc(i.score):"VS"}</span><span class="srs">${h.logo?`<img src="${h.logo}" alt="">`:""}<b class="disp">${esc(x.homeTeam.abbrev)}</b><i class="hmk">HOME</i></span><span class="srn">${i?(lv?"LIVE &middot; ":"")+esc(i.note):esc(fmtT(Date.parse(x.startTimeUTC)))}</span></span>${gh?`<span class="srg"><i>LAST GOAL</i>${gh}</span>`:`<span class="srg none">${i?"No goals yet":"Not started"}</span>`}</button>`};
     const FK={id:0,gameState:"FUT",startTimeUTC:new Date().toISOString(),awayTeam:{abbrev:"AAA"},homeTeam:{abbrev:"BBB"},goals:[]};
-    m.innerHTML=`<div class="lzh"><h2 class="disp">Scores today</h2><span class="sub" style="margin:0">${scLoaded?`${nLive} live &middot; ${gl.length} games`:SKL}</span></div>`+(gl.length?`<div class="srl">${gl.map(row).join("")}</div>`:!scLoaded&&!scFail?`<div class="srl">${skN(8,()=>row(FK))}</div>`:scFail?`<div class="empty gerr"><div>Could not load the scores.</div><button class="btn focusable" id="scretry">Try again</button></div>`:`<div class="empty">No NHL games on the board yet.</div>`);
+    m.innerHTML=`<div class="lzh"><h2 class="disp">Scores today</h2><span class="sub" role="status" aria-live="polite" style="margin:0">${scFail?"":scLoaded?`${nLive} live &middot; ${gl.length} games`:SKL}</span></div>`+(gl.length?`<div class="srl">${gl.map(row).join("")}</div>`:!scLoaded&&!scFail?`<div class="srl">${skN(8,()=>row(FK))}</div>`:scFail?`<div class="empty gerr"><div>Could not load the scores.</div><button class="btn focusable" id="scretry">Try again</button></div>`:`<div class="empty">No NHL games on the board yet.</div>`);
   }else if(tab==="live"&&noCh()){ m.innerHTML=noPl();
   }else if(tab==="live"){
     const have=new Set(vis.map(catOf)), groups=["All","Favorites","Recent",...catList.filter(x=>have.has(x))];
     if(!groups.includes(grp))grp="All";
     if(!gStart||gStart<Date.now()-3*36e5)gStart=Math.floor(Date.now()/18e5)*18e5;
-    m.innerHTML=`<div class="gs"><input id="gs" class="focusable" type="search" readonly placeholder="Search channels" value="${esc(gQ)}"></div><div class="chips one">${groups.map(g=>chip(g,g===grp,`data-grp="${esc(g)}"`)).join("")}</div><div class="gtop"><div class="gi" id="gi"></div><div class="gv" id="gv"><div class="pw" id="pw">Preview starts when a channel is focused</div></div></div><div id="gx">${guideHTML(vis)}</div>`;
+    m.innerHTML=`<div class="gs"><input id="gs" class="focusable" type="search" readonly placeholder="Search channels" value="${esc(gQ)}"></div><div class="chips one">${groups.map(g=>chip(g,g===grp,`data-grp="${esc(g)}"`)).join("")}</div><div class="gtop"><div class="gi" id="gi"></div><div class="gv" id="gv"><div class="pw" id="pw">Preview starts when a channel is focused</div></div></div><div id="gx">${guideHTML(vis)}</div><div class="keys">Menu = channel options &middot; OK = watch</div>`;
     $("#gv").prepend(PV); gInfo(null);
   }else{
     m.innerHTML=`<h2 class="disp">Setup</h2><div class="chips">${[["s-pl","Playlist"],["s-tm","Teams &amp; sports"],["s-ch","Channels"]].map(j=>`<button class="chip focusable" data-jump="${j[0]}">${j[1]}</button>`).join("")}</div>
       <h2 class="disp" id="s-pl">Playlist</h2><div class="sub">M3U playlist link. Paste the link from your provider.</div>
       <div class="field"><input id="u" class="mask focusable" type="url" value="${esc(url)}" placeholder="http://..." autocomplete="off"><button class="btn focusable" id="go">Load</button></div>
-      <div class="sub" id="st">${msg==="Loading..."?SKL:esc(msg||ch.length+" channels loaded")}</div>
-      <h2 class="disp" id="s-tm" style="margin-top:14px">Favorite teams</h2><div class="sub">Their games show first, with a star while live.</div><div class="chips">${NHL.map(t=>`<button class="chip ft focusable" data-ft="${t[0]}" aria-pressed="${favT.includes(t[0])}">${(window.LOGO||{})[t[0]]?`<img src="${window.LOGO[t[0]]}" alt="">`:""}<span>${esc(t[1])}</span></button>`).join("")}</div>
+      <div class="sub${!ch.length&&!url&&!msg?" hint":""}" id="st">${msg===LOADING?SKL:esc(msg||(!ch.length&&!url?"Add your playlist link above":ch.length+" channels loaded"))}</div>
+      <div class="lzh" style="margin-top:14px"><h2 class="disp" id="s-tm">Favorite teams</h2>${favT.length?`<button class="chip focusable" data-ftclear="1">${favT.length} selected &middot; Clear</button>`:""}</div><div class="sub">Their games show first, with a star while live.</div>${DIVS.map(d=>`<div class="chips">${d.map(a=>{const t=NHL.find(x=>x[0]===a);return `<button class="chip ft focusable" data-ft="${a}" aria-label="${esc(t[1])}" aria-pressed="${favT.includes(a)}">${(window.LOGO||{})[a]?`<img src="${window.LOGO[a]}" alt="">`:""}<span>${esc(t[1].match(/(Maple Leafs|Blue Jackets|Red Wings|Golden Knights|\S+)$/)[1])}</span></button>`}).join("")}</div>`).join("")}
       <h2 class="disp" style="margin-top:14px">Sports</h2><div class="sub">Turn a sport off to hide its games and channels.</div>${sportRows()}${catSettingsHTML()}`;
   }
   const f=firstF(m); if(f&&!document.activeElement.closest("main")){f.focus({preventScroll:true});if(tab==="home")m.scrollTop=0}
@@ -890,14 +902,14 @@ let LL=[], deskSel=null;
 const netStr=g=>[...new Set((g.nets||[]).map(n=>String(n).trim().replace(/^[A-Z]{2,3}(?=NHL$)/,"")).filter(Boolean))].join(" / "); // data has a glued code like MINNHL
 const noCh=()=>!ch.length&&!plLoad();
 const noPl=()=>`<div class="empty gerr noplay"><div>${url?"Your playlist did not load. Check the link in Setup.":"No playlist yet. Add your M3U link to start watching."}</div><button class="btn focusable" data-go="setup">${url?"Open Setup":"Add playlist"}</button></div>`;
-function firstF(m){return (tab==="home"&&m.querySelector("#hcar .watch"))||(tab==="schedule"&&m.querySelector(".grid.cal .pill"))||m.querySelector("button,input")} // first focus: hero on Home, first game on Schedule
+function firstF(m){return (tab==="setup"&&!ch.length&&!url&&m.querySelector("#u"))||(tab==="home"&&m.querySelector("#hcar .watch"))||(tab==="schedule"&&m.querySelector(".grid.cal .pill"))||m.querySelector("button,input")} // first focus: hero on Home, first game on Schedule
 /* ---------- game popup: pick Watch / Live stats ---------- */
 let popG=null,popBack=null;
 function openPop(g){if(!g)return;popG=g;popBack=document.activeElement;const sc=g.sc,over=sc&&sc.over,x=scoreOf(g.aw,g.hm,g.st),logo=t=>t.logo?`<img src="${t.logo}" alt="">`:"";
   const hasF=!!(g.c&&g.c.u), mvb=!over&&hasF&&(sc||Date.now()>=g.st-40*6e4)?'<button class="pbtn alt" data-pa="mv">MULTIVIEW +</button>':"", btns=over?`<button class="pbtn" data-pa="sum">SUMMARY</button><button class="pbtn alt" data-pa="box">STATS</button>${g.c&&g.c.u&&x&&Date.now()<(ls("endAt",{})[x.id]||0)+36e5?`<button class="pbtn alt" data-pa="play">WATCH POST GAME</button>`:""}`:sc?(hasF?`<button class="pbtn" data-pa="play">WATCH LIVE</button><button class="pbtn alt" data-pa="sum">LIVE STATS</button>`:`<button class="pbtn" data-pa="sum">LIVE STATS</button>`):(hasF&&Date.now()>=g.st-40*6e4?`<button class="pbtn" data-pa="play">WATCH PRE-GAME</button>`:"")+`<button class="pbtn${hasF&&Date.now()>=g.st-40*6e4?" alt":""}" data-pa="t0">TEAM GUIDE: ${esc(g.tm[0].split(" ").pop().toUpperCase())}</button><button class="pbtn alt" data-pa="t1">TEAM GUIDE: ${esc(g.tm[1].split(" ").pop().toUpperCase())}</button>`;
   if(g.sid)svFeeds(g.sid,()=>{}); // warm the 2 min stream cache so Watch starts fast
   const p=$("#gpop");p.innerHTML=`<div class="pc${over?" done":""}" style="${slideStyle(g)}"><span class="skin"><span class="mesh"></span></span><div class="pi"><div class="ft-top"><b>${sc?(over?"GAME OVER":esc(sc.note)):esc(fmtT(g.st))}</b><span>${esc(netStr(g))}</span></div>
-    <div class="ft-mid"><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span><small>HOME</small></div><div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div><div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span><small>AWAY</small></div></div>
+    <div class="ft-mid"><div class="ft-team${sc&&sc.win==="h"?" lose":""}">${logo(g.t[0])}<span class="nm disp">${esc(g.tm[0])}</span><small>AWAY</small></div><div><div class="ft-sc disp">${sc?sc.score:"VS"}</div>${over?`<div class="ft-over disp">${esc(sc.note)}</div>`:""}</div><div class="ft-team${sc&&sc.win==="a"?" lose":""}">${logo(g.t[1])}<span class="nm disp">${esc(g.tm[1])}</span><small>HOME</small></div></div>
     <div class="tv">${over?"This game has ended":sc?(g.c&&g.c.u?"Best feed: "+esc(bfName(g)):"No channel carries this game"):hasF&&Date.now()>=g.st-40*6e4?"Pre-game on "+esc(bfName(g)):"Game has not started yet"}</div><div class="pb">${btns}${mvb}<button class="pbtn alt" data-pa="close">CLOSE</button></div></div></div>`;
   p.hidden=false;p.querySelector(".pbtn").focus()}
 let popC=null;
@@ -907,7 +919,7 @@ function openChMenu(c){if(!c||!$("#gpop").hidden)return;popC=c;popG=null;popBack
 function closePop(){$("#gpop").hidden=true;if(popBack&&popBack.isConnected)popBack.focus({preventScroll:true})}
 $("#gpop").addEventListener("click",e=>{const b=e.target.closest("button");if(!b){closePop();return}const a=b.dataset.pa,g=popG;if(!a)return;
   if(a==="close"){closePop();return}
-  if(a==="t0"||a==="t1"){const ab=a==="t0"?g.hm:g.aw;$("#gpop").hidden=true;tab="guide";render();[500,1500].forEach(d=>setTimeout(()=>gPost({cmd:"team",ab}),d));return}
+  if(a==="t0"||a==="t1"){const ab=a==="t0"?g.aw:g.hm;$("#gpop").hidden=true;tab="guide";render();[500,1500].forEach(d=>setTimeout(()=>gPost({cmd:"team",ab}),d));return}
   if(a==="cplay"||a==="cmv"||a==="cfav"){const c=popC; if(!c)return; // channel menu (Live tab): watch / add to multiview / favorite
     if(a==="cfav"){closePop();toggleFav(c.n);rerender();return}
     $("#gpop").hidden=true;
@@ -919,7 +931,7 @@ $("#gpop").addEventListener("click",e=>{const b=e.target.closest("button");if(!b
 $("#gpop").addEventListener("keydown",e=>{const k=e.key;if(!/^Arrow/.test(k))return;e.preventDefault();e.stopPropagation();
   if(k==="ArrowLeft"||k==="ArrowRight"){const row=[...$("#gpop").querySelectorAll("button")],i=row.indexOf(document.activeElement),n=row[i+(k==="ArrowRight"?1:-1)];if(n)n.focus()}},true);
 /* ---------- game detail overlay: summary / box score / play-by-play ---------- */
-let gdId=0,gdTab="sum",gdSide="h",gdBox=null,gdPbp=null,gdBack=null,gdLand=null,gdRail=null;
+let gdId=0,gdTab="sum",gdSide="a",gdBox=null,gdPbp=null,gdBack=null,gdLand=null,gdRail=null;
 const nm=id=>{const r=((gdPbp&&gdPbp.rosterSpots)||[]).find(x=>x.playerId===id);return r?(r.firstName.default[0]+". "+r.lastName.default):""};
 const gdSk=()=>'<div inert aria-hidden="true">'+'<i class="sk" style="height:46px;margin-bottom:6px;border-radius:12px"></i>'.repeat(6)+'</div>';
 function openGame(id,tb){if(!id)return;gdFail=0;gdId=id;gdBox=gdPbp=gdLand=gdRail=null;gdTab=tb||"sum";gdBack=document.activeElement;$("#gd").hidden=false;gdRender();gdLoad();$("#gdh [data-gt="+gdTab+"]").focus()}
@@ -930,9 +942,9 @@ function gdLoad(){const id=gdId,u="https://api-web.nhle.com/v1/gamecenter/"+id+"
   get("landing","gotGL");get("right-rail","gotGR");get("boxscore","gotGB");get("play-by-play","gotGP")}
 function gdRender(){const sc=SC.find(x=>x.id===gdId),b=gdBox,L0=gdLand,aw=(sc&&sc.awayTeam)||(b&&b.awayTeam)||(L0&&L0.awayTeam)||{},hm=(sc&&sc.homeTeam)||(b&&b.homeTeam)||(L0&&L0.homeTeam)||{};
   const h=$("#gdh"),cur=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.gt,curS=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.gs;
-  h.innerHTML=`<button data-gx="1">&#8592; Back</button><button data-gt="sum" aria-pressed="${gdTab==="sum"}">Summary</button><button data-gt="box" aria-pressed="${gdTab==="box"}">${/OFF|FINAL/.test((sc&&sc.gameState)||(L0&&L0.gameState)||"")?"Stats":"Box Score"}</button><button data-gt="pbp" aria-pressed="${gdTab==="pbp"}">Play-by-Play</button><span class="t disp">${esc(hm.abbrev||"")} vs ${esc(aw.abbrev||"")}</span>`;
+  h.innerHTML=`<button data-gx="1">&#8592; Back</button><button data-gt="sum" aria-pressed="${gdTab==="sum"}">Summary</button><button data-gt="box" aria-pressed="${gdTab==="box"}">${/OFF|FINAL/.test((sc&&sc.gameState)||(L0&&L0.gameState)||"")?"Stats":"Box Score"}</button><button data-gt="pbp" aria-pressed="${gdTab==="pbp"}">Play-by-Play</button><span class="t disp">${esc(aw.abbrev||"")} @ ${esc(hm.abbrev||"")}</span>`;
   if(cur){const f=h.querySelector("[data-gt="+cur+"]");if(f)f.focus()}
-  const rb=$("#gdr");rb.innerHTML=gdTab==="box"?`<button data-gs="h" aria-pressed="${gdSide==="h"}">${esc(hm.abbrev||"Home")}</button><button data-gs="a" aria-pressed="${gdSide==="a"}">${esc(aw.abbrev||"Away")}</button>`:"";
+  const rb=$("#gdr");rb.innerHTML=gdTab==="box"?`<button data-gs="a" aria-pressed="${gdSide==="a"}">${esc(aw.abbrev||"Away")}</button><button data-gs="h" aria-pressed="${gdSide==="h"}">${esc(hm.abbrev||"Home")}</button>`:"";
   if(curS){const f=rb.querySelector("[data-gs="+curS+"]");if(f)f.focus()}
   const bd=$("#gdb"),y=bd.scrollTop;
   if((gdTab==="box"&&!b)||(gdTab==="sum"&&!gdLand)){bd.innerHTML=gdFail?'<div class="empty gerr"><div>Could not load this game.</div><button class="pbtn" id="gdretry">Try again</button></div>':gdSk();return}
@@ -943,17 +955,17 @@ function gdSum(aw,hm){const L=gdLand,S=L.summary||{},R=gdRail||{},ab=x=>x&&(x.de
   const pl=n=>n===4?"Overtime":n===5?"Shootout":["","1st Period","2nd Period","3rd Period"][n]||"Period "+n;
   const st=over?"FINAL":live?"P"+((L.periodDescriptor||{}).number||"")+" "+((L.clock||{}).timeRemaining||""):"";
   const ls=R.linescore||{},bp=ls.byPeriod||[],tt=ls.totals||{away:aw.score||0,home:hm.score||0};
-  const lt=`<table class="gt ls"><thead><tr><th></th><th style="text-align:left;width:auto"></th>${bp.map(x=>`<th>${pn(x.periodDescriptor.number)}</th>`).join("")}<th>T</th></tr></thead><tbody>${[[hm,"home",H],[aw,"away",A]].map(r=>`<tr><td>${lg(r[2])}</td><td>${esc(r[2])} <span style="color:var(--muted);font-weight:400">SOG ${r[0].sog||0}</span></td>${bp.map(x=>`<td>${x[r[1]]}</td>`).join("")}<td class="h">${tt[r[1]]}</td></tr>`).join("")}</tbody></table>`;
+  const lt=`<table class="gt ls"><thead><tr><th></th><th style="text-align:left;width:auto"></th>${bp.map(x=>`<th>${pn(x.periodDescriptor.number)}</th>`).join("")}<th>T</th></tr></thead><tbody>${[[aw,"away",A],[hm,"home",H]].map(r=>`<tr><td>${lg(r[2])}</td><td>${esc(r[2])} <span style="color:var(--muted);font-weight:400">SOG ${r[0].sog||0}</span></td>${bp.map(x=>`<td>${x[r[1]]}</td>`).join("")}<td class="h">${tt[r[1]]}</td></tr>`).join("")}</tbody></table>`;
   const stars=(S.threeStars||[]).map(x=>`<div class="star"><img src="${x.headshot}" alt=""><div><b>${x.star}&#9733; ${esc(x.name.default)}</b><span>${esc(x.teamAbbrev)} #${x.sweaterNo} ${esc(x.position)}</span><span class="hn">${x.position==="G"?"GAA "+(x.goalsAgainstAverage||0).toFixed(2)+" SV% "+(x.savePctg||0).toFixed(3).slice(1):x.goals+"G "+x.assists+"A "+x.points+"P"}</span></div></div>`).join("");
   const pens=(S.penalties||[]).map(p=>(p.penalties||[]).map(q=>`<div class="ev"><em>${pn(p.periodDescriptor.number)} ${esc(q.timeInPeriod)}</em><b>${esc(ab(q.teamAbbrev))}</b><span>${esc((q.committedByPlayer&&q.committedByPlayer.lastName&&q.committedByPlayer.lastName.default)||"Bench")} ${q.duration}m ${esc((q.descKey||"").replace(/-/g," "))}</span></div>`).join("")).join("");
   const goals=(S.scoring||[]).map(p=>`<h3>${pl(p.periodDescriptor.number).toUpperCase()}</h3>${(p.goals||[]).map(g=>{const t=ab(g.teamAbbrev),ho=t===H;
-    return `<div class="gc" style="--o-a:${col(t)}"><img class="mug" src="${g.headshot||g.mugshot}" alt=""><div class="gm"><b>${esc(g.name.default)} (${g.goalsToDate})${g.strength&&g.strength!=="ev"?`<i class="ppg">${esc(g.strength.toUpperCase())}</i>`:""}${g.goalModifier&&g.goalModifier!=="none"?`<i class="ppg">${esc(g.goalModifier.replace(/-/g," ").toUpperCase())}</i>`:""}</b><span>${(g.assists||[]).map(x=>esc(x.name.default)+" ("+x.assistsToDate+")").join(", ")||"Unassisted"}</span></div><div class="gsx">${lg(H)}<b class="disp">${g.homeScore}</b><span class="sepb">|</span><b class="disp">${g.awayScore}</b>${lg(A)}</div><div class="gtm"><span>${esc(g.timeInPeriod)}</span><span>${esc(g.shotType||"")}</span></div></div>`}).join("")||'<div class="empty" style="padding:2px 0">No goals scored.</div>'}`).join("");
+    return `<div class="gc" style="--o-a:${col(t)}"><img class="mug" src="${g.headshot||g.mugshot}" alt=""><div class="gm"><b>${esc(g.name.default)} (${g.goalsToDate})${g.strength&&g.strength!=="ev"?`<i class="ppg">${esc(g.strength.toUpperCase())}</i>`:""}${g.goalModifier&&g.goalModifier!=="none"?`<i class="ppg">${esc(g.goalModifier.replace(/-/g," ").toUpperCase())}</i>`:""}</b><span>${(g.assists||[]).map(x=>esc(x.name.default)+" ("+x.assistsToDate+")").join(", ")||"Unassisted"}</span></div><div class="gsx">${lg(A)}<b class="disp">${g.awayScore}</b><span class="sepb">|</span><b class="disp">${g.homeScore}</b>${lg(H)}</div><div class="gtm"><span>${esc(g.timeInPeriod)}</span><span>${esc(g.shotType||"")}</span></div></div>`}).join("")||'<div class="empty" style="padding:2px 0">No goals scored.</div>'}`).join("");
   const T={};(R.teamGameStats||[]).forEach(x=>T[x.category]=x);
-  const bar=(lab,hv,av,hs,as,pc)=>{const h=parseFloat(String(hv)),a=parseFloat(String(av)),t=(h+a)||1;return `<div class="br"><div class="bv"><b>${hs}</b><span>${lab}</span><b>${as}</b></div><div class="bb"><i style="width:${Math.max(3,h/t*100)}%;background:${col(H)}"></i><i style="width:${Math.max(3,a/t*100)}%;background:${col(A)}"></i></div></div>`};
+  const bar=(lab,hv,av,hs,as,pc)=>{const h=parseFloat(String(hv)),a=parseFloat(String(av)),t=(h+a)||1;return `<div class="br"><div class="bv"><b>${as}</b><span>${lab}</span><b>${hs}</b></div><div class="bb"><i style="width:${Math.max(3,a/t*100)}%;background:${col(A)}"></i><i style="width:${Math.max(3,h/t*100)}%;background:${col(H)}"></i></div></div>`};
   const sg=(c,lab,pct)=>{const x=T[c];if(!x)return"";const f=pct?v=>(v*100).toFixed(1)+"%":v=>v;return bar(lab,x.homeValue,x.awayValue,f(x.homeValue),f(x.awayValue))};
   const spp=T.powerPlay?bar("Power Play",T.powerPlayPctg.homeValue,T.powerPlayPctg.awayValue,T.powerPlay.homeValue,T.powerPlay.awayValue):"";
   const byp=(R.shotsByPeriod||[]).map(x=>bar(pl(x.periodDescriptor.number),x.home,x.away,x.home,x.away)).join("");
-  return `<div class="gsc2"><div class="gsh">${lg(H)}<b class="disp">${hm.score||0}</b><span>${esc(st||"")}</span><b class="disp">${aw.score||0}</b>${lg(A)}</div></div><div class="g3"><div><h3>SCORE BY PERIOD</h3>${lt}<h3>THREE STARS</h3>${stars||'<div class="empty" style="padding:2px 0">After the game.</div>'}<h3>PENALTIES</h3>${pens||'<div class="empty" style="padding:2px 0">None.</div>'}</div><div><h3>SCORING SUMMARY</h3>${goals||'<div class="empty">No goals yet.</div>'}</div><div><h3>GAME STATS</h3>${sg("sog","Shots on Goal")}${sg("faceoffWinningPctg","Face-off %",1)}${spp}${sg("pim","Penalty Minutes")}${sg("hits","Hits")}${sg("blockedShots","Blocked Shots")}${sg("giveaways","Giveaways")}${sg("takeaways","Takeaways")}<h3>SHOTS ON GOAL BY PERIOD</h3>${byp}</div></div>`}
+  return `<div class="gsc2"><div class="gsh">${lg(A)}<b class="disp">${aw.score||0}</b><span>${esc(st||"")}</span><b class="disp">${hm.score||0}</b>${lg(H)}</div></div><div class="g3"><div><h3>SCORE BY PERIOD</h3>${lt}<h3>THREE STARS</h3>${stars||'<div class="empty" style="padding:2px 0">After the game.</div>'}<h3>PENALTIES</h3>${pens||'<div class="empty" style="padding:2px 0">None.</div>'}</div><div><h3>SCORING SUMMARY</h3>${goals||'<div class="empty">No goals yet.</div>'}</div><div><h3>GAME STATS</h3>${sg("sog","Shots on Goal")}${sg("faceoffWinningPctg","Face-off %",1)}${spp}${sg("pim","Penalty Minutes")}${sg("hits","Hits")}${sg("blockedShots","Blocked Shots")}${sg("giveaways","Giveaways")}${sg("takeaways","Takeaways")}<h3>SHOTS ON GOAL BY PERIOD</h3>${byp}</div></div>`}
 function gdBoxHTML(){const t=gdBox.playerByGameStats[gdSide==="h"?"homeTeam":"awayTeam"];
   const z=v=>`<td class="${v?"h":"z"}">${v||0}</td>`;
   const sk=(l,a)=>`<table class="gt"><thead><tr><th>#</th><th>${l}</th><th>POS</th><th>G</th><th>A</th><th>P</th><th>+/-</th><th>SOG</th><th>HIT</th><th>BLK</th><th>TK</th><th>GV</th><th>FO%</th><th>PIM</th><th>PPG</th><th>SHF</th><th>TOI</th></tr></thead><tbody>${(a||[]).map(p=>`<tr><td>${p.sweaterNumber}</td><td>${esc(p.name.default)}</td><td>${p.position}</td>${z(p.goals)}${z(p.assists)}${z(p.points)}<td>${p.plusMinus||0}</td>${z(p.sog)}${z(p.hits)}${z(p.blockedShots)}${z(p.takeaways)}${z(p.giveaways)}<td>${p.faceoffWinningPctg?Math.round(p.faceoffWinningPctg*100):"-"}</td>${z(p.pim)}${z(p.powerPlayGoals)}<td>${p.shifts||0}</td><td>${p.toi||""}</td></tr>`).join("")}</tbody></table>`;
@@ -975,7 +987,10 @@ $("#gd").addEventListener("keydown",e=>{const k=e.key;if(!/^Arrow/.test(k))retur
 },true);
 
 /* ---------- player ---------- */
-function ctlFit(){for(const el of [$("#pctl"),$("#mvb")]){if(!el||!el.offsetParent)continue;const g=parseFloat(getComputedStyle(el).columnGap)||0,k=[...el.children].filter(x=>x.offsetWidth),w=k.reduce((a,x)=>a+x.offsetWidth,0)+g*(k.length-1),W=(el.parentNode.clientWidth||innerWidth)-16;el.style.setProperty("--cs",Math.min(1,W/Math.max(1,w)).toFixed(3))}}
+function ctlFit(){for(const el of [$("#pctl"),$("#mvb")]){if(!el||!el.offsetParent)continue;const g=parseFloat(getComputedStyle(el).columnGap)||0,W=(el.parentNode.clientWidth||innerWidth)-16,
+    wd=()=>{const k=[...el.children].filter(x=>x.offsetWidth);return k.reduce((a,x)=>a+x.offsetWidth,0)+g*(k.length-1)};
+    el.classList.remove("ico"); if(W/Math.max(1,wd())<.85)el.classList.add("ico"); // labels do not fit: icons only (aria-labels stay), still one line
+    el.style.setProperty("--cs",Math.min(1,W/Math.max(1,wd())).toFixed(3))}}
 window.addEventListener("resize",ctlFit);
 window.addEventListener("resize",()=>{const b=$("#sbar");if(b.classList.contains("on"))sbFit(b)});
 function show(){const pl=$("#pl");pl.classList.remove("hide");requestAnimationFrame(ctlFit);clearTimeout(hideT);hideT=setTimeout(()=>{if(!menuOn&&!$("#pbuf").classList.contains("on"))pl.classList.add("hide")},4000)} // never auto-hide while connecting / buffering / failed: the message and the Feed button stay up
@@ -1059,7 +1074,7 @@ function sbNote(c){if(!c||c.over||!c.n)return null; // dots fill as periods comp
   const ot=c.pt==="OT"||c.pt==="SO", done=ot?3:c.it?c.n:c.n-1, dots=[0,1,2].map(i=>`<i class="${i<done?"f":i===done&&!c.it?"c":""}"></i>`).join("");
   return `<span class="sbdots">${dots}</span>${ot?esc(c.note.split(" ")[0])+" ":""}${c.it?"INT":`<span class="sbtr">${esc(c.tr)}</span>`}`}
 function sbItem(g,k){const c=g.sc,ok=sbOk(g),s=c?String(c.score).split(" - "):0,col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"",lg=(x,a)=>x&&x.logo?`<img src="${x.logo}" alt="">`:`<b class="disp">${esc(a)}</b>`;
-  return `<button class="sbi focusable${c&&c.over?" done":""}${ok?"":" off"}${sbCur(g)?" cur":""}" data-t="${esc(g.title)}" data-k="${k}" tabindex="-1" aria-disabled="${!ok}" aria-label="${esc(g.tm[0]+" vs "+g.tm[1]+", "+(c?c.score+", "+c.note:clk(g.st)))}" style="${col(g.t[0].c,"a")}${col(g.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${lg(g.t[0],g.hm)}<span class="scr disp">${c?esc(c.score):"VS"}</span>${lg(g.t[1],g.aw)}<span class="nt disp${c&&sbNote(c)?" per":""}">${c?(sbNote(c)||esc(c.note)):esc(clk(g.st)).toUpperCase()}</span>${c&&c.prog!=null?`<span class="sbpg"><i style="width:${(c.prog*100).toFixed(1)}%"></i></span>`:""}<span class="pk"><span class="pt disp">${esc(g.aw)}${s?" "+s[1]:""} @ ${esc(g.hm)}${s?" "+s[0]:""}</span><span class="pn disp">${c?esc(c.note):esc(clk(g.st)).toUpperCase()}</span></span></button>`}
+  return `<button class="sbi focusable${c&&c.over?" done":""}${ok?"":" off"}${sbCur(g)?" cur":""}" data-t="${esc(g.title)}" data-k="${k}" tabindex="-1" aria-disabled="${!ok}" aria-label="${esc(g.tm[0]+" vs "+g.tm[1]+", "+(c?c.score+", "+c.note:clk(g.st)))}" style="${col(g.t[0].c,"a")}${col(g.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${lg(g.t[0],g.aw)}<span class="scr disp">${c?esc(c.score):"VS"}</span>${lg(g.t[1],g.hm)}<span class="nt disp${c&&sbNote(c)?" per":""}">${c?(sbNote(c)||esc(c.note)):esc(clk(g.st)).toUpperCase()}</span>${c&&c.prog!=null?`<span class="sbpg"><i style="width:${(c.prog*100).toFixed(1)}%"></i></span>`:""}<span class="pk"><span class="pt disp">${esc(g.aw)}${s?" "+s[0]:""} @ ${esc(g.hm)}${s?" "+s[1]:""}</span><span class="pn disp">${c?esc(c.note):esc(clk(g.st)).toUpperCase()}</span></span></button>`}
 // squeeze until every game fits on the one line: drop clocks, then tighten spacing, then shrink logos/text, then zoom the pills down
 function sbFit(b){const L=["tight","t2","t3","t4"],over=()=>b.scrollWidth>b.clientWidth+1;
   b.classList.remove(...L); b.style.removeProperty("--sbz");
@@ -1185,7 +1200,7 @@ function mvAdd(g,pre){ // pre = {feeds,c} when the game was already playing in t
     const a=pre.ad,h=a.h; a.v.style.cssText=""; a.v.muted=t!==MV.a; el.replaceChild(a.v,t.v); t.v=a.v; t.feeds=pre.feeds; t.c=pre.c; t.tried.add(pre.c.u); t.hls=h; mvHook(t,h);
     t.v.addEventListener("playing",()=>mvMsg(t,"")); mvMark(); mvCap(t); mvPlay(t)}
   else if(pre&&pre.c){t.feeds=pre.feeds;mvLoad(t,pre.c)}else mvFeeds(t);
-  mvCapAll(); mvShow()}
+  mvCapAll(); mvShow(); requestAnimationFrame(ctlFit)}
 function mvSetAudio(t){if(!t)return; MV.t.forEach(x=>x.v.muted=x!==t); MV.a=MV.f=t; mvLayout(); mvCapAll(); mvPlay(t); mvShow()} // audio = muted flag only; the audio tile is the main tile
 function mvRemove(t){if(!t)return; if(MV.t.length<2)return mvClose();
   mvKill(t); MV.t=MV.t.filter(x=>x!==t); if(MV.f===t)MV.f=MV.t[0]; if(MV.a===t)mvSetAudio(MV.t[0]); else{mvLayout();mvCapAll()}}
@@ -1221,8 +1236,8 @@ function mvHide(){clearTimeout(MV.ht);if(!$("#mvm").hidden)return; // the hold m
   $("#mvp").hidden=true;mvEl.classList.add("hide");mvEl.focus()}
 /* ---------- per-tile menu: hold OK on a selected tile (or long-press / right-click) ---------- */
 const mvZl=t=>Math.round(MV.cs==="free"?t.bs*100:t.z)+"%";
-function mvMenu(t){if(!t||!MV.t.includes(t))return; const m=$("#mvm"); MV.mt=t; MV.f=t; mvMark(); mvShow();
-  m.innerHTML=`<h3>${esc(mvName(t.g))}</h3><button data-m="full"><span>Full screen</span></button><button data-m="zoom"><span>Zoom</span><small>&#9664; ${mvZl(t)} &#9654;</small></button><button data-m="feed"><span>Feed</span><small>${esc(t.c?baseName(t.c.n):"")}</small></button><button data-m="game"><span>Switch game</span></button><button data-m="au"><span>${t===MV.a?"Main (audio)":"Make audio / main"}</span></button><button data-m="rm" class="danger"><span>Remove</span></button>`;
+function mvMenu(t){if(!t||!MV.t.includes(t))return; if(!ls("mvTip",0)){sv("mvTip",1);const h=$("#mv .mvh");if(h)h.remove()} const m=$("#mvm"); MV.mt=t; MV.f=t; mvMark(); mvShow();
+  m.innerHTML=`<h3>${esc(mvName(t.g))}</h3><button role="menuitem" data-m="full"><span>Full screen</span></button><button role="menuitem" data-m="zoom"><span>Zoom</span><small>&#9664; ${mvZl(t)} &#9654;</small></button><button role="menuitem" data-m="feed"><span>Feed</span><small>${esc(t.c?baseName(t.c.n):"")}</small></button><button role="menuitem" data-m="game"><span>Switch game</span></button><button role="menuitem" data-m="au"><span>${t===MV.a?"Main (audio)":"Make audio / main"}</span></button><button role="menuitem" data-m="rm" class="danger"><span>Remove</span></button>`;
   m.hidden=false; const r=t.el.getBoundingClientRect(),W=mvEl.clientWidth,H=mvEl.clientHeight,w=Math.min(m.offsetWidth,W-16),h=m.offsetHeight,bb=$("#mvb").getBoundingClientRect(),HB=bb.height?Math.min(H,bb.top):H; // keep the menu above the control bar
   Object.assign(m.style,{left:mvC(r.left+r.width/2-w/2,8,W-w-8)+"px",top:mvC(r.top+r.height/2-h/2,8,Math.max(8,HB-h-8))+"px",right:"auto",bottom:"auto",transform:"none"});
   m.querySelector("button").focus()}
@@ -1328,7 +1343,7 @@ const duckApply=()=>{const v=$("#v"),open=!$("#gp").hidden&&gSide(); if(open&&du
 function guideSide(){ // quarter-width phone view inside the player
   const gp=$("#gp"), t=(cur&&cur.t)||[], logo=x=>x&&x.logo?`<img src="${x.logo}" alt="">`:"";
   let b="";
-  if(cur&&cur.hm)b=`<button data-gq="game">GAME</button><button data-gq="team" data-ab="${cur.hm}">${logo(t[0])}${cur.hm}</button><button data-gq="team" data-ab="${cur.aw}">${logo(t[1])}${cur.aw}</button>`;
+  if(cur&&cur.hm)b=`<button data-gq="game">GAME</button><button data-gq="team" data-ab="${cur.aw}">${logo(t[0])}${cur.aw}</button><button data-gq="team" data-ab="${cur.hm}">${logo(t[1])}${cur.hm}</button>`;
   else b=`<button data-gq="games">GAMES</button>`;
   $("#gbar").innerHTML=b+`<span class="sp"></span><button data-gq="duck" aria-pressed="${duck}">VOL 50%: ${duck?"ON":"OFF"}</button><button data-gq="close">X</button>`;
   gp.className="side"; gp.hidden=false; gLayout(); duckApply(); gDepth=0; gLoad();
@@ -1416,16 +1431,18 @@ function toggleFav(n){fav=fav.includes(n)?fav.filter(x=>x!==n):[...fav,n];sv("fa
 /* ---------- data from the TV side ---------- */
 function rerender(){ // redraw but keep the remote focus on the same item
   const a=document.activeElement, y=$("#m").scrollTop; let sel=null;
-  if(a&&a.closest&&a.closest("main"))for(const k of ["data-g","data-l","data-i","data-grp","data-s"])if(a.hasAttribute(k)){sel=`[${k}="${CSS.escape(a.getAttribute(k))}"]`;break}
+  if(a&&a.closest&&a.closest("main"))for(const k of ["data-g","data-l","data-i","data-grp","data-s","data-ft"])if(a.hasAttribute(k)){sel=`[${k}="${CSS.escape(a.getAttribute(k))}"]`;break}
   render(); $("#m").scrollTop=y; const n=sel&&$("#m").querySelector(sel); if(n)n.focus();
 }
 window.gotList=(t,e)=>{
   const c=t?parse(t):[];
   const eu=t&&(t.match(/(?:x-tvg-url|url-tvg)="([^",]+)/)||[])[1]; if(eu&&eu!==EPGURL){EPGURL=eu;sv("epgurl",eu)}
+  clearTimeout(plT);
   if(c.length){ch=c;sv("ch",c);msg=c.length+" channels loaded";log("playlist",c.length)}else msg=e?"Failed: "+e:"No channels found in that playlist";
   loadEpg(); render(); {const b=$("#bst");if(b){b.textContent=c.length?"":"Could not load the playlist";if(!c.length){const r=$("#boot .bar");r&&r.remove()}}} plDone=1; bootOff();
 };
 function go(t){tab=t;gStart=0;render();(document.querySelector("header [data-t][aria-pressed=true]")).focus()}
+if(ls("mvTip",0)){const h=$("#mv .mvh");if(h)h.remove()}
 
 function updateDots(){const d=$("#dots"),gw=$("#gw"); if(!d||!gw)return; const R=gw.getBoundingClientRect(); let v=0, h="";
   document.querySelectorAll(".gw .pill").forEach((p,k)=>{const r=p.getBoundingClientRect(), vis=r.top>=R.top-4&&r.bottom<=R.bottom+4; if(vis)v++; h+=`<i class="${vis?"v":""}${k===hi?" c":""}"></i>`});
@@ -1503,18 +1520,22 @@ $("#m").addEventListener("keydown",e=>{if(e.key==="Enter"&&/^(u|cc-new|cc-ren)$/
 $("header").onclick=e=>{const b=e.target.closest("button");if(b)go(b.dataset.t)};
 $("#m").onclick=e=>{
   const go0=e.target.closest("[data-go]"); if(go0)return go(go0.dataset.go);
+  const nb=e.target.closest(".nwb"); if(nb){nwOpen=!nwOpen;document.querySelectorAll("#hcar .fn").forEach(f=>{f.classList.toggle("open",nwOpen);f.querySelector(".nwb").setAttribute("aria-expanded",nwOpen)});return}
   if(e.target.closest("#scretry")){scFail=0;render();pollScores();return}
   const jp=e.target.closest("[data-jump]"); if(jp){const t=$("#"+jp.dataset.jump),m=$("#m"); if(t)smoothTo(m,t.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-6); const n=m.querySelector({"s-pl":"#u","s-tm":".chip.ft","s-ch":"[data-cc-act=toggle]"}[jp.dataset.jump]); if(n)n.focus({preventScroll:true}); return}
   const dy=e.target.closest("[data-day]"); if(dy){const t=$("#d"+dy.dataset.day),m=$("#m"),k=m.querySelector(".dchips"); if(t){smoothTo(m,t.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-(k?k.offsetHeight+6:6)); const p=t.nextElementSibling&&t.nextElementSibling.querySelector(".pill"); if(p)p.focus({preventScroll:true})} return}
   const cc=e.target.closest("[data-cc-sel],[data-cc-ch],[data-cc-set],[data-cc-act]"); if(cc)return catClick(cc);
-  const ft=e.target.closest("[data-ft]"); if(ft){const k=ft.dataset.ft;favT=favT.includes(k)?favT.filter(x=>x!==k):[...favT,k];sv("favT",favT);ft.setAttribute("aria-pressed",favT.includes(k));return}
+  if(e.target.closest("[data-ftclear]")){favT=[];sv("favT",favT);render();const c=$("#m").querySelector("[data-ft]");if(c)c.focus({preventScroll:true});return}
+  const ft=e.target.closest("[data-ft]"); if(ft){const k=ft.dataset.ft;favT=favT.includes(k)?favT.filter(x=>x!==k):[...favT,k];sv("favT",favT);rerender();return}
   const sr=e.target.closest(".sr"); if(sr)return openGame(+sr.dataset.id);
   const q=e.target.closest("[data-g]"); if(q){if(window.NEMDESK&&e.detail>0&&q.classList.contains("pill")&&deskSel!==q.dataset.g){deskSel=q.dataset.g;slideTo(+q.dataset.g);return} deskSel=null;return openPop(G[+q.dataset.g])} // desktop: 1st click shows that game in the hero, 2nd opens the watch options
   const l=e.target.closest("[data-l]"); if(l)return openPop(L[+l.dataset.l]);
   const p=e.target.closest("[data-i]"); if(p){const c=ch[+p.dataset.i];return play({c,tm:[c.n],t:[{}],s:c.s},tab==="live"?LL:null)}
   const gp=e.target.closest("[data-grp]"); if(gp){grp=gp.dataset.grp;sv("grp",grp);render();$("#m").querySelector(`[data-grp="${CSS.escape(grp)}"]`).focus();return}
   const s=e.target.closest("[data-s]"); if(s){const k=s.dataset.s;off=off.includes(k)?off.filter(x=>x!==k):[...off,k];sv("off",off);render();$("#m").querySelector(`[data-s="${CSS.escape(k)}"]`).focus();return}
-  if(e.target.closest("#go")){url=$("#u").value.trim();sv("url",url);msg="Loading...";$("#st").innerHTML=SKL;window.Android&&Android.load(url)}
+  if(e.target.closest("#go")){url=$("#u").value.trim();sv("url",url);clearTimeout(plT);
+    if(!(window.Android||window.NEMDESK)){msg="Playlists load in the TV app";$("#st").textContent=msg;return} // plain web has no bridge: say so instead of a skeleton that never ends
+    msg=LOADING;$("#st").innerHTML=SKL;plT=setTimeout(()=>{if(msg===LOADING){msg="Could not load the playlist. Check the link";const t=$("#st");if(t)t.textContent=msg}},1e4);window.Android&&Android.load(url)}
 };
 document.addEventListener("keydown",e=>{ // Backspace in Live: clear search + filter, back to the default view
   if(e.key!=="Backspace"||tab!=="live"||$("#pl").classList.contains("on"))return;
@@ -1527,10 +1548,10 @@ document.addEventListener("keydown",e=>{ // Menu key on a channel card = favorit
 });
 $("#m").addEventListener("contextmenu",e=>{const c=e.target.closest("[data-i]");if(c&&ch[+c.dataset.i]&&!$("#pl").classList.contains("on")){e.preventDefault();openChMenu(ch[+c.dataset.i])}}); // right-click / touch long-press: same channel menu
 render();
-const bootAt=Date.now(); let bootDone=false;
+const bootAt=Date.now(), bootFirst=!ch.length&&!!url&&!!(window.Android||window.NEMDESK); let bootDone=false; // splash is held 2.2s only while a first-run playlist loads; otherwise it fades with the first paint
 (function(){const k=Object.keys(window.LOGO||{}).sort(()=>Math.random()-.5);
   $("#brows").innerHTML=[0,1,2].map(r=>{const l=k.filter((_,i)=>i%3===r),h=l.concat(l).map(a=>`<img src="${window.LOGO[a]}" alt="">`).join("");return `<div class="r">${h}</div>`}).join("")})();
-function bootOff(){if(bootDone)return;bootDone=true;const wait=Math.max(0,2200-(Date.now()-bootAt));setTimeout(()=>{$("#boot").classList.add("out");setTimeout(()=>$("#boot").remove(),700);const f=firstF($("#m"));if(f)f.focus({preventScroll:true})},wait)}
+function bootOff(){if(bootDone)return;bootDone=true;const wait=Math.max(0,(bootFirst?2200:400)-(Date.now()-bootAt));setTimeout(()=>{$("#boot").classList.add("out");setTimeout(()=>$("#boot").remove(),700);const f=firstF($("#m"));if(f)f.focus({preventScroll:true});if(!ls("tip",0)){sv("tip",1);const t=$("#tip");t.textContent="Tip: press OK on a game for Watch, Stats or Multiview";t.classList.add("on");setTimeout(()=>t.classList.remove("on"),6e3)}},wait)}
 setTimeout(bootOff,9000); // never hang on the splash
 if(ch.length||!url||!(window.Android||window.NEMDESK))bootOff(); // no playlist stored, or plain web (nothing will ever load one): do not hold the splash
 document.querySelectorAll("img").forEach(i=>{if(i.complete)i.classList.add("ld")});

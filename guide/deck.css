@@ -4,7 +4,10 @@
 /* NEMTV guide "deck": each section is one full screen paged LEFT/RIGHT (no scrolling down); tabs at the top show where you are.
    Rules (docs/UI-RULES.md): one grid owns the screen; every control is the same height with equal left/right padding; spacing only from the 4/8/12 scale;
    every number sits next to its label; content is sized to its cell and deck.js shrinks it until nothing clips. */
-:root{--ch:28px;--g4:4px;--g8:8px;--g12:12px;--cp:12px}
+:root{--ch:28px;--g4:4px;--g8:8px;--g12:12px;--cp:12px;color-scheme:dark;
+  --bg:#0F0E11;--surface:#19171C;--sunken:#242128;--line:#2D2A31;--line-strong:#3B3741;--ink:#F2F0F4;--ink-2:#C9C4CF;--muted:#8F8996;
+  --red-soft:#3A1820;--red-line:#5C2330;--peach:#5C2330;--good:#5FD08A;--good-soft:#12301F;--warn:#F0B35A;--warn-soft:#3A2A0C;--info:#8FB4E8;--info-soft:#1B2A40;--crit:#FF6B7F;--crit-soft:#3A1720;
+  --ring-line:0 0 0 1px #2D2A31;--ring-focus:0 0 0 2px #0F0E11,0 0 0 5px #F2F0F4}
 html,body{height:100%;overflow:hidden}
 #scroller{position:fixed;inset:0;overflow:hidden!important;padding:0!important}
 #scroller>.wrap{height:100%;max-width:none;margin:0;padding:var(--g4) max(var(--g12),var(--safe-x)) max(var(--g8),var(--safe-y))!important;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:var(--g4)}
@@ -133,12 +136,12 @@ footer,.jump,#gamesBtn,#teamView{display:none!important}
 .pr2:focus{box-shadow:var(--ring-in)!important}
 .pr2 .ph{grid-row:1/3;width:26px;height:26px}
 .pr2 .nm{grid-column:2;grid-row:1;font:700 12px/1.1 var(--font-sans);white-space:nowrap;overflow:hidden;align-self:end}
-.pr2 .nm .cp{background:var(--ink);color:var(--bg);border-radius:5px;padding:1px 4px;font-size:9px;margin-left:var(--g4)}
+.pr2 .nm .cp{background:var(--ink);color:var(--bg);border-radius:5px;padding:0 4px;font-size:12px;margin-left:var(--g4)}
 .pr2 .nm .dt{width:7px;height:7px;border-radius:50%;background:var(--crit);display:inline-block;margin-left:var(--g4)}
 .pr2.q .nm .dt{background:var(--warn)}
-.pr2 .sub2{grid-column:2;grid-row:2;font:500 10px/1.1 var(--font-sans);color:var(--muted);white-space:nowrap;overflow:hidden;align-self:start}
-.pr2 .st{grid-column:3;grid-row:1;font:700 11px/1.1 var(--font-sans);color:var(--ink-2);white-space:nowrap;text-align:right;align-self:end}
-.pr2 .av{grid-column:3;grid-row:2;font:500 10px/1.1 var(--font-sans);color:var(--muted);white-space:nowrap;text-align:right;align-self:start}
+.pr2 .sub2{grid-column:2;grid-row:2;font:500 12px/1.1 var(--font-sans);color:var(--muted);white-space:nowrap;overflow:hidden;align-self:start}
+.pr2 .st{grid-column:3;grid-row:1;font:700 12px/1.1 var(--font-sans);color:var(--ink-2);white-space:nowrap;text-align:right;align-self:end}
+.pr2 .av{grid-column:3;grid-row:2;font:500 12px/1.1 var(--font-sans);color:var(--muted);white-space:nowrap;text-align:right;align-self:start}
 
 /* 4 Team: three panels with real content */
 .s-tm .si{grid-template-rows:minmax(0,1fr)}
@@ -154,10 +157,10 @@ footer,.jump,#gamesBtn,#teamView{display:none!important}
 .bar{width:100%;max-width:100%;min-width:0;justify-items:stretch;margin:0!important;padding:0 var(--g4)!important}
 .bar .v,.ten .v{text-align:right}
 .bar .track,.ten .track{height:7px!important}
-#regions{display:-webkit-box!important;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:10.5px!important;color:var(--muted)!important}
+#regions{display:-webkit-box!important;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:12px!important;color:var(--muted)!important}
 .acqrows{display:grid;gap:var(--g4);grid-auto-rows:min-content}
 .acqrow{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:2px var(--g8);padding:var(--g4) var(--g8)!important;font-size:11.5px!important;border-radius:10px}
-.acqrow small{grid-column:1/-1;font-size:10px!important;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.acqrow small{grid-column:1/-1;font-size:12px!important;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .tenure{display:grid;gap:3px}
 #tenH{margin-top:var(--g4)!important}
 .mini{display:grid;grid-auto-rows:minmax(0,1fr);gap:2px;min-height:0;flex:1}
@@ -178,18 +181,18 @@ footer,.jump,#gamesBtn,#teamView{display:none!important}
 .dlab{display:flex;gap:var(--g8);align-items:baseline}.dlab b{font-size:18px}
 .dstrip{display:flex;gap:var(--g4);overflow:hidden!important}
 .dstrip>*{flex:1 1 0;min-width:0}
-.dchip{display:grid!important;justify-items:center;gap:0;padding:var(--g4) 0!important;height:auto!important;min-height:0;border-radius:10px;font-size:10px!important;line-height:1.15}
-.dchip b{font-size:14px!important}.dchip .n{font-size:9px!important}
+.dchip{display:grid!important;justify-items:center;gap:0;padding:var(--g4) 0!important;height:auto!important;min-height:0;border-radius:10px;font-size:12px!important;line-height:1.15}
+.dchip b{font-size:14px!important}.dchip .n{font-size:12px!important}
 .mgrid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))!important;grid-auto-rows:minmax(0,1fr);gap:var(--g8)!important;min-height:0;align-content:stretch}
 .mgrid>*{min-height:0;min-width:0;overflow:hidden}
 .mc{display:grid!important;grid-template-rows:auto repeat(2,minmax(0,1fr));gap:var(--g4)!important;padding:var(--g8) var(--g12)!important;text-align:left;border-radius:14px!important;align-content:stretch}
 .mc-facts,.mc-foot{display:none!important}
 .mc-top{display:flex;justify-content:space-between;gap:var(--g8);font-size:12px;align-items:center;min-width:0}
-.mc-time{font:800 15px/1 var(--font-sans)}.mc-tv{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden}
+.mc-time{font:800 15px/1 var(--font-sans)}.mc-tv{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden}
 .mt{display:grid!important;grid-template-columns:22px minmax(0,1fr) auto;gap:var(--g8);align-items:center;min-height:0}
 .mt img{width:22px!important;height:22px!important;object-fit:contain}
 .mt b{font-size:12px!important;white-space:nowrap}
-.mt small{font-size:9px!important;white-space:nowrap;display:block;overflow:hidden}
+.mt small{font-size:12px!important;white-space:nowrap;display:block;overflow:hidden}
 .mt .sc{font:800 18px/1 var(--font-sans)}
 #gvNote{display:none}
 /* few games = roomy cards with the extra info back (series, rank, venue) */
@@ -235,9 +238,9 @@ footer,.jump,#gamesBtn,#teamView{display:none!important}
 .ovc{position:relative;min-width:0;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:var(--g4);padding:10px var(--g12);border-radius:16px;background:rgba(12,12,16,.55);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);color:#fff}
 .ovc.ovnext{grid-column:span 2}
 .ovc::before{content:"";position:absolute;left:var(--g12);top:0;width:28px;height:3px;border-radius:0 0 3px 3px;background:var(--tc,#fff)}
-.ovl{font:700 11px/1.1 var(--font-sans);letter-spacing:.12em;text-transform:uppercase;opacity:.8;margin-top:var(--g4)}
+.ovl{font:700 11px/1.1 var(--font-sans);letter-spacing:.12em;text-transform:uppercase;color:#E6E3EA;margin-top:var(--g4)}
 .ovv{display:block;font:800 clamp(20px,4.6vh,40px)/1 var(--font-display);text-transform:uppercase;white-space:nowrap;font-variant-numeric:tabular-nums}
-.ovs{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font:600 11px/1.25 var(--font-sans);opacity:.85;overflow:hidden;min-width:0}
+.ovs{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font:600 11px/1.25 var(--font-sans);color:#E6E3EA;overflow:hidden;min-width:0}
 .ovrow{display:flex;align-items:center;gap:var(--g8);min-width:0}
 .ovtxt{display:grid;gap:2px;min-width:0}
 .ovph{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none;background:rgba(255,255,255,.12);box-shadow:0 0 0 2px var(--tc,#fff)}
@@ -505,8 +508,8 @@ html.tv .rail,html.cz .rail{display:none!important}
 
 /* Overview: Next game is the one primary action (stronger fill + accent edge); the other cards are flat read-outs */
 button.ovc{font:inherit;text-align:left;cursor:pointer;width:100%}
-.ovc:not(.ovnext){-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(12,12,16,.42);border-color:rgba(255,255,255,.1)}
-.ovc.ovnext{background:color-mix(in srgb,var(--tc,#1B3A8A) 45%,rgba(12,12,16,.82));border-color:color-mix(in srgb,var(--tc,#fff) 55%,#fff 22%);border-left:4px solid var(--tc,#fff)}
+.ovc:not(.ovnext){-webkit-backdrop-filter:none;backdrop-filter:none;background:#14121A;border-color:rgba(255,255,255,.1)}
+.ovc.ovnext{background:color-mix(in srgb,var(--tc,#1B3A8A) 28%,#0C0C10);border-color:color-mix(in srgb,var(--tc,#fff) 55%,#fff 22%);border-left:4px solid var(--tc,#fff)}
 .ovc.ovnext::before{display:none}
 .ovnext .ovl{display:flex;justify-content:space-between;align-items:center;gap:var(--g8)}
 .ovgo{letter-spacing:.06em;opacity:.95}
@@ -569,7 +572,7 @@ html.cz .cs.today,html.cz .cs[aria-pressed=true]{box-shadow:none}
 .cdb:focus-visible{outline:none;box-shadow:var(--ring-in)}
 .cdt{display:flex;justify-content:space-between;align-items:flex-start;gap:4px}
 .cg{flex:none;display:flex;flex-direction:column;gap:2px;padding:0}
-.tpill{justify-self:start;font:800 10px/1 var(--font-sans);font-style:normal;letter-spacing:.08em;text-transform:uppercase;padding:3px 6px;border-radius:999px;background:var(--tc,#fff);color:var(--tx,#000)}
+.tpill{justify-self:start;font:800 11px/1 var(--font-sans);font-style:normal;letter-spacing:.08em;text-transform:uppercase;padding:3px 6px;border-radius:999px;background:var(--tc,#fff);color:var(--tx,#000)}
 .calbar{position:relative}
 .caltoday{position:absolute;right:0;top:50%;transform:translateY(-50%);height:44px;padding:0 var(--g12);border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:inherit;font:700 12px/1 var(--font-sans);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
 .offl{position:absolute;left:0;top:50%;transform:translateY(-50%);max-width:30%;opacity:.85}

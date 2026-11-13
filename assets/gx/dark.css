@@ -1,11 +1,11 @@
 :root{--bg:#0F0E11;--surface:#19171C;--sunken:#14121A;--line:#2B2731;--line-strong:#3A3541;--ink:#F6F4F7;--ink-2:#C9C4CE;--muted:#9A94A1;
 --red-soft:#3A1720;--red-line:#5C2330;--good-soft:#12301F;--warn-soft:#3A2A0C;--info-soft:#1B2A40;--crit-soft:#3A1720;
---good:#5FD08A;--warn:#F0B35A;--info:#8FB4E8;--crit:#FF6B7F;--ring-focus:0 0 0 2px #FF8A5B;--ring-line:0 0 0 1px #2B2731;color-scheme:dark}
+--good:#5FD08A;--warn:#F0B35A;--info:#8FB4E8;--crit:#FF6B7F;--ring-focus:0 0 0 2px #0F0E11,0 0 0 5px #F2F0F4;--ring-line:0 0 0 1px #2B2731;color-scheme:dark}
 html,body{background:transparent!important;color:var(--ink)}
 body::before{background:transparent!important}
 .drawer{background-color:#0F0E11!important;opacity:1!important}
 img[src*="logo"]{background:none}
-:focus,:focus-visible{outline:3px solid #FF8A5B!important;outline-offset:2px;box-shadow:none!important}
+:focus,:focus-visible{outline:none!important;box-shadow:0 0 0 2px #0F0E11,0 0 0 5px #F2F0F4!important}
 /* ink-filled chips/buttons: ink is light in dark mode, so their text must be dark */
 .pill[aria-pressed="true"],.chip.cap,.tm.cur,.gm.home,.cb-seg.cur,.cv-seg.cur,.cv-seg.here,.gbtn[aria-pressed="true"],.dchip[aria-pressed="true"],
 .pill[aria-pressed="true"] *,.chip.cap *,.tm.cur *,.gm.home *,.cb-seg.cur *,.cv-seg.cur *,.cv-seg.here *,.gbtn[aria-pressed="true"] *,.dchip[aria-pressed="true"] *{color:#141217!important}

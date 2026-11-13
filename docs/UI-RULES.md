@@ -94,3 +94,11 @@ Full do/don't list: [tv-design/dos-donts.md](tv-design/dos-donts.md). Audit and 
 - **Player bar**: Feed is the only filled pill; Zoom is one `Zoom 100%` button (the -/+ buttons stay in the DOM, hidden); on/off states are a ring plus a check, not a fill; empty groups hide; phones wrap the bar (44px buttons). Controls never auto-hide while `#pbuf` is up. Feed menu title is `FEED` for a plain channel and shows `Only one feed for this one`; `Note:` addon pseudo-feeds are dropped in `svFeeds`.
 - **Game popup**: pre-game with no feed leads with `TEAM GUIDE: <TEAM>` (primary) and has a Close pill; HOME/AWAY under the team names. **Game detail**: `Back` button instead of X.
 - **Multiview**: persistent hint `Hold OK (or long-press) on a tile for options`; a dead tile shows `This feed failed. Hold OK to change it` (`data-err`); Remove is danger-styled and spaced; one selection style (white ring = audio, white dashed = focus on another tile); `ALL ZOOM n%` label; picker rows 32px / 13px.
+
+
+## 2026-11-13 audit updates (supersede older lines above)
+- Text floor on TV is 12px for anything read; 10px only for decoration.
+- Player controls never wrap: below 85% fit they switch to icon-only.
+- One signal per meaning: coral ring = live, star = favourite, white ring = focus/selection. No flashing or pulsing dots.
+- Away team first (left) on every screen.
+- Guide uses the dark tokens.

@@ -154,7 +154,11 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 body.sbp #pl .ptop,body.sbp #pl .ctl,body.sbp #mv .ctl,body.sbp #mv .ml,body.sbp #mv .pmenu{opacity:0;pointer-events:none}
 body.sbp,body.sbp *{cursor:default}body.sbp .sbi:not(.off){cursor:pointer}
 .sbi{--o-base:var(--island);--o-a:var(--red-3);--o-b:var(--wine);--o-c:var(--plum);--o-f1:var(--coral);--o-f2:var(--wine);position:relative;isolation:isolate;flex:0 0 auto;height:100%;border-radius:999px;text-align:center;color:#fff;display:grid;grid-template-columns:auto auto auto auto;grid-template-rows:1fr;column-gap:4px;align-items:center;justify-content:center;padding:1px 8px;white-space:nowrap}
-#sbar.tight .sbi{padding:1px 6px;column-gap:3px}#sbar.tight .sbi .nt:not(.per){display:none}#sbar.tight .sbi .sbtr{display:none} /* tight: keep period dots + label, drop the clock */
+#sbar.tight .sbi{padding:1px 6px;column-gap:3px}#sbar.tight .sbi .nt:not(.per){display:none}#sbar.tight .sbi .sbtr{display:none}
+#sbar.t2{gap:1px}#sbar.t2 .sbi{padding:1px 4px;column-gap:2px}#sbar.t2 .sbi .sbdots{gap:2px;margin-right:0}#sbar.t2 .sbi .sbdots i{width:5px;height:5px}#sbar.t2 .sbi .sbpg{left:8px;right:8px}
+#sbar.t3 .sbi img,#sbar.t3 .sbi b{width:clamp(11px,52cqh,18px);height:clamp(11px,52cqh,18px)}#sbar.t3 .sbi .scr{font-size:clamp(10px,48cqh,16px)}#sbar.t3 .sbi .nt{font-size:clamp(9px,34cqh,11px);letter-spacing:.02em}
+#sbar.t4 .sbi .nt.per .sbtr,#sbar.t4 .sbi .scr{letter-spacing:0}#sbar.t4 .sbi{padding:1px 3px;column-gap:1px}#sbar.t4 .sbi img,#sbar.t4 .sbi b{width:clamp(10px,44cqh,14px);height:clamp(10px,44cqh,14px)}
+#sbar .sbi{zoom:var(--sbz,1)} /* tight: keep period dots + label, drop the clock */
 .sbi:first-child{margin-left:auto}.sbi:last-child{margin-right:auto} /* centred when they fit, scrolls from the left when not */
 .sbi img,.sbi b{width:clamp(14px,70cqh,26px);height:clamp(14px,70cqh,26px);object-fit:contain;font-size:clamp(11px,40cqh,13px);line-height:clamp(14px,70cqh,26px);overflow:hidden}
 .sbi .scr{font-size:clamp(12px,60cqh,22px);line-height:1;text-shadow:0 2px 10px rgba(0,0,0,.6);white-space:nowrap}
@@ -973,6 +977,7 @@ $("#gd").addEventListener("keydown",e=>{const k=e.key;if(!/^Arrow/.test(k))retur
 /* ---------- player ---------- */
 function ctlFit(){for(const el of [$("#pctl"),$("#mvb")]){if(!el||!el.offsetParent)continue;const g=parseFloat(getComputedStyle(el).columnGap)||0,k=[...el.children].filter(x=>x.offsetWidth),w=k.reduce((a,x)=>a+x.offsetWidth,0)+g*(k.length-1),W=(el.parentNode.clientWidth||innerWidth)-16;el.style.setProperty("--cs",Math.min(1,W/Math.max(1,w)).toFixed(3))}}
 window.addEventListener("resize",ctlFit);
+window.addEventListener("resize",()=>{const b=$("#sbar");if(b.classList.contains("on"))sbFit(b)});
 function show(){const pl=$("#pl");pl.classList.remove("hide");requestAnimationFrame(ctlFit);clearTimeout(hideT);hideT=setTimeout(()=>{if(!menuOn&&!$("#pbuf").classList.contains("on"))pl.classList.add("hide")},4000)} // never auto-hide while connecting / buffering / failed: the message and the Feed button stay up
 function setZoom(z){zoom=Math.max(50,Math.min(200,z));$("#v").style.transform="scale("+zoom/100+")";$("#zv").textContent="Zoom "+zoom+"%"}
 function favBtn(){const f=fav.includes(cur.c.n),b=$("#bfav");b.textContent=f?"Unfavorite":"Favorite";b.setAttribute("aria-pressed",f)}
@@ -1055,12 +1060,17 @@ function sbNote(c){if(!c||c.over||!c.n)return null; // dots fill as periods comp
   return `<span class="sbdots">${dots}</span>${ot?esc(c.note.split(" ")[0])+" ":""}${c.it?"INT":`<span class="sbtr">${esc(c.tr)}</span>`}`}
 function sbItem(g,k){const c=g.sc,ok=sbOk(g),s=c?String(c.score).split(" - "):0,col=(x,v)=>x?`--o-${v}:${x};--o-f${v==="a"?1:2}:${x};`:"",lg=(x,a)=>x&&x.logo?`<img src="${x.logo}" alt="">`:`<b class="disp">${esc(a)}</b>`;
   return `<button class="sbi focusable${c&&c.over?" done":""}${ok?"":" off"}${sbCur(g)?" cur":""}" data-t="${esc(g.title)}" data-k="${k}" tabindex="-1" aria-disabled="${!ok}" aria-label="${esc(g.tm[0]+" vs "+g.tm[1]+", "+(c?c.score+", "+c.note:clk(g.st)))}" style="${col(g.t[0].c,"a")}${col(g.t[1].c,"b")}"><span class="skin"><span class="mesh"></span></span>${lg(g.t[0],g.hm)}<span class="scr disp">${c?esc(c.score):"VS"}</span>${lg(g.t[1],g.aw)}<span class="nt disp${c&&sbNote(c)?" per":""}">${c?(sbNote(c)||esc(c.note)):esc(clk(g.st)).toUpperCase()}</span>${c&&c.prog!=null?`<span class="sbpg"><i style="width:${(c.prog*100).toFixed(1)}%"></i></span>`:""}<span class="pk"><span class="pt disp">${esc(g.aw)}${s?" "+s[1]:""} @ ${esc(g.hm)}${s?" "+s[0]:""}</span><span class="pn disp">${c?esc(c.note):esc(clk(g.st)).toUpperCase()}</span></span></button>`}
+// squeeze until every game fits on the one line: drop clocks, then tighten spacing, then shrink logos/text, then zoom the pills down
+function sbFit(b){const L=["tight","t2","t3","t4"],over=()=>b.scrollWidth>b.clientWidth+1;
+  b.classList.remove(...L); b.style.removeProperty("--sbz");
+  for(const c of L){if(!over())return; b.classList.add(c)}
+  let z=1; for(let k=0;k<6&&over();k++){z*=Math.max(.5,(b.clientWidth-8)/b.scrollWidth)*.98; b.style.setProperty("--sbz",z.toFixed(3))}} // ponytail: zoom, no floor; 16 games on a phone get small but stay on screen
 function sbRefresh(){const b=$("#sbar"); if(!b.classList.contains("on"))return;
   if(!scLoaded&&!scFail){b.innerHTML=skN(8,i=>sbItem({tm:["AAA","BBB"],t:[{},{}],hm:"BBB",aw:"AAA",title:"sk"+i,st:Date.now()},i));return}
   const f=document.activeElement, ft=b.contains(f)&&f.dataset.t;
   SB=(games().live||[]).filter(g=>SBP||!sbCur(g)).slice().sort((a,b)=>a.st-b.st||a.title.localeCompare(b.title));
   b.innerHTML=SB.length?SB.map(sbItem).join(""):'<span class="sbe">No other NHL games</span>';
-  b.classList.remove("tight"); if(b.scrollWidth>b.clientWidth+1)b.classList.add("tight"); // too many games: drop the clock so more fit on the one line
+  sbFit(b);
   const n=ft&&b.querySelector('[data-t="'+CSS.escape(ft)+'"]'); if(n)n.focus({preventScroll:true})}
 function sbFocus(el){const b=$("#sbar"); el.focus({preventScroll:true}); b.scrollLeft=Math.max(0,el.offsetLeft-(b.clientWidth-el.offsetWidth)/2); el.scrollIntoView({block:"nearest"})}
 function sbMoveV(d){const a=document.activeElement,it=[...$("#sbar").querySelectorAll(".sbi:not(.off)")]; if(!it.includes(a))return; const r=a.getBoundingClientRect(); let best=null,bs=1e9; it.forEach(x=>{const q=x.getBoundingClientRect(),dy=(q.top-r.top)*d; if(dy<8)return; const v=dy*3+Math.abs(q.left-r.left); if(v<bs){bs=v;best=x}}); if(best)sbFocus(best)} // picker is a wrapped grid: Up/Down jump to the nearest game in the next row

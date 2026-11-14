@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14T09:00:01-05:00",
+ "updated": "2026-11-14T17:00:02-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -278,6 +278,20 @@
    "game": "Next: Thu Nov 12, 12:00 PM ET at SEA, Veikkaus Arena, Helsinki (NHLN, Prime Video, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Svechnikov and Jankowski each score twice, Carolina beats Kraken 5-1 to sweep series in Finland",
+     "summary": "— Jordan Staal returned from injury, Andrei Svechnikov and Mark Jankowski each scored twice and the Carolina Hurricanes beat the Seattle Kraken 5-1 on Saturday to sweep the NHL’s Global Series in Finland’s capital.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401891809",
+     "date": "2026-11-14"
+    },
+    {
+     "title": "Jordan Staal returns as Hurricanes win second game in Finland",
+     "summary": "Hurricanes captain Jordan Staal returned to play in a 5-1 win over the Kraken as Carolina completed a sweep of two games in Helsinki, Finland.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50479826/hurricanes-activate-jordan-staal-injured-reserve",
+     "date": "2026-11-14"
+    },
+    {
      "title": "Hurricanes aim to keep win streak going, host the Kraken",
      "summary": "Seattle Kraken (9-7-1, in the Pacific Division) vs. Carolina Hurricanes (15-3-2, in the Metropolitan Division)",
      "source": "ESPN",
@@ -318,18 +332,9 @@
      "source": "Pro Hockey Rumors",
      "url": "https://www.prohockeyrumors.com/2026/11/injury-notes-red-wings-hurricanes-flyers.html",
      "date": "2026-11-05"
-    },
-    {
-     "title": "Staal out one to two months",
-     "summary": "Jordan Staal tore his calf in warmups before an Oct. 11 game. Rod Brind'Amour said he would miss one to two months.",
-     "source": "Daily Faceoff",
-     "url": "https://www.dailyfaceoff.com/news/carolina-hurricanes-jordan-staal-out-at-least-month-calf-tear-nhl-injury-news",
-     "date": "2026-10-13"
     }
    ],
-   "injuries": [
-    "Jordan Staal (calf, IR)"
-   ]
+   "injuries": []
   },
   "CBJ": {
    "headline": "The Blue Jackets lost 5-2 in Buffalo and lost Sean Monahan and Dmitri Voronkov to injuries.",
@@ -394,6 +399,7 @@
    ],
    "injuries": [
     "Isac Lundestrom (IR)",
+    "Conor Garland (out)",
     "Sean Monahan (dtd)"
    ]
   },
@@ -534,6 +540,13 @@
    "game": "Next: Tue Nov 10, 7:00 PM ET at Toronto, Scotiabank Arena (ALT, TSN4, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Avalanche's Nathan MacKinnon, Cale Makar ruled out for multiple weeks",
+     "summary": "Colorado's Nathan MacKinnon is out at least a month, while teammate Cale Makar will be out approximately two weeks, both with lower-body injuries.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50480955/avalanc-nathan-mackinnon-cale-makar-injuries",
+     "date": "2026-11-14"
+    },
+    {
      "title": "Canadiens host the Avalanche in a non-conference matchup",
      "summary": "Colorado Avalanche (11-6-3, in the Central Division) vs. Montreal Canadiens (12-3-4, in the Atlantic Division)",
      "source": "ESPN",
@@ -581,18 +594,11 @@
      "source": "ESPN",
      "url": "https://www.espn.com/mlb/story/_/id/47539505/most-consecutive-games-played-mlb-nfl-nba-nhl",
      "date": "2026-11-09"
-    },
-    {
-     "title": "Necas has four points, Blackwood blanks Red Wings",
-     "summary": "Necas had two goals and two assists and MacKinnon and Makar each had a goal and two assists in a 4-0 win. Blackwood made 27 saves for his first shutout of the season and Colorado moved to 10-6-2.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/detroit-red-wings-colorado-avalanche-game-recap-november-7-2026",
-     "date": "2026-11-08"
     }
    ],
    "injuries": [
-    "Cale Makar (day-to-day)",
-    "Nathan MacKinnon (day-to-day)",
+    "Cale Makar (out)",
+    "Nathan MacKinnon (lower body, out)",
     "Josh Manson (IR)",
     "Zachary L'Heureux (IR)"
    ]
@@ -652,9 +658,9 @@
     }
    ],
    "injuries": [
-    "Lian Bichsel (lower body, out)",
     "Miro Heiskanen (upper body, out)",
-    "Kyle Capobianco (IR)",
+    "Kyle Capobianco (leg, IR)",
+    "Lian Bichsel (lower body, IR)",
     "Oskar Back (IR)",
     "Matt Duchene (IR)"
    ]
@@ -924,7 +930,8 @@
     }
    ],
    "injuries": [
-    "Erik Gustafsson (day-to-day)",
+    "Erik Gustafsson (out)",
+    "Artemi Panarin (out)",
     "Jakub Dvorak (IR)"
    ]
   },
@@ -990,8 +997,6 @@
     }
    ],
    "injuries": [
-    "Joel Eriksson Ek (day-to-day)",
-    "Brock Faber (skull, IR)",
     "Filip Gustavsson (hip, IR)"
    ]
   },
@@ -1057,7 +1062,8 @@
     }
    ],
    "injuries": [
-    "Chris Kreider (day-to-day)",
+    "Mike Matheson (undisclosed, day-to-day)",
+    "Chris Kreider (lower body, out)",
     "Ivan Demidov (foot, IR)",
     "Sam Montembeault (lower body, IR)",
     "Bryce Pickford (IR)",
@@ -1126,9 +1132,10 @@
     }
    ],
    "injuries": [
+    "Vladislav Kolyachonok (out)",
+    "Brett Pesce (illness, out)",
     "Seamus Casey (knee, IR)",
     "Johnathan Kovacevic (ankle, IR)",
-    "Brett Pesce (day-to-day)",
     "Anthony Mantha (throat, IR)"
    ]
   },
@@ -1194,7 +1201,7 @@
     }
    ],
    "injuries": [
-    "Jonathan Marchessault (out)",
+    "Jonathan Marchessault (day-to-day)",
     "William Trudeau (IR)"
    ]
   },
@@ -1261,9 +1268,9 @@
    ],
    "injuries": [
     "Jean-Gabriel Pageau (day-to-day)",
-    "Mathew Barzal (knee, IR)",
     "Calum Ritchie (IR)",
-    "Alexander Romanov (IR)"
+    "Alexander Romanov (IR)",
+    "Mathew Barzal (IR)"
    ]
   },
   "NYR": {
@@ -1466,7 +1473,6 @@
     }
    ],
    "injuries": [
-    "Noel Acciari (day-to-day)",
     "Nikita Grebenkin (back, IR)"
    ]
   },
@@ -1543,6 +1549,13 @@
    "game": "Next: Thu Nov 12, 12:00 PM ET vs Carolina Hurricanes, Veikkaus Arena in Helsinki (CARNHL, HHN, KONG, NHLN, Prime Video, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Svechnikov and Jankowski each score twice, Carolina beats Kraken 5-1 to sweep series in Finland",
+     "summary": "— Jordan Staal returned from injury, Andrei Svechnikov and Mark Jankowski each scored twice and the Carolina Hurricanes beat the Seattle Kraken 5-1 on Saturday to sweep the NHL’s Global Series in Finland’s capital.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401891809",
+     "date": "2026-11-14"
+    },
+    {
      "title": "Hurricanes aim to keep win streak going, host the Kraken",
      "summary": "Seattle Kraken (9-7-1, in the Pacific Division) vs. Carolina Hurricanes (15-3-2, in the Metropolitan Division)",
      "source": "ESPN",
@@ -1594,7 +1607,6 @@
    ],
    "injuries": [
     "Jacob Melanson (chest, IR)",
-    "Ryan Lindgren (upper body, IR)",
     "Nikke Kokko (IR)",
     "Curtis Douglas (IR)",
     "Jared McCann (lower body, IR)",
@@ -1663,7 +1675,7 @@
     }
    ],
    "injuries": [
-    "Alexander Wennberg (day-to-day)",
+    "Alexander Wennberg (out)",
     "Igor Chernyshov (IR)",
     "Quentin Musty (upper body, IR)",
     "Kyle Keyser (upper body, IR)"
@@ -1866,8 +1878,8 @@
     }
    ],
    "injuries": [
+    "Nick Schmaltz (lower body, out)",
     "Logan Cooley (out)",
-    "Nick Schmaltz (day-to-day)",
     "Nate Schmidt (upper body, IR)",
     "Dylan Guenther (IR)",
     "John Marino (IR)",

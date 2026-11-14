@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T17:00:01-05:00",
+ "updated": "2026-11-14T09:00:01-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -1126,16 +1126,23 @@
     }
    ],
    "injuries": [
+    "Seamus Casey (knee, IR)",
     "Johnathan Kovacevic (ankle, IR)",
     "Brett Pesce (day-to-day)",
-    "Anthony Mantha (throat, IR)",
-    "Seamus Casey (IR)"
+    "Anthony Mantha (throat, IR)"
    ]
   },
   "NSH": {
    "headline": "The Predators beat St. Louis 3-1 at home on Saturday for their fourth straight win.",
    "game": "Next: Tue Nov 10, 10:00 PM ET at Los Angeles Kings, Crypto.com Arena (Disney+, ESPN+, HULU, SNE). Starter not announced.",
    "items": [
+    {
+     "title": "Roman Josi lifts Predators past Golden Knights 3-2 in shootout for seventh straight win",
+     "summary": "— Roman Josi scored the deciding goal in the fourth round of a shootout as the Nashville Predators beat the Vegas Golden Knights 3-2 Friday night for their seventh straight win.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892707",
+     "date": "2026-11-14"
+    },
     {
      "title": "Golden Knights bring winning streak into home matchup with the Predators",
      "summary": "Nashville Predators (10-4-5, in the Central Division) vs. Vegas Golden Knights (13-5-2, in the Pacific Division)",
@@ -1183,13 +1190,6 @@
      "summary": "Steven Stamkos, Ross Colton and Nick Perbix scored and Juuse Saros made 25 saves. Stamkos' 248th power-play goal moved him past Luc Robitaille for fifth in NHL history.",
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-recap-november-7-2026",
-     "date": "2026-11-07"
-    },
-    {
-     "title": "Blues at Predators projected lineups",
-     "summary": "Nashville was expected to use the lineup from its 3-2 overtime win at Colorado. Jonathan Marchessault was considered day to day.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/st-louis-blues-nashville-predators-game-preview-november-7-2026",
      "date": "2026-11-07"
     }
    ],
@@ -1271,6 +1271,13 @@
    "game": "Next: Mon Nov 09, 8:00 PM ET at Edmonton Oilers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Glenn Gawdin scores his first 2 NHL goals in the Rangers' 5-1 victory over the Canucks",
+     "summary": "— Glenn Gawdin scored his first two NHL goals in New York's four-goal second period and the Rangers won for the first time this season when allowing the first goal, beating the Vancouver Canucks 5-1 on Friday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892706",
+     "date": "2026-11-14"
+    },
+    {
      "title": "Rangers visit the Canucks after Zibanejad's 2-goal game",
      "summary": "New York Rangers (11-8-1, in the Metropolitan Division) vs. Vancouver Canucks (3-16-1, in the Pacific Division)",
      "source": "ESPN",
@@ -1318,13 +1325,6 @@
      "source": "Hudson River Blue",
      "url": "https://www.hudsonriverblue.com/rangers-waive-reimer-after-one-period-as-korpisalo-returns-to-back-up-garand-in-seattle/",
      "date": "2026-11-07"
-    },
-    {
-     "title": "Rangers at Kraken projected lineups",
-     "summary": "Luke Glendening and Matthew Robertson were projected scratches. Igor Shesterkin and Joseph Veleno were listed with lower-body injuries.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-preview-november-7-2026",
-     "date": "2026-11-06"
     }
    ],
    "injuries": [
@@ -1866,8 +1866,8 @@
     }
    ],
    "injuries": [
+    "Logan Cooley (out)",
     "Nick Schmaltz (day-to-day)",
-    "Logan Cooley (day-to-day)",
     "Nate Schmidt (upper body, IR)",
     "Dylan Guenther (IR)",
     "John Marino (IR)",
@@ -1878,6 +1878,20 @@
    "headline": "The Canucks lost 4-2 in Edmonton on Saturday for their fifth straight loss and are 3-15-1.",
    "game": "Next: Mon Nov 9, 9:30 PM ET vs Philadelphia, Rogers Arena (NBCSP, SN+). Starter not announced.",
    "items": [
+    {
+     "title": "Canucks take losing streak into matchup with the Golden Knights",
+     "summary": "Vancouver Canucks (3-17-1, in the Pacific Division) vs. Vegas Golden Knights (13-5-3, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892724",
+     "date": "2026-11-14"
+    },
+    {
+     "title": "Glenn Gawdin scores his first 2 NHL goals in the Rangers' 5-1 victory over the Canucks",
+     "summary": "— Glenn Gawdin scored his first two NHL goals in New York's four-goal second period and the Rangers won for the first time this season when allowing the first goal, beating the Vancouver Canucks 5-1 on Friday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892706",
+     "date": "2026-11-14"
+    },
     {
      "title": "Rangers visit the Canucks after Zibanejad's 2-goal game",
      "summary": "New York Rangers (11-8-1, in the Metropolitan Division) vs. Vancouver Canucks (3-16-1, in the Pacific Division)",
@@ -1919,24 +1933,10 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892673",
      "date": "2026-11-08"
-    },
-    {
-     "title": "Oilers beat skidding Canucks 4-2",
-     "summary": "Vancouver is 1-14-1 since a 2-1 start. The Canucks host Philadelphia on Monday.",
-     "source": "AP via WRAL",
-     "url": "https://www.wral.com/news/ap/86bfd-draisaitl-scores-twice-mcdavid-has-3-assists-to-extend-streak-and-oilers-beat-skidding-canucks-4-2/",
-     "date": "2026-11-07"
-    },
-    {
-     "title": "Canucks at Oilers projected lineups",
-     "summary": "Chytil (upper body) and Demko (hip) were listed as injured. Bains was expected in for Quillan and Schenn for Mancini.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/vancouver-canucks-edmonton-oilers-game-preview-november-7-2026",
-     "date": "2026-11-07"
     }
    ],
    "injuries": [
-    "Filip Chytil (shoulder, IR)",
+    "Guillaume Brisebois (IR)",
     "Mackenzie MacEachern (IR)",
     "Thatcher Demko (hip, IR)"
    ]
@@ -1945,6 +1945,20 @@
    "headline": "In progress at 5 PM ET: Vegas led Buffalo 1-0 on a Mitch Marner goal. The Golden Knights finish a road trip at Buffalo on Sunday after a 2-1 win at Detroit on Thursday.",
    "game": "Next: Sun Nov 08, 3:30 PM ET at BUF, KeyBank Center (MSG-B, SCRIPPS, SN1, TVAS). Carter Hart projected to start.",
    "items": [
+    {
+     "title": "Canucks take losing streak into matchup with the Golden Knights",
+     "summary": "Vancouver Canucks (3-17-1, in the Pacific Division) vs. Vegas Golden Knights (13-5-3, in the Pacific Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892724",
+     "date": "2026-11-14"
+    },
+    {
+     "title": "Roman Josi lifts Predators past Golden Knights 3-2 in shootout for seventh straight win",
+     "summary": "— Roman Josi scored the deciding goal in the fourth round of a shootout as the Nashville Predators beat the Vegas Golden Knights 3-2 Friday night for their seventh straight win.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892707",
+     "date": "2026-11-14"
+    },
     {
      "title": "Golden Knights bring winning streak into home matchup with the Predators",
      "summary": "Nashville Predators (10-4-5, in the Central Division) vs. Vegas Golden Knights (13-5-2, in the Pacific Division)",
@@ -1985,13 +1999,6 @@
      "summary": "Victor Olofsson returned from injury on Nov. 5. Braeden Bowman scored in the win.",
      "source": "Golden Knights",
      "url": "https://www.nhl.com/goldenknights/news/morning-skate-report-nov-8-2026",
-     "date": "2026-11-08"
-    },
-    {
-     "title": "Tomas Hertl scores twice as Golden Knights beat Sabres 4-1 for third straight win",
-     "summary": "— Tomas Hertl scored two goals and the Vegas Golden Knights won their third straight game, 4-1 over the Buffalo Sabres on Sunday.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892675",
      "date": "2026-11-08"
     }
    ],

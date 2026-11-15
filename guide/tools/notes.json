@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T09:00:02-05:00",
+ "updated": "2026-11-15T17:00:02-05:00",
  "teams": {
   "BOS": {
    "name": "Boston Bruins",
@@ -875,8 +875,8 @@
    ],
    "out": [
     8480068,
-    8482178,
-    8478421
+    8478421,
+    8482178
    ],
    "players": {
     "8480843": {
@@ -923,7 +923,7 @@
    "coach": "Lindy Ruff",
    "captain": 8480064,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 14",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8484145,
@@ -1009,7 +1009,7 @@
    "coach": "Rod Brind'Amour",
    "captain": 8473533,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 14",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8477478,
@@ -1081,7 +1081,7 @@
    "coach": "Rick Bowness",
    "captain": null,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 14",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8481716,
@@ -1111,11 +1111,11 @@
     ],
     [
      8478500,
-     8479371
+     8483485
     ],
     [
      8481161,
-     8483485
+     8479371
     ]
    ],
    "goalies": [
@@ -1123,9 +1123,9 @@
     8475660
    ],
    "out": [
+    8477497,
     8480806,
-    8478856,
-    8477497
+    8478856
    ],
    "players": {
     "8477497": {
@@ -1756,7 +1756,7 @@
    "coach": "Peter Laviolette",
    "captain": 8474563,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 14",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8481532,
@@ -1798,8 +1798,8 @@
     8475311
    ],
    "out": [
-    8476979,
     8478550,
+    8476979,
     8484163
    ],
    "players": {
@@ -1944,7 +1944,7 @@
     [
      8484403,
      8478133,
-     8476981
+     8483424
     ]
    ],
    "pairs": [
@@ -1967,6 +1967,7 @@
    ],
    "out": [
     8476875,
+    8476981,
     8475184,
     8484984,
     8478470,
@@ -2011,7 +2012,7 @@
    "coach": "Sheldon Keefe",
    "captain": 8480002,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 14",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8481721,
@@ -2232,7 +2233,7 @@
    "coach": "Mike Sullivan",
    "captain": 8476468,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 13",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8484210,
@@ -2323,7 +2324,7 @@
    "coach": "Travis Green",
    "captain": 8478469,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 14",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8476393,
@@ -2481,7 +2482,7 @@
    "coach": "Dan Muse",
    "captain": 8471675,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 14",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8471215,
@@ -2562,7 +2563,7 @@
    "coach": "Lane Lambert",
    "captain": 8474586,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 14",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8482259,
@@ -2576,13 +2577,13 @@
     ],
     [
      8477919,
-     8476905,
-     8483442
+     8483570,
+     8484241
     ],
     [
-     8484241,
-     8483570,
-     8482751
+     8482751,
+     8476905,
+     8483442
     ]
    ],
    "pairs": [
@@ -2729,7 +2730,7 @@
    "coach": "Jim Montgomery",
    "captain": 8480023,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 14",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8482077,
@@ -2887,7 +2888,7 @@
    "coach": "Andre Tourigny",
    "captain": 8479343,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 14",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8479343,
@@ -2974,12 +2975,12 @@
     [
      8478498,
      8480012,
-     8478444
+     8483476
     ],
     [
      8481032,
      8480078,
-     8483476
+     8478444
     ],
     [
      8483499,
@@ -3007,8 +3008,8 @@
     ]
    ],
    "goalies": [
-    8480947,
-    8482447
+    8482447,
+    8480947
    ],
    "out": [
     8478465,
@@ -3203,7 +3204,7 @@
    "coach": "Spencer Carbery",
    "captain": 8471214,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 14",
+   "linesAsOf": "DailyFaceoff Nov 15",
    "lines": [
     [
      8481656,

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T09:00:02-05:00",
+ "updated": "2026-11-15T17:00:02-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -129,7 +129,7 @@
     }
    ],
    "injuries": [
-    "Morgan Rielly (out)",
+    "Morgan Rielly (day-to-day)",
     "Colton Sissons (IR)",
     "Kirill Marchenko (IR)",
     "Miles Wood (undisclosed, IR)",
@@ -202,8 +202,8 @@
    ],
    "injuries": [
     "Ryan Poehling (lower body, IR)",
-    "Ian Moore (lower body, IR)",
-    "A.J. Greer (upper body, IR)"
+    "A.J. Greer (upper body, IR)",
+    "Ian Moore (IR)"
    ]
   },
   "BUF": {
@@ -398,9 +398,9 @@
     }
    ],
    "injuries": [
+    "Sean Monahan (day-to-day)",
     "Isac Lundestrom (IR)",
-    "Conor Garland (out)",
-    "Sean Monahan (dtd)"
+    "Conor Garland (out)"
    ]
   },
   "CGY": {
@@ -548,6 +548,13 @@
      "date": "2026-11-15"
     },
     {
+     "title": "Most consecutive games played in MLB, NFL, NBA, NHL",
+     "summary": "Brent Burns has 1,000+ consecutive games played. Find out who else has played the most games in a row across other major leagues.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/mlb/story/_/id/47539505/most-consecutive-games-played-mlb-nfl-nba-nhl",
+     "date": "2026-11-15"
+    },
+    {
      "title": "Avalanche's Nathan MacKinnon, Cale Makar ruled out for multiple weeks",
      "summary": "Colorado's Nathan MacKinnon is out at least a month, while teammate Cale Makar will be out approximately two weeks, both with lower-body injuries.",
      "source": "ESPN",
@@ -588,13 +595,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892683",
      "date": "2026-11-11"
-    },
-    {
-     "title": "Maple Leafs bring losing streak into home matchup with the Avalanche",
-     "summary": "Colorado Avalanche (10-6-2, in the Central Division) vs. Toronto Maple Leafs (8-9-2, in the Atlantic Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892683",
-     "date": "2026-11-09"
     }
    ],
    "injuries": [
@@ -759,6 +759,13 @@
      "date": "2026-11-15"
     },
     {
+     "title": "Devon Levi's connection with the ice leads to Russell Crowe praise",
+     "summary": "Caught pressing his bare hand against the ice, Oilers goalie Devon Levi said the moment was inspired by the film \"Gladiator,\" leading to a social media shoutout from actor Russell Crowe.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50490672/devon-levi-inspired-gladiator-earns-crowe-praise",
+     "date": "2026-11-15"
+    },
+    {
      "title": "Oilers look to keep win streak going, visit the Maple Leafs",
      "summary": "Edmonton Oilers (14-3-3, in the Pacific Division) vs. Toronto Maple Leafs (8-11-2, in the Atlantic Division)",
      "source": "ESPN",
@@ -792,13 +799,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892692",
      "date": "2026-11-10"
-    },
-    {
-     "title": "Nugent-Hopkins leaves game after being struck in head by puck",
-     "summary": "Nugent-Hopkins was hit by a shoot-in attempt from teammate Ryan Shea 45 seconds into the second period and did not return.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/oilers-ryan-nugent-hopkins-injured-after-being-struck-in-head-by-puck",
-     "date": "2026-11-08"
     }
    ],
    "injuries": [
@@ -938,8 +938,8 @@
     }
    ],
    "injuries": [
-    "Erik Gustafsson (out)",
-    "Artemi Panarin (out)",
+    "Artemi Panarin (day-to-day)",
+    "Erik Gustafsson (day-to-day)",
     "Jakub Dvorak (IR)"
    ]
   },
@@ -1070,8 +1070,9 @@
     }
    ],
    "injuries": [
-    "Mike Matheson (out)",
-    "Chris Kreider (lower body, out)",
+    "Mike Matheson (lower body, out)",
+    "Josh Anderson (IR)",
+    "Chris Kreider (IR)",
     "Ivan Demidov (foot, IR)",
     "Sam Montembeault (lower body, IR)",
     "Bryce Pickford (IR)",
@@ -1140,8 +1141,8 @@
     }
    ],
    "injuries": [
-    "Vladislav Kolyachonok (out)",
-    "Brett Pesce (illness, out)",
+    "Brett Pesce (day-to-day)",
+    "Vladislav Kolyachonok (day-to-day)",
     "Seamus Casey (knee, IR)",
     "Johnathan Kovacevic (ankle, IR)",
     "Anthony Mantha (throat, IR)"
@@ -1275,9 +1276,9 @@
     }
    ],
    "injuries": [
+    "Jean-Gabriel Pageau (day-to-day)",
     "Bo Horvat (day-to-day)",
     "Logan Stanley (lower body, day-to-day)",
-    "Jean-Gabriel Pageau (lower body, out)",
     "Calum Ritchie (IR)",
     "Alexander Romanov (IR)"
    ]
@@ -1685,7 +1686,7 @@
     }
    ],
    "injuries": [
-    "Alexander Wennberg (out)",
+    "Alexander Wennberg (day-to-day)",
     "Igor Chernyshov (IR)",
     "Quentin Musty (upper body, IR)",
     "Kyle Keyser (upper body, IR)"
@@ -1753,8 +1754,9 @@
     }
    ],
    "injuries": [
+    "Jake Neighbours (upper body, day-to-day)",
+    "Philip Broberg (lower body, day-to-day)",
     "Aleksanteri Kaskimaki (day-to-day)",
-    "Philip Broberg (day-to-day)",
     "Torey Krug (ankle, IR)",
     "Dillon Dube (IR)",
     "Tyler Tucker (IR)"
@@ -1822,8 +1824,8 @@
     }
    ],
    "injuries": [
-    "Erik Cernak (upper body, out)",
-    "Anthony Cirelli (lower body, out)",
+    "Erik Cernak (day-to-day)",
+    "Anthony Cirelli (day-to-day)",
     "Brayden Point (IR)"
    ]
   },
@@ -1889,8 +1891,8 @@
     }
    ],
    "injuries": [
+    "Logan Cooley (day-to-day)",
     "Nick Schmaltz (lower body, out)",
-    "Logan Cooley (out)",
     "Nate Schmidt (upper body, IR)",
     "Dylan Guenther (IR)",
     "John Marino (IR)",
@@ -2091,7 +2093,7 @@
     }
    ],
    "injuries": [
-    "Isak Rosen (undisclosed, out)",
+    "Isak Rosen (day-to-day)",
     "Dylan DeMelo (lower body, IR)",
     "Elias Salomonsson (IR)",
     "Vladislav Namestnikov (IR)",

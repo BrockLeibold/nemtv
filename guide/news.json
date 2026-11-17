@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T17:00:02-05:00",
+ "updated": "2026-11-17T09:00:02-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -541,6 +541,13 @@
    "game": "Next: Tue Nov 10, 7:00 PM ET at Toronto, Scotiabank Arena (ALT, TSN4, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Mammoth take losing streak into matchup with the Avalanche",
+     "summary": "Colorado Avalanche (12-6-3, in the Central Division) vs. Utah Mammoth (10-9-3, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892741",
+     "date": "2026-11-17"
+    },
+    {
      "title": "Avalanche beat Canadiens 4-1 without injured stars MacKinnon, Makar",
      "summary": "— Artturi Lehkonen had a goal and an assist and the short-handed Colorado Avalanche beat the Montreal Canadiens 4-1 on Saturday night without injured stars Nathan MacKinnon and Cale Makar.",
      "source": "ESPN",
@@ -587,13 +594,6 @@
      "summary": "Colorado Avalanche (11-6-2, in the Central Division) vs. Ottawa Senators (11-6-2, in the Atlantic Division)",
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892698",
-     "date": "2026-11-11"
-    },
-    {
-     "title": "Landeskog scores twice and the Avalanche hand the Maple Leafs their 4th straight loss, 6-3",
-     "summary": "— Gabriel Landeskog scored his second goal of the game early in the third period to put the Colorado Avalanche ahead for good in a 6-3 win over the Toronto Maple Leafs on Tuesday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892683",
      "date": "2026-11-11"
     }
    ],
@@ -746,6 +746,13 @@
    "game": "Next: Mon Nov 9, 8:00 PM ET vs NY Rangers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "The Connor McDavid Scoring Tracker: Can the Oilers' superstar break 200 points?",
+     "summary": "Follow along game by game as No. 97 looks to break a benchmark that only No. 99 has done in NHL history.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50502384/nhl-2026-27-connor-mcdavid-scoring-200-points-stats-record-wayne-gretzky",
+     "date": "2026-11-17"
+    },
+    {
      "title": "Oilers bring 5-game win streak into matchup with the Panthers",
      "summary": "Edmonton Oilers (16-3-3, in the Pacific Division) vs. Florida Panthers (12-7-3, in the Atlantic Division)",
      "source": "ESPN",
@@ -793,13 +800,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892710",
      "date": "2026-11-13"
-    },
-    {
-     "title": "Wysh List: Will Connor McDavid break 200 points? The cases for and against",
-     "summary": "The Oilers superstar is on pace to break a benchmark that hasn't been hit since the 1980s.",
-     "source": "ESPN",
-     "url": "https://www.espn.com/nhl/story/_/id/50455208/nhl-2026-27-connor-mcdavid-points-record-stats-200-wayne-gretzky",
-     "date": "2026-11-12"
     }
    ],
    "injuries": [
@@ -1016,6 +1016,20 @@
    "game": "Next: Tue Nov 10, 7:00 PM ET vs Minnesota Wild, Centre Bell (MINNHL, RDS, TSN2, Wild+). Starter not announced.",
    "items": [
     {
+     "title": "Devils host the Canadiens after Rodrigues' 2-goal game",
+     "summary": "Montreal Canadiens (12-5-4, in the Atlantic Division) vs. New Jersey Devils (15-6, in the Metropolitan Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892740",
+     "date": "2026-11-17"
+    },
+    {
+     "title": "Will Cuylle scores twice as the Rangers come back to beat the Canadiens 3-1",
+     "summary": "— Will Cuylle scored twice, including the go-ahead short-handed goal in the final minute of the second period, and the New York Rangers rallied to defeat the Montreal Canadiens 3-1 on Monday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892726",
+     "date": "2026-11-17"
+    },
+    {
      "title": "New York takes on Montreal following Gawdin's 2-goal showing",
      "summary": "Montreal Canadiens (12-4-4, in the Atlantic Division) vs. New York Rangers (12-8-1, in the Metropolitan Division)",
      "source": "ESPN",
@@ -1056,20 +1070,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892684",
      "date": "2026-11-11"
-    },
-    {
-     "title": "Canadiens take on the Wild after Newhook's 2-goal performance",
-     "summary": "Minnesota Wild (12-3-4, in the Central Division) vs. Montreal Canadiens (11-3-3, in the Atlantic Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892684",
-     "date": "2026-11-09"
-    },
-    {
-     "title": "Fowler stops 26, Canadiens beat Maple Leafs",
-     "summary": "Alex Newhook scored twice and Chris Kreider and Zachary Bolduc also scored in a 4-2 win. Montreal is 11-3-3 and 8-0-2 in its past 10 games.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/montreal-canadiens-toronto-maple-leafs-game-recap-november-7-2026",
-     "date": "2026-11-07"
     }
    ],
    "injuries": [
@@ -1086,6 +1086,13 @@
    "headline": "The Devils (12-5-0) take a four-game win streak to Toronto after beating the Islanders 5-4 in overtime.",
    "game": "Next: Sun Nov 08, 7:00 PM ET at Toronto, Scotiabank Arena (MSGSN, NHLN, TSN4). Expected starter: Connor Hellebuyck (not confirmed).",
    "items": [
+    {
+     "title": "Devils host the Canadiens after Rodrigues' 2-goal game",
+     "summary": "Montreal Canadiens (12-5-4, in the Atlantic Division) vs. New Jersey Devils (15-6, in the Metropolitan Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892740",
+     "date": "2026-11-17"
+    },
     {
      "title": "Connor Hellebuyck makes 43 saves and improves to 7-0 with Devils in 7-4 win over Capitals",
      "summary": "— Connor Hellebuyck recovered from a shaky start to make 43 saves, remaining unbeaten in net with New Jersey as the surging Devils defeated the Washington Capitals 7-4 on Saturday night.",
@@ -1134,13 +1141,6 @@
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50444775/connor-hellebuyck-discusses-why-wanted-winnipeg",
      "date": "2026-11-10"
-    },
-    {
-     "title": "Jets disappointed ex-goalie Connor Hellebuyck sitting out",
-     "summary": "The Jets are disappointed they won't get closure for the departure of ex-goalie Connor Hellebuyck as he won't be starting for the Devils when they play in Winnipeg on Tuesday.",
-     "source": "ESPN",
-     "url": "https://www.espn.com/nhl/story/_/id/50435073/jets-disappointed-ex-goalie-connor-hellebuyck-sitting-out",
-     "date": "2026-11-09"
     }
    ],
    "injuries": [
@@ -1290,6 +1290,13 @@
    "game": "Next: Mon Nov 09, 8:00 PM ET at Edmonton Oilers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Will Cuylle scores twice as the Rangers come back to beat the Canadiens 3-1",
+     "summary": "— Will Cuylle scored twice, including the go-ahead short-handed goal in the final minute of the second period, and the New York Rangers rallied to defeat the Montreal Canadiens 3-1 on Monday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892726",
+     "date": "2026-11-17"
+    },
+    {
      "title": "New York takes on Montreal following Gawdin's 2-goal showing",
      "summary": "Montreal Canadiens (12-4-4, in the Atlantic Division) vs. New York Rangers (12-8-1, in the Metropolitan Division)",
      "source": "ESPN",
@@ -1337,18 +1344,12 @@
      "source": "NHL.com",
      "url": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-recap-november-7-2026",
      "date": "2026-11-08"
-    },
-    {
-     "title": "New York brings 3-game win streak into matchup against Edmonton",
-     "summary": "New York Rangers (10-7-1, in the Metropolitan Division) vs. Edmonton Oilers (12-3-3, in the Pacific Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892680",
-     "date": "2026-11-08"
     }
    ],
    "injuries": [
+    "Sean Durzi (lower body, IR)",
+    "Pavel Dorofeyev (out)",
     "Alberts Smits (IR)",
-    "Sean Durzi (undisclosed, IR)",
     "Igor Shesterkin (IR)",
     "Joe Veleno (lower body, IR)",
     "Aidan Thompson (IR)",
@@ -1838,6 +1839,20 @@
    "game": "Next: Wed Nov 11, 9:30 PM ET at Vegas Golden Knights, T-Mobile Arena (HBO MAX, TNT, truTV). Starter not announced.",
    "items": [
     {
+     "title": "Mammoth take losing streak into matchup with the Avalanche",
+     "summary": "Colorado Avalanche (12-6-3, in the Central Division) vs. Utah Mammoth (10-9-3, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892741",
+     "date": "2026-11-17"
+    },
+    {
+     "title": "Boeser's late power-play goal lifts Canucks to 3-2 win over Mammoth",
+     "summary": "— Brock Boeser scored a power-play goal with 4:23 left to lift the Vancouver Canucks to a 3-2 victory over the Utah Mammoth on Monday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892727",
+     "date": "2026-11-17"
+    },
+    {
      "title": "Vancouver visits Utah after Chytil's 2-goal game",
      "summary": "Vancouver Canucks (4-17-1, in the Pacific Division) vs. Utah Mammoth (10-8-3, in the Central Division)",
      "source": "ESPN",
@@ -1878,24 +1893,9 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892693",
      "date": "2026-11-12"
-    },
-    {
-     "title": "Vegas plays Utah following Hertl's 2-goal showing",
-     "summary": "Utah Mammoth (10-7-1, in the Central Division) vs. Vegas Golden Knights (12-5-2, in the Pacific Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892693",
-     "date": "2026-11-10"
-    },
-    {
-     "title": "Utah falls to Ottawa in close game",
-     "summary": "Clayton Keller and Barrett Hayton scored, but Ottawa scored twice in the final three minutes. Karel Vejmelka made 17 saves.",
-     "source": "NHL.com (Utah Mammoth)",
-     "url": "https://www.nhl.com/utah/news/utah-falls-to-ottawa-in-close-battle-game-story-11-7-26",
-     "date": "2026-11-07"
     }
    ],
    "injuries": [
-    "Logan Cooley (day-to-day)",
     "Nick Schmaltz (lower body, out)",
     "Nate Schmidt (upper body, IR)",
     "Dylan Guenther (IR)",
@@ -1908,6 +1908,13 @@
    "headline": "The Canucks lost 4-2 in Edmonton on Saturday for their fifth straight loss and are 3-15-1.",
    "game": "Next: Mon Nov 9, 9:30 PM ET vs Philadelphia, Rogers Arena (NBCSP, SN+). Starter not announced.",
    "items": [
+    {
+     "title": "Boeser's late power-play goal lifts Canucks to 3-2 win over Mammoth",
+     "summary": "— Brock Boeser scored a power-play goal with 4:23 left to lift the Vancouver Canucks to a 3-2 victory over the Utah Mammoth on Monday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892727",
+     "date": "2026-11-17"
+    },
     {
      "title": "Vancouver visits Utah after Chytil's 2-goal game",
      "summary": "Vancouver Canucks (4-17-1, in the Pacific Division) vs. Utah Mammoth (10-8-3, in the Central Division)",
@@ -1956,13 +1963,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892681",
      "date": "2026-11-09"
-    },
-    {
-     "title": "Canucks losses keep piling up",
-     "summary": "Malhotra scratched Quillan, put Bains on the top line with Pettersson and Boeser, and played Schenn for Mancini. Willander missed a third straight game.",
-     "source": "Sportsnaut",
-     "url": "https://sportsnaut.com/nhl/vancouver-canucks/the-canucks-and-oilers-can-play-defense-canucks-losses-keep-piling-up",
-     "date": "2026-11-08"
     }
    ],
    "injuries": [
@@ -2102,8 +2102,7 @@
     "Dylan DeMelo (lower body, IR)",
     "Elias Salomonsson (IR)",
     "Vladislav Namestnikov (IR)",
-    "Nick Bjugstad (pectoral, IR)",
-    "Kyle Connor (dtd)"
+    "Nick Bjugstad (pectoral, IR)"
    ]
   },
   "WSH": {

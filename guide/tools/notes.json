@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T09:00:02-05:00",
+ "updated": "2026-11-17T17:00:02-05:00",
  "teams": {
   "BOS": {
    "name": "Boston Bruins",
@@ -955,7 +955,7 @@
     ],
     [
      8482803,
-     8481806
+     8484305
     ]
    ],
    "goalies": [
@@ -1007,12 +1007,12 @@
    "coach": "Rod Brind'Amour",
    "captain": 8473533,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 15",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
-     8477478,
+     8480830,
      8478427,
-     8480830
+     8477478
     ],
     [
      8477940,
@@ -1027,7 +1027,7 @@
     [
      8475791,
      8476873,
-     8480829
+     8480762
     ]
    ],
    "pairs": [
@@ -1079,7 +1079,7 @@
    "coach": "Rick Bowness",
    "captain": null,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 15",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8481716,
@@ -1112,8 +1112,8 @@
      8483485
     ],
     [
-     8481161,
-     8479371
+     8479371,
+     8475790
     ]
    ],
    "goalies": [
@@ -1162,7 +1162,7 @@
    "coach": "Ryan Huska",
    "captain": 8474150,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 16",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8480797,
@@ -1180,7 +1180,7 @@
      8483609
     ],
     [
-     8482747,
+     8484958,
      8484154,
      8484234
     ]
@@ -1324,7 +1324,7 @@
    "coach": "Jared Bednar",
    "captain": 8476455,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 15",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8477476,
@@ -1357,7 +1357,7 @@
      8478454
     ],
     [
-     8482942,
+     8476422,
      8470613
     ]
    ],
@@ -1391,7 +1391,7 @@
    "coach": "Glen Gulutzan",
    "captain": 8473994,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 16",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8480027,
@@ -1409,19 +1409,19 @@
      8475794
     ],
     [
-     8476278,
+     8474102,
      8476889,
-     8474102
+     8476278
     ]
    ],
    "pairs": [
     [
-     8481581,
-     8480878
+     8476902,
+     8480036
     ],
     [
-     8476902,
-     8474574
+     8481581,
+     8480878
     ],
     [
      8485468,
@@ -1433,7 +1433,7 @@
     8479193
    ],
    "out": [
-    8480036,
+    8474574,
     8478476,
     8483425,
     8480840,
@@ -1476,12 +1476,12 @@
    "coach": "Todd McLellan",
    "captain": null,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 15",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8479337,
-     8484471,
-     8483464
+     8483464,
+     8484471
     ],
     [
      8484794,
@@ -1501,7 +1501,7 @@
    ],
    "pairs": [
     [
-     8482171,
+     8483679,
      8481542
     ],
     [
@@ -1510,7 +1510,7 @@
     ],
     [
      8477971,
-     8483679
+     8481607
     ]
    ],
    "goalies": [
@@ -1518,7 +1518,7 @@
     8476434
    ],
    "out": [
-    8481607,
+    8482171,
     8477946,
     8482762
    ],
@@ -1565,7 +1565,7 @@
    "coach": "Mike Babcock",
    "captain": 8478402,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 16",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8481617,
@@ -1611,8 +1611,7 @@
     8480831,
     8483512,
     8475883,
-    8477406,
-    8483455
+    8477406
    ],
    "players": {
     "8476454": {
@@ -1757,7 +1756,7 @@
    "coach": "Peter Laviolette",
    "captain": 8474563,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 15",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8481532,
@@ -1782,16 +1781,16 @@
    ],
    "pairs": [
     [
-     8479998,
-     8474563
-    ],
-    [
-     8475208,
+     8476979,
      8482730
     ],
     [
      8476441,
-     8476879
+     8474563
+    ],
+    [
+     8479998,
+     8475208
     ]
    ],
    "goalies": [
@@ -1800,7 +1799,6 @@
    ],
    "out": [
     8478550,
-    8476979,
     8484163
    ],
    "players": {
@@ -2014,7 +2012,7 @@
    "coach": "Sheldon Keefe",
    "captain": 8480002,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 15",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8481721,
@@ -2056,9 +2054,9 @@
     8474596
    ],
    "out": [
-    8483429,
+    8477511,
     8480192,
-    8477511
+    8483429
    ],
    "players": {
     "8475455": {
@@ -2077,7 +2075,7 @@
    "coach": "Andrew Brunette",
    "captain": 8474600,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 16",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8474564,
@@ -2090,14 +2088,14 @@
      8481535
     ],
     [
+     8483513,
+     8477021,
+     8476539
+    ],
+    [
      8479525,
      8480835,
      8481726
-    ],
-    [
-     8483513,
-     8477021,
-     8486189
     ]
    ],
    "pairs": [
@@ -2110,7 +2108,7 @@
      8480246
     ],
     [
-     8482094,
+     8479980,
      8481593
     ]
    ],
@@ -2119,7 +2117,6 @@
     8481020
    ],
    "out": [
-    8476539,
     8482806
    ],
    "players": {
@@ -2278,8 +2275,8 @@
     8482193
    ],
    "out": [
-    8480434,
     8481604,
+    8480434,
     8485957,
     8478048,
     8480813,
@@ -2412,7 +2409,7 @@
    "coach": "Rick Tocchet",
    "captain": 8476461,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 16",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8482159,
@@ -2420,7 +2417,7 @@
      8478439
     ],
     [
-     8478047,
+     8484142,
      8477989,
      8480015
     ],
@@ -2438,15 +2435,15 @@
    "pairs": [
     [
      8477948,
-     8477499
+     8482142
     ],
     [
      8481546,
-     8481122
+     8477499
     ],
     [
      8476372,
-     8482142
+     8484148
     ]
    ],
    "goalies": [
@@ -2454,7 +2451,6 @@
     8478435
    ],
    "out": [
-    8484142,
     8483733
    ],
    "players": {
@@ -2655,7 +2651,7 @@
    "coach": "Ryan Warsofsky",
    "captain": null,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 16",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8486103,
@@ -2663,14 +2659,14 @@
      8484227
     ],
     [
-     8478975,
      8485402,
-     8484911
+     8477505,
+     8478975
     ],
     [
      8475726,
      8480848,
-     8480748
+     8484911
     ],
     [
      8476624,
@@ -2697,7 +2693,7 @@
     8477968
    ],
    "out": [
-    8477505,
+    8480748,
     8484994,
     8484200,
     8480356
@@ -2735,27 +2731,27 @@
    "coach": "Jim Montgomery",
    "captain": 8480023,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 16",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
-     8482089,
+     8482077,
      8480023,
      8483516
     ],
     [
-     8482077,
+     8482089,
      8482745,
      8481580
     ],
     [
-     8483463,
+     8484164,
      8477402,
      8481013
     ],
     [
      8480281,
      8480459,
-     8484164
+     8483463
     ]
    ],
    "pairs": [
@@ -2819,7 +2815,7 @@
    "coach": "Jon Cooper",
    "captain": 8475167,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 15",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
      8479542,
@@ -2853,7 +2849,7 @@
     ],
     [
      8474151,
-     8481719
+     8478416
     ]
    ],
    "goalies": [
@@ -2861,7 +2857,6 @@
     8483710
    ],
    "out": [
-    8478416,
     8478010
    ],
    "players": {
@@ -3062,15 +3057,15 @@
    "coach": "Ryan Craig",
    "captain": 8475913,
    "detail": "news",
-   "linesAsOf": "DailyFaceoff Nov 16",
+   "linesAsOf": "DailyFaceoff Nov 17",
    "lines": [
     [
-     8484803,
+     8479353,
      8478403,
      8475913
     ],
     [
-     8483890,
+     8484803,
      8476448,
      8478483
     ],
@@ -3082,7 +3077,7 @@
     [
      8481534,
      8475343,
-     8479353
+     8483890
     ]
    ],
    "pairs": [

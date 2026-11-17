@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T09:00:02-05:00",
+ "updated": "2026-11-17T17:00:02-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -129,14 +129,14 @@
     }
    ],
    "injuries": [
-    "Morgan Rielly (day-to-day)",
     "Colton Sissons (IR)",
     "Kirill Marchenko (IR)",
     "Miles Wood (undisclosed, IR)",
     "Nick Blankenburg (undisclosed, IR)",
     "Marshall Rifai (IR)",
     "Max Domi (back, IR)",
-    "Cade Webber (IR)"
+    "Cade Webber (IR)",
+    "Elvis Merzlikins (IR)"
    ]
   },
   "ANA": {
@@ -333,12 +333,21 @@
      "date": "2026-11-05"
     }
    ],
-   "injuries": []
+   "injuries": [
+    "Pyotr Kochetkov (illness, day-to-day)"
+   ]
   },
   "CBJ": {
    "headline": "The Blue Jackets lost 5-2 in Buffalo and lost Sean Monahan and Dmitri Voronkov to injuries.",
    "game": "Next: Tue Nov 10, 7:30 PM ET vs FLA, Nationwide Arena (Disney+, ESPN+, HULU, SN). Starter not announced.",
    "items": [
+    {
+     "title": "Statue to memorialize Johnny, Matthew Gaudreau at childhood skating rink",
+     "summary": "The late Johnny and Matthew Gaudreau will be memorialized with a bronze statue outside of their childhood skating rink in New Jersey.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50511347/statue-memorialize-johnny-matthew-gaudreau-ice-rink",
+     "date": "2026-11-17"
+    },
     {
      "title": "Blue Jackets bring losing streak into game against the Islanders",
      "summary": "Columbus Blue Jackets (7-11, in the Metropolitan Division) vs. New York Islanders (9-6-4, in the Metropolitan Division)",
@@ -387,13 +396,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892686",
      "date": "2026-11-09"
-    },
-    {
-     "title": "Monahan and Voronkov hurt in loss",
-     "summary": "Coach Rick Bowness had no update on either player. Columbus has lost three straight, all on the road.",
-     "source": "Columbus Dispatch via Yahoo Sports",
-     "url": "https://sports.yahoo.com/articles/buffalo-sabres-rout-columbus-blue-025540569.html",
-     "date": "2026-11-07"
     }
    ],
    "injuries": [
@@ -598,6 +600,7 @@
     }
    ],
    "injuries": [
+    "Scott Wedgewood (day-to-day)",
     "Cale Makar (out)",
     "Nathan MacKinnon (lower body, out)",
     "Josh Manson (IR)",
@@ -666,8 +669,7 @@
     }
    ],
    "injuries": [
-    "Tyler Myers (day-to-day)",
-    "Miro Heiskanen (day-to-day)",
+    "Tyler Myers (out)",
     "Kyle Capobianco (leg, IR)",
     "Lian Bichsel (lower body, IR)",
     "Oskar Back (IR)",
@@ -737,6 +739,7 @@
    ],
    "injuries": [
     "Albert Johansson (undisclosed, IR)",
+    "William Wallinder (upper body, day-to-day)",
     "Dylan Larkin (IR)",
     "Simon Edvinsson (contract dispute, IR)"
    ]
@@ -803,12 +806,11 @@
     }
    ],
    "injuries": [
-    "Ryan Nugent-Hopkins (day-to-day)",
+    "Ryan Nugent-Hopkins (undisclosed, out)",
     "Alec Regula (undisclosed, IR)",
     "Matt Savoie (lower body, IR)",
     "Frederik Andersen (knee, IR)",
-    "Mattias Janmark (undisclosed, IR)",
-    "Isaac Howard (IR)"
+    "Mattias Janmark (undisclosed, IR)"
    ]
   },
   "FLA": {
@@ -941,7 +943,6 @@
    ],
    "injuries": [
     "Artemi Panarin (out)",
-    "Erik Gustafsson (day-to-day)",
     "Jakub Dvorak (IR)"
    ]
   },
@@ -1073,6 +1074,7 @@
     }
    ],
    "injuries": [
+    "Alexandre Texier (day-to-day)",
     "Mike Matheson (lower body, out)",
     "Josh Anderson (lower body, IR)",
     "Chris Kreider (IR)",
@@ -1091,6 +1093,13 @@
      "summary": "Montreal Canadiens (12-5-4, in the Atlantic Division) vs. New Jersey Devils (15-6, in the Metropolitan Division)",
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892740",
+     "date": "2026-11-17"
+    },
+    {
+     "title": "Devils' Mantha expected to miss a month, Kovacevic out 4-6 weeks",
+     "summary": "Devils winger Anthony Mantha (throat) is expected to miss a month, and defenseman Johnathan Kovacevic (ankle) is out 4-6 weeks, coach Sheldon Keefe announced Tuesday.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50512716/devils-mantha-expected-miss-month-kovacevic-4-6-weeks",
      "date": "2026-11-17"
     },
     {
@@ -1134,21 +1143,12 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892688",
      "date": "2026-11-11"
-    },
-    {
-     "title": "Connor Hellebuyck discusses why he wanted out of Winnipeg",
-     "summary": "Connor Hellebuyck talks a little bit about why he wanted out of Winnipeg.",
-     "source": "ESPN",
-     "url": "https://www.espn.com/nhl/story/_/id/50444775/connor-hellebuyck-discusses-why-wanted-winnipeg",
-     "date": "2026-11-10"
     }
    ],
    "injuries": [
-    "Brett Pesce (day-to-day)",
-    "Vladislav Kolyachonok (day-to-day)",
-    "Seamus Casey (knee, IR)",
+    "Anthony Mantha (neck, IR)",
     "Johnathan Kovacevic (ankle, IR)",
-    "Anthony Mantha (throat, IR)"
+    "Seamus Casey (knee, IR)"
    ]
   },
   "NSH": {
@@ -1213,7 +1213,6 @@
     }
    ],
    "injuries": [
-    "Jonathan Marchessault (day-to-day)",
     "William Trudeau (IR)"
    ]
   },
@@ -1279,8 +1278,8 @@
     }
    ],
    "injuries": [
-    "Logan Stanley (lower body, day-to-day)",
-    "Jean-Gabriel Pageau (day-to-day)",
+    "Logan Stanley (out)",
+    "Jean-Gabriel Pageau (lower body, day-to-day)",
     "Calum Ritchie (IR)",
     "Alexander Romanov (IR)"
    ]
@@ -1347,8 +1346,8 @@
     }
    ],
    "injuries": [
+    "Pavel Dorofeyev (day-to-day)",
     "Sean Durzi (lower body, IR)",
-    "Pavel Dorofeyev (out)",
     "Alberts Smits (IR)",
     "Igor Shesterkin (IR)",
     "Joe Veleno (lower body, IR)",
@@ -1487,8 +1486,8 @@
     }
    ],
    "injuries": [
-    "Denver Barkey (day-to-day)",
-    "Nikita Grebenkin (back, IR)"
+    "Nikita Grebenkin (back, IR)",
+    "Denver Barkey (out)"
    ]
   },
   "PIT": {
@@ -1690,8 +1689,7 @@
     }
    ],
    "injuries": [
-    "Alexander Wennberg (day-to-day)",
-    "Kiefer Sherwood (day-to-day)",
+    "Kiefer Sherwood (out)",
     "Igor Chernyshov (upper body, IR)",
     "Quentin Musty (upper body, IR)",
     "Kyle Keyser (upper body, IR)"
@@ -1759,12 +1757,10 @@
     }
    ],
    "injuries": [
-    "Ross Johnston (day-to-day)",
-    "Aleksanteri Kaskimaki (day-to-day)",
+    "Ross Johnston (upper body, out)",
     "Torey Krug (ankle, IR)",
     "Dillon Dube (IR)",
-    "Tyler Tucker (IR)",
-    "Philip Broberg (dtd)"
+    "Tyler Tucker (IR)"
    ]
   },
   "TBL": {
@@ -1829,9 +1825,10 @@
     }
    ],
    "injuries": [
-    "Erik Cernak (day-to-day)",
-    "Anthony Cirelli (day-to-day)",
-    "Brayden Point (IR)"
+    "Anthony Cirelli (lower body, day-to-day)",
+    "Erik Cernak (upper body, day-to-day)",
+    "Conor Geekie (IR)",
+    "Brayden Point (dtd)"
    ]
   },
   "UTA": {
@@ -2098,7 +2095,7 @@
     }
    ],
    "injuries": [
-    "Isak Rosen (day-to-day)",
+    "Isak Rosen (IR)",
     "Dylan DeMelo (lower body, IR)",
     "Elias Salomonsson (IR)",
     "Vladislav Namestnikov (IR)",

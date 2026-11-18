@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T17:00:02-05:00",
+ "updated": "2026-11-18T09:00:02-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -144,6 +144,13 @@
    "game": "Next: Sun Nov 08, 8:00 PM ET vs Pittsburgh, Honda Center (Prime Video, SN, SN-PIT). Expected starter: Ville Husso (could start).",
    "items": [
     {
+     "title": "Ducks' Cutter Gauthier makes NHL history, records fourth hat trick in month",
+     "summary": "Cutter Gauthier became the first NHL player to have four hat tricks in a single month, netting a trio of tallies in a loss to the Blues on Tuesday night.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50517677/ducks-cutter-gauthier-bags-record-4th-hat-trick-month",
+     "date": "2026-11-18"
+    },
+    {
      "title": "Ducks visit the Blues after Sennecke's 2-goal game",
      "summary": "Anaheim Ducks (11-9-1, in the Pacific Division) vs. St. Louis Blues (9-9-2, in the Central Division)",
      "source": "ESPN",
@@ -191,16 +198,10 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892694",
      "date": "2026-11-11"
-    },
-    {
-     "title": "Cutter Gauthier gets his 3rd hat trick in November, propelling the prolific Ducks past Penguins 5-2",
-     "summary": "— Cutter Gauthier continued his scoring rampage with his third hat trick in eight days, and captain Mikael Granlund had a goal and three assists in the Anaheim Ducks' fifth consecutive victory, 5-2 over the Pittsburgh Penguins on Sunday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892679",
-     "date": "2026-11-09"
     }
    ],
    "injuries": [
+    "Beckett Sennecke (out)",
     "Ryan Poehling (lower body, IR)",
     "A.J. Greer (upper body, IR)"
    ]
@@ -401,7 +402,7 @@
    "injuries": [
     "Sean Monahan (out)",
     "Isac Lundestrom (IR)",
-    "Conor Garland (out)"
+    "Conor Garland (IR)"
    ]
   },
   "CGY": {
@@ -476,6 +477,13 @@
    "game": "Next: Thu Nov 12, 8:00 PM ET vs Buffalo Sabres, United Center (CHSN, MSG-B). Starter not announced.",
    "items": [
     {
+     "title": "Blackhawks' Connor Bedard exits with upper-body injury, set for testing",
+     "summary": "Connor Bedard left Tuesday night's game because of an injury and is set to undergo additional testing.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50517080/blackhawks-connor-bedard-exits-win-injury",
+     "date": "2026-11-18"
+    },
+    {
      "title": "Maple Leafs come into matchup against the Blackhawks on losing streak",
      "summary": "Toronto Maple Leafs (8-12-2, in the Atlantic Division) vs. Chicago Blackhawks (5-13-2, in the Central Division)",
      "source": "ESPN",
@@ -523,19 +531,11 @@
      "source": "CBS Sports (RotoWire)",
      "url": "https://www.cbssports.com/fantasy/hockey/news/blackhawks-arvid-soderblom-shaky-in-relief-appearance/",
      "date": "2026-11-08"
-    },
-    {
-     "title": "Hurricanes score nine against Chicago",
-     "summary": "Spencer Knight was pulled after allowing six goals on 17 shots. Roman Kantserov and Connor Bedard scored, and Chicago fell to 4-13-1.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/chicago-blackhawks-carolina-hurricanes-game-recap-november-7-2026",
-     "date": "2026-11-07"
     }
    ],
    "injuries": [
-    "Bowen Byram (upper body, IR)",
-    "Cole Smith (dtd)",
-    "Tyler Bertuzzi (dtd)"
+    "Connor Bedard (day-to-day)",
+    "Bowen Byram (upper body, IR)"
    ]
   },
   "COL": {
@@ -749,6 +749,13 @@
    "game": "Next: Mon Nov 9, 8:00 PM ET vs NY Rangers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Oilers' Connor McDavid runs season-opening points streak to 23 games",
+     "summary": "Connor McDavid had a goal and an assist to extend his season-opening points streak to 23 games, and the Oilers continued their sizzling start by beating the rival Panthers 5-2 on Tuesday night.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50516823/oilers-connor-mcdavid-ups-season-opening-points-streak-23-games-tying-wayne-gretzky-4th-longest-all",
+     "date": "2026-11-18"
+    },
+    {
      "title": "The Connor McDavid Scoring Tracker: Can the Oilers' superstar break 200 points?",
      "summary": "Follow along game by game as No. 97 looks to break a benchmark that only No. 99 has done in NHL history.",
      "source": "ESPN",
@@ -796,13 +803,6 @@
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50490672/devon-levi-inspired-gladiator-earns-crowe-praise",
      "date": "2026-11-15"
-    },
-    {
-     "title": "Oilers look to keep win streak going, visit the Maple Leafs",
-     "summary": "Edmonton Oilers (14-3-3, in the Pacific Division) vs. Toronto Maple Leafs (8-11-2, in the Atlantic Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892710",
-     "date": "2026-11-13"
     }
    ],
    "injuries": [
@@ -1008,8 +1008,8 @@
     }
    ],
    "injuries": [
-    "Olli Maatta (IR)",
-    "Filip Gustavsson (hip, IR)"
+    "Filip Gustavsson (hip, IR)",
+    "Olli Maatta (IR)"
    ]
   },
   "MTL": {
@@ -1221,6 +1221,13 @@
    "game": "Next: Mon Nov 9, 10:00 PM ET at San Jose Sharks, SAP Center at San Jose (MSGSN, NBCSCA, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Islanders' Schaefer becomes 2nd-youngest defenseman with hat trick",
+     "summary": "Matthew Schaefer became the second-youngest defenseman in NHL history to record a hat trick when he scored three goals in the Islanders' rout of Columbus.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50517556/islanders-schaefer-2nd-youngest-defenseman-hat-trick",
+     "date": "2026-11-18"
+    },
+    {
      "title": "Blue Jackets bring losing streak into game against the Islanders",
      "summary": "Columbus Blue Jackets (7-11, in the Metropolitan Division) vs. New York Islanders (9-6-4, in the Metropolitan Division)",
      "source": "ESPN",
@@ -1268,18 +1275,11 @@
      "source": "Eyes on Isles",
      "url": "https://eyesonisles.com/ny-islanders-squander-two-goal-lead-as-nj-devils-steal-overtime-win-on-hughes-goal-01m6xk76yems",
      "date": "2026-11-08"
-    },
-    {
-     "title": "New York brings losing streak into matchup with San Jose",
-     "summary": "New York Islanders (7-6-3, in the Metropolitan Division) vs. San Jose Sharks (7-11-1, in the Pacific Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892682",
-     "date": "2026-11-08"
     }
    ],
    "injuries": [
+    "Jean-Gabriel Pageau (out)",
     "Logan Stanley (out)",
-    "Jean-Gabriel Pageau (lower body, day-to-day)",
     "Calum Ritchie (IR)",
     "Alexander Romanov (IR)"
    ]
@@ -1417,6 +1417,7 @@
     }
    ],
    "injuries": [
+    "Thomas Chabot (day-to-day)",
     "Hayden Hodgson (groin, out)",
     "Warren Foegele (knee, IR)",
     "Nick Cousins (out)",
@@ -1486,8 +1487,7 @@
     }
    ],
    "injuries": [
-    "Nikita Grebenkin (back, IR)",
-    "Denver Barkey (out)"
+    "Nikita Grebenkin (back, IR)"
    ]
   },
   "PIT": {
@@ -1554,8 +1554,7 @@
    "injuries": [
     "Elmer Soderblom (upper body, IR)",
     "Bryan Rust (lower body, IR)",
-    "Ryan Graves (lower body, IR)",
-    "Trevor van Riemsdyk (IR)"
+    "Ryan Graves (lower body, IR)"
    ]
   },
   "SEA": {
@@ -1825,10 +1824,9 @@
     }
    ],
    "injuries": [
-    "Anthony Cirelli (lower body, day-to-day)",
-    "Erik Cernak (upper body, day-to-day)",
-    "Conor Geekie (IR)",
-    "Brayden Point (dtd)"
+    "Zemgus Girgensons (day-to-day)",
+    "Brandon Hagel (undisclosed, out)",
+    "Conor Geekie (IR)"
    ]
   },
   "UTA": {
@@ -1893,7 +1891,7 @@
     }
    ],
    "injuries": [
-    "Nick Schmaltz (lower body, out)",
+    "Nick Schmaltz (IR)",
     "Nate Schmidt (upper body, IR)",
     "Dylan Guenther (IR)",
     "John Marino (IR)",
@@ -2107,6 +2105,13 @@
    "game": "Next: Tue Nov 10, 7:00 PM ET at Ottawa Senators, Canadian Tire Centre (MNMT, RDS2, TSN5). Starter not announced.",
    "items": [
     {
+     "title": "Capitals' Alex Ovechkin sees goal drought hit 14 games, tying longest of career",
+     "summary": "Capitals star Alex Ovechkin failed to score a goal for the 14th straight game, tying his longest career scoring drought within a season.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50517019/capitals-alex-ovechkin-ties-longest-career-goal-drought-14-games",
+     "date": "2026-11-18"
+    },
+    {
      "title": "Lightning host the Capitals in Eastern Conference play",
      "summary": "Washington Capitals (10-8, in the Metropolitan Division) vs. Tampa Bay Lightning (13-5-2, in the Atlantic Division)",
      "source": "ESPN",
@@ -2154,13 +2159,6 @@
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50452880/hit-capitals-chychrun-senators-cousins-deemed-clean",
      "date": "2026-11-11"
-    },
-    {
-     "title": "Ovechkin says Russians want to play for country, doesn't weigh in on worlds",
-     "summary": "Alex Ovechkin didn't weigh in on CAS' decision to allow Russian players back in hockey worlds, but said they just want to represent their country.",
-     "source": "ESPN",
-     "url": "https://www.espn.com/nhl/story/_/id/50444702/ovechkin-weigh-allowing-russians-worlds",
-     "date": "2026-11-10"
     }
    ],
    "injuries": [

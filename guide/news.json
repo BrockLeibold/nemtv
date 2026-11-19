@@ -1,11 +1,18 @@
 {
- "updated": "2026-11-18T17:00:02-05:00",
+ "updated": "2026-11-19T17:00:02-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
    "headline": "The Bruins beat Florida 4-1 at home on Nov. 8 for their fourth straight win behind 40 saves from Jeremy Swayman.",
    "game": "Next: Thu Nov 12, 7:00 PM ET vs MTL, TD Garden (NESN, RDS, TSN2). Starter not announced.",
    "items": [
+    {
+     "title": "Bruins beat Red Wings 4-1, spoil Detroit's Centennial celebration game",
+     "summary": "— David Pastrnak had a goal and an assist as the Boston Bruins beat Detroit 4-1 on Wednesday night and spoiled the Red Wings' Centennial celebration game.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892739",
+     "date": "2026-11-19"
+    },
     {
      "title": "Bruins bring 3-game losing streak into matchup with the Red Wings",
      "summary": "Boston Bruins (13-7-1, in the Atlantic Division) vs. Detroit Red Wings (8-10-3, in the Atlantic Division)",
@@ -54,13 +61,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892696",
      "date": "2026-11-11"
-    },
-    {
-     "title": "Carey Price, Patrice Bergeron among 6 inducted into Hockey Hall of Fame",
-     "summary": "Longtime Canadiens goaltender Carey Price was inducted into the Hockey Hall of Fame as part of the 2026 class alongside Patrice Bergeron, Pekka Rinne, Keith Tkachuk and Cindy Curley in the player category Monday. Brian Burke was enshrined as a builder.",
-     "source": "ESPN",
-     "url": "https://www.espn.com/nhl/story/_/id/50438897/carey-price-patrice-bergeron-pekka-rinne-keith-tkachuk-cindy-curley-brian-burke-inducted-hockey-hall-fame",
-     "date": "2026-11-10"
     }
    ],
    "injuries": [
@@ -144,6 +144,13 @@
    "game": "Next: Sun Nov 08, 8:00 PM ET vs Pittsburgh, Honda Center (Prime Video, SN, SN-PIT). Expected starter: Ville Husso (could start).",
    "items": [
     {
+     "title": "Ducks visit the Avalanche following Gauthier's hat trick",
+     "summary": "Anaheim Ducks (11-10-1, in the Pacific Division) vs. Colorado Avalanche (12-7-3, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892751",
+     "date": "2026-11-19"
+    },
+    {
      "title": "Ducks' Cutter Gauthier makes NHL history, records fourth hat trick in month",
      "summary": "Cutter Gauthier became the first NHL player to have four hat tricks in a single month, netting a trio of tallies in a loss to the Blues on Tuesday night.",
      "source": "ESPN",
@@ -191,17 +198,9 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892719",
      "date": "2026-11-13"
-    },
-    {
-     "title": "Nils Hoglander, Shane Wright lead Predators past Ducks 4-2 for their 6th straight victory",
-     "summary": "— Shane Wright, Nils Hoglander and Jayden Struble had a goal and an assist apiece, and the Nashville Predators extended their winning streak to six games with a 4-2 victory over the Anaheim Ducks on Wednesday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892694",
-     "date": "2026-11-12"
     }
    ],
    "injuries": [
-    "Beckett Sennecke (day-to-day)",
     "Ryan Poehling (lower body, IR)",
     "A.J. Greer (upper body, IR)"
    ]
@@ -268,16 +267,23 @@
     }
    ],
    "injuries": [
+    "Mattias Samuelsson (undisclosed, day-to-day)",
     "Konsta Helenius (IR)",
     "Justin Danforth (upper body, IR)",
-    "Matt Grzelcyk (lower body, IR)",
-    "Mattias Samuelsson (dtd)"
+    "Matt Grzelcyk (lower body, IR)"
    ]
   },
   "CAR": {
    "headline": "The Hurricanes beat Chicago 9-2 on Saturday and leave for two games against Seattle in Finland.",
    "game": "Next: Thu Nov 12, 12:00 PM ET at SEA, Veikkaus Arena, Helsinki (NHLN, Prime Video, SN+, TVAS). Starter not announced.",
    "items": [
+    {
+     "title": "Hurricanes host the Canadiens on 4-game win streak",
+     "summary": "Montreal Canadiens (13-5-4, in the Atlantic Division) vs. Carolina Hurricanes (16-3-2, in the Metropolitan Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892747",
+     "date": "2026-11-19"
+    },
     {
      "title": "Svechnikov and Jankowski each score twice, Carolina beats Kraken 5-1 to sweep series in Finland",
      "summary": "— Jordan Staal returned from injury, Andrei Svechnikov and Mark Jankowski each scored twice and the Carolina Hurricanes beat the Seattle Kraken 5-1 on Saturday to sweep the NHL’s Global Series in Finland’s capital.",
@@ -326,18 +332,9 @@
      "source": "AP via WRAL",
      "url": "https://www.wral.com/news/ap/55bb7-martinook-svechnikov-score-twice-as-hurricanes-top-blackhawks-9-2/",
      "date": "2026-11-07"
-    },
-    {
-     "title": "Taylor Hall returns from injury",
-     "summary": "Hall returned against the Islanders after missing nine games with an upper-body injury. Nicolas Deslauriers came out of the lineup.",
-     "source": "Pro Hockey Rumors",
-     "url": "https://www.prohockeyrumors.com/2026/11/injury-notes-red-wings-hurricanes-flyers.html",
-     "date": "2026-11-05"
     }
    ],
-   "injuries": [
-    "Pyotr Kochetkov (dtd)"
-   ]
+   "injuries": []
   },
   "CBJ": {
    "headline": "The Blue Jackets lost 5-2 in Buffalo and lost Sean Monahan and Dmitri Voronkov to injuries.",
@@ -402,7 +399,6 @@
    ],
    "injuries": [
     "Sean Monahan (out)",
-    "Isac Lundestrom (IR)",
     "Conor Garland (IR)"
    ]
   },
@@ -535,7 +531,7 @@
     }
    ],
    "injuries": [
-    "Connor Bedard (day-to-day)",
+    "Connor Bedard (out)",
     "Bowen Byram (upper body, IR)"
    ]
   },
@@ -543,6 +539,20 @@
    "headline": "The Avalanche shut out the Red Wings 4-0 on Saturday behind four points from Martin Necas and 27 saves from Mackenzie Blackwood.",
    "game": "Next: Tue Nov 10, 7:00 PM ET at Toronto, Scotiabank Arena (ALT, TSN4, TVAS). Starter not announced.",
    "items": [
+    {
+     "title": "Ducks visit the Avalanche following Gauthier's hat trick",
+     "summary": "Anaheim Ducks (11-10-1, in the Pacific Division) vs. Colorado Avalanche (12-7-3, in the Central Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892751",
+     "date": "2026-11-19"
+    },
+    {
+     "title": "Mammoth end 6-game slide with 4-1 win over Avalanche",
+     "summary": "— Vincent Trocheck scored a goal and assisted another to help the Utah Mammoth beat the Colorado Avalanche 4-1 on Wednesday night and snap a six-game losing streak.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892741",
+     "date": "2026-11-19"
+    },
     {
      "title": "Mammoth, Avalanche bring mountain style to Winter Classic uniforms",
      "summary": "A mammoth crest anchors Utah's light blue jersey, while Colorado features a cream jersey with a burgundy \"C\" surrounding a mountain design.",
@@ -584,25 +594,11 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892711",
      "date": "2026-11-13"
-    },
-    {
-     "title": "Avs lose MacKinnon, Makar to injury in 4-3 overtime loss at Ottawa",
-     "summary": "— Shane Pinto celebrated his 26th birthday by scoring his second goal of the game 2:08 into overtime and the Ottawa Senators beat Colorado 4-3 on Thursday night after the Avalanche lost superstars Nathan MacKinnon and Cale Makar to injuries.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892698",
-     "date": "2026-11-13"
-    },
-    {
-     "title": "Avalanche lose stars MacKinnon, Makar to 2nd-period injuries vs. Senators",
-     "summary": "Avalanche forward Nathan MacKinnon and defenseman Cale Makar both left Thursday's game against the Senators after suffering lower-body injuries in the second period.",
-     "source": "ESPN",
-     "url": "https://www.espn.com/nhl/story/_/id/50467465/avalanche-lose-stars-mackinnon-makar-injuries-vs-senators",
-     "date": "2026-11-13"
     }
    ],
    "injuries": [
-    "Scott Wedgewood (day-to-day)",
-    "Cale Makar (out)",
+    "Cale Makar (IR)",
+    "Gavin Brindley (upper body, out)",
     "Nathan MacKinnon (lower body, out)",
     "Josh Manson (IR)",
     "Zachary L'Heureux (IR)"
@@ -670,10 +666,10 @@
     }
    ],
    "injuries": [
+    "Oskar Back (finger, IR)",
     "Tyler Myers (out)",
     "Kyle Capobianco (leg, IR)",
     "Lian Bichsel (lower body, IR)",
-    "Oskar Back (IR)",
     "Matt Duchene (IR)"
    ]
   },
@@ -681,6 +677,13 @@
    "headline": "The Red Wings were shut out 4-0 in Colorado for their third straight loss.",
    "game": "Next: Tue Nov 10, 8:00 PM ET at STL, Enterprise Center (TNT, HBO Max, SN+). Starter not announced.",
    "items": [
+    {
+     "title": "Bruins beat Red Wings 4-1, spoil Detroit's Centennial celebration game",
+     "summary": "— David Pastrnak had a goal and an assist as the Boston Bruins beat Detroit 4-1 on Wednesday night and spoiled the Red Wings' Centennial celebration game.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892739",
+     "date": "2026-11-19"
+    },
     {
      "title": "Bruins bring 3-game losing streak into matchup with the Red Wings",
      "summary": "Boston Bruins (13-7-1, in the Atlantic Division) vs. Detroit Red Wings (8-10-3, in the Atlantic Division)",
@@ -729,17 +732,10 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892687",
      "date": "2026-11-09"
-    },
-    {
-     "title": "Blackwood makes 27 saves, Necas has 4 points, Avs beat Wings 4-0",
-     "summary": "— Mackenzie Blackwood made 27 saves, Martin Necas had two goals and two assists and the Colorado Avalanche beat the Detroit Red Wings 4-0 on Saturday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892671",
-     "date": "2026-11-08"
     }
    ],
    "injuries": [
-    "William Wallinder (upper body, out)",
+    "William Wallinder (upper body, day-to-day)",
     "Albert Johansson (undisclosed, IR)",
     "Dylan Larkin (IR)",
     "Simon Edvinsson (contract dispute, IR)"
@@ -876,9 +872,9 @@
     }
    ],
    "injuries": [
+    "Jonah Gadjovich (neck, IR)",
     "Brad Marchand (knee, IR)",
-    "Aleksander Barkov (knee, IR)",
-    "Jonah Gadjovich (upper body, IR)"
+    "Aleksander Barkov (knee, IR)"
    ]
   },
   "LAK": {
@@ -943,7 +939,8 @@
     }
    ],
    "injuries": [
-    "Artemi Panarin (day-to-day)",
+    "Trevor Moore (out)",
+    "Artemi Panarin (personal, out)",
     "Jakub Dvorak (IR)"
    ]
   },
@@ -1010,6 +1007,7 @@
    ],
    "injuries": [
     "Filip Gustavsson (hip, IR)",
+    "Yakov Trenin (out)",
     "Olli Maatta (IR)"
    ]
   },
@@ -1017,6 +1015,20 @@
    "headline": "The Canadiens won 4-2 in Toronto on Saturday to push their point streak to 10 games.",
    "game": "Next: Tue Nov 10, 7:00 PM ET vs Minnesota Wild, Centre Bell (MINNHL, RDS, TSN2, Wild+). Starter not announced.",
    "items": [
+    {
+     "title": "Hurricanes host the Canadiens on 4-game win streak",
+     "summary": "Montreal Canadiens (13-5-4, in the Atlantic Division) vs. Carolina Hurricanes (16-3-2, in the Metropolitan Division)",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/preview?gameId=401892747",
+     "date": "2026-11-19"
+    },
+    {
+     "title": "Canadiens end power-play drought and hand Connor Hellebuyck his 1st Devils loss with 3-2 victory",
+     "summary": "— Jake Evans scored the go-ahead goal, captain Nick Suzuki ended his team's long power-play drought and the Montreal Canadiens defeated the New Jersey Devils 3-2 on Wednesday night to halt a two-game skid.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892740",
+     "date": "2026-11-19"
+    },
     {
      "title": "Devils host the Canadiens after Rodrigues' 2-goal game",
      "summary": "Montreal Canadiens (12-5-4, in the Atlantic Division) vs. New Jersey Devils (15-6, in the Metropolitan Division)",
@@ -1058,24 +1070,10 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892696",
      "date": "2026-11-13"
-    },
-    {
-     "title": "Bruins take win streak into game against the Canadiens",
-     "summary": "Montreal Canadiens (11-3-4, in the Atlantic Division) vs. Boston Bruins (13-4-1, in the Atlantic Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892696",
-     "date": "2026-11-11"
-    },
-    {
-     "title": "Kaprizov's power-play goal in the 1st minute of OT lifts Wild past the Canadiens 2-1",
-     "summary": "— Kirill Kaprizov scored on a power play in the opening minute of overtime and Jesper Wallstedt made 27 saves as the Minnesota Wild beat the Montreal Canadiens 2-1 on Tuesday night after Carey Price was inducted into the team's ring of honor.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892684",
-     "date": "2026-11-11"
     }
    ],
    "injuries": [
-    "Alexandre Texier (day-to-day)",
+    "Zack Bolduc (out)",
     "Mike Matheson (lower body, out)",
     "Josh Anderson (lower body, IR)",
     "Chris Kreider (IR)",
@@ -1089,6 +1087,13 @@
    "headline": "The Devils (12-5-0) take a four-game win streak to Toronto after beating the Islanders 5-4 in overtime.",
    "game": "Next: Sun Nov 08, 7:00 PM ET at Toronto, Scotiabank Arena (MSGSN, NHLN, TSN4). Expected starter: Connor Hellebuyck (not confirmed).",
    "items": [
+    {
+     "title": "Canadiens end power-play drought and hand Connor Hellebuyck his 1st Devils loss with 3-2 victory",
+     "summary": "— Jake Evans scored the go-ahead goal, captain Nick Suzuki ended his team's long power-play drought and the Montreal Canadiens defeated the New Jersey Devils 3-2 on Wednesday night to halt a two-game skid.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892740",
+     "date": "2026-11-19"
+    },
     {
      "title": "Devils host the Canadiens after Rodrigues' 2-goal game",
      "summary": "Montreal Canadiens (12-5-4, in the Atlantic Division) vs. New Jersey Devils (15-6, in the Metropolitan Division)",
@@ -1137,17 +1142,9 @@
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50449980/connor-hellebuyck-booed-pregame-winnipeg-return-jets-go-beat-devils",
      "date": "2026-11-11"
-    },
-    {
-     "title": "Mercer, Connor each score twice to lift Jets to an emotional 4-2 win over Devils",
-     "summary": "— Dawson Mercer and Kyle Connor each scored twice to lead the Winnipeg Jets to an emotional 4-2 victory over the New Jersey Devils on Tuesday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892688",
-     "date": "2026-11-11"
     }
    ],
    "injuries": [
-    "Jonas Siegenthaler (day-to-day)",
     "Anthony Mantha (neck, IR)",
     "Johnathan Kovacevic (ankle, IR)",
     "Seamus Casey (knee, IR)"
@@ -1280,10 +1277,9 @@
     }
    ],
    "injuries": [
-    "Jean-Gabriel Pageau (day-to-day)",
+    "Jean-Gabriel Pageau (lower body, day-to-day)",
     "Logan Stanley (day-to-day)",
-    "Alexander Romanov (IR)",
-    "Calum Ritchie (IR)"
+    "Alexander Romanov (IR)"
    ]
   },
   "NYR": {
@@ -1554,6 +1550,7 @@
     }
    ],
    "injuries": [
+    "Nick Robertson (day-to-day)",
     "Elmer Soderblom (upper body, IR)",
     "Bryan Rust (lower body, IR)",
     "Ryan Graves (lower body, IR)"
@@ -1621,11 +1618,11 @@
     }
    ],
    "injuries": [
-    "Jacob Melanson (chest, IR)",
+    "Jake O'Brien (lower body, IR)",
     "Nikke Kokko (IR)",
     "Curtis Douglas (IR)",
     "Jared McCann (lower body, IR)",
-    "Jake O'Brien (lower body, IR)"
+    "Jacob Melanson (IR)"
    ]
   },
   "SJS": {
@@ -1826,7 +1823,7 @@
     }
    ],
    "injuries": [
-    "Brandon Hagel (day-to-day)",
+    "Brandon Hagel (lower body, IR)",
     "Zemgus Girgensons (day-to-day)",
     "Conor Geekie (IR)"
    ]
@@ -1835,6 +1832,13 @@
    "headline": "The Mammoth lost 4-2 in Ottawa on Saturday to finish a five-game road trip 2-2-1.",
    "game": "Next: Wed Nov 11, 9:30 PM ET at Vegas Golden Knights, T-Mobile Arena (HBO MAX, TNT, truTV). Starter not announced.",
    "items": [
+    {
+     "title": "Mammoth end 6-game slide with 4-1 win over Avalanche",
+     "summary": "— Vincent Trocheck scored a goal and assisted another to help the Utah Mammoth beat the Colorado Avalanche 4-1 on Wednesday night and snap a six-game losing streak.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892741",
+     "date": "2026-11-19"
+    },
     {
      "title": "Mammoth, Avalanche bring mountain style to Winter Classic uniforms",
      "summary": "A mammoth crest anchors Utah's light blue jersey, while Colorado features a cream jersey with a burgundy \"C\" surrounding a mountain design.",
@@ -1883,13 +1887,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892704",
      "date": "2026-11-13"
-    },
-    {
-     "title": "Mammoth bring 3-game losing streak into matchup against the Blues",
-     "summary": "St. Louis Blues (8-8-2, in the Central Division) vs. Utah Mammoth (10-8-1, in the Central Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892704",
-     "date": "2026-11-12"
     }
    ],
    "injuries": [
@@ -1898,7 +1895,6 @@
     "Nick Schmaltz (IR)",
     "Nate Schmidt (upper body, IR)",
     "Maveric Lamoureux (IR)",
-    "Mikhail Sergachev (dtd)",
     "Artem Duda (dtd)"
    ]
   },
@@ -2096,8 +2092,8 @@
     }
    ],
    "injuries": [
-    "Isak Rosen (IR)",
     "Dylan DeMelo (lower body, IR)",
+    "Isak Rosen (IR)",
     "Elias Salomonsson (IR)",
     "Vladislav Namestnikov (IR)",
     "Nick Bjugstad (pectoral, IR)"

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T09:00:02-05:00",
+ "updated": "2026-11-20T17:00:02-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -129,14 +129,14 @@
     }
    ],
    "injuries": [
+    "Cole McWard (IR)",
+    "Kirill Marchenko (lower body, IR)",
     "Colton Sissons (IR)",
-    "Kirill Marchenko (IR)",
     "Miles Wood (undisclosed, IR)",
     "Nick Blankenburg (undisclosed, IR)",
     "Marshall Rifai (IR)",
     "Max Domi (back, IR)",
-    "Cade Webber (IR)",
-    "Elvis Merzlikins (IR)"
+    "Cade Webber (IR)"
    ]
   },
   "ANA": {
@@ -269,8 +269,7 @@
    "injuries": [
     "Konsta Helenius (IR)",
     "Justin Danforth (upper body, IR)",
-    "Matt Grzelcyk (lower body, IR)",
-    "Mattias Samuelsson (dtd)"
+    "Matt Grzelcyk (lower body, IR)"
    ]
   },
   "CAR": {
@@ -598,7 +597,7 @@
     }
    ],
    "injuries": [
-    "Gavin Brindley (out)",
+    "Gavin Brindley (day-to-day)",
     "Cale Makar (IR)",
     "Nathan MacKinnon (lower body, out)",
     "Josh Manson (IR)",
@@ -667,8 +666,8 @@
     }
    ],
    "injuries": [
+    "Tyler Myers (day-to-day)",
     "Oskar Back (finger, IR)",
-    "Tyler Myers (out)",
     "Kyle Capobianco (leg, IR)",
     "Lian Bichsel (lower body, IR)",
     "Matt Duchene (IR)"
@@ -737,9 +736,9 @@
    ],
    "injuries": [
     "William Wallinder (upper body, day-to-day)",
-    "Albert Johansson (undisclosed, IR)",
     "Dylan Larkin (IR)",
-    "Simon Edvinsson (contract dispute, IR)"
+    "Simon Edvinsson (contract dispute, IR)",
+    "Albert Johansson (IR)"
    ]
   },
   "EDM": {
@@ -804,7 +803,7 @@
     }
    ],
    "injuries": [
-    "Ryan Nugent-Hopkins (out)",
+    "Ryan Nugent-Hopkins (day-to-day)",
     "Alec Regula (undisclosed, IR)",
     "Matt Savoie (lower body, IR)",
     "Frederik Andersen (knee, IR)",
@@ -940,8 +939,8 @@
     }
    ],
    "injuries": [
-    "Trevor Moore (out)",
-    "Artemi Panarin (personal, out)",
+    "Artemi Panarin (day-to-day)",
+    "Trevor Moore (day-to-day)",
     "Jakub Dvorak (IR)"
    ]
   },
@@ -1007,9 +1006,9 @@
     }
    ],
    "injuries": [
+    "Yakov Trenin (personal, day-to-day)",
     "Quinn Hughes (day-to-day)",
     "Filip Gustavsson (hip, IR)",
-    "Yakov Trenin (out)",
     "Olli Maatta (IR)"
    ]
   },
@@ -1075,7 +1074,7 @@
     }
    ],
    "injuries": [
-    "Zack Bolduc (out)",
+    "Zack Bolduc (day-to-day)",
     "Mike Matheson (lower body, out)",
     "Josh Anderson (lower body, IR)",
     "Chris Kreider (IR)",
@@ -1279,8 +1278,8 @@
     }
    ],
    "injuries": [
+    "Logan Stanley (day-to-day)",
     "Ryan Pulock (day-to-day)",
-    "Logan Stanley (out)",
     "Alexander Romanov (IR)"
    ]
   },
@@ -1346,11 +1345,12 @@
     }
    ],
    "injuries": [
-    "Pavel Dorofeyev (day-to-day)",
     "Sean Durzi (lower body, IR)",
+    "Joe Veleno (lower body, IR)",
+    "Oliver Bjorkstrand (day-to-day)",
+    "Pavel Dorofeyev (day-to-day)",
     "Alberts Smits (IR)",
     "Igor Shesterkin (IR)",
-    "Joe Veleno (lower body, IR)",
     "Aidan Thompson (IR)",
     "Adam Sykora (IR)"
    ]
@@ -1417,10 +1417,10 @@
     }
    ],
    "injuries": [
-    "Nick Cousins (out)",
-    "Hayden Hodgson (groin, out)",
+    "Andre Burakovsky (lower body, IR)",
+    "Nick Cousins (day-to-day)",
+    "Hayden Hodgson (day-to-day)",
     "Warren Foegele (knee, IR)",
-    "Andre Burakovsky (IR)",
     "William Eklund (IR)"
    ]
   },
@@ -1551,9 +1551,10 @@
     }
    ],
    "injuries": [
-    "Nick Robertson (out)",
-    "Elmer Soderblom (upper body, IR)",
     "Bryan Rust (lower body, IR)",
+    "Evgeni Malkin (out)",
+    "Nick Robertson (IR)",
+    "Elmer Soderblom (upper body, IR)",
     "Ryan Graves (lower body, IR)"
    ]
   },
@@ -1755,7 +1756,8 @@
     }
    ],
    "injuries": [
-    "Ross Johnston (upper body, out)",
+    "Connor McMichael (out)",
+    "Ross Johnston (day-to-day)",
     "Torey Krug (ankle, IR)",
     "Dillon Dube (IR)",
     "Tyler Tucker (IR)"
@@ -1823,7 +1825,7 @@
     }
    ],
    "injuries": [
-    "Zemgus Girgensons (out)",
+    "Zemgus Girgensons (day-to-day)",
     "Brandon Hagel (lower body, IR)",
     "Conor Geekie (IR)"
    ]
@@ -1890,8 +1892,8 @@
     }
    ],
    "injuries": [
-    "Dylan Guenther (upper body, IR)",
     "John Marino (upper body, IR)",
+    "Dylan Guenther (upper body, IR)",
     "Nick Schmaltz (IR)",
     "Nate Schmidt (upper body, IR)",
     "Maveric Lamoureux (IR)",
@@ -2162,8 +2164,9 @@
     }
    ],
    "injuries": [
+    "Vincent Desharnais (abdomen, IR)",
     "Rasmus Sandin (knee, IR)",
-    "Vincent Desharnais (IR)"
+    "Cole Hutson (dtd)"
    ]
   }
  }

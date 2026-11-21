@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T17:00:02-05:00",
+ "updated": "2026-11-21T09:00:02-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -737,8 +737,7 @@
    "injuries": [
     "William Wallinder (upper body, day-to-day)",
     "Dylan Larkin (IR)",
-    "Simon Edvinsson (contract dispute, IR)",
-    "Albert Johansson (IR)"
+    "Simon Edvinsson (contract dispute, IR)"
    ]
   },
   "EDM": {
@@ -1345,9 +1344,9 @@
     }
    ],
    "injuries": [
+    "Oliver Bjorkstrand (IR)",
     "Sean Durzi (lower body, IR)",
     "Joe Veleno (lower body, IR)",
-    "Oliver Bjorkstrand (day-to-day)",
     "Pavel Dorofeyev (day-to-day)",
     "Alberts Smits (IR)",
     "Igor Shesterkin (IR)",
@@ -1621,7 +1620,6 @@
    ],
    "injuries": [
     "Jake O'Brien (lower body, IR)",
-    "Nikke Kokko (IR)",
     "Curtis Douglas (IR)",
     "Jared McCann (lower body, IR)"
    ]

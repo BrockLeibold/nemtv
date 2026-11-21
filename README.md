@@ -2,6 +2,8 @@
 
 Android TV IPTV app (NHL games, cable-style guide, scores). Built with raw SDK tools: `bash build.sh`.
 
+**NEMTV lite** (weak boxes like the onn Full HD stick): `bash build.sh lite` -> `NEMTV-lite.apk` (~0.3 MB). Page is `lite/index.html`: Home, Live, Scores, Setup and the player only (no guide, schedule, multiview, score bar, gradients or animation). Same package and key, so `pm install -r` replaces the full app and keeps its data.
+
 ## Install on another box
 1. Install the **Downloader** app on the Android TV.
 2. In Downloader enter: `https://github.com/BrockLeibold/nemtv/releases/latest/download/NEMTV.apk`

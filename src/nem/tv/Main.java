@@ -71,15 +71,19 @@ public class Main extends Activity {
     i.close(); return o.toByteArray();
   }
 
-  static byte[] fetch(String u, int readMs) throws Exception {
+  static InputStream open(String u, int readMs) throws Exception {
     HttpURLConnection c = (HttpURLConnection) new URL(u).openConnection();
     c.setConnectTimeout(15000); c.setReadTimeout(readMs);
     c.setRequestProperty("User-Agent", "NEMTV");
-    InputStream i = c.getInputStream();
+    return c.getInputStream();
+  }
+
+  static byte[] fetch(String u, int readMs) throws Exception {
+    InputStream i = open(u, readMs);
     ByteArrayOutputStream o = new ByteArrayOutputStream();
     byte[] buf = new byte[65536]; int n;
     while ((n = i.read(buf)) > 0) o.write(buf, 0, n);
-    return o.toByteArray();
+    i.close(); return o.toByteArray();
   }
 
   void js(final String code) {
@@ -122,12 +126,16 @@ public class Main extends Activity {
         }}).start();
       }
 
-      // guide: download epg.xml, keep only hockey programmes, hand JS {channelId:[[startMs,stopMs,text]]}
-      @JavascriptInterface public void epg(final String u) {
+      // guide: download epg.xml, keep hockey programmes (any time) + everything else from 4h ago to 36h ahead, hand JS {channelId:[[startMs,stopMs,text,hockey]]}
+      @JavascriptInterface public void epg(final String u) { epgAhead(u, 36); }
+
+      // same, with the look-ahead in hours (NEMTV lite asks for 6). The XML is parsed while it downloads, never held whole in memory.
+      @JavascriptInterface public void epgAhead(final String u, final int hours) {
         new Thread(new Runnable() { public void run() {
           String out = "{}", e = "";
+          java.io.InputStream in = null;
           try {
-            java.io.InputStream in = new java.io.ByteArrayInputStream(fetch(u, 60000));
+            in = new java.io.BufferedInputStream(open(u, 60000), 65536);
             org.xmlpull.v1.XmlPullParser x = android.util.Xml.newPullParser();
             x.setInput(in, "UTF-8");
             java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyyMMddHHmmss Z", java.util.Locale.US);
@@ -145,7 +153,7 @@ public class Main extends Activity {
                   String t = tx.toString(); boolean hk = t.matches("(?is).*(nhl|hockey).*");
                   if (st.length() == 14) st += " +0000"; if (en.length() == 14) en += " +0000";
                   long s0 = f.parse(st).getTime(), e0 = f.parse(en).getTime();
-                  if (hk || (e0 > now - 4 * 3600000L && s0 < now + 36 * 3600000L)) {
+                  if (hk || (e0 > now - 4 * 3600000L && s0 < now + hours * 3600000L)) {
                     org.json.JSONArray a = all.optJSONArray(ch); if (a == null) { a = new org.json.JSONArray(); all.put(ch, a); }
                     org.json.JSONArray r = new org.json.JSONArray();
                     String tt = hk ? t : ti; r.put(s0); r.put(e0); r.put(tt.length() > 300 ? tt.substring(0, 300) : tt); r.put(hk ? 1 : 0);
@@ -157,6 +165,7 @@ public class Main extends Activity {
             }
             out = all.toString();
           } catch (Exception x) { e = String.valueOf(x.getMessage()); }
+          finally { try { if (in != null) in.close(); } catch (Exception x) {} }
           js("gotEpg(" + out + "," + org.json.JSONObject.quote(e) + ")");
         }}).start();
       }

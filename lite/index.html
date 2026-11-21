@@ -48,7 +48,7 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 /* game cards (lite): flat surface, away colour on the left edge, home colour on the right; no gradients, shadows or animation */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
 
-.pill{--o-a:var(--line-strong);--o-b:var(--line-strong);position:relative;min-height:112px;border-radius:14px;text-align:center;color:#fff;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--o-a);border-right:4px solid var(--o-b);
+.pill{position:relative;min-height:112px;border-radius:14px;text-align:center;color:#fff;background:var(--surface);border:1px solid var(--line);
   display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:10px 8px 28px}
 .pill .side{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
 .pill .side img{width:44px;height:44px;object-fit:contain}
@@ -99,6 +99,13 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 .ctl button.sm{padding:6px 10px}
 #pl.hide,#pl.hide *{cursor:none}
 #pl.hide .ptop,#pl.hide .ctl{opacity:0;pointer-events:none}
+/* score bar: today's other NHL games along the bottom, shown while the player controls are hidden; Scores in the player turns it on/off */
+#sbar{position:absolute;left:0;right:0;bottom:0;height:5%;min-height:26px;display:none;align-items:stretch;gap:2px;padding:2px var(--safe-x) 4px;background:rgba(0,0,0,.72);overflow:hidden;opacity:0;transition:opacity .2s;container-type:size}
+#pl.sb #sbar{display:flex}#pl.sb.hide #sbar{opacity:1}
+.sbi{flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:0 10px;border-radius:999px;background:var(--surface);color:#fff;white-space:nowrap;zoom:var(--sbz,1)}
+.sbi:first-child{margin-left:auto}.sbi:last-child{margin-right:auto}
+.sbi img,.sbi b{width:70cqh;height:70cqh;object-fit:contain;font-size:34cqh;line-height:70cqh;text-align:center}
+.sbi .scr{font-size:48cqh}.sbi .nt{font-size:34cqh;color:var(--ink-2)}.sbi.done{opacity:.55}
 .ctl button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--ink)}.ctl button[aria-pressed=true]:not(#bfav)::after{content:"\2713";margin-left:6px}.ctl button[aria-pressed=true]:focus-visible{box-shadow:inset 0 0 0 2px var(--ink),var(--ring)}
 .pmenu{position:absolute;left:50%;bottom:62px;transform:translateX(-50%);max-height:62%;overflow-y:auto;scrollbar-width:none;min-width:260px;max-width:420px;
   padding:6px;border-radius:22px;background:var(--surface);border:1px solid var(--line-strong)}
@@ -123,14 +130,13 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 .lzh h2{margin:0}
 .pbtn:focus{outline:none;box-shadow:var(--ring)}
 .srl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;align-items:start} /* a short pre-game row keeps its own height */
-.sr{--o-a:var(--line-strong);--o-b:var(--line-strong);position:relative;border-radius:14px;padding:10px 12px;color:#fff;text-align:left;display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--o-a);border-right:4px solid var(--o-b)}
+.sr{position:relative;border-radius:14px;padding:10px 12px;color:#fff;text-align:left;display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line)}
 .sr.done{--o-a:#4a474f!important;--o-b:#4a474f!important}
 .srt{display:flex;align-items:center;gap:8px}.srs{display:flex;align-items:center;gap:6px;flex:1}.srs:last-of-type{justify-content:flex-end}
 .srs img{width:28px;height:28px}.srs b{font-size:20px}.srm{font-size:26px;min-width:76px;text-align:center}.srn{font-size:12px;color:var(--muted);min-width:64px;text-align:right}
 .srg{display:flex;flex-direction:column;gap:2px;font-size:12px;background:rgba(10,9,12,.5);border-radius:12px;padding:6px 9px}.srg.none{color:var(--muted)}
 .srg i{font-style:normal;font-size:12px;letter-spacing:.08em;color:var(--muted)}.gl em{font-style:normal;color:var(--muted)}.gl.new{color:#fff}.gl:not(.new){color:var(--ink-2)}
 /* finished games: grey edges, dimmed loser */
-.pill.done{--o-a:#4a474f!important;--o-b:#4a474f!important}
 .pill.done .scr{color:#fff}
 .lose{opacity:.75}
 .pill.done .live{letter-spacing:.24em;color:var(--ink-2)}
@@ -185,8 +191,8 @@ main.live .chip{padding:3px 10px;font-size:12px}
 <div class="ptop" id="ptop"><button class="pbtn" id="pback">&#8592; Back</button><div class="ptt" id="ptt"></div><button class="pbtn" id="pfs">Full screen</button></div><div id="zb"></div>
 <div class="ctl" id="pctl">
  <div class="grp"><button id="bfeed"></button><button id="zv" aria-label="Zoom"></button></div>
- <div class="grp"><button id="bfav" aria-pressed="false">Favorite</button></div>
-</div><div class="pmenu" id="pmenu" role="menu" aria-label="Options" hidden></div></div>
+ <div class="grp"><button id="bsc" aria-pressed="false">Scores</button><button id="bfav" aria-pressed="false">Favorite</button></div>
+</div><div class="pmenu" id="pmenu" role="menu" aria-label="Options" hidden></div><div id="sbar" aria-label="Scores"></div></div>
 <div id="tip" role="status" aria-live="polite"></div>
 <script src="config.js"></script>
 <script src="categories.js"></script>
@@ -272,7 +278,7 @@ window.gotScores=(t,e)=>{
   var first=!scLoaded; try{const d=JSON.parse(t); SC=d.games||[]; scLoaded=1; scFail=0}catch(x){log("scores failed",e||x);if(!scLoaded){scFail=1;if(tab==="scores"&&!$("#pl").classList.contains("on"))render()}return}
   {const E=ls("endAt",{});let ch2=0;SC.forEach(x=>{if(/FINAL|OFF/.test(x.gameState)&&!E[x.id]){E[x.id]=Math.min(Date.now(),Date.parse(x.startTimeUTC)+DUR);ch2=1}});if(ch2)sv("endAt",E)} // when a game was first seen over: post-game button lasts 1 hour from here
   const sig=SC.map(x=>x.id+x.gameState+(x.clock&&x.clock.timeRemaining)+(x.awayTeam.score||0)+(x.homeTeam.score||0)+(x.goals||[]).length).join();
-  if(sig===scSig&&!first)return; scSig=sig;
+  if(sig===scSig&&!first)return; scSig=sig; sbRender();
   if(tab==="scores"&&!$("#pl").classList.contains("on")){const y=$("#m").scrollTop;render();$("#m").scrollTop=y;return}
   if(tab!=="home"||$("#pl").classList.contains("on"))return;
   let redo=false;
@@ -281,7 +287,7 @@ window.gotScores=(t,e)=>{
     if(g.sc&&sc){sc.textContent=g.sc.score; lv.innerHTML=esc(g.sc.note)} else if(g.sc!==null&&!sc)redo=true});
   if(redo)rerender()
 };
-function pollScores(){if($("#pl").classList.contains("on"))return; scAt=Date.now(); const u="https://api-web.nhle.com/v1/score/now";
+function pollScores(){if($("#pl").classList.contains("on")&&!sbOn)return; /* playing: only poll when the score bar is on */ scAt=Date.now(); const u="https://api-web.nhle.com/v1/score/now";
   if(window.Android&&Android.get)Android.get(u,"gotScores");else fetch(u,FT()).then(r=>r.text()).then(t=>gotScores(t,"")).catch(e=>gotScores("",String(e)))}
 const endAtMap=()=>ls("endAt",{});
 function games(){ // from the bundled NHL schedule + the TV box clock
@@ -358,8 +364,8 @@ function svFeeds(id,cb){const c=svCache[id];if(c&&Date.now()-c.t<12e4)return cb(
 const fmtT=ms=>{const d=new Date(ms);return d.toLocaleDateString([],{weekday:"short",month:"short",day:"numeric"})+", "+d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})};
 
 function pillHTML(c,k){ // lite: flat card, away team left, home right
-  const col=(x,v)=>x?`--o-${v}:${x};`:"", lg=t=>t.logo?`<img src="${t.logo}" alt="">`:"", fs=starOn(c.aw,c.hm)?`<span class="fstar">&#9733;</span>`:"";
-  return `<button class="pill focusable${c.sc&&c.sc.over?" done":""}" data-g="${k}" style="${col(c.t[0].c,"a")}${col(c.t[1].c,"b")}">${fs}<span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${lg(c.t[0])}<span class="tm disp">${esc(c.tm[0])}</span></span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${lg(c.t[1])}<span class="tm disp">${esc(c.tm[1])}</span></span><span class="live">${c.sc?esc(c.sc.note):esc(clk(c.st)).toUpperCase()}</span></button>`}
+  const lg=t=>t.logo?`<img src="${t.logo}" alt="">`:"", fs=starOn(c.aw,c.hm)?`<span class="fstar">&#9733;</span>`:"";
+  return `<button class="pill focusable${c.sc&&c.sc.over?" done":""}" data-g="${k}">${fs}<span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${lg(c.t[0])}<span class="tm disp">${esc(c.tm[0])}</span></span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${lg(c.t[1])}<span class="tm disp">${esc(c.tm[1])}</span></span><span class="live">${c.sc?esc(c.sc.note):esc(clk(c.st)).toUpperCase()}</span></button>`}
 const chip=(label,pressed,attr)=>`<button class="chip focusable" ${attr} aria-pressed="${pressed}">${esc(label)}</button>`;
 
 let gQ="";
@@ -483,8 +489,16 @@ function play(g,list){
         const have=new Set(me0.feeds.map(x=>x.u)),add=f.filter(x=>!have.has(x.u)&&!FR.test(x.n)); if(add.length){const all=svOrder(me0.feeds,add);me0.feeds.length=0;me0.feeds.push(...all);$("#bfeed").textContent=me0.feed.n+"  ("+(me0.feeds.indexOf(me0.feed)+1)+"/"+me0.feeds.length+")"}
       } else fin(f)});
   } else if(feeds[0])setFeed(fmPick(g,feeds)); else msgP("Finding feeds...","full");
-  show(); zb(); fsLbl(); $("#bfeed").focus();
+  show(); zb(); fsLbl(); sbSync(); $("#bfeed").focus();
 }
+/* ---------- score bar (localStorage "scoreBar", on unless turned off) ---------- */
+let sbOn=ls("scoreBar",true);
+function sbSync(){$("#pl").classList.toggle("sb",sbOn);$("#bsc").setAttribute("aria-pressed",sbOn);sbRender()}
+function sbRender(){const b=$("#sbar"); if(!sbOn||!$("#pl").classList.contains("on"))return;
+  const lg=(t,a)=>t.logo?`<img src="${t.logo}" alt="">`:`<b class="disp">${esc(a)}</b>`;
+  b.innerHTML=games().live.filter(g=>!(cur&&cur.title===g.title)).sort((x,y)=>x.st-y.st).map(g=>{const c=g.sc;
+    return `<span class="sbi${c&&c.over?" done":""}">${lg(g.t[0],g.aw)}<span class="scr disp">${c?esc(c.score):"VS"}</span>${lg(g.t[1],g.hm)}<span class="nt disp">${c?esc(c.note):esc(clk(g.st)).toUpperCase()}</span></span>`}).join("");
+  b.style.removeProperty("--sbz"); for(let k=0;k<3&&b.scrollWidth>b.clientWidth+1;k++)b.style.setProperty("--sbz",(+(b.style.getPropertyValue("--sbz")||1)*(b.clientWidth-8)/b.scrollWidth*.98).toFixed(3))} // ponytail: zoom to fit, no tiers like the full app
 /* ---------- remembered feed per game (localStorage "feedMem", entries older than 2 days dropped) ---------- */
 const fmKey=g=>g&&g.title&&!g.ch?svNrm(g.title)+"@"+(g.st?Math.floor(g.st/864e5):0):"";
 function fmSet(g,c){const k=fmKey(g); if(!k||!c)return; const m=ls("feedMem",{}),t=Date.now(); for(const x in m)if(t-m[x].t>1728e5)delete m[x]; m[k]={u:c.u,n:c.n,t}; sv("feedMem",m)}
@@ -550,6 +564,7 @@ $("#pl").onclick=e=>{
   if(b.id==="bfeed")openMenu("feed");
   else if(b.id==="zv")openMenu("zoom");
   else if(b.id==="bfav")toggleFav(cur.c.n);
+  else if(b.id==="bsc"){sbOn=!sbOn;sv("scoreBar",sbOn);sbSync();if(sbOn)pollScores()}
   else if(b.id==="pback"){closeMenu();stop()}
   else if(b.id==="pfs"){const d=document;if(d.fullscreenElement)d.exitFullscreen&&d.exitFullscreen().catch(()=>{});else if(d.documentElement.requestFullscreen)d.documentElement.requestFullscreen().catch(()=>{})}
   else if(b.dataset.f!==undefined){closeMenu();tried=new Set();const f=cur.feeds[+b.dataset.f];fmSet(cur,f);setFeed(f);$("#bfeed").focus()}

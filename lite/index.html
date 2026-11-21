@@ -277,7 +277,10 @@ function scInfo(x){ // {score:"2 - 1", note:"P2 12:34"} or null before the puck 
   const prog=over||ck.inIntermission||pd.periodType==="SO"||isNaN(rem)?null:Math.max(0,Math.min(1,1-rem/len));
   return {n,it:!!ck.inIntermission,pt:pd.periodType,tr:ck.timeRemaining||"",prog,score:(x.awayTeam.score||0)+" - "+(x.homeTeam.score||0),note,over,win:over?((x.awayTeam.score||0)>(x.homeTeam.score||0)?"a":(x.awayTeam.score||0)<(x.homeTeam.score||0)?"h":""):""};
 }
-window.gotScores=(t,e)=>{
+// scores + game clocks shown 45 s late so they never spoil the stream (Brock 2026-11-21); the first load at start-up shows at once
+const SC_DELAY=45e3;
+window.gotScores=(t,e)=>{if(!scLoaded||e)scApply(t,e);else setTimeout(()=>scApply(t,""),SC_DELAY)};
+function scApply(t,e){
   var first=!scLoaded; try{const d=JSON.parse(t); SC=d.games||[]; scLoaded=1; scFail=0}catch(x){log("scores failed",e||x);if(!scLoaded){scFail=1;if(tab==="scores"&&!$("#pl").classList.contains("on"))render()}return}
   {const E=ls("endAt",{});let ch2=0;SC.forEach(x=>{if(/FINAL|OFF/.test(x.gameState)&&!E[x.id]){E[x.id]=Math.min(Date.now(),Date.parse(x.startTimeUTC)+DUR);ch2=1}});if(ch2)sv("endAt",E)} // when a game was first seen over: post-game button lasts 1 hour from here
   const sig=SC.map(x=>x.id+x.gameState+(x.clock&&x.clock.timeRemaining)+(x.awayTeam.score||0)+(x.homeTeam.score||0)+(x.goals||[]).length).join();

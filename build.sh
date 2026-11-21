@@ -9,7 +9,7 @@ if [ "$1" = lite ]; then
   A=out/lite-assets; APK=NEMTV-lite.apk; mkdir -p "$A"
   cp assets/categories.js assets/hls.min.js assets/jersey.ttf assets/nemtv-logo.png assets/nhl_logos.js assets/nhl_schedule.js "$A"/
   for f in config.js stremio.json; do if [ -f "assets/$f" ]; then cp "assets/$f" "$A"/; fi; done # local-only (gitignored): playlist + addon feed
-  cp lite/index.html "$A"/index.html
+  cp lite/index.html "$A"/index.html; cp lite/inter-bold.ttf "$A"/
 else
   A=assets; APK=NEMTV.apk
   rm -rf assets/guide && mkdir -p assets/guide && cp -r guide/index.html guide/deck.css guide/deck.js guide/news.json guide/data guide/heroes assets/guide/ && [ -d guide/logos ] && cp -r guide/logos assets/guide/ || true

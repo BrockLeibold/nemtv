@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>NEMTV</title>
 <style>html.andr #pfs{display:none!important}
 /* NEMOS dark tokens, copied from the live local NEMOS (whisper-hub/nemos-src) */
@@ -10,7 +10,7 @@
   --bg:#0F0E11;--surface:#19171C;--surface-2:#242128;--line:#2D2A31;--line-strong:#3B3741;
   --ink:#F2F0F4;--ink-2:#C9C4CF;--muted:#8F8996;--accent:#F0435F;
   --red:#D21F3C;--red-3:#B8182F;--coral:#FF8A5B;--plum:#2B2731;--wine:#5C2330;--island:#211E25;
-  --gl-fill:rgba(33,30,37,.62);--safe-x:0px;--safe-y:0px;--h-ctl:34px;--pad-x:max(28px,var(--safe-x),calc((100vw - 1280px)/2));
+  --gl-fill:rgba(33,30,37,.62);--safe-x:max(env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));--safe-y:max(env(safe-area-inset-top,0px),env(safe-area-inset-bottom,0px));--h-ctl:34px;--pad-x:max(28px,var(--safe-x),calc((100vw - 1280px)/2));
   --ring:0 0 0 2px #0F0E11,0 0 0 5px #F2F0F4;--ring-in:inset 0 0 0 2px #0F0E11,inset 0 0 0 5px #F2F0F4;
   --gl-sheen:linear-gradient(135deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.03) 45%,rgba(255,255,255,.07) 100%);
   --gl-shadow:0 12px 34px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(255,255,255,.05);
@@ -121,7 +121,7 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 @media(prefers-reduced-motion:reduce){#boot *:not(.sk){animation:none!important}}
 
 /* player */
-#pl{position:fixed;inset:0;z-index:50;background:#000;display:none;overflow:hidden}
+#pl{position:fixed;inset:0;height:100dvh;z-index:50;background:#000;display:none;overflow:hidden}
 #pl.on{display:block}
 #pl video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform-origin:center}
 .ptop,.ctl{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;transition:opacity .2s}

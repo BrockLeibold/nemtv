@@ -582,6 +582,12 @@ $("#pl").onclick=e=>{
   else if(b.dataset.f!==undefined){closeMenu();tried=new Set();const f=cur.feeds[+b.dataset.f];fmSet(cur,f);setFeed(f);$("#bfeed").focus()}
   else if(b.dataset.z!==undefined){closeMenu();setZoom(+b.dataset.z);$("#zv").focus()}
 };
+/* BDTVos drawer game shortcut: Main.java holds "AWAY@HOME"; play it once the playlist (and guide, or 20 s) are in */
+window.nemGame=()=>{const s=window.Android&&Android.takeGame?Android.takeGame():""; if(!s)return; const [aw,hm]=s.split("@"); let n=0;
+  const tryIt=()=>{const g=games().live.find(x=>x.aw===aw&&x.hm===hm); if((!g||!plDone||!(EPG||epgF))&&n++<20)return setTimeout(tryIt,1e3);
+    if(!g)return tipS("That game is not on right now"); if($("#pl").classList.contains("on"))stop(); watchG(g)};
+  tryIt()};
+setTimeout(()=>nemGame(),0);
 function toggleFav(n){fav=fav.includes(n)?fav.filter(x=>x!==n):[...fav,n];sv("fav",fav);if(cur&&$("#pl").classList.contains("on"))favBtn()}
 
 /* ---------- data from the TV side ---------- */

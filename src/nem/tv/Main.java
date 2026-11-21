@@ -175,6 +175,9 @@ public class Main extends Activity {
         try { return new String(readAsset(n), "UTF-8"); } catch (Exception x) { return ""; }
       }
 
+      // game asked for by the launcher (intent extra "game" = "AWAY@HOME"), handed over once
+      @JavascriptInterface public String takeGame() { String g = pendingGame; pendingGame = null; return g == null ? "" : g; }
+
       // generic native GET (NHL scores): result goes to window[cb](text, err)
       @JavascriptInterface public void get(final String u, final String cb) {
         new Thread(new Runnable() { public void run() {
@@ -214,9 +217,18 @@ public class Main extends Activity {
         }}).start();
       }
     }, "Android");
+    pendingGame = getIntent().getStringExtra("game");
     w.loadUrl("file:///android_asset/index.html");
     setContentView(w);
     w.requestFocus();
+  }
+
+  volatile String pendingGame;
+  // BDTVos game shortcut while NEMTV is already open: the page picks it up through takeGame()
+  @Override protected void onNewIntent(android.content.Intent i) {
+    super.onNewIntent(i);
+    String g = i.getStringExtra("game");
+    if (g != null) { pendingGame = g; js("window.nemGame&&nemGame()"); }
   }
 
   @Override public void onWindowFocusChanged(boolean f) {

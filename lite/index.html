@@ -106,7 +106,8 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 #pl.sb #sbar{display:flex}#pl.sb.hide #sbar{opacity:1}
 .sbi{flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:0 10px;border-radius:999px;background:var(--surface);color:#fff;white-space:nowrap;zoom:var(--sbz,1)}
 .sbi:first-child{margin-left:auto}.sbi:last-child{margin-right:auto}
-.sbi img,.sbi b{width:70cqh;height:70cqh;object-fit:contain;font-size:34cqh;line-height:70cqh;text-align:center}
+.sbi img,.sbi b{width:100cqh;height:100cqh;object-fit:contain;font-size:34cqh;line-height:100cqh;text-align:center} /* logos fill the bar height (Brock 2026-11-21) */
+#sbar.tight .nt.fut,#sbar.t2 .sbi.done .nt{display:none}#sbar.t2 .sbi{padding:0 6px;gap:3px}
 .sbi .scr{font-size:48cqh}.sbi .nt{font-size:34cqh;color:var(--ink-2)}.sbi.done{opacity:.55}
 .ctl button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--ink)}.ctl button[aria-pressed=true]:not(#bfav)::after{content:"\2713";margin-left:6px}.ctl button[aria-pressed=true]:focus-visible{box-shadow:inset 0 0 0 2px var(--ink),var(--ring)}
 .pmenu{position:absolute;left:50%;bottom:62px;transform:translateX(-50%);max-height:62%;overflow-y:auto;scrollbar-width:none;min-width:260px;max-width:420px;
@@ -504,8 +505,9 @@ function sbSync(){$("#pl").classList.toggle("sb",sbOn);$("#bsc").setAttribute("a
 function sbRender(){const b=$("#sbar"); if(!sbOn||!$("#pl").classList.contains("on"))return;
   const lg=(t,a)=>t.logo?`<img src="${t.logo}" alt="">`:`<b class="disp">${esc(a)}</b>`;
   b.innerHTML=games().live.filter(g=>!(cur&&cur.title===g.title)).sort((x,y)=>x.st-y.st).map(g=>{const c=g.sc;
-    return `<span class="sbi${c&&c.over?" done":""}">${lg(g.t[0],g.aw)}<span class="scr disp">${c?esc(c.score):"VS"}</span>${lg(g.t[1],g.hm)}<span class="nt disp">${c?esc(c.note):esc(clk(g.st)).toUpperCase()}</span></span>`}).join("");
-  b.style.removeProperty("--sbz"); for(let k=0;k<3&&b.scrollWidth>b.clientWidth+1;k++)b.style.setProperty("--sbz",(+(b.style.getPropertyValue("--sbz")||1)*(b.clientWidth-8)/b.scrollWidth*.98).toFixed(3))} // ponytail: zoom to fit, no tiers like the full app
+    return `<span class="sbi${c&&c.over?" done":""}">${lg(g.t[0],g.aw)}<span class="scr disp">${c?esc(c.score):"VS"}</span>${lg(g.t[1],g.hm)}<span class="nt disp${c?"":" fut"}">${c?esc(c.note):esc(clk(g.st)).toUpperCase()}</span></span>`}).join("");
+  b.style.removeProperty("--sbz"); b.classList.remove("tight","t2"); // crowded: drop start times, then finished games' notes, then zoom
+  if(b.scrollWidth>b.clientWidth+1)b.classList.add("tight"); if(b.scrollWidth>b.clientWidth+1)b.classList.add("t2"); for(let k=0;k<3&&b.scrollWidth>b.clientWidth+1;k++)b.style.setProperty("--sbz",(+(b.style.getPropertyValue("--sbz")||1)*(b.clientWidth-8)/b.scrollWidth*.98).toFixed(3))} // ponytail: zoom to fit, no tiers like the full app
 /* ---------- remembered feed per game (localStorage "feedMem", entries older than 2 days dropped) ---------- */
 const fmKey=g=>g&&g.title&&!g.ch?svNrm(g.title)+"@"+(g.st?Math.floor(g.st/864e5):0):"";
 function fmSet(g,c){const k=fmKey(g); if(!k||!c)return; const m=ls("feedMem",{}),t=Date.now(); for(const x in m)if(t-m[x].t>1728e5)delete m[x]; m[k]={u:c.u,n:c.n,t}; sv("feedMem",m)}

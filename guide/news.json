@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T09:00:02-05:00",
+ "updated": "2026-11-22T17:00:01-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -79,6 +79,13 @@
      "date": "2026-11-22"
     },
     {
+     "title": "Auston Matthews 'embarrassed' as Leafs blow another lead in loss to Columbus",
+     "summary": "Auston Matthews says the Maple Leafs \"should be embarrassed\" after two goals in less than a minute against the Blue Jackets doomed Toronto to another loss.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50561684/auston-matthews-maple-leafs-winless-streak-inexcusable",
+     "date": "2026-11-22"
+    },
+    {
      "title": "Kings rally from 3 down to beat skidding Maple Leafs 4-3 on Kempe's goal in shootout",
      "summary": "— Adrian Kempe scored the only goal in a shootout and the Los Angeles Kings roared back from a three-goal deficit to beat Toronto 4-3 on Thursday night, handing the Maple Leafs their eighth straight defeat.",
      "source": "ESPN",
@@ -119,24 +126,17 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892710",
      "date": "2026-11-13"
-    },
-    {
-     "title": "Matt Boldy has 2nd hat trick of season to help Wild beat Maple Leafs, 5-2",
-     "summary": "— Matt Boldy completed his second hat trick of the season and the sixth of his career early in the third period and the Minnesota Wild sent the Toronto Maple Leafs to a fifth straight regulation home loss with a 5-2 victory Thursday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892697",
-     "date": "2026-11-13"
     }
    ],
    "injuries": [
+    "Colton Sissons (lower body, IR)",
+    "Jack Roslovic (upper body, day-to-day)",
     "Kirill Marchenko (lower body, IR)",
     "Cole McWard (lower body, IR)",
     "Nick Blankenburg (upper body, IR)",
-    "Colton Sissons (IR)",
     "Miles Wood (undisclosed, IR)",
     "Marshall Rifai (IR)",
-    "Max Domi (back, IR)",
-    "Cade Webber (IR)"
+    "Max Domi (back, IR)"
    ]
   },
   "ANA": {
@@ -201,7 +201,7 @@
     }
    ],
    "injuries": [
-    "Leo Carlsson (day-to-day)",
+    "Leo Carlsson (upper body, day-to-day)",
     "Beckett Sennecke (upper body, IR)",
     "Ryan Poehling (knee, IR)",
     "A.J. Greer (upper body, IR)"
@@ -279,6 +279,13 @@
    "game": "Next: Thu Nov 12, 12:00 PM ET at SEA, Veikkaus Arena, Helsinki (NHLN, Prime Video, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Bussi makes 25 saves and Hurricanes down Rangers 5-2",
+     "summary": "— Jackson Blake put Carolina ahead to stay midway through the second period and Brandon Bussi made 25 saves and the Carolina Hurricanes defeated the New York Rangers 5-2 on Sunday.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892768",
+     "date": "2026-11-22"
+    },
+    {
      "title": "Hurricanes surge past Oilers for 7-4 victory",
      "summary": "— Andrei Svechnikov scored two goals and Sebastian Aho had a goal and two assists to lead the Carolina Hurricanes to a 7-4 win over the Edmonton Oilers on Saturday.",
      "source": "ESPN",
@@ -326,13 +333,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401891808",
      "date": "2026-11-12"
-    },
-    {
-     "title": "Hurricanes play the Kraken after Martinook's 2-goal showing",
-     "summary": "Carolina Hurricanes (14-3-2, in the Metropolitan Division) vs. Seattle Kraken (9-6-1, in the Pacific Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401891808",
-     "date": "2026-11-11"
     }
    ],
    "injuries": [
@@ -410,6 +410,13 @@
    "game": "Next: Sun Nov 08, 7:00 PM ET vs Philadelphia, Scotiabank Saddledome (NBCSP, SNW). Expected starter: Devin Cooley.",
    "items": [
     {
+     "title": "Blackhawks' Wyatt Kaiser suspended 3 games for illegal check",
+     "summary": "Blackhawks defenseman Wyatt Kaiser has been suspended without pay for three games by the NHL for an illegal check to the head of Calgary's Martin Pospisil.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50563989/blackhawks-wyatt-kaiser-suspended-3-games-illegal-check",
+     "date": "2026-11-22"
+    },
+    {
      "title": "Sam Rinzel scores in overtime to lift Blackhawks over Flames 4-3",
      "summary": "— Sam Rinzel scored in overtime and had two assists to lead the Chicago Blackhawks past the Calgary Flames 4-3 on Saturday, snapping a nine-game road winless skid.",
      "source": "ESPN",
@@ -457,13 +464,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892723",
      "date": "2026-11-16"
-    },
-    {
-     "title": "Flames head to the Ducks in Pacific Division play",
-     "summary": "Calgary Flames (9-10-1, in the Pacific Division) vs. Anaheim Ducks (10-9-1, in the Pacific Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892723",
-     "date": "2026-11-15"
     }
    ],
    "injuries": [
@@ -481,6 +481,13 @@
      "summary": "Chicago Blackhawks captain Connor Bedard elected to undergo surgery on his right shoulder and is out indefinitely.",
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50556771/blackhawks-connor-bedard-elects-shoulder-surgery",
+     "date": "2026-11-22"
+    },
+    {
+     "title": "Blackhawks' Wyatt Kaiser suspended 3 games for illegal check",
+     "summary": "Blackhawks defenseman Wyatt Kaiser has been suspended without pay for three games by the NHL for an illegal check to the head of Calgary's Martin Pospisil.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50563989/blackhawks-wyatt-kaiser-suspended-3-games-illegal-check",
      "date": "2026-11-22"
     },
     {
@@ -524,17 +531,11 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892733",
      "date": "2026-11-18"
-    },
-    {
-     "title": "Maple Leafs come into matchup against the Blackhawks on losing streak",
-     "summary": "Toronto Maple Leafs (8-12-2, in the Atlantic Division) vs. Chicago Blackhawks (5-13-2, in the Central Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892733",
-     "date": "2026-11-16"
     }
    ],
    "injuries": [
-    "Connor Bedard (out)",
+    "Wyatt Kaiser (upper body, suspension)",
+    "Connor Bedard (shoulder, IR)",
     "Anton Frondell (day-to-day)",
     "Bowen Byram (upper body, IR)"
    ]
@@ -1290,6 +1291,13 @@
    "game": "Next: Mon Nov 09, 8:00 PM ET at Edmonton Oilers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Bussi makes 25 saves and Hurricanes down Rangers 5-2",
+     "summary": "— Jackson Blake put Carolina ahead to stay midway through the second period and Brandon Bussi made 25 saves and the Carolina Hurricanes defeated the New York Rangers 5-2 on Sunday.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892768",
+     "date": "2026-11-22"
+    },
+    {
      "title": "Will Cuylle scores twice as the Rangers come back to beat the Canadiens 3-1",
      "summary": "— Will Cuylle scored twice, including the go-ahead short-handed goal in the final minute of the second period, and the New York Rangers rallied to defeat the Montreal Canadiens 3-1 on Monday night.",
      "source": "ESPN",
@@ -1337,20 +1345,12 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892691",
      "date": "2026-11-10"
-    },
-    {
-     "title": "Korpisalo makes 25 saves in debut for Rangers, who hold off Kraken",
-     "summary": "The Rangers led 4-0 on goals by Gabe Perreault, Tye Kartye, Jaroslav Chmelar and Pavel Dorofeyev and held on 4-3. Joonas Korpisalo made 25 saves in his first game of the season.",
-     "source": "NHL.com",
-     "url": "https://www.nhl.com/news/new-york-rangers-seattle-kraken-game-recap-november-7-2026",
-     "date": "2026-11-08"
     }
    ],
    "injuries": [
     "Oliver Bjorkstrand (upper body, IR)",
     "Alberts Smits (upper body, IR)",
     "Pavel Dorofeyev (IR)",
-    "Sean Durzi (lower body, IR)",
     "Joe Veleno (lower body, IR)",
     "Igor Shesterkin (IR)",
     "Aidan Thompson (IR)",
@@ -1824,8 +1824,8 @@
     }
    ],
    "injuries": [
+    "Zemgus Girgensons (upper body, out)",
     "Conor Geekie (upper body, IR)",
-    "Zemgus Girgensons (day-to-day)",
     "Brandon Hagel (lower body, IR)"
    ]
   },

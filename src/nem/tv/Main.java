@@ -175,6 +175,11 @@ public class Main extends Activity {
         try { return new String(readAsset(n), "UTF-8"); } catch (Exception x) { return ""; }
       }
 
+      // native player (NPlayer): page calls these instead of hls.js when they exist
+      @JavascriptInterface public void nPlay(final String u) { runOnUiThread(new Runnable() { public void run() { w.setBackgroundColor(0); np.play(u); } }); }
+      @JavascriptInterface public void nStop() { runOnUiThread(new Runnable() { public void run() { np.stop(); w.setBackgroundColor(0xFF0D0C0F); } }); }
+      @JavascriptInterface public void nZoom(final int pct) { runOnUiThread(new Runnable() { public void run() { np.zoom(pct); } }); }
+
       // game asked for by the launcher (intent extra "game" = "AWAY@HOME"), handed over once
       @JavascriptInterface public String takeGame() { String g = pendingGame; pendingGame = null; return g == null ? "" : g; }
 
@@ -219,9 +224,24 @@ public class Main extends Activity {
     }, "Android");
     pendingGame = getIntent().getStringExtra("game");
     w.loadUrl("file:///android_asset/index.html");
-    setContentView(w);
+    // the native video surface sits behind the WebView; the page turns its own background clear while it plays
+    android.widget.FrameLayout root = new android.widget.FrameLayout(this);
+    root.setBackgroundColor(0xFF000000);
+    android.view.SurfaceView sv = new android.view.SurfaceView(this);
+    sv.setVisibility(View.GONE); sv.setFocusable(false);
+    root.addView(sv, new android.widget.FrameLayout.LayoutParams(-1, -1, android.view.Gravity.CENTER));
+    root.addView(w, new android.widget.FrameLayout.LayoutParams(-1, -1));
+    np = new NPlayer(this, sv, WebSettings.getDefaultUserAgent(this));
+    root.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+      public void onLayoutChange(View v, int l, int t, int r, int bt, int ol, int ot, int or, int ob) { np.layout(); }
+    });
+    setContentView(root);
     w.requestFocus();
   }
+
+  NPlayer np;
+  @Override protected void onStop() { super.onStop(); if (np != null) np.release(); }
+  @Override protected void onStart() { super.onStart(); if (np != null) np.resume(); }
 
   volatile String pendingGame;
   // BDTVos game shortcut while NEMTV is already open: the page picks it up through takeGame()

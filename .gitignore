@@ -16,3 +16,5 @@ shots_*.log*
 assets/stremio.json
 web/data/
 web/app/
+libs/*.aar
+libs/*.jar

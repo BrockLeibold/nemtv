@@ -84,6 +84,8 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 
 /* player */
 #pl{position:fixed;inset:0;z-index:50;background:#000;display:none;overflow:hidden}
+/* native player (NPlayer): the video is a surface behind the page, so the page goes clear while it plays */
+html.nv,html.nv body,html.nv #pl{background:transparent}html.nv body>*:not(#pl){visibility:hidden}html.nv #pl video{display:none}
 #pl.on{display:block}
 #pl video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform-origin:center}
 .ptop,.ctl{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center}
@@ -436,7 +438,7 @@ function watchG(g){if(!g)return tipS("No feed found for this game");const sc=g.s
   tipS(sc&&sc.over?"This game has ended":!hasF?"No feed found for this game":"Starts at "+clk(g.st)+". Watch opens 40 min before")}
 /* ---------- player ---------- */
 function show(){const pl=$("#pl");pl.classList.remove("hide");clearTimeout(hideT);hideT=setTimeout(()=>{if(!menuOn&&!$("#pbuf").classList.contains("on"))pl.classList.add("hide")},4000)} // never auto-hide while connecting / buffering / failed: the message and the Feed button stay up
-function setZoom(z){zoom=Math.max(50,Math.min(200,z));$("#v").style.transform="scale("+zoom/100+")";$("#zv").textContent="Zoom "+zoom+"%"}
+function setZoom(z){zoom=Math.max(50,Math.min(200,z));if(NV)Android.nZoom(zoom);$("#v").style.transform="scale("+zoom/100+")";$("#zv").textContent="Zoom "+zoom+"%"}
 function favBtn(){const f=fav.includes(cur.c.n),b=$("#bfav");b.textContent=f?"Unfavorite":"Favorite";b.setAttribute("aria-pressed",f)}
 let waitT=0;
 function bufBuild(){ // big loading card: both teams on their colours, or the channel name
@@ -455,11 +457,17 @@ const playErr=e=>{if(!e||e.name!=="AbortError")log("play",e)};
 let userPaused=false;
 document.addEventListener("visibilitychange",()=>{const v=$("#v"); if(!document.hidden&&!userPaused&&$("#pl").classList.contains("on")&&v.paused&&(hls||v.getAttribute("src")))v.play().catch(playErr)});
 function killHls(){if(hls){hls.destroy();hls=null}}
+const NV=!!(window.Android&&Android.nPlay);
+window.nemV=(s,m)=>{if(!$("#pl").classList.contains("on"))return; // native player state: ready / buffering / error
+  if(s==="ready")msgP("");
+  else if(s==="buffering"){pqW++;if(!$("#pbuf").classList.contains("on")){clearTimeout(waitT);waitT=setTimeout(()=>msgP("Buffering...","mini"),700)}}
+  else if(s==="error"){log("native",m);const nx=cur.feeds.find(f=>!tried.has(f.u)); if(nx){msgP("That feed failed. Trying "+baseName(nx.n)+"...","full");setFeed(nx)}else msgP("This feed would not play. Open FEED and pick another.","fail")}};
 function setFeed(c){
   cur.c=c; cur.feed=c; tried.add(c.u); msgP("Connecting to "+baseName(c.n)+"...","full");
   const v=$("#v"); killHls();
   $("#bfeed").textContent=c.n+(cur.feeds.length>1?"  ("+(cur.feeds.indexOf(c)+1)+"/"+cur.feeds.length+")":"");
   favBtn();
+  if(NV){try{v.pause();v.removeAttribute("src");v.load()}catch(x){} document.documentElement.classList.add("nv"); Android.nPlay(c.u); return} // native ExoPlayer on the TV (smooth 60 fps sports); hls.js elsewhere
   if(window.Hls&&Hls.isSupported()){
     const h0=hls=new Hls({maxBufferLength:30,maxMaxBufferLength:45,maxBufferSize:40e6,backBufferLength:8,liveSyncDurationCount:4,maxBufferHole:1,nudgeMaxRetry:6,capLevelToPlayerSize:true,abrEwmaDefaultEstimate:6e6,lowLatencyMode:false,enableWorker:true,
       fragLoadPolicy:{default:{maxTimeToFirstByteMs:12e3,maxLoadTimeMs:3e4,timeoutRetry:{maxNumRetry:4,retryDelayMs:0,maxRetryDelayMs:0},errorRetry:{maxNumRetry:6,retryDelayMs:500,maxRetryDelayMs:4e3}}}}); // 2026-11-21 stutter fix: 30s cushion, 4 segments behind live, jump TS gaps up to 1s, patient segment retries
@@ -514,7 +522,7 @@ function fmSet(g,c){const k=fmKey(g); if(!k||!c)return; const m=ls("feedMem",{})
 function fmPick(g,feeds){const r=ls("feedMem",{})[fmKey(g)]; return r&&(feeds.find(f=>f.u===r.u)||feeds.find(f=>f.n===r.n))||feeds[0]}
 let zbT=0, zapT=0;
 function lazyFeed(n){ // stop the old stream now, start the new one only after Up/Down settles (no overlapping streams)
-  clearTimeout(zapT); killHls(); const v=$("#v"); try{v.pause();v.removeAttribute("src");v.load()}catch(x){}
+  clearTimeout(zapT); killHls(); if(NV)Android.nStop(); const v=$("#v"); try{v.pause();v.removeAttribute("src");v.load()}catch(x){}
   msgP("Switching to "+baseName(n.n)+"...","full"); zapT=setTimeout(()=>setFeed(n),800)}
 function zb(){const l=cur.list,i=l.indexOf(cur.c); if(cur.title||l.length<2)return; const b=$("#zb"), row=(c,k)=>{const o=onNow(c);return `<div class="${k}"><b>${k==="p"?"&#9650; ":k==="n"?"&#9660; ":""}${esc(baseName(c.n))}</b><small>${o?esc(o.t)+" &middot; "+clk(o.s)+" - "+clk(o.e):"Live TV"}</small></div>`};
   b.innerHTML=row(l[(i-1+l.length)%l.length],"p")+row(cur.c,"c")+row(l[(i+1)%l.length],"n"); b.classList.add("on"); clearTimeout(zbT); zbT=setTimeout(()=>b.classList.remove("on"),4000)}
@@ -523,7 +531,7 @@ function zap(d){ // Up/Down with controls hidden: next/previous channel (or feed
   const n=l[(i+d+l.length)%l.length];
   if(cur.title){tried=new Set();lazyFeed(n)}else{cur.c=n;addRecent(n);tried=new Set();cur.feeds=[n];$("#ptop .t").textContent=plain(n.n).toUpperCase();lazyFeed(n)}
   zb()}
-function stop(){clearTimeout(zapT);$("#zb").classList.remove("on");closeMenu();killHls();const v=$("#v");v.pause();v.removeAttribute("src");v.load();msgP("");$("#pl").classList.remove("on");refocus();if(Date.now()-scAt>6e4)pollScores()} // scores paused while playing: catch up now
+function stop(){clearTimeout(zapT);$("#zb").classList.remove("on");closeMenu();killHls();if(NV){Android.nStop();document.documentElement.classList.remove("nv")}const v=$("#v");v.pause();v.removeAttribute("src");v.load();msgP("");$("#pl").classList.remove("on");refocus();if(Date.now()-scAt>6e4)pollScores()} // scores paused while playing: catch up now
 function refocus(){const a=document.activeElement; if(a&&a!==document.body&&a.offsetParent)return; const f=(plBack&&plBack.isConnected&&plBack.offsetParent&&plBack)||$("#m").querySelector(".focusable,button,input")||document.querySelector("header [data-t][aria-pressed=true]"); if(f)f.focus({preventScroll:true})} // back to the card that started the stream
 function openMenu(kind){
   if(kind==="feed"&&!cur.feeds.length)return; // no feeds yet (e.g. pre-game): nothing to pick

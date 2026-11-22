@@ -246,7 +246,7 @@ const DIVS=[["BOS","BUF","DET","FLA","MTL","OTT","TBL","TOR"],["CAR","CBJ","NJD"
 const team=n=>{const k=nk(n),t=NHL.find(t=>nk(t[1])===k);return t?{logo:(window.LOGO||{})[t[0]],c:t[2]}:{}};
 
 const on=c=>!c.s||!off.includes(c.s);
-const ABBR={}; NHL.forEach(t=>{ABBR[t[0]]={name:t[1],c:t[2],logo:(window.LOGO||{})[t[0]]}});
+const ABBR={}; NHL.forEach(t=>{if(!ABBR[t[0]])ABBR[t[0]]={name:t[1],c:t[2],logo:(window.LOGO||{})[t[0]]}});
 // NHL broadcast code -> channel names in the playlist (feeds like "TSN4 . feed 2" share the base name)
 const NET={ESPN:/^ESPN$/,ABC:/^ABC$/,TNT:/^TNT$/,truTV:/^truTV$/,NHLN:/^NHL Network$/,"NHLN-US":/^NHL Network$/,
  SN1:/^Sportsnet One$/,SN360:/^Sportsnet 360$/,SNE:/^Sportsnet East$/,SNW:/^Sportsnet West$/,SNP:/^Sportsnet Pacific$/,SNO:/^Sportsnet Ontario$/,"SN-PIT":/^SportsNet Pittsburgh$/,

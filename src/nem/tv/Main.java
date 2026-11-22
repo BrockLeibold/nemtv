@@ -178,6 +178,11 @@ public class Main extends Activity {
       // native player (NPlayer): page calls these instead of hls.js when they exist
       @JavascriptInterface public void nPlay(final String u) { runOnUiThread(new Runnable() { public void run() { w.setBackgroundColor(0); np.play(u); } }); }
       @JavascriptInterface public void nStop() { runOnUiThread(new Runnable() { public void run() { np.stop(); w.setBackgroundColor(0xFF0D0C0F); } }); }
+      // 2-up split: main game left, second game right, both capped at 960x540 so the box decodes two streams easily
+      @JavascriptInterface public void nPlay2(final String u) { runOnUiThread(new Runnable() { public void run() { np2.play(u); } }); }
+      @JavascriptInterface public void nStop2() { runOnUiThread(new Runnable() { public void run() { np2.stop(); } }); }
+      @JavascriptInterface public void nSplit(final boolean on) { runOnUiThread(new Runnable() { public void run() { np.slot = on ? 1 : 0; np.cap(on); np.layout(); if (!on) { np2.stop(); np.vol(1f); } } }); }
+      @JavascriptInterface public void nSound(final int side) { runOnUiThread(new Runnable() { public void run() { np.vol(side == 2 ? 0f : 1f); np2.vol(side == 2 ? 1f : 0f); } }); }
       @JavascriptInterface public void nZoom(final int pct) { runOnUiThread(new Runnable() { public void run() { np.zoom(pct); } }); }
 
       // game asked for by the launcher (intent extra "game" = "AWAY@HOME"), handed over once
@@ -230,18 +235,23 @@ public class Main extends Activity {
     android.view.SurfaceView sv = new android.view.SurfaceView(this);
     sv.setVisibility(View.GONE); sv.setFocusable(false);
     root.addView(sv, new android.widget.FrameLayout.LayoutParams(-1, -1, android.view.Gravity.CENTER));
+    android.view.SurfaceView sv2 = new android.view.SurfaceView(this); // second game for the 2-up split
+    sv2.setVisibility(View.GONE); sv2.setFocusable(false);
+    root.addView(sv2, new android.widget.FrameLayout.LayoutParams(-1, -1, android.view.Gravity.CENTER));
     root.addView(w, new android.widget.FrameLayout.LayoutParams(-1, -1));
-    np = new NPlayer(this, sv, WebSettings.getDefaultUserAgent(this));
+    String ua = WebSettings.getDefaultUserAgent(this);
+    np = new NPlayer(this, sv, ua, "nemV");
+    np2 = new NPlayer(this, sv2, ua, "nemV2"); np2.slot = 2; np2.cap(true);
     root.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-      public void onLayoutChange(View v, int l, int t, int r, int bt, int ol, int ot, int or, int ob) { np.layout(); }
+      public void onLayoutChange(View v, int l, int t, int r, int bt, int ol, int ot, int or, int ob) { np.layout(); np2.layout(); }
     });
     setContentView(root);
     w.requestFocus();
   }
 
-  NPlayer np;
-  @Override protected void onStop() { super.onStop(); if (np != null) np.release(); }
-  @Override protected void onStart() { super.onStart(); if (np != null) np.resume(); }
+  NPlayer np, np2;
+  @Override protected void onStop() { super.onStop(); if (np != null) { np.release(); np2.release(); } }
+  @Override protected void onStart() { super.onStart(); if (np != null) { np.resume(); np2.resume(); } }
 
   volatile String pendingGame;
   // BDTVos game shortcut while NEMTV is already open: the page picks it up through takeGame()

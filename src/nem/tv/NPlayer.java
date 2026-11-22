@@ -15,18 +15,21 @@ import androidx.media3.exoplayer.DefaultLoadControl;
 import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.exoplayer.analytics.AnalyticsListener;
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory;
+import androidx.media3.exoplayer.trackselection.DefaultTrackSelector;
 import org.json.JSONObject;
 
 /**
  * Native player (Media3 ExoPlayer) on a SurfaceView behind the transparent WebView: hardware decode straight to a
  * video plane, no JavaScript demuxing and no WebView compositing of every frame. The page keeps its own UI on top and
- * hears about the state through window.nemV(state, detail). Every method runs on the UI thread.
+ * hears about the state through window.<cb>(state, detail). Every method runs on the UI thread.
+ * slot: 0 full screen, 1 left half, 2 right half (2-up split). cap: pick renditions no bigger than 960x540.
  */
 final class NPlayer {
-  final Main m; final SurfaceView sv; final String ua;
-  ExoPlayer p; String url; float zoom = 1f; int vw, vh; float par = 1f;
+  final Main m; final SurfaceView sv; final String ua, cb;
+  ExoPlayer p; DefaultTrackSelector ts; String url; float zoom = 1f, volume = 1f; int vw, vh; float par = 1f;
+  int slot; boolean capped;
 
-  NPlayer(Main m, SurfaceView sv, String ua) { this.m = m; this.sv = sv; this.ua = ua; }
+  NPlayer(Main m, SurfaceView sv, String ua, String cb) { this.m = m; this.sv = sv; this.ua = ua; this.cb = cb; }
 
   void play(String u) {
     url = u;
@@ -34,7 +37,7 @@ final class NPlayer {
     MediaItem.Builder b = new MediaItem.Builder().setUri(u);
     if (u.toLowerCase().contains("m3u8")) b.setMimeType(MimeTypes.APPLICATION_M3U8);
     p.setMediaItem(b.build()); p.prepare(); p.setPlayWhenReady(true);
-    sv.setVisibility(View.VISIBLE);
+    sv.setVisibility(View.VISIBLE); layout();
   }
 
   private void build() {
@@ -42,40 +45,53 @@ final class NPlayer {
         .setAllowCrossProtocolRedirects(true).setConnectTimeoutMs(12000).setReadTimeoutMs(20000);
     // 20-50 s buffer, start after 2 s, resume after a stall once 4 s are in
     DefaultLoadControl lc = new DefaultLoadControl.Builder().setBufferDurationsMs(20000, 50000, 2000, 4000).build();
-    p = new ExoPlayer.Builder(m).setMediaSourceFactory(new DefaultMediaSourceFactory(http)).setLoadControl(lc).build();
+    ts = new DefaultTrackSelector(m);
+    p = new ExoPlayer.Builder(m).setMediaSourceFactory(new DefaultMediaSourceFactory(http)).setLoadControl(lc).setTrackSelector(ts).build();
+    applyCap(); p.setVolume(volume);
     p.setVideoSurfaceView(sv);
-    p.setAudioAttributes(AudioAttributes.DEFAULT, true);
+    p.setAudioAttributes(AudioAttributes.DEFAULT, cb.equals("nemV")); // only the main player takes audio focus (else the two players pause each other)
     p.addListener(new Player.Listener() {
       @Override public void onPlaybackStateChanged(int s) {
-        android.util.Log.d("NEMTV", "native state " + s + " buffered " + p.getTotalBufferedDuration() + " ms, live offset " + p.getCurrentLiveOffset() + " ms");
-        m.js("window.nemV&&nemV('" + (s == Player.STATE_BUFFERING ? "buffering" : s == Player.STATE_READY ? "ready" : s == Player.STATE_ENDED ? "ended" : "idle") + "')");
+        android.util.Log.d("NEMTV", cb + " state " + s + " buffered " + p.getTotalBufferedDuration() + " ms, live offset " + p.getCurrentLiveOffset() + " ms");
+        m.js("window." + cb + "&&" + cb + "('" + (s == Player.STATE_BUFFERING ? "buffering" : s == Player.STATE_READY ? "ready" : s == Player.STATE_ENDED ? "ended" : "idle") + "')");
       }
       @Override public void onPlayerError(PlaybackException e) {
         if (e.errorCode == PlaybackException.ERROR_CODE_BEHIND_LIVE_WINDOW) { p.seekToDefaultPosition(); p.prepare(); return; } // fell behind the live window: jump back to live
-        m.js("window.nemV&&nemV('error'," + JSONObject.quote(e.getErrorCodeName()) + ")");
+        m.js("window." + cb + "&&" + cb + "('error'," + JSONObject.quote(e.getErrorCodeName()) + ")");
       }
       @Override public void onVideoSizeChanged(VideoSize v) { vw = v.width; vh = v.height; par = v.pixelWidthHeightRatio > 0 ? v.pixelWidthHeightRatio : 1f; layout(); }
     });
     p.addAnalyticsListener(new AnalyticsListener() {
-      @Override public void onLoadError(AnalyticsListener.EventTime t, androidx.media3.exoplayer.source.LoadEventInfo li, androidx.media3.exoplayer.source.MediaLoadData d, java.io.IOException e, boolean canceled) { android.util.Log.d("NEMTV", "native load error " + e); }
-      @Override public void onDroppedVideoFrames(AnalyticsListener.EventTime t, int n, long ms) { android.util.Log.d("NEMTV", "native dropped " + n + " frames in " + ms + " ms"); }
+      @Override public void onLoadError(AnalyticsListener.EventTime t, androidx.media3.exoplayer.source.LoadEventInfo li, androidx.media3.exoplayer.source.MediaLoadData d, java.io.IOException e, boolean canceled) { android.util.Log.d("NEMTV", cb + " load error " + e); }
+      @Override public void onDroppedVideoFrames(AnalyticsListener.EventTime t, int n, long ms) { android.util.Log.d("NEMTV", cb + " dropped " + n + " frames in " + ms + " ms"); }
+      @Override public void onVideoInputFormatChanged(AnalyticsListener.EventTime t, androidx.media3.common.Format f, androidx.media3.exoplayer.DecoderReuseEvaluation r) { android.util.Log.d("NEMTV", cb + " rendition " + f.width + "x" + f.height + " " + f.bitrate / 1000 + "k"); }
     });
   }
 
-  /** Letterbox the surface to the video's shape (a SurfaceView stretches otherwise). */
+  /** Split screen: cap renditions at 960x540 (half the decode work; a half-screen tile can't show more anyway). */
+  void cap(boolean on) { capped = on; applyCap(); }
+  private void applyCap() {
+    if (ts == null) return;
+    ts.setParameters(ts.buildUponParameters().setMaxVideoSize(capped ? 960 : Integer.MAX_VALUE, capped ? 540 : Integer.MAX_VALUE));
+  }
+
+  void vol(float v) { volume = v; if (p != null) p.setVolume(v); }
+
+  /** Letterbox the surface to the video's shape inside its slot (a SurfaceView stretches otherwise). */
   void layout() {
     View parent = (View) sv.getParent();
-    int W = parent.getWidth(), H = parent.getHeight();
-    FrameLayout.LayoutParams lp;
-    if (vw == 0 || vh == 0 || W == 0 || H == 0) lp = new FrameLayout.LayoutParams(-1, -1, Gravity.CENTER);
-    else {
+    int W = parent.getWidth(), H = parent.getHeight(), x = 0;
+    if (slot != 0) { W = W / 2; if (slot == 2) x = W; }
+    int w = W, h = H;
+    if (vw != 0 && vh != 0 && W != 0 && H != 0) {
       float ar = vw * par / vh;
-      int w = W, h = Math.round(W / ar);
+      h = Math.round(W / ar);
       if (h > H) { h = H; w = Math.round(H * ar); }
-      lp = new FrameLayout.LayoutParams(w, h, Gravity.CENTER);
     }
+    FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(w, h, Gravity.LEFT | Gravity.CENTER_VERTICAL);
+    lp.leftMargin = x + (W - w) / 2;
     FrameLayout.LayoutParams o = (FrameLayout.LayoutParams) sv.getLayoutParams();
-    if (o != null && o.width == lp.width && o.height == lp.height) return; // same size: setting it again re-triggers layout every frame
+    if (o != null && o.width == lp.width && o.height == lp.height && o.leftMargin == lp.leftMargin && o.gravity == lp.gravity) return; // same: setting it again re-triggers layout every frame
     sv.setLayoutParams(lp);
   }
 
@@ -85,7 +101,7 @@ final class NPlayer {
   void stop() { url = null; release(); sv.setVisibility(View.GONE); }
 
   /** App went to the background: free the decoder, remember the stream. */
-  void release() { if (p != null) { p.release(); p = null; } }
+  void release() { if (p != null) { p.release(); p = null; ts = null; } }
 
   /** Back in front: reopen the stream the page still shows. */
   void resume() { if (url != null) play(url); }

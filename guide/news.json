@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T17:00:01-05:00",
+ "updated": "2026-11-23T09:00:01-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -212,6 +212,13 @@
    "game": "Next: Sun Nov 08, 3:30 PM ET vs VGK, KeyBank Center (MSG-B, SCRIPPS, SN1, TVAS). Colten Ellis expected to start (Die by the Blade); THN projected Luukkonen.",
    "items": [
     {
+     "title": "Tage Thompson scores twice as Sabres top Lightning, 6-2",
+     "summary": "— Tage Thompson scored twice, Zach Benson had a goal and two assists and Ukka-Pekka Luukkonen finished with 29 saves and the Buffalo Sabres beat the Tampa Bay Lightning 6-2 on Sunday.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892769",
+     "date": "2026-11-23"
+    },
+    {
      "title": "Bennett has hat trick, helps set up Vilmanis' winner as Panthers hold off Sabres 4-3",
      "summary": "— Sam Bennett had a hat trick and set up the go-ahead goal by Sandis Vilmanis with 3:18 left, and the Florida Panthers beat the Buffalo Sabres 4-3 on Saturday night.",
      "source": "ESPN",
@@ -258,13 +265,6 @@
      "summary": "Buffalo Sabres (8-7-4, in the Atlantic Division) vs. Dallas Stars (10-6-2, in the Central Division)",
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892717",
-     "date": "2026-11-13"
-    },
-    {
-     "title": "Blackhawks beat the Sabres 3-2 in overtime to end 6-game losing streak",
-     "summary": "— Ryan Donato scored on a wrist shot from between the circles at 3:12 of overtime and the Chicago Blackhawks beat the Buffalo Sabres 3-2 on Thursday night to end a six-game losing streak.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892702",
      "date": "2026-11-13"
     }
    ],
@@ -477,6 +477,20 @@
    "game": "Next: Thu Nov 12, 8:00 PM ET vs Buffalo Sabres, United Center (CHSN, MSG-B). Starter not announced.",
    "items": [
     {
+     "title": "Rookie Roman Kantserov posts first NHL hat trick in Chicago Blackhawks' victory",
+     "summary": "Roman Kantserov recorded his first NHL hat trick and added an assist as the Blackhawks used a four-goal first period to top the Canucks 6-3 on Sunday.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50570456/fueled-kantserov-1st-hat-trick-blackhawks-top-canucks",
+     "date": "2026-11-23"
+    },
+    {
+     "title": "Roman Kantserov scores his first NHL hat trick in the Blackhawks’ 6-3 win over the Canucks",
+     "summary": "— Rookie Roman Kantserov got his first NHL hat trick and added an assist as the Chicago Blackhawks used a four-goal first period to beat the Vancouver Canucks 6-3 on Sunday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892772",
+     "date": "2026-11-23"
+    },
+    {
      "title": "Blackhawks star Connor Bedard elects to have shoulder surgery",
      "summary": "Chicago Blackhawks captain Connor Bedard elected to undergo surgery on his right shoulder and is out indefinitely.",
      "source": "ESPN",
@@ -517,26 +531,12 @@
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50522884/connor-bedard-awaiting-test-results-injured-shoulder",
      "date": "2026-11-18"
-    },
-    {
-     "title": "Blackhawks host the Blue Jackets after Bertuzzi's 2-goal game",
-     "summary": "Columbus Blue Jackets (7-12, in the Metropolitan Division) vs. Chicago Blackhawks (6-13-2, in the Central Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892748",
-     "date": "2026-11-18"
-    },
-    {
-     "title": "Blackhawks lose Connor Bedard to injury as they hand Maple Leafs 7th straight loss, 6-3",
-     "summary": "— Frank Nazar and Tyler Bertuzzi each scored twice for the Chicago Blackhawks, who lost center Connor Bedard to injury while handing the Toronto Maple Leafs their seventh straight loss, 6-3 on Tuesday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892733",
-     "date": "2026-11-18"
     }
    ],
    "injuries": [
+    "Anton Frondell (out)",
     "Wyatt Kaiser (upper body, suspension)",
     "Connor Bedard (shoulder, IR)",
-    "Anton Frondell (day-to-day)",
     "Bowen Byram (upper body, IR)"
    ]
   },
@@ -614,6 +614,13 @@
    "game": "Next: Thu Nov 12, 8:00 PM ET vs WPG, American Airlines Center (KDFI, Prime Video, TSN3). Starter not announced.",
    "items": [
     {
+     "title": "Jake Oettinger stops 33 shots for league-best fifth shutout in Stars' 1-0 win over Penguins",
+     "summary": "— Jake Oettinger stopped a season-high 34 shots and had his NHL-leading fifth shutout of the season, Joel Kiviranta scored a second-period goal and the Dallas Stars beat the Pittsburgh Penguins 1-0 on Sunday night for their fifth straight win.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892771",
+     "date": "2026-11-23"
+    },
+    {
      "title": "Seguin, Stars edge Golden Knights 4-3 in shootout as Mark Stone sets Vegas’ franchise scoring record",
      "summary": "— Tyler Seguin scored the deciding goal in the shootout and the Dallas Stars beat the Vegas Golden Knights 4-3 on Thursday night for their second win at T-Mobile Arena in three days.",
      "source": "ESPN",
@@ -661,13 +668,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892717",
      "date": "2026-11-15"
-    },
-    {
-     "title": "Jamie Benn records 1,000th NHL point with goal in Stars' win",
-     "summary": "Dallas captain Jamie Benn scored his 1,000th career NHL point during Saturday night's game with a goal against the Buffalo Sabres.",
-     "source": "ESPN",
-     "url": "https://www.espn.com/nhl/story/_/id/50486339/stars-captain-jamie-benn-records-1000th-career-nhl-point",
-     "date": "2026-11-15"
     }
    ],
    "injuries": [
@@ -682,6 +682,13 @@
    "headline": "The Red Wings were shut out 4-0 in Colorado for their third straight loss.",
    "game": "Next: Tue Nov 10, 8:00 PM ET at STL, Enterprise Center (TNT, HBO Max, SN+). Starter not announced.",
    "items": [
+    {
+     "title": "Dylan Larkin, who requested to be traded by Detroit, dealt to Montreal",
+     "summary": "Former Detroit Red Wings captain Dylan Larkin was moved to the Montreal Canadiens in a blockbuster deal on Sunday.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50568711/red-wings-trade-star-forward-dylan-larkin-canadiens",
+     "date": "2026-11-23"
+    },
     {
      "title": "Palat scores twice, Islanders extend point streak to seven games with 3-2 win over Red Wings",
      "summary": "— Ondrej Palat scored two goals and the New York Islanders stretched their point streak to seven games with a 3-2 victory over the struggling Detroit Red Wings on Saturday.",
@@ -730,18 +737,11 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892699",
      "date": "2026-11-11"
-    },
-    {
-     "title": "Snuggerud's goal, assist help power the Blues to a 3-2 victory over the Red Wings",
-     "summary": "— Jimmy Snuggerud had a goal and an assist and his score in the third period was the winner as the St. Louis Blues beat the Detroit Red Wings 3-2 on Tuesday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892687",
-     "date": "2026-11-11"
     }
    ],
    "injuries": [
+    "Sam Montembeault (lower body, IR)",
     "William Wallinder (day-to-day)",
-    "Dylan Larkin (IR)",
     "Simon Edvinsson (contract dispute, IR)"
    ]
   },
@@ -749,6 +749,13 @@
    "headline": "The Oilers beat the Canucks 4-2 on Saturday as Draisaitl scored twice and McDavid ran his season-opening point streak to 18 games.",
    "game": "Next: Mon Nov 9, 8:00 PM ET vs NY Rangers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
+    {
+     "title": "Blues rally from late 3-goal deficit and beat Oilers 5-4 in shootout for 4th straight win",
+     "summary": "— The surging St. Louis Blues overcame a three-goal deficit in the final 10 minutes of regulation for the first time in franchise history and then beat the Edmonton Oilers in a shootout for a dramatic 5-4 victory on Sunday night for their fourth...",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892770",
+     "date": "2026-11-23"
+    },
     {
      "title": "Hurricanes surge past Oilers for 7-4 victory",
      "summary": "— Andrei Svechnikov scored two goals and Sebastian Aho had a goal and two assists to lead the Carolina Hurricanes to a 7-4 win over the Edmonton Oilers on Saturday.",
@@ -797,18 +804,11 @@
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50502384/nhl-2026-27-connor-mcdavid-scoring-200-points-stats-record-wayne-gretzky",
      "date": "2026-11-17"
-    },
-    {
-     "title": "Oilers bring 5-game win streak into matchup with the Panthers",
-     "summary": "Edmonton Oilers (16-3-3, in the Pacific Division) vs. Florida Panthers (12-7-3, in the Atlantic Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892730",
-     "date": "2026-11-16"
     }
    ],
    "injuries": [
+    "Zach Hyman (out)",
     "Ryan Nugent-Hopkins (undisclosed, out)",
-    "Zach Hyman (day-to-day)",
     "Alec Regula (undisclosed, IR)",
     "Matt Savoie (lower body, IR)",
     "Frederik Andersen (knee, IR)",
@@ -1022,6 +1022,13 @@
    "game": "Next: Tue Nov 10, 7:00 PM ET vs Minnesota Wild, Centre Bell (MINNHL, RDS, TSN2, Wild+). Starter not announced.",
    "items": [
     {
+     "title": "Dylan Larkin, who requested to be traded by Detroit, dealt to Montreal",
+     "summary": "Former Detroit Red Wings captain Dylan Larkin was moved to the Montreal Canadiens in a blockbuster deal on Sunday.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50568711/red-wings-trade-star-forward-dylan-larkin-canadiens",
+     "date": "2026-11-23"
+    },
+    {
      "title": "Cates' goal with 30 seconds left lifts the Flyers to a 4-3 win over the Canadiens",
      "summary": "— Noah Cates scored the winner with 30 seconds left in regulation as the Philadelphia Flyers held on to beat the Montreal Canadiens 4-3 Saturday night after squandering a two-goal lead.",
      "source": "ESPN",
@@ -1069,13 +1076,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892726",
      "date": "2026-11-15"
-    },
-    {
-     "title": "Avalanche beat Canadiens 4-1 without injured stars MacKinnon, Makar",
-     "summary": "— Artturi Lehkonen had a goal and an assist and the short-handed Colorado Avalanche beat the Montreal Canadiens 4-1 on Saturday night without injured stars Nathan MacKinnon and Cale Makar.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892711",
-     "date": "2026-11-15"
     }
    ],
    "injuries": [
@@ -1083,7 +1083,6 @@
     "Josh Anderson (lower body, IR)",
     "Chris Kreider (IR)",
     "Ivan Demidov (foot, IR)",
-    "Sam Montembeault (lower body, IR)",
     "Bryce Pickford (IR)",
     "Lucas Condotta (IR)"
    ]
@@ -1495,6 +1494,13 @@
    "game": "Next: Sun Nov 08, 8:00 PM ET at Anaheim, Honda Center (Prime Video, SN, SN-PIT). Expected starter: Arturs Silovs.",
    "items": [
     {
+     "title": "Jake Oettinger stops 33 shots for league-best fifth shutout in Stars' 1-0 win over Penguins",
+     "summary": "— Jake Oettinger stopped a season-high 34 shots and had his NHL-leading fifth shutout of the season, Joel Kiviranta scored a second-period goal and the Dallas Stars beat the Pittsburgh Penguins 1-0 on Sunday night for their fifth straight win.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892771",
+     "date": "2026-11-23"
+    },
+    {
      "title": "Struble and Marchessault lead the Predators to a 4-3 win over the Penguins",
      "summary": "— Jayden Struble and Jonathan Marchessault each had a goal and an assist to lead the Nashville Predators to a 4-3 victory over the Pittsburgh Penguins on Saturday.",
      "source": "ESPN",
@@ -1542,16 +1548,10 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892695",
      "date": "2026-11-10"
-    },
-    {
-     "title": "Cutter Gauthier gets his 3rd hat trick in November, propelling the prolific Ducks past Penguins 5-2",
-     "summary": "— Cutter Gauthier continued his scoring rampage with his third hat trick in eight days, and captain Mikael Granlund had a goal and three assists in the Anaheim Ducks' fifth consecutive victory, 5-2 over the Pittsburgh Penguins on Sunday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892679",
-     "date": "2026-11-09"
     }
    ],
    "injuries": [
+    "Declan Carlile (lower body, out)",
     "Bryan Rust (lower body, IR)",
     "Evgeni Malkin (out)",
     "Nick Robertson (IR)",
@@ -1699,6 +1699,13 @@
    "game": "Next: Tue Nov 10, 8:00 PM ET vs Detroit Red Wings, Enterprise Center (HBO MAX, SN+, TNT). Starter not announced.",
    "items": [
     {
+     "title": "Blues rally from late 3-goal deficit and beat Oilers 5-4 in shootout for 4th straight win",
+     "summary": "— The surging St. Louis Blues overcame a three-goal deficit in the final 10 minutes of regulation for the first time in franchise history and then beat the Edmonton Oilers in a shootout for a dramatic 5-4 victory on Sunday night for their fourth...",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892770",
+     "date": "2026-11-23"
+    },
+    {
      "title": "Neighbours has 5 assists and Blues chase Hellebuyck early in 9-6 victory over Devils",
      "summary": "— Jake Neighbours matched a franchise record with five assists, Brandon Carlo scored his first goal in more than two years and the St. Louis Blues chased star goalie Connor Hellebuyck a little more than nine minutes into a 9-6 victory over the New...",
      "source": "ESPN",
@@ -1746,17 +1753,10 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892716",
      "date": "2026-11-13"
-    },
-    {
-     "title": "McMichael scores in 8th round of shootout as Blues outlast Mammoth 1-0",
-     "summary": "— Connor McMichael beat Karel Vejmelka with a snap shot to the top left corner in the eighth round of a shootout to give the St. Louis Blues a 1-0 victory over the Utah Mammoth on Thursday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892704",
-     "date": "2026-11-13"
     }
    ],
    "injuries": [
-    "Connor McMichael (day-to-day)",
+    "Connor McMichael (out)",
     "Torey Krug (ankle, IR)",
     "Dillon Dube (IR)",
     "Tyler Tucker (IR)"
@@ -1766,6 +1766,13 @@
    "headline": "The Lightning beat Minnesota 4-3 in overtime on Saturday and play at Winnipeg on Sunday on the back end of a back-to-back.",
    "game": "Next: Sun Nov 08, 6:00 PM ET at WPG, Canada Life Centre (TSN3, The Spot). Andrei Vasilevskiy projected to start.",
    "items": [
+    {
+     "title": "Tage Thompson scores twice as Sabres top Lightning, 6-2",
+     "summary": "— Tage Thompson scored twice, Zach Benson had a goal and two assists and Ukka-Pekka Luukkonen finished with 29 saves and the Buffalo Sabres beat the Tampa Bay Lightning 6-2 on Sunday.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892769",
+     "date": "2026-11-23"
+    },
     {
      "title": "Connor McDavid's 23-game point streak ends as Oilers fall to Lightning",
      "summary": "Connor McDavid, who opened the season on a 23-game scoring streak, was held off the scoresheet for the first time this season in the Oilers' 3-1 loss to the Lightning.",
@@ -1813,13 +1820,6 @@
      "summary": "Detroit Red Wings (7-10-3, in the Atlantic Division) vs. Tampa Bay Lightning (13-4-2, in the Atlantic Division)",
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892712",
-     "date": "2026-11-13"
-    },
-    {
-     "title": "Hagel scores twice as Lightning beat Blue Jackets 3-1 for 5th win in 6 games",
-     "summary": "— Brandon Hagel had two goals and an assist and the Tampa Bay Lightning beat the Columbus Blue Jackets 3-1 on Thursday for their second victory in two nights and fifth in their last six games.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892701",
      "date": "2026-11-13"
     }
    ],
@@ -1905,6 +1905,20 @@
    "game": "Next: Mon Nov 9, 9:30 PM ET vs Philadelphia, Rogers Arena (NBCSP, SN+). Starter not announced.",
    "items": [
     {
+     "title": "Rookie Roman Kantserov posts first NHL hat trick in Chicago Blackhawks' victory",
+     "summary": "Roman Kantserov recorded his first NHL hat trick and added an assist as the Blackhawks used a four-goal first period to top the Canucks 6-3 on Sunday.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50570456/fueled-kantserov-1st-hat-trick-blackhawks-top-canucks",
+     "date": "2026-11-23"
+    },
+    {
+     "title": "Roman Kantserov scores his first NHL hat trick in the Blackhawks’ 6-3 win over the Canucks",
+     "summary": "— Rookie Roman Kantserov got his first NHL hat trick and added an assist as the Chicago Blackhawks used a four-goal first period to beat the Vancouver Canucks 6-3 on Sunday night.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892772",
+     "date": "2026-11-23"
+    },
+    {
      "title": "Rossi scores twice, DeBrusk stars in shootout as Canucks top Wild",
      "summary": "— Jake DeBrusk scored in a shootout as the Vancouver Canucks defeated the Minnesota Wild 4-3 on Saturday night.",
      "source": "ESPN",
@@ -1945,20 +1959,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892724",
      "date": "2026-11-16"
-    },
-    {
-     "title": "Canucks take losing streak into matchup with the Golden Knights",
-     "summary": "Vancouver Canucks (3-17-1, in the Pacific Division) vs. Vegas Golden Knights (13-5-3, in the Pacific Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892724",
-     "date": "2026-11-14"
-    },
-    {
-     "title": "Glenn Gawdin scores his first 2 NHL goals in the Rangers' 5-1 victory over the Canucks",
-     "summary": "— Glenn Gawdin scored his first two NHL goals in New York's four-goal second period and the Rangers won for the first time this season when allowing the first goal, beating the Vancouver Canucks 5-1 on Friday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892706",
-     "date": "2026-11-14"
     }
    ],
    "injuries": [

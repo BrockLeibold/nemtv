@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T09:00:01-05:00",
+ "updated": "2026-11-23T17:00:03-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -129,8 +129,8 @@
     }
    ],
    "injuries": [
-    "Colton Sissons (lower body, IR)",
     "Jack Roslovic (upper body, day-to-day)",
+    "Colton Sissons (lower body, IR)",
     "Kirill Marchenko (lower body, IR)",
     "Cole McWard (lower body, IR)",
     "Nick Blankenburg (upper body, IR)",
@@ -336,7 +336,7 @@
     }
    ],
    "injuries": [
-    "Nikolaj Ehlers (undisclosed, out)"
+    "Nikolaj Ehlers (day-to-day)"
    ]
   },
   "CBJ": {
@@ -467,7 +467,7 @@
     }
    ],
    "injuries": [
-    "Martin Pospisil (upper body, day-to-day)",
+    "Martin Pospisil (upper body, out)",
     "Jonathan Huberdeau (hip, IR)",
     "Kevin Bahl (IR)"
    ]
@@ -534,7 +534,7 @@
     }
    ],
    "injuries": [
-    "Anton Frondell (out)",
+    "Anton Frondell (day-to-day)",
     "Wyatt Kaiser (upper body, suspension)",
     "Connor Bedard (shoulder, IR)",
     "Bowen Byram (upper body, IR)"
@@ -671,7 +671,7 @@
     }
    ],
    "injuries": [
-    "Tyler Myers (upper body, out)",
+    "Tyler Myers (day-to-day)",
     "Oskar Back (finger, IR)",
     "Kyle Capobianco (leg, IR)",
     "Lian Bichsel (lower body, IR)",
@@ -687,6 +687,13 @@
      "summary": "Former Detroit Red Wings captain Dylan Larkin was moved to the Montreal Canadiens in a blockbuster deal on Sunday.",
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50568711/red-wings-trade-star-forward-dylan-larkin-canadiens",
+     "date": "2026-11-23"
+    },
+    {
+     "title": "Canadiens coach St. Louis: 'Harsh thing to say' Larkin 'quit' on Red Wings",
+     "summary": "The Canadiens have no concerns about newly acquired star Dylan Larkin asking Detroit for a trade, having been accused of quitting on the Red Wings after leaving in the fourth year of an eight-year contract.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50574950/canadiens-no-issue-dylan-larkin-quit-red-wings",
      "date": "2026-11-23"
     },
     {
@@ -730,13 +737,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892699",
      "date": "2026-11-13"
-    },
-    {
-     "title": "Red Wings bring losing streak into matchup with the Panthers",
-     "summary": "Detroit Red Wings (7-9-3, in the Atlantic Division) vs. Florida Panthers (10-7-2, in the Atlantic Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892699",
-     "date": "2026-11-11"
     }
    ],
    "injuries": [
@@ -807,8 +807,8 @@
     }
    ],
    "injuries": [
-    "Zach Hyman (out)",
-    "Ryan Nugent-Hopkins (undisclosed, out)",
+    "Ryan Nugent-Hopkins (day-to-day)",
+    "Zach Hyman (day-to-day)",
     "Alec Regula (undisclosed, IR)",
     "Matt Savoie (lower body, IR)",
     "Frederik Andersen (knee, IR)",
@@ -944,9 +944,9 @@
     }
    ],
    "injuries": [
-    "Artemi Panarin (day-to-day)",
-    "Trevor Moore (day-to-day)",
-    "Erik Gustafsson (day-to-day)",
+    "Erik Gustafsson (upper body, day-to-day)",
+    "Joel Edmundson (day-to-day)",
+    "Trevor Moore (undisclosed, day-to-day)",
     "Jakub Dvorak (IR)"
    ]
   },
@@ -1012,8 +1012,7 @@
     }
    ],
    "injuries": [
-    "Quinn Hughes (upper body, out)",
-    "Filip Gustavsson (hip, IR)",
+    "Quinn Hughes (IR)",
     "Olli Maatta (IR)"
    ]
   },
@@ -1026,6 +1025,13 @@
      "summary": "Former Detroit Red Wings captain Dylan Larkin was moved to the Montreal Canadiens in a blockbuster deal on Sunday.",
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50568711/red-wings-trade-star-forward-dylan-larkin-canadiens",
+     "date": "2026-11-23"
+    },
+    {
+     "title": "Canadiens coach St. Louis: 'Harsh thing to say' Larkin 'quit' on Red Wings",
+     "summary": "The Canadiens have no concerns about newly acquired star Dylan Larkin asking Detroit for a trade, having been accused of quitting on the Red Wings after leaving in the fourth year of an eight-year contract.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50574950/canadiens-no-issue-dylan-larkin-quit-red-wings",
      "date": "2026-11-23"
     },
     {
@@ -1069,13 +1075,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892726",
      "date": "2026-11-17"
-    },
-    {
-     "title": "New York takes on Montreal following Gawdin's 2-goal showing",
-     "summary": "Montreal Canadiens (12-4-4, in the Atlantic Division) vs. New York Rangers (12-8-1, in the Metropolitan Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892726",
-     "date": "2026-11-15"
     }
    ],
    "injuries": [
@@ -1281,7 +1280,7 @@
     }
    ],
    "injuries": [
-    "Ryan Pulock (day-to-day)",
+    "Ryan Pulock (out)",
     "Alexander Romanov (IR)"
    ]
   },
@@ -1418,7 +1417,7 @@
     }
    ],
    "injuries": [
-    "Hayden Hodgson (day-to-day)",
+    "Hayden Hodgson (groin, out)",
     "Andre Burakovsky (lower body, IR)",
     "Warren Foegele (knee, IR)",
     "William Eklund (IR)"
@@ -1551,9 +1550,9 @@
     }
    ],
    "injuries": [
-    "Declan Carlile (lower body, out)",
+    "Evgeni Malkin (day-to-day)",
+    "Declan Carlile (day-to-day)",
     "Bryan Rust (lower body, IR)",
-    "Evgeni Malkin (out)",
     "Nick Robertson (IR)",
     "Elmer Soderblom (upper body, IR)",
     "Ryan Graves (lower body, IR)"
@@ -1688,7 +1687,8 @@
     }
    ],
    "injuries": [
-    "Kiefer Sherwood (out)",
+    "Jacob Trouba (out)",
+    "Kiefer Sherwood (upper body, IR)",
     "Igor Chernyshov (upper body, IR)",
     "Quentin Musty (upper body, IR)",
     "Kyle Keyser (upper body, IR)"
@@ -1756,7 +1756,7 @@
     }
    ],
    "injuries": [
-    "Connor McMichael (out)",
+    "Connor McMichael (day-to-day)",
     "Torey Krug (ankle, IR)",
     "Dillon Dube (IR)",
     "Tyler Tucker (IR)"
@@ -1824,7 +1824,7 @@
     }
    ],
    "injuries": [
-    "Zemgus Girgensons (upper body, out)",
+    "Zemgus Girgensons (day-to-day)",
     "Conor Geekie (upper body, IR)",
     "Brandon Hagel (lower body, IR)"
    ]
@@ -1891,12 +1891,12 @@
     }
    ],
    "injuries": [
-    "Clayton Keller (day-to-day)",
     "John Marino (upper body, IR)",
-    "Dylan Guenther (upper body, IR)",
+    "Michael Carcone (upper body, out)",
     "Nick Schmaltz (IR)",
     "Nate Schmidt (upper body, IR)",
     "Maveric Lamoureux (IR)",
+    "Dylan Guenther (IR)",
     "Artem Duda (dtd)"
    ]
   },
@@ -1962,7 +1962,7 @@
     }
    ],
    "injuries": [
-    "Elias Pettersson (upper body, out)",
+    "Elias Pettersson (day-to-day)",
     "Brendan Gallagher (lower body, IR)",
     "Guillaume Brisebois (IR)",
     "Mackenzie MacEachern (IR)",
@@ -2107,6 +2107,13 @@
    "game": "Next: Tue Nov 10, 7:00 PM ET at Ottawa Senators, Canadian Tire Centre (MNMT, RDS2, TSN5). Starter not announced.",
    "items": [
     {
+     "title": "Capitals re-sign defenseman Jack St. Ivany to 2-year, $2.35M deal",
+     "summary": "The Washington Capitals have re-signed defenseman Jack St. Ivany to a two-year deal worth $2.35 million, the team announced Monday.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50574271/capitals-re-sign-defenseman-jack-st-ivany-two-year-deal",
+     "date": "2026-11-23"
+    },
+    {
      "title": "Elias Lindholm authors first four-goal game of career in Bruins' 7-5 victory",
      "summary": "Veteran forward Elias Lindholm authored the first four-goal game of his NHL career, carrying the Bruins past the Washington Capitals 7-5 on Saturday, an effort in which Boston scored three times in the opening nine minutes of the second period.",
      "source": "ESPN",
@@ -2154,16 +2161,10 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892729",
      "date": "2026-11-16"
-    },
-    {
-     "title": "Connor Hellebuyck makes 43 saves and improves to 7-0 with Devils in 7-4 win over Capitals",
-     "summary": "— Connor Hellebuyck recovered from a shaky start to make 43 saves, remaining unbeaten in net with New Jersey as the surging Devils defeated the Washington Capitals 7-4 on Saturday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892714",
-     "date": "2026-11-15"
     }
    ],
    "injuries": [
+    "Jordan Kyrou (out)",
     "Vincent Desharnais (abdomen, IR)",
     "Rasmus Sandin (knee, IR)"
    ]

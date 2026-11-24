@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T09:00:27-05:00",
+ "updated": "2026-11-24T17:00:01-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -129,7 +129,7 @@
     }
    ],
    "injuries": [
-    "Jack Roslovic (out)",
+    "Jack Roslovic (day-to-day)",
     "Colton Sissons (lower body, IR)",
     "Kirill Marchenko (lower body, IR)",
     "Cole McWard (lower body, IR)",
@@ -201,7 +201,7 @@
     }
    ],
    "injuries": [
-    "Leo Carlsson (out)",
+    "Leo Carlsson (day-to-day)",
     "Beckett Sennecke (upper body, IR)",
     "Ryan Poehling (knee, IR)",
     "A.J. Greer (upper body, IR)"
@@ -269,6 +269,7 @@
     }
    ],
    "injuries": [
+    "Tyson Kozak (undisclosed, day-to-day)",
     "Konsta Helenius (IR)",
     "Justin Danforth (upper body, IR)",
     "Matt Grzelcyk (lower body, IR)"
@@ -336,7 +337,7 @@
     }
    ],
    "injuries": [
-    "Nikolaj Ehlers (day-to-day)"
+    "Nikolaj Ehlers (out)"
    ]
   },
   "CBJ": {
@@ -401,8 +402,8 @@
     }
    ],
    "injuries": [
-    "Mathieu Olivier (out)",
-    "Sean Monahan (out)",
+    "Sean Monahan (day-to-day)",
+    "Mathieu Olivier (day-to-day)",
     "Conor Garland (IR)"
    ]
   },
@@ -604,9 +605,9 @@
     }
    ],
    "injuries": [
+    "Cale Makar (lower body, IR)",
     "Gavin Brindley (out)",
     "Nathan MacKinnon (lower body, out)",
-    "Cale Makar (IR)",
     "Josh Manson (IR)",
     "Zachary L'Heureux (IR)"
    ]
@@ -673,7 +674,7 @@
     }
    ],
    "injuries": [
-    "Tyler Myers (day-to-day)",
+    "Tyler Myers (upper body, day-to-day)",
     "Oskar Back (finger, IR)",
     "Kyle Capobianco (leg, IR)",
     "Lian Bichsel (lower body, IR)",
@@ -766,6 +767,13 @@
      "date": "2026-11-23"
     },
     {
+     "title": "The Connor McDavid Scoring Tracker: Can the Oilers' superstar break 200 points?",
+     "summary": "Follow along game by game as No. 97 looks to break a benchmark that only No. 99 has done in NHL history.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50502384/nhl-2026-27-connor-mcdavid-scoring-200-points-stats-record-wayne-gretzky",
+     "date": "2026-11-23"
+    },
+    {
      "title": "Hurricanes surge past Oilers for 7-4 victory",
      "summary": "— Andrei Svechnikov scored two goals and Sebastian Aho had a goal and two assists to lead the Carolina Hurricanes to a 7-4 win over the Edmonton Oilers on Saturday.",
      "source": "ESPN",
@@ -799,18 +807,10 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892744",
      "date": "2026-11-18"
-    },
-    {
-     "title": "McDavid runs season-opening points streak to 23 games, Oilers skate past Panthers 5-2",
-     "summary": "— Connor McDavid had a goal and an assist to extend his season-opening points streak to 23 games, and the Edmonton Oilers continued their sizzling start by beating the rival Florida Panthers 5-2 on Tuesday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892730",
-     "date": "2026-11-18"
     }
    ],
    "injuries": [
-    "Ryan Nugent-Hopkins (day-to-day)",
-    "Zach Hyman (day-to-day)",
+    "Zach Hyman (migraine, out)",
     "Alec Regula (undisclosed, IR)",
     "Matt Savoie (lower body, IR)",
     "Frederik Andersen (knee, IR)",
@@ -1078,8 +1078,8 @@
     }
    ],
    "injuries": [
+    "Mike Matheson (lower body, IR)",
     "Ivan Demidov (ankle, IR)",
-    "Mike Matheson (lower body, out)",
     "Josh Anderson (lower body, IR)",
     "Chris Kreider (IR)",
     "Bryce Pickford (IR)",
@@ -1280,9 +1280,10 @@
     }
    ],
    "injuries": [
-    "Kyle Palmieri (out)",
-    "Ryan Pulock (out)",
-    "Alexander Romanov (IR)"
+    "Kyle Palmieri (IR)",
+    "Ryan Pulock (shoulder, out)",
+    "Alexander Romanov (IR)",
+    "Logan Stanley (dtd)"
    ]
   },
   "NYR": {
@@ -1347,9 +1348,9 @@
     }
    ],
    "injuries": [
+    "Pavel Dorofeyev (lower body, IR)",
     "Oliver Bjorkstrand (upper body, IR)",
     "Alberts Smits (upper body, IR)",
-    "Pavel Dorofeyev (IR)",
     "Joe Veleno (lower body, IR)",
     "Igor Shesterkin (IR)",
     "Aidan Thompson (IR)",
@@ -1418,7 +1419,7 @@
     }
    ],
    "injuries": [
-    "Hayden Hodgson (groin, out)",
+    "Hayden Hodgson (IR)",
     "Andre Burakovsky (lower body, IR)",
     "Warren Foegele (knee, IR)",
     "William Eklund (IR)"
@@ -1757,7 +1758,10 @@
     }
    ],
    "injuries": [
-    "Connor McMichael (day-to-day)",
+    "Connor McMichael (lower body, out)",
+    "Brandon Carlo (day-to-day)",
+    "Pavel Buchnevich (day-to-day)",
+    "Jimmy Snuggerud (undisclosed, day-to-day)",
     "Torey Krug (ankle, IR)",
     "Dillon Dube (IR)",
     "Tyler Tucker (IR)"
@@ -1767,6 +1771,13 @@
    "headline": "The Lightning beat Minnesota 4-3 in overtime on Saturday and play at Winnipeg on Sunday on the back end of a back-to-back.",
    "game": "Next: Sun Nov 08, 6:00 PM ET at WPG, Canada Life Centre (TSN3, The Spot). Andrei Vasilevskiy projected to start.",
    "items": [
+    {
+     "title": "Lightning forward Conor Geekie out 4-5 months after undergoing shoulder surgery",
+     "summary": "Lightning forward Conor Geekie is expected to miss the next four to five months after undergoing shoulder surgery.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50583955/lightning-conor-geekie-4-5-months-shoulder-surgery",
+     "date": "2026-11-24"
+    },
     {
      "title": "Tage Thompson scores twice as Sabres top Lightning, 6-2",
      "summary": "— Tage Thompson scored twice, Zach Benson had a goal and two assists and Ukka-Pekka Luukkonen finished with 29 saves and the Buffalo Sabres beat the Tampa Bay Lightning 6-2 on Sunday.",
@@ -1815,18 +1826,11 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892712",
      "date": "2026-11-15"
-    },
-    {
-     "title": "Red Wings take losing streak into game against the Lightning",
-     "summary": "Detroit Red Wings (7-10-3, in the Atlantic Division) vs. Tampa Bay Lightning (13-4-2, in the Atlantic Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892712",
-     "date": "2026-11-13"
     }
    ],
    "injuries": [
+    "Conor Geekie (shoulder, IR)",
     "Zemgus Girgensons (day-to-day)",
-    "Conor Geekie (upper body, IR)",
     "Brandon Hagel (lower body, IR)"
    ]
   },
@@ -2164,9 +2168,9 @@
     }
    ],
    "injuries": [
-    "Jordan Kyrou (out)",
-    "Vincent Desharnais (abdomen, IR)",
-    "Rasmus Sandin (knee, IR)"
+    "Vincent Desharnais (appendectomy, IR)",
+    "Rasmus Sandin (knee, IR)",
+    "Jordan Kyrou (out)"
    ]
   }
  }

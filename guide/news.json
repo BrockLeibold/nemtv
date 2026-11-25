@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T17:00:01-05:00",
+ "updated": "2026-11-25T09:00:01-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -402,8 +402,8 @@
     }
    ],
    "injuries": [
+    "Mathieu Olivier (IR)",
     "Sean Monahan (day-to-day)",
-    "Mathieu Olivier (day-to-day)",
     "Conor Garland (IR)"
    ]
   },
@@ -753,6 +753,13 @@
    "game": "Next: Mon Nov 9, 8:00 PM ET vs NY Rangers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Connelly, Eichel power the Golden Knights past the Oilers 5-3 as Edmonton skid continues",
+     "summary": "— Trevor Connelly had two goals and an assist, Jack Eichel also scored twice, and the Vegas Golden Knights beat the Edmonton Oilers 5-3 on Tuesday night in a battle between the top two teams in the Pacific Division.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892780",
+     "date": "2026-11-25"
+    },
+    {
      "title": "NHL Tonight: Golden Knights-Oilers takes center stage on Tuesday",
      "summary": "Find game previews, betting intel, broadcast information, stats and highlights here.",
      "source": "ESPN",
@@ -800,16 +807,10 @@
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50516823/oilers-connor-mcdavid-ups-season-opening-points-streak-23-games-tying-wayne-gretzky-4th-longest-all",
      "date": "2026-11-18"
-    },
-    {
-     "title": "Tampa Bay plays Edmonton after Guentzel's 2-goal performance",
-     "summary": "Edmonton Oilers (17-3-3, in the Pacific Division) vs. Tampa Bay Lightning (14-5-2, in the Atlantic Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892744",
-     "date": "2026-11-18"
     }
    ],
    "injuries": [
+    "Filip Hallander (day-to-day)",
     "Zach Hyman (migraine, out)",
     "Alec Regula (undisclosed, IR)",
     "Matt Savoie (lower body, IR)",
@@ -1291,6 +1292,13 @@
    "game": "Next: Mon Nov 09, 8:00 PM ET at Edmonton Oilers, Rogers Place (MSG, SN+, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Why Alexis Lafreniere's breakout brings Rangers hope ... for 2026-27 and beyond",
+     "summary": "The 2020 first overall pick has had ups and downs in his development, but he leveled up this season.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50585269/nhl-2026-27-new-york-rangers-alexis-lafreniere-breakout-draft-stats-playoffs",
+     "date": "2026-11-25"
+    },
+    {
      "title": "Bussi makes 25 saves and Hurricanes down Rangers 5-2",
      "summary": "— Jackson Blake put Carolina ahead to stay midway through the second period and Brandon Bussi made 25 saves and the Carolina Hurricanes defeated the New York Rangers 5-2 on Sunday.",
      "source": "ESPN",
@@ -1337,13 +1345,6 @@
      "summary": "— Leon Draisaitl scored twice, Connor McDavid also had a goal and the Edmonton Oilers held off the New York Rangers 3-1 on Monday night to sweep their season series.",
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892680",
-     "date": "2026-11-10"
-    },
-    {
-     "title": "Flames host the Rangers after overtime win",
-     "summary": "New York Rangers (10-8-1, in the Metropolitan Division) vs. Calgary Flames (8-9-1, in the Pacific Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892691",
      "date": "2026-11-10"
     }
    ],
@@ -1419,8 +1420,8 @@
     }
    ],
    "injuries": [
-    "Hayden Hodgson (IR)",
     "Andre Burakovsky (lower body, IR)",
+    "Hayden Hodgson (IR)",
     "Warren Foegele (knee, IR)",
     "William Eklund (IR)"
    ]
@@ -1701,6 +1702,13 @@
    "game": "Next: Tue Nov 10, 8:00 PM ET vs Detroit Red Wings, Enterprise Center (HBO MAX, SN+, TNT). Starter not announced.",
    "items": [
     {
+     "title": "Joel Hofer supplants Jordan Binnington as Blues' starting goaltender",
+     "summary": "Jordan Binnington backstopped the St. Louis Blues to the Stanley Cup in 2019 and",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50586281/joel-hofer-supplants-jordan-binnington-blues-starting-goaltender",
+     "date": "2026-11-24"
+    },
+    {
      "title": "Blues rally from late 3-goal deficit and beat Oilers 5-4 in shootout for 4th straight win",
      "summary": "— The surging St. Louis Blues overcame a three-goal deficit in the final 10 minutes of regulation for the first time in franchise history and then beat the Edmonton Oilers in a shootout for a dramatic 5-4 victory on Sunday night for their fourth...",
      "source": "ESPN",
@@ -1748,18 +1756,11 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892716",
      "date": "2026-11-15"
-    },
-    {
-     "title": "Florida visits St. Louis after Lundell's 2-goal game",
-     "summary": "Florida Panthers (11-7-2, in the Atlantic Division) vs. St. Louis Blues (9-8-2, in the Central Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892716",
-     "date": "2026-11-13"
     }
    ],
    "injuries": [
-    "Connor McMichael (lower body, out)",
-    "Brandon Carlo (day-to-day)",
+    "Connor McMichael (IR)",
+    "Brandon Carlo (IR)",
     "Pavel Buchnevich (day-to-day)",
     "Jimmy Snuggerud (undisclosed, day-to-day)",
     "Torey Krug (ankle, IR)",
@@ -1978,6 +1979,13 @@
    "game": "Next: Sun Nov 08, 3:30 PM ET at BUF, KeyBank Center (MSG-B, SCRIPPS, SN1, TVAS). Carter Hart projected to start.",
    "items": [
     {
+     "title": "Connelly, Eichel power the Golden Knights past the Oilers 5-3 as Edmonton skid continues",
+     "summary": "— Trevor Connelly had two goals and an assist, Jack Eichel also scored twice, and the Vegas Golden Knights beat the Edmonton Oilers 5-3 on Tuesday night in a battle between the top two teams in the Pacific Division.",
+     "source": "ESPN",
+     "url": "http://www.espn.com/nhl/recap?gameId=401892780",
+     "date": "2026-11-25"
+    },
+    {
      "title": "NHL Tonight: Golden Knights-Oilers takes center stage on Tuesday",
      "summary": "Find game previews, betting intel, broadcast information, stats and highlights here.",
      "source": "ESPN",
@@ -2025,16 +2033,10 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892737",
      "date": "2026-11-16"
-    },
-    {
-     "title": "Chytil, Karlsson score twice as Canucks snap 7-game skid with win over Golden Knights",
-     "summary": "— Filip Chytil and Linus Karlsson each scored twice and the Vancouver Canucks snapped a seven-game losing streak with a 6-3 victory over the Vegas Golden Knights on Sunday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892724",
-     "date": "2026-11-16"
     }
    ],
    "injuries": [
+    "Marc Gatcomb (day-to-day)",
     "Noah Hanifin (out)"
    ]
   },
@@ -2111,6 +2113,13 @@
    "game": "Next: Tue Nov 10, 7:00 PM ET at Ottawa Senators, Canadian Tire Centre (MNMT, RDS2, TSN5). Starter not announced.",
    "items": [
     {
+     "title": "Remi Poirier's carousel around NHL spins again as Caps reclaim him",
+     "summary": "Remi Poirier is heading back to the Washington Capitals in the latest turn of his carousel of three NHL organizations.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50586215/remi-poirier-carousel-nhl-spins-again-caps-reclaim-him",
+     "date": "2026-11-24"
+    },
+    {
      "title": "Capitals re-sign defenseman Jack St. Ivany to 2-year, $2.35M deal",
      "summary": "The Washington Capitals have re-signed defenseman Jack St. Ivany to a two-year deal worth $2.35 million, the team announced Monday.",
      "source": "ESPN",
@@ -2158,13 +2167,6 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892729",
      "date": "2026-11-18"
-    },
-    {
-     "title": "Lightning host the Capitals in Eastern Conference play",
-     "summary": "Washington Capitals (10-8, in the Metropolitan Division) vs. Tampa Bay Lightning (13-5-2, in the Atlantic Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892729",
-     "date": "2026-11-16"
     }
    ],
    "injuries": [

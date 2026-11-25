@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25T09:00:01-05:00",
+ "updated": "2026-11-25T17:07:41-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -129,9 +129,9 @@
     }
    ],
    "injuries": [
+    "Kirill Marchenko (lower body, IR)",
     "Jack Roslovic (day-to-day)",
     "Colton Sissons (lower body, IR)",
-    "Kirill Marchenko (lower body, IR)",
     "Cole McWard (lower body, IR)",
     "Nick Blankenburg (upper body, IR)",
     "Miles Wood (undisclosed, IR)",
@@ -201,9 +201,9 @@
     }
    ],
    "injuries": [
-    "Leo Carlsson (day-to-day)",
-    "Beckett Sennecke (upper body, IR)",
     "Ryan Poehling (knee, IR)",
+    "Beckett Sennecke (upper body, IR)",
+    "Leo Carlsson (out)",
     "A.J. Greer (upper body, IR)"
    ]
   },
@@ -269,6 +269,7 @@
     }
    ],
    "injuries": [
+    "Mattias Samuelsson (undisclosed, day-to-day)",
     "Tyson Kozak (undisclosed, day-to-day)",
     "Konsta Helenius (IR)",
     "Justin Danforth (upper body, IR)",
@@ -337,6 +338,7 @@
     }
    ],
    "injuries": [
+    "K'Andre Miller (day-to-day)",
     "Nikolaj Ehlers (out)"
    ]
   },
@@ -403,7 +405,6 @@
    ],
    "injuries": [
     "Mathieu Olivier (IR)",
-    "Sean Monahan (day-to-day)",
     "Conor Garland (IR)"
    ]
   },
@@ -469,7 +470,7 @@
     }
    ],
    "injuries": [
-    "Morgan Frost (day-to-day)",
+    "Morgan Frost (upper body, out)",
     "Martin Pospisil (upper body, out)",
     "Jonathan Huberdeau (hip, IR)",
     "Kevin Bahl (IR)"
@@ -548,6 +549,13 @@
    "game": "Next: Tue Nov 10, 7:00 PM ET at Toronto, Scotiabank Arena (ALT, TSN4, TVAS). Starter not announced.",
    "items": [
     {
+     "title": "Cale Makar rejoining Avalanche lineup after 'fluke' injury",
+     "summary": "The Avalanche are getting one of their stars back as defenseman Cale Makar returns to the lineup after missing three games with a lower-body injury.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50596079/avalanche-defenseman-cale-makar-returns-3-game-absence",
+     "date": "2026-11-25"
+    },
+    {
      "title": "Avs' Nathan MacKinnon now out 12 weeks after injury timeline extended",
      "summary": "The Avalanche will be without star forward Nathan MacKinnon for longer than anticipated as his timeline for a return from a lower-body was extended to approximately 12 weeks.",
      "source": "ESPN",
@@ -595,17 +603,9 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892711",
      "date": "2026-11-15"
-    },
-    {
-     "title": "Most consecutive games played in MLB, NFL, NBA, NHL",
-     "summary": "Brent Burns has 1,000+ consecutive games played. Find out who else has played the most games in a row across other major leagues.",
-     "source": "ESPN",
-     "url": "https://www.espn.com/mlb/story/_/id/47539505/most-consecutive-games-played-mlb-nfl-nba-nhl",
-     "date": "2026-11-15"
     }
    ],
    "injuries": [
-    "Cale Makar (lower body, IR)",
     "Gavin Brindley (out)",
     "Nathan MacKinnon (lower body, out)",
     "Josh Manson (IR)",
@@ -674,11 +674,11 @@
     }
    ],
    "injuries": [
-    "Tyler Myers (upper body, day-to-day)",
     "Oskar Back (finger, IR)",
     "Kyle Capobianco (leg, IR)",
     "Lian Bichsel (lower body, IR)",
-    "Matt Duchene (IR)"
+    "Matt Duchene (IR)",
+    "Tyler Myers (dtd)"
    ]
   },
   "DET": {
@@ -810,8 +810,8 @@
     }
    ],
    "injuries": [
+    "Zach Hyman (day-to-day)",
     "Filip Hallander (day-to-day)",
-    "Zach Hyman (migraine, out)",
     "Alec Regula (undisclosed, IR)",
     "Matt Savoie (lower body, IR)",
     "Frederik Andersen (knee, IR)",
@@ -822,6 +822,13 @@
    "headline": "The Panthers lost 4-1 at Boston on Sunday, their second straight loss, and fell to 9-7-2.",
    "game": "Next: Tue Nov 10, 7:30 PM ET at CBJ, Nationwide Arena (Disney+, ESPN+, HULU, SN). Starter not announced.",
    "items": [
+    {
+     "title": "Aleksander Barkov, Brad Marchand returning from injuries against Senators",
+     "summary": "Aleksander Barkov and Brad Marchand are about to be in the Panthers' lineup together for the first time since the title-clinching game of the 2025 Stanley Cup Final.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50594065/aleksander-barkov-brad-marchand-returning-vs-senators",
+     "date": "2026-11-25"
+    },
     {
      "title": "Bennett has hat trick, helps set up Vilmanis' winner as Panthers hold off Sabres 4-3",
      "summary": "— Sam Bennett had a hat trick and set up the go-ahead goal by Sandis Vilmanis with 3:18 left, and the Florida Panthers beat the Buffalo Sabres 4-3 on Saturday night.",
@@ -870,18 +877,9 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892716",
      "date": "2026-11-13"
-    },
-    {
-     "title": "Panthers erase 4-1 deficit, top Red Wingst 5-4 behind 2 goals from Lundell",
-     "summary": "— Anton Lundell scored his second goal of the night with 2:40 left to cap a rally from three goals down, and the Florida Panthers pulled off their biggest comeback of the season to beat the Detroit Red Wings 5-4 on Thursday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892699",
-     "date": "2026-11-13"
     }
    ],
    "injuries": [
-    "Brad Marchand (knee, IR)",
-    "Aleksander Barkov (knee, IR)",
     "Jonah Gadjovich (neck, IR)"
    ]
   },
@@ -1553,12 +1551,13 @@
     }
    ],
    "injuries": [
-    "Evgeni Malkin (day-to-day)",
-    "Declan Carlile (day-to-day)",
+    "Egor Chinakhov (out)",
     "Bryan Rust (lower body, IR)",
     "Nick Robertson (IR)",
     "Elmer Soderblom (upper body, IR)",
-    "Ryan Graves (lower body, IR)"
+    "Ryan Graves (lower body, IR)",
+    "Evgeni Malkin (dtd)",
+    "Declan Carlile (dtd)"
    ]
   },
   "SEA": {
@@ -1759,10 +1758,10 @@
     }
    ],
    "injuries": [
+    "Pavel Buchnevich (upper body, out)",
+    "Jimmy Snuggerud (upper body, out)",
     "Connor McMichael (IR)",
     "Brandon Carlo (IR)",
-    "Pavel Buchnevich (day-to-day)",
-    "Jimmy Snuggerud (undisclosed, day-to-day)",
     "Torey Krug (ankle, IR)",
     "Dillon Dube (IR)",
     "Tyler Tucker (IR)"
@@ -1831,8 +1830,10 @@
    ],
    "injuries": [
     "Conor Geekie (shoulder, IR)",
-    "Zemgus Girgensons (day-to-day)",
-    "Brandon Hagel (lower body, IR)"
+    "Brandon Hagel (IR)",
+    "Zemgus Girgensons (dtd)",
+    "Erik Cernak (dtd)",
+    "Victor Hedman (dtd)"
    ]
   },
   "UTA": {
@@ -1967,7 +1968,7 @@
     }
    ],
    "injuries": [
-    "Elias Pettersson (day-to-day)",
+    "Elias Pettersson (out)",
     "Brendan Gallagher (lower body, IR)",
     "Guillaume Brisebois (IR)",
     "Mackenzie MacEachern (IR)",

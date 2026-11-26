@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T09:00:01-05:00",
+ "updated": "2026-11-26T17:00:01-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -129,8 +129,8 @@
     }
    ],
    "injuries": [
+    "Jack Roslovic (upper body, out)",
     "Kirill Marchenko (lower body, IR)",
-    "Jack Roslovic (day-to-day)",
     "Colton Sissons (lower body, IR)",
     "Cole McWard (lower body, IR)",
     "Nick Blankenburg (upper body, IR)",
@@ -201,10 +201,10 @@
     }
    ],
    "injuries": [
+    "Leo Carlsson (day-to-day)",
     "Ryan Poehling (knee, IR)",
-    "Beckett Sennecke (upper body, IR)",
-    "Leo Carlsson (out)",
-    "A.J. Greer (upper body, IR)"
+    "A.J. Greer (upper body, IR)",
+    "Beckett Sennecke (IR)"
    ]
   },
   "BUF": {
@@ -269,11 +269,10 @@
     }
    ],
    "injuries": [
-    "Tyson Kozak (undisclosed, out)",
+    "Tyson Kozak (day-to-day)",
     "Konsta Helenius (IR)",
     "Justin Danforth (upper body, IR)",
-    "Matt Grzelcyk (lower body, IR)",
-    "Mattias Samuelsson (dtd)"
+    "Matt Grzelcyk (lower body, IR)"
    ]
   },
   "CAR": {
@@ -338,8 +337,8 @@
     }
    ],
    "injuries": [
-    "K'Andre Miller (out)",
-    "Nikolaj Ehlers (out)"
+    "Nikolaj Ehlers (day-to-day)",
+    "K'Andre Miller (day-to-day)"
    ]
   },
   "CBJ": {
@@ -358,6 +357,20 @@
      "summary": "— Arseny Gritsyuk scored in a shootout and New Jersey Devils beat Columbus 3-2 on Wednesday night, topping the Blue Jackets for the second time in three days and sending them to their fourth consecutive home loss.",
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/recap?gameId=401892788",
+     "date": "2026-11-26"
+    },
+    {
+     "title": "Devils defenseman Brenden Dillon suspended 4 games for illegal hit to the head",
+     "summary": "Devils defenseman Brenden Dillon has been suspended for four games for an illegal hit to the head of Blue Jackets defenseman Denton Mateychuk.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50605811/devils-brenden-dillon-suspended-4-games-illegal-hit",
+     "date": "2026-11-26"
+    },
+    {
+     "title": "Devils' Brenden Dillon to have hearing for hit on Blue Jackets' Denton Mateychuk",
+     "summary": "Brenden Dillon will have a hearing with the NHL Department of Safety for his hit against Denton Mateychuk.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50602167/devils-brenden-dillon-hearing-denton-mateychuk-hit",
      "date": "2026-11-26"
     },
     {
@@ -387,26 +400,12 @@
      "source": "ESPN",
      "url": "https://www.espn.com/nhl/story/_/id/50521835/boston-college-retire-late-johnny-gaudreau-no-13",
      "date": "2026-11-18"
-    },
-    {
-     "title": "Blackhawks host the Blue Jackets after Bertuzzi's 2-goal game",
-     "summary": "Columbus Blue Jackets (7-12, in the Metropolitan Division) vs. Chicago Blackhawks (6-13-2, in the Central Division)",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/preview?gameId=401892748",
-     "date": "2026-11-18"
-    },
-    {
-     "title": "Defenseman Matthew Schaefer records 1st NHL hat trick as Islanders beat Columbus 5-1",
-     "summary": "— Defenseman Matthew Schaefer recorded his first NHL hat trick and Anthony Duclair had a goal and an assist as the New York Islanders beat the Columbus Blue Jackets 5-1 on Tuesday night.",
-     "source": "ESPN",
-     "url": "http://www.espn.com/nhl/recap?gameId=401892731",
-     "date": "2026-11-18"
     }
    ],
    "injuries": [
-    "Denton Mateychuk (day-to-day)",
-    "Mathieu Olivier (IR)",
-    "Conor Garland (IR)"
+    "Denton Mateychuk (out)",
+    "Conor Garland (IR)",
+    "Mathieu Olivier (dtd)"
    ]
   },
   "CGY": {
@@ -471,7 +470,7 @@
     }
    ],
    "injuries": [
-    "Morgan Frost (upper body, out)",
+    "Morgan Frost (day-to-day)",
     "Martin Pospisil (upper body, out)",
     "Jonathan Huberdeau (hip, IR)",
     "Kevin Bahl (IR)"
@@ -539,7 +538,7 @@
     }
    ],
    "injuries": [
-    "Tyler Bertuzzi (out)",
+    "Tyler Bertuzzi (day-to-day)",
     "Connor Bedard (IR)",
     "Wyatt Kaiser (upper body, suspension)",
     "Bowen Byram (upper body, IR)"
@@ -678,8 +677,7 @@
     "Kyle Capobianco (leg, IR)",
     "Lian Bichsel (lower body, IR)",
     "Matt Duchene (IR)",
-    "Oskar Back (IR)",
-    "Tyler Myers (dtd)"
+    "Oskar Back (IR)"
    ]
   },
   "DET": {
@@ -744,7 +742,7 @@
     }
    ],
    "injuries": [
-    "William Wallinder (out)",
+    "William Wallinder (day-to-day)",
     "Sam Montembeault (lower body, IR)",
     "Simon Edvinsson (contract dispute, IR)"
    ]
@@ -1083,7 +1081,6 @@
     "Mike Matheson (lower body, IR)",
     "Josh Anderson (lower body, IR)",
     "Chris Kreider (IR)",
-    "Bryce Pickford (IR)",
     "Lucas Condotta (IR)"
    ]
   },
@@ -1113,6 +1110,13 @@
      "date": "2026-11-26"
     },
     {
+     "title": "Devils defenseman Brenden Dillon suspended 4 games for illegal hit to the head",
+     "summary": "Devils defenseman Brenden Dillon has been suspended for four games for an illegal hit to the head of Blue Jackets defenseman Denton Mateychuk.",
+     "source": "ESPN",
+     "url": "https://www.espn.com/nhl/story/_/id/50605811/devils-brenden-dillon-suspended-4-games-illegal-hit",
+     "date": "2026-11-26"
+    },
+    {
      "title": "Hellebuyck returns to form, making 19 saves as the Devils beat the Blue Jackets 3-2",
      "summary": "— Connor Hellebuyck made 19 saves two days after getting an early hook and the New Jersey Devils beat the Columbus Blue Jackets 3-2 Monday night.",
      "source": "ESPN",
@@ -1139,16 +1143,10 @@
      "source": "ESPN",
      "url": "http://www.espn.com/nhl/preview?gameId=401892740",
      "date": "2026-11-17"
-    },
-    {
-     "title": "Devils' Mantha expected to miss a month, Kovacevic out 4-6 weeks",
-     "summary": "Devils winger Anthony Mantha (throat) is expected to miss a month, and defenseman Johnathan Kovacevic (ankle) is out 4-6 weeks, coach Sheldon Keefe announced Tuesday.",
-     "source": "ESPN",
-     "url": "https://www.espn.com/nhl/story/_/id/50512716/devils-mantha-expected-miss-month-kovacevic-4-6-weeks",
-     "date": "2026-11-17"
     }
    ],
    "injuries": [
+    "Brenden Dillon (suspension)",
     "Anthony Mantha (neck, IR)",
     "Johnathan Kovacevic (ankle, IR)",
     "Seamus Casey (knee, IR)"
@@ -1348,6 +1346,7 @@
     }
    ],
    "injuries": [
+    "Gabe Perreault (lower body, IR)",
     "Pavel Dorofeyev (lower body, IR)",
     "Oliver Bjorkstrand (upper body, IR)",
     "Alberts Smits (upper body, IR)",
@@ -1757,8 +1756,8 @@
     }
    ],
    "injuries": [
-    "Pavel Buchnevich (upper body, out)",
-    "Jimmy Snuggerud (upper body, out)",
+    "Pavel Buchnevich (day-to-day)",
+    "Jimmy Snuggerud (day-to-day)",
     "Connor McMichael (IR)",
     "Brandon Carlo (IR)",
     "Torey Krug (ankle, IR)",
@@ -1828,9 +1827,9 @@
     }
    ],
    "injuries": [
+    "Victor Hedman (day-to-day)",
+    "Erik Cernak (day-to-day)",
     "Pontus Holmberg (out)",
-    "Erik Cernak (out)",
-    "Victor Hedman (out)",
     "Conor Geekie (shoulder, IR)"
    ]
   },

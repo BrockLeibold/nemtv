@@ -32,10 +32,11 @@ nav{gap:2px}header [data-t]{display:flex;align-items:center;justify-content:cent
 header [data-t][aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 :focus{outline:none}
 /* 4K box only (html.anim, set from the user agent): focus moves are animated so it's clear where you are */
-html.anim .focusable,html.anim button,html.anim .pill{transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease,background-color .2s ease,filter .2s ease}
-html.anim .pill:focus,html.anim .focusable:focus{transform:scale(1.07);z-index:3;filter:brightness(1.12)}
+html.anim .focusable,html.anim button,html.anim .pill{transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease}
+html.anim .pill:focus,html.anim .focusable:focus{transform:scale(1.07);z-index:3}
 html.anim header [data-t]:focus,html.anim .ctl button:focus,html.anim .pmenu button:focus{transform:scale(1.08)}
-html.anim #m{scroll-behavior:smooth}
+
+#m{scroll-padding-block:40px} /* scrolling to a card leaves room for the focus ring + zoom (was cut off at the top) */
 @keyframes scpop{0%{transform:scale(1.45);color:#fff;text-shadow:0 0 14px rgba(255,255,255,.8)}100%{transform:none;text-shadow:none}}
 html.anim .scr.pop{display:inline-block;animation:scpop .9s cubic-bezier(.2,.8,.2,1)}
 @media (prefers-reduced-motion:reduce){html.anim *{transition:none!important;animation:none!important}}
@@ -65,8 +66,17 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 .pill .tm{font-size:13px;line-height:1.05;overflow-wrap:normal;word-break:normal;hyphens:none;text-wrap:balance}
 .pill .mid{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 4px}
 .pill .vs{color:rgba(255,255,255,.8);font-size:12px}
-.pill .live{position:absolute;bottom:6px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:4px;font-size:12px;color:rgba(255,255,255,.9);font-weight:700;letter-spacing:.1em}
+.pill .live{position:absolute;bottom:6px;z-index:2;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:4px;font-size:12px;color:rgba(255,255,255,.9);font-weight:700;letter-spacing:.1em}
 .pill .scr{font-size:22px;line-height:1;color:#fff;letter-spacing:.02em}
+/* cover style (Brock 2026-11-27): each half in its team's colour, big logos, no names; score + period over the seam */
+.pill{min-height:112px;padding:0;overflow:hidden;grid-template-columns:1fr 1fr;background:#111}
+.pill .side{height:100%;justify-content:center;background:linear-gradient(160deg,color-mix(in srgb,var(--ca) 78%,#000),color-mix(in srgb,var(--ca) 40%,#000))}
+.pill .side+.mid+.side{background:linear-gradient(160deg,color-mix(in srgb,var(--ch) 78%,#000),color-mix(in srgb,var(--ch) 40%,#000))}
+.pill .side img{width:58%;height:auto;max-height:62%}
+.pill .tm{display:none}
+.pill .mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-62%);z-index:2;background:rgba(10,9,12,.8);border-radius:10px;padding:5px 10px}
+.pill .live{bottom:7px;left:50%;right:auto;transform:translateX(-50%);background:rgba(10,9,12,.8);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.pill.done .side{filter:saturate(.25) brightness(.72)}.pill.done .side img{filter:none;opacity:1} /* finished: both team colours kept, desaturated */
 
 /* chips (Live filters, Home shortcuts) */
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
@@ -383,7 +393,7 @@ const fmtT=ms=>{const d=new Date(ms);return d.toLocaleDateString([],{weekday:"sh
 
 function pillHTML(c,k){ // lite: flat card, away team left, home right
   const lg=t=>t.logo?`<img src="${t.logo}" alt="">`:"", fs=starOn(c.aw,c.hm)?`<span class="fstar">&#9733;</span>`:"";
-  return `<button class="pill focusable${c.sc&&c.sc.over?" done":""}" data-g="${k}">${fs}<span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${lg(c.t[0])}<span class="tm tmn">${esc(c.tm[0])}</span></span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${lg(c.t[1])}<span class="tm tmn">${esc(c.tm[1])}</span></span><span class="live">${c.sc?esc(c.sc.note):esc(clk(c.st)).toUpperCase()}</span></button>`}
+  return `<button class="pill focusable${c.sc&&c.sc.over?" done":""}" data-g="${k}" style="--ca:${c.t[0].c||"#333"};--ch:${c.t[1].c||"#333"}">${fs}<span class="side${c.sc&&c.sc.win==="h"?" lose":""}">${lg(c.t[0])}<span class="tm tmn">${esc(c.tm[0])}</span></span><span class="mid">${c.sc?`<span class="scr disp">${c.sc.score}</span>`:'<span class="vs disp">VS</span>'}</span><span class="side${c.sc&&c.sc.win==="a"?" lose":""}">${lg(c.t[1])}<span class="tm tmn">${esc(c.tm[1])}</span></span><span class="live">${c.sc?esc(c.sc.note):esc(clk(c.st)).toUpperCase()}</span></button>`}
 const chip=(label,pressed,attr)=>`<button class="chip focusable" ${attr} aria-pressed="${pressed}">${esc(label)}</button>`;
 
 let gQ="";

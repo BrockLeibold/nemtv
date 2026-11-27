@@ -11,7 +11,7 @@
   --ink:#F2F0F4;--ink-2:#C9C4CF;--muted:#8F8996;--accent:#F0435F;
   --red:#D21F3C;--red-3:#B8182F;--coral:#FF8A5B;--plum:#2B2731;--wine:#5C2330;--island:#211E25;
   --gl-fill:#211E25;--safe-x:max(env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));--safe-y:max(env(safe-area-inset-top,0px),env(safe-area-inset-bottom,0px));--h-ctl:34px;--pad-x:max(28px,var(--safe-x),calc((100vw - 1280px)/2));
-  --ring:0 0 0 2px #0F0E11,0 0 0 5px #F2F0F4;--ring-in:inset 0 0 0 2px #0F0E11,inset 0 0 0 5px #F2F0F4;
+  --ring:inset 0 0 0 3px #F2F0F4,inset 0 0 0 4px #0F0E11; /* focus ring drawn inside (Brock 2026-11-27: no zoom, no outer ring) */--ring-in:inset 0 0 0 2px #0F0E11,inset 0 0 0 5px #F2F0F4;
 }
 @media(min-width:900px) and (min-aspect-ratio:3/2){:root{--safe-x:48px;--safe-y:27px}}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
@@ -31,10 +31,11 @@ nav{gap:2px}header [data-t]{display:flex;align-items:center;justify-content:cent
 #setb[aria-pressed=true]{background:rgba(244,242,246,.86)}
 header [data-t][aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 :focus{outline:none}
+.pill:focus::after,.sr:focus::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--ring);z-index:4;pointer-events:none} .sr{position:relative} /* cards: ring on top of the team colours, inside the edge */
 /* 4K box only (html.anim, set from the user agent): focus moves are animated so it's clear where you are */
 html.anim .focusable,html.anim button,html.anim .pill{transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease}
-html.anim .pill:focus,html.anim .focusable:focus{transform:scale(1.07);z-index:3}
-html.anim header [data-t]:focus,html.anim .ctl button:focus,html.anim .pmenu button:focus{transform:scale(1.08)}
+
+
 
 #m{scroll-padding-block:40px} /* scrolling to a card leaves room for the focus ring + zoom (was cut off at the top) */
 @keyframes scpop{0%{transform:scale(1.45);color:#fff;text-shadow:0 0 14px rgba(255,255,255,.8)}100%{transform:none;text-shadow:none}}
@@ -216,7 +217,7 @@ main.live .chip{padding:3px 10px;font-size:12px}
 <div class="ptop" id="ptop"><button class="pbtn" id="pback">&#8592; Back</button><div class="ptt" id="ptt"></div><button class="pbtn" id="pfs">Full screen</button></div><div id="zb"></div>
 <div class="ctl" id="pctl">
  <div class="grp"><button id="bfeed"></button><button id="zv" aria-label="Zoom"></button></div>
- <div class="grp"><button id="b2" hidden>Multiview</button><button id="bsc" aria-pressed="false">Scores</button><button id="bfav" aria-pressed="false">Favorite</button></div>
+ <div class="grp"><button id="b2" hidden>Multiview</button><button id="bmlay" hidden></button><button id="bmx" hidden>Single game</button><button id="bsc" aria-pressed="false">Scores</button></div>
 </div><div class="pmenu" id="pmenu" role="menu" aria-label="Options" hidden></div><div id="sbar" aria-label="Scores"></div></div>
 <div id="tip" role="status" aria-live="polite"></div>
 <script src="config.js"></script>
@@ -459,7 +460,7 @@ function watchG(g){if(!g)return tipS("No feed found for this game");const sc=g.s
 /* ---------- player ---------- */
 function show(){const pl=$("#pl");pl.classList.remove("hide");clearTimeout(hideT);hideT=setTimeout(()=>{if(!menuOn&&!$("#pbuf").classList.contains("on"))pl.classList.add("hide")},4000)} // never auto-hide while connecting / buffering / failed: the message and the Feed button stay up
 function setZoom(z){zoom=Math.max(50,Math.min(200,z));if(NV)Android.nZoom(zoom);$("#v").style.transform="scale("+zoom/100+")";$("#zv").textContent="Zoom "+zoom+"%"}
-function favBtn(){const f=fav.includes(cur.c.n),b=$("#bfav");b.textContent=f?"Unfavorite":"Favorite";b.setAttribute("aria-pressed",f)}
+function favBtn(){const f=fav.includes(cur.c.n),b=$("#bfav"); if(!b)return;b.textContent=f?"Unfavorite":"Favorite";b.setAttribute("aria-pressed",f)}
 let waitT=0;
 function bufBuild(){ // big loading card: both teams on their colours, or the channel name
   const pb=$("#pbuf"), t=cur&&cur.t&&cur.t.length>1?cur.t:[{},{}], two=cur&&cur.tm&&cur.tm.length>1&&t[0].logo&&t[1].logo;
@@ -487,13 +488,14 @@ let two=null, twoS=1, twoL=[];
 function twoOn(g){if(!g)return; if(two)Android.nStop2();
   const me={g,feeds:feedsFor(g),tried:new Set()}; two=me;
   if(!document.documentElement.classList.contains("two")){Android.nSplit(true);setZoom(100);twoSound(1);document.documentElement.classList.add("two")}
-  pttSet(cur); $("#b2").textContent="Multiview: on"; Android.nLayout(twoLay); twoOutline();
+  pttSet(cur); $("#b2").textContent="2nd: "+g.tm.join(" vs "); Android.nLayout(twoLay); twoOutline(); mvBar();
   const go=()=>{if(two!==me)return; const c=me.feeds.find(f=>!me.tried.has(f.u)); if(!c)return tipS("No feed would play for "+g.tm.join(" vs ")); me.tried.add(c.u); me.c=c; Android.nPlay2(c.u)};
   me.go=go;
   if(g.sid)svFeeds(g.sid,f=>{if(two!==me)return; me.feeds=svOrder(me.feeds,(f||[]).filter(x=>!svFr(x)));go()}); else go()}
-function twoOff(){if(!two)return; two=null; twoS=1; Android.nSplit(false); document.documentElement.classList.remove("two"); $("#b2").textContent="Multiview"; $("#pl").classList.remove("sel"); if(cur){pttSet(cur);feedLbl()}}
+function twoOff(){if(!two)return; two=null; twoS=1; Android.nSplit(false); document.documentElement.classList.remove("two"); $("#b2").textContent="Multiview"; $("#pl").classList.remove("sel"); mvBar(); if(cur){pttSet(cur);feedLbl()}}
 let twoLay=(()=>{try{return localStorage.twoLay||"side"}catch(e){return "side"}})(); const TWOL=[["side","Side by side"],["pip","Picture in picture"],["over","Overlap"]];
-function twoLayout(k){twoLay=k; try{localStorage.twoLay=k}catch(e){} Android.nLayout(k); twoOutline()}
+function twoLayout(k){twoLay=k; try{localStorage.twoLay=k}catch(e){} Android.nLayout(k); twoOutline(); mvBar()}
+function mvBar(){$("#bmlay").hidden=$("#bmx").hidden=!two; $("#bmlay").textContent="Layout: "+TWOL.find(x=>x[0]===twoLay)[1]} // multiview controls live on the main bar
 const TWOR={side:[[0,0,.5,1],[.5,0,.5,1]],pip:[[0,0,1,1],[.72,.68,.27,.3]],over:[[0,.35,.65,.65],[.57,0,.43,.43]]};
 function twoOutline(){const o=$("#twoOut"); if(!two)return; const W=innerWidth,H=innerHeight,[x,y,w,h]=TWOR[twoLay][twoS-1].map((f,i)=>f*(i%2?H:W)); let vw=w,vh=w*9/16; if(vh>h){vh=h;vw=h*16/9}
   Object.assign(o.style,{left:x+(w-vw)/2+"px",top:y+(h-vh)/2+"px",width:vw+"px",height:vh+"px"})}
@@ -579,8 +581,7 @@ function openMenu(kind){
   if(kind==="feed"&&F2)m.innerHTML=`<h3>FEED · SECOND GAME</h3>`+two.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===two.c}" data-f2="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("");
   else if(kind==="feed")m.innerHTML=`<h3>${two?"FEED · MAIN GAME":cur.title?"CHOOSE A FEED":"FEED"}</h3>`+cur.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===cur.feed}" data-f="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("")+(cur.feeds.length<2?'<div class="pnote">Only one feed for this one</div>':"");
   else if(kind==="two"){twoL=games().live.filter(g=>g.title!==cur.title&&g.c.u&&!(g.sc&&g.sc.over)&&g.st<=Date.now()+5*6e4);
-    m.innerHTML=(two?`<h3>MULTIVIEW</h3><button role="menuitemradio" aria-checked="${twoS===1}" data-s="1"><span>Sound from main game</span><small>${esc(cur.tm?cur.tm.join(" vs "):cur.c.n)}</small></button><button role="menuitemradio" aria-checked="${twoS===2}" data-s="2"><span>Sound from second game</span><small>${esc(two.g.tm.join(" vs "))}</small></button><button data-s="0"><span>Back to one game</span><small>full screen</small></button><h3>LAYOUT</h3>`+TWOL.map(([k,n])=>`<button role="menuitemradio" aria-checked="${twoLay===k}" data-lay="${k}"><span>${n}</span></button>`).join(""):"")
-      +`<h3>${two?"SWAP SECOND GAME":"MULTIVIEW: PICK A 2ND GAME"}</h3>`+(twoL.length?twoL.map((g,k)=>`<button role="menuitemradio" aria-checked="${!!two&&two.g.title===g.title}" data-g="${k}"><span class="tmn">${esc(g.tm[0])} vs ${esc(g.tm[1])}</span><small>${g.sc?esc(g.sc.score+"  "+g.sc.note):clk(g.st)}</small></button>`).join(""):'<div class="pnote">No other game on right now</div>')}
+    m.innerHTML=""+`<h3>${two?"SWAP SECOND GAME":"MULTIVIEW: PICK A 2ND GAME"}</h3>`+(twoL.length?twoL.map((g,k)=>`<button role="menuitemradio" aria-checked="${!!two&&two.g.title===g.title}" data-g="${k}"><span class="tmn">${esc(g.tm[0])} vs ${esc(g.tm[1])}</span><small>${g.sc?esc(g.sc.score+"  "+g.sc.note):clk(g.st)}</small></button>`).join(""):'<div class="pnote">No other game on right now</div>')}
   else m.innerHTML=`<h3>ZOOM</h3>`+[50,75,85,90,95,100,105,110,115,120,125,130,140,150,175,200].map(z=>`<button role="menuitemradio" aria-checked="${z===zoom}" data-z="${z}"><span>${z}%</span><small>${z===100?"fit to screen":""}</small></button>`).join("");
   m.hidden=false; const a=m.querySelector('[aria-checked=true]')||m.querySelector("button"); a.focus(); a.scrollIntoView({block:"center"});
 }
@@ -632,10 +633,11 @@ $("#pl").onclick=e=>{
   if(b.id==="bfeed")openMenu("feed");
   else if(b.id==="zv")openMenu("zoom");
   else if(b.id==="b2")openMenu("two");
+  else if(b.id==="bmlay"){const k=TWOL.findIndex(x=>x[0]===twoLay);twoLayout(TWOL[(k+1)%TWOL.length][0])}
+  else if(b.id==="bmx"){twoOff();$("#b2").focus()}
   else if(b.dataset.g!==undefined){closeMenu();twoOn(twoL[+b.dataset.g]);$("#b2").focus()}
   else if(b.dataset.lay){closeMenu();twoLayout(b.dataset.lay);$("#b2").focus()}
   else if(b.dataset.s!==undefined){closeMenu();const k=+b.dataset.s;if(k)twoSound(k);else twoOff();$("#b2").focus()}
-  else if(b.id==="bfav")toggleFav(cur.c.n);
   else if(b.id==="bsc"){sbOn=!sbOn;sv("scoreBar",sbOn);sbSync();if(sbOn)pollScores()}
   else if(b.id==="pback"){closeMenu();stop()}
   else if(b.id==="pfs"){const d=document;if(d.fullscreenElement)d.exitFullscreen&&d.exitFullscreen().catch(()=>{});else if(d.documentElement.requestFullscreen)d.documentElement.requestFullscreen().catch(()=>{})}

@@ -130,8 +130,8 @@ html.nv,html.nv body,html.nv #pl{background:transparent}html.nv body>*:not(#pl):
 #pl.sb #sbar{display:flex}
 /* multiview: scores fill the black space each layout leaves (side: bottom band, PiP: right column, overlap: bottom-right) */
 html.two #sbar{height:auto;min-height:0;container-type:normal;flex-wrap:wrap;align-content:center;justify-content:center;gap:8px;padding:6px}
-html.two .sbi{height:36px;margin:0!important;zoom:1} html.two .sbi img,html.two .sbi b{width:30px;height:30px;font-size:13px;line-height:30px} html.two .sbi .scr{font-size:19px} html.two .sbi .nt{font-size:13px}
-html[data-lay=side] #sbar{left:2%;right:2%;top:79%;bottom:2%} html[data-lay=pip] #sbar{left:1%;right:31%;top:76.5%;bottom:1%} html[data-lay=over] #sbar{left:1%;right:44%;top:1%;bottom:66%}
+html.two .sbi{height:36px;margin:0!important;zoom:var(--mvz,1)} html.two .sbi img,html.two .sbi b{width:30px;height:30px;font-size:13px;line-height:30px} html.two .sbi .scr{font-size:19px} html.two .sbi .nt{font-size:13px}
+html[data-lay=side] #sbar{left:2%;right:2%;top:79%;bottom:2%} html[data-lay=pip] #sbar{left:1%;right:31%;top:80%;bottom:1%;align-content:flex-end} html[data-lay=over] #sbar{left:1%;right:44%;top:1%;bottom:66%}
 #pl.sb.hide #sbar{opacity:1}
 .sbi{flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:0 10px;border-radius:999px;background:var(--surface);color:#fff;white-space:nowrap;zoom:var(--sbz,1)}
 .sbi:first-child{margin-left:auto}.sbi:last-child{margin-right:auto}
@@ -516,7 +516,7 @@ function twoGameAct(k){const sec=twoS===2;
   else if((k==="full"&&sec)||(k==="rm"&&!sec)){const g=two.g;twoOff();watchG(g)} // keep the second game alone
   else twoOff()} // keep the main game alone
 function mvBar(){$("#bmlay").hidden=$("#bmx").hidden=$("#bmsw").hidden=!two; $("#bmlay").textContent="Layout: "+TWOL.find(x=>x[0]===twoLay)[1]} // multiview controls live on the main bar
-const TWOR={side:[[0,0,.5,1],[.5,0,.5,1]],pip:[[0,0,.75,.75,0,0],[.7,.7,.3,.3,1,1]],over:[[0,.35,.65,.65,0,1],[.57,0,.43,.43,1,0]]};
+const TWOR={side:[[0,0,.5,1],[.5,0,.5,1]],pip:[[0,0,1,1],[.7,.7,.3,.3,1,1]],over:[[0,.35,.65,.65,0,1],[.57,0,.43,.43,1,0]]};
 function twoOutline(){const o=$("#twoOut"); if(!two)return; const W=innerWidth,H=innerHeight,R=TWOR[twoLay][(twoS-1)^twoSw],[x,y,w,h]=R.slice(0,4).map((f,i)=>f*(i%2?H:W)),ax=R[4]??.5,ay=R[5]??.5; let vw=w,vh=w*9/16; if(vh>h){vh=h;vw=h*16/9}
   Object.assign(o.style,{left:x+(w-vw)*ax+"px",top:y+(h-vh)*ay+"px",width:vw+"px",height:vh+"px"})}
 let selT=0; function twoSel(){const pl=$("#pl"); pl.classList.add("sel"); clearTimeout(selT); selT=setTimeout(()=>pl.classList.remove("sel"),4000)}
@@ -576,7 +576,7 @@ function sbRender(){const b=$("#sbar"); if(!sbOn||!$("#pl").classList.contains("
   const lg=(t,a)=>t.logo?`<img src="${t.logo}" alt="">`:`<b class="disp">${esc(a)}</b>`;
   b.innerHTML=games().live.filter(g=>!(cur&&cur.title===g.title)&&!(two&&two.g.title===g.title)).sort((x,y)=>x.st-y.st).map(g=>{const c=g.sc;
     return `<span class="sbi${c&&c.over?" done":""}">${lg(g.t[0],g.aw)}<span class="scr disp">${c?esc(c.score):"VS"}</span>${lg(g.t[1],g.hm)}<span class="nt disp${c?"":" fut"}">${c?esc(c.note):esc(clk(g.st)).toUpperCase()}</span></span>`}).join("");
-  b.style.removeProperty("--sbz"); b.classList.remove("tight","t2"); if(two)return; // multiview: chips wrap into the free space, no squeezing // crowded: drop start times, then finished games' notes, then zoom
+  b.style.removeProperty("--sbz"); b.classList.remove("tight","t2"); b.style.removeProperty("--mvz"); if(two){b.style.alignContent="flex-start"; /* measure with overflow going down only */ for(let z=.9;z>=.4&&(b.scrollHeight>b.clientHeight+1||b.scrollWidth>b.clientWidth+1);z-=.1)b.style.setProperty("--mvz",z.toFixed(1)); b.style.alignContent="";return} // multiview: chips wrap into the free space and shrink when there are many // crowded: drop start times, then finished games' notes, then zoom
   if(b.scrollWidth>b.clientWidth+1)b.classList.add("tight"); if(b.scrollWidth>b.clientWidth+1)b.classList.add("t2"); for(let k=0;k<3&&b.scrollWidth>b.clientWidth+1;k++)b.style.setProperty("--sbz",(+(b.style.getPropertyValue("--sbz")||1)*(b.clientWidth-8)/b.scrollWidth*.98).toFixed(3))} // ponytail: zoom to fit, no tiers like the full app
 /* ---------- remembered feed per game (localStorage "feedMem", entries older than 2 days dropped) ---------- */
 const fmKey=g=>g&&g.title&&!g.ch?svNrm(g.title)+"@"+(g.st?Math.floor(g.st/864e5):0):"";

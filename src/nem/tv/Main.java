@@ -184,7 +184,7 @@ public class Main extends Activity {
       @JavascriptInterface public void nSplit(final boolean on) { runOnUiThread(new Runnable() { public void run() { if (!on) { np.surface(sv1); np2.surface(sv2); np.rect = new float[]{0, 0, 1, 1}; } np.cap(on); np.layout(); if (!on) { np2.stop(); np.vol(1f); } } }); }
       // multiview layout for 2 games (same rects as the full version): side, pip (2nd small bottom-right), over (main bottom-left, 2nd top-right)
       @JavascriptInterface public void nLayout(final String s, final boolean sw) { runOnUiThread(new Runnable() { public void run() {
-        float[][] r = s.equals("pip") ? new float[][]{{0, 0, .75f, .75f, 0, 0}, {.7f, .7f, .3f, .3f, 1, 1}} : s.equals("over") ? new float[][]{{0, .35f, .65f, .65f, 0, 1}, {.57f, 0, .43f, .43f, 1, 0}} : new float[][]{{0, 0, .5f, 1}, {.5f, 0, .5f, 1}};
+        float[][] r = s.equals("pip") ? new float[][]{{0, 0, 1, 1}, {.7f, .7f, .3f, .3f, 1, 1}} : s.equals("over") ? new float[][]{{0, .35f, .65f, .65f, 0, 1}, {.57f, 0, .43f, .43f, 1, 0}} : new float[][]{{0, 0, .5f, 1}, {.5f, 0, .5f, 1}};
         np.rect = r[sw ? 1 : 0]; np2.rect = r[sw ? 0 : 1]; /* sw: the second stream takes the main spot */ np.surface(sw ? sv2 : sv1); np2.surface(sw ? sv1 : sv2); /* main spot always on the bottom surface, the other on the overlay (PiP draws on top) */ np.layout(); np2.layout(); } }); }
       @JavascriptInterface public void nSound(final int side) { runOnUiThread(new Runnable() { public void run() { np.vol(side == 2 ? 0f : 1f); np2.vol(side == 2 ? 1f : 0f); } }); }
       @JavascriptInterface public void nZoom(final int pct) { runOnUiThread(new Runnable() { public void run() { np.zoom(pct); } }); }

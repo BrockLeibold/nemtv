@@ -89,7 +89,8 @@ final class NPlayer {
       if (h > H) { h = H; w = Math.round(H * ar); }
     }
     FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(w, h, Gravity.LEFT | Gravity.TOP);
-    lp.leftMargin = x + (W - w) / 2; lp.topMargin = y + (H - h) / 2;
+    float ax = rect.length > 4 ? rect[4] : .5f, ay = rect.length > 5 ? rect[5] : .5f; // where the picture sits in its box (PiP: hard against the corner)
+    lp.leftMargin = x + Math.round((W - w) * ax); lp.topMargin = y + Math.round((H - h) * ay);
     FrameLayout.LayoutParams o = (FrameLayout.LayoutParams) sv.getLayoutParams();
     if (o != null && o.width == lp.width && o.height == lp.height && o.leftMargin == lp.leftMargin && o.topMargin == lp.topMargin && o.gravity == lp.gravity) return; // same: setting it again re-triggers layout every frame
     sv.setLayoutParams(lp);

@@ -516,9 +516,9 @@ function twoGameAct(k){const sec=twoS===2;
   else if((k==="full"&&sec)||(k==="rm"&&!sec)){const g=two.g;twoOff();watchG(g)} // keep the second game alone
   else twoOff()} // keep the main game alone
 function mvBar(){$("#bmlay").hidden=$("#bmx").hidden=$("#bmsw").hidden=!two; $("#bmlay").textContent="Layout: "+TWOL.find(x=>x[0]===twoLay)[1]} // multiview controls live on the main bar
-const TWOR={side:[[0,0,.5,1],[.5,0,.5,1]],pip:[[0,0,.75,.75],[.7,.7,.3,.3]],over:[[0,.35,.65,.65],[.57,0,.43,.43]]};
-function twoOutline(){const o=$("#twoOut"); if(!two)return; const W=innerWidth,H=innerHeight,[x,y,w,h]=TWOR[twoLay][(twoS-1)^twoSw].map((f,i)=>f*(i%2?H:W)); let vw=w,vh=w*9/16; if(vh>h){vh=h;vw=h*16/9}
-  Object.assign(o.style,{left:x+(w-vw)/2+"px",top:y+(h-vh)/2+"px",width:vw+"px",height:vh+"px"})}
+const TWOR={side:[[0,0,.5,1],[.5,0,.5,1]],pip:[[0,0,.75,.75,0,0],[.7,.7,.3,.3,1,1]],over:[[0,.35,.65,.65,0,1],[.57,0,.43,.43,1,0]]};
+function twoOutline(){const o=$("#twoOut"); if(!two)return; const W=innerWidth,H=innerHeight,R=TWOR[twoLay][(twoS-1)^twoSw],[x,y,w,h]=R.slice(0,4).map((f,i)=>f*(i%2?H:W)),ax=R[4]??.5,ay=R[5]??.5; let vw=w,vh=w*9/16; if(vh>h){vh=h;vw=h*16/9}
+  Object.assign(o.style,{left:x+(w-vw)*ax+"px",top:y+(h-vh)*ay+"px",width:vw+"px",height:vh+"px"})}
 let selT=0; function twoSel(){const pl=$("#pl"); pl.classList.add("sel"); clearTimeout(selT); selT=setTimeout(()=>pl.classList.remove("sel"),4000)}
 function twoSound(k){twoS=k; Android.nSound(k); twoOutline(); feedLbl()} // the outline is the sound indicator (no pop-up over the picture)
 function feedLbl(){const f=two&&twoS===2?two.c:cur.feed; if(!f)return; $("#bfeed").textContent=(two?(twoS===2?"Second: ":"Main: "):"")+f.n}

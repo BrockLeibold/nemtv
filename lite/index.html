@@ -31,6 +31,14 @@ nav{gap:2px}header [data-t]{display:flex;align-items:center;justify-content:cent
 #setb[aria-pressed=true]{background:rgba(244,242,246,.86)}
 header [data-t][aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 :focus{outline:none}
+/* 4K box only (html.anim, set from the user agent): focus moves are animated so it's clear where you are */
+html.anim .focusable,html.anim button,html.anim .pill{transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease,background-color .2s ease,filter .2s ease}
+html.anim .pill:focus,html.anim .focusable:focus{transform:scale(1.07);z-index:3;filter:brightness(1.12)}
+html.anim header [data-t]:focus,html.anim .ctl button:focus,html.anim .pmenu button:focus{transform:scale(1.08)}
+html.anim #m{scroll-behavior:smooth}
+@keyframes scpop{0%{transform:scale(1.45);color:#fff;text-shadow:0 0 14px rgba(255,255,255,.8)}100%{transform:none;text-shadow:none}}
+html.anim .scr.pop{display:inline-block;animation:scpop .9s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion:reduce){html.anim *{transition:none!important;animation:none!important}}
 button:focus-visible,input:focus-visible,.focusable:focus{box-shadow:var(--ring)}
 
 
@@ -281,6 +289,7 @@ function scInfo(x){ // {score:"2 - 1", note:"P2 12:34"} or null before the puck 
   return {n,it:!!ck.inIntermission,pt:pd.periodType,tr:ck.timeRemaining||"",prog,score:(x.awayTeam.score||0)+" - "+(x.homeTeam.score||0),note,over,win:over?((x.awayTeam.score||0)>(x.homeTeam.score||0)?"a":(x.awayTeam.score||0)<(x.homeTeam.score||0)?"h":""):""};
 }
 // scores + game clocks shown 45 s late so they never spoil the stream (Brock 2026-11-21); the first load at start-up shows at once
+if(/4K|deviceMemory/i.test(navigator.userAgent)||(navigator.deviceMemory||0)>=3)document.documentElement.classList.add("anim"); // 4K Onn (3 GB): animations on; 1080 stays still
 const SC_DELAY=45e3;
 window.gotScores=(t,e)=>{if(!scLoaded||e)scApply(t,e);else setTimeout(()=>scApply(t,""),SC_DELAY)};
 function scApply(t,e){
@@ -293,7 +302,7 @@ function scApply(t,e){
   let redo=false;
   document.querySelectorAll("#m .pill[data-g]").forEach(b=>{const g=G[+b.dataset.g]; if(!g)return; g.sc=scInfo(scoreOf(g.aw,g.hm,g.st));
     const sc=b.querySelector(".scr"), lv=b.querySelector(".live");
-    if(g.sc&&sc){sc.textContent=g.sc.score; lv.innerHTML=esc(g.sc.note)} else if(g.sc!==null&&!sc)redo=true});
+    if(g.sc&&sc){if(sc.textContent!==g.sc.score){sc.textContent=g.sc.score;sc.classList.remove("pop");void sc.offsetWidth;sc.classList.add("pop")} lv.innerHTML=esc(g.sc.note); if(g.sc.over!==b.classList.contains("done"))redo=true} else if(g.sc!==null&&!sc)redo=true});
   if(redo)rerender()
 };
 function pollScores(){if($("#pl").classList.contains("on")&&!sbOn)return; /* playing: only poll when the score bar is on */ scAt=Date.now(); const u="https://api-web.nhle.com/v1/score/now";
@@ -692,7 +701,7 @@ if(ch.length||!url||!(window.Android||window.NEMDESK))bootOff(); // no playlist 
 document.querySelectorAll("img").forEach(i=>{if(i.complete)i.classList.add("ld")});
 log("NEMTV lite start",new Date().toString(),"games",(window.SCHED||[]).length);
 if(url&&window.Android)Android.load(url); // refresh playlist in the background
-if(EPGURL)setTimeout(loadEpg,3000); setInterval(loadEpg,10800000); pollScores(); setInterval(pollScores,60000); // lite: scores every 60s, skipped while a stream plays (no standings, team news or guide)
+if(EPGURL)setTimeout(loadEpg,3000); setInterval(loadEpg,10800000); pollScores(); setInterval(pollScores,20000); // lite: scores every 60s, skipped while a stream plays (no standings, team news or guide)
 let gSig=""; const gSigOf=()=>{const g=games();return g.live.length+":"+g.later.length+":"+(g.live[0]||{}).st+":"+(g.later[0]||{}).st+":"+svVer};
 setTimeout(()=>{gSig=gSigOf()},3000);
 setInterval(()=>{if((tab==="home"||tab==="live")&&!$("#pl").classList.contains("on")){const n=gSigOf();if(n!==gSig){gSig=n;rerender()}}},60000);

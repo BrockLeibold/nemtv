@@ -215,7 +215,7 @@ main.live .chip{padding:3px 10px;font-size:12px}
 <div class="ptop" id="ptop"><button class="pbtn" id="pback">&#8592; Back</button><div class="ptt" id="ptt"></div><button class="pbtn" id="pfs">Full screen</button></div><div id="zb"></div>
 <div class="ctl" id="pctl">
  <div class="grp"><button id="bfeed"></button><button id="zv" aria-label="Zoom"></button></div>
- <div class="grp"><button id="b2" hidden>2 games</button><button id="bsc" aria-pressed="false">Scores</button><button id="bfav" aria-pressed="false">Favorite</button></div>
+ <div class="grp"><button id="b2" hidden>Multiview</button><button id="bsc" aria-pressed="false">Scores</button><button id="bfav" aria-pressed="false">Favorite</button></div>
 </div><div class="pmenu" id="pmenu" role="menu" aria-label="Options" hidden></div><div id="sbar" aria-label="Scores"></div></div>
 <div id="tip" role="status" aria-live="polite"></div>
 <script src="config.js"></script>
@@ -486,12 +486,14 @@ let two=null, twoS=1, twoL=[];
 function twoOn(g){if(!g)return; if(two)Android.nStop2();
   const me={g,feeds:feedsFor(g),tried:new Set()}; two=me;
   if(!document.documentElement.classList.contains("two")){Android.nSplit(true);setZoom(100);twoSound(1);document.documentElement.classList.add("two")}
-  pttSet(cur); $("#b2").textContent="2 games: on";
+  pttSet(cur); $("#b2").textContent="Multiview: on"; Android.nLayout(twoLay);
   const go=()=>{if(two!==me)return; const c=me.feeds.find(f=>!me.tried.has(f.u)); if(!c)return tipS("No feed would play for "+g.tm.join(" vs ")); me.tried.add(c.u); me.c=c; Android.nPlay2(c.u)};
   me.go=go;
   if(g.sid)svFeeds(g.sid,f=>{if(two!==me)return; me.feeds=svOrder(me.feeds,(f||[]).filter(x=>!svFr(x)));go()}); else go()}
-function twoOff(){if(!two)return; two=null; twoS=1; Android.nSplit(false); document.documentElement.classList.remove("two"); $("#b2").textContent="2 games"; if(cur)pttSet(cur)}
-function twoSound(k){twoS=k; Android.nSound(k); tipS("Sound from the "+(k===2?"right":"left")+" game")}
+function twoOff(){if(!two)return; two=null; twoS=1; Android.nSplit(false); document.documentElement.classList.remove("two"); $("#b2").textContent="Multiview"; if(cur)pttSet(cur)}
+let twoLay=(()=>{try{return localStorage.twoLay||"side"}catch(e){return "side"}})(); const TWOL=[["side","Side by side"],["pip","Picture in picture"],["over","Overlap"]];
+function twoLayout(k){twoLay=k; try{localStorage.twoLay=k}catch(e){} Android.nLayout(k)}
+function twoSound(k){twoS=k; Android.nSound(k); tipS("Sound from the "+(k===2?"second":"main")+" game")}
 window.nemV2=(s,m)=>{if(!two)return; if(s==="error"){log("native2",m);two.go()}};
 function setFeed(c){
   cur.c=c; cur.feed=c; tried.add(c.u); msgP("Connecting to "+baseName(c.n)+"...","full");
@@ -570,8 +572,8 @@ function openMenu(kind){
   const m=$("#pmenu"); menuOn=true; show();
   if(kind==="feed")m.innerHTML=`<h3>${cur.title?"CHOOSE A FEED":"FEED"}</h3>`+cur.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===cur.feed}" data-f="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("")+(cur.feeds.length<2?'<div class="pnote">Only one feed for this one</div>':"");
   else if(kind==="two"){twoL=games().live.filter(g=>g.title!==cur.title&&g.c.u&&!(g.sc&&g.sc.over)&&g.st<=Date.now()+5*6e4);
-    m.innerHTML=(two?`<h3>SPLIT SCREEN</h3><button role="menuitemradio" aria-checked="${twoS===1}" data-s="1"><span>Sound from left</span><small>${esc(cur.tm?cur.tm.join(" vs "):cur.c.n)}</small></button><button role="menuitemradio" aria-checked="${twoS===2}" data-s="2"><span>Sound from right</span><small>${esc(two.g.tm.join(" vs "))}</small></button><button data-s="0"><span>Back to one game</span><small>full screen</small></button>`:"")
-      +`<h3>${two?"SWAP RIGHT GAME":"WATCH 2 GAMES"}</h3>`+(twoL.length?twoL.map((g,k)=>`<button role="menuitemradio" aria-checked="${!!two&&two.g.title===g.title}" data-g="${k}"><span class="tmn">${esc(g.tm[0])} vs ${esc(g.tm[1])}</span><small>${g.sc?esc(g.sc.score+"  "+g.sc.note):clk(g.st)}</small></button>`).join(""):'<div class="pnote">No other game on right now</div>')}
+    m.innerHTML=(two?`<h3>MULTIVIEW</h3><button role="menuitemradio" aria-checked="${twoS===1}" data-s="1"><span>Sound from main game</span><small>${esc(cur.tm?cur.tm.join(" vs "):cur.c.n)}</small></button><button role="menuitemradio" aria-checked="${twoS===2}" data-s="2"><span>Sound from second game</span><small>${esc(two.g.tm.join(" vs "))}</small></button><button data-s="0"><span>Back to one game</span><small>full screen</small></button><h3>LAYOUT</h3>`+TWOL.map(([k,n])=>`<button role="menuitemradio" aria-checked="${twoLay===k}" data-lay="${k}"><span>${n}</span></button>`).join(""):"")
+      +`<h3>${two?"SWAP SECOND GAME":"MULTIVIEW: PICK A 2ND GAME"}</h3>`+(twoL.length?twoL.map((g,k)=>`<button role="menuitemradio" aria-checked="${!!two&&two.g.title===g.title}" data-g="${k}"><span class="tmn">${esc(g.tm[0])} vs ${esc(g.tm[1])}</span><small>${g.sc?esc(g.sc.score+"  "+g.sc.note):clk(g.st)}</small></button>`).join(""):'<div class="pnote">No other game on right now</div>')}
   else m.innerHTML=`<h3>ZOOM</h3>`+[50,75,85,90,95,100,105,110,115,120,125,130,140,150,175,200].map(z=>`<button role="menuitemradio" aria-checked="${z===zoom}" data-z="${z}"><span>${z}%</span><small>${z===100?"fit to screen":""}</small></button>`).join("");
   m.hidden=false; const a=m.querySelector('[aria-checked=true]')||m.querySelector("button"); a.focus(); a.scrollIntoView({block:"center"});
 }
@@ -623,6 +625,7 @@ $("#pl").onclick=e=>{
   else if(b.id==="zv")openMenu("zoom");
   else if(b.id==="b2")openMenu("two");
   else if(b.dataset.g!==undefined){closeMenu();twoOn(twoL[+b.dataset.g]);$("#b2").focus()}
+  else if(b.dataset.lay){closeMenu();twoLayout(b.dataset.lay);$("#b2").focus()}
   else if(b.dataset.s!==undefined){closeMenu();const k=+b.dataset.s;if(k)twoSound(k);else twoOff();$("#b2").focus()}
   else if(b.id==="bfav")toggleFav(cur.c.n);
   else if(b.id==="bsc"){sbOn=!sbOn;sv("scoreBar",sbOn);sbSync();if(sbOn)pollScores()}

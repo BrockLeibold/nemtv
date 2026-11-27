@@ -22,12 +22,12 @@ import org.json.JSONObject;
  * Native player (Media3 ExoPlayer) on a SurfaceView behind the transparent WebView: hardware decode straight to a
  * video plane, no JavaScript demuxing and no WebView compositing of every frame. The page keeps its own UI on top and
  * hears about the state through window.<cb>(state, detail). Every method runs on the UI thread.
- * slot: 0 full screen, 1 left half, 2 right half (2-up split). cap: pick renditions no bigger than 960x540.
+ * rect: where the video sits, as screen fractions {x, y, w, h} (multiview layouts set it). cap: pick renditions no bigger than 960x540.
  */
 final class NPlayer {
   final Main m; final SurfaceView sv; final String ua, cb;
   ExoPlayer p; DefaultTrackSelector ts; String url; float zoom = 1f, volume = 1f; int vw, vh; float par = 1f;
-  int slot; boolean capped;
+  float[] rect = {0, 0, 1, 1}; boolean capped;
 
   NPlayer(Main m, SurfaceView sv, String ua, String cb) { this.m = m; this.sv = sv; this.ua = ua; this.cb = cb; }
 
@@ -80,18 +80,18 @@ final class NPlayer {
   /** Letterbox the surface to the video's shape inside its slot (a SurfaceView stretches otherwise). */
   void layout() {
     View parent = (View) sv.getParent();
-    int W = parent.getWidth(), H = parent.getHeight(), x = 0;
-    if (slot != 0) { W = W / 2; if (slot == 2) x = W; }
+    int PW = parent.getWidth(), PH = parent.getHeight();
+    int x = Math.round(PW * rect[0]), y = Math.round(PH * rect[1]), W = Math.round(PW * rect[2]), H = Math.round(PH * rect[3]);
     int w = W, h = H;
     if (vw != 0 && vh != 0 && W != 0 && H != 0) {
       float ar = vw * par / vh;
       h = Math.round(W / ar);
       if (h > H) { h = H; w = Math.round(H * ar); }
     }
-    FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(w, h, Gravity.LEFT | Gravity.CENTER_VERTICAL);
-    lp.leftMargin = x + (W - w) / 2;
+    FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(w, h, Gravity.LEFT | Gravity.TOP);
+    lp.leftMargin = x + (W - w) / 2; lp.topMargin = y + (H - h) / 2;
     FrameLayout.LayoutParams o = (FrameLayout.LayoutParams) sv.getLayoutParams();
-    if (o != null && o.width == lp.width && o.height == lp.height && o.leftMargin == lp.leftMargin && o.gravity == lp.gravity) return; // same: setting it again re-triggers layout every frame
+    if (o != null && o.width == lp.width && o.height == lp.height && o.leftMargin == lp.leftMargin && o.topMargin == lp.topMargin && o.gravity == lp.gravity) return; // same: setting it again re-triggers layout every frame
     sv.setLayoutParams(lp);
   }
 

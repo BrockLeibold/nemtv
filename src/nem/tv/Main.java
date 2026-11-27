@@ -181,7 +181,11 @@ public class Main extends Activity {
       // 2-up split: main game left, second game right, both capped at 960x540 so the box decodes two streams easily
       @JavascriptInterface public void nPlay2(final String u) { runOnUiThread(new Runnable() { public void run() { np2.play(u); } }); }
       @JavascriptInterface public void nStop2() { runOnUiThread(new Runnable() { public void run() { np2.stop(); } }); }
-      @JavascriptInterface public void nSplit(final boolean on) { runOnUiThread(new Runnable() { public void run() { np.slot = on ? 1 : 0; np.cap(on); np.layout(); if (!on) { np2.stop(); np.vol(1f); } } }); }
+      @JavascriptInterface public void nSplit(final boolean on) { runOnUiThread(new Runnable() { public void run() { if (!on) np.rect = new float[]{0, 0, 1, 1}; np.cap(on); np.layout(); if (!on) { np2.stop(); np.vol(1f); } } }); }
+      // multiview layout for 2 games (same rects as the full version): side, pip (2nd small bottom-right), over (main bottom-left, 2nd top-right)
+      @JavascriptInterface public void nLayout(final String s) { runOnUiThread(new Runnable() { public void run() {
+        float[][] r = s.equals("pip") ? new float[][]{{0, 0, 1, 1}, {.72f, .68f, .27f, .3f}} : s.equals("over") ? new float[][]{{0, .35f, .65f, .65f}, {.57f, 0, .43f, .43f}} : new float[][]{{0, 0, .5f, 1}, {.5f, 0, .5f, 1}};
+        np.rect = r[0]; np2.rect = r[1]; np.layout(); np2.layout(); } }); }
       @JavascriptInterface public void nSound(final int side) { runOnUiThread(new Runnable() { public void run() { np.vol(side == 2 ? 0f : 1f); np2.vol(side == 2 ? 1f : 0f); } }); }
       @JavascriptInterface public void nZoom(final int pct) { runOnUiThread(new Runnable() { public void run() { np.zoom(pct); } }); }
 
@@ -236,12 +240,12 @@ public class Main extends Activity {
     sv.setVisibility(View.GONE); sv.setFocusable(false);
     root.addView(sv, new android.widget.FrameLayout.LayoutParams(-1, -1, android.view.Gravity.CENTER));
     android.view.SurfaceView sv2 = new android.view.SurfaceView(this); // second game for the 2-up split
-    sv2.setVisibility(View.GONE); sv2.setFocusable(false);
+    sv2.setVisibility(View.GONE); sv2.setFocusable(false); sv2.setZOrderMediaOverlay(true); // second game draws above the main one (PiP / overlap)
     root.addView(sv2, new android.widget.FrameLayout.LayoutParams(-1, -1, android.view.Gravity.CENTER));
     root.addView(w, new android.widget.FrameLayout.LayoutParams(-1, -1));
     String ua = WebSettings.getDefaultUserAgent(this);
     np = new NPlayer(this, sv, ua, "nemV");
-    np2 = new NPlayer(this, sv2, ua, "nemV2"); np2.slot = 2; np2.cap(true);
+    np2 = new NPlayer(this, sv2, ua, "nemV2"); np2.rect = new float[]{.5f, 0, .5f, 1}; np2.cap(true);
     root.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
       public void onLayoutChange(View v, int l, int t, int r, int bt, int ol, int ot, int or, int ob) { np.layout(); np2.layout(); }
     });

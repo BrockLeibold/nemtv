@@ -643,7 +643,7 @@ function toggleFav(n){fav=fav.includes(n)?fav.filter(x=>x!==n):[...fav,n];sv("fa
 function rerender(){ // redraw but keep the remote focus on the same item
   const a=document.activeElement, y=$("#m").scrollTop; let sel=null;
   if(a&&a.closest&&a.closest("main"))for(const k of ["data-g","data-l","data-i","data-grp","data-s","data-ft"])if(a.hasAttribute(k)){sel=`[${k}="${CSS.escape(a.getAttribute(k))}"]`;break}
-  render(); $("#m").scrollTop=y; const n=sel&&$("#m").querySelector(sel); if(n)n.focus();
+  render(); $("#m").scrollTop=y; const n=sel&&$("#m").querySelector(sel); if(n)n.focus({preventScroll:true});
 }
 window.gotList=(t,e)=>{
   const c=t?parse(t):[];
@@ -653,9 +653,9 @@ window.gotList=(t,e)=>{
   loadEpg(); render(); {const b=$("#bst");if(b)b.textContent=c.length?"":"Could not load the playlist"} plDone=1; bootOff();
 };
 function go(t){tab=t;render();(document.querySelector("header [data-t][aria-pressed=true]")).focus()}
-function smoothTo(m,y){m.scrollTop=y} // lite: jump, no animated scroll (fewer repaints on a weak GPU)
-function alignRow(el){const m=$("#m"), r=el.getBoundingClientRect(), mr=m.getBoundingClientRect(); if(r.top-18>=mr.top&&r.bottom+18<=mr.bottom)return; /* still fully on screen: don't scroll, only page when focus leaves the view */ const g=el.closest(".grid"), h=g&&g.previousElementSibling, top=h&&h.tagName==="H2"&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?h:el; // first row: show its heading too
-  smoothTo(m,top.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-(top===el?18:6))} // 18px: room for the scaled card + white outline
+let smA=0; function smoothTo(m,y){cancelAnimationFrame(smA); if(!document.documentElement.classList.contains("anim")){m.scrollTop=y;return} /* 4K: eased page turn, 700 ms */ const y0=m.scrollTop,d=Math.max(0,Math.min(y,m.scrollHeight-m.clientHeight))-y0,t0=performance.now(); if(!d)return; const f=t=>{const k=Math.min(1,(t-t0)/700),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2; m.scrollTop=y0+d*e; if(k<1)smA=requestAnimationFrame(f)}; smA=requestAnimationFrame(f)} // lite: jump, no animated scroll (fewer repaints on a weak GPU)
+function alignRow(el){const m=$("#m"), g=el.closest(".grid"); if(!g)return; const kids=[...g.children], c0=kids[0].offsetTop, cols=Math.max(1,kids.filter(k=>k.offsetTop===c0).length), row=Math.floor(kids.indexOf(el)/cols), pg=Math.floor(row/3); // pages of 3 rows (9 games): scroll only when focus moves to another page
+  const first=kids[pg*3*cols]; smoothTo(m,pg===0&&g===m.querySelector(".grid")?0:first.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-18)}
 $("#m").addEventListener("focusin",e=>{const t=e.target; if(t.closest&&t.closest(".grid"))alignRow(t)});
 // D-pad inside the home/live/sports pages: we pick the next item ourselves, so one press = one item and we control the viewport
 const ARR={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};

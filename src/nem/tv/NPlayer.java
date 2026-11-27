@@ -25,7 +25,7 @@ import org.json.JSONObject;
  * rect: where the video sits, as screen fractions {x, y, w, h} (multiview layouts set it). cap: pick renditions no bigger than 960x540.
  */
 final class NPlayer {
-  final Main m; final SurfaceView sv; final String ua, cb;
+  final Main m; SurfaceView sv; final String ua, cb;
   ExoPlayer p; DefaultTrackSelector ts; String url; float zoom = 1f, volume = 1f; int vw, vh; float par = 1f;
   float[] rect = {0, 0, 1, 1}; boolean capped;
 
@@ -93,6 +93,15 @@ final class NPlayer {
     FrameLayout.LayoutParams o = (FrameLayout.LayoutParams) sv.getLayoutParams();
     if (o != null && o.width == lp.width && o.height == lp.height && o.leftMargin == lp.leftMargin && o.topMargin == lp.topMargin && o.gravity == lp.gravity) return; // same: setting it again re-triggers layout every frame
     sv.setLayoutParams(lp);
+  }
+
+  /** Multiview swap: move this stream to another surface without reloading it. */
+  void surface(SurfaceView s) {
+    if (s == sv) return;
+    if (p != null) p.clearVideoSurfaceView(sv);
+    sv.setScaleX(1f); sv.setScaleY(1f); sv = s;
+    if (p != null) { p.setVideoSurfaceView(s); s.setVisibility(View.VISIBLE); }
+    s.setScaleX(zoom); s.setScaleY(zoom);
   }
 
   void zoom(int pct) { zoom = pct / 100f; sv.setScaleX(zoom); sv.setScaleY(zoom); }

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T17:00:01-05:00",
+ "updated": "2026-11-27T09:00:01-05:00",
  "edition": "Pre-game",
  "teams": {
   "BOS": {
@@ -203,8 +203,7 @@
    "injuries": [
     "Leo Carlsson (day-to-day)",
     "Ryan Poehling (knee, IR)",
-    "A.J. Greer (upper body, IR)",
-    "Beckett Sennecke (IR)"
+    "A.J. Greer (upper body, IR)"
    ]
   },
   "BUF": {
@@ -405,7 +404,7 @@
    "injuries": [
     "Denton Mateychuk (out)",
     "Conor Garland (IR)",
-    "Mathieu Olivier (dtd)"
+    "Mathieu Olivier (out)"
    ]
   },
   "CGY": {
@@ -606,7 +605,7 @@
     }
    ],
    "injuries": [
-    "Gavin Brindley (out)",
+    "Gavin Brindley (IR)",
     "Nathan MacKinnon (lower body, out)",
     "Josh Manson (IR)",
     "Zachary L'Heureux (IR)"

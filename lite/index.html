@@ -121,6 +121,7 @@ html.nv,html.nv body,html.nv #pl{background:transparent}html.nv body>*:not(#pl):
 .ctl button.sm{padding:6px 10px}
 #pl.hide,#pl.hide *{cursor:none}
 #pl.hide .ptop,#pl.hide .ctl{opacity:0;pointer-events:none}
+#twoOut{position:absolute;border:3px solid #fff;border-radius:4px;pointer-events:none;opacity:0;transition:opacity .25s ease;z-index:1} html.two #pl:not(.hide) #twoOut,html.two #pl.sel #twoOut{opacity:1} /* multiview: calm white outline on the game with the sound, fades with the controls */
 /* score bar: today's other NHL games along the bottom, shown while the player controls are hidden; Scores in the player turns it on/off */
 #sbar{position:absolute;left:0;right:0;bottom:0;height:6.25%;min-height:33px;display:none;align-items:stretch;gap:3px;padding:2px var(--safe-x) 5px;overflow:hidden;opacity:0;transition:opacity .2s;container-type:size}
 #pl.sb #sbar{display:flex}#pl.sb.hide #sbar{opacity:1}
@@ -210,7 +211,7 @@ main.live .chip{padding:3px 10px;font-size:12px}
 <nav id="nav"><button data-t="home"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Home</span></button><button data-t="scores"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Scores</span></button><button data-t="live"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Live</span></button></nav><button id="setb" data-t="setup" aria-label="Setup"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2.2-1.3L14 3h-4l-.4 2.5a7 7 0 0 0-2.2 1.3l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .9.1 1.3l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2.2 1.3L10 21h4l.4-2.5a7 7 0 0 0 2.2-1.3l2.3 1 2-3.4-2-1.5c.1-.4.1-.9.1-1.3z"/></svg></button></header>
 <main id="m"></main>
 <div id="boot"><div class="ttl"><img src="nemtv-logo.png" alt="NEMTV" style="height:64px"></div><div class="tag disp">NHL &middot; LIVE TV</div><div class="st" id="bst"></div></div>
-<div id="pl" tabindex="-1" style="outline:none"><video id="v" autoplay playsinline></video>
+<div id="pl" tabindex="-1" style="outline:none"><div id="twoOut"></div><video id="v" autoplay playsinline></video>
 <div id="pbuf"><div id="pbc"></div><div class="stt" id="pst" role="status" aria-live="polite"></div></div>
 <div class="ptop" id="ptop"><button class="pbtn" id="pback">&#8592; Back</button><div class="ptt" id="ptt"></div><button class="pbtn" id="pfs">Full screen</button></div><div id="zb"></div>
 <div class="ctl" id="pctl">
@@ -486,20 +487,25 @@ let two=null, twoS=1, twoL=[];
 function twoOn(g){if(!g)return; if(two)Android.nStop2();
   const me={g,feeds:feedsFor(g),tried:new Set()}; two=me;
   if(!document.documentElement.classList.contains("two")){Android.nSplit(true);setZoom(100);twoSound(1);document.documentElement.classList.add("two")}
-  pttSet(cur); $("#b2").textContent="Multiview: on"; Android.nLayout(twoLay);
+  pttSet(cur); $("#b2").textContent="Multiview: on"; Android.nLayout(twoLay); twoOutline();
   const go=()=>{if(two!==me)return; const c=me.feeds.find(f=>!me.tried.has(f.u)); if(!c)return tipS("No feed would play for "+g.tm.join(" vs ")); me.tried.add(c.u); me.c=c; Android.nPlay2(c.u)};
   me.go=go;
   if(g.sid)svFeeds(g.sid,f=>{if(two!==me)return; me.feeds=svOrder(me.feeds,(f||[]).filter(x=>!svFr(x)));go()}); else go()}
-function twoOff(){if(!two)return; two=null; twoS=1; Android.nSplit(false); document.documentElement.classList.remove("two"); $("#b2").textContent="Multiview"; if(cur)pttSet(cur)}
+function twoOff(){if(!two)return; two=null; twoS=1; Android.nSplit(false); document.documentElement.classList.remove("two"); $("#b2").textContent="Multiview"; $("#pl").classList.remove("sel"); if(cur){pttSet(cur);feedLbl()}}
 let twoLay=(()=>{try{return localStorage.twoLay||"side"}catch(e){return "side"}})(); const TWOL=[["side","Side by side"],["pip","Picture in picture"],["over","Overlap"]];
-function twoLayout(k){twoLay=k; try{localStorage.twoLay=k}catch(e){} Android.nLayout(k)}
-function twoSound(k){twoS=k; Android.nSound(k); tipS("Sound from the "+(k===2?"second":"main")+" game")}
+function twoLayout(k){twoLay=k; try{localStorage.twoLay=k}catch(e){} Android.nLayout(k); twoOutline()}
+const TWOR={side:[[0,0,.5,1],[.5,0,.5,1]],pip:[[0,0,1,1],[.72,.68,.27,.3]],over:[[0,.35,.65,.65],[.57,0,.43,.43]]};
+function twoOutline(){const o=$("#twoOut"); if(!two)return; const W=innerWidth,H=innerHeight,[x,y,w,h]=TWOR[twoLay][twoS-1].map((f,i)=>f*(i%2?H:W)); let vw=w,vh=w*9/16; if(vh>h){vh=h;vw=h*16/9}
+  Object.assign(o.style,{left:x+(w-vw)/2+"px",top:y+(h-vh)/2+"px",width:vw+"px",height:vh+"px"})}
+let selT=0; function twoSel(){const pl=$("#pl"); pl.classList.add("sel"); clearTimeout(selT); selT=setTimeout(()=>pl.classList.remove("sel"),4000)}
+function twoSound(k){twoS=k; Android.nSound(k); twoOutline(); feedLbl()} // the outline is the sound indicator (no pop-up over the picture)
+function feedLbl(){const f=two&&twoS===2?two.c:cur.feed; if(!f)return; $("#bfeed").textContent=(two?(twoS===2?"Second: ":"Main: "):"")+f.n}
 window.nemV2=(s,m)=>{if(!two)return; if(s==="error"){log("native2",m);two.go()}};
 function setFeed(c){
   cur.c=c; cur.feed=c; tried.add(c.u); msgP("Connecting to "+baseName(c.n)+"...","full");
   const v=$("#v"); killHls();
   $("#bfeed").textContent=c.n+(cur.feeds.length>1?"  ("+(cur.feeds.indexOf(c)+1)+"/"+cur.feeds.length+")":"");
-  favBtn();
+  favBtn(); if(two)feedLbl();
   if(NV){try{v.pause();v.removeAttribute("src");v.load()}catch(x){} document.documentElement.classList.add("nv"); Android.nPlay(c.u); return} // native ExoPlayer on the TV (smooth 60 fps sports); hls.js elsewhere
   if(window.Hls&&Hls.isSupported()){
     const h0=hls=new Hls({maxBufferLength:30,maxMaxBufferLength:45,maxBufferSize:40e6,backBufferLength:8,liveSyncDurationCount:4,maxBufferHole:1,nudgeMaxRetry:6,capLevelToPlayerSize:true,abrEwmaDefaultEstimate:6e6,lowLatencyMode:false,enableWorker:true,
@@ -568,9 +574,10 @@ function zap(d){ // Up/Down with controls hidden: next/previous channel (or feed
 function stop(){if(two)twoOff();clearTimeout(zapT);$("#zb").classList.remove("on");closeMenu();killHls();if(NV){Android.nStop();document.documentElement.classList.remove("nv")}const v=$("#v");v.pause();v.removeAttribute("src");v.load();msgP("");$("#pl").classList.remove("on");refocus();if(Date.now()-scAt>6e4)pollScores()} // scores paused while playing: catch up now
 function refocus(){const a=document.activeElement; if(a&&a!==document.body&&a.offsetParent)return; const f=(plBack&&plBack.isConnected&&plBack.offsetParent&&plBack)||$("#m").querySelector(".focusable,button,input")||document.querySelector("header [data-t][aria-pressed=true]"); if(f)f.focus({preventScroll:true})} // back to the card that started the stream
 function openMenu(kind){
-  if(kind==="feed"&&!cur.feeds.length)return; // no feeds yet (e.g. pre-game): nothing to pick
+  const F2=two&&twoS===2; if(kind==="feed"&&!(F2?two.feeds:cur.feeds).length)return; // no feeds yet (e.g. pre-game): nothing to pick
   const m=$("#pmenu"); menuOn=true; show();
-  if(kind==="feed")m.innerHTML=`<h3>${cur.title?"CHOOSE A FEED":"FEED"}</h3>`+cur.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===cur.feed}" data-f="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("")+(cur.feeds.length<2?'<div class="pnote">Only one feed for this one</div>':"");
+  if(kind==="feed"&&F2)m.innerHTML=`<h3>FEED · SECOND GAME</h3>`+two.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===two.c}" data-f2="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("");
+  else if(kind==="feed")m.innerHTML=`<h3>${two?"FEED · MAIN GAME":cur.title?"CHOOSE A FEED":"FEED"}</h3>`+cur.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===cur.feed}" data-f="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("")+(cur.feeds.length<2?'<div class="pnote">Only one feed for this one</div>':"");
   else if(kind==="two"){twoL=games().live.filter(g=>g.title!==cur.title&&g.c.u&&!(g.sc&&g.sc.over)&&g.st<=Date.now()+5*6e4);
     m.innerHTML=(two?`<h3>MULTIVIEW</h3><button role="menuitemradio" aria-checked="${twoS===1}" data-s="1"><span>Sound from main game</span><small>${esc(cur.tm?cur.tm.join(" vs "):cur.c.n)}</small></button><button role="menuitemradio" aria-checked="${twoS===2}" data-s="2"><span>Sound from second game</span><small>${esc(two.g.tm.join(" vs "))}</small></button><button data-s="0"><span>Back to one game</span><small>full screen</small></button><h3>LAYOUT</h3>`+TWOL.map(([k,n])=>`<button role="menuitemradio" aria-checked="${twoLay===k}" data-lay="${k}"><span>${n}</span></button>`).join(""):"")
       +`<h3>${two?"SWAP SECOND GAME":"MULTIVIEW: PICK A 2ND GAME"}</h3>`+(twoL.length?twoL.map((g,k)=>`<button role="menuitemradio" aria-checked="${!!two&&two.g.title===g.title}" data-g="${k}"><span class="tmn">${esc(g.tm[0])} vs ${esc(g.tm[1])}</span><small>${g.sc?esc(g.sc.score+"  "+g.sc.note):clk(g.st)}</small></button>`).join(""):'<div class="pnote">No other game on right now</div>')}
@@ -597,10 +604,11 @@ $("#pl").addEventListener("keydown",e=>{
   if(hidden&&!menuOn){
     // D-pad just opens the controls (never touches the stream); only dedicated channel keys zap
     if(e.key==="PageUp"||e.key==="PageDown"||e.keyCode===166||e.keyCode===167){e.preventDefault();e.stopPropagation();zap(e.key==="PageDown"||e.keyCode===167?1:-1);show();return}
-    if(e.key==="ArrowUp"){e.preventDefault();e.stopPropagation();return} // Up while hidden: stays hidden (Brock 2026-11-11: Down shows UI, Up hides it)
+    if(two&&(e.key==="ArrowLeft"||e.key==="ArrowRight")){e.preventDefault();e.stopPropagation();twoSound(e.key==="ArrowLeft"?1:2);twoSel();return} // multiview: Left = main game, Right = second game; sound follows, games stay put
+    if(e.key==="ArrowUp"){e.preventDefault();e.stopPropagation();$("#pl").classList.remove("sel");return} // Up while hidden: stays hidden (Brock 2026-11-11: Down shows UI, Up hides it)
     e.preventDefault();e.stopPropagation();show();$("#bfeed").focus();return;
   }
-  if(!menuOn&&e.key==="ArrowUp"){e.preventDefault();e.stopPropagation();clearTimeout(hideT);$("#pl").classList.add("hide");$("#pl").focus({preventScroll:true});return} // Up hides the UI
+  if(!menuOn&&e.key==="ArrowUp"){e.preventDefault();e.stopPropagation();clearTimeout(hideT);$("#pl").classList.add("hide");$("#pl").classList.remove("sel");$("#pl").focus({preventScroll:true});return} // Up hides the UI
   if(!menuOn&&/^Arrow/.test(e.key)){ // D-pad: top bar (Back, Full screen) <-> bottom bar
     const top=[...document.querySelectorAll("#ptop button")],bot=[...document.querySelectorAll("#pctl button")].filter(b=>!b.hidden),a=document.activeElement,
       row=top.includes(a)?top:bot.includes(a)?bot:null;
@@ -631,6 +639,7 @@ $("#pl").onclick=e=>{
   else if(b.id==="bsc"){sbOn=!sbOn;sv("scoreBar",sbOn);sbSync();if(sbOn)pollScores()}
   else if(b.id==="pback"){closeMenu();stop()}
   else if(b.id==="pfs"){const d=document;if(d.fullscreenElement)d.exitFullscreen&&d.exitFullscreen().catch(()=>{});else if(d.documentElement.requestFullscreen)d.documentElement.requestFullscreen().catch(()=>{})}
+  else if(b.dataset.f2!==undefined){closeMenu();const f=two.feeds[+b.dataset.f2];two.c=f;two.tried.add(f.u);fmSet(two.g,f);Android.nPlay2(f.u);feedLbl();$("#bfeed").focus()}
   else if(b.dataset.f!==undefined){closeMenu();tried=new Set();const f=cur.feeds[+b.dataset.f];fmSet(cur,f);setFeed(f);$("#bfeed").focus()}
   else if(b.dataset.z!==undefined){closeMenu();setZoom(+b.dataset.z);$("#zv").focus()}
 };

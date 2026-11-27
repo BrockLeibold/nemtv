@@ -495,6 +495,17 @@ function twoOn(g){if(!g)return; if(two)Android.nStop2();
 function twoOff(){if(!two)return; two=null; twoS=1; Android.nSplit(false); document.documentElement.classList.remove("two"); $("#b2").textContent="Multiview"; $("#pl").classList.remove("sel"); mvBar(); if(cur){pttSet(cur);feedLbl()}}
 let twoLay=(()=>{try{return localStorage.twoLay||"side"}catch(e){return "side"}})(); const TWOL=[["side","Side by side"],["pip","Picture in picture"],["over","Overlap"]];
 function twoLayout(k){twoLay=k; try{localStorage.twoLay=k}catch(e){} Android.nLayout(k); twoOutline(); mvBar()}
+let holdT=0;
+document.addEventListener("keyup",e=>{if(!holdT||(e.key!=="Enter"&&e.key!==" "))return; clearTimeout(holdT); holdT=0; show(); $("#bfeed").focus()},true);
+function twoGameMenu(){const m=$("#pmenu"), sec=twoS===2, g=sec?two.g:cur; menuOn=true; twoSel();
+  m.innerHTML=`<h3>${esc(g.tm?g.tm.join(" vs "):g.c.n)}</h3><button data-gm="full"><span>Full screen</span><small>this game only</small></button><button data-gm="feed"><span>Feed</span><small>${esc((sec?two.c:cur.feed)?.n||"")}</small></button>${sec?'<button data-gm="game"><span>Switch game</span></button>':""}<button data-gm="lay"><span>Layout</span><small>${TWOL.find(x=>x[0]===twoLay)[1]}</small></button><button data-gm="rm"><span>Remove</span><small>keep the other game</small></button>`;
+  m.hidden=false; m.querySelector("button").focus()}
+function twoGameAct(k){const sec=twoS===2;
+  if(k==="lay"){const i=TWOL.findIndex(x=>x[0]===twoLay);twoLayout(TWOL[(i+1)%TWOL.length][0]);$("#pmenu").querySelector('[data-gm="lay"] small').textContent=TWOL.find(x=>x[0]===twoLay)[1];return}
+  closeMenu();
+  if(k==="feed")openMenu("feed"); else if(k==="game")openMenu("two");
+  else if((k==="full"&&sec)||(k==="rm"&&!sec)){const g=two.g;twoOff();watchG(g)} // keep the second game alone
+  else twoOff()} // keep the main game alone
 function mvBar(){$("#bmlay").hidden=$("#bmx").hidden=!two; $("#bmlay").textContent="Layout: "+TWOL.find(x=>x[0]===twoLay)[1]} // multiview controls live on the main bar
 const TWOR={side:[[0,0,.5,1],[.5,0,.5,1]],pip:[[0,0,1,1],[.72,.68,.27,.3]],over:[[0,.35,.65,.65],[.57,0,.43,.43]]};
 function twoOutline(){const o=$("#twoOut"); if(!two)return; const W=innerWidth,H=innerHeight,[x,y,w,h]=TWOR[twoLay][twoS-1].map((f,i)=>f*(i%2?H:W)); let vw=w,vh=w*9/16; if(vh>h){vh=h;vw=h*16/9}
@@ -601,6 +612,8 @@ window.nemBack=()=>{const pl=$("#pl");
   if(tab!=="home"){go("home");return true}return false};
 $("#pl").addEventListener("keydown",e=>{
   if(menuOn&&/^Arrow/.test(e.key)){e.preventDefault();e.stopPropagation();show();const bs=[...$("#pmenu").querySelectorAll("button")],i=bs.indexOf(document.activeElement);if(e.key==="ArrowDown"&&i<bs.length-1)bs[i+1].focus();else if(e.key==="ArrowUp"&&i>0)bs[i-1].focus();return}
+  if(two&&!menuOn&&(e.key==="Enter"||e.key===" ")&&$("#pl").classList.contains("hide")){e.preventDefault();e.stopPropagation(); // multiview: hold OK on the selected game = its settings; a short press only wakes the controls (keyup)
+    if(!e.repeat&&!holdT)holdT=setTimeout(()=>{holdT=0;twoGameMenu()},500); return}
   const hidden=$("#pl").classList.contains("hide");
   if(hidden&&!menuOn){
     // D-pad just opens the controls (never touches the stream); only dedicated channel keys zap
@@ -633,6 +646,7 @@ $("#pl").onclick=e=>{
   if(b.id==="bfeed")openMenu("feed");
   else if(b.id==="zv")openMenu("zoom");
   else if(b.id==="b2")openMenu("two");
+  else if(b.dataset.gm){twoGameAct(b.dataset.gm)}
   else if(b.id==="bmlay"){const k=TWOL.findIndex(x=>x[0]===twoLay);twoLayout(TWOL[(k+1)%TWOL.length][0])}
   else if(b.id==="bmx"){twoOff();$("#b2").focus()}
   else if(b.dataset.g!==undefined){closeMenu();twoOn(twoL[+b.dataset.g]);$("#b2").focus()}

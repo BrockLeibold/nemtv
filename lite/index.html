@@ -75,7 +75,7 @@ img[src]:not(.ld){animation:skbg 1ms linear .15s forwards}
 .pill .side img{width:58%;height:auto;max-height:62%}
 .pill .tm{display:none}
 .pill .mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-62%);z-index:2;background:rgba(10,9,12,.8);border-radius:10px;padding:5px 10px}
-.pill .live{bottom:7px;left:50%;right:auto;transform:translateX(-50%);background:rgba(10,9,12,.8);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.pill .live{bottom:0;left:50%;right:auto;transform:translateX(-50%);background:rgba(10,9,12,.8);border-radius:12px 12px 0 0;padding:5px 16px 4px;white-space:nowrap}.pill .live::before,.pill .live::after{content:"";position:absolute;bottom:0;width:10px;height:10px;background:radial-gradient(circle at 0 0,transparent 9.5px,rgba(10,9,12,.8) 10px)}.pill .live::before{left:-10px}.pill .live::after{right:-10px;background:radial-gradient(circle at 100% 0,transparent 9.5px,rgba(10,9,12,.8) 10px)} /* notch rising from the card bottom, flared corners */
 .pill.done .side{filter:saturate(.25) brightness(.72)}.pill.done .side img{filter:none;opacity:1} /* finished: both team colours kept, desaturated */
 
 /* chips (Live filters, Home shortcuts) */
@@ -655,7 +655,7 @@ window.gotList=(t,e)=>{
 function go(t){tab=t;render();(document.querySelector("header [data-t][aria-pressed=true]")).focus()}
 function smoothTo(m,y){m.scrollTop=y} // lite: jump, no animated scroll (fewer repaints on a weak GPU)
 function alignRow(el){const m=$("#m"), g=el.closest(".grid"), h=g&&g.previousElementSibling, top=h&&h.tagName==="H2"&&Math.abs(el.offsetTop-g.firstElementChild.offsetTop)<4?h:el; // first row: show its heading too
-  smoothTo(m,top.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-6)}
+  smoothTo(m,top.getBoundingClientRect().top-m.getBoundingClientRect().top+m.scrollTop-(top===el?18:6))} // 18px: room for the scaled card + white outline
 $("#m").addEventListener("focusin",e=>{const t=e.target; if(t.closest&&t.closest(".grid"))alignRow(t)});
 // D-pad inside the home/live/sports pages: we pick the next item ourselves, so one press = one item and we control the viewport
 const ARR={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};

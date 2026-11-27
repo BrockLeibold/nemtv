@@ -31,6 +31,8 @@ nav{gap:2px}header [data-t]{display:flex;align-items:center;justify-content:cent
 #setb[aria-pressed=true]{background:rgba(244,242,246,.86)}
 header [data-t][aria-pressed=true]{background:rgba(244,242,246,.86);color:#141217}
 :focus{outline:none}
+.ctl.ico button:not(.sm){font-size:0;gap:0;min-width:var(--h-ctl);padding:0 10px;display:inline-flex;align-items:center;justify-content:center}.ctl.ico button:not(.sm)::before{content:"";width:20px;height:20px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat}.ctl.ico button::after{display:none!important} /* player bar: icons only, each opens its settings */
+#bfeed{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M4%206h16M4%2012h16M4%2018h10'/%3E%3C/svg%3E")}#zv{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='11'%20cy='11'%20r='7'/%3E%3Cpath%20d='M21%2021l-5-5M8%2011h6M11%208v6'/%3E%3C/svg%3E")}#bsc{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M4%2020V10M10%2020V4M16%2020v-7M22%2020H2'/%3E%3C/svg%3E")}#b2{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Crect%20x='3'%20y='3'%20width='8'%20height='8'%20rx='1'/%3E%3Crect%20x='13'%20y='3'%20width='8'%20height='8'%20rx='1'/%3E%3Crect%20x='3'%20y='13'%20width='8'%20height='8'%20rx='1'/%3E%3Crect%20x='13'%20y='13'%20width='8'%20height='8'%20rx='1'/%3E%3C/svg%3E")}#bmlay{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Crect%20x='3'%20y='3'%20width='8'%20height='8'%20rx='1'/%3E%3Crect%20x='13'%20y='3'%20width='8'%20height='8'%20rx='1'/%3E%3Crect%20x='3'%20y='13'%20width='18'%20height='8'%20rx='1'/%3E%3C/svg%3E")}#bmx{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23000'%20stroke-width='2'%3E%3Crect%20x='3'%20y='5'%20width='18'%20height='14'%20rx='2'/%3E%3C/svg%3E")}
 .pill:focus::after,.sr:focus::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--ring);z-index:4;pointer-events:none} .sr{position:relative} /* cards: ring on top of the team colours, inside the edge */
 /* 4K box only (html.anim, set from the user agent): focus moves are animated so it's clear where you are */
 html.anim .focusable,html.anim button,html.anim .pill{transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease}
@@ -215,7 +217,7 @@ main.live .chip{padding:3px 10px;font-size:12px}
 <div id="pl" tabindex="-1" style="outline:none"><div id="twoOut"></div><video id="v" autoplay playsinline></video>
 <div id="pbuf"><div id="pbc"></div><div class="stt" id="pst" role="status" aria-live="polite"></div></div>
 <div class="ptop" id="ptop"><button class="pbtn" id="pback">&#8592; Back</button><div class="ptt" id="ptt"></div><button class="pbtn" id="pfs">Full screen</button></div><div id="zb"></div>
-<div class="ctl" id="pctl">
+<div class="ctl ico" id="pctl">
  <div class="grp"><button id="bfeed"></button><button id="zv" aria-label="Zoom"></button></div>
  <div class="grp"><button id="b2" hidden>Multiview</button><button id="bmlay" hidden></button><button id="bmx" hidden>Single game</button><button id="bsc" aria-pressed="false">Scores</button></div>
 </div><div class="pmenu" id="pmenu" role="menu" aria-label="Options" hidden></div><div id="sbar" aria-label="Scores"></div></div>
@@ -593,6 +595,8 @@ function openMenu(kind){
   else if(kind==="feed")m.innerHTML=`<h3>${two?"FEED · MAIN GAME":cur.title?"CHOOSE A FEED":"FEED"}</h3>`+cur.feeds.map((c,k)=>`<button role="menuitemradio" aria-checked="${c===cur.feed}" data-f="${k}"><span>${esc(c.n)}</span><small>${esc(c.g)}</small></button>`).join("")+(cur.feeds.length<2?'<div class="pnote">Only one feed for this one</div>':"");
   else if(kind==="two"){twoL=games().live.filter(g=>g.title!==cur.title&&g.c.u&&!(g.sc&&g.sc.over)&&g.st<=Date.now()+5*6e4);
     m.innerHTML=""+`<h3>${two?"SWAP SECOND GAME":"MULTIVIEW: PICK A 2ND GAME"}</h3>`+(twoL.length?twoL.map((g,k)=>`<button role="menuitemradio" aria-checked="${!!two&&two.g.title===g.title}" data-g="${k}"><span class="tmn">${esc(g.tm[0])} vs ${esc(g.tm[1])}</span><small>${g.sc?esc(g.sc.score+"  "+g.sc.note):clk(g.st)}</small></button>`).join(""):'<div class="pnote">No other game on right now</div>')}
+  else if(kind==="lay")m.innerHTML=`<h3>LAYOUT</h3>`+TWOL.map(([k,n])=>`<button role="menuitemradio" aria-checked="${twoLay===k}" data-lay="${k}"><span>${n}</span></button>`).join("");
+  else if(kind==="sc")m.innerHTML=`<h3>SCORE BAR</h3><button role="menuitemradio" aria-checked="${sbOn}" data-sc="1"><span>On</span><small>live scores along the bottom</small></button><button role="menuitemradio" aria-checked="${!sbOn}" data-sc="0"><span>Off</span></button>`;
   else m.innerHTML=`<h3>ZOOM</h3>`+[50,75,85,90,95,100,105,110,115,120,125,130,140,150,175,200].map(z=>`<button role="menuitemradio" aria-checked="${z===zoom}" data-z="${z}"><span>${z}%</span><small>${z===100?"fit to screen":""}</small></button>`).join("");
   m.hidden=false; const a=m.querySelector('[aria-checked=true]')||m.querySelector("button"); a.focus(); a.scrollIntoView({block:"center"});
 }
@@ -647,12 +651,13 @@ $("#pl").onclick=e=>{
   else if(b.id==="zv")openMenu("zoom");
   else if(b.id==="b2")openMenu("two");
   else if(b.dataset.gm){twoGameAct(b.dataset.gm)}
-  else if(b.id==="bmlay"){const k=TWOL.findIndex(x=>x[0]===twoLay);twoLayout(TWOL[(k+1)%TWOL.length][0])}
+  else if(b.id==="bmlay")openMenu("lay");
+  else if(b.dataset.lay){closeMenu();twoLayout(b.dataset.lay);$("#bmlay").focus()}
   else if(b.id==="bmx"){twoOff();$("#b2").focus()}
   else if(b.dataset.g!==undefined){closeMenu();twoOn(twoL[+b.dataset.g]);$("#b2").focus()}
-  else if(b.dataset.lay){closeMenu();twoLayout(b.dataset.lay);$("#b2").focus()}
   else if(b.dataset.s!==undefined){closeMenu();const k=+b.dataset.s;if(k)twoSound(k);else twoOff();$("#b2").focus()}
-  else if(b.id==="bsc"){sbOn=!sbOn;sv("scoreBar",sbOn);sbSync();if(sbOn)pollScores()}
+  else if(b.id==="bsc")openMenu("sc");
+  else if(b.dataset.sc!==undefined){closeMenu();$("#bsc").focus();if(+b.dataset.sc===+sbOn)return;sbOn=!sbOn;sv("scoreBar",sbOn);sbSync();if(sbOn)pollScores()}
   else if(b.id==="pback"){closeMenu();stop()}
   else if(b.id==="pfs"){const d=document;if(d.fullscreenElement)d.exitFullscreen&&d.exitFullscreen().catch(()=>{});else if(d.documentElement.requestFullscreen)d.documentElement.requestFullscreen().catch(()=>{})}
   else if(b.dataset.f2!==undefined){closeMenu();const f=two.feeds[+b.dataset.f2];two.c=f;two.tried.add(f.u);fmSet(two.g,f);Android.nPlay2(f.u);feedLbl();$("#bfeed").focus()}

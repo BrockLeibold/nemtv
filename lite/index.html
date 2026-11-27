@@ -122,7 +122,7 @@ html.nv,html.nv body,html.nv #pl{background:transparent}html.nv body>*:not(#pl):
 .ctl button.sm{padding:6px 10px}
 #pl.hide,#pl.hide *{cursor:none}
 #pl.hide .ptop,#pl.hide .ctl{opacity:0;pointer-events:none}
-#twoOut{position:absolute;border:3px solid #fff;border-radius:4px;pointer-events:none;opacity:0;transition:opacity .25s ease;z-index:1} html.two #pl:not(.hide) #twoOut,html.two #pl.sel #twoOut{opacity:1} /* multiview: calm white outline on the game with the sound, fades with the controls */
+#twoOut{position:absolute;border:3px solid #fff;border-radius:4px;pointer-events:none;opacity:0;transition:opacity .25s ease;z-index:0} html.two #pl:not(.hide) #twoOut,html.two #pl.sel #twoOut{opacity:1} /* multiview: calm white outline on the game with the sound, fades with the controls */
 /* score bar: today's other NHL games along the bottom, shown while the player controls are hidden; Scores in the player turns it on/off */
 #sbar{position:absolute;left:0;right:0;bottom:0;height:6.25%;min-height:33px;display:none;align-items:stretch;gap:3px;padding:2px var(--safe-x) 5px;overflow:hidden;opacity:0;transition:opacity .2s;container-type:size}
 #pl.sb #sbar{display:flex}#pl.sb.hide #sbar{opacity:1}
@@ -132,7 +132,7 @@ html.nv,html.nv body,html.nv #pl{background:transparent}html.nv body>*:not(#pl):
 #sbar.tight .nt.fut,#sbar.t2 .sbi.done .nt{display:none}#sbar.t2 .sbi{padding:0 6px;gap:3px}
 .sbi .scr{font-size:48cqh}.sbi .nt{font-size:34cqh;color:var(--ink-2)}.sbi.done{opacity:.55}
 .ctl button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--ink)}.ctl button[aria-pressed=true]:not(#bfav)::after{content:"\2713";margin-left:6px}.ctl button[aria-pressed=true]:focus-visible{box-shadow:inset 0 0 0 2px var(--ink),var(--ring)}
-.pmenu{position:absolute;left:50%;bottom:62px;transform:translateX(-50%);max-height:62%;overflow-y:auto;scrollbar-width:none;min-width:260px;max-width:420px;
+.pmenu{position:absolute;z-index:5;left:50%;bottom:62px;transform:translateX(-50%);max-height:62%;overflow-y:auto;scrollbar-width:none;min-width:260px;max-width:420px;
   padding:6px;border-radius:22px;background:var(--surface);border:1px solid var(--line-strong)}
 .pmenu::-webkit-scrollbar{display:none}
 .pmenu button{display:flex;align-items:center;min-height:32px;justify-content:space-between;gap:12px;width:100%;padding:7px 14px;border-radius:999px;text-align:left}
